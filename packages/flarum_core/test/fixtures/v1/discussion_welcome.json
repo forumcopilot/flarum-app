@@ -5,7 +5,8 @@
     "query": {
       "include": "user,lastPostedUser,tags"
     },
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 200,
   "body": {

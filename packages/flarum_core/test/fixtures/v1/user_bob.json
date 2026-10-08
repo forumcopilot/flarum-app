@@ -3,7 +3,8 @@
     "method": "GET",
     "path": "/users/6",
     "query": {},
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 200,
   "body": {

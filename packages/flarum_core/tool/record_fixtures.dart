@@ -8,7 +8,7 @@
 //
 // The fixture folder (v1 or v2) is chosen from the forum's detected version.
 // Each fixture holds the request as FlarumApi sent it, the status and the body.
-// The log-in response is not recorded: it contains a token.
+// The log-in responses are not recorded: they contain tokens.
 
 import 'dart:convert';
 import 'dart:io';
@@ -30,15 +30,18 @@ Future<void> main(List<String> args) async {
   final guest = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
   final api = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
 
-  Future<void> record(String name, Future<Object?> Function() call) async {
-    recorder.name = name;
+  /// Records the responses [call] gets, one fixture per name, in order.
+  Future<void> recordAll(List<String> names, Future<Object?> Function() call) async {
+    recorder.names.addAll(names);
     try {
       await call();
     } on FlarumApiException {
       // Error responses are fixtures too.
     }
-    if (recorder.name != null) throw StateError('$name: no response recorded');
+    if (recorder.names.isNotEmpty) throw StateError('${recorder.names.join(', ')}: no response recorded');
   }
+
+  Future<void> record(String name, Future<Object?> Function() call) => recordAll([name], call);
 
   final version = (await guest.forumInfo()).version;
   await record('forum_guest', guest.forumInfo);
@@ -66,6 +69,12 @@ Future<void> main(List<String> args) async {
         },
       }));
 
+  // Sign-out lists the account's tokens with the remember cookie, then deletes the current one.
+  // carol signs in afresh so the tokens the fixtures above used stay valid.
+  final carol = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
+  await carol.logIn('carol', password);
+  await recordAll(['logout_list_tokens', 'logout_delete_token'], carol.logOut);
+
   final dir = Directory('test/fixtures/${version.name}')..createSync(recursive: true);
   const encoder = JsonEncoder.withIndent('  ');
   for (final MapEntry(key: name, value: fixture) in recorder.recorded.entries) {
@@ -76,7 +85,7 @@ Future<void> main(List<String> args) async {
 }
 
 class _Recorder extends Interceptor {
-  String? name;
+  final names = <String>[];
   final recorded = <String, Map<String, Object?>>{};
 
   @override
@@ -93,19 +102,18 @@ class _Recorder extends Interceptor {
   }
 
   void _save(RequestOptions options, int? status, Object? body) {
-    final current = name;
-    if (current == null) return;
-    recorded[current] = {
+    if (names.isEmpty) return;
+    recorded[names.removeAt(0)] = {
       'request': {
         'method': options.method,
         'path': options.path,
         'query': options.queryParameters,
         'signedIn': options.headers.containsKey('Authorization'),
+        'rememberCookie': '${options.headers['Cookie'] ?? ''}'.contains('_remember='),
         if (options.data != null) 'body': options.data,
       },
       'status': status,
       'body': body,
     };
-    name = null;
   }
 }

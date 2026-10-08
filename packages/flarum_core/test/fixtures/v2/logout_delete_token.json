@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/access-tokens/25",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 204,
+  "body": null
+}

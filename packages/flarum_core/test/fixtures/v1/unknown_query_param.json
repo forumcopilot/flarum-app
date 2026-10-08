@@ -6,7 +6,8 @@
       "filter[discussion]": "5",
       "foo": "bar"
     },
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 200,
   "body": {
@@ -327,7 +328,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T18:26:49+00:00",
+          "lastSeenAt": "2026-10-08T20:01:05+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -398,7 +399,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T17:52:29+00:00",
+          "lastSeenAt": "2026-10-08T19:59:05+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,

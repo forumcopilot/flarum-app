@@ -1,0 +1,73 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/access-tokens",
+    "query": {},
+    "signedIn": false,
+    "rememberCookie": true
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/access-tokens"
+    },
+    "data": [
+      {
+        "type": "access-tokens",
+        "id": "12",
+        "attributes": {
+          "userId": 7,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "lastActivityAt": "2026-10-08T17:52:28+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "18",
+        "attributes": {
+          "userId": 7,
+          "createdAt": "2026-10-08T17:54:19+00:00",
+          "lastActivityAt": "2026-10-08T17:54:19+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "21",
+        "attributes": {
+          "userId": 7,
+          "createdAt": "2026-10-08T17:54:37+00:00",
+          "lastActivityAt": "2026-10-08T17:54:37+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "34",
+        "attributes": {
+          "userId": 7,
+          "createdAt": "2026-10-08T20:01:07+00:00",
+          "lastActivityAt": "2026-10-08T20:01:07+00:00",
+          "isCurrent": true,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      }
+    ]
+  }
+}

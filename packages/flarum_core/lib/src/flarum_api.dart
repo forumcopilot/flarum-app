@@ -1,4 +1,6 @@
+import 'attributes.dart';
 import 'flarum_client.dart';
+import 'flarum_exception.dart';
 import 'json_api.dart';
 import 'models/discussion.dart';
 import 'models/forum_info.dart';
@@ -71,6 +73,34 @@ class FlarumApi {
     final session = FlarumSession(token: json['token'] as String, userId: '${json['userId']}');
     client.token = session.token;
     return session;
+  }
+
+  /// Signs out: revokes the reader's token on the forum, then clears it from [client].
+  ///
+  /// Flarum has no "revoke this token" call. The token's id is found in
+  /// `/access-tokens`, where only a token presented as the remember cookie is
+  /// marked current, and deleted by id. Works the same on 1.8 and 2.0.
+  ///
+  /// Returns false if the forum accepted the token but marked none current, so
+  /// nothing was revoked. A token the forum already rejects counts as revoked.
+  /// Other failures (e.g. no network) are rethrown and the token is kept, so
+  /// the caller can retry.
+  Future<bool> logOut() async {
+    if (client.token == null) return true;
+    var revoked = true;
+    try {
+      final tokens = await client.getWithRememberCookie('/access-tokens');
+      final current = tokens.data.where((token) => token.attributes.boolean('isCurrent') ?? false).firstOrNull;
+      if (current == null) {
+        revoked = false;
+      } else {
+        await client.delete('/access-tokens/${current.id}');
+      }
+    } on FlarumApiException catch (e) {
+      if (!e.isUnauthorized) rethrow;
+    }
+    client.token = null;
+    return revoked;
   }
 
   /// A page of discussions. [tagSlug] limits it to a tag, [following] to

@@ -43,5 +43,8 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Validation (422): 1.x reports the first failed rule, 2.0 every invalid field.
 - Listing `/api/notifications` resets the reader's "new" badge on the website.
 - byobu private discussions are invisible to admins who aren't recipients.
-- Revoking the current token is unsolved: 1.8's `/api/access-tokens` marks no header token as
-  current, and 2.0 rc.8 returns HTTP 500 on that list for header tokens.
+- Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
+  never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing
+  with the token sent as the `<prefix>_remember` cookie marks it current; then
+  `DELETE /api/access-tokens/{id}` with the header. The prefix (`cookie.name`, default `flarum`)
+  shows in any response's `<prefix>_session` Set-Cookie.

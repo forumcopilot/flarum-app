@@ -41,6 +41,7 @@ class _Fixture {
         path = json['request']['path'] as String,
         query = (json['request']['query'] as Map).map((key, value) => MapEntry('$key', '$value')),
         signedIn = json['request']['signedIn'] as bool,
+        rememberCookie = json['request']['rememberCookie'] as bool? ?? false,
         status = json['status'] as int,
         body = json['body'];
 
@@ -48,6 +49,7 @@ class _Fixture {
   final String path;
   final Map<String, String> query;
   final bool signedIn;
+  final bool rememberCookie;
   final int status;
   final Object? body;
 
@@ -55,6 +57,7 @@ class _Fixture {
       options.method == method &&
       options.path == path &&
       options.headers.containsKey('Authorization') == signedIn &&
+      '${options.headers['Cookie'] ?? ''}'.contains('_remember=') == rememberCookie &&
       _sameQuery(options.queryParameters, query);
 
   static bool _sameQuery(Map<String, dynamic> sent, Map<String, String> recorded) =>

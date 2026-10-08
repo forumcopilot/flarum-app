@@ -6,7 +6,8 @@
       "filter[discussion]": "3",
       "foo": "bar"
     },
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 400,
   "body": {

@@ -7,7 +7,8 @@
       "page[limit]": "20",
       "include": "fromUser,subject"
     },
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 200,
   "body": {
@@ -261,7 +262,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "lastSeenAt": "2026-10-08T19:59:05+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

@@ -1,0 +1,94 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/access-tokens",
+    "query": {},
+    "signedIn": false,
+    "rememberCookie": true
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "access-tokens",
+        "id": "9",
+        "links": {
+          "self": "/access-tokens/9"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-08T17:53:47+00:00",
+          "lastActivityAt": "2026-10-08T17:53:47+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "12",
+        "links": {
+          "self": "/access-tokens/12"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-08T17:54:20+00:00",
+          "lastActivityAt": "2026-10-08T17:54:20+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "15",
+        "links": {
+          "self": "/access-tokens/15"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-08T17:54:39+00:00",
+          "lastActivityAt": "2026-10-08T17:54:39+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "25",
+        "links": {
+          "self": "/access-tokens/25"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-08T20:01:14+00:00",
+          "lastActivityAt": "2026-10-08T20:01:14+00:00",
+          "isCurrent": true,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      }
+    ],
+    "included": [],
+    "meta": {
+      "page": {
+        "total": 4,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

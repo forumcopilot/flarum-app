@@ -4,6 +4,7 @@
     "path": "/discussions",
     "query": {},
     "signedIn": true,
+    "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",

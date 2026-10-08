@@ -3,7 +3,8 @@
     "method": "GET",
     "path": "",
     "query": {},
-    "signedIn": true
+    "signedIn": true,
+    "rememberCookie": false
   },
   "status": 200,
   "body": {
@@ -282,7 +283,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 1,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-08T18:26:50+00:00",
+          "lastSeenAt": "2026-10-08T20:01:13+00:00",
           "markedAllAsReadAt": null,
           "unreadNotificationCount": 5,
           "newNotificationCount": 0,

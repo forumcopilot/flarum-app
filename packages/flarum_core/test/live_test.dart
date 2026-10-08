@@ -44,6 +44,18 @@ void main() {
       test('lists notifications', () async {
         expect((await api.notifications()).items, isNotEmpty);
       });
+
+      test('logOut revokes the token on the forum', () async {
+        final carol = FlarumApi(FlarumClient(url!));
+        final session = await carol.logIn('carol', password!);
+        expect(await carol.logOut(), isTrue);
+
+        final stale = FlarumApi(FlarumClient(url, token: session.token));
+        await expectLater(
+          stale.notifications(),
+          throwsA(isA<FlarumApiException>().having((e) => e.isUnauthorized, 'isUnauthorized', isTrue)),
+        );
+      });
     }, skip: url == null || password == null ? 'set FLARUM_${version.name.toUpperCase()}_URL and FLARUM_TEST_PASSWORD' : false);
   }
 }

@@ -4,7 +4,8 @@ Findings from the Phase 0 spike, checked on local Flarum 1.8.20 and 2.0.0-rc.8 f
 plan's Must-tier extensions. Last updated 8 October 2026.
 
 So far nothing found blocks the plan. Sign-out, polling and rendering all work on both versions,
-with the changes listed below. Sign-in through a web view is still untested: it needs a phone.
+with the changes listed below. Web-view sign-in works in a mobile browser on every setup tried;
+it still needs a run on a real phone.
 
 ## Status
 
@@ -15,7 +16,31 @@ with the changes listed below. Sign-in through a web view is still untested: it 
 | Token revoke on both versions | Done: `FlarumApi.logOut` (below) |
 | Notification listing and last-seen side effects | Measured (below) |
 | Run `contentHtml` from both forums through the existing renderer | Done (below) |
-| Web-view sign-in capturing `flarum_remember`, incl. a Turnstile forum | Not started: needs the Pixel and an iPhone |
+| Web-view sign-in capturing `flarum_remember`, incl. a Turnstile forum | Passes in headless mobile Chromium; spike app `tool/spikes/signin_app` ready for the Pixel |
+
+## Sign-in
+
+The plan's flow works: open the forum, click its own "Log In" button, tick "Remember me",
+let the reader log in, then read `<prefix>_remember` from the web view's cookie store. The cookie
+is HttpOnly, so it must come from the native store (`flutter_inappwebview`'s `CookieManager`),
+not page JavaScript. Its value works as `Authorization: Token`.
+
+| Forum | Native `POST /api/token` | Web sign-in in headless mobile Chromium |
+| --- | --- | --- |
+| 1.8, no CAPTCHA | Works | Works (cookie in ~2.5 s) |
+| 1.8, blomstra/turnstile on sign-in | **Still works** | Works, after the widget passes (~5.6 s) |
+| 2.0, no CAPTCHA | Works | Works |
+| 2.0, flectar/flarum-turnstile on sign-in | 422, pointer `/data/attributes/turnstileToken` | Works (~8.3 s) |
+
+Correction to the plan (§6): a CAPTCHA doesn't always block `POST /api/token`. The common 1.x
+extensions (blomstra/turnstile, fof/recaptcha) hook `LogInValidator`, which only the website's
+`POST /login` runs. The 2.0 Turnstile fork (flectar/flarum-turnstile, also published as
+blazite/flarum-turnstile) adds middleware on the token route. So the web view stays the only
+path that works everywhere; a native form is possible on more forums than the plan assumed, and
+a 422 on the token's `turnstileToken` (or similar) field is the signal to fall back.
+
+Tested with Cloudflare's always-passing test keys, which work on any domain. Still to do on
+the Pixel: the real Android WebView, and Google via fof/oauth on a real forum.
 
 ## Sign-out
 

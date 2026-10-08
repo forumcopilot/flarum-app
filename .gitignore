@@ -20,3 +20,6 @@
 # Local credentials for the test forums, never committed
 .env
 *.credentials
+
+# Node tooling for browser checks
+node_modules/

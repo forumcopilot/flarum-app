@@ -1,0 +1,23 @@
+name: flarum_signin_spike
+description: Phase 0 spike - sign in to Flarum through an in-app web view and capture the remember cookie.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # The web view discourse-app uses; its cookie manager can read HttpOnly cookies.
+  flutter_inappwebview: ^6.1.5
+  flarum_core:
+    path: ../../../packages/flarum_core
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/signin.js

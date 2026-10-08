@@ -32,7 +32,10 @@ against both. Live tests and re-recording: `test/live_test.dart`, `tool/test_for
 Checked against 1.8.20 and 2.0.0-rc.8:
 
 - Version: only 2.0's `GET /api` forum attributes include `colorScheme` and `jsChunksBaseUrl`.
-- Auth: `Authorization: Token <token>`; it skips CSRF. `POST /api/token` fails on CAPTCHA forums.
+- Auth: `Authorization: Token <token>`; it skips CSRF. Sign-in is the web view (the forum's page,
+  "Remember me" ticked, the HttpOnly `<prefix>_remember` cookie read from the native store).
+  `POST /api/token` works on 1.x even with blomstra/turnstile or fof/recaptcha (they guard only
+  the website's `/login`), but the 2.0 Turnstile fork blocks it with a 422 on `turnstileToken`.
 - 2.0 rejects unknown query parameters with HTTP 400; 1.x ignores them. Send only known ones.
 - Paging: `page[offset]` and `page[limit]`, capped at 50. Never follow `links.next`: on 2.0 it
   drops the `/api` prefix. Posts: `/api/posts?filter[discussion]=…` on both versions.

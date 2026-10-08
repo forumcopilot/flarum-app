@@ -37,6 +37,13 @@ Then record fixtures from `packages/flarum_core`:
 FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json
 ```
 
+## CAPTCHA
+
+For sign-in tests, 1.8 runs blomstra/turnstile (on sign-in, sign-up and password reset) and
+2.0 runs flectar/flarum-turnstile (on sign-up and reset; sign-in off, because it also blocks
+`POST /api/token`, which the tests and tools use). Both use Cloudflare's test keys, which
+always pass: site key `1x00000000000000000000AA`, secret `1x0000000000000000000000000000000AA`.
+
 ## Installation quirks
 
 - **1.x installer:** `php flarum install -f <file>` enables no bundled extensions unless the file

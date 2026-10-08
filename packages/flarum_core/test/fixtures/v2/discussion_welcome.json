@@ -1,0 +1,226 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/3",
+    "query": {
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "3",
+      "links": {
+        "self": "/discussions/3"
+      },
+      "attributes": {
+        "title": "Welcome to the test forum",
+        "slug": "3-welcome-to-the-test-forum",
+        "commentCount": 4,
+        "participantCount": 4,
+        "createdAt": "2026-10-08T17:53:48+00:00",
+        "lastPostedAt": "2026-10-08T17:53:49+00:00",
+        "lastPostNumber": 4,
+        "canReply": true,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "lastReadAt": "2026-10-08T17:53:48+00:00",
+        "lastReadPostNumber": 2,
+        "canTag": false,
+        "isApproved": true,
+        "subscription": null,
+        "isPrivateDiscussion": false,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "canDownloadFiles": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectBestAnswer": false,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "5"
+          }
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "8"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "5"
+            },
+            {
+              "type": "posts",
+              "id": "6"
+            },
+            {
+              "type": "posts",
+              "id": "7"
+            },
+            {
+              "type": "posts",
+              "id": "8"
+            }
+          ]
+        },
+        "hideUser": {
+          "data": null
+        },
+        "bestAnswerPost": {
+          "data": null
+        },
+        "bestAnswerUser": {
+          "data": null
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "1"
+            }
+          ]
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "1"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "tags",
+        "id": "1",
+        "links": {
+          "self": "/tags/1"
+        },
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "icon": null,
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 2,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:54:03+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 0,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "1",
+        "links": {
+          "self": "/users/1"
+        },
+        "attributes": {
+          "username": "admin",
+          "displayName": "admin",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "admin",
+          "joinTime": "2026-10-08T16:06:42+00:00",
+          "discussionCount": 3,
+          "commentCount": 3,
+          "lastSeenAt": "2026-10-08T17:53:10+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

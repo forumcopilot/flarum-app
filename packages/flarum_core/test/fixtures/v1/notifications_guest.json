@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/notifications",
+    "query": {
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "fromUser,subject"
+    },
+    "signedIn": false
+  },
+  "status": 401,
+  "body": {
+    "errors": [
+      {
+        "status": "401",
+        "code": "not_authenticated"
+      }
+    ]
+  }
+}

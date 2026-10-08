@@ -1,0 +1,408 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[discussion]": "3",
+      "sort": "number",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "posts",
+        "id": "5",
+        "links": {
+          "self": "/posts/5"
+        },
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Introduce yourself here. Markdown works: <em>italic</em>, <code>code</code>, <a href=\"https://flarum.org\" rel=\"ugc nofollow\">a link</a>.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "6",
+        "links": {
+          "self": "/posts/6"
+        },
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Hi all! Looking forward to testing with <a href=\"http://127.0.0.1:8082/u/bob\" class=\"UserMention\">@bob</a> and <a href=\"http://127.0.0.1:8082/u/carol\" class=\"UserMention\">@carol</a>.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 1,
+          "likesCount": 2
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "7",
+        "links": {
+          "self": "/posts/7"
+        },
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-08T17:53:49+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p><a href=\"http://127.0.0.1:8082/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a> Welcome! I'll take the iOS side.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 1
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "8",
+        "links": {
+          "self": "/posts/8"
+        },
+        "attributes": {
+          "number": 4,
+          "createdAt": "2026-10-08T17:53:49+00:00",
+          "contentType": "comment",
+          "contentHtml": "<blockquote class=\"uncited\"><div><p>Quoted text keeps working too.</p></div></blockquote>\n\n<p>Hello from carol. Thanks <a href=\"http://127.0.0.1:8082/u/admin\" class=\"UserMention\">@admin</a>.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 0,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "2",
+        "links": {
+          "self": "/users/2"
+        },
+        "attributes": {
+          "username": "alice",
+          "email": "alice@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "alice",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 1,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T18:26:50+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 1,
+          "fof-upload-uploadCountAll": 1,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "1",
+        "links": {
+          "self": "/users/1"
+        },
+        "attributes": {
+          "username": "admin",
+          "displayName": "admin",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "admin",
+          "joinTime": "2026-10-08T16:06:42+00:00",
+          "discussionCount": 3,
+          "commentCount": 3,
+          "lastSeenAt": "2026-10-08T17:53:10+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 4,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/notifications",
+    "query": {
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "fromUser,subject"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/notifications?page%5Blimit%5D=20&include=fromUser%2Csubject"
+    },
+    "data": [
+      {
+        "type": "notifications",
+        "id": "21",
+        "attributes": {
+          "contentType": "byobuPrivateDiscussionReplied",
+          "content": {
+            "postNumber": 3
+          },
+          "createdAt": "2026-10-08T17:53:02+00:00",
+          "isRead": false
+        },
+        "relationships": {
+          "fromUser": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "subject": {
+            "data": {
+              "type": "discussions",
+              "id": "10"
+            }
+          }
+        }
+      },
+      {
+        "type": "notifications",
+        "id": "10",
+        "attributes": {
+          "contentType": "postMentioned",
+          "content": {
+            "replyNumber": 3
+          },
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "isRead": false
+        },
+        "relationships": {
+          "fromUser": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "subject": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          }
+        }
+      },
+      {
+        "type": "notifications",
+        "id": "13",
+        "attributes": {
+          "contentType": "postLiked",
+          "content": null,
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "isRead": false
+        },
+        "relationships": {
+          "fromUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "subject": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          }
+        }
+      },
+      {
+        "type": "notifications",
+        "id": "15",
+        "attributes": {
+          "contentType": "postMentioned",
+          "content": {
+            "replyNumber": 2
+          },
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "isRead": false
+        },
+        "relationships": {
+          "fromUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "subject": {
+            "data": {
+              "type": "posts",
+              "id": "16"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "10",
+        "attributes": {
+          "title": "Private: test plan",
+          "slug": "10-private-test-plan",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:02+00:00",
+          "lastPostedAt": "2026-10-08T17:53:02+00:00",
+          "lastPostNumber": 3,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:02+00:00",
+          "lastReadPostNumber": 1,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "isPrivateDiscussion": true,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        }
+      },
+      {
+        "type": "posts",
+        "id": "13",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Hi all! Looking forward to testing with <a href=\"http://127.0.0.1:8081/u/bob\" class=\"UserMention\">@bob</a> and <a href=\"http://127.0.0.1:8081/u/carol\" class=\"UserMention\">@carol</a>.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "16",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><img class=\"FoFUpload--Upl-Image-Preview\" src=\"http://127.0.0.1:8081/assets/files/2026-10-08/1791481948-212922-screenshot.png\" title=\"screenshot.png\" alt=\"\" data-id=\"0eceaeb3-bc91-451c-9ff8-12d391f8a64a\" loading=\"lazy\" width=\"320\" height=\"200\"></p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      }
+    ]
+  }
+}

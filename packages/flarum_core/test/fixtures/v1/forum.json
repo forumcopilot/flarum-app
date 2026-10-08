@@ -1,0 +1,552 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "",
+    "query": {},
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "forums",
+      "id": "1",
+      "attributes": {
+        "title": "Flarum 1 Dev",
+        "description": "",
+        "showLanguageSelector": true,
+        "baseUrl": "http://127.0.0.1:8081",
+        "basePath": "",
+        "baseOrigin": "http://127.0.0.1:8081",
+        "debug": false,
+        "apiUrl": "http://127.0.0.1:8081/api",
+        "welcomeTitle": "Welcome to Flarum",
+        "welcomeMessage": "Enjoy your new forum! Hop over to discuss.flarum.org if you have any questions, or to join our community!",
+        "themePrimaryColor": "#4D698E",
+        "themeSecondaryColor": "#4D698E",
+        "logoUrl": null,
+        "faviconUrl": null,
+        "headerHtml": null,
+        "footerHtml": null,
+        "allowSignUp": true,
+        "defaultRoute": "/all",
+        "canViewForum": true,
+        "canStartDiscussion": true,
+        "canSearchUsers": true,
+        "canCreateAccessToken": false,
+        "canModerateAccessTokens": false,
+        "assetsBaseUrl": "http://127.0.0.1:8081/assets",
+        "canViewFlags": false,
+        "guidelinesUrl": null,
+        "canBypassTagCounts": false,
+        "minPrimaryTags": "1",
+        "maxPrimaryTags": "1",
+        "minSecondaryTags": "0",
+        "maxSecondaryTags": "3",
+        "canProcessErasureRequests": false,
+        "erasureAnonymizationAllowed": true,
+        "erasureDeletionAllowed": false,
+        "allowUsernameMentionFormat": true,
+        "canStartPrivateDiscussion": true,
+        "canStartPrivateDiscussionWithUsers": true,
+        "canAddMoreThanTwoUserRecipients": false,
+        "canStartPrivateDiscussionWithGroups": false,
+        "canStartPrivateDiscussionWithBlockers": false,
+        "byobu.icon-badge": "fas fa-map",
+        "byobu.icon-postAction": "far fa-map",
+        "fofFollowTagsFollowingPageDefault": "none",
+        "fofFollowTagsPromptShouldPrompt": false,
+        "fofFollowTagsPromptButton": false,
+        "fofFollowTagsAllDiscussionsForGuests": false,
+        "fof-upload.canUpload": true,
+        "fof-upload.canDownload": false,
+        "fof-upload.composerButtonVisiblity": "both",
+        "fof-terms.signup-legal-text": null,
+        "fof-terms.hide-updated-at": false,
+        "fof-terms.date-format": "YYYY-MM-DD",
+        "fof-terms.canSeeUserPoliciesState": false,
+        "ReactionConverts": [
+          null,
+          null,
+          null
+        ],
+        "fofReactionsAllowAnonymous": false,
+        "fofReactionsCdnUrl": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/[codepoint].png",
+        "canStartPolls": false,
+        "canStartGlobalPolls": false,
+        "canUploadPollImages": false,
+        "canStartPollGroup": false,
+        "canViewPollGroups": false,
+        "pollsDirectoryDefaultSort": "-createdAt",
+        "globalPollsEnabled": false,
+        "pollGroupsEnabled": false,
+        "allowPollOptionImage": false,
+        "pollMaxOptions": 10,
+        "fofOauthModerate": false,
+        "fof-oauth.only_icons": false,
+        "fof-oauth.popupWidth": 580,
+        "fof-oauth.popupHeight": 400,
+        "fof-oauth.fullscreenPopup": true,
+        "passwordlessSignUp": false,
+        "canSaveDrafts": false,
+        "canScheduleDrafts": false,
+        "drafts.enableScheduledDrafts": true,
+        "fof-bookmarks.independentButton": true,
+        "fof-bookmarks.postButtonPosition": "header",
+        "fof-bookmarks.postHeaderBadge": false,
+        "fof-best-answer.show_max_lines": 0,
+        "showTagsInSearchResults": true,
+        "removeSolutionResultsFromMainSearch": false,
+        "solutionSearchEnabled": true,
+        "useAlternativeBestAnswerUi": false,
+        "showBestAnswerFilterUi": true,
+        "bestAnswerDiscussionSidebarJumpButton": false,
+        "displayNameDriver": "username",
+        "setNicknameOnRegistration": true,
+        "randomizeUsernameOnRegistration": false
+      },
+      "relationships": {
+        "groups": {
+          "data": [
+            {
+              "type": "groups",
+              "id": "1"
+            },
+            {
+              "type": "groups",
+              "id": "2"
+            },
+            {
+              "type": "groups",
+              "id": "3"
+            },
+            {
+              "type": "groups",
+              "id": "4"
+            }
+          ]
+        },
+        "actor": {
+          "data": {
+            "type": "users",
+            "id": "5"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "1"
+            },
+            {
+              "type": "tags",
+              "id": "8"
+            },
+            {
+              "type": "tags",
+              "id": "10"
+            },
+            {
+              "type": "tags",
+              "id": "11"
+            },
+            {
+              "type": "tags",
+              "id": "12"
+            },
+            {
+              "type": "tags",
+              "id": "13"
+            }
+          ]
+        },
+        "fofFollowTagsPromptList": {
+          "data": []
+        },
+        "fofTermsPolicies": {
+          "data": []
+        },
+        "reactions": {
+          "data": [
+            {
+              "type": "reactions",
+              "id": "1"
+            },
+            {
+              "type": "reactions",
+              "id": "2"
+            },
+            {
+              "type": "reactions",
+              "id": "3"
+            },
+            {
+              "type": "reactions",
+              "id": "4"
+            },
+            {
+              "type": "reactions",
+              "id": "5"
+            },
+            {
+              "type": "reactions",
+              "id": "6"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "groups",
+        "id": "1",
+        "attributes": {
+          "nameSingular": "Admin",
+          "namePlural": "Admins",
+          "color": "#B72A2A",
+          "icon": "fas fa-wrench",
+          "isHidden": 0
+        }
+      },
+      {
+        "type": "groups",
+        "id": "2",
+        "attributes": {
+          "nameSingular": "Guest",
+          "namePlural": "Guests",
+          "color": null,
+          "icon": null,
+          "isHidden": 0
+        }
+      },
+      {
+        "type": "groups",
+        "id": "3",
+        "attributes": {
+          "nameSingular": "Member",
+          "namePlural": "Members",
+          "color": null,
+          "icon": null,
+          "isHidden": 0
+        }
+      },
+      {
+        "type": "groups",
+        "id": "4",
+        "attributes": {
+          "nameSingular": "Mod",
+          "namePlural": "Mods",
+          "color": "#80349E",
+          "icon": "fas fa-bolt",
+          "isHidden": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "5",
+        "attributes": {
+          "username": "alice",
+          "displayName": "alice",
+          "avatarUrl": null,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 1,
+          "commentCount": 24,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-08T18:26:49+00:00",
+          "isEmailConfirmed": true,
+          "email": "alice@flarumapp.local",
+          "markedAllAsReadAt": null,
+          "unreadNotificationCount": 5,
+          "newNotificationCount": 0,
+          "preferences": {
+            "followAfterReply": false,
+            "flarum-subscriptions.notify_for_all_posts": false,
+            "followTagsPageDefault": null,
+            "draftAutosaveEnable": false,
+            "draftAutosaveInterval": 6,
+            "notify_discussionRenamed_alert": true,
+            "notify_userSuspended_alert": true,
+            "notify_userSuspended_email": true,
+            "notify_userUnsuspended_alert": true,
+            "notify_userUnsuspended_email": true,
+            "notify_gdprExportAvailable_alert": true,
+            "notify_gdprExportAvailable_email": true,
+            "notify_gdpr_erasure_confirm_alert": false,
+            "notify_gdpr_erasure_confirm_email": true,
+            "notify_gdpr_erasure_cancelled_alert": true,
+            "notify_gdpr_erasure_cancelled_email": true,
+            "notify_postMentioned_alert": true,
+            "notify_postMentioned_email": false,
+            "notify_userMentioned_alert": true,
+            "notify_userMentioned_email": false,
+            "notify_groupMentioned_alert": true,
+            "notify_groupMentioned_email": false,
+            "notify_newPost_alert": true,
+            "notify_newPost_email": true,
+            "notify_byobuPrivateDiscussionCreated_alert": true,
+            "notify_byobuPrivateDiscussionCreated_email": true,
+            "notify_byobuPrivateDiscussionReplied_alert": true,
+            "notify_byobuPrivateDiscussionReplied_email": true,
+            "notify_byobuRecipientRemoved_alert": true,
+            "notify_byobuRecipientRemoved_email": true,
+            "notify_byobuPrivateDiscussionAdded_alert": true,
+            "notify_byobuPrivateDiscussionAdded_email": true,
+            "notify_byobuMadePublic_alert": true,
+            "notify_byobuMadePublic_email": false,
+            "notify_newDiscussionInTag_alert": true,
+            "notify_newDiscussionInTag_email": true,
+            "notify_newPostInTag_alert": true,
+            "notify_newPostInTag_email": true,
+            "notify_newDiscussionTag_alert": true,
+            "notify_newDiscussionTag_email": true,
+            "notify_postReacted_alert": true,
+            "notify_selectBestAnswer_alert": true,
+            "notify_selectBestAnswer_email": true,
+            "notify_awardedBestAnswer_alert": true,
+            "notify_awardedBestAnswer_email": false,
+            "notify_bestAnswerInDiscussion_alert": false,
+            "notify_bestAnswerInDiscussion_email": false,
+            "notify_discussionLocked_alert": true,
+            "notify_postLiked_alert": true,
+            "discloseOnline": true,
+            "indexProfile": true,
+            "locale": null
+          },
+          "isAdmin": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": 1,
+          "fof-upload-uploadCountAll": 1,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "newFlagCount": 0,
+          "canMentionGroups": false,
+          "draftCount": 0
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          },
+          "ignoredUsers": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "1",
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": null,
+          "discussionCount": 2,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:39+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "8",
+        "attributes": {
+          "name": "Support",
+          "description": "Support discussions",
+          "slug": "support",
+          "color": "#e67e22",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-life-ring",
+          "discussionCount": 1,
+          "position": 1,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "10",
+        "attributes": {
+          "name": "Feedback",
+          "description": "Feedback discussions",
+          "slug": "feedback",
+          "color": "#27ae60",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-lightbulb",
+          "discussionCount": 1,
+          "position": 2,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "11",
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-bullhorn",
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "12",
+        "attributes": {
+          "name": "question",
+          "description": "question discussions",
+          "slug": "question",
+          "color": "#8e44ad",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "13",
+        "attributes": {
+          "name": "bug",
+          "description": "bug discussions",
+          "slug": "bug",
+          "color": "#d35400",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "1",
+        "attributes": {
+          "identifier": "thumbsup",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "2",
+        "attributes": {
+          "identifier": "thumbsdown",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "3",
+        "attributes": {
+          "identifier": "laughing",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "4",
+        "attributes": {
+          "identifier": "confused",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "5",
+        "attributes": {
+          "identifier": "heart",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "6",
+        "attributes": {
+          "identifier": "tada",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      }
+    ]
+  }
+}

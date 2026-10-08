@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "base": "http://127.0.0.1:8082",
+  "tags": {
+    "general": "1",
+    "support": "3",
+    "ios": "4",
+    "feedback": "5",
+    "announcements": "6",
+    "question": "7",
+    "bug": "8"
+  },
+  "users": {
+    "admin": "1",
+    "alice": "2",
+    "bob": "3",
+    "carol": "4"
+  },
+  "discussions": {
+    "rules": "2",
+    "welcome": "3",
+    "support": "4",
+    "feedback": "5",
+    "long": "6",
+    "private": "7"
+  },
+  "posts": {
+    "welcome": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "support": [
+      "9",
+      "10"
+    ]
+  }
+}

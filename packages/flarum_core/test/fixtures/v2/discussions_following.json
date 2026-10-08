@@ -1,0 +1,264 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions",
+    "query": {
+      "filter[subscription]": "following",
+      "sort": "-lastPostedAt",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "discussions",
+        "id": "5",
+        "links": {
+          "self": "/discussions/5"
+        },
+        "attributes": {
+          "title": "Feature request: dark mode",
+          "slug": "5-feature-request-dark-mode",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": null,
+          "lastReadPostNumber": null,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": "follow",
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "11"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "12"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "5"
+              },
+              {
+                "type": "tags",
+                "id": "7"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "tags",
+        "id": "5",
+        "links": {
+          "self": "/tags/5"
+        },
+        "attributes": {
+          "name": "Feedback",
+          "description": "Feedback discussions",
+          "slug": "feedback",
+          "color": "#27ae60",
+          "icon": "fas fa-lightbulb",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 2,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "7",
+        "links": {
+          "self": "/tags/7"
+        },
+        "attributes": {
+          "name": "question",
+          "description": "question discussions",
+          "slug": "question",
+          "color": "#8e44ad",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 0,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 1,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

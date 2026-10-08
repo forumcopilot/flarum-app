@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/users/6",
+    "query": {},
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "6",
+      "attributes": {
+        "username": "bob",
+        "displayName": "bob",
+        "avatarUrl": null,
+        "slug": "bob",
+        "joinTime": "2026-10-08T17:52:27+00:00",
+        "discussionCount": 2,
+        "commentCount": 23,
+        "canEdit": false,
+        "canEditCredentials": false,
+        "canEditGroups": false,
+        "canDelete": false,
+        "lastSeenAt": "2026-10-08T17:52:28+00:00",
+        "canSuspend": false,
+        "canModerateExports": false,
+        "blocksPd": false,
+        "fof-upload-uploadCountCurrent": 0,
+        "fof-upload-uploadCountAll": 0,
+        "ignored": false,
+        "canBeIgnored": true,
+        "bestAnswerCount": 0,
+        "canEditNickname": false
+      },
+      "relationships": {
+        "groups": {
+          "data": []
+        }
+      }
+    }
+  }
+}

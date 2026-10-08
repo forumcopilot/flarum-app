@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "",
+          "content": ""
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "detail": "The number of primary tags must be 1.",
+        "source": {
+          "pointer": "/data/relationships/tags"
+        }
+      }
+    ]
+  }
+}

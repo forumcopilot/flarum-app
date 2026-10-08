@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[discussion]": "3",
+      "foo": "bar"
+    },
+    "signedIn": true
+  },
+  "status": 400,
+  "body": {
+    "errors": [
+      {
+        "status": "400",
+        "code": "validation_error",
+        "title": "Bad Request",
+        "detail": "Invalid query parameter: foo",
+        "source": {
+          "parameter": "foo"
+        }
+      }
+    ]
+  }
+}

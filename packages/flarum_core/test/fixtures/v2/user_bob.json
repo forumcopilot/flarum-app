@@ -1,0 +1,55 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/users/3",
+    "query": {},
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "3",
+      "links": {
+        "self": "/users/3"
+      },
+      "attributes": {
+        "username": "bob",
+        "displayName": "bob",
+        "avatarUrl": null,
+        "avatarSrcset": null,
+        "hasUploadedAvatar": false,
+        "slug": "bob",
+        "joinTime": "2026-10-08T17:53:46+00:00",
+        "discussionCount": 2,
+        "commentCount": 23,
+        "lastSeenAt": "2026-10-08T17:53:49+00:00",
+        "canEdit": false,
+        "canEditCredentials": false,
+        "canEditGroups": false,
+        "canDelete": false,
+        "canSuspend": false,
+        "canModerateExports": false,
+        "blocksPd": false,
+        "ignored": false,
+        "canBeIgnored": true,
+        "bestAnswerCount": 0,
+        "canEditNickname": false,
+        "canSendAnyMessage": true,
+        "fof-upload-uploadCountCurrent": 0,
+        "fof-upload-uploadCountAll": 0
+      },
+      "relationships": {
+        "groups": {
+          "data": []
+        },
+        "ignoredUsers": {
+          "data": []
+        }
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

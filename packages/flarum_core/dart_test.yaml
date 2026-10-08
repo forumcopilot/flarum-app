@@ -1,0 +1,6 @@
+# Tests tagged `live` hit real Flarum forums over the network. They are excluded
+# from a plain `dart test` so the default suite stays hermetic and offline;
+# run them deliberately with `dart test --run-skipped -t live` (see test/live_test.dart).
+tags:
+  live:
+    skip: "network test — run with --run-skipped -t live"

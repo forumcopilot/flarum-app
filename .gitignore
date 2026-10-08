@@ -1,0 +1,22 @@
+# Miscellaneous
+*.class
+*.log
+*.swp
+.DS_Store
+.idea/
+*.iml
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/packages/**/build/
+*.g.dart
+
+# Local credentials for the test forums, never committed
+.env
+*.credentials

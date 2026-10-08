@@ -1,0 +1,636 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions",
+    "query": {
+      "sort": "-lastPostedAt",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/discussions?sort=-lastPostedAt&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+    },
+    "data": [
+      {
+        "type": "discussions",
+        "id": "8",
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "8-long-thread-for-paging-tests",
+          "commentCount": 60,
+          "participantCount": 3,
+          "createdAt": "2026-10-08T17:22:50+00:00",
+          "lastPostedAt": "2026-10-08T18:21:50+00:00",
+          "lastPostNumber": 60,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:52:39+00:00",
+          "lastReadPostNumber": 20,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "10",
+        "attributes": {
+          "title": "Private: test plan",
+          "slug": "10-private-test-plan",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:02+00:00",
+          "lastPostedAt": "2026-10-08T17:53:02+00:00",
+          "lastPostNumber": 3,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:02+00:00",
+          "lastReadPostNumber": 1,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "isPrivateDiscussion": true,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "tags": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "7",
+        "attributes": {
+          "title": "Feature request: dark mode",
+          "slug": "7-feature-request-dark-mode",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:52:30+00:00",
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": null,
+          "lastReadPostNumber": 0,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": "follow",
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "10"
+              },
+              {
+                "type": "tags",
+                "id": "12"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "5",
+        "attributes": {
+          "title": "Welcome to the test forum",
+          "slug": "5-welcome-to-the-test-forum",
+          "commentCount": 4,
+          "participantCount": 4,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:52:28+00:00",
+          "lastReadPostNumber": 2,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "6",
+        "attributes": {
+          "title": "App crashes when opening a long thread",
+          "slug": "6-app-crashes-when-opening-a-long-thread",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:52:29+00:00",
+          "lastReadPostNumber": 1,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "8"
+              },
+              {
+                "type": "tags",
+                "id": "9"
+              },
+              {
+                "type": "tags",
+                "id": "13"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "4",
+        "attributes": {
+          "title": "Forum rules",
+          "slug": "4-forum-rules",
+          "commentCount": 1,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "lastPostNumber": 1,
+          "canReply": false,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": true,
+          "canSticky": false,
+          "isLocked": true,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "11"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "1",
+        "attributes": {
+          "title": "Hello from setup",
+          "slug": "1-hello-from-setup",
+          "commentCount": 1,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T16:07:33+00:00",
+          "lastPostedAt": "2026-10-08T16:07:33+00:00",
+          "lastPostNumber": 1,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "tags": {
+            "data": []
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "users",
+        "id": "5",
+        "attributes": {
+          "username": "alice",
+          "displayName": "alice",
+          "avatarUrl": null,
+          "slug": "alice"
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "users",
+        "id": "1",
+        "attributes": {
+          "username": "admin",
+          "displayName": "admin",
+          "avatarUrl": null,
+          "slug": "admin"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "1",
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": null,
+          "discussionCount": 2,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:39+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "10",
+        "attributes": {
+          "name": "Feedback",
+          "description": "Feedback discussions",
+          "slug": "feedback",
+          "color": "#27ae60",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-lightbulb",
+          "discussionCount": 1,
+          "position": 2,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "12",
+        "attributes": {
+          "name": "question",
+          "description": "question discussions",
+          "slug": "question",
+          "color": "#8e44ad",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "8",
+        "attributes": {
+          "name": "Support",
+          "description": "Support discussions",
+          "slug": "support",
+          "color": "#e67e22",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-life-ring",
+          "discussionCount": 1,
+          "position": 1,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "9",
+        "attributes": {
+          "name": "iOS",
+          "description": "iOS discussions",
+          "slug": "ios",
+          "color": "#7f8c8d",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fab fa-apple",
+          "discussionCount": 1,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": true,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "13",
+        "attributes": {
+          "name": "bug",
+          "description": "bug discussions",
+          "slug": "bug",
+          "color": "#d35400",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "11",
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-bullhorn",
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

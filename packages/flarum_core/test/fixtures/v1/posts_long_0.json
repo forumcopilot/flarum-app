@@ -1,0 +1,2213 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[discussion]": "8",
+      "sort": "number",
+      "page[offset]": "0",
+      "page[limit]": "50",
+      "include": "user"
+    },
+    "signedIn": true
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=50&include=user",
+      "next": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=50&page%5Blimit%5D=50&include=user"
+    },
+    "data": [
+      {
+        "type": "posts",
+        "id": "20",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:22:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 1 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "21",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-08T17:23:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 2 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "22",
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-08T17:24:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 3 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "23",
+        "attributes": {
+          "number": 4,
+          "createdAt": "2026-10-08T17:25:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 4 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "24",
+        "attributes": {
+          "number": 5,
+          "createdAt": "2026-10-08T17:26:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 5 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "25",
+        "attributes": {
+          "number": 6,
+          "createdAt": "2026-10-08T17:27:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 6 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "26",
+        "attributes": {
+          "number": 7,
+          "createdAt": "2026-10-08T17:28:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 7 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "27",
+        "attributes": {
+          "number": 8,
+          "createdAt": "2026-10-08T17:29:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 8 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "28",
+        "attributes": {
+          "number": 9,
+          "createdAt": "2026-10-08T17:30:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 9 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "29",
+        "attributes": {
+          "number": 10,
+          "createdAt": "2026-10-08T17:31:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 10 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "30",
+        "attributes": {
+          "number": 11,
+          "createdAt": "2026-10-08T17:32:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 11 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "31",
+        "attributes": {
+          "number": 12,
+          "createdAt": "2026-10-08T17:33:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 12 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "32",
+        "attributes": {
+          "number": 13,
+          "createdAt": "2026-10-08T17:34:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 13 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "33",
+        "attributes": {
+          "number": 14,
+          "createdAt": "2026-10-08T17:35:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 14 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "34",
+        "attributes": {
+          "number": 15,
+          "createdAt": "2026-10-08T17:36:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 15 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "35",
+        "attributes": {
+          "number": 16,
+          "createdAt": "2026-10-08T17:37:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 16 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "36",
+        "attributes": {
+          "number": 17,
+          "createdAt": "2026-10-08T17:38:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 17 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "37",
+        "attributes": {
+          "number": 18,
+          "createdAt": "2026-10-08T17:39:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 18 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "38",
+        "attributes": {
+          "number": 19,
+          "createdAt": "2026-10-08T17:40:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 19 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "39",
+        "attributes": {
+          "number": 20,
+          "createdAt": "2026-10-08T17:41:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 20 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "40",
+        "attributes": {
+          "number": 21,
+          "createdAt": "2026-10-08T17:42:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 21 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "41",
+        "attributes": {
+          "number": 22,
+          "createdAt": "2026-10-08T17:43:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 22 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "42",
+        "attributes": {
+          "number": 23,
+          "createdAt": "2026-10-08T17:44:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 23 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "43",
+        "attributes": {
+          "number": 24,
+          "createdAt": "2026-10-08T17:45:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 24 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "44",
+        "attributes": {
+          "number": 25,
+          "createdAt": "2026-10-08T17:46:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 25 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "45",
+        "attributes": {
+          "number": 26,
+          "createdAt": "2026-10-08T17:47:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 26 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "46",
+        "attributes": {
+          "number": 27,
+          "createdAt": "2026-10-08T17:48:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 27 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "47",
+        "attributes": {
+          "number": 28,
+          "createdAt": "2026-10-08T17:49:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 28 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "48",
+        "attributes": {
+          "number": 29,
+          "createdAt": "2026-10-08T17:50:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 29 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "49",
+        "attributes": {
+          "number": 30,
+          "createdAt": "2026-10-08T17:51:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 30 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "50",
+        "attributes": {
+          "number": 31,
+          "createdAt": "2026-10-08T17:52:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 31 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "51",
+        "attributes": {
+          "number": 32,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 32 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "52",
+        "attributes": {
+          "number": 33,
+          "createdAt": "2026-10-08T17:54:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 33 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "53",
+        "attributes": {
+          "number": 34,
+          "createdAt": "2026-10-08T17:55:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 34 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "54",
+        "attributes": {
+          "number": 35,
+          "createdAt": "2026-10-08T17:56:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 35 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "55",
+        "attributes": {
+          "number": 36,
+          "createdAt": "2026-10-08T17:57:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 36 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "56",
+        "attributes": {
+          "number": 37,
+          "createdAt": "2026-10-08T17:58:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 37 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "57",
+        "attributes": {
+          "number": 38,
+          "createdAt": "2026-10-08T17:59:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 38 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "58",
+        "attributes": {
+          "number": 39,
+          "createdAt": "2026-10-08T18:00:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 39 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "59",
+        "attributes": {
+          "number": 40,
+          "createdAt": "2026-10-08T18:01:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 40 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "60",
+        "attributes": {
+          "number": 41,
+          "createdAt": "2026-10-08T18:02:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 41 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "61",
+        "attributes": {
+          "number": 42,
+          "createdAt": "2026-10-08T18:03:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 42 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "62",
+        "attributes": {
+          "number": 43,
+          "createdAt": "2026-10-08T18:04:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 43 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "63",
+        "attributes": {
+          "number": 44,
+          "createdAt": "2026-10-08T18:05:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 44 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "64",
+        "attributes": {
+          "number": 45,
+          "createdAt": "2026-10-08T18:06:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 45 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "65",
+        "attributes": {
+          "number": 46,
+          "createdAt": "2026-10-08T18:07:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 46 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "66",
+        "attributes": {
+          "number": 47,
+          "createdAt": "2026-10-08T18:08:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 47 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "67",
+        "attributes": {
+          "number": 48,
+          "createdAt": "2026-10-08T18:09:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 48 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "68",
+        "attributes": {
+          "number": 49,
+          "createdAt": "2026-10-08T18:10:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 49 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "69",
+        "attributes": {
+          "number": 50,
+          "createdAt": "2026-10-08T18:11:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 50 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 2,
+          "commentCount": 23,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-08T17:52:28+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 0,
+          "commentCount": 23,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-08T17:52:29+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        }
+      },
+      {
+        "type": "users",
+        "id": "5",
+        "attributes": {
+          "username": "alice",
+          "displayName": "alice",
+          "avatarUrl": null,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 1,
+          "commentCount": 24,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-08T18:26:49+00:00",
+          "isEmailConfirmed": true,
+          "email": "alice@flarumapp.local",
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": 1,
+          "fof-upload-uploadCountAll": 1,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true
+        }
+      }
+    ]
+  }
+}

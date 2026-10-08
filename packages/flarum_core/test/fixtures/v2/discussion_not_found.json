@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/999999",
+    "query": {
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true
+  },
+  "status": 404,
+  "body": {
+    "errors": [
+      {
+        "status": "404",
+        "code": "not_found"
+      }
+    ]
+  }
+}

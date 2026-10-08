@@ -75,6 +75,9 @@ Future<void> main(List<String> args) async {
   await carol.logIn('carol', password);
   await recordAll(['logout_list_tokens', 'logout_delete_token'], carol.logOut);
 
+  // Not recorded: revokes alice's token from this run so her token list doesn't grow.
+  await api.logOut();
+
   final dir = Directory('test/fixtures/${version.name}')..createSync(recursive: true);
   const encoder = JsonEncoder.withIndent('  ');
   for (final MapEntry(key: name, value: fixture) in recorder.recorded.entries) {

@@ -27,6 +27,9 @@ void main() {
         await api.logIn('alice', password!);
       });
 
+      // Each run signs alice in afresh; revoke the token so her list doesn't grow.
+      tearDownAll(() => api.logOut());
+
       test('detects the version and the reader', () async {
         final info = await api.forumInfo();
         expect(info.version, version);

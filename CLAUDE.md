@@ -49,5 +49,6 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
   never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing
   with the token sent as the `<prefix>_remember` cookie marks it current; then
-  `DELETE /api/access-tokens/{id}` with the header. The prefix (`cookie.name`, default `flarum`)
+  `DELETE /api/access-tokens/{id}` with the header. The list is paged oldest first (20 by
+  default), so a reader with many sessions has the current token on a later page. The prefix (`cookie.name`, default `flarum`)
   shows in any response's `<prefix>_session` Set-Cookie.

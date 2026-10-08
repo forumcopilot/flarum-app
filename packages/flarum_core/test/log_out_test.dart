@@ -18,6 +18,7 @@ void main() {
 
       final [list, delete] = forum.requests;
       expect(list.path, '/access-tokens');
+      expect(list.queryParameters, {'page[offset]': '0', 'page[limit]': '50'});
       expect(list.headers['Cookie'], 'flarum_remember=fixture-token');
       expect(list.headers.containsKey('Authorization'), isFalse);
       expect(delete.method, 'DELETE');
@@ -45,6 +46,27 @@ void main() {
       expect(adapter.requests[0].headers['Cookie'], 'flarum_remember=t');
       expect(adapter.requests[1].headers['Cookie'], 'myforum_remember=t');
       expect(adapter.requests[2].path, '/access-tokens/7');
+    });
+
+    test('pages through the token list to find the current one', () async {
+      final adapter = _ScriptedAdapter([
+        _ok({
+          'links': {'next': 'https://forum.test/access-tokens?page%5Boffset%5D=50&page%5Blimit%5D=50'},
+          'data': [for (var id = 1; id <= 50; id++) _token('$id', isCurrent: false)],
+        }),
+        _ok({
+          'links': <Object>[],
+          'data': [_token('51', isCurrent: false), _token('52', isCurrent: true)],
+        }),
+        (204, null, const {}),
+      ]);
+      final api = _api(adapter);
+
+      expect(await api.logOut(), isTrue);
+      expect(adapter.requests[0].queryParameters, {'page[offset]': '0', 'page[limit]': '50'});
+      expect(adapter.requests[1].queryParameters, {'page[offset]': '50', 'page[limit]': '50'});
+      expect(adapter.requests[1].headers['Cookie'], 'flarum_remember=t');
+      expect(adapter.requests[2].path, '/access-tokens/52');
     });
 
     test('a token the forum already rejects counts as revoked', () async {

@@ -65,13 +65,13 @@ class FlarumClient {
   /// (and 2.0 rc.8 fails with HTTP 500 listing tokens for one). If the forum
   /// uses another cookie prefix, its 401 response sets `<prefix>_session`;
   /// the prefix is adopted and the request retried once.
-  Future<JsonApiDocument> getWithRememberCookie(String path) async {
+  Future<JsonApiDocument> getWithRememberCookie(String path, {Map<String, String> query = const {}}) async {
     try {
-      return _document(await _send('GET', path, rememberCookie: true));
+      return _document(await _send('GET', path, query: query, rememberCookie: true));
     } on _CookieRejected catch (rejected) {
       if (rejected.prefix == null || rejected.prefix == cookiePrefix) throw rejected.exception;
       cookiePrefix = rejected.prefix!;
-      return _document(await _send('GET', path, rememberCookie: true));
+      return _document(await _send('GET', path, query: query, rememberCookie: true));
     }
   }
 

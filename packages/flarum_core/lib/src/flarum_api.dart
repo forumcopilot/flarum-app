@@ -89,8 +89,7 @@ class FlarumApi {
     if (client.token == null) return true;
     var revoked = true;
     try {
-      final tokens = await client.getWithRememberCookie('/access-tokens');
-      final current = tokens.data.where((token) => token.attributes.boolean('isCurrent') ?? false).firstOrNull;
+      final current = await _currentAccessToken();
       if (current == null) {
         revoked = false;
       } else {
@@ -101,6 +100,17 @@ class FlarumApi {
     }
     client.token = null;
     return revoked;
+  }
+
+  /// The reader's token as listed in `/access-tokens`. The list is paged, oldest
+  /// first, and a reader with many sessions (one per device and sign-in) has
+  /// the newest, likely current, one beyond the first page.
+  Future<JsonApiResource?> _currentAccessToken() async {
+    for (var offset = 0;; offset += maxPageSize) {
+      final tokens = await client.getWithRememberCookie('/access-tokens', query: _page(offset, maxPageSize));
+      final current = tokens.data.where((token) => token.attributes.boolean('isCurrent') ?? false).firstOrNull;
+      if (current != null || !tokens.hasNext || tokens.data.isEmpty) return current;
+    }
   }
 
   /// A page of discussions. [tagSlug] limits it to a tag, [following] to

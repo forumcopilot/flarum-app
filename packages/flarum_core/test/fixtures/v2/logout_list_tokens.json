@@ -2,7 +2,10 @@
   "request": {
     "method": "GET",
     "path": "/access-tokens",
-    "query": {},
+    "query": {
+      "page[offset]": "0",
+      "page[limit]": "50"
+    },
     "signedIn": false,
     "rememberCookie": true
   },
@@ -62,14 +65,14 @@
       },
       {
         "type": "access-tokens",
-        "id": "25",
+        "id": "53",
         "links": {
-          "self": "/access-tokens/25"
+          "self": "/access-tokens/53"
         },
         "attributes": {
           "userId": 4,
-          "createdAt": "2026-10-08T20:01:14+00:00",
-          "lastActivityAt": "2026-10-08T20:01:14+00:00",
+          "createdAt": "2026-10-08T21:19:51+00:00",
+          "lastActivityAt": "2026-10-08T21:19:51+00:00",
           "isCurrent": true,
           "isSessionToken": true,
           "title": null,
@@ -83,7 +86,7 @@
       "page": {
         "total": 4,
         "offset": 0,
-        "limit": 20
+        "limit": 50
       }
     },
     "links": [],

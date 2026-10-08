@@ -26,6 +26,11 @@ and carol, mentions, a post mention, likes, an image upload, a sticky locked ann
 and unread notifications. It also sets the mail driver to `log` and lets members upload and start
 private discussions. See the header of `seed.php` for the credentials file.
 
+For rendering work, `formatting_samples.php` (same arguments plus the seed ids file) adds a
+"Formatting samples" discussion with one post per kind of markup. It turns on fof/formatting's
+optional plugins (Autoimage, Autovideo, FancyPants, HTMLEntities, MediaEmbed, PipeTables,
+TaskLists) and lets fof/upload accept text and PDF attachments, since many forums do.
+
 Then record fixtures from `packages/flarum_core`:
 
 ```bash

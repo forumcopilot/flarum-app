@@ -13,7 +13,8 @@ marked places so 1.x can be dropped later. The app needs no plugin on the forum.
 
 ## Rules (from the plan, set by Tung)
 
-- Get explicit approval before creating repos, pushing, deploying, uploading to stores or publishing.
+- Get explicit approval before creating repos, deploying, uploading to stores or publishing.
+- Pushing to this repo needs no approval (decided 8 Oct 2026). Push when work is tested; CI must stay green.
 - `git add` with explicit paths only. Never commit credentials or a config pointing at a local forum.
 - SDK interface and model changes go into the canonical forumcopilot_sdk first, not a local copy.
 

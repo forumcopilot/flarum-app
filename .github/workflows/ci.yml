@@ -1,9 +1,8 @@
-# Analyze and test every package on each push and pull request.
+# Analyze and test every package on each push (any branch) and pull request.
 name: CI
 
 on:
   push:
-    branches: [main]
   pull_request:
 
 concurrency:

@@ -34,5 +34,8 @@
   "notifications": "通知",
   "settings": "设置",
   "tags": "标签",
-  "filterTop": "热门"
+  "filterTop": "热门",
+  "signOut": "退出登录",
+  "account": "账户",
+  "createAccount": "创建账户"
 }

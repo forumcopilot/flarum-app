@@ -201,4 +201,27 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get tagsLoadFailed => 'Couldn\'t load the tags.';
+
+  @override
+  String get signOut => '退出登录';
+
+  @override
+  String get account => '账户';
+
+  @override
+  String get createAccount => '创建账户';
+
+  @override
+  String signInFailedReason(String reason) {
+    return 'Couldn\'t sign in: $reason';
+  }
+
+  @override
+  String get signInHint =>
+      'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.';
+
+  @override
+  String signedInAs(String name) {
+    return 'Signed in as $name';
+  }
 }

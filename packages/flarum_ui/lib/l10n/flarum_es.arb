@@ -34,5 +34,8 @@
   "notifications": "Notificaciones",
   "settings": "Ajustes",
   "tags": "Etiquetas",
-  "filterTop": "Destacados"
+  "filterTop": "Destacados",
+  "signOut": "Cerrar sesión",
+  "account": "Cuenta",
+  "createAccount": "Crear cuenta"
 }

@@ -427,6 +427,42 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load the tags.'**
   String get tagsLoadFailed;
+
+  /// UI text: Sign out
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// Drawer: Account
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// Button opening sign-up
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccount;
+
+  /// Shown when the forum doesn't accept the sign-in captured from its page
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t sign in: {reason}'**
+  String signInFailedReason(String reason);
+
+  /// Under the Sign in button on the account tab
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.'**
+  String get signInHint;
+
+  /// Account tab, signed in
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {name}'**
+  String signedInAs(String name);
 }
 
 class _FlarumLocalizationsDelegate

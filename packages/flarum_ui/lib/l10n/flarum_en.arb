@@ -259,5 +259,39 @@
   "tagsLoadFailed": "Couldn't load the tags.",
   "@tagsLoadFailed": {
     "description": "Error shown when the forum's tags fail to load"
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "UI text: Sign out"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Drawer: Account"
+  },
+  "createAccount": "Create account",
+  "@createAccount": {
+    "description": "Button opening sign-up"
+  },
+  "signInFailedReason": "Couldn't sign in: {reason}",
+  "@signInFailedReason": {
+    "description": "Shown when the forum doesn't accept the sign-in captured from its page",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "signInHint": "Sign in on the forum's own page. The app keeps you signed in until you sign out.",
+  "@signInHint": {
+    "description": "Under the Sign in button on the account tab"
+  },
+  "signedInAs": "Signed in as {name}",
+  "@signedInAs": {
+    "description": "Account tab, signed in",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

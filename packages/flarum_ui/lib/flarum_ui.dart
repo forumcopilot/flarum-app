@@ -23,3 +23,5 @@ export 'src/app/app_shell.dart';
 export 'src/app/flarum_app.dart';
 export 'src/home/discussion_list_view.dart';
 export 'src/tags/tags_page.dart';
+export 'src/account/account_page.dart';
+export 'src/account/sign_in_page.dart';

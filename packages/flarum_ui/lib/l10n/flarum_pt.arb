@@ -34,5 +34,8 @@
   "notifications": "Notificações",
   "settings": "Configurações",
   "tags": "Tags",
-  "filterTop": "Top"
+  "filterTop": "Top",
+  "signOut": "Sair",
+  "account": "Conta",
+  "createAccount": "Criar conta"
 }

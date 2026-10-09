@@ -34,5 +34,8 @@
   "notifications": "Уведомления",
   "settings": "Настройки",
   "tags": "Теги",
-  "filterTop": "Обсуждаемые"
+  "filterTop": "Обсуждаемые",
+  "signOut": "Выйти",
+  "account": "Аккаунт",
+  "createAccount": "Создать аккаунт"
 }

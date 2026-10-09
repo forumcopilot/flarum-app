@@ -31,6 +31,7 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   flutter_layout_grid: ^2.0.8 # post tables: CSS-grid track sizing, with col/rowspan
   html: '>=0.15.6 <0.15.7' # 0.15.7 drops Element.matches, which flutter_html 3.0.0 still calls
+  flutter_inappwebview: ^6.1.5 # sign-in: the forum's page, and its HttpOnly remember cookie
   intl: ^0.20.2
   scrollable_positioned_list: ^0.3.8 # a thread opens scrolled to a post
   share_plus: ^12.0.1
@@ -45,3 +46,5 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+  assets:
+    - assets/signin.js

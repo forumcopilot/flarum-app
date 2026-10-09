@@ -34,5 +34,8 @@
   "notifications": "Benachrichtigungen",
   "settings": "Einstellungen",
   "tags": "Schlagwörter",
-  "filterTop": "Top"
+  "filterTop": "Top",
+  "signOut": "Abmelden",
+  "account": "Konto",
+  "createAccount": "Konto erstellen"
 }

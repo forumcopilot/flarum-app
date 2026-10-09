@@ -34,5 +34,8 @@
   "notifications": "알림",
   "settings": "설정",
   "tags": "태그",
-  "filterTop": "인기"
+  "filterTop": "인기",
+  "signOut": "로그아웃",
+  "account": "계정",
+  "createAccount": "계정 만들기"
 }

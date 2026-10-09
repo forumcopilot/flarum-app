@@ -203,4 +203,27 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get tagsLoadFailed => 'Couldn\'t load the tags.';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get createAccount => 'Create account';
+
+  @override
+  String signInFailedReason(String reason) {
+    return 'Couldn\'t sign in: $reason';
+  }
+
+  @override
+  String get signInHint =>
+      'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.';
+
+  @override
+  String signedInAs(String name) {
+    return 'Signed in as $name';
+  }
 }

@@ -10,7 +10,7 @@ app itself, `flarum_ui` and the shared `forum_kit` come in later phases.
 ## Layout
 
 - `packages/flarum_core/`: Flarum JSON:API client: forum info and version detection, sign-in,
-  discussions, posts, users, notifications. Plain Dart for now.
+  discussions, posts, users, notifications; it builds on forumcopilot_sdk (from discourse-app).
 - `tool/test_forums/`: seeds the local Flarum 1.8 and 2.0 forums the tests are recorded from.
 - `tool/spikes/`: one-off experiments, such as rendering Flarum HTML with discourse-app's renderer.
 - `docs/phase-0-notes.md`, `docs/phase-1-notes.md`: what each phase found and decided.
@@ -21,9 +21,10 @@ Flutter 3.38.7 (Dart 3.10), as discourse-app's CI.
 
 ```bash
 cd packages/flarum_core
-dart pub get
-dart analyze
-dart test                     # offline, against fixtures recorded from both versions
+cp pubspec_overrides.yaml.example pubspec_overrides.yaml   # optional: build against ../discourse-app
+flutter pub get
+flutter analyze
+flutter test                  # offline, against fixtures recorded from both versions
 ```
 
 Live tests against running forums, and re-recording fixtures, are described in

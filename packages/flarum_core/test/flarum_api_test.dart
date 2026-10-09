@@ -1,5 +1,5 @@
 import 'package:flarum_core/flarum_core.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'support/fixtures.dart';
 

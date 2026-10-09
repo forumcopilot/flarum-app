@@ -1,17 +1,26 @@
 name: flarum_core
-description: Flarum REST (JSON:API) client for flarum-app, supporting Flarum 1.8 and 2.0.
-version: 0.1.0
+description: Flarum REST (JSON:API) client for flarum-app and its forumcopilot_sdk proxies, supporting Flarum 1.8 and 2.0.
+version: 0.2.0
 publish_to: none
 
-# Plain Dart for now (Phase 0). It becomes a Flutter package in Phase 2, when it
-# implements the forumcopilot_sdk proxies.
 environment:
   sdk: ^3.6.0
+  flutter: ">=3.32.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
   # Same HTTP client as forumcopilot_sdk.
   dio: ^5.4.0
+  # The SDK lives in discourse-app, pinned by commit as ABDA pins discourse-app.
+  # For local development, copy pubspec_overrides.yaml.example to pubspec_overrides.yaml.
+  forumcopilot_sdk:
+    git:
+      url: https://github.com/forumcopilot/discourse-app.git
+      path: packages/forumcopilot_sdk
+      ref: 8c56b48e19787b126b97c37f1ab0cdb3cdde45b4
 
 dev_dependencies:
-  lints: ^5.0.0
-  test: ^1.24.0
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter

@@ -4,13 +4,13 @@ library;
 import 'dart:io';
 
 import 'package:flarum_core/flarum_core.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 /// Checks the client against running test forums seeded with alice, bob and
 /// carol. Skipped by default; run with
 ///
 ///   FLARUM_V1_URL=http://127.0.0.1:8081 FLARUM_V2_URL=http://127.0.0.1:8082 \
-///   FLARUM_TEST_PASSWORD=… dart test --run-skipped -t live
+///   FLARUM_TEST_PASSWORD=… flutter test --run-skipped -t live
 void main() {
   final password = Platform.environment['FLARUM_TEST_PASSWORD'];
   final forums = {

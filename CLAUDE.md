@@ -27,7 +27,7 @@ marked places so 1.x can be dropped later. The app needs no plugin on the forum.
 ## Commands
 
 ```bash
-cd packages/flarum_core && dart pub get && dart analyze && dart test
+cd packages/flarum_core && flutter pub get && flutter analyze && flutter test
 ```
 
 Tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every API test runs

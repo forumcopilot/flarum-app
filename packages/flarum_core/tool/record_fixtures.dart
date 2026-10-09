@@ -14,7 +14,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flarum_core/flarum_core.dart';
+import 'package:flarum_core/api.dart';
 
 Future<void> main(List<String> args) async {
   final password = Platform.environment['FLARUM_TEST_PASSWORD'];

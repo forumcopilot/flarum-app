@@ -23,3 +23,6 @@
 
 # Node tooling for browser checks
 node_modules/
+
+# Local dependency overrides (see pubspec_overrides.yaml.example)
+pubspec_overrides.yaml

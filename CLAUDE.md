@@ -82,6 +82,8 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Attribute types vary: 2.0 sends some booleans as `"1"`/`""`; tag limits are strings on both.
   Read attributes through `FlarumAttributes`.
 - Validation (422): 1.x reports the first failed rule, 2.0 every invalid field.
+- Mark all read: `PATCH /api/users/{id}` with `markedAllAsReadAt` as a date; 2.0 refuses `true` (422),
+  1.x records the current time whatever the value.
 - Listing `/api/notifications` resets the reader's "new" badge on the website.
 - Notifications: include `subject.discussion`, or a post subject arrives without its discussion on
   1.x. Discussion-subject types carry the post to open in `content.postNumber`; `postMentioned`'s

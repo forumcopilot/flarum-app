@@ -71,7 +71,8 @@ void main() {
         final patch = fixtures.requests.last;
         expect(patch.method, 'PATCH');
         expect(patch.path, '/users/${fixtures.userId('alice')}');
-        expect(((patch.data as Map)['data'] as Map)['attributes'], {'markedAllAsReadAt': true});
+        final sent = ((patch.data as Map)['data'] as Map)['attributes'] as Map;
+        expect(DateTime.parse(sent['markedAllAsReadAt'] as String).isUtc, isTrue, reason: '2.0 refuses `true`');
       });
 
       test('reports what Flarum doesn\'t have instead of inventing it', () async {

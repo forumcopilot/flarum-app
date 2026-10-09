@@ -67,3 +67,23 @@ rendered with `PostTile`. A few GET requests per forum, as a guest, with the app
 First run (9 October 2026): all 21 answered, parsed and were detected as the right version; 172
 posts rendered with no error. The phones still have to confirm what this can't: real fonts,
 scrolling, and the web-view sign-in.
+
+## SDK conformance
+
+`packages/flarum_core/test/conformance_test.dart` (tag `live`) runs the SDK's shared proxy suites
+(forumcopilot_sdk `lib/test`) against a test forum, signed in as carol, for the proxies Flarum
+implements. They expect `result: true` from every method, so Phase 3's methods fail by design;
+the summary is the report.
+
+9 October 2026, both versions: 36 of 59 pass. The 18 that don't, all expected:
+
+- Writes, Phase 3: `newTopic`, `replyPostAsync`, `reportPostAsync`, `getRawPostAsync` and
+  `saveRawPostAsync` (editing), `ignoreUserAsync`/`getIgnoredUsersAsync` (fof/ignore-users), and
+  following discussions and tags (`subscribe`/`unsubscribe…`).
+- Private messages, Phase 3: `getInboxStatAsync`.
+- Not on Flarum: `loginForum` (no password-protected tags), `getBoardStatAsync` (admin-only),
+  `loginTwoStepAsync`, `getOnlineUsersAsync`, `getRecommendedUsersAsync`.
+- The test data: `getAvatarAsync` (the seed users have no avatar).
+
+It found one real bug, now fixed: "mark all read" sent `markedAllAsReadAt: true`, which 1.8 takes
+and 2.0 refuses (422); it now sends the time.

@@ -357,7 +357,8 @@ class FlarumApi {
       'data': {
         'type': 'users',
         'id': userId,
-        'attributes': {'markedAllAsReadAt': true},
+        // 2.0 wants a date (422 on `true`); 1.x takes any value and records now.
+        'attributes': {'markedAllAsReadAt': DateTime.now().toUtc().toIso8601String()},
       },
     });
   }

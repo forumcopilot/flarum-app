@@ -37,5 +37,8 @@
   "filterTop": "Top",
   "signOut": "Esci",
   "account": "Account",
-  "createAccount": "Crea account"
+  "createAccount": "Crea account",
+  "allNotificationsMarkedAsRead": "Tutte le notifiche segnate come lette",
+  "failedToMarkNotificationsRead": "Impossibile segnare le notifiche come lette",
+  "noNotificationsYet": "Ancora nessuna notifica"
 }

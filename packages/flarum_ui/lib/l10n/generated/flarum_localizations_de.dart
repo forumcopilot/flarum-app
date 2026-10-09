@@ -226,4 +226,134 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String signedInAs(String name) {
     return 'Signed in as $name';
   }
+
+  @override
+  String get allNotificationsMarkedAsRead =>
+      'Alle Benachrichtigungen als gelesen markiert';
+
+  @override
+  String get failedToMarkNotificationsRead =>
+      'Benachrichtigungen konnten nicht als gelesen markiert werden';
+
+  @override
+  String get noNotificationsYet => 'Noch keine Benachrichtigungen';
+
+  @override
+  String notifNewPost(String user, String title) {
+    return '$user replied to $title';
+  }
+
+  @override
+  String notifPostLiked(String user, String title) {
+    return '$user liked your post in $title';
+  }
+
+  @override
+  String notifPostReacted(String user, String title) {
+    return '$user reacted to your post in $title';
+  }
+
+  @override
+  String notifPostMentioned(String user, String title) {
+    return '$user replied to your post in $title';
+  }
+
+  @override
+  String notifUserMentioned(String user, String title) {
+    return '$user mentioned you in $title';
+  }
+
+  @override
+  String notifGroupMentioned(String user, String title) {
+    return '$user mentioned a group you\'re in, in $title';
+  }
+
+  @override
+  String notifRenamed(String user, String title) {
+    return '$user renamed a discussion to $title';
+  }
+
+  @override
+  String notifLocked(String user, String title) {
+    return '$user locked $title';
+  }
+
+  @override
+  String notifNewDiscussion(String user, String title) {
+    return '$user started $title';
+  }
+
+  @override
+  String notifMovedToTag(String user, String title) {
+    return '$user moved $title to a tag you follow';
+  }
+
+  @override
+  String notifPrivateCreated(String user, String title) {
+    return '$user started a private discussion with you: $title';
+  }
+
+  @override
+  String notifPrivateReplied(String user, String title) {
+    return '$user replied to the private discussion $title';
+  }
+
+  @override
+  String notifPrivateAdded(String user, String title) {
+    return '$user added you to the private discussion $title';
+  }
+
+  @override
+  String notifPrivateRemoved(String user, String title) {
+    return '$user removed you from the private discussion $title';
+  }
+
+  @override
+  String notifMadePublic(String user, String title) {
+    return '$user made $title public';
+  }
+
+  @override
+  String notifBestAnswerAwarded(String user, String title) {
+    return '$user chose your post as the best answer in $title';
+  }
+
+  @override
+  String notifBestAnswerChosen(String user, String title) {
+    return '$user chose a best answer in $title';
+  }
+
+  @override
+  String notifBestAnswerPending(String title) {
+    return 'Choose a best answer in $title';
+  }
+
+  @override
+  String notifMessage(String user) {
+    return '$user sent you a message';
+  }
+
+  @override
+  String get notifSuspended => 'You have been suspended';
+
+  @override
+  String get notifUnsuspended => 'Your suspension has been lifted';
+
+  @override
+  String get notifExport => 'Your data export is ready';
+
+  @override
+  String get notifOther => 'New notification';
+
+  @override
+  String get aDiscussion => 'a discussion';
+
+  @override
+  String get notificationsLoadFailed => 'Couldn\'t load your notifications.';
+
+  @override
+  String get notificationsSignIn => 'Sign in to see your notifications.';
+
+  @override
+  String get markAllRead => 'Mark all as read';
 }

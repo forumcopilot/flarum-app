@@ -293,5 +293,271 @@
         "type": "String"
       }
     }
+  },
+  "allNotificationsMarkedAsRead": "All notifications marked as read",
+  "@allNotificationsMarkedAsRead": {
+    "description": "UI text: All notifications marked as read"
+  },
+  "failedToMarkNotificationsRead": "Failed to mark notifications as read",
+  "@failedToMarkNotificationsRead": {
+    "description": "Notifications tab: snackbar when Dismiss all fails and the forum gave no reason"
+  },
+  "noNotificationsYet": "No notifications yet",
+  "@noNotificationsYet": {
+    "description": "Notifications tab, All filter: empty state"
+  },
+  "notifNewPost": "{user} replied to {title}",
+  "@notifNewPost": {
+    "description": "Notification: a new reply in a discussion the reader follows",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPostLiked": "{user} liked your post in {title}",
+  "@notifPostLiked": {
+    "description": "Notification",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPostReacted": "{user} reacted to your post in {title}",
+  "@notifPostReacted": {
+    "description": "Notification (fof/reactions)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPostMentioned": "{user} replied to your post in {title}",
+  "@notifPostMentioned": {
+    "description": "Notification: someone quoted or replied to the reader's post",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifUserMentioned": "{user} mentioned you in {title}",
+  "@notifUserMentioned": {
+    "description": "Notification",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifGroupMentioned": "{user} mentioned a group you're in, in {title}",
+  "@notifGroupMentioned": {
+    "description": "Notification",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRenamed": "{user} renamed a discussion to {title}",
+  "@notifRenamed": {
+    "description": "Notification: {title} is the new title",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLocked": "{user} locked {title}",
+  "@notifLocked": {
+    "description": "Notification",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifNewDiscussion": "{user} started {title}",
+  "@notifNewDiscussion": {
+    "description": "Notification: a new discussion in a tag the reader follows",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifMovedToTag": "{user} moved {title} to a tag you follow",
+  "@notifMovedToTag": {
+    "description": "Notification (fof/follow-tags)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPrivateCreated": "{user} started a private discussion with you: {title}",
+  "@notifPrivateCreated": {
+    "description": "Notification (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPrivateReplied": "{user} replied to the private discussion {title}",
+  "@notifPrivateReplied": {
+    "description": "Notification (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPrivateAdded": "{user} added you to the private discussion {title}",
+  "@notifPrivateAdded": {
+    "description": "Notification (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifPrivateRemoved": "{user} removed you from the private discussion {title}",
+  "@notifPrivateRemoved": {
+    "description": "Notification (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifMadePublic": "{user} made {title} public",
+  "@notifMadePublic": {
+    "description": "Notification (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifBestAnswerAwarded": "{user} chose your post as the best answer in {title}",
+  "@notifBestAnswerAwarded": {
+    "description": "Notification (fof/best-answer)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifBestAnswerChosen": "{user} chose a best answer in {title}",
+  "@notifBestAnswerChosen": {
+    "description": "Notification (fof/best-answer)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifBestAnswerPending": "Choose a best answer in {title}",
+  "@notifBestAnswerPending": {
+    "description": "Notification (fof/best-answer): a reminder to the discussion's author",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notifMessage": "{user} sent you a message",
+  "@notifMessage": {
+    "description": "Notification (flarum/messages, 2.0)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifSuspended": "You have been suspended",
+  "@notifSuspended": {
+    "description": "Notification"
+  },
+  "notifUnsuspended": "Your suspension has been lifted",
+  "@notifUnsuspended": {
+    "description": "Notification"
+  },
+  "notifExport": "Your data export is ready",
+  "@notifExport": {
+    "description": "Notification (flarum/gdpr)"
+  },
+  "notifOther": "New notification",
+  "@notifOther": {
+    "description": "Notification of a kind the app doesn't describe"
+  },
+  "aDiscussion": "a discussion",
+  "@aDiscussion": {
+    "description": "Stands in for a discussion title the notification doesn't carry"
+  },
+  "notificationsLoadFailed": "Couldn't load your notifications.",
+  "@notificationsLoadFailed": {
+    "description": "Error on the notifications tab"
+  },
+  "notificationsSignIn": "Sign in to see your notifications.",
+  "@notificationsSignIn": {
+    "description": "Notifications tab for a guest"
+  },
+  "markAllRead": "Mark all as read",
+  "@markAllRead": {
+    "description": "Notifications tab action"
   }
 }

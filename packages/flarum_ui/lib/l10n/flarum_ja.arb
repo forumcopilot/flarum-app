@@ -37,5 +37,8 @@
   "filterTop": "トップ",
   "signOut": "サインアウト",
   "account": "アカウント",
-  "createAccount": "アカウントを作成"
+  "createAccount": "アカウントを作成",
+  "allNotificationsMarkedAsRead": "すべての通知を既読にしました",
+  "failedToMarkNotificationsRead": "通知を既読にできませんでした",
+  "noNotificationsYet": "まだ通知はありません"
 }

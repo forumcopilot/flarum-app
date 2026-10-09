@@ -2,7 +2,6 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flarum_core/testing.dart';
-import '../support/scripted.dart';
 import 'site.dart';
 
 void main() {

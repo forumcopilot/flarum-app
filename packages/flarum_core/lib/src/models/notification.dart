@@ -74,4 +74,16 @@ class FlarumNotification {
   /// The post to open at: the subject post's number, or the event's own
   /// (byobu's replies carry `content.postNumber`).
   final int? postNumber;
+
+  /// The post number to open the discussion at: for a post mention, the
+  /// reply that made it (`content.replyNumber`; the subject is the reader's
+  /// own post), otherwise [postNumber].
+  int? get openAt {
+    final content = this.content;
+    if (contentType == 'postMentioned' && content is Map) {
+      final reply = int.tryParse('${content['replyNumber'] ?? ''}');
+      if (reply != null) return reply;
+    }
+    return postNumber;
+  }
 }

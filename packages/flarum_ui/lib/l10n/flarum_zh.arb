@@ -37,5 +37,8 @@
   "filterTop": "热门",
   "signOut": "退出登录",
   "account": "账户",
-  "createAccount": "创建账户"
+  "createAccount": "创建账户",
+  "allNotificationsMarkedAsRead": "所有通知已标记为已读",
+  "failedToMarkNotificationsRead": "无法将通知标记为已读",
+  "noNotificationsYet": "还没有通知"
 }

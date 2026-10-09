@@ -37,5 +37,8 @@
   "filterTop": "Top",
   "signOut": "Se déconnecter",
   "account": "Compte",
-  "createAccount": "Créer un compte"
+  "createAccount": "Créer un compte",
+  "allNotificationsMarkedAsRead": "Toutes les notifications marquées comme lues",
+  "failedToMarkNotificationsRead": "Impossible de marquer les notifications comme lues",
+  "noNotificationsYet": "Aucune notification pour l'instant"
 }

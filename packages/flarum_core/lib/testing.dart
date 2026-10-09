@@ -3,3 +3,4 @@
 library;
 
 export 'src/testing/fixture_forum.dart';
+export 'src/testing/scripted_adapter.dart';

@@ -37,5 +37,8 @@
   "filterTop": "인기",
   "signOut": "로그아웃",
   "account": "계정",
-  "createAccount": "계정 만들기"
+  "createAccount": "계정 만들기",
+  "allNotificationsMarkedAsRead": "모든 알림을 읽음으로 표시했습니다",
+  "failedToMarkNotificationsRead": "알림을 읽음으로 표시하지 못했습니다",
+  "noNotificationsYet": "아직 알림이 없습니다"
 }

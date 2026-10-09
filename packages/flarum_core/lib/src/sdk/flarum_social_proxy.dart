@@ -112,7 +112,7 @@ class FlarumSocialProxy implements IFCSocialProxy {
   static FCAlert toAlert(FlarumNotification n, {required String baseUrl}) {
     final who = n.fromUser?.displayName ?? 'Someone';
     final title = n.discussionTitle ?? 'a discussion';
-    final number = _postNumber(n);
+    final number = n.openAt;
     final discussionId = n.discussionId;
     final (contentType, contentId) = switch (n.contentType) {
       'messageReceived' => ('conversation_message', ''),
@@ -141,17 +141,6 @@ class FlarumSocialProxy implements IFCSocialProxy {
       action: _action(n.contentType),
       isRead: n.isRead,
     );
-  }
-
-  /// Where to open: a post mention at the reply that made it, others at their
-  /// subject post or the event's own number (`content.postNumber`).
-  static int? _postNumber(FlarumNotification n) {
-    final content = n.content;
-    if (n.contentType == 'postMentioned' && content is Map) {
-      final reply = int.tryParse('${content['replyNumber'] ?? ''}');
-      if (reply != null) return reply;
-    }
-    return n.postNumber;
   }
 
   /// The website's wording for each type, in English. Types from extensions

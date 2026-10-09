@@ -37,5 +37,8 @@
   "filterTop": "Top",
   "signOut": "Afmelden",
   "account": "Account",
-  "createAccount": "Account aanmaken"
+  "createAccount": "Account aanmaken",
+  "allNotificationsMarkedAsRead": "Alle meldingen gemarkeerd als gelezen",
+  "failedToMarkNotificationsRead": "Meldingen markeren als gelezen mislukt",
+  "noNotificationsYet": "Nog geen meldingen"
 }

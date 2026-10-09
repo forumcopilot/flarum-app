@@ -463,6 +463,186 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Signed in as {name}'**
   String signedInAs(String name);
+
+  /// UI text: All notifications marked as read
+  ///
+  /// In en, this message translates to:
+  /// **'All notifications marked as read'**
+  String get allNotificationsMarkedAsRead;
+
+  /// Notifications tab: snackbar when Dismiss all fails and the forum gave no reason
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to mark notifications as read'**
+  String get failedToMarkNotificationsRead;
+
+  /// Notifications tab, All filter: empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get noNotificationsYet;
+
+  /// Notification: a new reply in a discussion the reader follows
+  ///
+  /// In en, this message translates to:
+  /// **'{user} replied to {title}'**
+  String notifNewPost(String user, String title);
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'{user} liked your post in {title}'**
+  String notifPostLiked(String user, String title);
+
+  /// Notification (fof/reactions)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} reacted to your post in {title}'**
+  String notifPostReacted(String user, String title);
+
+  /// Notification: someone quoted or replied to the reader's post
+  ///
+  /// In en, this message translates to:
+  /// **'{user} replied to your post in {title}'**
+  String notifPostMentioned(String user, String title);
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'{user} mentioned you in {title}'**
+  String notifUserMentioned(String user, String title);
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'{user} mentioned a group you\'re in, in {title}'**
+  String notifGroupMentioned(String user, String title);
+
+  /// Notification: {title} is the new title
+  ///
+  /// In en, this message translates to:
+  /// **'{user} renamed a discussion to {title}'**
+  String notifRenamed(String user, String title);
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'{user} locked {title}'**
+  String notifLocked(String user, String title);
+
+  /// Notification: a new discussion in a tag the reader follows
+  ///
+  /// In en, this message translates to:
+  /// **'{user} started {title}'**
+  String notifNewDiscussion(String user, String title);
+
+  /// Notification (fof/follow-tags)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} moved {title} to a tag you follow'**
+  String notifMovedToTag(String user, String title);
+
+  /// Notification (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} started a private discussion with you: {title}'**
+  String notifPrivateCreated(String user, String title);
+
+  /// Notification (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} replied to the private discussion {title}'**
+  String notifPrivateReplied(String user, String title);
+
+  /// Notification (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} added you to the private discussion {title}'**
+  String notifPrivateAdded(String user, String title);
+
+  /// Notification (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} removed you from the private discussion {title}'**
+  String notifPrivateRemoved(String user, String title);
+
+  /// Notification (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} made {title} public'**
+  String notifMadePublic(String user, String title);
+
+  /// Notification (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} chose your post as the best answer in {title}'**
+  String notifBestAnswerAwarded(String user, String title);
+
+  /// Notification (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} chose a best answer in {title}'**
+  String notifBestAnswerChosen(String user, String title);
+
+  /// Notification (fof/best-answer): a reminder to the discussion's author
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a best answer in {title}'**
+  String notifBestAnswerPending(String title);
+
+  /// Notification (flarum/messages, 2.0)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} sent you a message'**
+  String notifMessage(String user);
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'You have been suspended'**
+  String get notifSuspended;
+
+  /// Notification
+  ///
+  /// In en, this message translates to:
+  /// **'Your suspension has been lifted'**
+  String get notifUnsuspended;
+
+  /// Notification (flarum/gdpr)
+  ///
+  /// In en, this message translates to:
+  /// **'Your data export is ready'**
+  String get notifExport;
+
+  /// Notification of a kind the app doesn't describe
+  ///
+  /// In en, this message translates to:
+  /// **'New notification'**
+  String get notifOther;
+
+  /// Stands in for a discussion title the notification doesn't carry
+  ///
+  /// In en, this message translates to:
+  /// **'a discussion'**
+  String get aDiscussion;
+
+  /// Error on the notifications tab
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your notifications.'**
+  String get notificationsLoadFailed;
+
+  /// Notifications tab for a guest
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to see your notifications.'**
+  String get notificationsSignIn;
+
+  /// Notifications tab action
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllRead;
 }
 
 class _FlarumLocalizationsDelegate

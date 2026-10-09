@@ -380,6 +380,17 @@ class FlarumApi {
     );
   }
 
+  /// Marks notification [id] read.
+  Future<void> markNotificationRead(String id) async {
+    await client.patch('/notifications/$id', {
+      'data': {
+        'type': 'notifications',
+        'id': id,
+        'attributes': {'isRead': true},
+      },
+    });
+  }
+
   /// Marks all the reader's notifications read.
   Future<void> markAllNotificationsRead() => client.postEmpty('/notifications/read');
 

@@ -2,7 +2,6 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flarum_core/testing.dart';
-import 'support/scripted.dart';
 
 /// Every test runs against responses recorded from both test forums.
 void main() {
@@ -218,6 +217,24 @@ void main() {
     // No fixture exists for this request; only what was sent matters.
     await _failure(() => forum.api().discussions(limit: 200));
     expect(forum.requests.single.queryParameters['page[limit]'], '50');
+  });
+
+  test('marking one notification read patches its isRead', () async {
+    final adapter = ScriptedAdapter([
+      (200, {'data': {'type': 'notifications', 'id': '7', 'attributes': {'isRead': true}}}),
+    ]);
+    final api = FlarumApi(FlarumClient(FixtureForum.baseUrl, token: 't', dio: adapter.dio()));
+    await api.markNotificationRead('7');
+    final request = adapter.requests.single;
+    expect('${request.method} ${request.path}', 'PATCH /notifications/7');
+    expect(((request.data as Map)['data'] as Map)['attributes'], {'isRead': true});
+  });
+
+  test('a notification opens at its post, a post mention at the reply', () {
+    const liked = FlarumNotification(id: '1', contentType: 'postLiked', postNumber: 2);
+    const mention = FlarumNotification(id: '2', contentType: 'postMentioned', postNumber: 2, content: {'replyNumber': 5});
+    expect(liked.openAt, 2);
+    expect(mention.openAt, 5);
   });
 
   test('started since a day asks for that day through tomorrow, in UTC', () async {

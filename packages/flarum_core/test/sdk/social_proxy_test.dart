@@ -4,7 +4,6 @@ import 'package:forumcopilot_sdk/models/results/fc_social_result.dart';
 import 'package:forumcopilot_sdk/models/results/fc_user_result.dart';
 
 import 'package:flarum_core/testing.dart';
-import '../support/scripted.dart';
 import 'site.dart';
 
 void main() {

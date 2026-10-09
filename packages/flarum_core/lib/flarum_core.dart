@@ -9,3 +9,4 @@ export 'src/sdk/flarum_forum.dart';
 export 'src/sdk/flarum_proxy_factory.dart';
 export 'src/sdk/flarum_forum_proxy.dart';
 export 'src/sdk/flarum_topic_proxy.dart';
+export 'src/sdk/flarum_post_proxy.dart';

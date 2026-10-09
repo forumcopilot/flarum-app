@@ -66,6 +66,9 @@ Future<void> main(List<String> args) async {
   await record('posts_long_0', () => api.posts(discussions['long']!, limit: 50));
   await record('posts_long_50', () => api.posts(discussions['long']!, offset: 50, limit: 50));
   await record('posts_long_near_30', () => api.postsNear(discussions['long']!, 30, limit: 5));
+  await record('discussion_long', () => api.discussion(discussions['long']!));
+  await record('posts_long_near_21', () => api.postsNear(discussions['long']!, 21, limit: 20));
+  await record('posts_welcome_near_2', () => api.postsNear(discussions['welcome']!, 2, limit: 20));
   await record('user_bob', () => api.user(users['bob']!));
   await record('tags', api.tags);
   await record('post_welcome_2', () => api.post(welcomePosts[1]));

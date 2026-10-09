@@ -4,8 +4,7 @@
     "path": "/posts",
     "query": {
       "filter[discussion]": "3",
-      "sort": "number",
-      "page[offset]": "0",
+      "page[near]": "2",
       "page[limit]": "20",
       "include": "user"
     },

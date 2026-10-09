@@ -63,11 +63,12 @@ void main() {
     });
   }
 
-  test('the factory serves Flarum\'s config proxy and refuses the rest for now', () {
+  test('the factory serves Flarum\'s proxies and refuses the ones not built yet', () {
     FlarumProxyFactory.register();
     final site = testSite();
     SiteProxyFactory.initialize(site);
     expect(SiteProxyFactory.getConfigProxy(), isA<FlarumConfigProxy>());
-    expect(SiteProxyFactory.getPostProxy, throwsUnimplementedError);
+    expect(SiteProxyFactory.getPostProxy(), isA<FlarumPostProxy>());
+    expect(SiteProxyFactory.getUserProxy, throwsUnimplementedError);
   });
 }

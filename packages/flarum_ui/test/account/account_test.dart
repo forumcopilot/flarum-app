@@ -4,6 +4,7 @@ import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
+import 'package:forum_kit/theme/forum_palette.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 void main() {
@@ -18,6 +19,38 @@ void main() {
       expect(rememberToken([(name: 'flarum_session', value: 's')]), isNull);
       expect(rememberToken([(name: '_remember', value: 'x')]), isNull);
     });
+  });
+
+  test('the forum\'s colours become the palette\'s accents', () {
+    FlarumForumInfo info({String? primary, String? secondary}) => FlarumForumInfo(
+          version: FlarumVersion.v2,
+          baseUrl: 'https://forum.test',
+          apiUrl: 'https://forum.test/api',
+          title: 'x',
+          attributes: const {},
+          primaryColor: primary,
+          secondaryColor: secondary,
+        );
+    final palette = flarumPalette(info(primary: '#4D698E', secondary: '#B72A2A'));
+    expect(palette!.light!.tertiary, const Color(0xFF4D698E));
+    expect(palette.light!.quaternary, const Color(0xFFB72A2A));
+    expect(palette.dark!.tertiary, const Color(0xFF4D698E));
+    expect(palette.dark!.isDark, isTrue);
+    expect(flarumPalette(info()), isNull);
+  });
+
+  testWidgets('the appearance is chosen on the account tab', (tester) async {
+    FlarumForum.resetForTesting();
+    FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum(signedIn: false);
+    final appearance = Appearance.unsaved();
+    final site = SiteContext(
+      siteType: FlarumProxyFactory.siteType,
+      site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+    );
+    await tester.pumpWidget(MaterialApp(home: AccountPage(site: site, appearance: appearance)));
+    await tester.tap(find.text('Dark'));
+    await tester.pump();
+    expect(appearance.value, ThemeMode.dark);
   });
 
   for (final version in FlarumVersion.values) {

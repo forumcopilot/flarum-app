@@ -43,5 +43,9 @@
   "noNotificationsYet": "还没有通知",
   "posts": "帖子",
   "profileJoined": "{date} 加入",
-  "searchFailedWithError": "搜索失败：{error}"
+  "searchFailedWithError": "搜索失败：{error}",
+  "light": "浅色",
+  "dark": "深色",
+  "appearance": "外观",
+  "appearanceSystem": "跟随系统"
 }

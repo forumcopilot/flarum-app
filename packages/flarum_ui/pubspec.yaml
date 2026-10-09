@@ -35,6 +35,7 @@ dependencies:
   intl: ^0.20.2
   scrollable_positioned_list: ^0.3.8 # a thread opens scrolled to a post
   share_plus: ^12.0.1
+  shared_preferences: ^2.5.1 # the reader's appearance choice
   url_launcher: ^6.2.5
   video_player: ^2.10.0
 

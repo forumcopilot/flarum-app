@@ -404,4 +404,16 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String noResultsFor(String query) {
     return 'Nothing found for “$query”.';
   }
+
+  @override
+  String get light => '라이트';
+
+  @override
+  String get dark => '다크';
+
+  @override
+  String get appearance => '테마';
+
+  @override
+  String get appearanceSystem => '시스템 기본값';
 }

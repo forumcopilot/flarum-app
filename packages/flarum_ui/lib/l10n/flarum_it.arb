@@ -43,5 +43,9 @@
   "noNotificationsYet": "Ancora nessuna notifica",
   "posts": "Post",
   "profileJoined": "Iscritto da {date}",
-  "searchFailedWithError": "Ricerca fallita: {error}"
+  "searchFailedWithError": "Ricerca fallita: {error}",
+  "light": "Chiaro",
+  "dark": "Scuro",
+  "appearance": "Aspetto",
+  "appearanceSystem": "Sistema"
 }

@@ -43,5 +43,9 @@
   "noNotificationsYet": "Noch keine Benachrichtigungen",
   "posts": "Beiträge",
   "profileJoined": "Dabei seit {date}",
-  "searchFailedWithError": "Suche fehlgeschlagen: {error}"
+  "searchFailedWithError": "Suche fehlgeschlagen: {error}",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "appearance": "Darstellung",
+  "appearanceSystem": "Systemstandard"
 }

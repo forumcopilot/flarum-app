@@ -43,5 +43,9 @@
   "noNotificationsYet": "Aún no hay notificaciones",
   "posts": "Publicaciones",
   "profileJoined": "Se unió en {date}",
-  "searchFailedWithError": "Búsqueda fallida: {error}"
+  "searchFailedWithError": "Búsqueda fallida: {error}",
+  "light": "Claro",
+  "dark": "Oscuro",
+  "appearance": "Apariencia",
+  "appearanceSystem": "Sistema"
 }

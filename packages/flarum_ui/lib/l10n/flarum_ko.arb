@@ -43,5 +43,9 @@
   "noNotificationsYet": "아직 알림이 없습니다",
   "posts": "게시물",
   "profileJoined": "{date} 가입",
-  "searchFailedWithError": "검색 실패: {error}"
+  "searchFailedWithError": "검색 실패: {error}",
+  "light": "라이트",
+  "dark": "다크",
+  "appearance": "테마",
+  "appearanceSystem": "시스템 기본값"
 }

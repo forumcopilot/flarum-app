@@ -6,5 +6,6 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final site = await FlarumApp.initialize(AppForumConfig.current);
-  runApp(FlarumApp(site: site));
+  final appearance = await Appearance.load();
+  runApp(FlarumApp(site: site, appearance: appearance));
 }

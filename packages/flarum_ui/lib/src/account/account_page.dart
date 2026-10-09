@@ -6,14 +6,18 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../render/links.dart';
+import '../app/appearance.dart';
 import 'sign_in_page.dart';
 
 /// The reader's account: sign in (or create an account on the forum's
-/// page), or who is signed in, and sign out.
+/// page), or who is signed in, and sign out; and the app's appearance.
 class AccountPage extends StatefulWidget {
-  const AccountPage({super.key, required this.site, this.onSignInChanged});
+  const AccountPage({super.key, required this.site, this.appearance, this.onSignInChanged});
 
   final SiteContext site;
+
+  /// The reader's light/dark choice, offered here when given.
+  final Appearance? appearance;
 
   /// Called after signing in or out, so the rest of the app can reload.
   final VoidCallback? onSignInChanged;
@@ -76,6 +80,23 @@ class _AccountPageState extends State<AccountPage> {
                   ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
                   : const Icon(Icons.logout),
               label: Text(l10n.signOut),
+            ),
+          ],
+          if (widget.appearance case final appearance?) ...[
+            const SizedBox(height: DesignTokens.spacingXXL),
+            Text(l10n.appearance, style: theme.textTheme.titleSmall),
+            const SizedBox(height: DesignTokens.spacingS),
+            ValueListenableBuilder<ThemeMode>(
+              valueListenable: appearance,
+              builder: (context, mode, _) => SegmentedButton<ThemeMode>(
+                segments: [
+                  ButtonSegment(value: ThemeMode.system, label: Text(l10n.appearanceSystem)),
+                  ButtonSegment(value: ThemeMode.light, label: Text(l10n.light)),
+                  ButtonSegment(value: ThemeMode.dark, label: Text(l10n.dark)),
+                ],
+                selected: {mode},
+                onSelectionChanged: (choice) => appearance.choose(choice.single),
+              ),
             ),
           ],
         ],

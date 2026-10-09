@@ -43,5 +43,9 @@
   "noNotificationsYet": "まだ通知はありません",
   "posts": "投稿",
   "profileJoined": "{date} に参加",
-  "searchFailedWithError": "検索に失敗しました: {error}"
+  "searchFailedWithError": "検索に失敗しました: {error}",
+  "light": "ライト",
+  "dark": "ダーク",
+  "appearance": "外観",
+  "appearanceSystem": "端末の設定"
 }

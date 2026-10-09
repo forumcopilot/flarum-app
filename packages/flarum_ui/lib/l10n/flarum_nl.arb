@@ -43,5 +43,9 @@
   "noNotificationsYet": "Nog geen meldingen",
   "posts": "Berichten",
   "profileJoined": "Lid sinds {date}",
-  "searchFailedWithError": "Zoeken mislukt: {error}"
+  "searchFailedWithError": "Zoeken mislukt: {error}",
+  "light": "Licht",
+  "dark": "Donker",
+  "appearance": "Weergave",
+  "appearanceSystem": "Systeemstandaard"
 }

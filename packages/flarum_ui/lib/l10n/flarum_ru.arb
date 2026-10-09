@@ -43,5 +43,9 @@
   "noNotificationsYet": "Пока нет уведомлений",
   "posts": "Сообщения",
   "profileJoined": "С нами с {date}",
-  "searchFailedWithError": "Поиск не удался: {error}"
+  "searchFailedWithError": "Поиск не удался: {error}",
+  "light": "Светлая",
+  "dark": "Тёмная",
+  "appearance": "Оформление",
+  "appearanceSystem": "Как в системе"
 }

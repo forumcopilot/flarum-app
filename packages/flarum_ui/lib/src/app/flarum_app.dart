@@ -9,13 +9,16 @@ import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 import '../../config/app_forum_config.dart';
 import '../../l10n/flarum_l10n.dart';
 import 'app_shell.dart';
+import 'appearance.dart';
 
-/// The single-forum app: the forum in [config], light and dark, in the
-/// languages flarum_ui has.
+/// The single-forum app: the forum in [site], in its colours, light or dark
+/// as the reader chose, in the languages flarum_ui has.
 class FlarumApp extends StatelessWidget {
-  const FlarumApp({super.key, required this.site});
+  FlarumApp({super.key, required this.site, Appearance? appearance})
+      : appearance = appearance ?? Appearance.unsaved();
 
   final SiteContext site;
+  final Appearance appearance;
 
   /// Everything the app needs before its first frame: the SDK's HTTP client,
   /// Flarum's proxies, and the reader's sign-in from the last launch. Returns
@@ -30,6 +33,7 @@ class FlarumApp extends StatelessWidget {
     try {
       await forum.restoreSession();
       final info = await forum.current();
+      AppTheme.palette.value = flarumPalette(info);
       if (info.actor != null) site.setLoginData(FlarumUserProxy.loginResult(info));
     } catch (_) {
       // Offline or the forum is down: the screens say so and retry.
@@ -39,11 +43,19 @@ class FlarumApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: appearance,
+      builder: (context, mode, _) => _app(mode),
+    );
+  }
+
+  Widget _app(ThemeMode mode) {
     return MaterialApp(
       title: site.site.name,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      themeMode: mode,
       localizationsDelegates: const [
         FlarumLocalizations.delegate,
         KitLocalizations.delegate,
@@ -52,7 +64,7 @@ class FlarumApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: FlarumLocalizations.supportedLocales,
-      home: AppShell(site: site),
+      home: AppShell(site: site, appearance: appearance),
     );
   }
 }

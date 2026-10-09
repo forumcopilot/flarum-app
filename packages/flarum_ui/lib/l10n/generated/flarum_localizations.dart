@@ -703,6 +703,30 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Nothing found for “{query}”.'**
   String noResultsFor(String query);
+
+  /// Light theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// Dark theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// Drawer row and sheet title for choosing light, dark or the device's setting
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// Appearance option that follows the device's light/dark setting
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get appearanceSystem;
 }
 
 class _FlarumLocalizationsDelegate

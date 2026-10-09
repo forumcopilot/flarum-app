@@ -43,5 +43,9 @@
   "noNotificationsYet": "Nenhuma notificação ainda",
   "posts": "Publicações",
   "profileJoined": "Entrou em {date}",
-  "searchFailedWithError": "Busca falhou: {error}"
+  "searchFailedWithError": "Busca falhou: {error}",
+  "light": "Claro",
+  "dark": "Escuro",
+  "appearance": "Aparência",
+  "appearanceSystem": "Sistema"
 }

@@ -29,3 +29,4 @@ export 'src/notifications/notifications_model.dart';
 export 'src/notifications/notifications_page.dart';
 export 'src/profile/user_page.dart';
 export 'src/search/search_page.dart';
+export 'src/app/appearance.dart';

@@ -43,5 +43,9 @@
   "noNotificationsYet": "Aucune notification pour l'instant",
   "posts": "Messages",
   "profileJoined": "Inscrit en {date}",
-  "searchFailedWithError": "Recherche échouée : {error}"
+  "searchFailedWithError": "Recherche échouée : {error}",
+  "light": "Clair",
+  "dark": "Sombre",
+  "appearance": "Apparence",
+  "appearanceSystem": "Système"
 }

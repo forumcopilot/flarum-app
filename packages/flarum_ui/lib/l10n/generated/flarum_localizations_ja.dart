@@ -404,4 +404,16 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String noResultsFor(String query) {
     return 'Nothing found for “$query”.';
   }
+
+  @override
+  String get light => 'ライト';
+
+  @override
+  String get dark => 'ダーク';
+
+  @override
+  String get appearance => '外観';
+
+  @override
+  String get appearanceSystem => '端末の設定';
 }

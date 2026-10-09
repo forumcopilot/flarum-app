@@ -404,4 +404,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String noResultsFor(String query) {
     return 'Nothing found for “$query”.';
   }
+
+  @override
+  String get light => '浅色';
+
+  @override
+  String get dark => '深色';
+
+  @override
+  String get appearance => '外观';
+
+  @override
+  String get appearanceSystem => '跟随系统';
 }

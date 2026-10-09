@@ -1,0 +1,191 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions",
+    "query": {
+      "filter[q]": "thread -tag:support author:bob",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,lastPostedUser,tags,mostRelevantPost,mostRelevantPost.user"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bq%5D=thread+-tag%3Asupport+author%3Abob&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags%2CmostRelevantPost%2CmostRelevantPost.user"
+    },
+    "data": [
+      {
+        "type": "discussions",
+        "id": "8",
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "8-long-thread-for-paging-tests",
+          "commentCount": 60,
+          "participantCount": 3,
+          "createdAt": "2026-10-08T17:22:50+00:00",
+          "lastPostedAt": "2026-10-08T18:21:50+00:00",
+          "lastPostNumber": 60,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:52:39+00:00",
+          "lastReadPostNumber": 20,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          },
+          "mostRelevantPost": {
+            "data": {
+              "type": "posts",
+              "id": "20"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 2,
+          "commentCount": 23,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-08T20:12:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        }
+      },
+      {
+        "type": "users",
+        "id": "5",
+        "attributes": {
+          "username": "alice",
+          "displayName": "alice",
+          "avatarUrl": null,
+          "slug": "alice"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "1",
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": null,
+          "discussionCount": 3,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "posts",
+        "id": "20",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:22:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 1 of 60.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

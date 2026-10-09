@@ -60,6 +60,13 @@ Future<void> main(List<String> args) async {
   await record('discussions_author_bob', () => api.discussions(author: 'bob'));
   // A search within a tag: gambits in q on 1.x, separate filter keys on 2.0.
   await record('discussions_search_in_tag', () => api.discussions(query: 'thread', tagSlug: 'support'));
+  // Search, most relevant first, with each discussion's best-matching post.
+  await record('search_thread', () => api.discussions(query: 'thread', sort: null, withRelevantPost: true));
+  await record('search_thread_bob_not_support',
+      () => api.discussions(query: 'thread', sort: null, excludeTagSlugs: ['support'], author: 'bob', withRelevantPost: true));
+  // On 1.x these are the discussion search again (no post search there).
+  await record('search_posts_thread', () => api.searchPosts('thread'));
+  await record('search_posts_thread_alice', () => api.searchPosts('thread', author: 'alice'));
   await record('discussion_welcome', () => api.discussion(discussions['welcome']!));
   await record('discussion_not_found', () => api.discussion('999999'));
   await record('posts_welcome', () => api.posts(discussions['welcome']!));

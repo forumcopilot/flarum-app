@@ -8,6 +8,7 @@ import '../models/discussion.dart';
 import '../models/tag.dart';
 import 'flarum_forum.dart';
 import 'flarum_forum_proxy.dart' show describeFlarumError;
+import 'flarum_post_proxy.dart' show plainText;
 
 /// Discussion lists and read state.
 ///
@@ -41,7 +42,7 @@ class FlarumTopicProxy implements IFCTopicProxy {
         result: true,
         resultText: '',
         totalTopicNum: _total(page),
-        topics: await _topics(page.items),
+        topics: await topics(page.items),
       );
     } catch (e) {
       return FCTopicDataResult(result: false, resultText: describeFlarumError(e), totalTopicNum: 0);
@@ -62,7 +63,7 @@ class FlarumTopicProxy implements IFCTopicProxy {
     try {
       final (offset, limit) = _range(startNum, lastNum);
       final page = await _forum.api.discussions(unread: true, offset: offset, limit: limit);
-      return FCUnreadTopicResult(result: true, resultText: '', totalUnreadNum: _total(page), topics: await _topics(page.items));
+      return FCUnreadTopicResult(result: true, resultText: '', totalUnreadNum: _total(page), topics: await topics(page.items));
     } catch (e) {
       return FCUnreadTopicResult(result: false, resultText: describeFlarumError(e), totalUnreadNum: 0);
     }
@@ -80,7 +81,7 @@ class FlarumTopicProxy implements IFCTopicProxy {
         result: true,
         resultText: '',
         totalParticipatedNum: _total(page),
-        topics: await _topics(page.items),
+        topics: await topics(page.items),
       );
     } catch (e) {
       return FCParticipatedTopicResult(result: false, resultText: describeFlarumError(e), totalParticipatedNum: 0);
@@ -92,7 +93,7 @@ class FlarumTopicProxy implements IFCTopicProxy {
   Future<FCTopicByIdsResult> getTopicByIds(List<String> topicIds) async {
     try {
       final discussions = await Future.wait(topicIds.map(_forum.api.discussion));
-      return FCTopicByIdsResult(result: true, resultText: '', topics: await _topics(discussions));
+      return FCTopicByIdsResult(result: true, resultText: '', topics: await topics(discussions));
     } catch (e) {
       return FCTopicByIdsResult(result: false, resultText: describeFlarumError(e));
     }
@@ -179,7 +180,7 @@ class FlarumTopicProxy implements IFCTopicProxy {
         canUpload: extensions.upload,
         canSubscribe: extensions.followTags,
         isSubscribed: tag.subscription == 'follow' || tag.subscription == 'lurk',
-        topics: await _topics(page.items),
+        topics: await topics(page.items),
       );
     } catch (e) {
       return FCTopicDataResult(result: false, resultText: describeFlarumError(e), totalTopicNum: 0);
@@ -190,13 +191,14 @@ class FlarumTopicProxy implements IFCTopicProxy {
     try {
       final (offset, limit) = _range(startNum, lastNum);
       final page = await _forum.api.discussions(sort: sort, offset: offset, limit: limit);
-      return FCLatestTopicResult(result: true, resultText: '', totalLatestNum: _total(page), topics: await _topics(page.items));
+      return FCLatestTopicResult(result: true, resultText: '', totalLatestNum: _total(page), topics: await topics(page.items));
     } catch (e) {
       return FCLatestTopicResult(result: false, resultText: describeFlarumError(e), totalLatestNum: 0);
     }
   }
 
-  Future<List<FCTopic>> _topics(List<FlarumDiscussion> discussions) async {
+  /// [discussions] as the SDK's topics, with the reader's read state.
+  Future<List<FCTopic>> topics(List<FlarumDiscussion> discussions) async {
     final info = await _forum.current();
     final reader = info.actor;
     return [
@@ -256,7 +258,17 @@ class FlarumTopicProxy implements IFCTopicProxy {
       hasPoll: d.hasPoll,
       isSolved: d.hasBestAnswer,
       tags: [for (final tag in d.tags) if (!tag.isPrimary) tag.name],
+      // In search results, the best-matching post.
+      shortContent: d.mostRelevantPost == null ? null : excerpt(plainText(d.mostRelevantPost!.contentHtml ?? '')),
     );
+  }
+
+  /// [text] cut to about [length] characters, at a word where possible.
+  static String excerpt(String text, {int length = 200}) {
+    final flat = text.replaceAll(RegExp(r'\s+'), ' ').trim();
+    if (flat.length <= length) return flat;
+    final cut = flat.lastIndexOf(' ', length);
+    return '${flat.substring(0, cut > length ~/ 2 ? cut : length)}…';
   }
 
   /// Replies, not counting the first post.

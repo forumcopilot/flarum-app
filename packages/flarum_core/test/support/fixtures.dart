@@ -27,6 +27,7 @@ class FixtureForum {
 
   String discussionId(String name) => (seed['discussions'] as Map)[name] as String;
   String userId(String name) => (seed['users'] as Map)[name] as String;
+  String tagId(String name) => (seed['tags'] as Map)[name] as String;
 
   /// An API over the fixtures, signed in as alice unless [signedIn] is false.
   FlarumApi api({bool signedIn = true}) =>

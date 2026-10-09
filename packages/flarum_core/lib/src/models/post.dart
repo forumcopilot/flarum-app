@@ -30,10 +30,12 @@ class FlarumPost {
     this.canSelectAsBestAnswer = false,
   });
 
-  factory FlarumPost.fromResource(JsonApiResource resource, JsonApiDocument document) {
+  /// [discussion] stands in for the post's own `discussion` relationship when a
+  /// response nests the post under its discussion (`mostRelevantPost`).
+  factory FlarumPost.fromResource(JsonApiResource resource, JsonApiDocument document, {JsonApiResource? discussion}) {
     final a = resource.attributes;
     final author = document.find(resource.toOne('user'));
-    final discussion = document.find(resource.toOne('discussion'));
+    discussion ??= document.find(resource.toOne('discussion'));
     return FlarumPost(
       id: resource.id,
       number: a.integer('number') ?? 0,
@@ -43,7 +45,7 @@ class FlarumPost {
       createdAt: a.date('createdAt'),
       editedAt: a.date('editedAt'),
       isHidden: a.boolean('isHidden') ?? false,
-      discussionId: resource.toOne('discussion')?.id,
+      discussionId: resource.toOne('discussion')?.id ?? discussion?.id,
       discussionTitle: discussion?.attributes.string('title'),
       author: author == null ? null : FlarumUser.fromResource(author),
       canEdit: a.boolean('canEdit') ?? false,

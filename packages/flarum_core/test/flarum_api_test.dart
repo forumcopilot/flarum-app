@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/fixtures.dart';
+import 'support/scripted.dart';
 
 /// Every test runs against responses recorded from both test forums.
 void main() {
@@ -207,6 +208,45 @@ void main() {
     // No fixture exists for this request; only what was sent matters.
     await _failure(() => forum.api().discussions(limit: 200));
     expect(forum.requests.single.queryParameters['page[limit]'], '50');
+  });
+
+  test('started since a day asks for that day through tomorrow, in UTC', () async {
+    final forum = FixtureForum(FlarumVersion.v2);
+    await _failure(() => forum.api().discussions(createdSince: DateTime.utc(2026, 3, 1, 23, 30)));
+    final tomorrow = DateTime.now().toUtc().add(const Duration(days: 1)).toIso8601String().substring(0, 10);
+    expect(forum.requests.single.queryParameters['filter[created]'], '2026-03-01..$tomorrow');
+  });
+
+  test('of several excluded tags, the forum gets one and the page drops the rest', () async {
+    Map<String, Object> discussion(String id, String tagId) => {
+          'type': 'discussions',
+          'id': id,
+          'attributes': {'title': 'Discussion $id'},
+          'relationships': {
+            'tags': {
+              'data': [
+                {'type': 'tags', 'id': tagId},
+              ],
+            },
+          },
+        };
+    Map<String, Object> tag(String id, String slug) => {
+          'type': 'tags',
+          'id': id,
+          'attributes': {'name': slug, 'slug': slug},
+        };
+    final adapter = ScriptedAdapter([
+      (200, {
+        'data': [discussion('1', '1'), discussion('2', '2')],
+        'included': [tag('1', 'general'), tag('2', 'ios')],
+      }),
+    ]);
+    final api = FlarumApi(FlarumClient(FixtureForum.baseUrl, dio: adapter.dio()));
+
+    final page = await api.discussions(excludeTagSlugs: ['support', 'ios']);
+
+    expect(adapter.requests.single.queryParameters['filter[-tag]'], 'support');
+    expect(page.items.map((d) => d.id), ['1']);
   });
 }
 

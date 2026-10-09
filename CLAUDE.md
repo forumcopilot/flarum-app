@@ -47,6 +47,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Search: 1.x takes conditions as gambits inside `filter[q]` (`tag:`, `is:following`, `is:unread`,
   `is:private`) and ignores other `filter[...]` keys once `q` is present; 2.0 takes separate keys
   and treats gambits in `q` as words. 1.x `/api/posts` ignores `filter[q]` (no post search).
+  With no `sort`, results come by relevance; `include=mostRelevantPost,mostRelevantPost.user`
+  brings the best post (1.x refuses `mostRelevantPost.discussion` with 400). 2.0 gives
+  `meta.page.total`, 1.x no total. 2.0's post search takes `filter[tag]` as an id only (422 on a
+  slug). One excluded tag per request: `filter[-tag]=a,b` excludes neither on 2.0.
   Method-by-method SDK coverage: `docs/sdk-coverage.md`.
 - Paging: `page[offset]` and `page[limit]`, capped at 50. Never follow `links.next`: on 2.0 it
   drops the `/api` prefix. Posts: `/api/posts?filter[discussion]=…` on both versions.

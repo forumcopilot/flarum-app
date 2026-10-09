@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'post.dart';
 import 'tag.dart';
 import 'user.dart';
 
@@ -35,12 +36,14 @@ class FlarumDiscussion {
     this.author,
     this.lastPostedUser,
     this.tags = const [],
+    this.mostRelevantPost,
   });
 
   factory FlarumDiscussion.fromResource(JsonApiResource resource, JsonApiDocument document) {
     final a = resource.attributes;
     final author = document.find(resource.toOne('user'));
     final lastPostedUser = document.find(resource.toOne('lastPostedUser'));
+    final relevant = document.find(resource.toOne('mostRelevantPost'));
     return FlarumDiscussion(
       id: resource.id,
       title: a.string('title') ?? '',
@@ -71,6 +74,7 @@ class FlarumDiscussion {
       author: author == null ? null : FlarumUser.fromResource(author),
       lastPostedUser: lastPostedUser == null ? null : FlarumUser.fromResource(lastPostedUser),
       tags: [for (final tag in document.findAll(resource.toMany('tags'))) FlarumTag.fromResource(tag)],
+      mostRelevantPost: relevant == null ? null : FlarumPost.fromResource(relevant, document, discussion: resource),
     );
   }
 
@@ -123,4 +127,7 @@ class FlarumDiscussion {
   final FlarumUser? author;
   final FlarumUser? lastPostedUser;
   final List<FlarumTag> tags;
+
+  /// In search results, the post that best matches the query.
+  final FlarumPost? mostRelevantPost;
 }

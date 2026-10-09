@@ -24,13 +24,16 @@ enum DiscussionSort {
 /// One page of a list. Flarum pages by offset; [hasMore] comes from the
 /// presence of `links.next`, which is never followed (see [JsonApiDocument.hasNext]).
 class FlarumPage<T> {
-  const FlarumPage(this.items, {required this.offset, required this.hasMore});
+  const FlarumPage(this.items, {required this.offset, required this.hasMore, this.total});
 
   final List<T> items;
 
   /// The page's offset; null for a page fetched around a post ([FlarumApi.postsNear]).
   final int? offset;
   final bool hasMore;
+
+  /// How many there are in all, when the forum says: 2.0 does (`meta.page.total`), 1.x doesn't.
+  final int? total;
 
   int? get nextOffset => offset == null ? null : offset! + items.length;
 }
@@ -124,55 +127,123 @@ class FlarumApi {
     }
   }
 
-  /// A page of discussions. [tagSlug] limits it to a tag, [following] to
-  /// discussions the reader follows, [unread] to ones with posts the reader
-  /// hasn't read, [sticky] to stickied ones, [author] to those a user started,
-  /// and [query] runs a full-text search.
+  /// A page of discussions. [tagSlug] limits it to a tag (or any of several,
+  /// joined by commas), [excludeTagSlugs] leaves tags out, [following] keeps
+  /// discussions the reader follows, [unread] ones with posts the reader hasn't
+  /// read, [sticky] stickied ones, [author] those a user started, and
+  /// [createdSince] those started on or after that day. [query] runs a
+  /// full-text search; with no [sort] its results come most relevant first,
+  /// and [withRelevantPost] brings each one's best-matching post.
   Future<FlarumPage<FlarumDiscussion>> discussions({
-    DiscussionSort sort = DiscussionSort.latest,
+    DiscussionSort? sort = DiscussionSort.latest,
     String? tagSlug,
+    List<String> excludeTagSlugs = const [],
     bool following = false,
     bool unread = false,
     bool sticky = false,
     String? author,
+    DateTime? createdSince,
     String? query,
+    bool withRelevantPost = false,
     int offset = 0,
     int limit = 20,
   }) async {
+    // Through a day after today, so posts from today in any time zone count.
+    final created = createdSince == null ? null : '${_day(createdSince)}..${_day(DateTime.now().add(const Duration(days: 1)))}';
     final filters = {
       if (tagSlug != null) 'filter[tag]': tagSlug,
+      // The key takes one tag (2.0 reads `-tag=a,b` as a condition that
+      // excludes neither); the rest are dropped from the page below.
+      if (excludeTagSlugs.isNotEmpty) 'filter[-tag]': excludeTagSlugs.first,
       if (following) 'filter[subscription]': 'following',
       if (unread) 'filter[unread]': '1',
       if (sticky) 'filter[sticky]': '1',
       if (author != null) 'filter[author]': author,
+      if (created != null) 'filter[created]': created,
       if (query != null) 'filter[q]': query,
     };
     // Once filter[q] is present, 1.x ignores every other filter key: its search
     // takes those conditions as gambits inside q. 2.0 is the reverse: it reads
     // only filter keys and treats gambits in q as search words.
-    if (query != null && filters.length > 1 && await version() == FlarumVersion.v1) {
+    final gambits = query != null && filters.length > 1 && await version() == FlarumVersion.v1;
+    if (gambits) {
       filters
         ..clear()
         ..['filter[q]'] = [
           query,
           if (tagSlug != null) 'tag:$tagSlug',
+          for (final slug in excludeTagSlugs) '-tag:$slug',
           if (following) 'is:following',
           if (unread) 'is:unread',
           if (sticky) 'is:sticky',
           if (author != null) 'author:$author',
+          if (created != null) 'created:$created',
         ].join(' ');
     }
     final document = await client.get('/discussions', query: {
       ...filters,
-      'sort': sort.param,
+      if (sort != null) 'sort': sort.param,
       ..._page(offset, limit),
-      'include': _discussionIncludes,
+      // 1.x refuses mostRelevantPost.discussion; the post gets its discussion from the row instead.
+      'include': withRelevantPost ? '$_discussionIncludes,mostRelevantPost,mostRelevantPost.user' : _discussionIncludes,
     });
+    final discussions = [for (final resource in document.data) FlarumDiscussion.fromResource(resource, document)];
+    final excluded = gambits ? const <String>{} : excludeTagSlugs.skip(1).toSet();
     return FlarumPage(
-      [for (final resource in document.data) FlarumDiscussion.fromResource(resource, document)],
+      [
+        for (final d in discussions)
+          if (!d.tags.any((tag) => excluded.contains(tag.slug))) d,
+      ],
       offset: offset,
       hasMore: document.hasNext,
+      total: _total(document),
     );
+  }
+
+  /// Posts matching [query], most relevant first. [author] (a username),
+  /// [discussionId] and [tag] narrow it.
+  ///
+  /// 1.x has no post search: its `/posts` ignores `filter[q]`. There the
+  /// results come from the discussion search, one post per discussion (the one
+  /// that matches best), so an [author] keeps only the posts they wrote, and
+  /// [discussionId] throws [UnsupportedError].
+  Future<FlarumPage<FlarumPost>> searchPosts(
+    String query, {
+    String? author,
+    String? discussionId,
+    FlarumTag? tag,
+    int offset = 0,
+    int limit = 20,
+  }) async {
+    if (await version() == FlarumVersion.v1) {
+      if (discussionId != null) throw UnsupportedError('Flarum 1.x can\'t search within a discussion');
+      final page = await discussions(
+        query: query,
+        sort: null,
+        tagSlug: tag?.slug,
+        withRelevantPost: true,
+        offset: offset,
+        limit: limit,
+      );
+      return FlarumPage(
+        [
+          for (final d in page.items)
+            if (d.mostRelevantPost case final post? when author == null || post.author?.username == author) post,
+        ],
+        offset: offset,
+        hasMore: page.hasMore,
+      );
+    }
+    final document = await client.get('/posts', query: {
+      'filter[q]': query,
+      if (author != null) 'filter[author]': author,
+      if (discussionId != null) 'filter[discussion]': discussionId,
+      // By id: 2.0's post tag filter refuses slugs (422).
+      if (tag != null) 'filter[tag]': tag.id,
+      ..._page(offset, limit),
+      'include': 'user,discussion',
+    });
+    return _postPage(document, offset);
   }
 
   Future<FlarumDiscussion> discussion(String id) async {
@@ -309,7 +380,15 @@ class FlarumApi {
         [for (final resource in document.data) FlarumPost.fromResource(resource, document)],
         offset: offset,
         hasMore: document.hasNext,
+        total: _total(document),
       );
+
+  static int? _total(JsonApiDocument document) {
+    final page = document.meta['page'];
+    return page is Map ? int.tryParse('${page['total'] ?? ''}') : null;
+  }
+
+  static String _day(DateTime time) => time.toUtc().toIso8601String().substring(0, 10);
 
   static Map<String, String> _page(int offset, int limit) =>
       {'page[offset]': '$offset', 'page[limit]': '${_clampLimit(limit)}'};

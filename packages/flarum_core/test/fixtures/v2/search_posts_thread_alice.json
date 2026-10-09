@@ -1,0 +1,216 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[q]": "thread",
+      "filter[author]": "alice",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,discussion"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "posts",
+        "id": "9",
+        "links": {
+          "self": "/posts/9"
+        },
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><a href=\"http://127.0.0.1:8082/assets/files/2026-10-08/1791482028-170679-screenshot.png\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"FoFUpload--Upl-Image-Preview-Link\"><img class=\"FoFUpload--Upl-Image-Preview\" src=\"http://127.0.0.1:8082/assets/files/2026-10-08/1791482028-170679-screenshot-thumb.webp\" title=\"screenshot.png\" alt=\"screenshot.png\" data-id=\"3effac13-5035-4af2-93d7-ef6d40806567\" loading=\"lazy\" width=\"320\" height=\"200\"></a></p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 1,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "4"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "discussions",
+        "id": "4",
+        "links": {
+          "self": "/discussions/4"
+        },
+        "attributes": {
+          "title": "App crashes when opening a long thread",
+          "slug": "4-app-crashes-when-opening-a-long-thread",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:50+00:00",
+          "lastReadPostNumber": 1,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "9"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "10"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "2",
+        "links": {
+          "self": "/users/2"
+        },
+        "attributes": {
+          "username": "alice",
+          "email": "alice@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "alice",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 38,
+          "lastSeenAt": "2026-10-09T17:06:41+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 1,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 1,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

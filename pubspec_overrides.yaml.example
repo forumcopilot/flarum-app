@@ -1,0 +1,7 @@
+# Copy to pubspec_overrides.yaml (git-ignored) to build against a local
+# discourse-app checkout instead of the pinned commit.
+dependency_overrides:
+  forum_kit:
+    path: ../discourse-app/packages/forum_kit
+  forumcopilot_sdk:
+    path: ../discourse-app/packages/forumcopilot_sdk

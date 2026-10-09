@@ -255,5 +255,9 @@
   "discussionsLoadFailed": "Couldn't load discussions.",
   "@discussionsLoadFailed": {
     "description": "Error shown when a discussion list fails to load"
+  },
+  "tagsLoadFailed": "Couldn't load the tags.",
+  "@tagsLoadFailed": {
+    "description": "Error shown when the forum's tags fail to load"
   }
 }

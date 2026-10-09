@@ -421,6 +421,12 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load discussions.'**
   String get discussionsLoadFailed;
+
+  /// Error shown when the forum's tags fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the tags.'**
+  String get tagsLoadFailed;
 }
 
 class _FlarumLocalizationsDelegate

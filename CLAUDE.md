@@ -27,9 +27,14 @@ marked places so 1.x can be dropped later. The app needs no plugin on the forum.
 ## Commands
 
 ```bash
+flutter pub get && flutter analyze && flutter test          # the app (lib/main.dart, test/)
 cd packages/flarum_core && flutter pub get && flutter analyze && flutter test
 cd packages/flarum_ui && flutter pub get && flutter analyze && flutter test
 ```
+
+The root is the app: a thin `lib/main.dart` over flarum_ui's `FlarumApp`. The forum is
+`AppForumConfig` (flarum_ui `lib/config/`), chosen at build time; point a build at a test forum
+with `--dart-define=FLARUM_URL=…` rather than editing it. Phone testing: `docs/device-testing.md`.
 
 Each package needs `pubspec_overrides.yaml` (copy the `.example`) to build against the local
 discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit.

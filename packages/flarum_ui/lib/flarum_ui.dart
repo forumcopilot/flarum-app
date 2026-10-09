@@ -18,3 +18,8 @@ export 'src/home/discussion_list_model.dart';
 export 'src/home/discussion_tile.dart';
 export 'src/home/home_page.dart';
 export 'src/tags/tag_label.dart';
+export 'config/app_forum_config.dart';
+export 'src/app/app_shell.dart';
+export 'src/app/flarum_app.dart';
+export 'src/home/discussion_list_view.dart';
+export 'src/tags/tags_page.dart';

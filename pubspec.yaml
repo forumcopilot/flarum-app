@@ -1,0 +1,36 @@
+name: flarum_app
+description: "A Flutter app for one Flarum forum (1.8 or 2.0): the template's thin runner over flarum_ui."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.6.0
+  flutter: ">=3.32.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flarum_ui:
+    path: packages/flarum_ui
+  # Pinned with flarum_ui's; for local development copy pubspec_overrides.yaml.example.
+  forum_kit:
+    git:
+      url: https://github.com/forumcopilot/discourse-app.git
+      path: packages/forum_kit
+      ref: 8c56b48e19787b126b97c37f1ab0cdb3cdde45b4
+  forumcopilot_sdk:
+    git:
+      url: https://github.com/forumcopilot/discourse-app.git
+      path: packages/forumcopilot_sdk
+      ref: 8c56b48e19787b126b97c37f1ab0cdb3cdde45b4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # The app test replays flarum_core's recorded forum (package:flarum_core/testing.dart).
+  flarum_core:
+    path: packages/flarum_core
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

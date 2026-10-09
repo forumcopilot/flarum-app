@@ -1,0 +1,6 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # Spikes and scripts, each with its own setup (the render spike runs inside discourse-app).
+    - tool/**

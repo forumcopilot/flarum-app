@@ -198,4 +198,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get discussionsLoadFailed => 'Couldn\'t load discussions.';
+
+  @override
+  String get tagsLoadFailed => 'Couldn\'t load the tags.';
 }

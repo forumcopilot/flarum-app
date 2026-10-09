@@ -261,7 +261,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T17:06:30+00:00",
+          "lastSeenAt": "2026-10-09T17:11:42+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "markedAllAsReadAt": null,
@@ -392,7 +392,7 @@
           "lastPostedAt": "2026-10-08T17:52:29+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "lurk",
           "isQnA": false,
           "reminders": false
         }
@@ -416,7 +416,7 @@
           "lastPostedAt": "2026-10-08T17:52:30+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "follow",
           "isQnA": false,
           "reminders": false
         }

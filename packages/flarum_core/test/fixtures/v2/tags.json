@@ -69,7 +69,7 @@
           "lastPostedAt": "2026-10-08T17:53:50+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "lurk",
           "isQnA": false,
           "reminders": false
         },
@@ -146,7 +146,7 @@
           "lastPostedAt": "2026-10-08T17:53:50+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "follow",
           "isQnA": false,
           "reminders": false
         },

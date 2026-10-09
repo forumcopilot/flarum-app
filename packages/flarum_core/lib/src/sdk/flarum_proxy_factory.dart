@@ -7,6 +7,8 @@ import 'flarum_forum_proxy.dart';
 import 'flarum_post_proxy.dart';
 import 'flarum_search_proxy.dart';
 import 'flarum_social_proxy.dart';
+import 'flarum_subscription_proxy.dart';
+import 'flarum_tag_proxy.dart';
 import 'flarum_topic_proxy.dart';
 import 'flarum_user_proxy.dart';
 
@@ -34,7 +36,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCPostProxy createPostProxy(SiteContext context) => FlarumPostProxy(context);
   @override
-  IFCSubscriptionProxy createSubscriptionProxy(SiteContext context) => _notYet('subscription');
+  IFCSubscriptionProxy createSubscriptionProxy(SiteContext context) => FlarumSubscriptionProxy(context);
   @override
   IFCModerationProxy createModerationProxy(SiteContext context) => _notYet('moderation');
   @override
@@ -47,6 +49,8 @@ class FlarumProxyFactory extends SiteProxyFactory {
   IFCPrivateMessageProxy createPrivateMessageProxy(SiteContext context) => _notYet('private message');
   @override
   IFCAttachmentProxy createAttachmentProxy(SiteContext context) => _notYet('attachment');
+  @override
+  IFCTagProxy createTagProxy(SiteContext context) => FlarumTagProxy(context);
 
   static Never _notYet(String proxy) => throw UnimplementedError('Flarum $proxy proxy is not implemented yet');
 }

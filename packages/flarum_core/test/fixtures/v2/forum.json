@@ -287,7 +287,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-09T17:06:41+00:00",
+          "lastSeenAt": "2026-10-09T17:11:43+00:00",
           "markedAllAsReadAt": null,
           "unreadNotificationCount": 5,
           "newNotificationCount": 0,
@@ -441,7 +441,7 @@
           "lastPostedAt": "2026-10-08T17:53:50+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "lurk",
           "isQnA": false,
           "reminders": false
         },
@@ -478,7 +478,7 @@
           "lastPostedAt": "2026-10-08T17:53:50+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "follow",
           "isQnA": false,
           "reminders": false
         },

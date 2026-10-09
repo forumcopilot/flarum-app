@@ -226,6 +226,15 @@ reply($carol, $d, '+1, especially for reading at night.');
 patch($alice, 'posts', $p1, ['isLiked' => true]);
 patch($alice, 'discussions', $d, ['subscription' => 'follow']);
 $ids['discussions']['feedback'] = $d;
+// fof/follow-tags: alice lurks in support (every reply) and follows feedback (new discussions).
+// 1.x has its own route for it; 2.0 takes the tag's attribute.
+foreach (['support' => 'lurk', 'feedback' => 'follow'] as $slug => $level) {
+    if ($v === 1) {
+        api('POST', "/api/tags/{$tags[$slug]}/subscription", ['data' => ['subscription' => $level]], $alice);
+    } else {
+        patch($alice, 'tags', $tags[$slug], ['subscription' => $level]);
+    }
+}
 
 // 5. A long thread (60 posts) to test paging past page[limit]=50; alice has read up to post 20.
 // alice doesn't post here: replying marks the thread read, and read state only moves forward.

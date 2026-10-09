@@ -125,7 +125,7 @@
           "lastPostedAt": "2026-10-08T17:52:29+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
-          "subscription": null,
+          "subscription": "lurk",
           "isQnA": false,
           "reminders": false
         }

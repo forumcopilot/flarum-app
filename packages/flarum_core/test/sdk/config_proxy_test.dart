@@ -72,6 +72,8 @@ void main() {
     expect(SiteProxyFactory.getUserProxy(), isA<FlarumUserProxy>());
     expect(SiteProxyFactory.getSocialProxy(), isA<FlarumSocialProxy>());
     expect(SiteProxyFactory.getSearchProxy(), isA<FlarumSearchProxy>());
-    expect(SiteProxyFactory.getSubscriptionProxy, throwsUnimplementedError);
+    expect(SiteProxyFactory.getSubscriptionProxy(), isA<FlarumSubscriptionProxy>());
+    expect(SiteProxyFactory.getTagProxy(), isA<FlarumTagProxy>());
+    expect(SiteProxyFactory.getModerationProxy, throwsUnimplementedError);
   });
 }

@@ -12,5 +12,7 @@ export 'src/sdk/flarum_topic_proxy.dart';
 export 'src/sdk/flarum_post_proxy.dart';
 export 'src/sdk/flarum_search_proxy.dart';
 export 'src/sdk/flarum_social_proxy.dart';
+export 'src/sdk/flarum_subscription_proxy.dart';
+export 'src/sdk/flarum_tag_proxy.dart';
 export 'src/sdk/flarum_token_store.dart';
 export 'src/sdk/flarum_user_proxy.dart';

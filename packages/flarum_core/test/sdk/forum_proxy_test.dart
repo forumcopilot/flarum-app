@@ -77,9 +77,12 @@ void main() {
       test('reports what Flarum doesn\'t have instead of inventing it', () async {
         expect((await proxy.getBoardStatAsync()).result, isFalse);
         expect((await proxy.loginForum(tagId('support'), 'secret')).result, isFalse);
+      });
+
+      test('the tags the reader follows or lurks in stand for participation', () async {
         final followed = await proxy.getParticipatedForumAsync();
         expect(followed.result, isTrue);
-        expect(followed.forums, isEmpty, reason: 'alice follows no tag');
+        expect(followed.forums.map((f) => f.id), unorderedEquals([tagId('support'), tagId('feedback')]));
       });
 
       test('a failure is a failed result, not an exception', () async {

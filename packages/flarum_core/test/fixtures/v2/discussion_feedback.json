@@ -1,12 +1,8 @@
 {
   "request": {
     "method": "GET",
-    "path": "/discussions",
+    "path": "/discussions/5",
     "query": {
-      "filter[subscription]": "following",
-      "sort": "-lastPostedAt",
-      "page[offset]": "0",
-      "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
     },
     "signedIn": true,
@@ -14,100 +10,107 @@
   },
   "status": 200,
   "body": {
-    "data": [
-      {
-        "type": "discussions",
-        "id": "5",
-        "links": {
-          "self": "/discussions/5"
+    "data": {
+      "type": "discussions",
+      "id": "5",
+      "links": {
+        "self": "/discussions/5"
+      },
+      "attributes": {
+        "title": "Feature request: dark mode",
+        "slug": "5-feature-request-dark-mode",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-08T17:53:50+00:00",
+        "lastPostedAt": "2026-10-08T17:53:50+00:00",
+        "lastPostNumber": 2,
+        "canReply": true,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "lastReadAt": null,
+        "lastReadPostNumber": null,
+        "canTag": false,
+        "isApproved": true,
+        "subscription": "follow",
+        "isPrivateDiscussion": false,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "canDownloadFiles": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectBestAnswer": false,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "11"
+          }
         },
-        "attributes": {
-          "title": "Feature request: dark mode",
-          "slug": "5-feature-request-dark-mode",
-          "commentCount": 2,
-          "participantCount": 2,
-          "createdAt": "2026-10-08T17:53:50+00:00",
-          "lastPostedAt": "2026-10-08T17:53:50+00:00",
-          "lastPostNumber": 2,
-          "canReply": true,
-          "canRename": false,
-          "canDelete": false,
-          "canHide": false,
-          "lastReadAt": null,
-          "lastReadPostNumber": null,
-          "canTag": false,
-          "isApproved": true,
-          "subscription": "follow",
-          "isPrivateDiscussion": false,
-          "canEditRecipients": false,
-          "canEditUserRecipients": false,
-          "canEditGroupRecipients": false,
-          "canMakePublic": false,
-          "canDownloadFiles": false,
-          "canSeeReactions": false,
-          "hasPoll": false,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectBestAnswer": false,
-          "hasBestAnswer": false,
-          "bestAnswerSetAt": null,
-          "isSticky": false,
-          "canSticky": false,
-          "isLocked": false,
-          "canLock": false
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "12"
+          }
         },
-        "relationships": {
-          "firstPost": {
-            "data": {
+        "posts": {
+          "data": [
+            {
               "type": "posts",
               "id": "11"
-            }
-          },
-          "lastPost": {
-            "data": {
+            },
+            {
               "type": "posts",
               "id": "12"
             }
-          },
-          "mostRelevantPost": {
-            "data": null
-          },
-          "hideUser": {
-            "data": null
-          },
-          "bestAnswerPost": {
-            "data": null
-          },
-          "bestAnswerUser": {
-            "data": null
-          },
-          "tags": {
-            "data": [
-              {
-                "type": "tags",
-                "id": "5"
-              },
-              {
-                "type": "tags",
-                "id": "7"
-              }
-            ]
-          },
-          "lastPostedUser": {
-            "data": {
-              "type": "users",
-              "id": "4"
+          ]
+        },
+        "hideUser": {
+          "data": null
+        },
+        "bestAnswerPost": {
+          "data": null
+        },
+        "bestAnswerUser": {
+          "data": null
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "5"
+            },
+            {
+              "type": "tags",
+              "id": "7"
             }
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "3"
-            }
+          ]
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "3"
           }
         }
       }
-    ],
+    },
     "included": [
       {
         "type": "tags",
@@ -250,14 +253,6 @@
         }
       }
     ],
-    "meta": {
-      "page": {
-        "total": 1,
-        "offset": 0,
-        "limit": 20
-      }
-    },
-    "links": [],
     "jsonapi": {
       "version": "1.1"
     }

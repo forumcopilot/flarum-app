@@ -69,6 +69,7 @@ Future<void> main(List<String> args) async {
   await record('search_posts_thread_alice', () => api.searchPosts('thread', author: 'alice'));
   await record('discussion_welcome', () => api.discussion(discussions['welcome']!));
   await record('discussion_not_found', () => api.discussion('999999'));
+  await record('discussion_feedback', () => api.discussion(discussions['feedback']!)); // alice follows it
   await record('posts_welcome', () => api.posts(discussions['welcome']!));
   await record('posts_long_0', () => api.posts(discussions['long']!, limit: 50));
   await record('posts_long_50', () => api.posts(discussions['long']!, offset: 50, limit: 50));

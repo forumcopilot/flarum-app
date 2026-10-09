@@ -65,6 +65,9 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   subject is the reader's own post, and the reply that mentions it is `content.replyNumber`.
   `POST /api/notifications/read` marks all read (204).
 - byobu private discussions are invisible to admins who aren't recipients.
+- Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the
+  reader's lists). fof/follow-tags puts `lurk`, `follow`, `ignore` or `hide` on each tag; 1.x sets it
+  with `POST /api/tags/{id}/subscription {"data":{"subscription":…}}`, 2.0 by PATCHing the attribute.
 - Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
   never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing
   with the token sent as the `<prefix>_remember` cookie marks it current; then

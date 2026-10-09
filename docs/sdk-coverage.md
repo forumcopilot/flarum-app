@@ -161,7 +161,7 @@ client-side assembly · **No** not possible · **n/a** the concept doesn't exist
 ### IFCSearchProxy
 | Method | 1.8 | 2.0 | How | Notes |
 |---|---|---|---|---|
-| searchTopicAsync | Core | Core | `GET /api/discussions?filter[q]=…&include=mostRelevantPost` (no `sort`: relevance) | Totals on 2.0 only. Built: `FlarumSearchProxy`. |
+| searchTopicAsync | Core | Core | `GET /api/discussions?filter[q]=…&include=mostRelevantPost` (no `sort`: relevance) | Totals on 2.0 only. |
 | searchPostAsync | Partial | Core | 1.8: `mostRelevantPost`; 2.0: `GET /api/posts?filter[q]=…` | 1.8 `/posts` ignores `q`. |
 | advanceSearchPostAsync | Partial | Partial | 1.8 gambits; 2.0 `filter[author]`, `[discussion]`, `[tag]` (numeric ids) | No title-only search. 1.8: author kept client-side, no search within a discussion. |
 | advanceSearchTopicAsync | Partial | Partial | 1.8 gambits `author:`, `tag:`, `-tag:`, `created:`; 2.0 the same as filter keys | Titles only is filtered client-side. 2.0: one excluded tag server-side. |

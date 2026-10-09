@@ -1,0 +1,288 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/tags",
+    "query": {
+      "include": "parent"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "tags",
+        "id": "1",
+        "links": {
+          "self": "/tags/1"
+        },
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "icon": null,
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 3,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T20:06:40+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "3",
+        "links": {
+          "self": "/tags/3"
+        },
+        "attributes": {
+          "name": "Support",
+          "description": "Support discussions",
+          "slug": "support",
+          "color": "#e67e22",
+          "icon": "fas fa-life-ring",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 1,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "4"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "4",
+        "links": {
+          "self": "/tags/4"
+        },
+        "attributes": {
+          "name": "iOS",
+          "description": "iOS discussions",
+          "slug": "ios",
+          "color": "#7f8c8d",
+          "icon": "fab fa-apple",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": true,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "4"
+            }
+          },
+          "parent": {
+            "data": {
+              "type": "tags",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "5",
+        "links": {
+          "self": "/tags/5"
+        },
+        "attributes": {
+          "name": "Feedback",
+          "description": "Feedback discussions",
+          "slug": "feedback",
+          "color": "#27ae60",
+          "icon": "fas fa-lightbulb",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 2,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "6",
+        "links": {
+          "self": "/tags/6"
+        },
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "icon": "fas fa-bullhorn",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:48+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "2"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "7",
+        "links": {
+          "self": "/tags/7"
+        },
+        "attributes": {
+          "name": "question",
+          "description": "question discussions",
+          "slug": "question",
+          "color": "#8e44ad",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "8",
+        "links": {
+          "self": "/tags/8"
+        },
+        "attributes": {
+          "name": "bug",
+          "description": "bug discussions",
+          "slug": "bug",
+          "color": "#d35400",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "4"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      }
+    ],
+    "included": [],
+    "meta": {
+      "page": {
+        "total": 7
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

@@ -14,6 +14,12 @@ class FlarumTag {
     this.position,
     this.isChild = false,
     this.parentId,
+    this.description,
+    this.discussionCount = 0,
+    this.lastPostedAt,
+    this.canStartDiscussion = false,
+    this.isHidden = false,
+    this.subscription,
   });
 
   factory FlarumTag.fromResource(JsonApiResource resource) {
@@ -30,6 +36,12 @@ class FlarumTag {
       position: position,
       isChild: a.boolean('isChild') ?? false,
       parentId: resource.toOne('parent')?.id,
+      description: a.nonEmptyString('description'),
+      discussionCount: a.integer('discussionCount') ?? 0,
+      lastPostedAt: a.date('lastPostedAt'),
+      canStartDiscussion: a.boolean('canStartDiscussion') ?? false,
+      isHidden: a.boolean('isHidden') ?? false,
+      subscription: a.nonEmptyString('subscription'),
     );
   }
 
@@ -48,4 +60,17 @@ class FlarumTag {
 
   /// The parent tag's id; known only when the request included `parent`.
   final String? parentId;
+
+  final String? description;
+  final int discussionCount;
+  final DateTime? lastPostedAt;
+
+  /// Whether the reader may start a discussion here.
+  final bool canStartDiscussion;
+
+  /// Hidden tags keep their discussions out of All Discussions.
+  final bool isHidden;
+
+  /// fof/follow-tags state for the reader: `follow`, `lurk`, `ignore`, `hide`, or null.
+  final String? subscription;
 }

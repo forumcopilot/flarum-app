@@ -6,6 +6,7 @@ import 'models/discussion.dart';
 import 'models/forum_info.dart';
 import 'models/notification.dart';
 import 'models/post.dart';
+import 'models/tag.dart';
 import 'models/user.dart';
 
 /// How to order a discussion list. These are the forum home's views.
@@ -194,6 +195,40 @@ class FlarumApi {
   }
 
   Future<FlarumUser> user(String id) async => FlarumUser.fromResource((await client.get('/users/$id')).single);
+
+  /// Every tag the reader can see, with each child's parent: primary tags
+  /// (the forum's tree, two levels) and secondary ones (labels).
+  Future<List<FlarumTag>> tags() async {
+    final document = await client.get('/tags', query: {'include': 'parent'});
+    return [for (final resource in document.data) FlarumTag.fromResource(resource)];
+  }
+
+  /// One post, with its discussion and number (for links to it).
+  Future<FlarumPost> post(String id) async {
+    final document = await client.get('/posts/$id');
+    return FlarumPost.fromResource(document.single, document);
+  }
+
+  /// The id of post [number] in a discussion, or null if there's none the reader can see.
+  Future<String?> postIdByNumber(String discussionId, int number) async {
+    final document = await client.get('/posts', query: {
+      'filter[discussion]': discussionId,
+      'filter[number]': '$number',
+    });
+    return document.data.isEmpty ? null : document.data.first.id;
+  }
+
+  /// Marks every discussion read for the reader [userId]: Flarum records the
+  /// time, and treats anything older as read. There's no per-tag version.
+  Future<void> markAllAsRead(String userId) async {
+    await client.patch('/users/$userId', {
+      'data': {
+        'type': 'users',
+        'id': userId,
+        'attributes': {'markedAllAsReadAt': true},
+      },
+    });
+  }
 
   /// A page of the reader's notifications, newest first.
   ///

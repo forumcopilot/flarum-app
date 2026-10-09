@@ -1,0 +1,218 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/tags",
+    "query": {
+      "include": "parent"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "tags",
+        "id": "1",
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": null,
+          "discussionCount": 3,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "8",
+        "attributes": {
+          "name": "Support",
+          "description": "Support discussions",
+          "slug": "support",
+          "color": "#e67e22",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-life-ring",
+          "discussionCount": 1,
+          "position": 1,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "9",
+        "attributes": {
+          "name": "iOS",
+          "description": "iOS discussions",
+          "slug": "ios",
+          "color": "#7f8c8d",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fab fa-apple",
+          "discussionCount": 1,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": true,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": {
+              "type": "tags",
+              "id": "8"
+            }
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "10",
+        "attributes": {
+          "name": "Feedback",
+          "description": "Feedback discussions",
+          "slug": "feedback",
+          "color": "#27ae60",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-lightbulb",
+          "discussionCount": 1,
+          "position": 2,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "11",
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-bullhorn",
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "12",
+        "attributes": {
+          "name": "question",
+          "description": "question discussions",
+          "slug": "question",
+          "color": "#8e44ad",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:30+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "13",
+        "attributes": {
+          "name": "bug",
+          "description": "bug discussions",
+          "slug": "bug",
+          "color": "#d35400",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 1,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "tags",
+        "id": "8",
+        "attributes": {
+          "name": "Support",
+          "description": "Support discussions",
+          "slug": "support",
+          "color": "#e67e22",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-life-ring",
+          "discussionCount": 1,
+          "position": 1,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:29+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

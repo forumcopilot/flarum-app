@@ -25,6 +25,7 @@ Future<void> main(List<String> args) async {
   final seed = jsonDecode(File(args[1]).readAsStringSync()) as Map<String, dynamic>;
   final discussions = (seed['discussions'] as Map).cast<String, String>();
   final users = (seed['users'] as Map).cast<String, String>();
+  final welcomePosts = ((seed['posts'] as Map)['welcome'] as List).cast<String>();
 
   final recorder = _Recorder();
   final guest = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
@@ -61,6 +62,9 @@ Future<void> main(List<String> args) async {
   await record('posts_long_50', () => api.posts(discussions['long']!, offset: 50, limit: 50));
   await record('posts_long_near_30', () => api.postsNear(discussions['long']!, 30, limit: 5));
   await record('user_bob', () => api.user(users['bob']!));
+  await record('tags', api.tags);
+  await record('post_welcome_2', () => api.post(welcomePosts[1]));
+  await record('post_number_welcome_2', () => api.postIdByNumber(discussions['welcome']!, 2));
   await record('notifications', api.notifications);
   // The version difference behind FlarumClient's "known parameters only" rule.
   await record('unknown_query_param', () => api.client.get('/posts', query: {'filter[discussion]': discussions['welcome']!, 'foo': 'bar'}));

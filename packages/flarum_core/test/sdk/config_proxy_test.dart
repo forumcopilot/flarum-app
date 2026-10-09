@@ -1,26 +1,9 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/factory/site_proxy_factory.dart';
-import 'package:forumcopilot_sdk/models/domain/site.dart';
 
 import '../support/fixtures.dart';
-
-SiteContext _site() => SiteContext(
-      siteType: FlarumProxyFactory.siteType,
-      site: Site(
-        id: null,
-        name: 'Test forum',
-        url: FixtureForum.baseUrl,
-        description: '',
-        logoUrl: null,
-        backgroundUrl: null,
-        endpoint: null,
-        baseUrl: FixtureForum.baseUrl,
-        siteType: FlarumProxyFactory.siteType,
-        language: null,
-      ),
-    );
+import 'site.dart';
 
 void main() {
   for (final version in FlarumVersion.values) {
@@ -34,7 +17,7 @@ void main() {
 
       test('reads the forum and the extensions it runs from GET /api', () async {
         fixtures.forum();
-        final config = await FlarumConfigProxy(_site()).getConfig(FixtureForum.baseUrl);
+        final config = await FlarumConfigProxy(testSite()).getConfig(FixtureForum.baseUrl);
 
         expect(config.forumType, 'flarum');
         expect(config.systemVersion, version == FlarumVersion.v2 ? '2' : '1');
@@ -63,14 +46,14 @@ void main() {
 
       test('a guest gets the forum, with no user', () async {
         fixtures.forum(signedIn: false);
-        final config = await FlarumConfigProxy(_site()).getConfig(FixtureForum.baseUrl);
+        final config = await FlarumConfigProxy(testSite()).getConfig(FixtureForum.baseUrl);
         expect(config.guestOkay, isTrue);
         expect(config.userId, '');
       });
 
       test('reads GET /api once, and again when asked to refresh', () async {
         fixtures.forum();
-        final proxy = FlarumConfigProxy(_site());
+        final proxy = FlarumConfigProxy(testSite());
         await proxy.getConfig(FixtureForum.baseUrl);
         await proxy.getConfig(FixtureForum.baseUrl);
         expect(fixtures.requests, hasLength(1));
@@ -82,7 +65,7 @@ void main() {
 
   test('the factory serves Flarum\'s config proxy and refuses the rest for now', () {
     FlarumProxyFactory.register();
-    final site = _site();
+    final site = testSite();
     SiteProxyFactory.initialize(site);
     expect(SiteProxyFactory.getConfigProxy(), isA<FlarumConfigProxy>());
     expect(SiteProxyFactory.getPostProxy, throwsUnimplementedError);

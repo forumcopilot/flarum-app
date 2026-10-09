@@ -115,6 +115,16 @@ void main() {
           expect(forum.requests.last.queryParameters['page[offset]'], '50');
         });
 
+        test('a discussion lists its post ids in order, which line up with the offsets', () async {
+          final id = forum.discussionId('long');
+          final discussion = await api.discussion(id, withPostIds: true);
+          expect(discussion.postIds, hasLength(60));
+          final page = await api.posts(id, offset: 50, limit: 50);
+          expect(page.items.map((p) => p.id), discussion.postIds.sublist(50));
+          expect((await api.discussion(id)).postIds, version == FlarumVersion.v1 ? isEmpty : hasLength(60),
+              reason: '2.0 always sends them');
+        });
+
         test('fetches a page around a post, which contains it', () async {
           final page = await api.postsNear(forum.discussionId('long'), 30, limit: 5);
           expect(page.items, hasLength(5));

@@ -246,8 +246,15 @@ class FlarumApi {
     return _postPage(document, offset);
   }
 
-  Future<FlarumDiscussion> discussion(String id) async {
-    final document = await client.get('/discussions/$id', query: {'include': _discussionIncludes});
+  /// One discussion. [withPostIds] also brings the ids of all its posts
+  /// ([FlarumDiscussion.postIds]), which a thread pages through.
+  Future<FlarumDiscussion> discussion(String id, {bool withPostIds = false}) async {
+    // 2.0 lists the post ids by default and refuses `include=posts` (400);
+    // 1.x lists them only when asked (and then also sends 20 posts, unused).
+    final posts = withPostIds && await version() == FlarumVersion.v1;
+    final document = await client.get('/discussions/$id', query: {
+      'include': posts ? '$_discussionIncludes,posts' : _discussionIncludes,
+    });
     return FlarumDiscussion.fromResource(document.single, document);
   }
 

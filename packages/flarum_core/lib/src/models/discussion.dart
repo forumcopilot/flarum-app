@@ -37,6 +37,7 @@ class FlarumDiscussion {
     this.lastPostedUser,
     this.tags = const [],
     this.mostRelevantPost,
+    this.postIds = const [],
   });
 
   factory FlarumDiscussion.fromResource(JsonApiResource resource, JsonApiDocument document) {
@@ -75,6 +76,7 @@ class FlarumDiscussion {
       lastPostedUser: lastPostedUser == null ? null : FlarumUser.fromResource(lastPostedUser),
       tags: [for (final tag in document.findAll(resource.toMany('tags'))) FlarumTag.fromResource(tag)],
       mostRelevantPost: relevant == null ? null : FlarumPost.fromResource(relevant, document, discussion: resource),
+      postIds: [for (final ref in resource.toMany('posts')) ref.id],
     );
   }
 
@@ -130,4 +132,9 @@ class FlarumDiscussion {
 
   /// In search results, the post that best matches the query.
   final FlarumPost? mostRelevantPost;
+
+  /// Every post the reader can see, comments and events, in number order:
+  /// from [FlarumApi.discussion] with `withPostIds`, empty otherwise. A post's
+  /// index here is its offset in [FlarumApi.posts].
+  final List<String> postIds;
 }

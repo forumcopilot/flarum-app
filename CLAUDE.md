@@ -37,7 +37,10 @@ The root is the app: a thin `lib/main.dart` over flarum_ui's `FlarumApp`. The fo
 with `--dart-define=FLARUM_URL=…` rather than editing it. Phone testing: `docs/device-testing.md`.
 
 Each package needs `pubspec_overrides.yaml` (copy the `.example`) to build against the local
-discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit.
+discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit. CI has no
+overrides, and the analyzer can report things against the pinned commit that it doesn't with the
+override (an unused import did once): before pushing a change to imports, analyze once with the
+override moved aside.
 
 flarum_core's tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every
 API test runs against both. `FixtureForum` lives in `package:flarum_core/testing.dart`, so flarum_ui's
@@ -50,6 +53,8 @@ fof/upload files and previews, s9e embeds, mention icons) into shapes the render
 are `FlarumLocalizations` (`flarumL10n(context)`; ARBs in `lib/l10n`, then `flutter gen-l10n`).
 To compare its output with the web: `tool/render_compare/compare.mjs` (screenshots both sides at a
 Pixel's width into `packages/flarum_ui/build/render/`).
+`test/census/census_test.dart` (tag `census`) reads 20 real forums from the plan's census as a
+guest and renders their posts: run it after changes to the API or the renderer.
 
 ## Flarum API facts the client depends on
 

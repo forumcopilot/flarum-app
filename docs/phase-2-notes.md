@@ -55,3 +55,15 @@ until those screens exist. Pictures open in a full-screen gallery.
 
 Tests run on both versions' fixtures through `package:flarum_core/testing.dart` (`FixtureForum`,
 with `root` pointing at flarum_core's fixtures); the screenshot harness also renders the page.
+
+## Real forums (census check)
+
+`packages/flarum_ui/test/census/census_test.dart` (tag `census`, skipped by default) reads 20 active,
+guest-readable forums from the plan's census, plus discuss.flarum.org: 12 on 1.x and 9 on 2.0, in
+13 languages (Arabic and Chinese among them), two installed in a subfolder. For each: the forum's
+info and version, 10 discussions, the tags, one thread with its post ids, and its first 20 posts
+rendered with `PostTile`. A few GET requests per forum, as a guest, with the app's User-Agent.
+
+First run (9 October 2026): all 21 answered, parsed and were detected as the right version; 172
+posts rendered with no error. The phones still have to confirm what this can't: real fonts,
+scrolling, and the web-view sign-in.

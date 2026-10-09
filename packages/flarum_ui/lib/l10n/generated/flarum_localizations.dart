@@ -643,6 +643,48 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Mark all as read'**
   String get markAllRead;
+
+  /// No description provided for @posts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get posts;
+
+  /// When the person joined, e.g. 'Joined Mar 2024'
+  ///
+  /// In en, this message translates to:
+  /// **'Joined {date}'**
+  String profileJoined(String date);
+
+  /// Profile tab: the discussions a user started
+  ///
+  /// In en, this message translates to:
+  /// **'Discussions'**
+  String get discussionsTab;
+
+  /// Profile: when the user was last online ({time} like '5 minutes ago')
+  ///
+  /// In en, this message translates to:
+  /// **'Last seen {time}'**
+  String lastSeen(String time);
+
+  /// Profile: how many discussions the user started and posts they wrote
+  ///
+  /// In en, this message translates to:
+  /// **'{discussions, plural, =1{1 discussion} other{{discussions} discussions}} · {comments, plural, =1{1 post} other{{comments} posts}}'**
+  String userStats(int discussions, int comments);
+
+  /// Error on a user's profile
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this profile.'**
+  String get userLoadFailed;
+
+  /// Empty list on a profile
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet.'**
+  String get noPostsYet;
 }
 
 class _FlarumLocalizationsDelegate

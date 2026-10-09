@@ -40,5 +40,7 @@
   "createAccount": "Account aanmaken",
   "allNotificationsMarkedAsRead": "Alle meldingen gemarkeerd als gelezen",
   "failedToMarkNotificationsRead": "Meldingen markeren als gelezen mislukt",
-  "noNotificationsYet": "Nog geen meldingen"
+  "noNotificationsYet": "Nog geen meldingen",
+  "posts": "Berichten",
+  "profileJoined": "Lid sinds {date}"
 }

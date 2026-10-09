@@ -40,5 +40,7 @@
   "createAccount": "Crear cuenta",
   "allNotificationsMarkedAsRead": "Todas las notificaciones marcadas como leídas",
   "failedToMarkNotificationsRead": "No se pudieron marcar las notificaciones como leídas",
-  "noNotificationsYet": "Aún no hay notificaciones"
+  "noNotificationsYet": "Aún no hay notificaciones",
+  "posts": "Publicaciones",
+  "profileJoined": "Se unió en {date}"
 }

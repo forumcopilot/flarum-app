@@ -27,3 +27,4 @@ export 'src/account/account_page.dart';
 export 'src/account/sign_in_page.dart';
 export 'src/notifications/notifications_model.dart';
 export 'src/notifications/notifications_page.dart';
+export 'src/profile/user_page.dart';

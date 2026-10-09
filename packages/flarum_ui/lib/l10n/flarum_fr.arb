@@ -40,5 +40,7 @@
   "createAccount": "Créer un compte",
   "allNotificationsMarkedAsRead": "Toutes les notifications marquées comme lues",
   "failedToMarkNotificationsRead": "Impossible de marquer les notifications comme lues",
-  "noNotificationsYet": "Aucune notification pour l'instant"
+  "noNotificationsYet": "Aucune notification pour l'instant",
+  "posts": "Messages",
+  "profileJoined": "Inscrit en {date}"
 }

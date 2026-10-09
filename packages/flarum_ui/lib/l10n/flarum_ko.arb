@@ -40,5 +40,7 @@
   "createAccount": "계정 만들기",
   "allNotificationsMarkedAsRead": "모든 알림을 읽음으로 표시했습니다",
   "failedToMarkNotificationsRead": "알림을 읽음으로 표시하지 못했습니다",
-  "noNotificationsYet": "아직 알림이 없습니다"
+  "noNotificationsYet": "아직 알림이 없습니다",
+  "posts": "게시물",
+  "profileJoined": "{date} 가입"
 }

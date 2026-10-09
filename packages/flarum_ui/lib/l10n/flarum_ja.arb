@@ -40,5 +40,7 @@
   "createAccount": "アカウントを作成",
   "allNotificationsMarkedAsRead": "すべての通知を既読にしました",
   "failedToMarkNotificationsRead": "通知を既読にできませんでした",
-  "noNotificationsYet": "まだ通知はありません"
+  "noNotificationsYet": "まだ通知はありません",
+  "posts": "投稿",
+  "profileJoined": "{date} に参加"
 }

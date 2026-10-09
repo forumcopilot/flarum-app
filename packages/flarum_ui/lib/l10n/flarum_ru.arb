@@ -40,5 +40,7 @@
   "createAccount": "Создать аккаунт",
   "allNotificationsMarkedAsRead": "Все уведомления отмечены как прочитанные",
   "failedToMarkNotificationsRead": "Не удалось отметить уведомления как прочитанные",
-  "noNotificationsYet": "Пока нет уведомлений"
+  "noNotificationsYet": "Пока нет уведомлений",
+  "posts": "Сообщения",
+  "profileJoined": "С нами с {date}"
 }

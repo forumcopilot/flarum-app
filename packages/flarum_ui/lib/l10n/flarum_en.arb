@@ -559,5 +559,48 @@
   "markAllRead": "Mark all as read",
   "@markAllRead": {
     "description": "Notifications tab action"
+  },
+  "posts": "Posts",
+  "profileJoined": "Joined {date}",
+  "@profileJoined": {
+    "description": "When the person joined, e.g. 'Joined Mar 2024'",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "discussionsTab": "Discussions",
+  "@discussionsTab": {
+    "description": "Profile tab: the discussions a user started"
+  },
+  "lastSeen": "Last seen {time}",
+  "@lastSeen": {
+    "description": "Profile: when the user was last online ({time} like '5 minutes ago')",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "userStats": "{discussions, plural, =1{1 discussion} other{{discussions} discussions}} · {comments, plural, =1{1 post} other{{comments} posts}}",
+  "@userStats": {
+    "description": "Profile: how many discussions the user started and posts they wrote",
+    "placeholders": {
+      "discussions": {
+        "type": "int"
+      },
+      "comments": {
+        "type": "int"
+      }
+    }
+  },
+  "userLoadFailed": "Couldn't load this profile.",
+  "@userLoadFailed": {
+    "description": "Error on a user's profile"
+  },
+  "noPostsYet": "No posts yet.",
+  "@noPostsYet": {
+    "description": "Empty list on a profile"
   }
 }

@@ -11,6 +11,7 @@ import '../media/image_viewer_page.dart';
 import '../navigation/forum_links.dart';
 import '../render/flarum_html.dart';
 import '../render/links.dart';
+import '../profile/user_page.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
 
@@ -19,8 +20,8 @@ import 'thread_model.dart';
 /// The posts load a page at a time as the reader nears the end; a thread
 /// opened part-way down offers the posts before. What the reader scrolls
 /// past is reported as read. Links to the forum's discussions open here in
-/// the app; a user or a tag goes to [onOpenUser] or [onOpenTag], or to the
-/// forum's page when the host gives none.
+/// the app, a user in their profile; [onOpenUser] and [onOpenTag] let the
+/// host decide (a tag otherwise opens the forum's page).
 class ThreadPage extends StatefulWidget {
   const ThreadPage({
     super.key,
@@ -129,7 +130,7 @@ class _ThreadPageState extends State<ThreadPage> {
     if (widget.onOpenUser != null) {
       widget.onOpenUser!(context, username);
     } else {
-      openExternally('${widget.site.site.url}/u/${Uri.encodeComponent(username)}');
+      UserPage.open(context, widget.site, username);
     }
   }
 

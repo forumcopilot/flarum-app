@@ -352,4 +352,43 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Mark all as read';
+
+  @override
+  String get posts => '帖子';
+
+  @override
+  String profileJoined(String date) {
+    return '$date 加入';
+  }
+
+  @override
+  String get discussionsTab => 'Discussions';
+
+  @override
+  String lastSeen(String time) {
+    return 'Last seen $time';
+  }
+
+  @override
+  String userStats(int discussions, int comments) {
+    String _temp0 = intl.Intl.pluralLogic(
+      discussions,
+      locale: localeName,
+      other: '$discussions discussions',
+      one: '1 discussion',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      comments,
+      locale: localeName,
+      other: '$comments posts',
+      one: '1 post',
+    );
+    return '$_temp0 · $_temp1';
+  }
+
+  @override
+  String get userLoadFailed => 'Couldn\'t load this profile.';
+
+  @override
+  String get noPostsYet => 'No posts yet.';
 }

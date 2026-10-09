@@ -40,5 +40,7 @@
   "createAccount": "Konto erstellen",
   "allNotificationsMarkedAsRead": "Alle Benachrichtigungen als gelesen markiert",
   "failedToMarkNotificationsRead": "Benachrichtigungen konnten nicht als gelesen markiert werden",
-  "noNotificationsYet": "Noch keine Benachrichtigungen"
+  "noNotificationsYet": "Noch keine Benachrichtigungen",
+  "posts": "Beiträge",
+  "profileJoined": "Dabei seit {date}"
 }

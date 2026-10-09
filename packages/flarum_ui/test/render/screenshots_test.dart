@@ -145,7 +145,12 @@ void main() {
   // a phone screen's worth (412 × 915).
   group('thread screenshots', () {
     for (final version in FlarumVersion.values) {
-      for (final (name, discussion, near) in [('home', null, null), ('welcome', 'welcome', null), ('long_near_21', 'long', 21)]) {
+      for (final (name, discussion, near) in [
+        ('home', null, null),
+        ('profile_bob', 'user:bob', null),
+        ('welcome', 'welcome', null),
+        ('long_near_21', 'long', 21),
+      ]) {
         testWidgets('${version.name} $name', (tester) async {
           tester.view.physicalSize = const Size(_width * _ratio, 915 * _ratio);
           tester.view.devicePixelRatio = _ratio;
@@ -159,9 +164,13 @@ void main() {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              home: discussion == null
-                  ? HomePage(site: _site(FixtureForum.baseUrl))
-                  : ThreadPage(site: _site(FixtureForum.baseUrl), discussionId: fixtures.discussionId(discussion), near: near),
+              home: switch (discussion) {
+                null => HomePage(site: _site(FixtureForum.baseUrl)),
+                final user when user.startsWith('user:') =>
+                  UserPage(site: _site(FixtureForum.baseUrl), username: user.substring(5)),
+                final name => ThreadPage(
+                    site: _site(FixtureForum.baseUrl), discussionId: fixtures.discussionId(name), near: near),
+              },
             ),
           ));
           for (var i = 0; i < 20; i++) {

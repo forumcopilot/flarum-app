@@ -4,14 +4,17 @@ import 'package:flutter/foundation.dart';
 /// The forum home's views, as the web's sort menu and sidebar offer them.
 enum DiscussionView { latest, top, newest, following }
 
-/// A list of discussions for a view (and optionally a tag), loaded a page at
-/// a time.
+/// A list of discussions for a view, optionally of one tag or started by one
+/// user, loaded a page at a time.
 class DiscussionListModel extends ChangeNotifier {
-  DiscussionListModel(this.forum, {this.view = DiscussionView.latest, this.tagSlug, this.pageSize = 20});
+  DiscussionListModel(this.forum, {this.view = DiscussionView.latest, this.tagSlug, this.author, this.pageSize = 20});
 
   final FlarumForum forum;
   final DiscussionView view;
   final String? tagSlug;
+
+  /// A username: only the discussions they started.
+  final String? author;
   final int pageSize;
 
   final List<FlarumDiscussion> items = [];
@@ -48,6 +51,7 @@ class DiscussionListModel extends ChangeNotifier {
         },
         following: view == DiscussionView.following,
         tagSlug: tagSlug,
+        author: author,
         offset: reset ? 0 : items.length,
         limit: pageSize,
       );

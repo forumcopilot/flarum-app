@@ -29,10 +29,20 @@ class FixtureForum {
   String userId(String name) => (seed['users'] as Map)[name] as String;
 
   /// An API over the fixtures, signed in as alice unless [signedIn] is false.
-  FlarumApi api({bool signedIn = true}) {
-    final dio = Dio()..httpClientAdapter = _FixtureAdapter(this);
-    return FlarumApi(FlarumClient('https://forum.test', token: signedIn ? 'fixture-token' : null, dio: dio));
+  FlarumApi api({bool signedIn = true}) =>
+      FlarumApi(FlarumClient(baseUrl, token: signedIn ? 'fixture-token' : null, dio: _dio()));
+
+  /// The registry's forum at [baseUrl], answered from the fixtures, signed in
+  /// as alice unless [signedIn] is false. Replaces any earlier one.
+  FlarumForum forum({bool signedIn = true}) {
+    final forum = FlarumForum.forTesting(baseUrl, _dio());
+    if (signedIn) forum.api.client.token = 'fixture-token';
+    return forum;
   }
+
+  static const baseUrl = 'https://forum.test';
+
+  Dio _dio() => Dio()..httpClientAdapter = _FixtureAdapter(this);
 }
 
 class _Fixture {

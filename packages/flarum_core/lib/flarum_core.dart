@@ -3,3 +3,7 @@
 library;
 
 export 'api.dart';
+export 'src/sdk/flarum_config_proxy.dart';
+export 'src/sdk/flarum_extensions.dart';
+export 'src/sdk/flarum_forum.dart';
+export 'src/sdk/flarum_proxy_factory.dart';

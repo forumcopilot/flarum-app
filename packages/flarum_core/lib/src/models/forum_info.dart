@@ -50,6 +50,7 @@ class FlarumForumInfo {
     this.allowSignUp = false,
     this.tagRules,
     this.actor,
+    this.actorAttributes = const {},
   });
 
   factory FlarumForumInfo.fromDocument(JsonApiDocument document) {
@@ -80,6 +81,7 @@ class FlarumForumInfo {
               canBypass: a.boolean('canBypassTagCounts') ?? false,
             ),
       actor: actor == null ? null : FlarumUser.fromResource(actor),
+      actorAttributes: actor?.attributes ?? const {},
       attributes: a,
     );
   }
@@ -106,6 +108,10 @@ class FlarumForumInfo {
 
   /// The signed-in reader; null for guests.
   final FlarumUser? actor;
+
+  /// The reader's raw attributes, including ones extensions add
+  /// (flarum/messages' `messageCount`); empty for guests.
+  final Map<String, dynamic> actorAttributes;
 
   /// Every forum attribute, including ones extensions add (`fof-upload.canUpload`,
   /// `canStartPrivateDiscussion`…), for detecting what a forum supports.

@@ -26,3 +26,4 @@ node_modules/
 
 # Local dependency overrides (see pubspec_overrides.yaml.example)
 pubspec_overrides.yaml
+packages/*/pubspec.lock

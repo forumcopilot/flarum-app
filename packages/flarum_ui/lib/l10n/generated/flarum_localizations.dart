@@ -223,6 +223,108 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Text'**
   String get fileTypeText;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// UI text: edited
+  ///
+  /// In en, this message translates to:
+  /// **'edited'**
+  String get edited;
+
+  /// Disclosure under a post listing its direct replies
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 reply} other{{count} replies}}'**
+  String nReplies(int count);
+
+  /// Profile summary: number of likes on a topic/reply row, or between the user and another person ('Most liked by')
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 like} other{{count} likes}}'**
+  String summaryLikeCount(int count);
+
+  /// UI text: Load more
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
+
+  /// Screen-reader label of a user row in the who-reacted sheet
+  ///
+  /// In en, this message translates to:
+  /// **'View profile of {username}'**
+  String viewProfileOfUser(String username);
+
+  /// Button at the top of a discussion opened part-way down: loads the posts before
+  ///
+  /// In en, this message translates to:
+  /// **'Load earlier posts'**
+  String get loadEarlierPosts;
+
+  /// Shown in place of a deleted (hidden) post
+  ///
+  /// In en, this message translates to:
+  /// **'This post was deleted.'**
+  String get postHidden;
+
+  /// Error shown when a discussion fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this discussion.'**
+  String get threadLoadFailed;
+
+  /// Event post: someone renamed the discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed the title from “{from}” to “{to}”.'**
+  String eventRenamed(String user, String from, String to);
+
+  /// Event post
+  ///
+  /// In en, this message translates to:
+  /// **'{user} locked the discussion.'**
+  String eventLocked(String user);
+
+  /// Event post
+  ///
+  /// In en, this message translates to:
+  /// **'{user} unlocked the discussion.'**
+  String eventUnlocked(String user);
+
+  /// Event post
+  ///
+  /// In en, this message translates to:
+  /// **'{user} stickied the discussion.'**
+  String eventStickied(String user);
+
+  /// Event post
+  ///
+  /// In en, this message translates to:
+  /// **'{user} unstickied the discussion.'**
+  String eventUnstickied(String user);
+
+  /// Event post: someone changed the discussion's tags
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed the tags.'**
+  String eventTagged(String user);
+
+  /// Event post of a kind the app doesn't describe
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed the discussion.'**
+  String eventOther(String user);
+
+  /// Stands in for a user the forum didn't name (deleted account)
+  ///
+  /// In en, this message translates to:
+  /// **'Someone'**
+  String get someone;
 }
 
 class _FlarumLocalizationsDelegate

@@ -72,5 +72,126 @@
   "fileTypeText": "Text",
   "@fileTypeText": {
     "description": "File type label under an attached file's name (shown in capitals): a plain text file"
+  },
+  "retry": "Retry",
+  "edited": "edited",
+  "@edited": {
+    "description": "UI text: edited"
+  },
+  "nReplies": "{count, plural, =1{1 reply} other{{count} replies}}",
+  "@nReplies": {
+    "description": "Disclosure under a post listing its direct replies",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryLikeCount": "{count, plural, =1{1 like} other{{count} likes}}",
+  "@summaryLikeCount": {
+    "description": "Profile summary: number of likes on a topic/reply row, or between the user and another person ('Most liked by')",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "loadMore": "Load more",
+  "@loadMore": {
+    "description": "UI text: Load more"
+  },
+  "viewProfileOfUser": "View profile of {username}",
+  "@viewProfileOfUser": {
+    "description": "Screen-reader label of a user row in the who-reacted sheet",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "loadEarlierPosts": "Load earlier posts",
+  "@loadEarlierPosts": {
+    "description": "Button at the top of a discussion opened part-way down: loads the posts before"
+  },
+  "postHidden": "This post was deleted.",
+  "@postHidden": {
+    "description": "Shown in place of a deleted (hidden) post"
+  },
+  "threadLoadFailed": "Couldn't load this discussion.",
+  "@threadLoadFailed": {
+    "description": "Error shown when a discussion fails to load"
+  },
+  "eventRenamed": "{user} changed the title from “{from}” to “{to}”.",
+  "@eventRenamed": {
+    "description": "Event post: someone renamed the discussion",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "eventLocked": "{user} locked the discussion.",
+  "@eventLocked": {
+    "description": "Event post",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "eventUnlocked": "{user} unlocked the discussion.",
+  "@eventUnlocked": {
+    "description": "Event post",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "eventStickied": "{user} stickied the discussion.",
+  "@eventStickied": {
+    "description": "Event post",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "eventUnstickied": "{user} unstickied the discussion.",
+  "@eventUnstickied": {
+    "description": "Event post",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "eventTagged": "{user} changed the tags.",
+  "@eventTagged": {
+    "description": "Event post: someone changed the discussion's tags",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "eventOther": "{user} changed the discussion.",
+  "@eventOther": {
+    "description": "Event post of a kind the app doesn't describe",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "someone": "Someone",
+  "@someone": {
+    "description": "Stands in for a user the forum didn't name (deleted account)"
   }
 }

@@ -17,5 +17,11 @@
   "fileTypeArchive": "Archief",
   "fileTypeAudio": "Audio",
   "fileTypeFile": "Bestand",
-  "fileTypeText": "Tekst"
+  "fileTypeText": "Tekst",
+  "retry": "Opnieuw",
+  "edited": "bewerkt",
+  "nReplies": "{count, plural, =1{1 antwoord} other{{count} antwoorden}}",
+  "summaryLikeCount": "{count, plural, =1{1 like} other{{count} likes}}",
+  "loadMore": "Meer laden",
+  "viewProfileOfUser": "Profiel van {username} bekijken"
 }

@@ -76,6 +76,17 @@ Future<void> main(List<String> args) async {
   await record('posts_long_near_30', () => api.postsNear(discussions['long']!, 30, limit: 5));
   await record('discussion_long', () => api.discussion(discussions['long']!));
   await record('discussion_long_with_post_ids', () => api.discussion(discussions['long']!, withPostIds: true));
+  // What a thread page asks for (flarum_ui, 20 posts a page): from the start, and around post 21
+  // with the windows before and after it, at the offsets the post ids give.
+  await record('discussion_welcome_with_post_ids', () => api.discussion(discussions['welcome']!, withPostIds: true));
+  await record('posts_long_0_20', () => api.posts(discussions['long']!, limit: 20));
+  await record('posts_long_20_20', () => api.posts(discussions['long']!, offset: 20, limit: 20));
+  final longIds = (await api.discussion(discussions['long']!, withPostIds: true)).postIds;
+  final near21 = await api.postsNear(discussions['long']!, 21, limit: 20);
+  final near21Start = longIds.indexOf(near21.items.first.id);
+  await record('posts_long_before_near_21', () => api.posts(discussions['long']!, limit: near21Start));
+  await record('posts_long_after_near_21',
+      () => api.posts(discussions['long']!, offset: near21Start + near21.items.length, limit: 20));
   await record('posts_long_near_21', () => api.postsNear(discussions['long']!, 21, limit: 20));
   await record('posts_welcome_near_2', () => api.postsNear(discussions['welcome']!, 2, limit: 20));
   await record('user_bob', () => api.user(users['bob']!));

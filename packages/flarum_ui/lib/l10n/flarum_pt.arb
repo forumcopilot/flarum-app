@@ -17,5 +17,11 @@
   "fileTypeArchive": "Arquivo compactado",
   "fileTypeAudio": "Áudio",
   "fileTypeFile": "Arquivo",
-  "fileTypeText": "Texto"
+  "fileTypeText": "Texto",
+  "retry": "Tentar Novamente",
+  "edited": "editado",
+  "nReplies": "{count, plural, =1{1 resposta} other{{count} respostas}}",
+  "summaryLikeCount": "{count, plural, =1{1 curtida} other{{count} curtidas}}",
+  "loadMore": "Carregar mais",
+  "viewProfileOfUser": "Ver o perfil de {username}"
 }

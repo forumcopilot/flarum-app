@@ -1,7 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../support/fixtures.dart';
+import 'package:flarum_core/testing.dart';
 import 'site.dart';
 
 void main() {

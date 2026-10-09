@@ -2,7 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_topic.dart';
 
-import '../support/fixtures.dart';
+import 'package:flarum_core/testing.dart';
 import 'site.dart';
 
 void main() {

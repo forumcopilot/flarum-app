@@ -9,3 +9,8 @@ export 'src/render/flarum_content.dart'
 export 'src/render/flarum_html.dart';
 export 'src/render/forum_media.dart' show ForumMediaAuth;
 export 'src/render/post_body_extensions.dart' show SpoilerBox;
+export 'src/media/image_viewer_page.dart';
+export 'src/navigation/forum_links.dart';
+export 'src/thread/post_tile.dart';
+export 'src/thread/thread_model.dart';
+export 'src/thread/thread_page.dart';

@@ -35,7 +35,8 @@ Each package needs `pubspec_overrides.yaml` (copy the `.example`) to build again
 discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit.
 
 flarum_core's tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every
-API test runs against both. Live tests and re-recording: `test/live_test.dart`,
+API test runs against both. `FixtureForum` lives in `package:flarum_core/testing.dart`, so flarum_ui's
+tests replay the same fixtures (`root: '../flarum_core/test/fixtures'`). Live tests and re-recording: `test/live_test.dart`,
 `tool/test_forums/README.md`.
 
 flarum_ui's post renderer is `FlarumContent` (copied from discourse_ui's RichTextContent) on HTML

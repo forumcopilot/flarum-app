@@ -2,7 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/models/domain/site.dart';
 
-import '../support/fixtures.dart';
+import 'package:flarum_core/testing.dart';
 
 /// A SiteContext for the fixture forum at [FixtureForum.baseUrl].
 SiteContext testSite() => SiteContext(

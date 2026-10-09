@@ -17,5 +17,11 @@
   "fileTypeArchive": "圧縮ファイル",
   "fileTypeAudio": "音声",
   "fileTypeFile": "ファイル",
-  "fileTypeText": "テキスト"
+  "fileTypeText": "テキスト",
+  "retry": "再試行",
+  "edited": "編集済み",
+  "nReplies": "{count, plural, other{{count} 件の返信}}",
+  "summaryLikeCount": "{count, plural, other{いいね {count} 件}}",
+  "loadMore": "さらに読み込む",
+  "viewProfileOfUser": "{username} さんのプロフィールを見る"
 }

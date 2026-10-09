@@ -17,5 +17,11 @@
   "fileTypeArchive": "Archivio",
   "fileTypeAudio": "Audio",
   "fileTypeFile": "File",
-  "fileTypeText": "Testo"
+  "fileTypeText": "Testo",
+  "retry": "Riprova",
+  "edited": "modificato",
+  "nReplies": "{count, plural, =1{1 risposta} other{{count} risposte}}",
+  "summaryLikeCount": "{count, plural, =1{1 mi piace} other{{count} mi piace}}",
+  "loadMore": "Carica altro",
+  "viewProfileOfUser": "Vedi il profilo di {username}"
 }

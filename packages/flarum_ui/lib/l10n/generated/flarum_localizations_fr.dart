@@ -65,4 +65,87 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get fileTypeText => 'Texte';
+
+  @override
+  String get retry => 'Réessayer';
+
+  @override
+  String get edited => 'modifié';
+
+  @override
+  String nReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count réponses',
+      one: '1 réponse',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String summaryLikeCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count j’aime',
+      one: '1 j’aime',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loadMore => 'Charger plus';
+
+  @override
+  String viewProfileOfUser(String username) {
+    return 'Voir le profil de $username';
+  }
+
+  @override
+  String get loadEarlierPosts => 'Load earlier posts';
+
+  @override
+  String get postHidden => 'This post was deleted.';
+
+  @override
+  String get threadLoadFailed => 'Couldn\'t load this discussion.';
+
+  @override
+  String eventRenamed(String user, String from, String to) {
+    return '$user changed the title from “$from” to “$to”.';
+  }
+
+  @override
+  String eventLocked(String user) {
+    return '$user locked the discussion.';
+  }
+
+  @override
+  String eventUnlocked(String user) {
+    return '$user unlocked the discussion.';
+  }
+
+  @override
+  String eventStickied(String user) {
+    return '$user stickied the discussion.';
+  }
+
+  @override
+  String eventUnstickied(String user) {
+    return '$user unstickied the discussion.';
+  }
+
+  @override
+  String eventTagged(String user) {
+    return '$user changed the tags.';
+  }
+
+  @override
+  String eventOther(String user) {
+    return '$user changed the discussion.';
+  }
+
+  @override
+  String get someone => 'Someone';
 }

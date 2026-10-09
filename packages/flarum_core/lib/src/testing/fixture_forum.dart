@@ -3,18 +3,19 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flarum_core/flarum_core.dart';
+import '../../flarum_core.dart';
 
-/// Recorded responses from one Flarum version's test forum (test/fixtures/v1
-/// or v2, written by tool/record_fixtures.dart), served to a [FlarumApi] in
-/// place of the network.
+/// Recorded responses from one Flarum version's test forum (flarum_core's
+/// test/fixtures/v1 or v2, written by tool/record_fixtures.dart), served to a
+/// [FlarumApi] in place of the network. For tests only: flarum_core's own, and
+/// flarum_ui's, which pass [root] as the path to flarum_core's fixtures.
 class FixtureForum {
-  FixtureForum(this.version)
+  FixtureForum(this.version, {String root = 'test/fixtures'})
       : _fixtures = [
-          for (final file in Directory('test/fixtures/${version.name}').listSync().whereType<File>())
+          for (final file in Directory('$root/${version.name}').listSync().whereType<File>())
             if (!file.path.endsWith('seed.json')) _Fixture(jsonDecode(file.readAsStringSync()) as Map<String, dynamic>),
         ],
-        seed = jsonDecode(File('test/fixtures/${version.name}/seed.json').readAsStringSync()) as Map<String, dynamic>;
+        seed = jsonDecode(File('$root/${version.name}/seed.json').readAsStringSync()) as Map<String, dynamic>;
 
   final FlarumVersion version;
   final List<_Fixture> _fixtures;

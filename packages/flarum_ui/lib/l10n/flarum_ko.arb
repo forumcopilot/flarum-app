@@ -17,5 +17,11 @@
   "fileTypeArchive": "압축 파일",
   "fileTypeAudio": "오디오",
   "fileTypeFile": "파일",
-  "fileTypeText": "텍스트"
+  "fileTypeText": "텍스트",
+  "retry": "다시 시도",
+  "edited": "수정됨",
+  "nReplies": "{count, plural, other{답글 {count}개}}",
+  "summaryLikeCount": "{count, plural, other{좋아요 {count}개}}",
+  "loadMore": "더 불러오기",
+  "viewProfileOfUser": "{username}님의 프로필 보기"
 }

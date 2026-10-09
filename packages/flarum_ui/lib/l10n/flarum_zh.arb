@@ -17,5 +17,11 @@
   "fileTypeArchive": "压缩包",
   "fileTypeAudio": "音频",
   "fileTypeFile": "文件",
-  "fileTypeText": "文本"
+  "fileTypeText": "文本",
+  "retry": "重试",
+  "edited": "已编辑",
+  "nReplies": "{count, plural, other{{count} 条回复}}",
+  "summaryLikeCount": "{count, plural, other{{count} 个赞}}",
+  "loadMore": "加载更多",
+  "viewProfileOfUser": "查看 {username} 的个人资料"
 }

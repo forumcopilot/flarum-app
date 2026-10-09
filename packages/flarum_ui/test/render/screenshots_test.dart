@@ -14,6 +14,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flarum_core/flarum_core.dart';
+import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -133,6 +134,44 @@ void main() {
           });
           File('${out.path}/app_${version}_$name.png').writeAsBytesSync(png!.buffer.asUint8List());
           // Let retries and animations time out before the test ends.
+          await tester.pumpWidget(const SizedBox.shrink());
+          await tester.pump(const Duration(minutes: 1));
+        });
+      }
+    }
+  }, skip: _skip);
+
+  // The thread page over the recorded fixtures: app_thread_<version>_<name>.png,
+  // a phone screen's worth (412 × 915).
+  group('thread screenshots', () {
+    for (final version in FlarumVersion.values) {
+      for (final (name, discussion, near) in [('welcome', 'welcome', null), ('long_near_21', 'long', 21)]) {
+        testWidgets('${version.name} $name', (tester) async {
+          tester.view.physicalSize = const Size(_width * _ratio, 915 * _ratio);
+          tester.view.devicePixelRatio = _ratio;
+          addTearDown(tester.view.reset);
+          final fixtures = FixtureForum(version, root: '../flarum_core/test/fixtures');
+          FlarumForum.resetForTesting();
+          fixtures.forum();
+          final boundary = GlobalKey();
+          await tester.pumpWidget(RepaintBoundary(
+            key: boundary,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              home: ThreadPage(site: _site(FixtureForum.baseUrl), discussionId: fixtures.discussionId(discussion), near: near),
+            ),
+          ));
+          for (var i = 0; i < 20; i++) {
+            await tester.pump(const Duration(milliseconds: 100));
+          }
+          tester.takeException();
+          final render = boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+          final png = await tester.runAsync(() async {
+            final image = await render.toImage(pixelRatio: _ratio);
+            return (await image.toByteData(format: ui.ImageByteFormat.png))!;
+          });
+          File('${out.path}/app_thread_${version.name}_$name.png').writeAsBytesSync(png!.buffer.asUint8List());
           await tester.pumpWidget(const SizedBox.shrink());
           await tester.pump(const Duration(minutes: 1));
         });

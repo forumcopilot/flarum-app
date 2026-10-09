@@ -41,3 +41,17 @@ The screenshot harness (`test/render/screenshots_test.dart`, tag `render`) preca
 real zone: in a widget test's fake-async zone an HTTPS picture never arrives.
 
 Still for a device: real fonts and scrolling, video playback, the download-and-share flow.
+
+## Thread page
+
+`ThreadPage` (flarum_ui) shows a discussion's posts with `PostTile`: avatar, name and time, the
+body through `FlarumContent`, likes and replies counts; event posts (renamed, locked, stickied,
+tagged) as one-line notices. `ThreadModel` holds a window of posts: `FlarumApi.discussion(withPostIds)`
+gives every post's place (1.x lists the ids only with `include=posts`, which 2.0 refuses), so a
+thread opens at a post with `page[near]` and pages both ways by offset. Reading is reported once it
+pauses, only forward, and only for a signed-in reader. Links to the forum's discussions open in the
+app (the same discussion scrolls to the post); users and tags go to the host's callbacks, the web
+until those screens exist. Pictures open in a full-screen gallery.
+
+Tests run on both versions' fixtures through `package:flarum_core/testing.dart` (`FixtureForum`,
+with `root` pointing at flarum_core's fixtures); the screenshot harness also renders the page.

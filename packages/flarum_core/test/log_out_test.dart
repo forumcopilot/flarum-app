@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'support/fixtures.dart';
+import 'package:flarum_core/testing.dart';
 
 void main() {
   for (final version in FlarumVersion.values) {

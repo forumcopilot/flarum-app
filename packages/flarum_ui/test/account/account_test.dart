@@ -4,7 +4,6 @@ import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
-import 'package:forum_kit/theme/forum_palette.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 void main() {

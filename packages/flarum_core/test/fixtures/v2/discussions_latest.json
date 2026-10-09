@@ -16,6 +16,94 @@
     "data": [
       {
         "type": "discussions",
+        "id": "8",
+        "links": {
+          "self": "/discussions/8"
+        },
+        "attributes": {
+          "title": "Formatting samples",
+          "slug": "8-formatting-samples",
+          "commentCount": 15,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T20:06:10+00:00",
+          "lastPostedAt": "2026-10-08T20:06:40+00:00",
+          "lastPostNumber": 15,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": true,
+          "lastReadAt": "2026-10-08T20:06:40+00:00",
+          "lastReadPostNumber": 15,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "76"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "90"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          }
+        }
+      },
+      {
+        "type": "discussions",
         "id": "6",
         "links": {
           "self": "/discussions/6"
@@ -647,7 +735,7 @@
           "joinTime": "2026-10-08T16:06:42+00:00",
           "discussionCount": 3,
           "commentCount": 3,
-          "lastSeenAt": "2026-10-08T17:53:10+00:00",
+          "lastSeenAt": "2026-10-08T21:00:56+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -715,11 +803,11 @@
           "icon": null,
           "isHidden": false,
           "isPrimary": true,
-          "discussionCount": 2,
+          "discussionCount": 3,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-08T17:54:03+00:00",
+          "lastPostedAt": "2026-10-08T20:06:40+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -733,7 +821,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "6"
+              "id": "8"
             }
           }
         }
@@ -754,7 +842,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-08T19:59:05+00:00",
+          "lastSeenAt": "2026-10-09T00:03:39+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -901,9 +989,9 @@
           "hasUploadedAvatar": false,
           "slug": "alice",
           "joinTime": "2026-10-08T17:53:46+00:00",
-          "discussionCount": 1,
-          "commentCount": 23,
-          "lastSeenAt": "2026-10-08T20:01:13+00:00",
+          "discussionCount": 2,
+          "commentCount": 38,
+          "lastSeenAt": "2026-10-09T00:16:29+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -921,9 +1009,9 @@
           "canEditNickname": true,
           "canSendAnyMessage": true,
           "canDeleteOwnMessages": null,
-          "messageCount": 0,
-          "fof-upload-uploadCountCurrent": 1,
-          "fof-upload-uploadCountAll": 1,
+          "messageCount": 1,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
           "fofTermsPoliciesState": [],
           "fofTermsPoliciesHasUpdate": false,
           "fofTermsPoliciesMustAccept": false,
@@ -1020,7 +1108,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-08T17:53:49+00:00",
+          "lastSeenAt": "2026-10-08T20:12:03+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -1040,7 +1128,7 @@
     ],
     "meta": {
       "page": {
-        "total": 7,
+        "total": 8,
         "offset": 0,
         "limit": 20
       }

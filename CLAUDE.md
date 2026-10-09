@@ -37,6 +37,11 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   `POST /api/token` works on 1.x even with blomstra/turnstile or fof/recaptcha (they guard only
   the website's `/login`), but the 2.0 Turnstile fork blocks it with a 422 on `turnstileToken`.
 - 2.0 rejects unknown query parameters with HTTP 400; 1.x ignores them. Send only known ones.
+  Unknown `filter[...]` keys are silently ignored on both.
+- Search: 1.x takes conditions as gambits inside `filter[q]` (`tag:`, `is:following`, `is:unread`,
+  `is:private`) and ignores other `filter[...]` keys once `q` is present; 2.0 takes separate keys
+  and treats gambits in `q` as words. 1.x `/api/posts` ignores `filter[q]` (no post search).
+  Method-by-method SDK coverage: `docs/sdk-coverage.md`.
 - Paging: `page[offset]` and `page[limit]`, capped at 50. Never follow `links.next`: on 2.0 it
   drops the `/api` prefix. Posts: `/api/posts?filter[discussion]=…` on both versions.
 - `page[near]` can't be combined with `sort` on 1.x; 1.x places the post by `created_at`, so the

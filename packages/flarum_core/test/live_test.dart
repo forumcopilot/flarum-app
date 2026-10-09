@@ -44,6 +44,11 @@ void main() {
         expect((await api.postsNear(long.id, 30, limit: 5)).items.map((p) => p.number), contains(30));
       });
 
+      test('searches within a tag', () async {
+        final page = await api.discussions(query: 'thread', tagSlug: 'support');
+        expect(page.items.map((d) => d.title), ['App crashes when opening a long thread']);
+      });
+
       test('lists notifications', () async {
         expect((await api.notifications()).items, isNotEmpty);
       });

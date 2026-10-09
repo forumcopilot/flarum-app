@@ -57,12 +57,22 @@ class FlarumApi {
   static const _discussionIncludes = 'user,lastPostedUser,tags';
 
   /// The forum's settings and, when signed in, the reader (`actor`).
-  Future<FlarumForumInfo> forumInfo() async => FlarumForumInfo.fromDocument(await client.get(''));
+  Future<FlarumForumInfo> forumInfo() async {
+    final info = FlarumForumInfo.fromDocument(await client.get(''));
+    _version = info.version;
+    return info;
+  }
+
+  FlarumVersion? _version;
+
+  /// The forum's major version, as the last [forumInfo] saw it; fetched once if needed.
+  Future<FlarumVersion> version() async => _version ?? (await forumInfo()).version;
 
   /// Signs in with a username or email and password, and keeps the token on [client].
   ///
-  /// This is the native form path. It fails on forums that guard log-in with a
-  /// CAPTCHA (Turnstile, reCAPTCHA), which is why the app signs in through a web view.
+  /// This is the native form path. Some CAPTCHA extensions block it (2.0's
+  /// flectar/flarum-turnstile answers 422 on `turnstileToken`), which is why the
+  /// app signs in through a web view.
   /// [remember] asks for a long-lived token instead of a 1-hour session token.
   Future<FlarumSession> logIn(String identification, String password, {bool remember = true}) async {
     final json = await client.postJson('/token', {
@@ -123,10 +133,21 @@ class FlarumApi {
     int offset = 0,
     int limit = 20,
   }) async {
-    final document = await client.get('/discussions', query: {
+    final filters = {
       if (tagSlug != null) 'filter[tag]': tagSlug,
       if (following) 'filter[subscription]': 'following',
       if (query != null) 'filter[q]': query,
+    };
+    // Once filter[q] is present, 1.x ignores every other filter key: its search
+    // takes those conditions as gambits inside q. 2.0 is the reverse: it reads
+    // only filter keys and treats gambits in q as search words.
+    if (query != null && filters.length > 1 && await version() == FlarumVersion.v1) {
+      filters
+        ..clear()
+        ..['filter[q]'] = [query, if (tagSlug != null) 'tag:$tagSlug', if (following) 'is:following'].join(' ');
+    }
+    final document = await client.get('/discussions', query: {
+      ...filters,
       'sort': sort.param,
       ..._page(offset, limit),
       'include': _discussionIncludes,

@@ -87,7 +87,7 @@
           "canEdit": false,
           "canDelete": false,
           "canHide": false,
-          "mentionedByCount": 1,
+          "mentionedByCount": 3,
           "canFlag": false,
           "isApproved": true,
           "canApprove": false,
@@ -129,6 +129,14 @@
               {
                 "type": "posts",
                 "id": "14"
+              },
+              {
+                "type": "posts",
+                "id": "91"
+              },
+              {
+                "type": "posts",
+                "id": "92"
               }
             ]
           },
@@ -291,7 +299,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T18:27:01+00:00",
+          "lastSeenAt": "2026-10-08T20:59:49+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -322,13 +330,13 @@
           "avatarUrl": null,
           "slug": "alice",
           "joinTime": "2026-10-08T17:52:27+00:00",
-          "discussionCount": 1,
-          "commentCount": 24,
+          "discussionCount": 2,
+          "commentCount": 38,
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T20:01:05+00:00",
+          "lastSeenAt": "2026-10-09T00:16:28+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -336,8 +344,8 @@
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
-          "fof-upload-uploadCountCurrent": 1,
-          "fof-upload-uploadCountAll": 1,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
           "fofTermsPoliciesState": [],
           "fofTermsPoliciesHasUpdate": false,
           "fofTermsPoliciesMustAccept": false,
@@ -367,7 +375,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T17:52:28+00:00",
+          "lastSeenAt": "2026-10-08T20:12:00+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -399,7 +407,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T19:59:05+00:00",
+          "lastSeenAt": "2026-10-09T00:03:37+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -439,6 +447,17 @@
         }
       },
       {
+        "type": "discussions",
+        "id": "11",
+        "attributes": {
+          "title": "Formatting samples",
+          "slug": "11-formatting-samples",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
         "type": "posts",
         "id": "14",
         "attributes": {
@@ -460,6 +479,58 @@
             "data": {
               "type": "discussions",
               "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "91",
+        "attributes": {
+          "number": 7,
+          "createdAt": "2026-10-08T20:06:08+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Hello <a href=\"http://127.0.0.1:8081/u/bob\" class=\"UserMention\">@bob</a>, and the @“Mods”#g4 group. Replying to <a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a>.</p>",
+          "renderFailed": false,
+          "mentionedByCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "11"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "92",
+        "attributes": {
+          "number": 8,
+          "createdAt": "2026-10-08T20:06:08+00:00",
+          "contentType": "comment",
+          "contentHtml": "<blockquote class=\"uncited\"><div><p><a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a> Hi all! Looking forward to testing</p></div></blockquote>\n\n<p>Quoting the welcome reply, as the web’s Quote button does.</p>",
+          "renderFailed": false,
+          "mentionedByCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "11"
             }
           }
         }

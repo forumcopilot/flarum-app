@@ -70,6 +70,20 @@ void main() {
           expect(tags['support']!.icon, 'fas fa-life-ring');
         });
 
+        test('searches within a tag in the form the version understands', () async {
+          final page = await api.discussions(query: 'thread', tagSlug: 'support');
+          expect(page.items.single.title, 'App crashes when opening a long thread');
+          final sent = forum.requests.last.queryParameters;
+          if (version == FlarumVersion.v1) {
+            // 1.x ignores other filter keys once filter[q] is present.
+            expect(sent['filter[q]'], 'thread tag:support');
+            expect(sent.containsKey('filter[tag]'), isFalse);
+          } else {
+            expect(sent['filter[q]'], 'thread');
+            expect(sent['filter[tag]'], 'support');
+          }
+        });
+
         test('lists followed discussions', () async {
           final page = await api.discussions(following: true);
           expect(page.items.single.title, 'Feature request: dark mode');

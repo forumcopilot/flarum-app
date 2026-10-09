@@ -44,6 +44,30 @@
       },
       {
         "type": "notifications",
+        "id": "13",
+        "attributes": {
+          "contentType": "postLiked",
+          "content": null,
+          "createdAt": "2026-10-08T17:52:29+00:00",
+          "isRead": false
+        },
+        "relationships": {
+          "fromUser": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "subject": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          }
+        }
+      },
+      {
+        "type": "notifications",
         "id": "10",
         "attributes": {
           "contentType": "postMentioned",
@@ -58,30 +82,6 @@
             "data": {
               "type": "users",
               "id": "6"
-            }
-          },
-          "subject": {
-            "data": {
-              "type": "posts",
-              "id": "13"
-            }
-          }
-        }
-      },
-      {
-        "type": "notifications",
-        "id": "13",
-        "attributes": {
-          "contentType": "postLiked",
-          "content": null,
-          "createdAt": "2026-10-08T17:52:29+00:00",
-          "isRead": false
-        },
-        "relationships": {
-          "fromUser": {
-            "data": {
-              "type": "users",
-              "id": "7"
             }
           },
           "subject": {

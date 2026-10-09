@@ -106,6 +106,10 @@
         "showBestAnswerFilterUi": true,
         "useAlternativeBestAnswerUi": false,
         "fof-best-answer.show_max_lines": 0,
+        "flectar-turnstile.site_key": "1x00000000000000000000AA",
+        "flectar-turnstile.signup": true,
+        "flectar-turnstile.signin": false,
+        "flectar-turnstile.forgot": true,
         "excerptDisplayEnabled": true,
         "onlyStickyUnreadDiscussions": true,
         "displayNameDriver": "username",
@@ -276,11 +280,11 @@
           "icon": null,
           "isHidden": false,
           "isPrimary": true,
-          "discussionCount": 2,
+          "discussionCount": 3,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-08T17:54:03+00:00",
+          "lastPostedAt": "2026-10-08T20:06:40+00:00",
           "canStartDiscussion": false,
           "canAddToDiscussion": false,
           "subscription": null,
@@ -291,7 +295,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "6"
+              "id": "8"
             }
           },
           "parent": {

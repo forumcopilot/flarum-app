@@ -19,6 +19,64 @@
     "data": [
       {
         "type": "discussions",
+        "id": "11",
+        "attributes": {
+          "title": "Formatting samples",
+          "slug": "11-formatting-samples",
+          "commentCount": 15,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T20:06:06+00:00",
+          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "lastPostNumber": 15,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": true,
+          "lastReadAt": "2026-10-08T20:06:39+00:00",
+          "lastReadPostNumber": 15,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "discussions",
         "id": "8",
         "attributes": {
           "title": "Long thread for paging tests",
@@ -426,22 +484,22 @@
     "included": [
       {
         "type": "users",
-        "id": "6",
-        "attributes": {
-          "username": "bob",
-          "displayName": "bob",
-          "avatarUrl": null,
-          "slug": "bob"
-        }
-      },
-      {
-        "type": "users",
         "id": "5",
         "attributes": {
           "username": "alice",
           "displayName": "alice",
           "avatarUrl": null,
           "slug": "alice"
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
         }
       },
       {
@@ -475,12 +533,12 @@
           "backgroundUrl": null,
           "backgroundMode": null,
           "icon": null,
-          "discussionCount": 2,
+          "discussionCount": 3,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-08T17:52:39+00:00",
+          "lastPostedAt": "2026-10-08T20:06:39+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

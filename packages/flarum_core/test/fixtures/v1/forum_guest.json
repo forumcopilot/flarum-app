@@ -111,7 +111,12 @@
         "bestAnswerDiscussionSidebarJumpButton": false,
         "displayNameDriver": "username",
         "setNicknameOnRegistration": true,
-        "randomizeUsernameOnRegistration": false
+        "randomizeUsernameOnRegistration": false,
+        "blomstra-turnstile.site_key": "1x00000000000000000000AA",
+        "turnstile_dark_mode": false,
+        "blomstra-turnstile.signup": true,
+        "blomstra-turnstile.signin": true,
+        "blomstra-turnstile.forgot": true
       },
       "relationships": {
         "groups": {
@@ -254,12 +259,12 @@
           "backgroundUrl": null,
           "backgroundMode": null,
           "icon": null,
-          "discussionCount": 2,
+          "discussionCount": 3,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-08T17:52:39+00:00",
+          "lastPostedAt": "2026-10-08T20:06:39+00:00",
           "canStartDiscussion": false,
           "canAddToDiscussion": false,
           "subscription": null,

@@ -1,11 +1,29 @@
 # Phase 0 notes
 
 Findings from the Phase 0 spike, checked on local Flarum 1.8.20 and 2.0.0-rc.8 forums with the
-plan's Must-tier extensions. Last updated 8 October 2026.
+plan's Must-tier extensions. Last updated 9 October 2026.
 
-So far nothing found blocks the plan. Sign-out, polling and rendering all work on both versions,
-with the changes listed below. Web-view sign-in works in a mobile browser on every setup tried;
-it still needs a run on a real phone.
+**Recommendation: go.** Nothing found blocks the plan. Web-view sign-in works on a Pixel 10a on
+both versions, and sign-out, polling and rendering work too, with the changes below. Flarum fully
+serves 105 of the SDK's 161 applicable methods on 1.8 and 115 on 2.0 (`docs/sdk-coverage.md`).
+
+## Changes to the plan
+
+1. **Sign-in (§6):** a CAPTCHA doesn't always block `POST /api/token`; the web view stays the
+   default because only it works everywhere (details below).
+2. **Sign-out (§6):** solved without the companion extension: find the token in
+   `/api/access-tokens` with the remember cookie, paging through the list, then delete it.
+3. **Push (§7):** the consent page can offer `discloseOnline` off, which removes the "looks online"
+   side effect for other members. On 2.0, also watch `messageCount`: messages create no notification.
+4. **Renderer profile (§5.2):** six pieces of Flarum markup need handling (Rendering, below).
+5. **Search (§5.3):** each version has its own search syntax, and 1.8 has no post search.
+6. **SDK changes (§12, canonical SDK first):** notification preferences (per-type alert/email),
+   bookmarks on discussions, attachments as BBCode, and topic lists by tag slug don't fit the
+   current models.
+7. **Phase 1** should run on the Mac or a bigger server: building discourse_ui here peaked at
+   1.4 GB of 1.8 GB.
+
+Still open: an iPhone run, and Google sign-in through fof/oauth on a real forum.
 
 ## Status
 
@@ -16,7 +34,9 @@ it still needs a run on a real phone.
 | Token revoke on both versions | Done: `FlarumApi.logOut` (below) |
 | Notification listing and last-seen side effects | Measured (below) |
 | Run `contentHtml` from both forums through the existing renderer | Done (below) |
-| Web-view sign-in capturing `flarum_remember`, incl. a Turnstile forum | Passes in headless mobile Chromium; spike app `tool/spikes/signin_app` ready for the Pixel |
+| Web-view sign-in capturing `flarum_remember`, incl. a Turnstile forum | Done on a Pixel 10a (Android WebView), 1.8 with Turnstile and 2.0; also in headless mobile Chromium |
+| The same on an iPhone | Not yet |
+| SDK gaps | Done: `docs/sdk-coverage.md`, all 181 methods on both versions |
 
 ## Sign-in
 
@@ -39,8 +59,14 @@ blazite/flarum-turnstile) adds middleware on the token route. So the web view st
 path that works everywhere; a native form is possible on more forums than the plan assumed, and
 a 422 on the token's `turnstileToken` (or similar) field is the signal to fall back.
 
-Tested with Cloudflare's always-passing test keys, which work on any domain. Still to do on
-the Pixel: the real Android WebView, and Google via fof/oauth on a real forum.
+Tested with Cloudflare's always-passing test keys, which work on any domain.
+
+On the Pixel 10a (8 October, `tool/spikes/signin_app`, forums reached through `adb reverse`), the
+Android WebView captured `flarum_remember` and it worked as the API token on 1.8 with Turnstile
+and on 2.0. The first run found a sign-out bug: `/api/access-tokens` is paged, oldest first, and
+alice's new token was past the first 20, so `logOut` missed it. It now pages through the list.
+
+Still to do: an iPhone (WKWebView), and Google through fof/oauth on a real forum.
 
 ## Sign-out
 

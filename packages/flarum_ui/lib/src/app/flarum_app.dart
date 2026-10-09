@@ -41,6 +41,14 @@ class FlarumApp extends StatelessWidget {
     return site;
   }
 
+  /// Starts the app afresh on another forum (the debug forum switcher).
+  /// Each forum keeps its own sign-in.
+  Future<void> restartOn(AppForumConfig config) async {
+    AppTheme.palette.value = null;
+    final next = await initialize(config);
+    runApp(FlarumApp(site: next, appearance: appearance));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
@@ -64,7 +72,7 @@ class FlarumApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: FlarumLocalizations.supportedLocales,
-      home: AppShell(site: site, appearance: appearance),
+      home: AppShell(site: site, appearance: appearance, onSwitchForum: restartOn),
     );
   }
 }

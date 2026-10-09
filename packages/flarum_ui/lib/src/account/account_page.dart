@@ -6,13 +6,15 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../render/links.dart';
+import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
+import '../app/debug_forums.dart';
 import 'sign_in_page.dart';
 
 /// The reader's account: sign in (or create an account on the forum's
 /// page), or who is signed in, and sign out; and the app's appearance.
 class AccountPage extends StatefulWidget {
-  const AccountPage({super.key, required this.site, this.appearance, this.onSignInChanged});
+  const AccountPage({super.key, required this.site, this.appearance, this.onSignInChanged, this.onSwitchForum});
 
   final SiteContext site;
 
@@ -21,6 +23,9 @@ class AccountPage extends StatefulWidget {
 
   /// Called after signing in or out, so the rest of the app can reload.
   final VoidCallback? onSignInChanged;
+
+  /// Restarts the app on another forum; offered in debug builds only.
+  final Future<void> Function(AppForumConfig forum)? onSwitchForum;
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -97,6 +102,19 @@ class _AccountPageState extends State<AccountPage> {
                 selected: {mode},
                 onSelectionChanged: (choice) => appearance.choose(choice.single),
               ),
+            ),
+          ],
+          if (showForumSwitcher && widget.onSwitchForum != null) ...[
+            const SizedBox(height: DesignTokens.spacingXXL),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.swap_horiz),
+              title: const Text('Forum (debug)'),
+              subtitle: Text(widget.site.site.url),
+              onTap: () async {
+                final forum = await DebugForumPage.open(context, widget.site.site.url);
+                if (forum != null) await widget.onSwitchForum!(forum);
+              },
             ),
           ],
         ],

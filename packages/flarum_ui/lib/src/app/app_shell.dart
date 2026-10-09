@@ -7,15 +7,19 @@ import '../account/account_page.dart';
 import '../home/home_page.dart';
 import '../notifications/notifications_page.dart';
 import '../tags/tags_page.dart';
+import '../../config/app_forum_config.dart';
 import 'appearance.dart';
 
 /// The app's top level: the forum's discussions, its tags, the reader's
 /// notifications and account, one tab each. Signing in or out starts the other tabs afresh.
 class AppShell extends StatefulWidget {
-  const AppShell({super.key, required this.site, required this.appearance});
+  const AppShell({super.key, required this.site, required this.appearance, this.onSwitchForum});
 
   final SiteContext site;
   final Appearance appearance;
+
+  /// Restarts the app on another forum; offered in debug builds only.
+  final Future<void> Function(AppForumConfig forum)? onSwitchForum;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -66,7 +70,12 @@ class _AppShellState extends State<AppShell> {
           tab(0, () => HomePage(key: ValueKey(('home', _session)), site: widget.site, title: widget.site.site.name)),
           tab(1, () => TagsPage(key: ValueKey(('tags', _session)), site: widget.site)),
           tab(2, () => NotificationsPage(key: ValueKey(('notifications', _session)), site: widget.site)),
-          tab(3, () => AccountPage(site: widget.site, appearance: widget.appearance, onSignInChanged: _signedInOrOut)),
+          tab(3, () => AccountPage(
+                site: widget.site,
+                appearance: widget.appearance,
+                onSignInChanged: _signedInOrOut,
+                onSwitchForum: widget.onSwitchForum,
+              )),
         ],
       ),
       bottomNavigationBar: NavigationBar(

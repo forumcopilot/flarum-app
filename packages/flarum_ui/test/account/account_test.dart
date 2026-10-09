@@ -80,4 +80,23 @@ void main() {
       expect(find.text('Create account'), findsOneWidget);
     });
   }
+
+  testWidgets('a debug build can switch forums from the account tab', (tester) async {
+    FlarumForum.resetForTesting();
+    FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum(signedIn: false);
+    final site = SiteContext(
+      siteType: FlarumProxyFactory.siteType,
+      site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+    );
+    AppForumConfig? chosen;
+    await tester.pumpWidget(MaterialApp(
+      home: AccountPage(site: site, onSwitchForum: (forum) async => chosen = forum),
+    ));
+    await tester.scrollUntilVisible(find.text('Forum (debug)'), 200);
+    await tester.tap(find.text('Forum (debug)'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Flarum Community'));
+    await tester.pumpAndSettle();
+    expect(chosen?.baseUrl, 'https://discuss.flarum.org');
+  });
 }

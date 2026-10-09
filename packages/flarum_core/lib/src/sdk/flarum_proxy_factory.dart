@@ -6,6 +6,7 @@ import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
 import 'flarum_post_proxy.dart';
 import 'flarum_topic_proxy.dart';
+import 'flarum_user_proxy.dart';
 
 /// Flarum's implementations of the SDK proxies, registered under [siteType].
 ///
@@ -23,7 +24,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCAccountProxy createAccountProxy(SiteContext context) => _notYet('account');
   @override
-  IFCUserProxy createUserProxy(SiteContext context) => _notYet('user');
+  IFCUserProxy createUserProxy(SiteContext context) => FlarumUserProxy(context);
   @override
   IFCForumProxy createForumProxy(SiteContext context) => FlarumForumProxy(context);
   @override

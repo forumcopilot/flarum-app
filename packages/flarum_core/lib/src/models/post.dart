@@ -15,6 +15,7 @@ class FlarumPost {
     this.editedAt,
     this.isHidden = false,
     this.discussionId,
+    this.discussionTitle,
     this.author,
     this.canEdit = false,
     this.canDelete = false,
@@ -32,6 +33,7 @@ class FlarumPost {
   factory FlarumPost.fromResource(JsonApiResource resource, JsonApiDocument document) {
     final a = resource.attributes;
     final author = document.find(resource.toOne('user'));
+    final discussion = document.find(resource.toOne('discussion'));
     return FlarumPost(
       id: resource.id,
       number: a.integer('number') ?? 0,
@@ -42,6 +44,7 @@ class FlarumPost {
       editedAt: a.date('editedAt'),
       isHidden: a.boolean('isHidden') ?? false,
       discussionId: resource.toOne('discussion')?.id,
+      discussionTitle: discussion?.attributes.string('title'),
       author: author == null ? null : FlarumUser.fromResource(author),
       canEdit: a.boolean('canEdit') ?? false,
       canDelete: a.boolean('canDelete') ?? false,
@@ -74,6 +77,9 @@ class FlarumPost {
   final DateTime? editedAt;
   final bool isHidden;
   final String? discussionId;
+
+  /// Known only when the request included the discussion.
+  final String? discussionTitle;
   final FlarumUser? author;
   final bool canEdit;
 

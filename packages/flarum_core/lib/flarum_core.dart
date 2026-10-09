@@ -10,3 +10,5 @@ export 'src/sdk/flarum_proxy_factory.dart';
 export 'src/sdk/flarum_forum_proxy.dart';
 export 'src/sdk/flarum_topic_proxy.dart';
 export 'src/sdk/flarum_post_proxy.dart';
+export 'src/sdk/flarum_token_store.dart';
+export 'src/sdk/flarum_user_proxy.dart';

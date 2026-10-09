@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   # Same HTTP client as forumcopilot_sdk.
   dio: ^5.4.0
+  # Keychain / Keystore for each forum's sign-in token, as discourse_core keeps its key.
+  flutter_secure_storage: ^9.2.4
   # The SDK lives in discourse-app, pinned by commit as ABDA pins discourse-app.
   # For local development, copy pubspec_overrides.yaml.example to pubspec_overrides.yaml.
   forumcopilot_sdk:

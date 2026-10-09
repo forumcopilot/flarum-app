@@ -3,10 +3,12 @@
     "method": "GET",
     "path": "/posts",
     "query": {
-      "filter[discussion]": "6",
-      "page[near]": "21",
+      "filter[author]": "bob",
+      "filter[type]": "comment",
+      "sort": "-createdAt",
+      "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user"
+      "include": "user,discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -16,73 +18,15 @@
     "data": [
       {
         "type": "posts",
-        "id": "24",
+        "id": "70",
         "links": {
-          "self": "/posts/24"
+          "self": "/posts/70"
         },
         "attributes": {
-          "number": 12,
-          "createdAt": "2026-10-08T17:33:50+00:00",
+          "number": 58,
+          "createdAt": "2026-10-08T18:19:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 12 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "25",
-        "links": {
-          "self": "/posts/25"
-        },
-        "attributes": {
-          "number": 13,
-          "createdAt": "2026-10-08T17:34:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 13 of 60.</p>",
+          "contentHtml": "<p>Post 58 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -110,17 +54,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -132,15 +76,15 @@
       },
       {
         "type": "posts",
-        "id": "26",
+        "id": "67",
         "links": {
-          "self": "/posts/26"
+          "self": "/posts/67"
         },
         "attributes": {
-          "number": 14,
-          "createdAt": "2026-10-08T17:35:50+00:00",
+          "number": 55,
+          "createdAt": "2026-10-08T18:16:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 14 of 60.</p>",
+          "contentHtml": "<p>Post 55 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -168,133 +112,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "4"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "27",
-        "links": {
-          "self": "/posts/27"
-        },
-        "attributes": {
-          "number": 15,
-          "createdAt": "2026-10-08T17:36:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 15 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "28",
-        "links": {
-          "self": "/posts/28"
-        },
-        "attributes": {
-          "number": 16,
-          "createdAt": "2026-10-08T17:37:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 16 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": true,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": true,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
           },
           "user": {
             "data": {
@@ -306,15 +134,15 @@
       },
       {
         "type": "posts",
-        "id": "29",
+        "id": "64",
         "links": {
-          "self": "/posts/29"
+          "self": "/posts/64"
         },
         "attributes": {
-          "number": 17,
-          "createdAt": "2026-10-08T17:38:50+00:00",
+          "number": 52,
+          "createdAt": "2026-10-08T18:13:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 17 of 60.</p>",
+          "contentHtml": "<p>Post 52 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -342,133 +170,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "4"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "30",
-        "links": {
-          "self": "/posts/30"
-        },
-        "attributes": {
-          "number": 18,
-          "createdAt": "2026-10-08T17:39:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 18 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "31",
-        "links": {
-          "self": "/posts/31"
-        },
-        "attributes": {
-          "number": 19,
-          "createdAt": "2026-10-08T17:40:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 19 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": true,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": true,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
           },
           "user": {
             "data": {
@@ -480,15 +192,15 @@
       },
       {
         "type": "posts",
-        "id": "32",
+        "id": "61",
         "links": {
-          "self": "/posts/32"
+          "self": "/posts/61"
         },
         "attributes": {
-          "number": 20,
-          "createdAt": "2026-10-08T17:41:50+00:00",
+          "number": 49,
+          "createdAt": "2026-10-08T18:10:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 20 of 60.</p>",
+          "contentHtml": "<p>Post 49 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -516,133 +228,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "4"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "33",
-        "links": {
-          "self": "/posts/33"
-        },
-        "attributes": {
-          "number": 21,
-          "createdAt": "2026-10-08T17:42:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 21 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "34",
-        "links": {
-          "self": "/posts/34"
-        },
-        "attributes": {
-          "number": 22,
-          "createdAt": "2026-10-08T17:43:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 22 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": true,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": true,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
           },
           "user": {
             "data": {
@@ -654,15 +250,15 @@
       },
       {
         "type": "posts",
-        "id": "35",
+        "id": "58",
         "links": {
-          "self": "/posts/35"
+          "self": "/posts/58"
         },
         "attributes": {
-          "number": 23,
-          "createdAt": "2026-10-08T17:44:50+00:00",
+          "number": 46,
+          "createdAt": "2026-10-08T18:07:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 23 of 60.</p>",
+          "contentHtml": "<p>Post 46 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -690,133 +286,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "4"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "36",
-        "links": {
-          "self": "/posts/36"
-        },
-        "attributes": {
-          "number": 24,
-          "createdAt": "2026-10-08T17:45:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 24 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "37",
-        "links": {
-          "self": "/posts/37"
-        },
-        "attributes": {
-          "number": 25,
-          "createdAt": "2026-10-08T17:46:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 25 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": true,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": true,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
           },
           "user": {
             "data": {
@@ -828,15 +308,15 @@
       },
       {
         "type": "posts",
-        "id": "38",
+        "id": "55",
         "links": {
-          "self": "/posts/38"
+          "self": "/posts/55"
         },
         "attributes": {
-          "number": 26,
-          "createdAt": "2026-10-08T17:47:50+00:00",
+          "number": 43,
+          "createdAt": "2026-10-08T18:04:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 26 of 60.</p>",
+          "contentHtml": "<p>Post 43 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -864,133 +344,17 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "4"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "39",
-        "links": {
-          "self": "/posts/39"
-        },
-        "attributes": {
-          "number": 27,
-          "createdAt": "2026-10-08T17:48:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 27 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": false,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": false,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "posts",
-        "id": "40",
-        "links": {
-          "self": "/posts/40"
-        },
-        "attributes": {
-          "number": 28,
-          "createdAt": "2026-10-08T17:49:50+00:00",
-          "contentType": "comment",
-          "contentHtml": "<p>Post 28 of 60.</p>",
-          "renderFailed": null,
-          "editedAt": null,
-          "canEdit": false,
-          "canDelete": false,
-          "canHide": false,
-          "canFlag": true,
-          "isApproved": true,
-          "canApprove": false,
-          "canReact": true,
-          "canDeletePostReactions": false,
-          "reactionCounts": {
-            "1": 0,
-            "2": 0,
-            "3": 0,
-            "4": 0,
-            "5": 0,
-            "6": 0
-          },
-          "userReaction": null,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectAsBestAnswer": false,
-          "canLike": true,
-          "mentionedByCount": 0,
-          "likesCount": 0
-        },
-        "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
-          "editedUser": {
-            "data": null
-          },
-          "hiddenUser": {
-            "data": null
           },
           "user": {
             "data": {
@@ -1002,15 +366,15 @@
       },
       {
         "type": "posts",
-        "id": "41",
+        "id": "52",
         "links": {
-          "self": "/posts/41"
+          "self": "/posts/52"
         },
         "attributes": {
-          "number": 29,
-          "createdAt": "2026-10-08T17:50:50+00:00",
+          "number": 40,
+          "createdAt": "2026-10-08T18:01:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 29 of 60.</p>",
+          "contentHtml": "<p>Post 40 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
@@ -1038,46 +402,46 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
           "user": {
             "data": {
               "type": "users",
-              "id": "4"
+              "id": "3"
             }
           }
         }
       },
       {
         "type": "posts",
-        "id": "42",
+        "id": "49",
         "links": {
-          "self": "/posts/42"
+          "self": "/posts/49"
         },
         "attributes": {
-          "number": 30,
-          "createdAt": "2026-10-08T17:51:50+00:00",
+          "number": 37,
+          "createdAt": "2026-10-08T17:58:50+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Post 30 of 60.</p>",
+          "contentHtml": "<p>Post 37 of 60.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,
           "canDelete": false,
           "canHide": false,
-          "canFlag": false,
+          "canFlag": true,
           "isApproved": true,
           "canApprove": false,
-          "canReact": false,
+          "canReact": true,
           "canDeletePostReactions": false,
           "reactionCounts": {
             "1": 0,
@@ -1096,22 +460,254 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
           },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
           "user": {
             "data": {
               "type": "users",
-              "id": "2"
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "46",
+        "links": {
+          "self": "/posts/46"
+        },
+        "attributes": {
+          "number": 34,
+          "createdAt": "2026-10-08T17:55:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 34 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "75",
+        "links": {
+          "self": "/posts/75"
+        },
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-08T17:54:03+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Sure, tomorrow.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "7"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "11",
+        "links": {
+          "self": "/posts/11"
+        },
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Would love a dark theme in the app.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 1
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "7",
+        "links": {
+          "self": "/posts/7"
+        },
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-08T17:53:49+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p><a href=\"http://127.0.0.1:8082/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a> Welcome! I'll take the iOS side.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 1
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
             }
           }
         }
@@ -1154,17 +750,423 @@
           "likesCount": 0
         },
         "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "6"
             }
           },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "40",
+        "links": {
+          "self": "/posts/40"
+        },
+        "attributes": {
+          "number": 28,
+          "createdAt": "2026-10-08T17:49:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 28 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "37",
+        "links": {
+          "self": "/posts/37"
+        },
+        "attributes": {
+          "number": 25,
+          "createdAt": "2026-10-08T17:46:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 25 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "34",
+        "links": {
+          "self": "/posts/34"
+        },
+        "attributes": {
+          "number": 22,
+          "createdAt": "2026-10-08T17:43:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 22 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "31",
+        "links": {
+          "self": "/posts/31"
+        },
+        "attributes": {
+          "number": 19,
+          "createdAt": "2026-10-08T17:40:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 19 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "28",
+        "links": {
+          "self": "/posts/28"
+        },
+        "attributes": {
+          "number": 16,
+          "createdAt": "2026-10-08T17:37:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 16 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "25",
+        "links": {
+          "self": "/posts/25"
+        },
+        "attributes": {
+          "number": 13,
+          "createdAt": "2026-10-08T17:34:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 13 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "22",
+        "links": {
+          "self": "/posts/22"
+        },
+        "attributes": {
+          "number": 10,
+          "createdAt": "2026-10-08T17:31:50+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Post 10 of 60.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -1176,6 +1178,86 @@
       }
     ],
     "included": [
+      {
+        "type": "discussions",
+        "id": "6",
+        "links": {
+          "self": "/discussions/6"
+        },
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "6-long-thread-for-paging-tests",
+          "commentCount": 60,
+          "participantCount": 3,
+          "createdAt": "2026-10-08T17:22:51+00:00",
+          "lastPostedAt": "2026-10-08T18:21:51+00:00",
+          "lastPostNumber": 60,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:54:03+00:00",
+          "lastReadPostNumber": 20,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "72"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
       {
         "type": "users",
         "id": "3",
@@ -1210,96 +1292,256 @@
         }
       },
       {
-        "type": "users",
-        "id": "2",
+        "type": "discussions",
+        "id": "3",
         "links": {
-          "self": "/users/2"
+          "self": "/discussions/3"
         },
         "attributes": {
-          "username": "alice",
-          "email": "alice@flarumapp.local",
-          "isEmailConfirmed": true,
-          "displayName": "alice",
-          "avatarUrl": null,
-          "avatarSrcset": null,
-          "hasUploadedAvatar": false,
-          "slug": "alice",
-          "joinTime": "2026-10-08T17:53:46+00:00",
-          "discussionCount": 2,
-          "commentCount": 38,
-          "lastSeenAt": "2026-10-09T15:46:09+00:00",
-          "canEdit": false,
-          "canEditCredentials": false,
-          "canEditGroups": false,
+          "title": "Welcome to the test forum",
+          "slug": "3-welcome-to-the-test-forum",
+          "commentCount": 4,
+          "participantCount": 4,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "lastPostedAt": "2026-10-08T17:53:49+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
           "canDelete": false,
-          "newFlagCount": 0,
-          "canSuspend": false,
-          "suspendMessage": null,
-          "suspendedUntil": null,
-          "canModerateExports": true,
-          "canMentionGroups": false,
-          "blocksPd": false,
-          "ignored": false,
-          "canBeIgnored": false,
-          "bestAnswerCount": 0,
-          "canEditNickname": true,
-          "canSendAnyMessage": true,
-          "canDeleteOwnMessages": null,
-          "messageCount": 1,
-          "fof-upload-uploadCountCurrent": 3,
-          "fof-upload-uploadCountAll": 3,
-          "fofTermsPoliciesState": [],
-          "fofTermsPoliciesHasUpdate": false,
-          "fofTermsPoliciesMustAccept": false,
-          "draftCount": 0
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:48+00:00",
+          "lastReadPostNumber": 2,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "8"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
         }
       },
       {
-        "type": "users",
-        "id": "4",
+        "type": "discussions",
+        "id": "5",
         "links": {
-          "self": "/users/4"
+          "self": "/discussions/5"
         },
         "attributes": {
-          "username": "carol",
-          "displayName": "carol",
-          "avatarUrl": null,
-          "avatarSrcset": null,
-          "hasUploadedAvatar": false,
-          "slug": "carol",
-          "joinTime": "2026-10-08T17:53:47+00:00",
-          "discussionCount": 0,
-          "commentCount": 23,
-          "lastSeenAt": "2026-10-09T15:43:04+00:00",
-          "canEdit": false,
-          "canEditCredentials": false,
-          "canEditGroups": false,
+          "title": "Feature request: dark mode",
+          "slug": "5-feature-request-dark-mode",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
           "canDelete": false,
-          "canSuspend": false,
-          "canModerateExports": false,
-          "blocksPd": false,
-          "ignored": false,
-          "canBeIgnored": true,
-          "bestAnswerCount": 0,
-          "canEditNickname": false,
-          "canSendAnyMessage": true,
-          "fof-upload-uploadCountCurrent": 0,
-          "fof-upload-uploadCountAll": 0
+          "canHide": false,
+          "lastReadAt": null,
+          "lastReadPostNumber": null,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": "follow",
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "11"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "12"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "7",
+        "links": {
+          "self": "/discussions/7"
+        },
+        "attributes": {
+          "title": "Private: test plan",
+          "slug": "7-private-test-plan",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:54:03+00:00",
+          "lastPostedAt": "2026-10-08T17:54:03+00:00",
+          "lastPostNumber": 3,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:54:03+00:00",
+          "lastReadPostNumber": 1,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": true,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "73"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "75"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
         }
       }
     ],
     "meta": {
       "page": {
-        "total": 60,
-        "offset": 11,
+        "total": 23,
+        "offset": 0,
         "limit": 20
       }
     },
     "links": {
-      "first": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=21&page%5Blimit%5D=20",
-      "prev": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=21&page%5Blimit%5D=11",
-      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=21&page%5Blimit%5D=20&page%5Boffset%5D=40",
-      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=21&page%5Blimit%5D=20&page%5Boffset%5D=31"
+      "last": "http://127.0.0.1:8082/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&include=user%2Cdiscussion&page%5Boffset%5D=20&page%5Blimit%5D=20&sort=-createdAt",
+      "next": "http://127.0.0.1:8082/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&include=user%2Cdiscussion&page%5Boffset%5D=20&page%5Blimit%5D=20&sort=-createdAt"
     },
     "jsonapi": {
       "version": "1.1"

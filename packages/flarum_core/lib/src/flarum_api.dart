@@ -223,6 +223,33 @@ class FlarumApi {
 
   Future<FlarumUser> user(String id) async => FlarumUser.fromResource((await client.get('/users/$id')).single);
 
+  /// A user by username; without `bySlug` Flarum reads it as an id and 404s.
+  Future<FlarumUser> userByUsername(String username) async => FlarumUser.fromResource(
+      (await client.get('/users/${Uri.encodeComponent(username)}', query: {'bySlug': 'true'})).single);
+
+  /// Users matching [query]. Needs the forum's "search users" permission
+  /// (`canSearchUsers`); guests get 403 by default.
+  Future<FlarumPage<FlarumUser>> searchUsers(String query, {int offset = 0, int limit = 20}) async {
+    final document = await client.get('/users', query: {'filter[q]': query, ..._page(offset, limit)});
+    return FlarumPage(
+      [for (final resource in document.data) FlarumUser.fromResource(resource)],
+      offset: offset,
+      hasMore: document.hasNext,
+    );
+  }
+
+  /// A user's comments, newest first, with their discussions.
+  Future<FlarumPage<FlarumPost>> userPosts(String username, {int offset = 0, int limit = 20}) async {
+    final document = await client.get('/posts', query: {
+      'filter[author]': username,
+      'filter[type]': 'comment',
+      'sort': '-createdAt',
+      ..._page(offset, limit),
+      'include': 'user,discussion',
+    });
+    return _postPage(document, offset);
+  }
+
   /// Every tag the reader can see, with each child's parent: primary tags
   /// (the forum's tree, two levels) and secondary ones (labels).
   Future<List<FlarumTag>> tags() async {

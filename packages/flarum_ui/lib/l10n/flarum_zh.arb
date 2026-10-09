@@ -23,5 +23,16 @@
   "nReplies": "{count, plural, other{{count} 条回复}}",
   "summaryLikeCount": "{count, plural, other{{count} 个赞}}",
   "loadMore": "加载更多",
-  "viewProfileOfUser": "查看 {username} 的个人资料"
+  "viewProfileOfUser": "查看 {username} 的个人资料",
+  "latest": "最新",
+  "unread": "未读",
+  "search": "搜索",
+  "signIn": "登录",
+  "profile": "资料",
+  "following": "关注中",
+  "home": "首页",
+  "notifications": "通知",
+  "settings": "设置",
+  "tags": "标签",
+  "filterTop": "热门"
 }

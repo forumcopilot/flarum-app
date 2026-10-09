@@ -23,5 +23,16 @@
   "nReplies": "{count, plural, =1{1 ответ} few{{count} ответа} other{{count} ответов}}",
   "summaryLikeCount": "{count, plural, one{{count} лайк} few{{count} лайка} many{{count} лайков} other{{count} лайка}}",
   "loadMore": "Загрузить ещё",
-  "viewProfileOfUser": "Открыть профиль {username}"
+  "viewProfileOfUser": "Открыть профиль {username}",
+  "latest": "Последние",
+  "unread": "Непрочитанные",
+  "search": "Поиск",
+  "signIn": "Войти",
+  "profile": "Профиль",
+  "following": "Подписки",
+  "home": "Главная",
+  "notifications": "Уведомления",
+  "settings": "Настройки",
+  "tags": "Теги",
+  "filterTop": "Обсуждаемые"
 }

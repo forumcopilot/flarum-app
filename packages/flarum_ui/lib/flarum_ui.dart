@@ -14,3 +14,7 @@ export 'src/navigation/forum_links.dart';
 export 'src/thread/post_tile.dart';
 export 'src/thread/thread_model.dart';
 export 'src/thread/thread_page.dart';
+export 'src/home/discussion_list_model.dart';
+export 'src/home/discussion_tile.dart';
+export 'src/home/home_page.dart';
+export 'src/tags/tag_label.dart';

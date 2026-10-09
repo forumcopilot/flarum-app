@@ -23,5 +23,16 @@
   "nReplies": "{count, plural, =1{1 antwoord} other{{count} antwoorden}}",
   "summaryLikeCount": "{count, plural, =1{1 like} other{{count} likes}}",
   "loadMore": "Meer laden",
-  "viewProfileOfUser": "Profiel van {username} bekijken"
+  "viewProfileOfUser": "Profiel van {username} bekijken",
+  "latest": "Nieuwste",
+  "unread": "Ongelezen",
+  "search": "Zoeken",
+  "signIn": "Inloggen",
+  "profile": "Profiel",
+  "following": "Volgend",
+  "home": "Start",
+  "notifications": "Meldingen",
+  "settings": "Instellingen",
+  "tags": "Tags",
+  "filterTop": "Top"
 }

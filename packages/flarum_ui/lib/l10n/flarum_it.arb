@@ -23,5 +23,16 @@
   "nReplies": "{count, plural, =1{1 risposta} other{{count} risposte}}",
   "summaryLikeCount": "{count, plural, =1{1 mi piace} other{{count} mi piace}}",
   "loadMore": "Carica altro",
-  "viewProfileOfUser": "Vedi il profilo di {username}"
+  "viewProfileOfUser": "Vedi il profilo di {username}",
+  "latest": "Recenti",
+  "unread": "Non letti",
+  "search": "Cerca",
+  "signIn": "Accedi",
+  "profile": "Profilo",
+  "following": "Seguiti",
+  "home": "Home",
+  "notifications": "Notifiche",
+  "settings": "Impostazioni",
+  "tags": "Tag",
+  "filterTop": "Top"
 }

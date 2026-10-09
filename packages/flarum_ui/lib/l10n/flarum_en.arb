@@ -193,5 +193,67 @@
   "someone": "Someone",
   "@someone": {
     "description": "Stands in for a user the forum didn't name (deleted account)"
+  },
+  "latest": "Latest",
+  "unread": "Unread",
+  "search": "Search",
+  "signIn": "Sign in",
+  "profile": "Profile",
+  "following": "Following",
+  "home": "Home",
+  "@home": {
+    "description": "Home tab title"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications tab title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "UI text: Settings"
+  },
+  "tags": "Tags",
+  "@tags": {
+    "description": "Drawer: Tags"
+  },
+  "filterTop": "Top",
+  "@filterTop": {
+    "description": "Home view: the most active topics of a period (Discourse: Top)"
+  },
+  "viewNewest": "Newest",
+  "@viewNewest": {
+    "description": "Discussion list view: discussions by when they started, newest first"
+  },
+  "discussionReplied": "{user} replied {time}",
+  "@discussionReplied": {
+    "description": "Discussion row: who replied last and when ({time} is e.g. '5 minutes ago')",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "discussionStarted": "{user} started {time}",
+  "@discussionStarted": {
+    "description": "Discussion row with no replies: who started it and when",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noDiscussions": "No discussions here yet.",
+  "@noDiscussions": {
+    "description": "Empty discussion list"
+  },
+  "discussionsLoadFailed": "Couldn't load discussions.",
+  "@discussionsLoadFailed": {
+    "description": "Error shown when a discussion list fails to load"
   }
 }

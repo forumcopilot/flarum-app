@@ -325,6 +325,102 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Someone'**
   String get someone;
+
+  /// No description provided for @latest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest'**
+  String get latest;
+
+  /// No description provided for @unread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get unread;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @following.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get following;
+
+  /// Home tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// Notifications tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// UI text: Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// Drawer: Tags
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get tags;
+
+  /// Home view: the most active topics of a period (Discourse: Top)
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get filterTop;
+
+  /// Discussion list view: discussions by when they started, newest first
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get viewNewest;
+
+  /// Discussion row: who replied last and when ({time} is e.g. '5 minutes ago')
+  ///
+  /// In en, this message translates to:
+  /// **'{user} replied {time}'**
+  String discussionReplied(String user, String time);
+
+  /// Discussion row with no replies: who started it and when
+  ///
+  /// In en, this message translates to:
+  /// **'{user} started {time}'**
+  String discussionStarted(String user, String time);
+
+  /// Empty discussion list
+  ///
+  /// In en, this message translates to:
+  /// **'No discussions here yet.'**
+  String get noDiscussions;
+
+  /// Error shown when a discussion list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load discussions.'**
+  String get discussionsLoadFailed;
 }
 
 class _FlarumLocalizationsDelegate

@@ -146,4 +146,56 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get someone => 'Someone';
+
+  @override
+  String get latest => '最新';
+
+  @override
+  String get unread => '未読';
+
+  @override
+  String get search => '検索';
+
+  @override
+  String get signIn => 'ログイン';
+
+  @override
+  String get profile => 'プロフィール';
+
+  @override
+  String get following => 'フォロー中';
+
+  @override
+  String get home => 'ホーム';
+
+  @override
+  String get notifications => '通知';
+
+  @override
+  String get settings => '設定';
+
+  @override
+  String get tags => 'タグ';
+
+  @override
+  String get filterTop => 'トップ';
+
+  @override
+  String get viewNewest => 'Newest';
+
+  @override
+  String discussionReplied(String user, String time) {
+    return '$user replied $time';
+  }
+
+  @override
+  String discussionStarted(String user, String time) {
+    return '$user started $time';
+  }
+
+  @override
+  String get noDiscussions => 'No discussions here yet.';
+
+  @override
+  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
 }

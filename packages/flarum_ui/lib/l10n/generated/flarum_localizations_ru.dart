@@ -151,4 +151,56 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get someone => 'Someone';
+
+  @override
+  String get latest => 'Последние';
+
+  @override
+  String get unread => 'Непрочитанные';
+
+  @override
+  String get search => 'Поиск';
+
+  @override
+  String get signIn => 'Войти';
+
+  @override
+  String get profile => 'Профиль';
+
+  @override
+  String get following => 'Подписки';
+
+  @override
+  String get home => 'Главная';
+
+  @override
+  String get notifications => 'Уведомления';
+
+  @override
+  String get settings => 'Настройки';
+
+  @override
+  String get tags => 'Теги';
+
+  @override
+  String get filterTop => 'Обсуждаемые';
+
+  @override
+  String get viewNewest => 'Newest';
+
+  @override
+  String discussionReplied(String user, String time) {
+    return '$user replied $time';
+  }
+
+  @override
+  String discussionStarted(String user, String time) {
+    return '$user started $time';
+  }
+
+  @override
+  String get noDiscussions => 'No discussions here yet.';
+
+  @override
+  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
 }

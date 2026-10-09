@@ -146,4 +146,56 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get someone => 'Someone';
+
+  @override
+  String get latest => '최신';
+
+  @override
+  String get unread => '읽지 않음';
+
+  @override
+  String get search => '검색';
+
+  @override
+  String get signIn => '로그인';
+
+  @override
+  String get profile => '프로필';
+
+  @override
+  String get following => '팔로잉';
+
+  @override
+  String get home => '홈';
+
+  @override
+  String get notifications => '알림';
+
+  @override
+  String get settings => '설정';
+
+  @override
+  String get tags => '태그';
+
+  @override
+  String get filterTop => '인기';
+
+  @override
+  String get viewNewest => 'Newest';
+
+  @override
+  String discussionReplied(String user, String time) {
+    return '$user replied $time';
+  }
+
+  @override
+  String discussionStarted(String user, String time) {
+    return '$user started $time';
+  }
+
+  @override
+  String get noDiscussions => 'No discussions here yet.';
+
+  @override
+  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
 }

@@ -146,4 +146,56 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get someone => 'Someone';
+
+  @override
+  String get latest => '最新';
+
+  @override
+  String get unread => '未读';
+
+  @override
+  String get search => '搜索';
+
+  @override
+  String get signIn => '登录';
+
+  @override
+  String get profile => '资料';
+
+  @override
+  String get following => '关注中';
+
+  @override
+  String get home => '首页';
+
+  @override
+  String get notifications => '通知';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get tags => '标签';
+
+  @override
+  String get filterTop => '热门';
+
+  @override
+  String get viewNewest => 'Newest';
+
+  @override
+  String discussionReplied(String user, String time) {
+    return '$user replied $time';
+  }
+
+  @override
+  String discussionStarted(String user, String time) {
+    return '$user started $time';
+  }
+
+  @override
+  String get noDiscussions => 'No discussions here yet.';
+
+  @override
+  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
 }

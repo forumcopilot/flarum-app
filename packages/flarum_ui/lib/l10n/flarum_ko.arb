@@ -23,5 +23,16 @@
   "nReplies": "{count, plural, other{답글 {count}개}}",
   "summaryLikeCount": "{count, plural, other{좋아요 {count}개}}",
   "loadMore": "더 불러오기",
-  "viewProfileOfUser": "{username}님의 프로필 보기"
+  "viewProfileOfUser": "{username}님의 프로필 보기",
+  "latest": "최신",
+  "unread": "읽지 않음",
+  "search": "검색",
+  "signIn": "로그인",
+  "profile": "프로필",
+  "following": "팔로잉",
+  "home": "홈",
+  "notifications": "알림",
+  "settings": "설정",
+  "tags": "태그",
+  "filterTop": "인기"
 }

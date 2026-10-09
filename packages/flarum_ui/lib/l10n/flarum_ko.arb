@@ -1,0 +1,21 @@
+{
+  "@@locale": "ko",
+  "attachmentDefaultName": "첨부파일",
+  "share": "공유",
+  "cancel": "취소",
+  "downloading": "{filename} 다운로드 중...",
+  "download": "다운로드",
+  "errorDownloading": "{filename} 다운로드 오류: {error}",
+  "video": "동영상",
+  "viewOnWeb": "웹에서 보기",
+  "mediaPause": "일시 정지",
+  "mediaPlay": "재생",
+  "failedToLoadVideo": "동영상을 불러오지 못했습니다",
+  "close": "닫기",
+  "spoiler": "스포일러",
+  "image": "이미지",
+  "fileTypeArchive": "압축 파일",
+  "fileTypeAudio": "오디오",
+  "fileTypeFile": "파일",
+  "fileTypeText": "텍스트"
+}

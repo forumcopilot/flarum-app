@@ -1,0 +1,21 @@
+{
+  "@@locale": "fr",
+  "attachmentDefaultName": "Pièce jointe",
+  "share": "Partager",
+  "cancel": "Annuler",
+  "downloading": "Téléchargement de {filename}...",
+  "download": "Télécharger",
+  "errorDownloading": "Erreur lors du téléchargement de {filename} : {error}",
+  "video": "Vidéo",
+  "viewOnWeb": "Voir sur le Web",
+  "mediaPause": "Mettre en pause",
+  "mediaPlay": "Lire",
+  "failedToLoadVideo": "Impossible de charger la vidéo",
+  "close": "Fermer",
+  "spoiler": "Spoiler",
+  "image": "Image",
+  "fileTypeArchive": "Archive",
+  "fileTypeAudio": "Audio",
+  "fileTypeFile": "Fichier",
+  "fileTypeText": "Texte"
+}

@@ -1,0 +1,21 @@
+{
+  "@@locale": "it",
+  "attachmentDefaultName": "Allegato",
+  "share": "Condividi",
+  "cancel": "Annulla",
+  "downloading": "Download di {filename}...",
+  "download": "Scarica",
+  "errorDownloading": "Errore nel download di {filename}: {error}",
+  "video": "Video",
+  "viewOnWeb": "Visualizza sul Web",
+  "mediaPause": "Pausa",
+  "mediaPlay": "Riproduci",
+  "failedToLoadVideo": "Impossibile caricare il video",
+  "close": "Chiudi",
+  "spoiler": "Spoiler",
+  "image": "Immagine",
+  "fileTypeArchive": "Archivio",
+  "fileTypeAudio": "Audio",
+  "fileTypeFile": "File",
+  "fileTypeText": "Testo"
+}

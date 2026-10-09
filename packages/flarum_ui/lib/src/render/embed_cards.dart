@@ -1,0 +1,515 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+import '../../l10n/flarum_l10n.dart';
+import 'forum_media.dart';
+import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/embed_links.dart';
+import 'links.dart';
+import 'package:forum_kit/utils/youtube_cache.dart';
+import 'forum_image.dart';
+import 'full_screen_video_viewer.dart';
+import 'post_body_extensions.dart';
+
+/// The native preview for an embed in a post (see [EmbedLink]): a video
+/// shows its thumbnail with the site's play button, as Discourse's lazy
+/// videos do on the web; anything else is a row naming the site. Tapping
+/// opens the page — for YouTube, TikTok and the like, in their app. The gap
+/// to the next block is the post body's (see [withBlockGap]).
+class EmbedPreviewCard extends StatelessWidget {
+  const EmbedPreviewCard({super.key, required this.link, required this.onOpen});
+
+  final EmbedLink link;
+  final void Function(String url) onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return link.provider.kind == EmbedKind.video
+        ? _VideoPreview(link: link, onOpen: onOpen)
+        : _EmbedRow(link: link, onOpen: onOpen);
+  }
+}
+
+class _VideoPreview extends StatefulWidget {
+  const _VideoPreview({required this.link, required this.onOpen});
+
+  final EmbedLink link;
+  final void Function(String url) onOpen;
+
+  @override
+  State<_VideoPreview> createState() => _VideoPreviewState();
+}
+
+class _VideoPreviewState extends State<_VideoPreview> {
+  late EmbedLink _link = widget.link;
+  String? _channel;
+
+  @override
+  void initState() {
+    super.initState();
+    _lookUp();
+  }
+
+  @override
+  void didUpdateWidget(_VideoPreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.link.url != widget.link.url) {
+      _link = widget.link;
+      _channel = null;
+      _lookUp();
+    }
+  }
+
+  /// A YouTube embed that came without a title (a bare iframe, or a link
+  /// the forum did not turn into an embed) gets one from forumcopilot.com,
+  /// cached on the device, the way the ForumCopilot app fills its video
+  /// cards. Embeds that carry their title cost no request.
+  void _lookUp() {
+    final id = _link.youtubeId;
+    if (id == null || _link.title != null) return;
+    final url = _link.url;
+    unawaited(YouTubeCache.fetchYouTubePreview(id).then((data) {
+      if (!mounted || data == null || _link.url != url) return;
+      setState(() {
+        _link = _link.copyWith(
+          title: data.videoTitle,
+          thumbnailUrl: _link.thumbnailUrl ?? data.previewImageUrl,
+        );
+        _channel = data.authorName;
+      });
+    }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final link = _link;
+    final provider = link.provider;
+    final thumbnail = link.thumbnailUrl;
+    final title = link.title;
+    final textTheme = Theme.of(context).textTheme;
+
+    Widget placeholder() => ColoredBox(
+          color: Colors.black,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 72),
+              child: Text(
+                provider.name,
+                style: textTheme.bodySmall?.copyWith(color: Colors.white70),
+              ),
+            ),
+          ),
+        );
+
+    final frame = ClipRRect(
+      borderRadius: BorderRadius.circular(EmbeddedCard.radius),
+      child: Material(
+        color: Colors.black,
+        child: InkWell(
+          onTap: () => widget.onOpen(link.url),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              if (thumbnail != null)
+                Image.network(
+                  thumbnail,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, _, __) => placeholder(),
+                )
+              else
+                placeholder(),
+              if (title != null)
+                // The web's title bar: white text on a fade from black.
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(
+                      DesignTokens.spacingM,
+                      DesignTokens.spacingM,
+                      DesignTokens.spacingM,
+                      DesignTokens.spacingXL,
+                    ),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0x99000000), Color(0x00000000)],
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.titleMedium?.copyWith(
+                            color: Colors.white,
+                            shadows: const [Shadow(blurRadius: 4, color: Colors.black54)],
+                          ),
+                        ),
+                        if (_channel != null)
+                          Text(
+                            _channel!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.bodySmall?.copyWith(color: Colors.white70),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              Center(child: _PlayBadge(provider: provider)),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    return Semantics(
+      button: true,
+      label: [provider.name, if (title != null) title].join(': '),
+      excludeSemantics: true,
+      onTap: () => widget.onOpen(link.url),
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: ConstrainedBox(
+          // Tall videos (TikTok, Shorts) stay a sensible size instead of
+          // filling a whole screen with one post.
+          constraints: const BoxConstraints(maxHeight: 480),
+          child: AspectRatio(
+            aspectRatio: link.portrait ? 9 / 16 : 16 / 9,
+            child: frame,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The site's play button: YouTube's red one, or the site's colour.
+class _PlayBadge extends StatelessWidget {
+  const _PlayBadge({required this.provider});
+
+  final EmbedProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    if (identical(provider, EmbedLink.youtube)) {
+      return Container(
+        width: 68,
+        height: 48,
+        decoration: BoxDecoration(
+          color: const Color(0xFFFF0000),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 36),
+      );
+    }
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: BoxDecoration(
+        color: provider.brand ?? Colors.black54,
+        shape: BoxShape.circle,
+        boxShadow: const [BoxShadow(blurRadius: 8, color: Colors.black38)],
+      ),
+      child: Icon(provider.icon, color: Colors.white, size: 34),
+    );
+  }
+}
+
+/// A non-video embed — a Spotify track, a Reddit post, a map — as one row:
+/// the site's badge, the title when the embed named one, and the site.
+class _EmbedRow extends StatelessWidget {
+  const _EmbedRow({required this.link, required this.onOpen});
+
+  final EmbedLink link;
+  final void Function(String url) onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final provider = link.provider;
+    final badge = provider.brand ?? colorScheme.onSurface;
+    final onBadge = provider.brand == null ? colorScheme.surface : Colors.white;
+    final title = link.title ?? provider.name;
+    final subtitle = link.title != null ? provider.name : _host(link.url);
+
+    // The file row every attachment uses, in the one card recipe.
+    return EmbeddedCard(
+      onTap: () => onOpen(link.url),
+      padding: EdgeInsets.zero,
+      child: FileRow(
+        leading: DecoratedBox(
+          decoration: BoxDecoration(
+            color: badge,
+            borderRadius: BorderRadius.circular(DesignTokens.radiusS),
+          ),
+          child: Icon(provider.icon, color: onBadge, size: DesignTokens.iconSizeL),
+        ),
+        title: Text(title, maxLines: 2, overflow: TextOverflow.ellipsis),
+        subtitle: Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+        trailing: [
+          const SizedBox(width: DesignTokens.spacingXS),
+          Icon(Icons.open_in_new, size: DesignTokens.iconSizeSMedium, color: colorScheme.onSurfaceVariant),
+        ],
+      ),
+    );
+  }
+
+  /// The site's address, without "www." — the player's path says nothing
+  /// a reader can use.
+  static String _host(String url) {
+    final host = Uri.tryParse(url)?.host ?? '';
+    if (host.isEmpty) return url;
+    return host.startsWith('www.') ? host.substring(4) : host;
+  }
+}
+
+/// A video uploaded to the forum (`<video>`, or the placeholder newer
+/// Discourse cooks with a thumbnail), in a post or a chat message: its
+/// poster frame with a play button; tapping plays it in the app's video
+/// viewer.
+class PostVideoCard extends StatelessWidget {
+  const PostVideoCard({
+    super.key,
+    required this.src,
+    this.poster,
+    this.aspectRatio,
+    this.title,
+    this.auth,
+  });
+
+  final String src;
+  final String? poster;
+  final double? aspectRatio;
+
+  /// The upload's name as its author gave it, when known (a chat upload's
+  /// original_filename; cooked posts carry none).
+  final String? title;
+
+  /// The forum's media rules, for a video only a signed-in user may see.
+  final ForumMediaAuth? auth;
+
+  @override
+  Widget build(BuildContext context) {
+    final ratio = (aspectRatio == null || aspectRatio! <= 0)
+        ? 16 / 9
+        : aspectRatio!.clamp(0.4, 3.0);
+    // The address ends in the upload's hash, which named the viewer and was
+    // read out to screen readers; say "Video" instead when the name is not
+    // known.
+    final given = title?.trim() ?? '';
+    final name = given.isNotEmpty
+        ? given
+        : (flarumL10n(context).video);
+
+    // No poster: a black frame; the play button says what it is.
+    Widget blank() => const ColoredBox(color: Colors.black);
+
+    void openVideo() => Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => FullScreenVideoViewer(videoUrl: src, title: name, auth: auth),
+    ));
+
+    return Semantics(
+      button: true,
+      label: name,
+      excludeSemantics: true,
+      onTap: openVideo,
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 480),
+          child: AspectRatio(
+            aspectRatio: ratio,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(EmbeddedCard.radius),
+              child: Material(
+                color: Colors.black,
+                child: InkWell(
+                  onTap: openVideo,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      if (poster != null)
+                        Image(
+                          image: forumImage(poster!, auth),
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, _, __) => blank(),
+                        )
+                      else
+                        blank(),
+                      Center(
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            color: Colors.black54,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.play_arrow_rounded,
+                              color: Colors.white, size: 40),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// An audio upload (`<audio controls>`): a play button, a scrubbable
+/// progress bar and the time, like the browser's own control. The player
+/// is only created on the first tap.
+class PostAudioPlayer extends StatefulWidget {
+  const PostAudioPlayer({super.key, required this.src, this.auth});
+
+  final String src;
+
+  /// The forum's media rules, for a file only a signed-in user may fetch.
+  final ForumMediaAuth? auth;
+
+  @override
+  State<PostAudioPlayer> createState() => _PostAudioPlayerState();
+}
+
+class _PostAudioPlayerState extends State<PostAudioPlayer>
+    with AutomaticKeepAliveClientMixin {
+  VideoPlayerController? _controller;
+  bool _loading = false;
+  bool _failed = false;
+
+  /// Keep playing when the post scrolls out of view.
+  @override
+  bool get wantKeepAlive => _controller?.value.isPlaying ?? false;
+
+  @override
+  void dispose() {
+    _controller?.removeListener(_changed);
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  void _changed() {
+    if (!mounted) return;
+    // An error mid-playback left Play showing, doing nothing.
+    setState(() => _failed = _failed || (_controller?.value.hasError ?? false));
+    updateKeepAlive();
+  }
+
+  Future<void> _toggle() async {
+    final existing = _controller;
+    if (existing != null) {
+      existing.value.isPlaying ? await existing.pause() : await existing.play();
+      return;
+    }
+    if (Uri.tryParse(widget.src) == null) return;
+    setState(() => _loading = true);
+    // Where to play it from, and whether it needs the key (see
+    // ForumMedia.resolvePlayable).
+    final media = await ForumMedia.resolvePlayable(widget.auth, widget.src);
+    if (!mounted) return;
+    final controller =
+        VideoPlayerController.networkUrl(media.url, httpHeaders: media.headers);
+    setState(() => _controller = controller);
+    try {
+      await controller.initialize();
+      controller.addListener(_changed);
+      await controller.play();
+    } catch (_) {
+      _failed = true;
+    }
+    if (mounted) setState(() => _loading = false);
+  }
+
+  static String _time(Duration d) {
+    final m = d.inMinutes;
+    final s = (d.inSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final controller = _controller;
+    final value = controller?.value;
+    final ready = controller != null && value!.isInitialized && !_failed;
+
+    // The card recipe; the play button's own 48dp target is its padding.
+    return EmbeddedCard(
+      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingXS),
+      child: Row(
+        children: [
+          if (_loading)
+            const Padding(
+              padding: EdgeInsets.all(14),
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            )
+          else if (_failed)
+            IconButton(
+              tooltip: flarumL10n(context).viewOnWeb,
+              // It would not play here; the browser may manage.
+              onPressed: () => openExternally(widget.src),
+              icon: Icon(Icons.open_in_new, color: colorScheme.error),
+            )
+          else
+            IconButton(
+              tooltip: (value?.isPlaying ?? false)
+                  ? (flarumL10n(context).mediaPause)
+                  : (flarumL10n(context).mediaPlay),
+              onPressed: _toggle,
+              icon: Icon(
+                (value?.isPlaying ?? false)
+                    ? Icons.pause_rounded
+                    : Icons.play_arrow_rounded,
+                color: colorScheme.primary,
+                size: 28,
+              ),
+            ),
+          Expanded(
+            child: ready
+                ? VideoProgressIndicator(
+                    controller,
+                    allowScrubbing: true,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    colors: VideoProgressColors(
+                      playedColor: colorScheme.primary,
+                      bufferedColor: colorScheme.primary.withValues(alpha: 0.3),
+                      backgroundColor: colorScheme.outlineVariant,
+                    ),
+                  )
+                : Container(height: 4, color: colorScheme.outlineVariant),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              ready
+                  ? '${_time(value.position)} / ${_time(value.duration)}'
+                  : '0:00',
+              style: textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

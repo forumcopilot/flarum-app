@@ -1,0 +1,21 @@
+{
+  "@@locale": "pt",
+  "attachmentDefaultName": "Anexo",
+  "share": "Compartilhar",
+  "cancel": "Cancelar",
+  "downloading": "Baixando {filename}...",
+  "download": "Transferir",
+  "errorDownloading": "Erro ao baixar {filename}: {error}",
+  "video": "Vídeo",
+  "viewOnWeb": "Ver na Web",
+  "mediaPause": "Pausar",
+  "mediaPlay": "Reproduzir",
+  "failedToLoadVideo": "Não foi possível carregar o vídeo",
+  "close": "Fechar",
+  "spoiler": "Spoiler",
+  "image": "Imagem",
+  "fileTypeArchive": "Arquivo compactado",
+  "fileTypeAudio": "Áudio",
+  "fileTypeFile": "Arquivo",
+  "fileTypeText": "Texto"
+}

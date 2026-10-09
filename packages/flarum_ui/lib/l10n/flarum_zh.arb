@@ -1,0 +1,21 @@
+{
+  "@@locale": "zh",
+  "attachmentDefaultName": "附件",
+  "share": "分享",
+  "cancel": "取消",
+  "downloading": "正在下载{filename}...",
+  "download": "下载",
+  "errorDownloading": "下载{filename}时出错: {error}",
+  "video": "视频",
+  "viewOnWeb": "在网页中查看",
+  "mediaPause": "暂停",
+  "mediaPlay": "播放",
+  "failedToLoadVideo": "无法加载视频",
+  "close": "关闭",
+  "spoiler": "剧透",
+  "image": "图片",
+  "fileTypeArchive": "压缩包",
+  "fileTypeAudio": "音频",
+  "fileTypeFile": "文件",
+  "fileTypeText": "文本"
+}

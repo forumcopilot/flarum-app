@@ -1,0 +1,21 @@
+{
+  "@@locale": "ja",
+  "attachmentDefaultName": "添付ファイル",
+  "share": "共有",
+  "cancel": "キャンセル",
+  "downloading": "{filename}をダウンロード中...",
+  "download": "ダウンロード",
+  "errorDownloading": "{filename}のダウンロードエラー: {error}",
+  "video": "動画",
+  "viewOnWeb": "Webで表示",
+  "mediaPause": "一時停止",
+  "mediaPlay": "再生",
+  "failedToLoadVideo": "動画を読み込めませんでした",
+  "close": "閉じる",
+  "spoiler": "ネタバレ",
+  "image": "画像",
+  "fileTypeArchive": "圧縮ファイル",
+  "fileTypeAudio": "音声",
+  "fileTypeFile": "ファイル",
+  "fileTypeText": "テキスト"
+}

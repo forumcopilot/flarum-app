@@ -1,0 +1,21 @@
+{
+  "@@locale": "nl",
+  "attachmentDefaultName": "Bijlage",
+  "share": "Delen",
+  "cancel": "Annuleren",
+  "downloading": "Downloaden {filename}...",
+  "download": "Downloaden",
+  "errorDownloading": "Fout bij downloaden {filename}: {error}",
+  "video": "Video",
+  "viewOnWeb": "Bekijken op web",
+  "mediaPause": "Pauzeren",
+  "mediaPlay": "Afspelen",
+  "failedToLoadVideo": "Video laden mislukt",
+  "close": "Sluiten",
+  "spoiler": "Spoiler",
+  "image": "Afbeelding",
+  "fileTypeArchive": "Archief",
+  "fileTypeAudio": "Audio",
+  "fileTypeFile": "Bestand",
+  "fileTypeText": "Tekst"
+}

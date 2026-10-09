@@ -1,0 +1,21 @@
+{
+  "@@locale": "de",
+  "attachmentDefaultName": "Anhang",
+  "share": "Teilen",
+  "cancel": "Abbrechen",
+  "downloading": "Lade {filename} herunter...",
+  "download": "Herunterladen",
+  "errorDownloading": "Fehler beim Herunterladen von {filename}: {error}",
+  "video": "Video",
+  "viewOnWeb": "Im Web anzeigen",
+  "mediaPause": "Pausieren",
+  "mediaPlay": "Abspielen",
+  "failedToLoadVideo": "Video konnte nicht geladen werden",
+  "close": "Schließen",
+  "spoiler": "Spoiler",
+  "image": "Bild",
+  "fileTypeArchive": "Archiv",
+  "fileTypeAudio": "Audio",
+  "fileTypeFile": "Datei",
+  "fileTypeText": "Text"
+}

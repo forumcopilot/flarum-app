@@ -1,0 +1,21 @@
+{
+  "@@locale": "ru",
+  "attachmentDefaultName": "Вложение",
+  "share": "Поделиться",
+  "cancel": "Отмена",
+  "downloading": "Загрузка {filename}...",
+  "download": "Скачать",
+  "errorDownloading": "Ошибка при загрузке {filename}: {error}",
+  "video": "Видео",
+  "viewOnWeb": "Открыть в браузере",
+  "mediaPause": "Пауза",
+  "mediaPlay": "Воспроизвести",
+  "failedToLoadVideo": "Не удалось загрузить видео",
+  "close": "Закрыть",
+  "spoiler": "Спойлер",
+  "image": "Изображение",
+  "fileTypeArchive": "Архив",
+  "fileTypeAudio": "Аудио",
+  "fileTypeFile": "Файл",
+  "fileTypeText": "Текст"
+}

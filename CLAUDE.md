@@ -28,10 +28,22 @@ marked places so 1.x can be dropped later. The app needs no plugin on the forum.
 
 ```bash
 cd packages/flarum_core && flutter pub get && flutter analyze && flutter test
+cd packages/flarum_ui && flutter pub get && flutter analyze && flutter test
 ```
 
-Tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every API test runs
-against both. Live tests and re-recording: `test/live_test.dart`, `tool/test_forums/README.md`.
+Each package needs `pubspec_overrides.yaml` (copy the `.example`) to build against the local
+discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit.
+
+flarum_core's tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every
+API test runs against both. Live tests and re-recording: `test/live_test.dart`,
+`tool/test_forums/README.md`.
+
+flarum_ui's post renderer is `FlarumContent` (copied from discourse_ui's RichTextContent) on HTML
+prepared by `FlarumHtml`, which rewrites Flarum's own markup (code-block scripts, task lists,
+fof/upload files and previews, s9e embeds, mention icons) into shapes the renderer draws. Its strings
+are `FlarumLocalizations` (`flarumL10n(context)`; ARBs in `lib/l10n`, then `flutter gen-l10n`).
+To compare its output with the web: `tool/render_compare/compare.mjs` (screenshots both sides at a
+Pixel's width into `packages/flarum_ui/build/render/`).
 
 ## Flarum API facts the client depends on
 

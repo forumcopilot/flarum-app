@@ -1,0 +1,76 @@
+{
+  "@@locale": "en",
+  "attachmentDefaultName": "Attachment",
+  "@attachmentDefaultName": {
+    "description": "Name shown for a file in a post or chat message that has no name of its own"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "Menu item to share content"
+  },
+  "cancel": "Cancel",
+  "downloading": "Downloading {filename}...",
+  "@downloading": {
+    "description": "Status message when downloading file",
+    "placeholders": {
+      "filename": {
+        "type": "String"
+      }
+    }
+  },
+  "download": "Download",
+  "@download": {
+    "description": "Button tooltip: download a file from a post or chat message and open it (Discourse lightbox.download)"
+  },
+  "errorDownloading": "Error downloading {filename}: {error}",
+  "@errorDownloading": {
+    "description": "Error message when downloading file fails",
+    "placeholders": {
+      "filename": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "video": "Video",
+  "viewOnWeb": "View on Web",
+  "@viewOnWeb": {
+    "description": "Menu item to view content on web browser"
+  },
+  "mediaPause": "Pause",
+  "@mediaPause": {
+    "description": "Accessible label for an audio or video pause button"
+  },
+  "mediaPlay": "Play",
+  "@mediaPlay": {
+    "description": "Accessible label for an audio or video play button"
+  },
+  "failedToLoadVideo": "Failed to load video",
+  "@failedToLoadVideo": {
+    "description": "Full-screen video player: the video could not be played and the player gave no reason"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "UI text: Close"
+  },
+  "spoiler": "Spoiler",
+  "image": "Image",
+  "fileTypeArchive": "Archive",
+  "@fileTypeArchive": {
+    "description": "File type label under an attached file's name (shown in capitals): a compressed archive (zip, rar, 7z…)"
+  },
+  "fileTypeAudio": "Audio",
+  "@fileTypeAudio": {
+    "description": "File type label under an attached file's name (shown in capitals): an audio file"
+  },
+  "fileTypeFile": "File",
+  "@fileTypeFile": {
+    "description": "File type label under an attached file's name (shown in capitals) when the type is unknown"
+  },
+  "fileTypeText": "Text",
+  "@fileTypeText": {
+    "description": "File type label under an attached file's name (shown in capitals): a plain text file"
+  }
+}

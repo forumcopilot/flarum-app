@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/interfaces/interfaces.dart';
 import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
 import 'flarum_post_proxy.dart';
+import 'flarum_social_proxy.dart';
 import 'flarum_topic_proxy.dart';
 import 'flarum_user_proxy.dart';
 
@@ -38,7 +39,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCSearchProxy createSearchProxy(SiteContext context) => _notYet('search');
   @override
-  IFCSocialProxy createSocialProxy(SiteContext context) => _notYet('social');
+  IFCSocialProxy createSocialProxy(SiteContext context) => FlarumSocialProxy(context);
   @override
   IFCPrivateConversationProxy createPrivateConversationProxy(SiteContext context) => _notYet('private conversation');
   @override

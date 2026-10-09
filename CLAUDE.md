@@ -56,6 +56,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   Read attributes through `FlarumAttributes`.
 - Validation (422): 1.x reports the first failed rule, 2.0 every invalid field.
 - Listing `/api/notifications` resets the reader's "new" badge on the website.
+- Notifications: include `subject.discussion`, or a post subject arrives without its discussion on
+  1.x. Discussion-subject types carry the post to open in `content.postNumber`; `postMentioned`'s
+  subject is the reader's own post, and the reply that mentions it is `content.replyNumber`.
+  `POST /api/notifications/read` marks all read (204).
 - byobu private discussions are invisible to admins who aren't recipients.
 - Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
   never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing

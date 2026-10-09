@@ -149,6 +149,17 @@ void main() {
         final liked = page.items.firstWhere((n) => n.contentType == 'postLiked');
         expect(liked.fromUser?.username, isNotNull);
         expect(liked.subject?.type, 'posts');
+        expect(liked.postId, liked.subject?.id);
+        expect(liked.postNumber, 2);
+        expect(liked.discussionId, forum.discussionId('welcome'), reason: 'a post subject brings its discussion');
+        expect(liked.discussionTitle, 'Welcome to the test forum');
+        expect(liked.discussionSlug, '${forum.discussionId('welcome')}-welcome-to-the-test-forum');
+
+        final reply = page.items.firstWhere((n) => n.contentType == 'byobuPrivateDiscussionReplied');
+        expect(reply.discussionId, forum.discussionId('private'), reason: 'the subject is the discussion');
+        expect(reply.discussionTitle, 'Private: test plan');
+        expect(reply.postId, isNull);
+        expect(reply.postNumber, 3, reason: 'from content.postNumber');
       });
 
       group('errors', () {

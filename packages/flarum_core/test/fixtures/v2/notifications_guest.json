@@ -5,7 +5,7 @@
     "query": {
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "fromUser,subject"
+      "include": "fromUser,subject,subject.discussion"
     },
     "signedIn": false,
     "rememberCookie": false

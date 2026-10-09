@@ -53,6 +53,9 @@ class FlarumClient {
 
   Future<void> delete(String path) => _send('DELETE', path);
 
+  /// POSTs with no body, for actions such as `/notifications/read`.
+  Future<void> postEmpty(String path) => _send('POST', path);
+
   /// POSTs plain JSON (not JSON:API), for endpoints such as `/token`.
   Future<Map<String, dynamic>> postJson(String path, Map<String, dynamic> body) async =>
       _json((await _send('POST', path, body: body, jsonApi: false)).data);

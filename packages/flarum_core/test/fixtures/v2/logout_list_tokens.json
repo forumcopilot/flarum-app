@@ -65,14 +65,31 @@
       },
       {
         "type": "access-tokens",
-        "id": "86",
+        "id": "93",
         "links": {
-          "self": "/access-tokens/86"
+          "self": "/access-tokens/93"
         },
         "attributes": {
           "userId": 4,
-          "createdAt": "2026-10-09T15:47:53+00:00",
-          "lastActivityAt": "2026-10-09T15:47:53+00:00",
+          "createdAt": "2026-10-09T16:55:22+00:00",
+          "lastActivityAt": "2026-10-09T16:55:22+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "95",
+        "links": {
+          "self": "/access-tokens/95"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-09T16:56:32+00:00",
+          "lastActivityAt": "2026-10-09T16:56:32+00:00",
           "isCurrent": true,
           "isSessionToken": true,
           "title": null,
@@ -84,7 +101,7 @@
     "included": [],
     "meta": {
       "page": {
-        "total": 4,
+        "total": 5,
         "offset": 0,
         "limit": 50
       }

@@ -70,6 +70,7 @@ void main() {
     expect(SiteProxyFactory.getConfigProxy(), isA<FlarumConfigProxy>());
     expect(SiteProxyFactory.getPostProxy(), isA<FlarumPostProxy>());
     expect(SiteProxyFactory.getUserProxy(), isA<FlarumUserProxy>());
+    expect(SiteProxyFactory.getSocialProxy(), isA<FlarumSocialProxy>());
     expect(SiteProxyFactory.getSearchProxy, throwsUnimplementedError);
   });
 }

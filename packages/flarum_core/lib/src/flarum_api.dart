@@ -292,7 +292,8 @@ class FlarumApi {
   Future<FlarumPage<FlarumNotification>> notifications({int offset = 0, int limit = 20}) async {
     final document = await client.get('/notifications', query: {
       ..._page(offset, limit),
-      'include': 'fromUser,subject',
+      // subject.discussion: on 1.x a post subject carries no discussion otherwise.
+      'include': 'fromUser,subject,subject.discussion',
     });
     return FlarumPage(
       [for (final resource in document.data) FlarumNotification.fromResource(resource, document)],
@@ -300,6 +301,9 @@ class FlarumApi {
       hasMore: document.hasNext,
     );
   }
+
+  /// Marks all the reader's notifications read.
+  Future<void> markAllNotificationsRead() => client.postEmpty('/notifications/read');
 
   FlarumPage<FlarumPost> _postPage(JsonApiDocument document, int? offset) => FlarumPage(
         [for (final resource in document.data) FlarumPost.fromResource(resource, document)],

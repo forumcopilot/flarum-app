@@ -197,7 +197,7 @@ client-side assembly · **No** not possible · **n/a** the concept doesn't exist
 | unlikePostAsync | Ext | Ext | `isLiked=false` or `reaction=null` | |
 | likeConversationMessageAsync | Ext | Ext | byobu posts: `isLiked` | Dialog messages have no likes. |
 | unlikeConversationMessageAsync | Ext | Ext | Same | |
-| getAlertAsync | Core | Core | `GET /api/notifications` | Resets the website's "new" badge. |
+| getAlertAsync | Core | Core | `GET /api/notifications?include=fromUser,subject,subject.discussion` | Resets the website's "new" badge. A mention opens at `content.replyNumber`. |
 | getActivityAsync | Partial | Partial | `GET /api/posts?filter[author]={name}&sort=-createdAt` | Own posts only. |
 | markAllAlertsReadAsync | Core | Core | `POST /api/notifications/read` | |
 

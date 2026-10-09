@@ -5,7 +5,7 @@
     "query": {
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "fromUser,subject"
+      "include": "fromUser,subject,subject.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -13,7 +13,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/notifications?page%5Blimit%5D=20&include=fromUser%2Csubject"
+      "first": "http://127.0.0.1:8081/api/notifications?page%5Blimit%5D=20&include=fromUser%2Csubject%2Csubject.discussion"
     },
     "data": [
       {
@@ -178,6 +178,28 @@
         }
       },
       {
+        "type": "discussions",
+        "id": "5",
+        "attributes": {
+          "title": "Welcome to the test forum",
+          "slug": "5-welcome-to-the-test-forum",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "6",
+        "attributes": {
+          "title": "App crashes when opening a long thread",
+          "slug": "6-app-crashes-when-opening-a-long-thread",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
         "type": "posts",
         "id": "13",
         "attributes": {
@@ -209,6 +231,14 @@
           "canSelectAsBestAnswer": false,
           "canLike": true,
           "likesCount": 0
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          }
         }
       },
       {
@@ -243,6 +273,14 @@
           "canSelectAsBestAnswer": false,
           "canLike": true,
           "likesCount": 0
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
+          }
         }
       }
     ]

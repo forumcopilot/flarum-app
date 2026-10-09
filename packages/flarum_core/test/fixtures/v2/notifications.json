@@ -5,7 +5,7 @@
     "query": {
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "fromUser,subject"
+      "include": "fromUser,subject,subject.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -199,16 +199,96 @@
               "id": "2"
             }
           },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "3"
             }
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "3",
+        "links": {
+          "self": "/discussions/3"
+        },
+        "attributes": {
+          "title": "Welcome to the test forum",
+          "slug": "3-welcome-to-the-test-forum",
+          "commentCount": 4,
+          "participantCount": 4,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "lastPostedAt": "2026-10-08T17:53:49+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:48+00:00",
+          "lastReadPostNumber": 2,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
           },
-          "editedUser": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "8"
+            }
+          },
+          "mostRelevantPost": {
             "data": null
           },
-          "hiddenUser": {
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
             "data": null
           }
         }
@@ -229,7 +309,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-08T20:12:03+00:00",
+          "lastSeenAt": "2026-10-09T16:54:04+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -262,7 +342,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-09T15:43:04+00:00",
+          "lastSeenAt": "2026-10-09T16:55:22+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -323,16 +403,96 @@
               "id": "2"
             }
           },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
           "discussion": {
             "data": {
               "type": "discussions",
               "id": "4"
             }
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "4",
+        "links": {
+          "self": "/discussions/4"
+        },
+        "attributes": {
+          "title": "App crashes when opening a long thread",
+          "slug": "4-app-crashes-when-opening-a-long-thread",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-08T17:53:50+00:00",
+          "lastPostedAt": "2026-10-08T17:53:50+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:50+00:00",
+          "lastReadPostNumber": 1,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
           },
-          "editedUser": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "9"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "10"
+            }
+          },
+          "mostRelevantPost": {
             "data": null
           },
-          "hiddenUser": {
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
             "data": null
           }
         }

@@ -22,5 +22,27 @@ forum is chosen at build time (`AppForumConfig`), so a local address never needs
 Without `--dart-define`, the app opens the template's default forum, discuss.flarum.org, as a
 guest. CI builds that as a debug APK on every push (artifact `app-debug.apk` on the run's page).
 
+## Quickest: CI's debug APK and the forum switcher
+
+1. From the latest green run on GitHub Actions (branch `phase-2`), download the artifact
+   `app-debug.apk` and install it: `adb install -r app-debug.apk`.
+2. A debug build has a forum switcher at the bottom of the Account tab ("Forum (debug)"): the two
+   local test forums (with the tunnel and `adb reverse` above), the 21 census forums, or any address.
+   Each forum keeps its own sign-in.
+
+## What only the phone can confirm (Phase 2 exit)
+
+- Sign-in in the app: Account → Sign in on both local forums (1.8 has Turnstile on its log-in, as on
+  a real forum); the app returns signed in, Following appears on Home, the Notifications tab lists
+  alice's notifications, and Sign out works.
+- Browsing: the census forums in the switcher, both versions and several languages (Arabic is
+  right-to-left): the home list, a tag, a long thread (scrolling, opening part-way down, "Load earlier
+  posts"), a profile, search.
+- Posts as the web draws them: the "Formatting samples" discussion on each local forum, beside the
+  same posts in the phone's browser (images, YouTube card, video, spoilers, code, task lists, quotes,
+  the file card's download).
+- Light and dark (Account → Appearance) and the forum's colours.
+- The same on an iPhone (iOS web view: sign-in and the remember cookie).
+
 Test accounts on the local forums: alice, bob and carol (password in the server's credentials
 file, not in the repo).

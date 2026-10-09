@@ -39,6 +39,8 @@ class FlarumForum {
 
   FlarumVersion? get version => info?.version;
 
+  /// What [info] reveals; empty until it's loaded. Use [currentExtensions]
+  /// unless [current] or [refresh] has run.
   FlarumExtensions get extensions => FlarumExtensions(
         info?.attributes ?? const {},
         actorAttributes: info?.actorAttributes ?? const {},
@@ -49,6 +51,12 @@ class FlarumForum {
 
   /// The info from the last [refresh], fetching it if there is none yet.
   Future<FlarumForumInfo> current() async => info ?? await refresh();
+
+  /// The forum's extensions, loading its info first if needed.
+  Future<FlarumExtensions> currentExtensions() async {
+    await current();
+    return extensions;
+  }
 
   List<FlarumTag>? _tags;
 

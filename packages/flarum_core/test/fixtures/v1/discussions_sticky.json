@@ -1,0 +1,115 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions",
+    "query": {
+      "filter[sticky]": "1",
+      "sort": "-lastPostedAt",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bsticky%5D=1&sort=-lastPostedAt&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+    },
+    "data": [
+      {
+        "type": "discussions",
+        "id": "4",
+        "attributes": {
+          "title": "Forum rules",
+          "slug": "4-forum-rules",
+          "commentCount": 1,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "lastPostNumber": 1,
+          "canReply": false,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": true,
+          "canSticky": false,
+          "isLocked": true,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "11"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "1",
+        "attributes": {
+          "username": "admin",
+          "displayName": "admin",
+          "avatarUrl": null,
+          "slug": "admin"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "11",
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-bullhorn",
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

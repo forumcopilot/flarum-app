@@ -125,11 +125,16 @@ class FlarumApi {
   }
 
   /// A page of discussions. [tagSlug] limits it to a tag, [following] to
-  /// discussions the reader follows, and [query] runs a full-text search.
+  /// discussions the reader follows, [unread] to ones with posts the reader
+  /// hasn't read, [sticky] to stickied ones, [author] to those a user started,
+  /// and [query] runs a full-text search.
   Future<FlarumPage<FlarumDiscussion>> discussions({
     DiscussionSort sort = DiscussionSort.latest,
     String? tagSlug,
     bool following = false,
+    bool unread = false,
+    bool sticky = false,
+    String? author,
     String? query,
     int offset = 0,
     int limit = 20,
@@ -137,6 +142,9 @@ class FlarumApi {
     final filters = {
       if (tagSlug != null) 'filter[tag]': tagSlug,
       if (following) 'filter[subscription]': 'following',
+      if (unread) 'filter[unread]': '1',
+      if (sticky) 'filter[sticky]': '1',
+      if (author != null) 'filter[author]': author,
       if (query != null) 'filter[q]': query,
     };
     // Once filter[q] is present, 1.x ignores every other filter key: its search
@@ -145,7 +153,14 @@ class FlarumApi {
     if (query != null && filters.length > 1 && await version() == FlarumVersion.v1) {
       filters
         ..clear()
-        ..['filter[q]'] = [query, if (tagSlug != null) 'tag:$tagSlug', if (following) 'is:following'].join(' ');
+        ..['filter[q]'] = [
+          query,
+          if (tagSlug != null) 'tag:$tagSlug',
+          if (following) 'is:following',
+          if (unread) 'is:unread',
+          if (sticky) 'is:sticky',
+          if (author != null) 'author:$author',
+        ].join(' ');
     }
     final document = await client.get('/discussions', query: {
       ...filters,
@@ -163,6 +178,18 @@ class FlarumApi {
   Future<FlarumDiscussion> discussion(String id) async {
     final document = await client.get('/discussions/$id', query: {'include': _discussionIncludes});
     return FlarumDiscussion.fromResource(document.single, document);
+  }
+
+  /// Records that the reader has read discussion [id] up to post [number].
+  /// Flarum keeps one high-water mark per discussion and never lowers it.
+  Future<void> markDiscussionRead(String id, int number) async {
+    await client.patch('/discussions/$id', {
+      'data': {
+        'type': 'discussions',
+        'id': id,
+        'attributes': {'lastReadPostNumber': number},
+      },
+    });
   }
 
   /// A page of a discussion's posts in number order, through `/posts` (the same

@@ -1,0 +1,190 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions",
+    "query": {
+      "filter[sticky]": "1",
+      "sort": "-lastPostedAt",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "discussions",
+        "id": "2",
+        "links": {
+          "self": "/discussions/2"
+        },
+        "attributes": {
+          "title": "Forum rules",
+          "slug": "2-forum-rules",
+          "commentCount": 1,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "lastPostedAt": "2026-10-08T17:53:48+00:00",
+          "lastPostNumber": 1,
+          "canReply": false,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": true,
+          "canSticky": false,
+          "isLocked": true,
+          "canLock": false,
+          "firstPostExcerpt": "Be kind. Stay on topic. This discussion is sticky and locked."
+        },
+        "relationships": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "2"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "2"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "6"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "tags",
+        "id": "6",
+        "links": {
+          "self": "/tags/6"
+        },
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "icon": "fas fa-bullhorn",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:48+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "2"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "1",
+        "links": {
+          "self": "/users/1"
+        },
+        "attributes": {
+          "username": "admin",
+          "displayName": "admin",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "admin",
+          "joinTime": "2026-10-08T16:06:42+00:00",
+          "discussionCount": 3,
+          "commentCount": 3,
+          "lastSeenAt": "2026-10-08T21:00:56+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 1,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

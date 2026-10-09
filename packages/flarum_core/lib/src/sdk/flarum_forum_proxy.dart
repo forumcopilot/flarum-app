@@ -17,11 +17,7 @@ class FlarumForumProxy implements IFCForumProxy {
 
   FlarumForum get _forum => FlarumForum.of(siteContext);
 
-  /// Whether fof/follow-tags is on, which needs the forum's info (read once).
-  Future<bool> _canFollowTags() async {
-    await _forum.current();
-    return _forum.extensions.followTags;
-  }
+  Future<bool> _canFollowTags() async => (await _forum.currentExtensions()).followTags;
 
   @override
   Future<FCForumDataResult> getForumAsync(bool returnDescription, String forumId, bool forceRefresh) async {

@@ -20,6 +20,18 @@ class FlarumDiscussion {
     this.isLocked = false,
     this.subscription,
     this.canReply = false,
+    this.canRename = false,
+    this.canDelete = false,
+    this.canHide = false,
+    this.canTag = false,
+    this.canLock = false,
+    this.canSticky = false,
+    this.isApproved = true,
+    this.isHidden = false,
+    this.isPrivate = false,
+    this.hasPoll = false,
+    this.hasBestAnswer = false,
+    this.bookmarked = false,
     this.author,
     this.lastPostedUser,
     this.tags = const [],
@@ -44,6 +56,18 @@ class FlarumDiscussion {
       isLocked: a.boolean('isLocked') ?? false,
       subscription: a.nonEmptyString('subscription'),
       canReply: a.boolean('canReply') ?? false,
+      canRename: a.boolean('canRename') ?? false,
+      canDelete: a.boolean('canDelete') ?? false,
+      canHide: a.boolean('canHide') ?? false,
+      canTag: a.boolean('canTag') ?? false,
+      canLock: a.boolean('canLock') ?? false,
+      canSticky: a.boolean('canSticky') ?? false,
+      isApproved: a.boolean('isApproved') ?? true,
+      isHidden: a.boolean('isHidden') ?? false,
+      isPrivate: a.boolean('isPrivateDiscussion') ?? false,
+      hasPoll: a.boolean('hasPoll') ?? false,
+      hasBestAnswer: a.boolean('hasBestAnswer') ?? false,
+      bookmarked: a.boolean('bookmarked') ?? false,
       author: author == null ? null : FlarumUser.fromResource(author),
       lastPostedUser: lastPostedUser == null ? null : FlarumUser.fromResource(lastPostedUser),
       tags: [for (final tag in document.findAll(resource.toMany('tags'))) FlarumTag.fromResource(tag)],
@@ -70,6 +94,32 @@ class FlarumDiscussion {
   /// flarum/subscriptions state for the reader: `follow`, `ignore`, or null.
   final String? subscription;
   final bool canReply;
+  final bool canRename;
+
+  /// Delete for good; [canHide] is the soft delete.
+  final bool canDelete;
+  final bool canHide;
+
+  /// Change its tags, i.e. move it.
+  final bool canTag;
+  final bool canLock;
+  final bool canSticky;
+
+  /// False while flarum/approval holds it for a moderator.
+  final bool isApproved;
+
+  /// Soft-deleted; only moderators see these.
+  final bool isHidden;
+
+  /// A fof/byobu private discussion.
+  final bool isPrivate;
+  final bool hasPoll;
+
+  /// fof/best-answer chose an answer.
+  final bool hasBestAnswer;
+
+  /// fof/bookmarks: the reader bookmarked it.
+  final bool bookmarked;
   final FlarumUser? author;
   final FlarumUser? lastPostedUser;
   final List<FlarumTag> tags;

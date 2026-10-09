@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/access-tokens/87",
+    "path": "/access-tokens/90",
     "query": {},
     "signedIn": true,
     "rememberCookie": false

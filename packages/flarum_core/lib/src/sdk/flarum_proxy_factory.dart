@@ -4,6 +4,7 @@ import 'package:forumcopilot_sdk/interfaces/interfaces.dart';
 
 import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
+import 'flarum_topic_proxy.dart';
 
 /// Flarum's implementations of the SDK proxies, registered under [siteType].
 ///
@@ -25,7 +26,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCForumProxy createForumProxy(SiteContext context) => FlarumForumProxy(context);
   @override
-  IFCTopicProxy createTopicProxy(SiteContext context) => _notYet('topic');
+  IFCTopicProxy createTopicProxy(SiteContext context) => FlarumTopicProxy(context);
   @override
   IFCPostProxy createPostProxy(SiteContext context) => _notYet('post');
   @override

@@ -3,6 +3,7 @@
     "method": "GET",
     "path": "/discussions",
     "query": {
+      "filter[unread]": "1",
       "sort": "-lastPostedAt",
       "page[offset]": "0",
       "page[limit]": "20",
@@ -14,94 +15,6 @@
   "status": 200,
   "body": {
     "data": [
-      {
-        "type": "discussions",
-        "id": "8",
-        "links": {
-          "self": "/discussions/8"
-        },
-        "attributes": {
-          "title": "Formatting samples",
-          "slug": "8-formatting-samples",
-          "commentCount": 15,
-          "participantCount": 1,
-          "createdAt": "2026-10-08T20:06:10+00:00",
-          "lastPostedAt": "2026-10-08T20:06:40+00:00",
-          "lastPostNumber": 15,
-          "canReply": true,
-          "canRename": false,
-          "canDelete": false,
-          "canHide": true,
-          "lastReadAt": "2026-10-08T20:06:40+00:00",
-          "lastReadPostNumber": 15,
-          "canTag": false,
-          "isApproved": true,
-          "subscription": null,
-          "isPrivateDiscussion": false,
-          "canEditRecipients": false,
-          "canEditUserRecipients": false,
-          "canEditGroupRecipients": false,
-          "canMakePublic": false,
-          "canDownloadFiles": false,
-          "canSeeReactions": false,
-          "hasPoll": false,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectBestAnswer": false,
-          "hasBestAnswer": false,
-          "bestAnswerSetAt": null,
-          "isSticky": false,
-          "canSticky": false,
-          "isLocked": false,
-          "canLock": false
-        },
-        "relationships": {
-          "firstPost": {
-            "data": {
-              "type": "posts",
-              "id": "76"
-            }
-          },
-          "lastPost": {
-            "data": {
-              "type": "posts",
-              "id": "90"
-            }
-          },
-          "mostRelevantPost": {
-            "data": null
-          },
-          "hideUser": {
-            "data": null
-          },
-          "bestAnswerPost": {
-            "data": null
-          },
-          "bestAnswerUser": {
-            "data": null
-          },
-          "tags": {
-            "data": [
-              {
-                "type": "tags",
-                "id": "1"
-              }
-            ]
-          },
-          "lastPostedUser": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          }
-        }
-      },
       {
         "type": "discussions",
         "id": "6",
@@ -1128,7 +1041,7 @@
     ],
     "meta": {
       "page": {
-        "total": 8,
+        "total": 7,
         "offset": 0,
         "limit": 20
       }

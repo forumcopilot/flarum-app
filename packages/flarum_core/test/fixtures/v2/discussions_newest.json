@@ -3,7 +3,7 @@
     "method": "GET",
     "path": "/discussions",
     "query": {
-      "sort": "-lastPostedAt",
+      "sort": "-createdAt",
       "page[offset]": "0",
       "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
@@ -98,94 +98,6 @@
             "data": {
               "type": "users",
               "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "discussions",
-        "id": "6",
-        "links": {
-          "self": "/discussions/6"
-        },
-        "attributes": {
-          "title": "Long thread for paging tests",
-          "slug": "6-long-thread-for-paging-tests",
-          "commentCount": 60,
-          "participantCount": 3,
-          "createdAt": "2026-10-08T17:22:51+00:00",
-          "lastPostedAt": "2026-10-08T18:21:51+00:00",
-          "lastPostNumber": 60,
-          "canReply": true,
-          "canRename": false,
-          "canDelete": false,
-          "canHide": false,
-          "lastReadAt": "2026-10-08T17:54:03+00:00",
-          "lastReadPostNumber": 20,
-          "canTag": false,
-          "isApproved": true,
-          "subscription": null,
-          "isPrivateDiscussion": false,
-          "canEditRecipients": false,
-          "canEditUserRecipients": false,
-          "canEditGroupRecipients": false,
-          "canMakePublic": false,
-          "canDownloadFiles": false,
-          "canSeeReactions": false,
-          "hasPoll": false,
-          "canStartPoll": false,
-          "bookmarked": false,
-          "canSelectBestAnswer": false,
-          "hasBestAnswer": false,
-          "bestAnswerSetAt": null,
-          "isSticky": false,
-          "canSticky": false,
-          "isLocked": false,
-          "canLock": false
-        },
-        "relationships": {
-          "firstPost": {
-            "data": {
-              "type": "posts",
-              "id": "13"
-            }
-          },
-          "lastPost": {
-            "data": {
-              "type": "posts",
-              "id": "72"
-            }
-          },
-          "mostRelevantPost": {
-            "data": null
-          },
-          "hideUser": {
-            "data": null
-          },
-          "bestAnswerPost": {
-            "data": null
-          },
-          "bestAnswerUser": {
-            "data": null
-          },
-          "tags": {
-            "data": [
-              {
-                "type": "tags",
-                "id": "1"
-              }
-            ]
-          },
-          "lastPostedUser": {
-            "data": {
-              "type": "users",
-              "id": "2"
-            }
-          },
-          "user": {
-            "data": {
-              "type": "users",
-              "id": "3"
             }
           }
         }
@@ -638,6 +550,94 @@
       },
       {
         "type": "discussions",
+        "id": "6",
+        "links": {
+          "self": "/discussions/6"
+        },
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "6-long-thread-for-paging-tests",
+          "commentCount": 60,
+          "participantCount": 3,
+          "createdAt": "2026-10-08T17:22:51+00:00",
+          "lastPostedAt": "2026-10-08T18:21:51+00:00",
+          "lastPostNumber": 60,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:54:03+00:00",
+          "lastReadPostNumber": 20,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "72"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "discussions",
         "id": "1",
         "links": {
           "self": "/discussions/1"
@@ -754,43 +754,6 @@
       },
       {
         "type": "tags",
-        "id": "6",
-        "links": {
-          "self": "/tags/6"
-        },
-        "attributes": {
-          "name": "Announcements",
-          "description": "Announcements discussions",
-          "slug": "announcements",
-          "color": "#c0392b",
-          "icon": "fas fa-bullhorn",
-          "isHidden": false,
-          "isPrimary": true,
-          "discussionCount": 1,
-          "position": 3,
-          "defaultSort": null,
-          "isChild": false,
-          "lastPostedAt": "2026-10-08T17:53:48+00:00",
-          "canStartDiscussion": true,
-          "canAddToDiscussion": true,
-          "subscription": null,
-          "isQnA": false,
-          "reminders": false
-        },
-        "relationships": {
-          "parent": {
-            "data": null
-          },
-          "lastPostedDiscussion": {
-            "data": {
-              "type": "discussions",
-              "id": "2"
-            }
-          }
-        }
-      },
-      {
-        "type": "tags",
         "id": "1",
         "links": {
           "self": "/tags/1"
@@ -822,6 +785,121 @@
             "data": {
               "type": "discussions",
               "id": "8"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "2",
+        "links": {
+          "self": "/users/2"
+        },
+        "attributes": {
+          "username": "alice",
+          "email": "alice@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "alice",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 38,
+          "lastSeenAt": "2026-10-09T15:35:47+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 1,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-08T20:12:03+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "tags",
+        "id": "6",
+        "links": {
+          "self": "/tags/6"
+        },
+        "attributes": {
+          "name": "Announcements",
+          "description": "Announcements discussions",
+          "slug": "announcements",
+          "color": "#c0392b",
+          "icon": "fas fa-bullhorn",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 1,
+          "position": 3,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-08T17:53:48+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "2"
             }
           }
         }
@@ -974,51 +1052,6 @@
         }
       },
       {
-        "type": "users",
-        "id": "2",
-        "links": {
-          "self": "/users/2"
-        },
-        "attributes": {
-          "username": "alice",
-          "email": "alice@flarumapp.local",
-          "isEmailConfirmed": true,
-          "displayName": "alice",
-          "avatarUrl": null,
-          "avatarSrcset": null,
-          "hasUploadedAvatar": false,
-          "slug": "alice",
-          "joinTime": "2026-10-08T17:53:46+00:00",
-          "discussionCount": 2,
-          "commentCount": 38,
-          "lastSeenAt": "2026-10-09T15:35:47+00:00",
-          "canEdit": false,
-          "canEditCredentials": false,
-          "canEditGroups": false,
-          "canDelete": false,
-          "newFlagCount": 0,
-          "canSuspend": false,
-          "suspendMessage": null,
-          "suspendedUntil": null,
-          "canModerateExports": true,
-          "canMentionGroups": false,
-          "blocksPd": false,
-          "ignored": false,
-          "canBeIgnored": false,
-          "bestAnswerCount": 0,
-          "canEditNickname": true,
-          "canSendAnyMessage": true,
-          "canDeleteOwnMessages": null,
-          "messageCount": 1,
-          "fof-upload-uploadCountCurrent": 3,
-          "fof-upload-uploadCountAll": 3,
-          "fofTermsPoliciesState": [],
-          "fofTermsPoliciesHasUpdate": false,
-          "fofTermsPoliciesMustAccept": false,
-          "draftCount": 0
-        }
-      },
-      {
         "type": "tags",
         "id": "5",
         "links": {
@@ -1090,39 +1123,6 @@
               "id": "5"
             }
           }
-        }
-      },
-      {
-        "type": "users",
-        "id": "3",
-        "links": {
-          "self": "/users/3"
-        },
-        "attributes": {
-          "username": "bob",
-          "displayName": "bob",
-          "avatarUrl": null,
-          "avatarSrcset": null,
-          "hasUploadedAvatar": false,
-          "slug": "bob",
-          "joinTime": "2026-10-08T17:53:46+00:00",
-          "discussionCount": 2,
-          "commentCount": 23,
-          "lastSeenAt": "2026-10-08T20:12:03+00:00",
-          "canEdit": false,
-          "canEditCredentials": false,
-          "canEditGroups": false,
-          "canDelete": false,
-          "canSuspend": false,
-          "canModerateExports": false,
-          "blocksPd": false,
-          "ignored": false,
-          "canBeIgnored": true,
-          "bestAnswerCount": 0,
-          "canEditNickname": false,
-          "canSendAnyMessage": true,
-          "fof-upload-uploadCountCurrent": 0,
-          "fof-upload-uploadCountAll": 0
         }
       }
     ],

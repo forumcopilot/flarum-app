@@ -6,7 +6,13 @@ Guidance for Claude Code sessions working in this repository.
 
 flarum-app is a Flutter client for Flarum forums, the Flarum counterpart of discourse-app. The plan
 (phases, decisions, scope) is the "Flarum App Plan": https://claude.ai/artifact/W61kE9VGWeUbHWxMycWedL.
-Current phase: **0 (spike)**. Only `packages/flarum_core` exists.
+Current phase: **2** (flarum_core on the SDK, flarum_ui). Phase 0 findings: docs/phase-0-notes.md.
+
+UI building blocks come from `forum_kit` (theme, shared widgets, caches, emoji, its own strings),
+which lives in discourse-app's `packages/forum_kit` and is shared with it. Only generic code goes
+there. The post renderer, composer and screens are flarum-app's own: copy them from discourse_ui
+and adapt them in `flarum_ui`, rather than sharing them through hooks (decided 9 Oct 2026;
+docs/phase-1-notes.md).
 
 Flarum 1.8 and 2.0 are both fully supported. Design for 2.0 and keep 1.x differences in clearly
 marked places so 1.x can be dropped later. The app needs no plugin on the forum.

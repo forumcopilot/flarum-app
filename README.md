@@ -13,7 +13,7 @@ app itself, `flarum_ui` and the shared `forum_kit` come in later phases.
   discussions, posts, users, notifications. Plain Dart for now.
 - `tool/test_forums/`: seeds the local Flarum 1.8 and 2.0 forums the tests are recorded from.
 - `tool/spikes/`: one-off experiments, such as rendering Flarum HTML with discourse-app's renderer.
-- `docs/phase-0-notes.md`: what the Phase 0 spike found.
+- `docs/phase-0-notes.md`, `docs/phase-1-notes.md`: what each phase found and decided.
 
 ## Development
 

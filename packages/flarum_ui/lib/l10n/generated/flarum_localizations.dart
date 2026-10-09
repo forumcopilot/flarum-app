@@ -685,6 +685,24 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'No posts yet.'**
   String get noPostsYet;
+
+  /// Search page: snackbar when a search fails, with the reason
+  ///
+  /// In en, this message translates to:
+  /// **'Search failed: {error}'**
+  String searchFailedWithError(String error);
+
+  /// Hint in the search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search discussions and posts'**
+  String get searchHint;
+
+  /// Search with no results
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found for “{query}”.'**
+  String noResultsFor(String query);
 }
 
 class _FlarumLocalizationsDelegate

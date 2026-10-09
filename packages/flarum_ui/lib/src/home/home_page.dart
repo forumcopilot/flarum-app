@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import 'discussion_list_model.dart';
+import '../search/search_page.dart';
 import 'discussion_list_view.dart';
 
 /// The forum's discussions, in the web's views: Latest, Top, Newest, and
@@ -75,6 +76,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_forum.info?.title ?? widget.title ?? ''),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: l10n.search,
+            onPressed: () => SearchPage.open(context, widget.site),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: FilterChipBar(

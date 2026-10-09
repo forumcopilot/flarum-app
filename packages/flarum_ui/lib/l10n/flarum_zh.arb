@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "无法将通知标记为已读",
   "noNotificationsYet": "还没有通知",
   "posts": "帖子",
-  "profileJoined": "{date} 加入"
+  "profileJoined": "{date} 加入",
+  "searchFailedWithError": "搜索失败：{error}"
 }

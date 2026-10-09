@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "Não foi possível marcar as notificações como lidas",
   "noNotificationsYet": "Nenhuma notificação ainda",
   "posts": "Publicações",
-  "profileJoined": "Entrou em {date}"
+  "profileJoined": "Entrou em {date}",
+  "searchFailedWithError": "Busca falhou: {error}"
 }

@@ -394,4 +394,17 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get noPostsYet => 'No posts yet.';
+
+  @override
+  String searchFailedWithError(String error) {
+    return 'Search failed: $error';
+  }
+
+  @override
+  String get searchHint => 'Search discussions and posts';
+
+  @override
+  String noResultsFor(String query) {
+    return 'Nothing found for “$query”.';
+  }
 }

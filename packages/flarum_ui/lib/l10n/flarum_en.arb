@@ -602,5 +602,27 @@
   "noPostsYet": "No posts yet.",
   "@noPostsYet": {
     "description": "Empty list on a profile"
+  },
+  "searchFailedWithError": "Search failed: {error}",
+  "@searchFailedWithError": {
+    "description": "Search page: snackbar when a search fails, with the reason",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchHint": "Search discussions and posts",
+  "@searchHint": {
+    "description": "Hint in the search field"
+  },
+  "noResultsFor": "Nothing found for “{query}”.",
+  "@noResultsFor": {
+    "description": "Search with no results",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
   }
 }

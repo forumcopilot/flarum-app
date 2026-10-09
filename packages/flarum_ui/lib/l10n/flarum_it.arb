@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "Impossibile segnare le notifiche come lette",
   "noNotificationsYet": "Ancora nessuna notifica",
   "posts": "Post",
-  "profileJoined": "Iscritto da {date}"
+  "profileJoined": "Iscritto da {date}",
+  "searchFailedWithError": "Ricerca fallita: {error}"
 }

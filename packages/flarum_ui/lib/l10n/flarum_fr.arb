@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "Impossible de marquer les notifications comme lues",
   "noNotificationsYet": "Aucune notification pour l'instant",
   "posts": "Messages",
-  "profileJoined": "Inscrit en {date}"
+  "profileJoined": "Inscrit en {date}",
+  "searchFailedWithError": "Recherche échouée : {error}"
 }

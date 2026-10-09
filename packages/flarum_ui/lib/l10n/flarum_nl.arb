@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "Meldingen markeren als gelezen mislukt",
   "noNotificationsYet": "Nog geen meldingen",
   "posts": "Berichten",
-  "profileJoined": "Lid sinds {date}"
+  "profileJoined": "Lid sinds {date}",
+  "searchFailedWithError": "Zoeken mislukt: {error}"
 }

@@ -42,5 +42,6 @@
   "failedToMarkNotificationsRead": "No se pudieron marcar las notificaciones como leídas",
   "noNotificationsYet": "Aún no hay notificaciones",
   "posts": "Publicaciones",
-  "profileJoined": "Se unió en {date}"
+  "profileJoined": "Se unió en {date}",
+  "searchFailedWithError": "Búsqueda fallida: {error}"
 }

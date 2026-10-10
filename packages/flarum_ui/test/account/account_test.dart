@@ -77,7 +77,7 @@ void main() {
       );
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
       expect(find.text('Sign in'), findsOneWidget);
-      expect(find.text('Create account'), findsOneWidget);
+      expect(find.text('Create account'), findsNothing, reason: 'the test forums take no sign-ups');
     });
   }
 

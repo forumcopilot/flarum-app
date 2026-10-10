@@ -66,11 +66,14 @@ class _AccountPageState extends State<AccountPage> {
             Text(l10n.signInHint, style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
             const SizedBox(height: DesignTokens.spacingXL),
             FilledButton(onPressed: _signIn, child: Text(l10n.signIn)),
-            const SizedBox(height: DesignTokens.spacingS),
-            OutlinedButton(
-              onPressed: () => openExternally(widget.site.site.url),
-              child: Text(l10n.createAccount),
-            ),
+            // Sign-up happens on the forum's page, when the forum takes new members.
+            if (_forum.info?.allowSignUp ?? false) ...[
+              const SizedBox(height: DesignTokens.spacingS),
+              OutlinedButton(
+                onPressed: () => openExternally(widget.site.site.url),
+                child: Text(l10n.createAccount),
+              ),
+            ],
           ] else ...[
             Center(child: UserAvatar(username: reader.username, iconUrl: reader.avatarUrl, radius: 40)),
             const SizedBox(height: DesignTokens.spacingM),

@@ -32,7 +32,8 @@ void main() {
         expect(config.getForum, isTrue);
         expect(config.updateProfile, isTrue);
         expect(config.searchUser, isTrue);
-        expect(config.regUrl, FixtureForum.baseUrl);
+        // Both test forums are closed to sign-ups, so there's no page to register on.
+        expect(config.regUrl, isEmpty);
         expect(config.markForum, isFalse);
         expect(config.markPmUnread, isFalse);
       });

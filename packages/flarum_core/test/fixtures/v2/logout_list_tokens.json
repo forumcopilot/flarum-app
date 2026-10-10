@@ -133,14 +133,14 @@
       },
       {
         "type": "access-tokens",
-        "id": "177",
+        "id": "180",
         "links": {
-          "self": "/access-tokens/177"
+          "self": "/access-tokens/180"
         },
         "attributes": {
           "userId": 4,
-          "createdAt": "2026-10-10T17:49:30+00:00",
-          "lastActivityAt": "2026-10-10T17:49:30+00:00",
+          "createdAt": "2026-10-10T18:31:10+00:00",
+          "lastActivityAt": "2026-10-10T18:31:10+00:00",
           "isCurrent": true,
           "isSessionToken": true,
           "title": null,

@@ -76,6 +76,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
         expect(find.text('Following'), findsOneWidget, reason: 'signed in');
+        expect(find.byIcon(Icons.mail_outline), findsOneWidget, reason: 'the byobu discussion is marked private');
 
         await tester.tap(find.text('Long thread for paging tests'));
         await _pumpUntil(tester, find.text('Post 21 of 60.'));

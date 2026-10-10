@@ -701,5 +701,48 @@
         "type": "int"
       }
     }
+  },
+  "eventTagsAdded": "{user} added {tags}.",
+  "@eventTagsAdded": {
+    "description": "Event post: tags added to the discussion; {tags} is the tag names, e.g. 'Support, iOS'",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "tags": {
+        "type": "String"
+      }
+    }
+  },
+  "eventTagsRemoved": "{user} removed {tags}.",
+  "@eventTagsRemoved": {
+    "description": "Event post: tags removed from the discussion",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "tags": {
+        "type": "String"
+      }
+    }
+  },
+  "eventTagsMoved": "{user} added {added} and removed {removed}.",
+  "@eventTagsMoved": {
+    "description": "Event post: tags added and others removed",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "added": {
+        "type": "String"
+      },
+      "removed": {
+        "type": "String"
+      }
+    }
+  },
+  "privateDiscussion": "Private discussion",
+  "@privateDiscussion": {
+    "description": "Label for a private discussion (fof/byobu) in a list"
   }
 }

@@ -12,6 +12,7 @@ import '../navigation/forum_links.dart';
 import '../render/flarum_html.dart';
 import '../render/links.dart';
 import '../profile/user_page.dart';
+import '../tags/tag_label.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
 
@@ -65,12 +66,21 @@ class _ThreadPageState extends State<ThreadPage> {
   int _generation = 0;
   int? _near;
 
+  /// The forum's tags by id, to name the tags in retag events.
+  Map<String, FlarumTag>? _tags;
+
   @override
   void initState() {
     super.initState();
     _near = widget.near;
     _positions.itemPositions.addListener(_scrolled);
     _model.open(near: _near);
+    FlarumForum.of(widget.site).tags().then(
+      (tags) {
+        if (mounted) setState(() => _tags = {for (final tag in tags) tag.id: tag});
+      },
+      onError: (_) {},
+    );
   }
 
   @override
@@ -86,7 +96,11 @@ class _ThreadPageState extends State<ThreadPage> {
     if (mounted) setState(() {});
   }
 
-  int get _leading => _model.hasPrevious ? 1 : 0;
+  /// The discussion's tags head the thread while it starts at its first post.
+  bool get _header => !_model.hasPrevious && (_model.discussion?.tags.isNotEmpty ?? false);
+
+  /// Rows before the first post: "Load earlier posts", or the tags header.
+  int get _leading => _model.hasPrevious || _header ? 1 : 0;
   int get _rowCount => _leading + _model.posts.length + 1;
 
   void _scrolled() {
@@ -205,6 +219,17 @@ class _ThreadPageState extends State<ThreadPage> {
   }
 
   Widget _row(BuildContext context, int row, FlarumLocalizations l10n) {
+    if (_header && row == 0) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(
+            DesignTokens.spacingL, DesignTokens.spacingM, DesignTokens.spacingL, DesignTokens.spacingS),
+        child: Wrap(
+          spacing: DesignTokens.spacingS,
+          runSpacing: DesignTokens.spacingXS,
+          children: [for (final tag in tagsInWebOrder(_model.discussion!.tags)) TagLabel(tag: tag)],
+        ),
+      );
+    }
     if (_model.hasPrevious && row == 0) {
       return Padding(
         padding: const EdgeInsets.all(DesignTokens.spacingS),
@@ -229,6 +254,7 @@ class _ThreadPageState extends State<ThreadPage> {
         callbacks: _callbacksFor(post),
         onAuthorTap: (author) => _openUser(author.username),
         onOpenReply: _openReply,
+        tags: _tags,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.

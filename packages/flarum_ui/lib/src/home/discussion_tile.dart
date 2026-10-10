@@ -49,6 +49,7 @@ class DiscussionTile extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(children: [
+                      if (d.isPrivate) _glyph(Icons.mail_outline, muted, label: l10n.privateDiscussion),
                       if (d.isSticky) _glyph(Icons.push_pin, muted),
                       if (d.isLocked) _glyph(Icons.lock, muted),
                       TextSpan(text: d.title),
@@ -66,7 +67,7 @@ class DiscussionTile extends StatelessWidget {
                     runSpacing: DesignTokens.spacingXS,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      for (final tag in _shownTags(d.tags)) TagLabel(tag: tag),
+                      for (final tag in tagsInWebOrder(d.tags)) TagLabel(tag: tag),
                       Text(meta, style: theme.textTheme.bodySmall?.copyWith(color: muted)),
                     ],
                   ),
@@ -81,18 +82,13 @@ class DiscussionTile extends StatelessWidget {
     );
   }
 
-  static InlineSpan _glyph(IconData icon, Color color) => WidgetSpan(
+  static InlineSpan _glyph(IconData icon, Color color, {String? label}) => WidgetSpan(
         alignment: PlaceholderAlignment.middle,
-        child: Padding(padding: const EdgeInsets.only(right: 4), child: Icon(icon, size: 16, color: color)),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 4),
+          child: Icon(icon, size: 16, color: color, semanticLabel: label),
+        ),
       );
-
-  /// The tags as the web lists them on a row: the primary ones, a child after
-  /// its parent, then the secondary ones.
-  static List<FlarumTag> _shownTags(List<FlarumTag> tags) => [
-        ...tags.where((t) => t.isPrimary && !t.isChild),
-        ...tags.where((t) => t.isPrimary && t.isChild),
-        ...tags.where((t) => !t.isPrimary),
-      ];
 }
 
 /// The replies count, or the unread count, highlighted, while there are some.

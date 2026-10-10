@@ -111,6 +111,8 @@ void main() {
         expect(find.text('Welcome to the test forum'), findsOneWidget, reason: 'the title');
         expect(find.byType(FlarumContent), findsWidgets);
         expect(find.text('admin'), findsWidgets);
+        expect(find.descendant(of: find.byType(TagLabel), matching: find.text('General')), findsOneWidget,
+            reason: 'the tags head the thread');
         await _close(tester);
       });
 
@@ -190,6 +192,17 @@ void main() {
     expect(EventPostNotice.describe(event('discussionStickied', {'sticky': true}), l10n).$2,
         'Alice stickied the discussion.');
     expect(EventPostNotice.describe(event('discussionMerged', null), l10n).$2, 'Alice changed the discussion.');
+    final tags = {
+      '1': const FlarumTag(id: '1', name: 'General', slug: 'general', isPrimary: true),
+      '3': const FlarumTag(id: '3', name: 'Support', slug: 'support', isPrimary: true),
+      '4': const FlarumTag(id: '4', name: 'iOS', slug: 'ios', isPrimary: true),
+    };
+    expect(EventPostNotice.describe(event('discussionTagged', [[1], [1, 4]]), l10n, tags: tags).$2, 'Alice added iOS.');
+    expect(EventPostNotice.describe(event('discussionTagged', [[1, 4], [1]]), l10n, tags: tags).$2, 'Alice removed iOS.');
+    expect(EventPostNotice.describe(event('discussionTagged', [[1], [3]]), l10n, tags: tags).$2,
+        'Alice added Support and removed General.');
+    expect(EventPostNotice.describe(event('discussionTagged', [[1], [3]]), l10n).$2, 'Alice changed the tags.',
+        reason: 'without the tag list');
   });
 
   test('replies are worded as the web words them', () {

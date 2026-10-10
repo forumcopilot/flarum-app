@@ -13,7 +13,8 @@ import '../render/flarum_html.dart';
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
 class PostTile extends StatelessWidget {
-  const PostTile({super.key, required this.site, required this.post, this.callbacks, this.onAuthorTap, this.onOpenReply});
+  const PostTile(
+      {super.key, required this.site, required this.post, this.callbacks, this.onAuthorTap, this.onOpenReply, this.tags});
 
   final SiteContext site;
   final FlarumPost post;
@@ -25,9 +26,12 @@ class PostTile extends StatelessWidget {
   /// One of the replies to the post was chosen (from "… replied to this").
   final void Function(FlarumPostReply reply)? onOpenReply;
 
+  /// The forum's tags by id, to name the tags in a retag event.
+  final Map<String, FlarumTag>? tags;
+
   @override
   Widget build(BuildContext context) =>
-      post.isComment ? _comment(context) : EventPostNotice(post: post);
+      post.isComment ? _comment(context) : EventPostNotice(post: post, tags: tags);
 
   Widget _comment(BuildContext context) {
     final theme = Theme.of(context);
@@ -185,15 +189,18 @@ class _Count extends StatelessWidget {
 
 /// An event post as the web's one-line notice: who did what, and when.
 class EventPostNotice extends StatelessWidget {
-  const EventPostNotice({super.key, required this.post});
+  const EventPostNotice({super.key, required this.post, this.tags});
 
   final FlarumPost post;
+
+  /// The forum's tags by id, to name the tags in a retag event.
+  final Map<String, FlarumTag>? tags;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final color = theme.colorScheme.onSurfaceVariant;
-    final (icon, text) = describe(post, flarumL10n(context));
+    final (icon, text) = describe(post, flarumL10n(context), tags: tags);
     final created = post.createdAt;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL, vertical: DesignTokens.spacingM),
@@ -218,7 +225,7 @@ class EventPostNotice extends StatelessWidget {
 
   /// The notice for [post]'s event: Flarum's own types, and a neutral line
   /// for an extension's.
-  static (IconData, String) describe(FlarumPost post, FlarumLocalizations l10n) {
+  static (IconData, String) describe(FlarumPost post, FlarumLocalizations l10n, {Map<String, FlarumTag>? tags}) {
     final user = post.author?.displayName ?? l10n.someone;
     final content = post.content;
     switch (post.contentType) {
@@ -233,6 +240,20 @@ class EventPostNotice extends StatelessWidget {
         final sticky = content is Map && content['sticky'] == true;
         return (Icons.push_pin_outlined, sticky ? l10n.eventStickied(user) : l10n.eventUnstickied(user));
       case 'discussionTagged':
+        // [[old tag ids], [new tag ids]]
+        if (tags != null && content is List && content.length == 2 && content[0] is List && content[1] is List) {
+          final before = {for (final id in content[0] as List) '$id'};
+          final after = {for (final id in content[1] as List) '$id'};
+          String names(Iterable<String> ids) =>
+              [for (final id in ids) tags[id]?.name].nonNulls.join(', ');
+          final added = names(after.difference(before));
+          final removed = names(before.difference(after));
+          if (added.isNotEmpty && removed.isNotEmpty) {
+            return (Icons.sell_outlined, l10n.eventTagsMoved(user, added, removed));
+          }
+          if (added.isNotEmpty) return (Icons.sell_outlined, l10n.eventTagsAdded(user, added));
+          if (removed.isNotEmpty) return (Icons.sell_outlined, l10n.eventTagsRemoved(user, removed));
+        }
         return (Icons.sell_outlined, l10n.eventTagged(user));
     }
     return (Icons.info_outline, l10n.eventOther(user));

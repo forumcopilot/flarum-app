@@ -456,4 +456,22 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     );
     return '$a and $_temp0 replied to this.';
   }
+
+  @override
+  String eventTagsAdded(String user, String tags) {
+    return '$user added $tags.';
+  }
+
+  @override
+  String eventTagsRemoved(String user, String tags) {
+    return '$user removed $tags.';
+  }
+
+  @override
+  String eventTagsMoved(String user, String added, String removed) {
+    return '$user added $added and removed $removed.';
+  }
+
+  @override
+  String get privateDiscussion => 'Private discussion';
 }

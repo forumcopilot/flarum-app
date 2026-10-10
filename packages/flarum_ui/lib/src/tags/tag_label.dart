@@ -12,6 +12,14 @@ IconData? flarumTagIcon(String? icon) {
   return materialIconForDiscourseIcon(name);
 }
 
+/// [tags] as the web lists them on a discussion: the primary ones, a child
+/// after its parent, then the secondary ones.
+List<FlarumTag> tagsInWebOrder(List<FlarumTag> tags) => [
+      ...tags.where((t) => t.isPrimary && !t.isChild),
+      ...tags.where((t) => t.isPrimary && t.isChild),
+      ...tags.where((t) => !t.isPrimary),
+    ];
+
 /// A tag's colour, or null when it has none (or an unreadable one).
 Color? flarumTagColor(FlarumTag tag) {
   final hex = tag.color?.trim();

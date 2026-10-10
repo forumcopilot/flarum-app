@@ -763,6 +763,30 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'{a} and {others, plural, =1{1 other} other{{others} others}} replied to this.'**
   String repliedByOneMore(String a, int others);
+
+  /// Event post: tags added to the discussion; {tags} is the tag names, e.g. 'Support, iOS'
+  ///
+  /// In en, this message translates to:
+  /// **'{user} added {tags}.'**
+  String eventTagsAdded(String user, String tags);
+
+  /// Event post: tags removed from the discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} removed {tags}.'**
+  String eventTagsRemoved(String user, String tags);
+
+  /// Event post: tags added and others removed
+  ///
+  /// In en, this message translates to:
+  /// **'{user} added {added} and removed {removed}.'**
+  String eventTagsMoved(String user, String added, String removed);
+
+  /// Label for a private discussion (fof/byobu) in a list
+  ///
+  /// In en, this message translates to:
+  /// **'Private discussion'**
+  String get privateDiscussion;
 }
 
 class _FlarumLocalizationsDelegate

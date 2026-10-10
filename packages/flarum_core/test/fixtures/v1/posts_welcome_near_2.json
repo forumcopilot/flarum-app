@@ -6,7 +6,7 @@
       "filter[discussion]": "5",
       "page[near]": "2",
       "page[limit]": "20",
-      "include": "user"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -14,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=5&page%5Bnear%5D=2&page%5Blimit%5D=20&include=user"
+      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=5&page%5Bnear%5D=2&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
     },
     "data": [
       {
@@ -56,6 +56,15 @@
               "type": "users",
               "id": "1"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -98,6 +107,28 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "mentionedBy": {
+            "data": [
+              {
+                "type": "posts",
+                "id": "14"
+              },
+              {
+                "type": "posts",
+                "id": "91"
+              },
+              {
+                "type": "posts",
+                "id": "92"
+              }
+            ]
           }
         }
       },
@@ -140,6 +171,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -182,6 +222,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       }
@@ -229,7 +278,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T17:47:40+00:00",
+          "lastSeenAt": "2026-10-10T08:19:46+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -263,7 +312,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T20:12:00+00:00",
+          "lastSeenAt": "2026-10-09T18:24:39+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -290,7 +339,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T17:47:47+00:00",
+          "lastSeenAt": "2026-10-10T08:13:58+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -300,6 +349,106 @@
           "canBeIgnored": true,
           "bestAnswerCount": 0,
           "canEditNickname": false
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "5",
+        "attributes": {
+          "title": "Welcome to the test forum",
+          "slug": "5-welcome-to-the-test-forum",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "11",
+        "attributes": {
+          "title": "Formatting samples",
+          "slug": "11-formatting-samples",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
+        "type": "posts",
+        "id": "14",
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-08T17:52:28+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p><a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a> Welcome! I'll take the iOS side.</p>",
+          "renderFailed": false,
+          "mentionedByCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "5"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "91",
+        "attributes": {
+          "number": 7,
+          "createdAt": "2026-10-08T20:06:08+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Hello <a href=\"http://127.0.0.1:8081/u/bob\" class=\"UserMention\">@bob</a>, and the @“Mods”#g4 group. Replying to <a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a>.</p>",
+          "renderFailed": false,
+          "mentionedByCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "11"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "92",
+        "attributes": {
+          "number": 8,
+          "createdAt": "2026-10-08T20:06:08+00:00",
+          "contentType": "comment",
+          "contentHtml": "<blockquote class=\"uncited\"><div><p><a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a> Hi all! Looking forward to testing</p></div></blockquote>\n\n<p>Quoting the welcome reply, as the web’s Quote button does.</p>",
+          "renderFailed": false,
+          "mentionedByCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "5"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "11"
+            }
+          }
         }
       }
     ]

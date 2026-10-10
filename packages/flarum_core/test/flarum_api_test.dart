@@ -114,6 +114,15 @@ void main() {
           expect(forum.requests.last.queryParameters['page[offset]'], '50');
         });
 
+        test('a post lists the replies to it, with their authors', () async {
+          final page = await api.posts(forum.discussionId('welcome'));
+          final second = page.items.singleWhere((p) => p.number == 2);
+          expect(second.mentionedByCount, greaterThanOrEqualTo(1));
+          final fromBob = second.mentionedBy.firstWhere((r) => r.author?.username == 'bob');
+          expect(fromBob.number, 3);
+          expect(fromBob.discussionId, forum.discussionId('welcome'));
+        });
+
         test('a discussion lists its post ids in order, which line up with the offsets', () async {
           final id = forum.discussionId('long');
           final discussion = await api.discussion(id, withPostIds: true);

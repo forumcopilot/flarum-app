@@ -640,5 +640,66 @@
   "appearanceSystem": "System default",
   "@appearanceSystem": {
     "description": "Appearance option that follows the device's light/dark setting"
+  },
+  "repliedByOne": "{a} replied to this.",
+  "@repliedByOne": {
+    "description": "Under a post: who replied to (mentioned) it",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "repliedByTwo": "{a} and {b} replied to this.",
+  "@repliedByTwo": {
+    "description": "Under a post: the two people who replied to it",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "repliedByMore": "{a}, {b} and {others, plural, =1{1 other} other{{others} others}} replied to this.",
+  "@repliedByMore": {
+    "description": "Under a post: two of the people who replied, and how many more replies",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "others": {
+        "type": "int"
+      }
+    }
+  },
+  "repliesTitle": "Replies",
+  "@repliesTitle": {
+    "description": "Title of the sheet listing the replies to a post"
+  },
+  "postNumber": "Post #{number}",
+  "@postNumber": {
+    "description": "A post by its number in the discussion",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "repliedByOneMore": "{a} and {others, plural, =1{1 other} other{{others} others}} replied to this.",
+  "@repliedByOneMore": {
+    "description": "Under a post: one person who replied, and how many more replies",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "others": {
+        "type": "int"
+      }
+    }
   }
 }

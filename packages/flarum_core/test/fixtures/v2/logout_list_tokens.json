@@ -82,14 +82,65 @@
       },
       {
         "type": "access-tokens",
-        "id": "108",
+        "id": "110",
         "links": {
-          "self": "/access-tokens/108"
+          "self": "/access-tokens/110"
         },
         "attributes": {
           "userId": 4,
-          "createdAt": "2026-10-09T17:50:36+00:00",
-          "lastActivityAt": "2026-10-09T17:50:36+00:00",
+          "createdAt": "2026-10-09T18:57:12+00:00",
+          "lastActivityAt": "2026-10-09T18:57:12+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "113",
+        "links": {
+          "self": "/access-tokens/113"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-09T18:57:56+00:00",
+          "lastActivityAt": "2026-10-09T18:57:56+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "114",
+        "links": {
+          "self": "/access-tokens/114"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-09T18:59:10+00:00",
+          "lastActivityAt": "2026-10-09T18:59:10+00:00",
+          "isCurrent": false,
+          "isSessionToken": true,
+          "title": null,
+          "lastIpAddress": "127.0.0.1",
+          "device": " on "
+        }
+      },
+      {
+        "type": "access-tokens",
+        "id": "120",
+        "links": {
+          "self": "/access-tokens/120"
+        },
+        "attributes": {
+          "userId": 4,
+          "createdAt": "2026-10-10T08:20:11+00:00",
+          "lastActivityAt": "2026-10-10T08:20:11+00:00",
           "isCurrent": true,
           "isSessionToken": true,
           "title": null,
@@ -101,7 +152,7 @@
     "included": [],
     "meta": {
       "page": {
-        "total": 5,
+        "total": 8,
         "offset": 0,
         "limit": 50
       }

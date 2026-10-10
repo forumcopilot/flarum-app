@@ -28,6 +28,7 @@ class FlarumPost {
     this.bookmarked = false,
     this.mentionedByCount = 0,
     this.canSelectAsBestAnswer = false,
+    this.mentionedBy = const [],
   });
 
   /// [discussion] stands in for the post's own `discussion` relationship when a
@@ -59,6 +60,9 @@ class FlarumPost {
       bookmarked: a.boolean('bookmarked') ?? false,
       mentionedByCount: a.integer('mentionedByCount') ?? 0,
       canSelectAsBestAnswer: a.boolean('canSelectAsBestAnswer') ?? false,
+      mentionedBy: [
+        for (final ref in resource.toMany('mentionedBy')) FlarumPostReply.from(ref, document),
+      ],
     );
   }
 
@@ -103,7 +107,37 @@ class FlarumPost {
 
   /// How many later posts reply to it (flarum/mentions).
   final int mentionedByCount;
+
+  /// The replies, when the request included `mentionedBy` (the posts pages
+  /// do): who replied, and where. 2.0 sends at most a handful; the full
+  /// number is [mentionedByCount].
+  final List<FlarumPostReply> mentionedBy;
   final bool canSelectAsBestAnswer;
 
   bool get isComment => contentType == 'comment';
+}
+
+/// A post that replies to (mentions) another: enough to name its author and
+/// open it. It can be in another discussion (a quote of the post elsewhere).
+class FlarumPostReply {
+  const FlarumPostReply({required this.id, this.number, this.discussionId, this.discussionTitle, this.author});
+
+  factory FlarumPostReply.from(ResourceId ref, JsonApiDocument document) {
+    final post = document.find(ref);
+    final author = document.find(post?.toOne('user'));
+    final discussion = document.find(post?.toOne('discussion'));
+    return FlarumPostReply(
+      id: ref.id,
+      number: post?.attributes.integer('number'),
+      discussionId: post?.toOne('discussion')?.id,
+      discussionTitle: discussion?.attributes.string('title'),
+      author: author == null ? null : FlarumUser.fromResource(author),
+    );
+  }
+
+  final String id;
+  final int? number;
+  final String? discussionId;
+  final String? discussionTitle;
+  final FlarumUser? author;
 }

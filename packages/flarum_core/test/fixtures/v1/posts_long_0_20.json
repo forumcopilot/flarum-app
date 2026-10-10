@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -15,8 +15,8 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=20&include=user",
-      "next": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user"
+      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion",
+      "next": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
     },
     "data": [
       {
@@ -58,6 +58,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -100,6 +109,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -142,6 +160,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -184,6 +211,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -226,6 +262,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -268,6 +313,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -310,6 +364,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -352,6 +415,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -394,6 +466,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -436,6 +517,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -478,6 +568,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -520,6 +619,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -562,6 +670,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -604,6 +721,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -646,6 +772,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -688,6 +823,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -730,6 +874,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -772,6 +925,15 @@
               "type": "users",
               "id": "5"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -814,6 +976,15 @@
               "type": "users",
               "id": "6"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       },
@@ -856,6 +1027,15 @@
               "type": "users",
               "id": "7"
             }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "mentionedBy": {
+            "data": []
           }
         }
       }
@@ -876,7 +1056,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-08T20:12:00+00:00",
+          "lastSeenAt": "2026-10-09T18:24:39+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -903,7 +1083,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T17:47:47+00:00",
+          "lastSeenAt": "2026-10-10T08:13:58+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -930,7 +1110,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T17:47:40+00:00",
+          "lastSeenAt": "2026-10-10T08:19:46+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -947,6 +1127,17 @@
           "canBeIgnored": false,
           "bestAnswerCount": 0,
           "canEditNickname": true
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "8",
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "8-long-thread-for-paging-tests",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
         }
       }
     ]

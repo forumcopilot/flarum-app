@@ -13,7 +13,7 @@ import '../render/flarum_html.dart';
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
 class PostTile extends StatelessWidget {
-  const PostTile({super.key, required this.site, required this.post, this.callbacks, this.onAuthorTap});
+  const PostTile({super.key, required this.site, required this.post, this.callbacks, this.onAuthorTap, this.onOpenReply});
 
   final SiteContext site;
   final FlarumPost post;
@@ -21,6 +21,9 @@ class PostTile extends StatelessWidget {
 
   /// The author's avatar or name was tapped.
   final void Function(FlarumUser author)? onAuthorTap;
+
+  /// One of the replies to the post was chosen (from "… replied to this").
+  final void Function(FlarumPostReply reply)? onOpenReply;
 
   @override
   Widget build(BuildContext context) =>
@@ -84,20 +87,77 @@ class PostTile extends StatelessWidget {
               content: FlarumHtml.parse(post.contentHtml ?? '', forumBaseUrl: site.site.url).html,
               callbacks: callbacks,
             ),
-          if (post.likesCount > 0 || post.mentionedByCount > 0)
+          if (post.likesCount > 0)
             Padding(
               padding: const EdgeInsets.only(top: DesignTokens.spacingS),
-              child: Wrap(
-                spacing: DesignTokens.spacingL,
-                children: [
-                  if (post.likesCount > 0)
-                    _Count(icon: Icons.favorite_border, label: l10n.summaryLikeCount(post.likesCount)),
-                  if (post.mentionedByCount > 0)
-                    _Count(icon: Icons.reply, label: l10n.nReplies(post.mentionedByCount)),
-                ],
+              child: _Count(icon: Icons.favorite_border, label: l10n.summaryLikeCount(post.likesCount)),
+            ),
+          if (post.mentionedByCount > 0)
+            InkWell(
+              onTap: post.mentionedBy.isEmpty ? null : () => _showReplies(context),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: DesignTokens.spacingS),
+                child: _Count(icon: Icons.reply, label: repliedBy(post, l10n)),
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// "bob and alice replied to this.", as the web words it: up to two names,
+/// then how many more replies.
+String repliedBy(FlarumPost post, FlarumLocalizations l10n) {
+  final replies = <String, int>{};
+  for (final reply in post.mentionedBy) {
+    final name = reply.author?.displayName;
+    if (name != null) replies[name] = (replies[name] ?? 0) + 1;
+  }
+  final names = replies.keys.take(2).toList();
+  if (names.isEmpty) return l10n.nReplies(post.mentionedByCount);
+  final shown = names.fold(0, (n, name) => n + replies[name]!);
+  final others = post.mentionedByCount > shown ? post.mentionedByCount - shown : 0;
+  return switch ((names.length, others)) {
+    (1, 0) => l10n.repliedByOne(names[0]),
+    (1, _) => l10n.repliedByOneMore(names[0], others),
+    (_, 0) => l10n.repliedByTwo(names[0], names[1]),
+    _ => l10n.repliedByMore(names[0], names[1], others),
+  };
+}
+
+extension on PostTile {
+  /// The replies, each opening at its post: here, or in its own discussion.
+  void _showReplies(BuildContext context) {
+    final l10n = flarumL10n(context);
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheet) => SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingS),
+              child: Text(l10n.repliesTitle, style: Theme.of(sheet).textTheme.titleMedium),
+            ),
+            for (final reply in post.mentionedBy)
+              ListTile(
+                leading: UserAvatar(username: reply.author?.username ?? '', iconUrl: reply.author?.avatarUrl, radius: 18),
+                title: Text(reply.author?.displayName ?? l10n.someone),
+                subtitle: Text(reply.discussionId == post.discussionId || reply.discussionTitle == null
+                    ? (reply.number == null ? '' : l10n.postNumber(reply.number!))
+                    : reply.discussionTitle!),
+                onTap: onOpenReply == null
+                    ? null
+                    : () {
+                        Navigator.of(sheet).pop();
+                        onOpenReply!(reply);
+                      },
+              ),
+          ],
+        ),
       ),
     );
   }

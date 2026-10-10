@@ -727,6 +727,42 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'System default'**
   String get appearanceSystem;
+
+  /// Under a post: who replied to (mentioned) it
+  ///
+  /// In en, this message translates to:
+  /// **'{a} replied to this.'**
+  String repliedByOne(String a);
+
+  /// Under a post: the two people who replied to it
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} replied to this.'**
+  String repliedByTwo(String a, String b);
+
+  /// Under a post: two of the people who replied, and how many more replies
+  ///
+  /// In en, this message translates to:
+  /// **'{a}, {b} and {others, plural, =1{1 other} other{{others} others}} replied to this.'**
+  String repliedByMore(String a, String b, int others);
+
+  /// Title of the sheet listing the replies to a post
+  ///
+  /// In en, this message translates to:
+  /// **'Replies'**
+  String get repliesTitle;
+
+  /// A post by its number in the discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Post #{number}'**
+  String postNumber(int number);
+
+  /// Under a post: one person who replied, and how many more replies
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {others, plural, =1{1 other} other{{others} others}} replied to this.'**
+  String repliedByOneMore(String a, int others);
 }
 
 class _FlarumLocalizationsDelegate

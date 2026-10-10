@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -53,17 +53,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "3"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
           },
           "user": {
             "data": {
@@ -111,17 +114,33 @@
           "likesCount": 2
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "3"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": [
+              {
+                "type": "posts",
+                "id": "7"
+              },
+              {
+                "type": "posts",
+                "id": "82"
+              },
+              {
+                "type": "posts",
+                "id": "83"
+              }
+            ]
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
           },
           "user": {
             "data": {
@@ -169,17 +188,20 @@
           "likesCount": 1
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "3"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
           },
           "user": {
             "data": {
@@ -227,17 +249,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "3"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "3"
+            }
           },
           "user": {
             "data": {
@@ -249,6 +274,86 @@
       }
     ],
     "included": [
+      {
+        "type": "discussions",
+        "id": "3",
+        "links": {
+          "self": "/discussions/3"
+        },
+        "attributes": {
+          "title": "Welcome to the test forum",
+          "slug": "3-welcome-to-the-test-forum",
+          "commentCount": 4,
+          "participantCount": 4,
+          "createdAt": "2026-10-08T17:53:48+00:00",
+          "lastPostedAt": "2026-10-08T17:53:49+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:53:48+00:00",
+          "lastReadPostNumber": 2,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "5"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "8"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
       {
         "type": "users",
         "id": "4",
@@ -265,7 +370,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-09T17:48:00+00:00",
+          "lastSeenAt": "2026-10-10T08:14:12+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -298,7 +403,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-09T16:54:04+00:00",
+          "lastSeenAt": "2026-10-09T18:24:42+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -313,6 +418,202 @@
           "canSendAnyMessage": true,
           "fof-upload-uploadCountCurrent": 0,
           "fof-upload-uploadCountAll": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "82",
+        "links": {
+          "self": "/posts/82"
+        },
+        "attributes": {
+          "number": 7,
+          "createdAt": "2026-10-08T20:06:13+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Hello <a href=\"http://127.0.0.1:8082/u/bob\" class=\"UserMention\">@bob</a>, and the @“Mods”#g4 group. Replying to <a href=\"http://127.0.0.1:8082/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a>.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "83",
+        "links": {
+          "self": "/posts/83"
+        },
+        "attributes": {
+          "number": 8,
+          "createdAt": "2026-10-08T20:06:13+00:00",
+          "contentType": "comment",
+          "contentHtml": "<blockquote class=\"uncited\"><div><p><a href=\"http://127.0.0.1:8082/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a> Hi all! Looking forward to testing</p></div></blockquote>\n\n<p>Quoting the welcome reply, as the web’s Quote button does.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "8"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          }
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "8",
+        "links": {
+          "self": "/discussions/8"
+        },
+        "attributes": {
+          "title": "Formatting samples",
+          "slug": "8-formatting-samples",
+          "commentCount": 15,
+          "participantCount": 1,
+          "createdAt": "2026-10-08T20:06:10+00:00",
+          "lastPostedAt": "2026-10-08T20:06:40+00:00",
+          "lastPostNumber": 15,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": true,
+          "lastReadAt": "2026-10-08T20:06:40+00:00",
+          "lastReadPostNumber": 15,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "76"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "90"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
         }
       },
       {
@@ -333,7 +634,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-09T17:47:53+00:00",
+          "lastSeenAt": "2026-10-10T08:20:03+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

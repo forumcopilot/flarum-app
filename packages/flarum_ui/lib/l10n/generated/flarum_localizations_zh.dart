@@ -416,4 +416,44 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get appearanceSystem => '跟随系统';
+
+  @override
+  String repliedByOne(String a) {
+    return '$a replied to this.';
+  }
+
+  @override
+  String repliedByTwo(String a, String b) {
+    return '$a and $b replied to this.';
+  }
+
+  @override
+  String repliedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others others',
+      one: '1 other',
+    );
+    return '$a, $b and $_temp0 replied to this.';
+  }
+
+  @override
+  String get repliesTitle => 'Replies';
+
+  @override
+  String postNumber(int number) {
+    return 'Post #$number';
+  }
+
+  @override
+  String repliedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others others',
+      one: '1 other',
+    );
+    return '$a and $_temp0 replied to this.';
+  }
 }

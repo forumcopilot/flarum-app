@@ -60,6 +60,10 @@ class FlarumApi {
 
   static const _discussionIncludes = 'user,lastPostedUser,tags';
 
+  /// A thread's posts with their authors and who replied to them, as the web
+  /// loads them.
+  static const _postIncludes = 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion';
+
   /// The forum's settings and, when signed in, the reader (`actor`).
   Future<FlarumForumInfo> forumInfo() async {
     final info = FlarumForumInfo.fromDocument(await client.get(''));
@@ -277,7 +281,7 @@ class FlarumApi {
       'filter[discussion]': discussionId,
       'sort': 'number',
       ..._page(offset, limit),
-      'include': 'user',
+      'include': _postIncludes,
     });
     return _postPage(document, offset);
   }
@@ -294,7 +298,7 @@ class FlarumApi {
       'filter[discussion]': discussionId,
       'page[near]': '$number',
       'page[limit]': '${_clampLimit(limit)}',
-      'include': 'user',
+      'include': _postIncludes,
     });
     return _postPage(document, null);
   }

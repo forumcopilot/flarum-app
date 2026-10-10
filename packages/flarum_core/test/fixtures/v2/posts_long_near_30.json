@@ -6,7 +6,7 @@
       "filter[discussion]": "6",
       "page[near]": "30",
       "page[limit]": "5",
-      "include": "user"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -52,17 +52,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -110,17 +113,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -168,17 +174,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -226,17 +235,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -284,17 +296,20 @@
           "likesCount": 0
         },
         "relationships": {
-          "discussion": {
-            "data": {
-              "type": "discussions",
-              "id": "6"
-            }
-          },
           "editedUser": {
             "data": null
           },
           "hiddenUser": {
             "data": null
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "6"
+            }
           },
           "user": {
             "data": {
@@ -306,6 +321,86 @@
       }
     ],
     "included": [
+      {
+        "type": "discussions",
+        "id": "6",
+        "links": {
+          "self": "/discussions/6"
+        },
+        "attributes": {
+          "title": "Long thread for paging tests",
+          "slug": "6-long-thread-for-paging-tests",
+          "commentCount": 60,
+          "participantCount": 3,
+          "createdAt": "2026-10-08T17:22:51+00:00",
+          "lastPostedAt": "2026-10-08T18:21:51+00:00",
+          "lastPostNumber": 60,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-08T17:54:03+00:00",
+          "lastReadPostNumber": 20,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "13"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "2"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "72"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
       {
         "type": "users",
         "id": "4",
@@ -322,7 +417,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-09T17:48:00+00:00",
+          "lastSeenAt": "2026-10-10T08:14:12+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -355,7 +450,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-09T16:54:04+00:00",
+          "lastSeenAt": "2026-10-09T18:24:42+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -390,7 +485,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-09T17:47:53+00:00",
+          "lastSeenAt": "2026-10-10T08:20:03+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -426,10 +521,10 @@
       }
     },
     "links": {
-      "first": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=30&page%5Blimit%5D=5",
-      "prev": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=22",
-      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=55",
-      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=32"
+      "first": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5",
+      "prev": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=22",
+      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=55",
+      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=32"
     },
     "jsonapi": {
       "version": "1.1"

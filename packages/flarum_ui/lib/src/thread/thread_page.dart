@@ -134,6 +134,17 @@ class _ThreadPageState extends State<ThreadPage> {
     }
   }
 
+  /// A reply to a post: in this thread, scroll to it; elsewhere, open its discussion there.
+  void _openReply(FlarumPostReply reply) {
+    final discussion = reply.discussionId;
+    if (discussion == null) return;
+    if (discussion == widget.discussionId) {
+      _goTo(reply.number ?? 1);
+    } else {
+      ThreadPage.open(context, widget.site, discussion, near: reply.number, title: reply.discussionTitle);
+    }
+  }
+
   /// Scrolls to post [number], reopening the thread there if it isn't loaded.
   void _goTo(int number) {
     final index = _model.indexOfNumber(number);
@@ -217,6 +228,7 @@ class _ThreadPageState extends State<ThreadPage> {
         post: post,
         callbacks: _callbacksFor(post),
         onAuthorTap: (author) => _openUser(author.username),
+        onOpenReply: _openReply,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.

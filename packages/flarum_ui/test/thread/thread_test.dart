@@ -114,6 +114,22 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets('who replied to a post, and the list of replies', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
+        ));
+        await _pumpUntil(tester, find.text('bob and alice replied to this.'));
+        await tester.tap(find.text('bob and alice replied to this.'));
+        await _pumpUntil(tester, find.text('Replies'));
+        expect(find.text('Post #3'), findsOneWidget, reason: "bob's reply, in this discussion");
+        expect(find.text('Formatting samples'), findsWidgets, reason: "alice's, in another one");
+        await tester.tap(find.text('Post #3'));
+        await tester.pump(const Duration(seconds: 1));
+        await _close(tester);
+      });
+
       testWidgets('opened part-way down, it offers the posts before', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(
@@ -174,5 +190,18 @@ void main() {
     expect(EventPostNotice.describe(event('discussionStickied', {'sticky': true}), l10n).$2,
         'Alice stickied the discussion.');
     expect(EventPostNotice.describe(event('discussionMerged', null), l10n).$2, 'Alice changed the discussion.');
+  });
+
+  test('replies are worded as the web words them', () {
+    final l10n = lookupFlarumLocalizations(const Locale('en'));
+    FlarumPostReply by(String name) =>
+        FlarumPostReply(id: name, author: FlarumUser(id: name, username: name, displayName: name));
+    FlarumPost post(int count, List<String> names) =>
+        FlarumPost(id: '1', number: 1, contentType: 'comment', mentionedByCount: count, mentionedBy: [for (final n in names) by(n)]);
+    expect(repliedBy(post(1, ['bob']), l10n), 'bob replied to this.');
+    expect(repliedBy(post(3, ['bob', 'alice', 'alice']), l10n), 'bob and alice replied to this.');
+    expect(repliedBy(post(4, ['bob', 'alice', 'carol']), l10n), 'bob, alice and 2 others replied to this.');
+    expect(repliedBy(post(2, ['bob']), l10n), 'bob and 1 other replied to this.', reason: '2.0 lists only some');
+    expect(repliedBy(post(2, []), l10n), '2 replies');
   });
 }

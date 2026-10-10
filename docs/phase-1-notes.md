@@ -2,7 +2,8 @@
 
 Phase 1 extracted `forum_kit`, the UI layer flarum-app shares with discourse-app, into
 discourse-app's `packages/forum_kit` (pull request
-[#37](https://github.com/forumcopilot/discourse-app/pull/37)). Last updated 9 October 2026.
+[#37](https://github.com/forumcopilot/discourse-app/pull/37), merged into `main` on 10 October 2026
+as `3febf29`). Last updated 10 October 2026.
 
 **Decision (9 October): share only the generic layer.** The plan (§5.2) also moves the post
 renderer, composer and push client into the kit behind platform hooks. In practice they are woven
@@ -36,7 +37,6 @@ the debug APK.
 
 ## Left
 
-- Merge #37 into discourse-app's `main` (approval). flarum-app then pins `forum_kit` and
-  `forumcopilot_sdk` to that commit.
+- Done 10 October: #37 merged (`3febf29`); flarum-app pins `forum_kit` and `forumcopilot_sdk` to it.
 - Later, with approval: remove the duplicated strings from discourse_ui's `app_*.arb`, cut a
   discourse-app release, repin ABDA.

@@ -20,7 +20,7 @@ dependencies:
     git:
       url: https://github.com/forumcopilot/discourse-app.git
       path: packages/forumcopilot_sdk
-      ref: 8c56b48e19787b126b97c37f1ab0cdb3cdde45b4
+      ref: 3febf29cd97c62db3ebe33dfd20f02d431904f04
 
 dev_dependencies:
   flutter_lints: ^6.0.0

@@ -84,6 +84,12 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Validation (422): 1.x reports the first failed rule, 2.0 every invalid field.
 - Mark all read: `PATCH /api/users/{id}` with `markedAllAsReadAt` as a date; 2.0 refuses `true` (422),
   1.x records the current time whatever the value.
+- Stickied discussions are pinned to the top only when the list request sends no `sort` (the
+  forum's default order, latest activity); with a tag filter, that tag's stickies. The web's Latest
+  view sends none, so `DiscussionSort.latest` sends none either.
+- 2.0 rc.8: a `PATCH /api/discussions/{id}` with only `relationships` (tags, `bestAnswerPost`) fails
+  with 500 in flarum/subscriptions; send `"attributes": {}` with it. Best answer: 1.x
+  `attributes.bestAnswerPostId`, 2.0 `relationships.bestAnswerPost`, in a tag with Q&A on.
 - Listing `/api/notifications` resets the reader's "new" badge on the website.
 - Notifications: include `subject.discussion`, or a post subject arrives without its discussion on
   1.x. Discussion-subject types carry the post to open in `content.postNumber`; `postMentioned`'s

@@ -31,6 +31,24 @@ For rendering work, `formatting_samples.php` (same arguments plus the seed ids f
 optional plugins (Autoimage, Autovideo, FancyPants, HTMLEntities, MediaEmbed, PipeTables,
 TaskLists) and lets fof/upload accept text and PDF attachments, since many forums do.
 
+Then `community_seed.php` gives the forum a community, for the phones and for anyone looking at
+it: 14 members with full names (flarum/nicknames), six sections (Photography, Cooking with Baking,
+Gardening, Cycling, Books, Tech Help as best-answer Q&A) and three secondary tags, and 27
+discussions with 123 posts written as conversations: replies quoting each other, likes, best
+answers, a rename, a retag, a lock, a pinned welcome, two private discussions, and seven photos from
+Wikimedia Commons (each credited). The content is `community.json`.
+
+```bash
+php tool/test_forums/community_seed.php http://127.0.0.1:8081 /path/to/.credentials /path/to/images community-v1.json
+```
+
+It leaves the test seed's data as the fixtures recorded it: nothing involves alice, bob or carol or
+the tags alice follows, no text uses the words the fixture tests search for, and everything is dated
+between 24 August and 6 October 2026, before the test seed, so its discussions stay on the latest
+list's first page. The members get random passwords, appended to the credentials file. The images
+directory caches the photos (downloaded when missing). It checks every discussion's tags against the
+forum's tag rules before writing anything, and refuses to run twice.
+
 Then record fixtures from `packages/flarum_core`:
 
 ```bash

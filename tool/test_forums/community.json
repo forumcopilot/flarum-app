@@ -1,0 +1,364 @@
+{
+  "about": "Community content for the test forums (community_seed.php): members, tags and discussions dated before the test seed, so the fixtures' data stays as recorded. Placeholders: {{p:N}} mentions post N of the same discussion, {{u:name}} mentions a member, {{img:key}} is an uploaded picture with its credit line.",
+  "users": [
+    ["maya", "Maya Okafor"],
+    ["theo", "Theo Lindqvist"],
+    ["priya", "Priya Nair"],
+    ["lukas", "Lukas Brenner"],
+    ["sofia", "Sofía Ramírez"],
+    ["jamie", "Jamie Chen"],
+    ["kenji", "Kenji Watanabe"],
+    ["amara", "Amara Diallo"],
+    ["nils", "Nils Hagen"],
+    ["olivia", "Olivia Turner"],
+    ["rafael", "Rafael Costa"],
+    ["hana", "Hana Kim"],
+    ["dmitri", "Dmitri Volkov"],
+    ["grace", "Grace O'Neill"]
+  ],
+  "tags": [
+    {"name": "Photography", "slug": "photography", "color": "#34495e", "icon": "fas fa-camera", "primary": true, "description": "Gear, technique and the pictures you're proud of."},
+    {"name": "Cooking", "slug": "cooking", "color": "#e74c3c", "icon": "fas fa-utensils", "primary": true, "description": "Recipes, kitchen questions and what's for dinner."},
+    {"name": "Baking", "slug": "baking", "color": "#d35400", "icon": "fas fa-bread-slice", "primary": true, "parent": "cooking", "description": "Bread, cakes, and everything that comes out of the oven."},
+    {"name": "Gardening", "slug": "gardening", "color": "#27ae60", "icon": "fas fa-seedling", "primary": true, "description": "Balconies, allotments and back gardens."},
+    {"name": "Cycling", "slug": "cycling", "color": "#2980b9", "icon": "fas fa-bicycle", "primary": true, "description": "Commutes, routes and keeping the bike running."},
+    {"name": "Books", "slug": "books", "color": "#8e44ad", "icon": "fas fa-book", "primary": true, "description": "What we're reading, and what you should read next."},
+    {"name": "Tech Help", "slug": "tech-help", "color": "#16a085", "icon": "fas fa-laptop", "primary": true, "qna": true, "description": "Ask a question; the answer that solved it gets marked."},
+    {"name": "showcase", "slug": "showcase", "color": "#f1c40f", "icon": "", "primary": false, "description": "Things you made, shot, grew or rode."},
+    {"name": "beginner", "slug": "beginner", "color": "#95a5a6", "icon": "", "primary": false, "description": "New to it? No question is too small."},
+    {"name": "recommendations", "slug": "recommendations", "color": "#1abc9c", "icon": "", "primary": false, "description": "Asking for, or giving, a recommendation."}
+  ],
+  "images": {
+    "city": {"by": "John Cunniff", "license": "CC BY 2.0", "file": "Manhattan_from_Liberty_State_Park,_NJ,_golden_hour_(19688940604).jpg"},
+    "sourdough": {"by": "Agelaia", "license": "CC BY 4.0", "file": "Sourdough_Bread_Loaf.jpg"},
+    "cornbread": {"by": "Douglas P Perkins", "license": "CC BY 3.0", "file": "Cornbread_in_cast_iron_pan.jpg"},
+    "tomato": {"by": "Softeis", "license": "CC BY-SA 3.0", "file": "Tomato_je.jpg"},
+    "bridge": {"by": "August Schwerdfeger", "license": "CC BY 4.0", "file": "Long_Meadow_Bridge_post-restoration_2017-04-30_-_3.jpg"},
+    "kimchi": {"by": "korea.net", "license": "CC BY-SA 2.0", "file": "Triple_White_Kimchi_05.jpg"},
+    "lakes": {"by": "Vyacheslav Argenberg", "license": "CC BY 4.0", "file": "Zagedan_Lakes,_Mountain_cirque,_Caucasus_Mountains.jpg"}
+  },
+  "discussions": [
+    {
+      "title": "Welcome! Start here",
+      "tags": ["general"],
+      "start": "2026-08-24 09:00",
+      "sticky": true,
+      "posts": [
+        {"by": "admin", "text": "Welcome to the community! This is a friendly place for people who like making things: photos, food, gardens, bike rides, and the occasional fight with a router.\n\n**A few things to know:**\n\n- Pick a tag when you start a discussion, so the right people see it.\n- In **Tech Help**, mark the reply that solved your problem as the best answer. It helps the next person.\n- Be kind. Everyone here was a beginner at something.\n\nSay hello in the introductions, and enjoy.", "likes": ["maya", "theo", "priya", "sofia", "grace", "nils"]},
+        {"by": "maya", "text": "Thanks for setting this up! Already found three discussions I want to read.", "after": 5},
+        {"by": "kenji", "text": "Glad to be here. Is there a way to follow a single tag? I mostly care about Photography and Books.", "after": 7},
+        {"by": "admin", "text": "{{p:3}} Yes: open the tag and use the bell next to its name. You can follow new discussions, or every reply if you like to keep up with everything.", "after": 2, "likes": ["kenji"]}
+      ]
+    },
+    {
+      "title": "Introduce yourself!",
+      "tags": ["general"],
+      "start": "2026-08-24 11:30",
+      "posts": [
+        {"by": "admin", "text": "Tell us who you are, where you're from and what you're into. I'll start: I look after the forum, I bake bread badly and I ride an old steel bike to work.", "likes": ["priya"]},
+        {"by": "maya", "text": "Hi all, Maya from Lagos, now in Rotterdam. Street photography mostly, and I've just started growing chillies on my windowsill.", "after": 2, "likes": ["theo", "hana"]},
+        {"by": "theo", "text": "Theo, Gothenburg. I commute 12 km each way by bike, all year. Also reading far too many crime novels.", "after": 3, "likes": ["nils"]},
+        {"by": "priya", "text": "Hello! Priya, Bangalore. Trying to keep a sourdough starter alive. It's going about as well as you'd expect.", "after": 4, "likes": ["dmitri", "grace", "sofia"]},
+        {"by": "lukas", "text": "Servus from Munich. Balcony gardener with ambitions far bigger than the balcony.", "after": 6},
+        {"by": "sofia", "text": "Sofía, from Valencia. I cook for a family of five, so anything fast and cheap is my love language.", "after": 5, "likes": ["olivia", "amara"]},
+        {"by": "hana", "text": "Hana, Seoul! Photography and fermentation, which my flatmates find equally smelly.", "after": 8, "likes": ["maya"]},
+        {"by": "nils", "text": "Nils, Bergen. Winter cyclist, so I'm mostly here to complain about rain.", "after": 9, "likes": ["theo"]},
+        {"by": "grace", "text": "Grace, Cork. Gardener, baker and reluctant family IT department.", "after": 12, "likes": ["jamie"]},
+        {"by": "rafael", "text": "Rafael from Porto. I ride long routes at weekends and take far too many pictures of bridges.", "after": 20}
+      ]
+    },
+    {
+      "title": "Golden hour in the city: share your shots",
+      "tags": ["photography", "showcase"],
+      "start": "2026-08-27 19:40",
+      "posts": [
+        {"by": "maya", "text": "I love the twenty minutes before sunset, when the whole skyline turns warm. Post your golden hour city pictures here! Not mine, but this one is my benchmark:\n\n{{img:city}}", "likes": ["theo", "hana", "rafael", "kenji"]},
+        {"by": "hana", "text": "That light on the glass is unreal. What do you all use for exposure in that situation? My phone always blows out the sky.", "after": 3},
+        {"by": "kenji", "text": "{{p:2}} Expose for the brightest part of the sky and lift the shadows later. On a phone, tap the sky and drag the exposure slider down a little before you shoot.", "after": 1, "likes": ["hana", "maya"]},
+        {"by": "rafael", "text": "And shoot a few minutes *after* you think it's over. The blue hour that follows is often better.", "after": 4, "likes": ["maya", "kenji"]},
+        {"by": "maya", "text": "{{p:4}} Agreed, the blue hour is underrated. Going out on Friday to try it at the harbour.", "after": 2}
+      ]
+    },
+    {
+      "title": "First mirrorless camera under $800?",
+      "tags": ["photography", "beginner", "recommendations"],
+      "start": "2026-08-30 14:15",
+      "posts": [
+        {"by": "jamie", "text": "I've outgrown my phone and want a first proper camera. Budget is about $800, used is fine. Mostly travel and my kids running around. Where would you start?"},
+        {"by": "kenji", "text": "For kids running around, autofocus matters more than anything else. Look at the last generation of any big brand's entry model, used. You'll get a better body for the money.", "after": 2, "likes": ["jamie"]},
+        {"by": "maya", "text": "Spend less on the body and more on one good lens. A fast 35 mm (or the equivalent for your sensor) will change your pictures more than any body upgrade.", "after": 3, "likes": ["jamie", "kenji", "hana"]},
+        {"by": "lukas", "text": "Also check how the camera feels in your hand before you buy. The best camera is the one you actually take with you.", "after": 6},
+        {"by": "jamie", "text": "Thank you all! Found a used body with a 35 mm lens for $720. {{p:3}} you were right, the lens makes all the difference.", "after": 50, "likes": ["maya", "kenji"]}
+      ]
+    },
+    {
+      "title": "Weekly challenge: reflections",
+      "tags": ["photography", "showcase"],
+      "start": "2026-09-14 08:30",
+      "posts": [
+        {"by": "grace", "text": "This week's challenge: **reflections**. Puddles, windows, lakes, spoons, whatever you find. Here's the kind of thing I mean:\n\n{{img:lakes}}", "likes": ["maya", "hana", "rafael"]},
+        {"by": "rafael", "text": "Puddle season has started here, so I'm in. Tip: get your lens a few centimetres above the water.", "after": 4, "likes": ["grace"]},
+        {"by": "hana", "text": "I tried shop windows at night. The trick was finding one with a dark interior so the street shows up clearly.", "after": 9, "likes": ["maya"]},
+        {"by": "maya", "text": "{{p:3}} Clever. I'll steal that for the harbour shoot.", "after": 2}
+      ]
+    },
+    {
+      "title": "How do you back up your photo library?",
+      "tags": ["tech-help"],
+      "start": "2026-09-20 21:05",
+      "posts": [
+        {"by": "nils", "text": "My library is about 900 GB and lives on one external drive. I know, I know. What's a sensible setup that doesn't cost a fortune every month?"},
+        {"by": "jamie", "text": "The usual rule is 3-2-1: three copies, on two kinds of storage, one of them somewhere else. For you that could be the drive, a second drive at a friend's place, and a cloud copy of just your favourites.", "after": 2, "likes": ["nils", "kenji", "grace"]},
+        {"by": "kenji", "text": "Whatever you do, test a restore once. A backup you've never restored from is a hope, not a backup.", "after": 5, "likes": ["jamie", "nils"]},
+        {"by": "nils", "text": "Bought a second drive and set up a weekly sync. Restoring a test folder worked. Marking {{p:2}} as the answer, thanks both!", "after": 70}
+      ],
+      "best": 2
+    },
+    {
+      "title": "What's your go-to weeknight dinner?",
+      "tags": ["cooking"],
+      "start": "2026-08-25 17:50",
+      "posts": [
+        {"by": "sofia", "text": "Thirty minutes, one pan, five hungry people. Mine is chickpeas with spinach, smoked paprika and a lot of garlic, with bread to mop it up. What's yours?", "likes": ["olivia", "amara", "priya", "grace"]},
+        {"by": "olivia", "text": "Fried rice with whatever's in the fridge. Day-old rice is the secret, fresh rice goes mushy.", "after": 1, "likes": ["sofia", "hana"]},
+        {"by": "amara", "text": "Peanut stew. Onion, tomato, peanut butter, stock, sweet potato, whatever greens I have. Fifteen minutes of work.", "after": 2, "likes": ["sofia", "priya"]},
+        {"by": "hana", "text": "Kimchi fried rice with a fried egg on top. {{p:2}} same rule about the rice!", "after": 3, "likes": ["olivia"]},
+        {"by": "dmitri", "text": "Pasta with butter, black pepper and too much cheese. I'm not proud.", "after": 4, "likes": ["sofia", "theo", "lukas"]},
+        {"by": "priya", "text": "Dal. It's cheap, it freezes well, and you can make it as simple or fancy as you want.", "after": 5, "likes": ["amara"]},
+        {"by": "sofia", "text": "{{p:3}} I made the peanut stew last night. The kids asked for it again tomorrow, which never happens. Thank you!", "after": 26, "likes": ["amara"]}
+      ]
+    },
+    {
+      "title": "Cast iron care: did I ruin my pan?",
+      "renamed_from": "help!! cast iron",
+      "tags": ["cooking", "beginner"],
+      "start": "2026-09-03 12:20",
+      "posts": [
+        {"by": "olivia", "text": "I left my new cast iron pan soaking overnight and now it has orange rust spots all over. Is it ruined?"},
+        {"by": "grace", "text": "Not at all, it's just surface rust. Scrub it off with steel wool, dry the pan on the hob, rub in a very thin layer of oil and heat it until it smokes. Repeat two or three times.", "after": 1, "likes": ["olivia", "sofia", "dmitri"]},
+        {"by": "dmitri", "text": "And don't soak it again. Wash it quickly while it's warm, dry it on the heat, tiny bit of oil. That's the whole routine.", "after": 3, "likes": ["olivia"]},
+        {"by": "sofia", "text": "The more you cook in it, the better it gets. Fry some potatoes in it this week and it'll be fine.", "after": 4},
+        {"by": "olivia", "text": "It worked! Re-seasoned it and made cornbread to celebrate.\n\n{{img:cornbread}}", "after": 48, "likes": ["grace", "dmitri", "sofia", "amara", "priya"]}
+      ]
+    },
+    {
+      "title": "Fermentation corner: kimchi, sauerkraut and friends",
+      "tags": ["cooking", "showcase"],
+      "start": "2026-09-08 20:10",
+      "posts": [
+        {"by": "hana", "text": "Starting a place for everyone who keeps jars of bubbling vegetables on the counter. My latest batch of white kimchi:\n\n{{img:kimchi}}\n\nNo chilli in this one, so it's gentle and very refreshing.", "likes": ["maya", "lukas", "priya", "sofia"]},
+        {"by": "lukas", "text": "Sauerkraut person here. Two percent salt by weight and patience, that's all.", "after": 3, "likes": ["hana"]},
+        {"by": "priya", "text": "How do you stop the top from going mouldy? Mine always gets a white film after a week.", "after": 5},
+        {"by": "hana", "text": "{{p:3}} Keep everything under the brine with a weight. A white film is usually harmless yeast you can skim off, but anything fuzzy or coloured means start again.", "after": 2, "likes": ["priya", "lukas"]},
+        {"by": "lukas", "text": "A small zip bag filled with brine makes a perfect weight, by the way.", "after": 4, "likes": ["priya", "hana"]}
+      ]
+    },
+    {
+      "title": "Sourdough starter not rising after a week",
+      "tags": ["cooking", "baking", "beginner"],
+      "start": "2026-08-26 08:45",
+      "posts": [
+        {"by": "priya", "text": "Day seven. My starter bubbled a lot on days two and three, then went completely flat. I feed it 50 g flour and 50 g water every day. What am I doing wrong?"},
+        {"by": "dmitri", "text": "Nothing, probably! That early burst is often bacteria, not yeast. The quiet phase is normal. Keep feeding and it should come back in a few days.", "after": 2, "likes": ["priya", "grace"]},
+        {"by": "grace", "text": "Two things that helped me: some wholemeal or rye flour in the feed, and a warmer spot. Mine woke up when I moved it on top of the fridge.", "after": 3, "likes": ["priya", "dmitri", "sofia"]},
+        {"by": "sofia", "text": "Also discard most of it before each feed, otherwise the new flour gets diluted.", "after": 6, "likes": ["priya"]},
+        {"by": "priya", "text": "Day eleven: it doubled in six hours! {{p:3}} the top of the fridge did it. First loaf this weekend.", "after": 90, "likes": ["grace", "dmitri", "sofia", "olivia"]}
+      ]
+    },
+    {
+      "title": "Show us your bakes this weekend",
+      "tags": ["cooking", "baking", "showcase"],
+      "start": "2026-09-27 10:00",
+      "posts": [
+        {"by": "dmitri", "text": "Weekend bake roll call! I'll start with a classic loaf, 75% hydration, 20% wholemeal.\n\n{{img:sourdough}}", "likes": ["priya", "grace", "sofia", "olivia", "maya"]},
+        {"by": "priya", "text": "That ear! My first loaf came out more like a frisbee, but it tasted great. {{u:dmitri}} what temperature do you bake at?", "after": 3, "likes": ["dmitri"]},
+        {"by": "dmitri", "text": "{{p:2}} 250 °C with the lid on for 20 minutes, then 230 °C without the lid until it's dark. Darker than you think.", "after": 1, "likes": ["priya", "grace"]},
+        {"by": "grace", "text": "Cinnamon buns here, for once without burning the bottoms. Baking tray on the middle shelf was the fix.", "after": 5, "likes": ["olivia", "sofia"]},
+        {"by": "olivia", "text": "Lemon drizzle cake. It disappeared before I could take a picture, which is the best review.", "after": 8, "likes": ["grace", "sofia", "amara"]}
+      ]
+    },
+    {
+      "title": "Tomatoes splitting after the heat wave",
+      "tags": ["gardening", "beginner"],
+      "start": "2026-08-28 07:30",
+      "posts": [
+        {"by": "amara", "text": "We had a week of 35 °C, then two days of heavy rain, and now half my tomatoes have split open. Are they still OK to eat?\n\n{{img:tomato}}\n\n(Not mine, mine look much sadder.)"},
+        {"by": "lukas", "text": "Yes, eat them soon. Splitting happens when the plant suddenly gets lots of water after a dry spell: the inside grows faster than the skin.", "after": 2, "likes": ["amara", "grace"]},
+        {"by": "grace", "text": "Water deeply and regularly, and mulch the soil so it doesn't swing from bone dry to soaked. Pick fruit when it's just turning if heavy rain is forecast.", "after": 3, "likes": ["amara", "lukas", "maya"]},
+        {"by": "amara", "text": "Mulched with straw and set a watering schedule. No new splits this week!", "after": 120, "likes": ["grace"]}
+      ]
+    },
+    {
+      "title": "Balcony herb garden: what actually survives?",
+      "tags": ["gardening", "recommendations"],
+      "start": "2026-09-05 18:00",
+      "posts": [
+        {"by": "lukas", "text": "South-facing balcony, very windy, I'm away a lot in summer. Which herbs survive me?"},
+        {"by": "grace", "text": "Rosemary, thyme and sage love sun and forgive you for forgetting them. Basil and coriander will not.", "after": 2, "likes": ["lukas", "amara"]},
+        {"by": "maya", "text": "Chives come back every year and handle wind fine. Mint too, but give it its own pot or it takes over.", "after": 4, "likes": ["lukas"]},
+        {"by": "amara", "text": "Self-watering pots changed everything for me. Two weeks away and the oregano didn't even notice.", "after": 6, "likes": ["lukas", "grace", "maya"]},
+        {"by": "lukas", "text": "Rosemary, thyme and chives in self-watering pots it is. {{p:4}} thanks for the tip!", "after": 30}
+      ]
+    },
+    {
+      "title": "Saving seeds from this year's harvest",
+      "tags": ["gardening"],
+      "start": "2026-09-30 16:20",
+      "posts": [
+        {"by": "grace", "text": "I'd like to save seeds from my best beans and tomatoes for next year. Anything I should know before I start?"},
+        {"by": "lukas", "text": "Only save from open-pollinated varieties. Seeds from F1 hybrids won't grow true to the parent.", "after": 3, "likes": ["grace", "amara"]},
+        {"by": "amara", "text": "For tomatoes, ferment the seeds in a little water for a few days, rinse, and dry them on a plate. It gets rid of the gel that stops them sprouting.", "after": 5, "likes": ["grace"]},
+        {"by": "grace", "text": "Beans are drying in paper bags and the tomato seeds are fermenting. The kitchen smells interesting.", "after": 50, "likes": ["amara", "lukas"]}
+      ]
+    },
+    {
+      "title": "Commuting by bike through winter: tips?",
+      "tags": ["cycling", "recommendations"],
+      "start": "2026-09-10 07:10",
+      "posts": [
+        {"by": "nils", "text": "Last winter I gave up in December. This year I want to make it through. What made the difference for you?"},
+        {"by": "theo", "text": "Lights, mudguards and good gloves, in that order. Bright rear light that also blinks in daylight.", "after": 1, "likes": ["nils", "rafael"]},
+        {"by": "rafael", "text": "Studded tyres if you get ice. They feel slow, but nothing beats staying upright.", "after": 3, "likes": ["nils", "theo"]},
+        {"by": "theo", "text": "Also: keep a spare set of dry clothes at work. Arriving wet is what really kills motivation.", "after": 5, "likes": ["nils", "rafael", "lukas"]},
+        {"by": "nils", "text": "Ordered studded tyres and proper mudguards. {{u:theo}} I'll report back in January!", "after": 20, "likes": ["theo"]}
+      ]
+    },
+    {
+      "title": "Route report: lakeside loop, 62 km",
+      "tags": ["cycling", "showcase"],
+      "start": "2026-09-21 19:30",
+      "posts": [
+        {"by": "rafael", "text": "Rode the lakeside loop on Sunday: 62 km, almost flat, quiet roads and a café at the halfway point. The old iron bridge at kilometre 40 is the highlight.\n\n{{img:bridge}}\n\nGo clockwise so you have the wind behind you on the way home.", "likes": ["theo", "nils", "maya", "lukas"]},
+        {"by": "theo", "text": "Saving this one. How's the surface on the gravel section?", "after": 2},
+        {"by": "rafael", "text": "{{p:2}} Hard-packed and fine on 32 mm tyres. Only about 4 km of it.", "after": 1, "likes": ["theo"]},
+        {"by": "maya", "text": "That bridge is so photogenic. I might come for the pictures and pretend it's for the exercise.", "after": 6, "likes": ["rafael", "hana"]}
+      ]
+    },
+    {
+      "title": "Tubeless tyres: worth switching?",
+      "tags_before": ["cycling"],
+      "tags": ["cycling", "recommendations"],
+      "start": "2026-10-01 12:00",
+      "posts": [
+        {"by": "theo", "text": "Three punctures this month on my commute. Everyone tells me to go tubeless. Is it really worth the hassle?"},
+        {"by": "nils", "text": "For commuting, yes. Small holes seal themselves and you often don't even notice. Setting it up the first time is messy, though.", "after": 2, "likes": ["theo"]},
+        {"by": "rafael", "text": "Top up the sealant every few months, it dries out. And carry a plug kit for bigger holes.", "after": 3, "likes": ["theo", "nils"]},
+        {"by": "theo", "text": "Convinced. Doing it this weekend, wish me luck.", "after": 5}
+      ]
+    },
+    {
+      "title": "What are you reading this month?",
+      "tags": ["books"],
+      "start": "2026-09-01 20:00",
+      "posts": [
+        {"by": "olivia", "text": "September's here, so: what's on your nightstand? I'm halfway through a big family saga and can't put it down."},
+        {"by": "theo", "text": "A Nordic noir, naturally. Grim, cold, very satisfying.", "after": 1, "likes": ["olivia", "nils"]},
+        {"by": "kenji", "text": "A collection of essays on walking. Perfect for reading on the train.", "after": 3, "likes": ["olivia", "jamie"]},
+        {"by": "jamie", "text": "Rereading a fantasy series I loved at fifteen. It holds up better than I expected.", "after": 4, "likes": ["kenji", "olivia"]},
+        {"by": "priya", "text": "A bread book, obviously.", "after": 6, "likes": ["dmitri", "grace", "olivia", "sofia"]},
+        {"by": "olivia", "text": "{{p:5}} Of course it is. Report back on the frisbee situation!", "after": 2, "likes": ["priya"]}
+      ]
+    },
+    {
+      "title": "Recommend a sci-fi novel for someone new to the genre",
+      "tags": ["books", "recommendations", "beginner"],
+      "start": "2026-09-16 21:30",
+      "posts": [
+        {"by": "kenji", "text": "My partner has never read science fiction and asked me for a first book. She loves character-driven literary fiction. Where would you start her?"},
+        {"by": "olivia", "text": "Something where the science stays in the background and the people come first. A quiet novel about a generation ship or a first-contact story told by a linguist would be perfect.", "after": 2, "likes": ["kenji", "jamie"]},
+        {"by": "jamie", "text": "Short stories are a great way in, too. She can try several flavours and see what she likes.", "after": 4, "likes": ["kenji", "olivia", "theo"]},
+        {"by": "kenji", "text": "Great ideas. She started with a short story collection and is already asking for more. {{p:3}} spot on.", "after": 60, "likes": ["jamie"]}
+      ]
+    },
+    {
+      "title": "Laptop fan constantly running after update",
+      "tags": ["tech-help"],
+      "start": "2026-09-02 22:10",
+      "posts": [
+        {"by": "jamie", "text": "Since the last system update my laptop fan runs at full speed all the time, even when I'm only reading email. Any ideas?"},
+        {"by": "dmitri", "text": "Right after a big update, the system often reindexes your files in the background for a day or two. Leave it plugged in overnight and see if it calms down.", "after": 1, "likes": ["jamie", "grace"]},
+        {"by": "grace", "text": "If it doesn't, open the activity monitor or task manager and sort by CPU. Something stuck at 100% is usually the culprit.", "after": 3, "likes": ["jamie", "kenji"]},
+        {"by": "jamie", "text": "It was the indexing! Quiet since this morning. Thanks {{u:dmitri}}.", "after": 26, "likes": ["dmitri"]}
+      ],
+      "best": 2
+    },
+    {
+      "title": "Best way to share large video files with family?",
+      "tags": ["tech-help", "recommendations"],
+      "start": "2026-09-12 15:40",
+      "posts": [
+        {"by": "amara", "text": "I've got 40 GB of videos from my sister's wedding and family in three countries who want them. Email obviously won't work. What's the easiest way for non-technical people?"},
+        {"by": "kenji", "text": "A shared folder on any cloud storage service, with a link they can open in the browser. Nobody needs an account or an app.", "after": 2, "likes": ["amara", "grace"]},
+        {"by": "jamie", "text": "If storage is a problem, compress them first. Wedding videos straight off a camera are huge, and a modern format halves them with no visible difference.", "after": 4, "likes": ["amara"]},
+        {"by": "grace", "text": "And put a short note in the folder explaining which file is which. Grandparents will thank you.", "after": 5, "likes": ["amara", "kenji", "olivia"]},
+        {"by": "amara", "text": "Shared folder sent, with a note. Even my uncle managed to download them. Thank you!", "after": 40}
+      ],
+      "best": 2
+    },
+    {
+      "title": "Router keeps dropping Wi-Fi every evening",
+      "tags": ["tech-help"],
+      "start": "2026-09-23 20:50",
+      "posts": [
+        {"by": "dmitri", "text": "Every evening around 8 pm our Wi-Fi drops for a minute or two, several times. Daytime is fine. The provider says the line is OK."},
+        {"by": "nils", "text": "Sounds like interference: everyone in your building is home and on Wi-Fi at the same time. Try changing the channel in the router settings, or use 5 GHz if your devices support it.", "after": 1, "likes": ["dmitri", "jamie"]},
+        {"by": "jamie", "text": "Also check for a firmware update for the router. Mine had a bug that caused exactly this.", "after": 3, "likes": ["dmitri"]},
+        {"by": "dmitri", "text": "Switched to a quieter 5 GHz channel. Three evenings without a drop! Marking this solved and locking it.", "after": 75, "likes": ["nils", "jamie"]}
+      ],
+      "best": 2,
+      "locked": true
+    },
+    {
+      "title": "Password manager recommendations",
+      "tags": ["tech-help", "recommendations"],
+      "start": "2026-10-04 11:15",
+      "posts": [
+        {"by": "maya", "text": "I finally want to stop reusing passwords. What should I look for in a password manager?"},
+        {"by": "grace", "text": "That it works on all your devices, has a good track record, and supports passkeys. Then turn on two-factor authentication for the manager itself.", "after": 2, "likes": ["maya", "jamie", "nils"]},
+        {"by": "jamie", "text": "And don't try to change every password on day one. Update each one the next time you log in to that site. It gets done without the pain.", "after": 3, "likes": ["maya", "grace"]}
+      ]
+    },
+    {
+      "title": "Small wins this week",
+      "tags": ["general"],
+      "start": "2026-09-25 18:45",
+      "posts": [
+        {"by": "priya", "text": "Tell us something that went right this week, however small. Mine: my starter has a name now. Meet Gerald."},
+        {"by": "nils", "text": "Rode to work every day this week, including the rainy ones.", "after": 2, "likes": ["priya", "theo"]},
+        {"by": "olivia", "text": "Finished a 600-page book. On to the next one!", "after": 4, "likes": ["kenji", "priya"]},
+        {"by": "lukas", "text": "First homegrown chilli. One. It's beautiful.", "after": 5, "likes": ["maya", "priya", "grace"]},
+        {"by": "maya", "text": "{{p:4}} Congratulations! Mine are still green.", "after": 1}
+      ]
+    },
+    {
+      "title": "Favourite podcasts at the moment",
+      "tags": ["general", "recommendations"],
+      "start": "2026-10-06 08:20",
+      "posts": [
+        {"by": "theo", "text": "I need something new for the commute. History, science or good interviews, anything goes."},
+        {"by": "kenji", "text": "A long-running series on the history of a single city, one episode per century. Weirdly addictive.", "after": 2, "likes": ["theo"]},
+        {"by": "amara", "text": "Anything where two friends explain one science topic to each other. Light, but I always learn something.", "after": 4, "likes": ["theo", "olivia"]}
+      ]
+    },
+    {
+      "title": "Photo walk on Saturday?",
+      "tags": [],
+      "private_with": ["hana"],
+      "start": "2026-09-17 10:30",
+      "posts": [
+        {"by": "maya", "text": "Hey Hana, want to do a photo walk along the harbour on Saturday afternoon? I'd love to try your shop-window trick."},
+        {"by": "hana", "text": "Yes! Let's meet at four, so we get the golden hour and the blue hour.", "after": 1}
+      ]
+    },
+    {
+      "title": "Spare studded tyres?",
+      "tags": [],
+      "private_with": ["nils"],
+      "start": "2026-10-02 19:00",
+      "posts": [
+        {"by": "theo", "text": "Nils, I have a set of 700×35 studded tyres I never used. Want them before you buy new ones?"},
+        {"by": "nils", "text": "Oh, that would be amazing. I'll bring coffee beans as payment.", "after": 2}
+      ]
+    }
+  ]
+}

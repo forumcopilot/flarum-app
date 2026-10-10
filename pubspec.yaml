@@ -17,12 +17,12 @@ dependencies:
     git:
       url: https://github.com/forumcopilot/discourse-app.git
       path: packages/forum_kit
-      ref: 3febf29cd97c62db3ebe33dfd20f02d431904f04
+      ref: ac722f5da4eff1c0025354a5951712452feef05e
   forumcopilot_sdk:
     git:
       url: https://github.com/forumcopilot/discourse-app.git
       path: packages/forumcopilot_sdk
-      ref: 3febf29cd97c62db3ebe33dfd20f02d431904f04
+      ref: ac722f5da4eff1c0025354a5951712452feef05e
 
 dev_dependencies:
   flutter_test:

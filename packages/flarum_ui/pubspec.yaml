@@ -20,12 +20,12 @@ dependencies:
     git:
       url: https://github.com/forumcopilot/discourse-app.git
       path: packages/forum_kit
-      ref: 3febf29cd97c62db3ebe33dfd20f02d431904f04
+      ref: ac722f5da4eff1c0025354a5951712452feef05e
   forumcopilot_sdk:
     git:
       url: https://github.com/forumcopilot/discourse-app.git
       path: packages/forumcopilot_sdk
-      ref: 3febf29cd97c62db3ebe33dfd20f02d431904f04
+      ref: ac722f5da4eff1c0025354a5951712452feef05e
   # The post renderer, as discourse_ui has it.
   dio: ^5.4.0
   flutter_html: ^3.0.0-beta.2

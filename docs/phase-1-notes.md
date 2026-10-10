@@ -37,6 +37,6 @@ the debug APK.
 
 ## Left
 
-- Done 10 October: #37 merged (`3febf29`); flarum-app pins `forum_kit` and `forumcopilot_sdk` to it.
-- Later, with approval: remove the duplicated strings from discourse_ui's `app_*.arb`, cut a
-  discourse-app release, repin ABDA.
+- Done 10 October: #37 merged (`3febf29`); the duplicated strings removed from discourse_ui; released
+  as discourse-app 1.0.51 (`v1.0.51`, `ac722f5`), which flarum-app pins.
+- ABDA's repin to 1.0.51, in its own session.

@@ -4,7 +4,6 @@
     "path": "/discussions",
     "query": {
       "filter[sticky]": "1",
-      "sort": "-lastPostedAt",
       "page[offset]": "0",
       "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
@@ -15,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bsticky%5D=1&sort=-lastPostedAt&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bsticky%5D=1&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
     },
     "data": [
       {
@@ -73,6 +72,62 @@
             ]
           }
         }
+      },
+      {
+        "type": "discussions",
+        "id": "12",
+        "attributes": {
+          "title": "Welcome! Start here",
+          "slug": "12-welcome-start-here",
+          "commentCount": 4,
+          "participantCount": 3,
+          "createdAt": "2026-08-24T09:00:00+00:00",
+          "lastPostedAt": "2026-08-24T23:00:00+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "canTag": false,
+          "subscription": null,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "isPrivateDiscussion": false,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "isSticky": true,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "1"
+            }
+          },
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          }
+        }
       }
     ],
     "included": [
@@ -103,6 +158,30 @@
           "isChild": false,
           "isHidden": false,
           "lastPostedAt": "2026-10-08T17:52:28+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "1",
+        "attributes": {
+          "name": "General",
+          "description": null,
+          "slug": "general",
+          "color": "#888",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": null,
+          "discussionCount": 7,
+          "position": 0,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-10T17:42:02+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

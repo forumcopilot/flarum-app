@@ -4,7 +4,6 @@
     "path": "/discussions",
     "query": {
       "filter[author]": "bob",
-      "sort": "-lastPostedAt",
       "page[offset]": "0",
       "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
@@ -15,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bauthor%5D=bob&sort=-lastPostedAt&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bauthor%5D=bob&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
     },
     "data": [
       {
@@ -181,12 +180,12 @@
           "backgroundUrl": null,
           "backgroundMode": null,
           "icon": null,
-          "discussionCount": 3,
+          "discussionCount": 7,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "lastPostedAt": "2026-10-10T17:42:02+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

@@ -101,7 +101,7 @@
         "useAlternativeBestAnswerUi": false,
         "showBestAnswerFilterUi": true,
         "bestAnswerDiscussionSidebarJumpButton": false,
-        "displayNameDriver": "username",
+        "displayNameDriver": "nickname",
         "setNicknameOnRegistration": true,
         "randomizeUsernameOnRegistration": false,
         "blomstra-turnstile.site_key": "1x00000000000000000000AA",
@@ -157,11 +157,43 @@
             },
             {
               "type": "tags",
-              "id": "12"
+              "id": "14"
             },
             {
               "type": "tags",
-              "id": "13"
+              "id": "15"
+            },
+            {
+              "type": "tags",
+              "id": "17"
+            },
+            {
+              "type": "tags",
+              "id": "18"
+            },
+            {
+              "type": "tags",
+              "id": "19"
+            },
+            {
+              "type": "tags",
+              "id": "20"
+            },
+            {
+              "type": "tags",
+              "id": "23"
+            },
+            {
+              "type": "tags",
+              "id": "21"
+            },
+            {
+              "type": "tags",
+              "id": "22"
+            },
+            {
+              "type": "tags",
+              "id": "12"
             }
           ]
         },
@@ -261,7 +293,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-10T08:19:46+00:00",
+          "lastSeenAt": "2026-10-10T17:47:46+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "markedAllAsReadAt": null,
@@ -360,12 +392,12 @@
           "backgroundUrl": null,
           "backgroundMode": null,
           "icon": null,
-          "discussionCount": 3,
+          "discussionCount": 7,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "lastPostedAt": "2026-10-10T17:42:02+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -447,6 +479,222 @@
       },
       {
         "type": "tags",
+        "id": "14",
+        "attributes": {
+          "name": "Photography",
+          "description": "Gear, technique and the pictures you're proud of.",
+          "slug": "photography",
+          "color": "#34495e",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-camera",
+          "discussionCount": 3,
+          "position": 4,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-09-14T23:30:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "15",
+        "attributes": {
+          "name": "Cooking",
+          "description": "Recipes, kitchen questions and what's for dinner.",
+          "slug": "cooking",
+          "color": "#e74c3c",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-utensils",
+          "discussionCount": 5,
+          "position": 5,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-09-28T03:00:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "17",
+        "attributes": {
+          "name": "Gardening",
+          "description": "Balconies, allotments and back gardens.",
+          "slug": "gardening",
+          "color": "#27ae60",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-seedling",
+          "discussionCount": 3,
+          "position": 6,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-03T02:20:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "18",
+        "attributes": {
+          "name": "Cycling",
+          "description": "Commutes, routes and keeping the bike running.",
+          "slug": "cycling",
+          "color": "#2980b9",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-bicycle",
+          "discussionCount": 3,
+          "position": 7,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-01T22:00:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "19",
+        "attributes": {
+          "name": "Books",
+          "description": "What we're reading, and what you should read next.",
+          "slug": "books",
+          "color": "#8e44ad",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-book",
+          "discussionCount": 2,
+          "position": 8,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-09-19T15:30:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 5,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-04T16:15:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "23",
+        "attributes": {
+          "name": "recommendations",
+          "description": "Asking for, or giving, a recommendation.",
+          "slug": "recommendations",
+          "color": "#1abc9c",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 8,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-06T14:20:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "21",
+        "attributes": {
+          "name": "showcase",
+          "description": "Things you made, shot, grew or rode.",
+          "slug": "showcase",
+          "color": "#f1c40f",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 5,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-09-28T03:00:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "22",
+        "attributes": {
+          "name": "beginner",
+          "description": "New to it? No question is too small.",
+          "slug": "beginner",
+          "color": "#95a5a6",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "",
+          "discussionCount": 5,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-09-19T15:30:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        }
+      },
+      {
+        "type": "tags",
         "id": "12",
         "attributes": {
           "name": "question",
@@ -462,30 +710,6 @@
           "isChild": false,
           "isHidden": false,
           "lastPostedAt": "2026-10-08T17:52:30+00:00",
-          "canStartDiscussion": true,
-          "canAddToDiscussion": true,
-          "subscription": null,
-          "isQnA": false,
-          "reminders": false
-        }
-      },
-      {
-        "type": "tags",
-        "id": "13",
-        "attributes": {
-          "name": "bug",
-          "description": "bug discussions",
-          "slug": "bug",
-          "color": "#d35400",
-          "backgroundUrl": null,
-          "backgroundMode": null,
-          "icon": "",
-          "discussionCount": 1,
-          "position": null,
-          "defaultSort": null,
-          "isChild": false,
-          "isHidden": false,
-          "lastPostedAt": "2026-10-08T17:52:29+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

@@ -11,6 +11,8 @@ import 'models/user.dart';
 
 /// How to order a discussion list. These are the forum home's views.
 enum DiscussionSort {
+  /// The forum's default order, so [FlarumApi.discussions] sends no `sort` for it: only then are
+  /// stickied discussions pinned to the top. [param] is what that order is.
   latest('-lastPostedAt'),
   top('-commentCount'),
   newest('-createdAt'),
@@ -186,7 +188,9 @@ class FlarumApi {
     }
     final document = await client.get('/discussions', query: {
       ...filters,
-      if (sort != null) 'sort': sort.param,
+      // Latest is the forum's own order, so it's left to the forum: only then does flarum/sticky
+      // pin stickied discussions to the top, as the web's default view shows them.
+      if (sort != null && sort != DiscussionSort.latest) 'sort': sort.param,
       ..._page(offset, limit),
       // 1.x refuses mostRelevantPost.discussion; the post gets its discussion from the row instead.
       'include': withRelevantPost ? '$_discussionIncludes,mostRelevantPost,mostRelevantPost.user' : _discussionIncludes,

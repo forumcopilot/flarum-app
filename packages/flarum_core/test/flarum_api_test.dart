@@ -39,10 +39,9 @@ void main() {
       });
 
       group('discussions', () {
-        test('sends only the parameters both versions accept', () async {
+        test('sends only the parameters both versions accept, and leaves Latest to the forum', () async {
           await api.discussions();
           expect(forum.requests.single.queryParameters, {
-            'sort': '-lastPostedAt',
             'page[offset]': '0',
             'page[limit]': '20',
             'include': 'user,lastPostedUser,tags',
@@ -57,7 +56,7 @@ void main() {
           expect(welcome.tags.map((t) => t.slug), ['general']);
           expect(welcome.commentCount, 4);
           expect(page.items.singleWhere((d) => d.title == 'Forum rules').isSticky, isTrue);
-          expect(page.hasMore, isFalse);
+          expect(page.hasMore, isTrue, reason: 'the community content (community_seed.php) fills a second page');
         });
 
         test('filters by tag, with primary, child and secondary tags', () async {

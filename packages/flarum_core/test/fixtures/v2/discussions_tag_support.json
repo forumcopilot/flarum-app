@@ -4,7 +4,6 @@
     "path": "/discussions",
     "query": {
       "filter[tag]": "support",
-      "sort": "-lastPostedAt",
       "page[offset]": "0",
       "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
@@ -243,7 +242,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-10T08:14:12+00:00",
+          "lastSeenAt": "2026-10-10T17:47:56+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -278,7 +277,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-10T08:20:03+00:00",
+          "lastSeenAt": "2026-10-10T17:47:53+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

@@ -4,7 +4,6 @@
     "path": "/discussions",
     "query": {
       "filter[q]": "thread tag:support",
-      "sort": "-lastPostedAt",
       "page[offset]": "0",
       "page[limit]": "20",
       "include": "user,lastPostedUser,tags"
@@ -15,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bq%5D=thread+tag%3Asupport&sort=-lastPostedAt&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bq%5D=thread+tag%3Asupport&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
     },
     "data": [
       {

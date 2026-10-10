@@ -130,11 +130,11 @@
           "icon": null,
           "isHidden": false,
           "isPrimary": true,
-          "discussionCount": 3,
+          "discussionCount": 7,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-08T20:06:40+00:00",
+          "lastPostedAt": "2026-10-10T17:40:54+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -148,7 +148,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "8"
+              "id": "44"
             }
           }
         }
@@ -169,7 +169,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-10T08:14:12+00:00",
+          "lastSeenAt": "2026-10-10T17:47:56+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -200,9 +200,9 @@
           "hasUploadedAvatar": false,
           "slug": "admin",
           "joinTime": "2026-10-08T16:06:42+00:00",
-          "discussionCount": 3,
-          "commentCount": 3,
-          "lastSeenAt": "2026-10-08T21:00:56+00:00",
+          "discussionCount": 5,
+          "commentCount": 6,
+          "lastSeenAt": "2026-10-10T17:39:41+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

@@ -112,7 +112,7 @@
         "flectar-turnstile.forgot": true,
         "excerptDisplayEnabled": true,
         "onlyStickyUnreadDiscussions": true,
-        "displayNameDriver": "username",
+        "displayNameDriver": "nickname",
         "setNicknameOnRegistration": true,
         "randomizeUsernameOnRegistration": false,
         "flarum-emoji.cdn": "https://cdn.jsdelivr.net/gh/jdecked/twemoji@[version]/assets/"
@@ -161,11 +161,43 @@
             },
             {
               "type": "tags",
-              "id": "7"
+              "id": "39"
             },
             {
               "type": "tags",
-              "id": "8"
+              "id": "40"
+            },
+            {
+              "type": "tags",
+              "id": "42"
+            },
+            {
+              "type": "tags",
+              "id": "43"
+            },
+            {
+              "type": "tags",
+              "id": "44"
+            },
+            {
+              "type": "tags",
+              "id": "45"
+            },
+            {
+              "type": "tags",
+              "id": "48"
+            },
+            {
+              "type": "tags",
+              "id": "46"
+            },
+            {
+              "type": "tags",
+              "id": "47"
+            },
+            {
+              "type": "tags",
+              "id": "7"
             }
           ]
         },
@@ -280,11 +312,11 @@
           "icon": null,
           "isHidden": false,
           "isPrimary": true,
-          "discussionCount": 3,
+          "discussionCount": 7,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-08T20:06:40+00:00",
+          "lastPostedAt": "2026-10-10T17:40:54+00:00",
           "canStartDiscussion": false,
           "canAddToDiscussion": false,
           "subscription": null,
@@ -295,7 +327,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "8"
+              "id": "44"
             }
           },
           "parent": {
@@ -416,6 +448,339 @@
       },
       {
         "type": "tags",
+        "id": "39",
+        "links": {
+          "self": "/tags/39"
+        },
+        "attributes": {
+          "name": "Photography",
+          "description": "Gear, technique and the pictures you're proud of.",
+          "slug": "photography",
+          "color": "#34495e",
+          "icon": "fas fa-camera",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 3,
+          "position": 4,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-09-14T23:30:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "24"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "40",
+        "links": {
+          "self": "/tags/40"
+        },
+        "attributes": {
+          "name": "Cooking",
+          "description": "Recipes, kitchen questions and what's for dinner.",
+          "slug": "cooking",
+          "color": "#e74c3c",
+          "icon": "fas fa-utensils",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 5,
+          "position": 5,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-09-28T03:00:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "30"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "42",
+        "links": {
+          "self": "/tags/42"
+        },
+        "attributes": {
+          "name": "Gardening",
+          "description": "Balconies, allotments and back gardens.",
+          "slug": "gardening",
+          "color": "#27ae60",
+          "icon": "fas fa-seedling",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 3,
+          "position": 6,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-03T02:20:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "33"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "43",
+        "links": {
+          "self": "/tags/43"
+        },
+        "attributes": {
+          "name": "Cycling",
+          "description": "Commutes, routes and keeping the bike running.",
+          "slug": "cycling",
+          "color": "#2980b9",
+          "icon": "fas fa-bicycle",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 3,
+          "position": 7,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-01T22:00:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "36"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "44",
+        "links": {
+          "self": "/tags/44"
+        },
+        "attributes": {
+          "name": "Books",
+          "description": "What we're reading, and what you should read next.",
+          "slug": "books",
+          "color": "#8e44ad",
+          "icon": "fas fa-book",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 2,
+          "position": 8,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-09-19T15:30:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "38"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "45",
+        "links": {
+          "self": "/tags/45"
+        },
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "icon": "fas fa-laptop",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 5,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-04T16:15:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "42"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "48",
+        "links": {
+          "self": "/tags/48"
+        },
+        "attributes": {
+          "name": "recommendations",
+          "description": "Asking for, or giving, a recommendation.",
+          "slug": "recommendations",
+          "color": "#1abc9c",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 8,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-06T14:20:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "44"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "46",
+        "links": {
+          "self": "/tags/46"
+        },
+        "attributes": {
+          "name": "showcase",
+          "description": "Things you made, shot, grew or rode.",
+          "slug": "showcase",
+          "color": "#f1c40f",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 5,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-09-28T03:00:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "35"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
+        "id": "47",
+        "links": {
+          "self": "/tags/47"
+        },
+        "attributes": {
+          "name": "beginner",
+          "description": "New to it? No question is too small.",
+          "slug": "beginner",
+          "color": "#95a5a6",
+          "icon": "",
+          "isHidden": false,
+          "isPrimary": false,
+          "discussionCount": 5,
+          "position": null,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-09-19T15:30:00+00:00",
+          "canStartDiscussion": false,
+          "canAddToDiscussion": false,
+          "subscription": null,
+          "isQnA": false,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "38"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "tags",
         "id": "7",
         "links": {
           "self": "/tags/7"
@@ -444,43 +809,6 @@
             "data": {
               "type": "discussions",
               "id": "5"
-            }
-          },
-          "parent": {
-            "data": null
-          }
-        }
-      },
-      {
-        "type": "tags",
-        "id": "8",
-        "links": {
-          "self": "/tags/8"
-        },
-        "attributes": {
-          "name": "bug",
-          "description": "bug discussions",
-          "slug": "bug",
-          "color": "#d35400",
-          "icon": "",
-          "isHidden": false,
-          "isPrimary": false,
-          "discussionCount": 1,
-          "position": null,
-          "defaultSort": null,
-          "isChild": false,
-          "lastPostedAt": "2026-10-08T17:53:50+00:00",
-          "canStartDiscussion": false,
-          "canAddToDiscussion": false,
-          "subscription": null,
-          "isQnA": false,
-          "reminders": false
-        },
-        "relationships": {
-          "lastPostedDiscussion": {
-            "data": {
-              "type": "discussions",
-              "id": "4"
             }
           },
           "parent": {

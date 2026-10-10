@@ -23,7 +23,12 @@ void main() {
       test('the forum tree is the primary tags in order, with child tags under their parent', () async {
         final result = await proxy.getForumAsync(true, '', false);
         expect(result.result, isTrue);
-        expect(result.forums.map((f) => f.slug), ['general', 'support', 'feedback', 'announcements']);
+        expect(result.forums.map((f) => f.slug), [
+          'general', 'support', 'feedback', 'announcements',
+          // community_seed.php's sections, after the seed's own.
+          'photography', 'cooking', 'gardening', 'cycling', 'books', 'tech-help',
+        ]);
+        expect(result.forums.singleWhere((f) => f.slug == 'cooking').childForums.map((f) => f.slug), ['baking']);
 
         final support = result.forums[1];
         expect(support.childForums.map((f) => f.slug), ['ios']);

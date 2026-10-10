@@ -24,7 +24,8 @@ void main() {
       test('latest discussions, with authors, read state and links', () async {
         final result = await proxy.getLatestTopicAsync(0, 19);
         expect(result.result, isTrue);
-        expect(result.totalLatestNum, result.topics.length, reason: 'one page, nothing more');
+        expect(result.topics, hasLength(20));
+        expect(result.totalLatestNum, greaterThan(result.topics.length), reason: 'the community content fills a second page');
 
         final welcome = titled(result.topics, 'Welcome to the test forum');
         expect(welcome.authorName, 'admin');
@@ -61,7 +62,8 @@ void main() {
       test('top, stickies, newest, unread and started-by lists', () async {
         expect((await proxy.getTopTopicAsync(tagId('support'), 0, 19)).topics.single.title,
             'App crashes when opening a long thread');
-        expect((await proxy.getAnnTopicAsync('', 0, 19)).topics.single.title, 'Forum rules');
+        expect((await proxy.getAnnTopicAsync('', 0, 19)).topics.map((t) => t.title),
+            unorderedEquals(['Forum rules', 'Welcome! Start here']));
         final newest = await proxy.getNewTopicAsync(0, 19);
         expect(newest.topics.first.createdAtOrder(newest.topics[1]), isTrue);
         expect((await proxy.getUnreadTopicAsync(0, 19)).topics, isNotEmpty);

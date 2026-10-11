@@ -49,15 +49,16 @@ class DiscussionLink extends ForumLink {
 }
 
 class UserLink extends ForumLink {
-  const UserLink(this.username);
+  const UserLink(this.slug);
 
-  final String username;
-
-  @override
-  bool operator ==(Object other) => other is UserLink && other.username == username;
+  /// The user's slug, from `/u/{slug}`: their username, or their id on forums that use ID slugs.
+  final String slug;
 
   @override
-  int get hashCode => username.hashCode;
+  bool operator ==(Object other) => other is UserLink && other.slug == slug;
+
+  @override
+  int get hashCode => slug.hashCode;
 }
 
 class TagLink extends ForumLink {

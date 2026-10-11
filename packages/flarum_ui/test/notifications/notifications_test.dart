@@ -84,8 +84,9 @@ void main() {
         FlarumNotification(id: '1', contentType: 'postLiked'),
         FlarumNotification(id: '2', contentType: 'newPost'),
       ]);
-    await model.markRead(model.items.first);
+    expect(await model.markRead(model.items.first), isTrue, reason: 'the forum marked it, so the badge reloads');
     expect(model.items.first.isRead, isTrue);
+    expect(await model.markRead(model.items.first), isFalse, reason: 'already read: nothing sent');
     expect(await model.markAllRead(), isTrue);
     expect(model.items.every((n) => n.isRead), isTrue);
     expect(adapter.requests.map((r) => '${r.method} ${r.path}'), ['PATCH /notifications/1', 'POST /notifications/read']);

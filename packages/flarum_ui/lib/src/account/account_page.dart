@@ -1,7 +1,6 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
-import 'package:forum_kit/views/widgets/user_avatar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
@@ -10,6 +9,7 @@ import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
 import 'sign_in_page.dart';
+import '../widgets/flarum_avatar.dart';
 
 /// The reader's account: sign in (or create an account on the forum's
 /// page), or who is signed in, and sign out; and the app's appearance.
@@ -75,7 +75,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ],
           ] else ...[
-            Center(child: UserAvatar(username: reader.username, iconUrl: reader.avatarUrl, radius: 40)),
+            Center(child: FlarumAvatar(user: reader, radius: 40)),
             const SizedBox(height: DesignTokens.spacingM),
             Text(reader.displayName, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
             Text(l10n.signedInAs('@${reader.username}'),

@@ -483,4 +483,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get answered => 'Answered';
+
+  @override
+  String eventRecipientsChanged(String user) {
+    return '$user changed who is in this private discussion.';
+  }
+
+  @override
+  String get permissionRequired => 'Permission required';
 }

@@ -96,3 +96,42 @@ don't are the same ones.
 
 It found one real bug, now fixed: "mark all read" sent `markedAllAsReadAt: true`, which 1.8 takes
 and 2.0 refuses (422); it now sends the time.
+
+## Phone run (11 October 2026)
+
+On a Pixel 4a (Android 13, WebView 153), debug builds of `8fc0378`, over home Wi-Fi; the iPhone
+wasn't set up for signing yet. Passed on both test forums and six census forums (discuss.flarum.org,
+the Arabic foro.arsoporte.com, Flarum 2x, discuss.flarum.org.cn, mondedie.fr, linuxmint.com.ua):
+web-view sign-in (1.8 with Turnstile, 2.0), session restore and sign-out, Following, notifications,
+home, tags, the long thread (opens at post 21, keeps its place loading earlier posts), profiles,
+search, the formatting samples beside Chrome, light, dark and the forums' colours. Cloudflare didn't
+challenge the app or its web view.
+
+Fixed after it:
+
+- The debug forum switcher left Home and Account on the previous forum: `runApp` reused the element
+  tree. `FlarumApp` keys its `MaterialApp` by the forum.
+- Profiles failed on forums with the ID slug driver (Flarum 2x): users are found by slug
+  (`FlarumApi.userBySlug`, `/u/{slug}`, the author's `slug`), and their lists filtered by the
+  username the forum returns.
+- Right-to-left posts had their list bullets on the left: a post is laid out in its own direction,
+  from most of its letters (code stays left to right), and list indents are on the marker's side.
+- File cards offered Download where members lack fof/upload's download permission, then failed
+  with 403: the card shows a lock and "Permission required" (`fof-upload.canDownload`), as 2.0's
+  web does.
+- Smaller: the badge reloads once a notification is read; byobu's recipients event has its own
+  line; tag mentions (2.0) are chips in the tag's colour; nested bullets are hollow, then square;
+  letter avatars take Flarum's colour from the display name (`stringToColor`).
+- The benchmark measures one fixed thread (26838 on discuss.flarum.org): the second discussion in
+  Latest varied with its pictures (5 against 29 slow frames between two runs).
+
+Left as they are: a block spoiler is labelled "Spoiler" (the web's "Details" is Chrome's default
+label for a `<details>` without a summary); a video shows a play card, not its first frame; long
+code lines scroll sideways, as on the web. The badge can also overcount for up to five minutes
+after a like is withdrawn: Flarum caches the count and doesn't clear it when a notification is
+deleted (the web's badge shows the same).
+
+Scroll benchmark, profile mode, the Pixel 4a, discuss.flarum.org (two runs): the home list at
+0.5–0.6 ms build p50, 4.9 ms raster p50, 0–1 frames over 16.7 ms; the thread at 0.7 ms build p50,
+3.0 ms raster p50.
+

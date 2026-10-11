@@ -7,8 +7,10 @@ import 'package:html/dom.dart' as dom;
 import '../../l10n/flarum_l10n.dart';
 import 'forum_media.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/discourse_color.dart';
 import 'package:forum_kit/views/widgets/broken_image_widget.dart';
 import 'forum_image.dart';
+import '../tags/tag_label.dart' show flarumTagIcon;
 
 /// The one gap between consecutive blocks of a post body — paragraphs,
 /// lists, quotes, code, tables, previews, polls, images, details. Blocks
@@ -257,7 +259,9 @@ class MentionExtension extends HtmlExtension {
   @override
   bool matches(ExtensionContext context) =>
       context.elementName == 'a' &&
-      (context.classes.contains('UserMention') || context.classes.contains('PostMention'));
+      (context.classes.contains('UserMention') ||
+          context.classes.contains('PostMention') ||
+          context.classes.contains('TagMention'));
 
   @override
   InlineSpan build(ExtensionContext context) {
@@ -266,30 +270,43 @@ class MentionExtension extends HtmlExtension {
     final href = context.attributes['href'] ?? '';
     final isPost = context.classes.contains('PostMention');
     final style = context.styledElement?.style.generateTextStyle();
+    // flarum/tags (2.0): a tag mention, in the tag's colour (`style="--color:#…"`) with its icon.
+    final isTag = context.classes.contains('TagMention');
+    final tagColor = isTag ? _tagColor.firstMatch(context.attributes['style'] ?? '')?.group(1) : null;
     return WidgetSpan(
       alignment: PlaceholderAlignment.middle,
       child: _MentionPill(
         text: text,
         style: style,
-        icon: isPost ? Icons.reply : null,
+        icon: isPost ? Icons.reply : (isTag ? flarumTagIcon(context.element?.querySelector('i')?.className) : null),
+        background: tagColor == null ? null : parseDiscourseHex(tagColor),
         onTap: href.isEmpty ? null : () => onTap(href, isPost),
       ),
     );
   }
+
+  static final _tagColor = RegExp(r'--color:\s*(#[0-9a-fA-F]{3,8})');
 }
 
 class _MentionPill extends StatelessWidget {
-  const _MentionPill({required this.text, this.style, this.icon, this.onTap});
+  const _MentionPill({required this.text, this.style, this.icon, this.background, this.onTap});
 
   final String text;
   final TextStyle? style;
   final IconData? icon;
+
+  /// A tag's colour; the theme's quiet surface otherwise.
+  final Color? background;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final size = style?.fontSize ?? 16;
+    final fill = background;
+    final foreground = fill == null
+        ? colorScheme.onSurface
+        : (ThemeData.estimateBrightnessForColor(fill) == Brightness.dark ? Colors.white : Colors.black87);
     return Semantics(
       link: onTap != null,
       child: GestureDetector(
@@ -298,7 +315,7 @@ class _MentionPill extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 1),
           padding: EdgeInsets.symmetric(horizontal: size * 0.34, vertical: size * 0.2),
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
+            color: fill ?? colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(DesignTokens.radiusXS),
           ),
           child: Row(
@@ -307,7 +324,7 @@ class _MentionPill extends StatelessWidget {
               if (icon != null)
                 Padding(
                   padding: EdgeInsets.only(right: size * 0.25),
-                  child: Icon(icon, size: size * 0.9, color: colorScheme.onSurfaceVariant),
+                  child: Icon(icon, size: size * 0.9, color: fill == null ? colorScheme.onSurfaceVariant : foreground),
                 ),
               Text(
                 text,
@@ -315,7 +332,7 @@ class _MentionPill extends StatelessWidget {
                 style: (style ?? const TextStyle()).copyWith(
                   fontSize: size * 0.93,
                   fontWeight: FontWeight.normal,
-                  color: colorScheme.onSurface,
+                  color: foreground,
                   decoration: TextDecoration.none,
                   height: 1.0,
                 ),

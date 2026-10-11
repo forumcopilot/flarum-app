@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
-import 'package:forum_kit/views/widgets/user_avatar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:intl/intl.dart';
 
@@ -11,18 +10,23 @@ import '../../l10n/flarum_l10n.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
 import '../thread/thread_page.dart';
+import '../widgets/flarum_avatar.dart';
 
 /// A user's profile: who they are, when they joined and were last seen, and
 /// what they wrote: their posts, newest first, and the discussions they
 /// started.
+///
+/// Found by [slug], as the forum's `/u/{slug}` links name users: the username
+/// by default, the user's id on forums that use the ID slug driver. Their
+/// posts and discussions are then filtered by the username the forum returns.
 class UserPage extends StatefulWidget {
-  const UserPage({super.key, required this.site, required this.username});
+  const UserPage({super.key, required this.site, required this.slug});
 
   final SiteContext site;
-  final String username;
+  final String slug;
 
-  static Future<void> open(BuildContext context, SiteContext site, String username) =>
-      Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => UserPage(site: site, username: username)));
+  static Future<void> open(BuildContext context, SiteContext site, String slug) =>
+      Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => UserPage(site: site, slug: slug)));
 
   @override
   State<UserPage> createState() => _UserPageState();
@@ -33,24 +37,23 @@ class _UserPageState extends State<UserPage> {
   FlarumUser? _user;
   Object? _error;
 
-  late final _posts = _UserPostsModel(_forum, widget.username)..addListener(_changed);
-  late final _discussions = DiscussionListModel(_forum, author: widget.username)..addListener(_changed);
+  // Made once the user is found, from their username.
+  _UserPostsModel? _posts;
+  DiscussionListModel? _discussions;
 
   @override
   void initState() {
     super.initState();
     _load();
-    _posts.refresh();
-    _discussions.refresh();
   }
 
   @override
   void dispose() {
     _posts
-      ..removeListener(_changed)
+      ?..removeListener(_changed)
       ..dispose();
     _discussions
-      ..removeListener(_changed)
+      ?..removeListener(_changed)
       ..dispose();
     super.dispose();
   }
@@ -61,8 +64,15 @@ class _UserPageState extends State<UserPage> {
 
   Future<void> _load() async {
     try {
-      final user = await _forum.api.userByUsername(widget.username);
-      if (mounted) setState(() => _user = user);
+      final user = await _forum.api.userBySlug(widget.slug);
+      if (!mounted) return;
+      setState(() {
+        _user = user;
+        _posts ??= _UserPostsModel(_forum, user.username)..addListener(_changed);
+        _discussions ??= DiscussionListModel(_forum, author: user.username)..addListener(_changed);
+      });
+      _posts!.refresh();
+      _discussions!.refresh();
     } catch (e) {
       if (mounted) setState(() => _error = e);
     }
@@ -74,7 +84,7 @@ class _UserPageState extends State<UserPage> {
     final user = _user;
     if (user == null) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.username)),
+        appBar: AppBar(title: Text(widget.slug)),
         body: _error != null
             ? EmptyStateView.error(
                 message: l10n.userLoadFailed,
@@ -101,8 +111,8 @@ class _UserPageState extends State<UserPage> {
           ],
           body: TabBarView(
             children: [
-              _PostsList(site: widget.site, model: _posts),
-              DiscussionListView(site: widget.site, list: _discussions),
+              _PostsList(site: widget.site, model: _posts!),
+              DiscussionListView(site: widget.site, list: _discussions!),
             ],
           ),
         ),
@@ -128,7 +138,7 @@ class _UserHeader extends StatelessWidget {
       padding: const EdgeInsets.all(DesignTokens.spacingL),
       child: Row(
         children: [
-          UserAvatar(username: user.username, iconUrl: user.avatarUrl, radius: 32),
+          FlarumAvatar(user: user, radius: 32),
           const SizedBox(width: DesignTokens.spacingL),
           Expanded(
             child: Column(

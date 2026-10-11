@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flarum_core/flarum_core.dart';
+import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forum_kit/views/widgets/code_block.dart';
@@ -45,6 +47,90 @@ class _Taps {
 
 void main() {
   setUp(FlarumForum.resetForTesting);
+
+  group('fof/upload\'s download permission', () {
+    test('comes from the forum (fof-upload.canDownload)', () async {
+      final forum = FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum();
+      expect(ForumMediaAuth.of(_site(FixtureForum.baseUrl)).mayDownloadFiles, isTrue,
+          reason: 'until the forum is read, it decides');
+      await forum.refresh();
+      expect(ForumMediaAuth.of(_site(FixtureForum.baseUrl)).mayDownloadFiles, isFalse,
+          reason: 'members of the test forums may not download');
+    });
+
+    testWidgets('without it a file card says so instead of offering a download', (tester) async {
+      const auth = ForumMediaAuth(
+          siteUrl: 'https://forum.test', credentials: {'Authorization': 'Token t'}, mayDownloadFiles: false);
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        home: const Scaffold(
+          body: Column(children: [
+            AttachmentFileCard(name: 'notes.txt', url: 'https://forum.test/api/fof/download/abc', auth: auth),
+            AttachmentFileCard(name: 'elsewhere.pdf', url: 'https://example.com/elsewhere.pdf', auth: auth),
+          ]),
+        ),
+      ));
+      expect(find.text('Permission required'), findsOneWidget, reason: "only the forum's own downloads are guarded");
+      expect(find.byIcon(Icons.download_rounded), findsOneWidget);
+    });
+  });
+
+  testWidgets('a tag mention (flarum/tags 2.0) is a pill in the tag\'s colour that opens the tag', (tester) async {
+    final taps = _Taps();
+    await tester.pumpWidget(MaterialApp(
+      theme: AppTheme.lightTheme,
+      home: Scaffold(
+        body: FlarumContent(
+          siteContext: _site('https://forum.test'),
+          callbacks: taps.callbacks,
+          content: '<p>See <a href="https://forum.test/t/general" data-id="1" class="TagMention TagMention--colored" '
+              'style="--color:#FF914D"><span class="TagMention-text"><i class="icon fas fa-home"></i> General</span></a>.</p>',
+        ),
+      ),
+    ));
+    await tester.pump();
+    final pill = find.ancestor(of: find.text('General'), matching: find.byType(Container)).first;
+    expect((tester.widget<Container>(pill).decoration! as BoxDecoration).color, const Color(0xFFFF914D));
+    expect(find.byIcon(Icons.home_outlined), findsOneWidget, reason: "the tag's Font Awesome icon (fa-home)");
+    await tester.tap(find.text('General'));
+    expect(taps.urls, ['https://forum.test/t/general']);
+  });
+
+  group('a post\'s direction', () {
+    test('comes from most of its letters, markup aside', () {
+      expect(FlarumContent.directionOf('<p>مرحبا بكم في <a href="https://forum.test/d/1-hello">Flarum</a></p>'),
+          TextDirection.rtl);
+      expect(FlarumContent.directionOf('<p>שלום עולם, hello</p>'), TextDirection.rtl);
+      expect(FlarumContent.directionOf('<p class="UserMention">Hello <b>world</b>, مرحبا</p>'), TextDirection.ltr);
+      expect(FlarumContent.directionOf('<p>🎉 123 &amp; 456</p>'), isNull);
+    });
+
+    testWidgets('an Arabic post is laid out right to left, its code left to right', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        home: Scaffold(
+          body: FlarumContent(
+            siteContext: _site('https://forum.test'),
+            content: '<p>مرحبا بكم</p><ul><li>عنصر أول</li></ul><pre><code>final x = 1;</code></pre>',
+          ),
+        ),
+      ));
+      await tester.pump();
+      expect(Directionality.of(tester.element(find.byType(Html))), TextDirection.rtl);
+      expect(Directionality.of(tester.element(find.byType(CodeBlock))), TextDirection.ltr);
+    });
+
+    testWidgets('an English post keeps the app\'s direction', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        home: Scaffold(
+          body: FlarumContent(siteContext: _site('https://forum.test'), content: '<p>Hello, مرحبا</p>'),
+        ),
+      ));
+      await tester.pump();
+      expect(find.descendant(of: find.byType(FlarumContent), matching: find.byType(Directionality)), findsNothing);
+    });
+  });
 
   for (final version in ['v1', 'v2']) {
     final forum = _samples[version] as Map<String, dynamic>;

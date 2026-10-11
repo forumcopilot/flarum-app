@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
-import 'package:forum_kit/views/widgets/user_avatar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../thread/thread_page.dart';
 import 'notifications_model.dart';
+import '../widgets/flarum_avatar.dart';
 
 /// The reader's notifications: who did what, where, and when, unread ones
 /// highlighted. A tap marks one read and opens the post it's about.
 class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key, required this.site});
+  const NotificationsPage({super.key, required this.site, this.onRead});
 
   final SiteContext site;
+
+  /// The forum marked one or all read: the unread count (the tab's badge) changed.
+  final VoidCallback? onRead;
 
   @override
   State<NotificationsPage> createState() => _NotificationsPageState();
@@ -44,7 +47,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 
   Future<void> _open(FlarumNotification n) async {
-    _model.markRead(n);
+    _model.markRead(n).then((marked) => marked ? widget.onRead?.call() : null);
     final discussion = n.discussionId;
     if (discussion == null) return;
     await ThreadPage.open(context, widget.site, discussion, near: n.openAt, title: n.discussionTitle);
@@ -54,6 +57,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final l10n = flarumL10n(context);
     final messenger = ScaffoldMessenger.of(context);
     final ok = await _model.markAllRead();
+    if (ok) widget.onRead?.call();
     messenger.showSnackBar(
         SnackBar(content: Text(ok ? l10n.allNotificationsMarkedAsRead : l10n.failedToMarkNotificationsRead)));
   }
@@ -129,7 +133,7 @@ class NotificationTile extends StatelessWidget {
       color: n.isRead ? Colors.transparent : colorScheme.primaryContainer.withValues(alpha: 0.35),
       child: ListTile(
         onTap: onTap,
-        leading: UserAvatar(username: n.fromUser?.username ?? '', iconUrl: n.fromUser?.avatarUrl, radius: 20),
+        leading: FlarumAvatar(user: n.fromUser),
         title: Text(
           message(n, flarumL10n(context)),
           style: theme.textTheme.bodyMedium?.copyWith(fontWeight: n.isRead ? FontWeight.w400 : FontWeight.w600),

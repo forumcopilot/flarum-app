@@ -24,6 +24,10 @@ import 'post_body_extensions.dart' show EmbeddedCard, FileRow;
 /// private message, or on a forum with prevent_anons_from_downloading_files,
 /// came back "not found". While it downloads, Download becomes the progress
 /// ring, and tapping it cancels. Share still shares the address.
+///
+/// Without fof/upload's download permission ([ForumMediaAuth.mayDownload]) the
+/// card says so with a lock, as the web does, instead of offering a download
+/// the forum refuses.
 class AttachmentFileCard extends StatefulWidget {
   const AttachmentFileCard({
     super.key,
@@ -139,9 +143,10 @@ class _AttachmentFileCardState extends State<AttachmentFileCard> {
     final label = widget.name.isEmpty ? l10n.attachmentDefaultName : widget.name;
     final hasUrl = widget.url.isNotEmpty;
     final progress = _progress;
+    final locked = hasUrl && widget.auth?.mayDownload(widget.url) == false;
 
     return EmbeddedCard(
-      onTap: hasUrl && !_busy ? _open : null,
+      onTap: hasUrl && !_busy && !locked ? _open : null,
       padding: EdgeInsets.zero,
       child: FileRow(
         // The 48dp type tile the composer draws, from the same helpers, so
@@ -163,34 +168,47 @@ class _AttachmentFileCardState extends State<AttachmentFileCard> {
           if (widget.size != null && widget.size!.isNotEmpty) widget.size!,
         ].join(' • ')),
         trailing: [
-          IconButton(
-            tooltip: l10n.share,
-            onPressed: hasUrl ? _share : null,
-            icon: Icon(Icons.share_outlined,
-                size: DesignTokens.iconSizeM, color: colorScheme.onSurfaceVariant),
-          ),
-          if (_busy)
-            IconButton(
-              tooltip: l10n.cancel,
-              onPressed: () => _cancel?.cancel(),
-              icon: SizedBox(
-                width: DesignTokens.iconSizeM,
-                height: DesignTokens.iconSizeM,
-                child: CircularProgressIndicator(
-                  value: progress,
-                  strokeWidth: 2.5,
-                  semanticsLabel: l10n.downloading(label),
-                  semanticsValue: progress == null ? null : '${(progress * 100).round()}%',
-                ),
+          if (locked)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingM),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.lock_outline, size: DesignTokens.iconSizeS, color: colorScheme.onSurfaceVariant),
+                  const SizedBox(width: DesignTokens.spacingXS),
+                  Text(l10n.permissionRequired,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+                ],
               ),
             )
-          else
+          else ...[
             IconButton(
-              tooltip: l10n.download,
-              onPressed: hasUrl ? _open : null,
-              icon: Icon(Icons.download_rounded,
-                  size: DesignTokens.iconSizeM, color: colorScheme.primary),
+              tooltip: l10n.share,
+              onPressed: hasUrl ? _share : null,
+              icon: Icon(Icons.share_outlined, size: DesignTokens.iconSizeM, color: colorScheme.onSurfaceVariant),
             ),
+            if (_busy)
+              IconButton(
+                tooltip: l10n.cancel,
+                onPressed: () => _cancel?.cancel(),
+                icon: SizedBox(
+                  width: DesignTokens.iconSizeM,
+                  height: DesignTokens.iconSizeM,
+                  child: CircularProgressIndicator(
+                    value: progress,
+                    strokeWidth: 2.5,
+                    semanticsLabel: l10n.downloading(label),
+                    semanticsValue: progress == null ? null : '${(progress * 100).round()}%',
+                  ),
+                ),
+              )
+            else
+              IconButton(
+                tooltip: l10n.download,
+                onPressed: hasUrl ? _open : null,
+                icon: Icon(Icons.download_rounded, size: DesignTokens.iconSizeM, color: colorScheme.primary),
+              ),
+          ],
         ],
       ),
     );

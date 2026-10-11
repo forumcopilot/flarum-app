@@ -52,6 +52,23 @@ void main() {
     expect(appearance.value, ThemeMode.dark);
   });
 
+  testWidgets('another forum gets a fresh app, not the last forum\'s screens', (tester) async {
+    FlarumForum.resetForTesting();
+    FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum(signedIn: false);
+    SiteContext site() => SiteContext(
+          siteType: FlarumProxyFactory.siteType,
+          site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+        );
+    await tester.pumpWidget(FlarumApp(site: site()));
+    await tester.pump();
+    final first = tester.state(find.byType(AppShell));
+    await tester.pumpWidget(FlarumApp(site: site()));
+    await tester.pump();
+    expect(tester.state(find.byType(AppShell)), isNot(same(first)));
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 5));
+  });
+
   for (final version in FlarumVersion.values) {
     testWidgets('Flarum ${version.name}: the account tab shows who is signed in', (tester) async {
       FlarumForum.resetForTesting();

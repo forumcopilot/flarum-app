@@ -41,14 +41,16 @@ class NotificationsModel extends ChangeNotifier {
     }
   }
 
-  /// Marks [n] read, here at once and then on the forum.
-  Future<void> markRead(FlarumNotification n) async {
-    if (n.isRead) return;
+  /// Marks [n] read, here at once and then on the forum. Returns whether the forum did.
+  Future<bool> markRead(FlarumNotification n) async {
+    if (n.isRead) return false;
     _replace(n, read: true);
     try {
       await forum.api.markNotificationRead(n.id);
+      return true;
     } catch (_) {
       _replace(n, read: false);
+      return false;
     }
   }
 

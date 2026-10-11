@@ -59,6 +59,9 @@ class FlarumApp extends StatelessWidget {
 
   Widget _app(ThemeMode mode) {
     return MaterialApp(
+      // Keyed by the forum: after the switcher's runApp, every screen starts afresh on the new one
+      // instead of keeping the state (and the forum) it was built with.
+      key: ObjectKey(site),
       title: site.site.name,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

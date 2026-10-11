@@ -805,6 +805,18 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Answered'**
   String get answered;
+
+  /// Event post in a fof/byobu private discussion: its recipients changed (including when it was started)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed who is in this private discussion.'**
+  String eventRecipientsChanged(String user);
+
+  /// On a file card in a post, instead of Download, when the reader may not download files (fof/upload's download permission)
+  ///
+  /// In en, this message translates to:
+  /// **'Permission required'**
+  String get permissionRequired;
 }
 
 class _FlarumLocalizationsDelegate

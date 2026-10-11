@@ -43,7 +43,7 @@ class ThreadPage extends StatefulWidget {
   /// The title to show until the discussion has loaded.
   final String? title;
 
-  final void Function(BuildContext context, String username)? onOpenUser;
+  final void Function(BuildContext context, String slug)? onOpenUser;
   final void Function(BuildContext context, String slug)? onOpenTag;
 
   /// Pushes a thread page for [discussionId].
@@ -131,8 +131,8 @@ class _ThreadPageState extends State<ThreadPage> {
         _goTo(number ?? 1);
       case DiscussionLink(:final id, :final number):
         ThreadPage.open(context, widget.site, id, near: number);
-      case UserLink(:final username):
-        _openUser(username);
+      case UserLink(:final slug):
+        _openUser(slug);
       case TagLink(:final slug) when widget.onOpenTag != null:
         widget.onOpenTag!(context, slug);
       default:
@@ -140,11 +140,12 @@ class _ThreadPageState extends State<ThreadPage> {
     }
   }
 
-  void _openUser(String username) {
+  /// Opens the profile of the user whose slug is [slug] (see [UserPage]).
+  void _openUser(String slug) {
     if (widget.onOpenUser != null) {
-      widget.onOpenUser!(context, username);
+      widget.onOpenUser!(context, slug);
     } else {
-      UserPage.open(context, widget.site, username);
+      UserPage.open(context, widget.site, slug);
     }
   }
 
@@ -273,7 +274,7 @@ class _ThreadPageState extends State<ThreadPage> {
         site: widget.site,
         post: post,
         callbacks: _callbacksFor(post),
-        onAuthorTap: (author) => _openUser(author.username),
+        onAuthorTap: (author) => _openUser(author.slug ?? author.username),
         onOpenReply: _openReply,
         tags: _tags,
         isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,

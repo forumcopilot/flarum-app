@@ -261,7 +261,7 @@ class FlarumUserProxy implements IFCUserProxy {
 
   Future<FlarumUser> _user({String? userId, String? username}) {
     if (userId != null && userId.isNotEmpty) return _forum.api.user(userId);
-    if (username != null && username.isNotEmpty) return _forum.api.userByUsername(username);
+    if (username != null && username.isNotEmpty) return _forum.api.userBySlug(username);
     throw ArgumentError('A user id or username is needed');
   }
 

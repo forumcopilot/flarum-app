@@ -100,6 +100,13 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   subject is the reader's own post, and the reply that mentions it is `content.replyNumber`.
   `POST /api/notifications/read` marks all read (204).
 - byobu private discussions are invisible to admins who aren't recipients.
+- Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
+  the username by default, the id on forums with the ID slug driver, where a username 404s. Filter
+  posts and discussions by the username the forum returns.
+- fof/upload: `fof-upload.canDownload` (forum attribute) is the reader's download permission;
+  without it `/api/fof/download/…` answers 403. Members don't have it by default.
+- The unread notification count (`GET /api` actor) is cached for 5 minutes and not cleared when a
+  notification is deleted (a like withdrawn), so it can exceed what the list shows until then.
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the
   reader's lists). fof/follow-tags puts `lurk`, `follow`, `ignore` or `hide` on each tag; 1.x sets it
   with `POST /api/tags/{id}/subscription {"data":{"subscription":…}}`, 2.0 by PATCHing the attribute.

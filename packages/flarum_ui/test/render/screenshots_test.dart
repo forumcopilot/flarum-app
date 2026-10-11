@@ -167,7 +167,7 @@ void main() {
               home: switch (discussion) {
                 null => HomePage(site: _site(FixtureForum.baseUrl)),
                 final user when user.startsWith('user:') =>
-                  UserPage(site: _site(FixtureForum.baseUrl), username: user.substring(5)),
+                  UserPage(site: _site(FixtureForum.baseUrl), slug: user.substring(5)),
                 final name => ThreadPage(
                     site: _site(FixtureForum.baseUrl), discussionId: fixtures.discussionId(name), near: near),
               },

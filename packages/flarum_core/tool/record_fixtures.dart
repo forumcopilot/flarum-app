@@ -98,7 +98,7 @@ Future<void> main(List<String> args) async {
   await record('posts_long_near_21', () => api.postsNear(discussions['long']!, 21, limit: 20));
   await record('posts_welcome_near_2', () => api.postsNear(discussions['welcome']!, 2, limit: 20));
   await record('user_bob', () => api.user(users['bob']!));
-  await record('user_bob_by_name', () => api.userByUsername('bob'));
+  await record('user_bob_by_name', () => api.userBySlug('bob'));
   await record('users_search_bo', () => api.searchUsers('bo'));
   await record('posts_by_bob', () => api.userPosts('bob'));
   await record('tags', api.tags);

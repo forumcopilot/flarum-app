@@ -44,9 +44,13 @@ class _AppShellState extends State<AppShell> {
     });
     // The badge's count comes from the forum's info; read it again after a
     // look at the notifications.
-    if (tab == _notificationsTab && _forum.isSignedIn) {
-      _forum.refresh().then((_) => mounted ? setState(() {}) : null, onError: (_) {});
-    }
+    if (tab == _notificationsTab) _refreshBadge();
+  }
+
+  /// Reads the forum's info again for the badge's unread count.
+  void _refreshBadge() {
+    if (!_forum.isSignedIn) return;
+    _forum.refresh().then((_) => mounted ? setState(() {}) : null, onError: (_) {});
   }
 
   void _signedInOrOut() => setState(() {
@@ -69,7 +73,11 @@ class _AppShellState extends State<AppShell> {
         children: [
           tab(0, () => HomePage(key: ValueKey(('home', _session)), site: widget.site, title: widget.site.site.name)),
           tab(1, () => TagsPage(key: ValueKey(('tags', _session)), site: widget.site)),
-          tab(2, () => NotificationsPage(key: ValueKey(('notifications', _session)), site: widget.site)),
+          tab(2, () => NotificationsPage(
+                key: ValueKey(('notifications', _session)),
+                site: widget.site,
+                onRead: _refreshBadge,
+              )),
           tab(3, () => AccountPage(
                 site: widget.site,
                 appearance: widget.appearance,

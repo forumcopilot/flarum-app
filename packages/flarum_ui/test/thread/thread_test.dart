@@ -210,6 +210,15 @@ void main() {
         'Alice unlocked the discussion.');
     expect(EventPostNotice.describe(event('discussionStickied', {'sticky': true}), l10n).$2,
         'Alice stickied the discussion.');
+    expect(
+        EventPostNotice.describe(
+                event('recipientsModified', {
+                  'new': {'users': [2, 3], 'groups': []},
+                  'old': {'users': [], 'groups': []},
+                }),
+                l10n)
+            .$2,
+        'Alice changed who is in this private discussion.');
     expect(EventPostNotice.describe(event('discussionMerged', null), l10n).$2, 'Alice changed the discussion.');
     final tags = {
       '1': const FlarumTag(id: '1', name: 'General', slug: 'general', isPrimary: true),

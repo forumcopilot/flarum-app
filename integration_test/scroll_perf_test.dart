@@ -10,6 +10,16 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+/// The thread to measure: always the same one, so runs compare. discuss.flarum.org's 26838 ("Flarum
+/// is slow in comparison to NodeBB", 123 posts, text without pictures) unless
+/// `--dart-define=PERF_DISCUSSION=…` names another; on another forum without one, the second
+/// discussion in Latest.
+String? get _thread {
+  const chosen = String.fromEnvironment('PERF_DISCUSSION');
+  if (chosen.isNotEmpty) return chosen;
+  return AppForumConfig.current.baseUrl == 'https://discuss.flarum.org' ? '26838' : null;
+}
+
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
@@ -23,12 +33,18 @@ void main() {
 
     await _measure('topic_list', () => _flings(tester, 8));
 
-    // Back to the top, then open the second discussion.
+    // Back to the top, then open the thread.
     for (var i = 0; i < 2; i++) {
       await tester.fling(find.byType(DiscussionTile).first, const Offset(0, 4000), 8000);
       await _settle(tester, frames: 60);
     }
-    await tester.tap(find.byType(DiscussionTile).at(1));
+    final thread = _thread;
+    if (thread != null) {
+      final home = tester.widget<HomePage>(find.byType(HomePage));
+      unawaited(ThreadPage.open(tester.element(find.byType(DiscussionTile).first), home.site, thread));
+    } else {
+      await tester.tap(find.byType(DiscussionTile).at(1));
+    }
     await _pumpUntil(tester, find.byType(PostTile), timeout: const Duration(seconds: 60));
     await tester.pump(const Duration(seconds: 4));
     await _settle(tester, frames: 30);

@@ -33,7 +33,7 @@ import 'links.dart';
 /// spoilers blurred until tapped, and a "Spoiler" label on block spoilers.
 ///
 /// Taps go to [callbacks]: a user mention to `onMentionTap` with the
-/// username, a picture to `onImageTap`, and any other link (a post mention,
+/// user's slug from its link (`/u/{slug}`), a picture to `onImageTap`, and any other link (a post mention,
 /// a link to a discussion on this forum) to `onUrlTap`, so the host can open
 /// the forum's own pages in the app. Without a callback a link opens outside
 /// the app.
@@ -69,8 +69,38 @@ class FlarumContent extends StatelessWidget {
     }
   }
 
+  /// The direction a post reads in, from its letters (markup and entities
+  /// aside): right-to-left when most are in a right-to-left script (Arabic,
+  /// Hebrew…), as the web lays such posts out. Null when it has no letters.
+  static TextDirection? directionOf(String html) {
+    final text = html.replaceAll(_markup, ' ');
+    var rtl = 0;
+    var letters = 0;
+    for (final letter in _letter.allMatches(text)) {
+      letters++;
+      if (_rtlLetter.hasMatch(letter[0]!)) rtl++;
+      if (letters == 2000) break; // enough to tell
+    }
+    if (letters == 0) return null;
+    return rtl * 2 > letters ? TextDirection.rtl : TextDirection.ltr;
+  }
+
+  static final _markup = RegExp(r'<[^>]*>|&#?\w+;');
+  static final _letter = RegExp(r'\p{L}', unicode: true);
+  static final _rtlLetter = RegExp(r'[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]');
+
+  /// Laid out in the post's own direction ([directionOf]), which can differ
+  /// from the app's: list markers, alignment and punctuation follow it.
   @override
   Widget build(BuildContext context) {
+    final direction = directionOf(content);
+    final post = _post(context);
+    return direction == null || direction == Directionality.of(context)
+        ? post
+        : Directionality(textDirection: direction, child: post);
+  }
+
+  Widget _post(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -183,11 +213,15 @@ class FlarumContent extends StatelessWidget {
                 ?.group(1);
             return withBlockGap(
               extensionContext,
-              CodeBlock(
-                // A trailing newline would leave a blank band inside the block.
-                code: code.replaceAll(RegExp(r'\n+$'), ''),
-                language: language,
-                textStyle: codeStyle,
+              // Code reads left to right, in a right-to-left post too.
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: CodeBlock(
+                  // A trailing newline would leave a blank band inside the block.
+                  code: code.replaceAll(RegExp(r'\n+$'), ''),
+                  language: language,
+                  textStyle: codeStyle,
+                ),
               ),
             );
           },
@@ -774,10 +808,14 @@ Map<String, Style> _stylesFor(ColorScheme colorScheme, TextStyle body,
       fontSize: FontSize(_codeFontSize),
       fontFamily: 'monospace',
     ),
+    // The indent is on the marker's side: the right in a right-to-left post.
     'ul, ol': Style(
       margin: Margins.only(bottom: kPostBlockGap),
-      padding: HtmlPaddings.only(left: 24),
+      padding: HtmlPaddings.only(inlineStart: 24),
     ),
+    // Nested bullets as the web draws them: hollow, then square.
+    'ul ul': Style(listStyleType: ListStyleType.circle),
+    'ul ul ul': Style(listStyleType: ListStyleType.square),
     'li': Style(margin: Margins.only(bottom: DesignTokens.spacingXS)),
     // The list's own gap follows its last item; a list inside an item sits
     // tight in it.

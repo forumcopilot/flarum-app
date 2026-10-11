@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
 import 'package:forum_kit/utils/time_utils.dart';
-import 'package:forum_kit/views/widgets/user_avatar.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../tags/tag_label.dart';
+import '../widgets/flarum_avatar.dart';
 
 /// A discussion in a list, as the web's discussion row: the starter's
 /// avatar, the title (bold while there's something unread), its tags, who
@@ -42,7 +42,7 @@ class DiscussionTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserAvatar(username: d.author?.username ?? '', iconUrl: d.author?.avatarUrl, radius: 20),
+            FlarumAvatar(user: d.author),
             const SizedBox(width: DesignTokens.spacingM),
             Expanded(
               child: Column(

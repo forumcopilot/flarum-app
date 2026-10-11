@@ -309,9 +309,10 @@ class FlarumApi {
 
   Future<FlarumUser> user(String id) async => FlarumUser.fromResource((await client.get('/users/$id')).single);
 
-  /// A user by username; without `bySlug` Flarum reads it as an id and 404s.
-  Future<FlarumUser> userByUsername(String username) async => FlarumUser.fromResource(
-      (await client.get('/users/${Uri.encodeComponent(username)}', query: {'bySlug': 'true'})).single);
+  /// A user by slug, as `/u/{slug}` names them: the username, or the id on forums that use the ID
+  /// slug driver (where a username 404s). Without `bySlug` Flarum reads it as an id.
+  Future<FlarumUser> userBySlug(String slug) async => FlarumUser.fromResource(
+      (await client.get('/users/${Uri.encodeComponent(slug)}', query: {'bySlug': 'true'})).single);
 
   /// Users matching [query]. Needs the forum's "search users" permission
   /// (`canSearchUsers`); guests get 403 by default.

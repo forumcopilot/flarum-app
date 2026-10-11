@@ -19,15 +19,33 @@ import 'package:forumcopilot_sdk/services/fc_http_overrides.dart';
 /// to an image host or a CDN, and not to the forum's static files either.
 @immutable
 class ForumMediaAuth {
-  const ForumMediaAuth({required this.siteUrl, this.credentials = const {}});
+  const ForumMediaAuth({required this.siteUrl, this.credentials = const {}, this.mayDownloadFiles = true});
 
   /// The signed-in reader of [site]; no credentials for a guest.
   factory ForumMediaAuth.of(SiteContext site) {
-    final token = FlarumForum.of(site).api.client.token;
+    final forum = FlarumForum.of(site);
+    final token = forum.api.client.token;
     return ForumMediaAuth(
       siteUrl: site.site.url,
       credentials: token == null ? const {} : {'Authorization': 'Token $token'},
+      // fof/upload's download permission for this reader; when the forum doesn't say, it decides.
+      mayDownloadFiles: switch (forum.info) {
+        final info? when info.attributes.containsKey('fof-upload.canDownload') => info.can('fof-upload.canDownload'),
+        _ => true,
+      },
     );
+  }
+
+  /// Whether the reader may download files through fof/upload's download endpoint
+  /// (`fof-upload.canDownload`). A guest, and by default a member, may not.
+  final bool mayDownloadFiles;
+
+  /// Whether the reader may fetch [url]: anything but one of the forum's file downloads, and
+  /// those with fof/upload's download permission.
+  bool mayDownload(String url) {
+    if (mayDownloadFiles) return true;
+    final path = _pathOnForum(url);
+    return path == null || !_privatePaths.any(path.startsWith);
   }
 
   /// The forum's address, as the app was configured with it.

@@ -62,8 +62,10 @@ flutter drive --profile -d <device id> --driver=test_driver/perf_driver.dart \
 grep PERF /tmp/drive.log
 ```
 
-Without `--dart-define` it measures discuss.flarum.org, a fixed public forum with long threads. It
-prints one line per screen (`topic_list`, `thread`), with the labels discourse-app uses, plus the
-thread it opened. Run it twice before comparing: two runs agree within about 0.2 ms on p50 and 10%
+Without `--dart-define` it measures discuss.flarum.org, a fixed public forum with long threads, and
+always the same thread there: 26838, 123 posts of text without pictures (the second discussion in
+Latest, as discourse-app's benchmark opens, varied from run to run with the pictures in it). Another
+thread: `--dart-define=PERF_DISCUSSION=<id>`. It prints one line per screen (`topic_list`, `thread`),
+with the labels discourse-app uses, plus the thread it opened. Run it twice before comparing: two runs agree within about 0.2 ms on p50 and 10%
 on the counts of slow frames. `flutter drive` uninstalls the app when it finishes.
 

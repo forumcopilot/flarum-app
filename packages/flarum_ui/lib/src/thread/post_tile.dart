@@ -4,12 +4,12 @@ import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
-import 'package:forum_kit/views/widgets/user_avatar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
+import '../widgets/flarum_avatar.dart';
 
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
@@ -72,10 +72,8 @@ class PostTile extends StatelessWidget {
                 button: author != null && onAuthorTap != null,
                 label: l10n.viewProfileOfUser(name),
                 excludeSemantics: true,
-                child: UserAvatar(
-                  username: author?.username ?? '',
-                  iconUrl: author?.avatarUrl,
-                  radius: 20,
+                child: FlarumAvatar(
+                  user: author,
                   onTap: author == null || onAuthorTap == null ? null : () => onAuthorTap!(author),
                 ),
               ),
@@ -177,7 +175,7 @@ extension on PostTile {
             ),
             for (final reply in post.mentionedBy)
               ListTile(
-                leading: UserAvatar(username: reply.author?.username ?? '', iconUrl: reply.author?.avatarUrl, radius: 18),
+                leading: FlarumAvatar(user: reply.author, radius: 18),
                 title: Text(reply.author?.displayName ?? l10n.someone),
                 subtitle: Text(reply.discussionId == post.discussionId || reply.discussionTitle == null
                     ? (reply.number == null ? '' : l10n.postNumber(reply.number!))
@@ -304,6 +302,9 @@ class EventPostNotice extends StatelessWidget {
           if (removed.isNotEmpty) return (Icons.sell_outlined, l10n.eventTagsRemoved(user, removed));
         }
         return (Icons.sell_outlined, l10n.eventTagged(user));
+      case 'recipientsModified':
+        // fof/byobu: {new: {users, groups}, old: {users, groups}}, ids only.
+        return (Icons.group_outlined, l10n.eventRecipientsChanged(user));
     }
     return (Icons.info_outline, l10n.eventOther(user));
   }

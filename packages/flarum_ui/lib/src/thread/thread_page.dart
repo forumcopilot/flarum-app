@@ -159,6 +159,27 @@ class _ThreadPageState extends State<ThreadPage> {
     }
   }
 
+  /// fof/best-answer chose a reply, so the question offers a way to it.
+  bool get _bestAnswerElsewhere {
+    final answer = _model.discussion?.bestAnswerPostId;
+    return answer != null && !_model.posts.any((post) => post.number == 1 && post.id == answer);
+  }
+
+  /// Goes to the best answer: scrolls there if it's loaded, else finds its number and opens the thread there.
+  Future<void> _goToBestAnswer() async {
+    final id = _model.discussion?.bestAnswerPostId;
+    if (id == null) return;
+    final loaded = _model.posts.where((post) => post.id == id).firstOrNull;
+    if (loaded != null) return _goTo(loaded.number);
+    try {
+      final answer = await FlarumForum.of(widget.site).api.post(id);
+      if (mounted) _goTo(answer.number);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(describeFlarumError(e))));
+    }
+  }
+
   /// Scrolls to post [number], reopening the thread there if it isn't loaded.
   void _goTo(int number) {
     final index = _model.indexOfNumber(number);
@@ -255,6 +276,8 @@ class _ThreadPageState extends State<ThreadPage> {
         onAuthorTap: (author) => _openUser(author.username),
         onOpenReply: _openReply,
         tags: _tags,
+        isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,
+        onGoToBestAnswer: post.number == 1 && _bestAnswerElsewhere ? _goToBestAnswer : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.

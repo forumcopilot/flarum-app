@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/theme/forum_colors.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/user_avatar.dart';
 
@@ -52,6 +53,8 @@ class DiscussionTile extends StatelessWidget {
                       if (d.isPrivate) _glyph(Icons.mail_outline, muted, label: l10n.privateDiscussion),
                       if (d.isSticky) _glyph(Icons.push_pin, muted),
                       if (d.isLocked) _glyph(Icons.lock, muted),
+                      if (d.hasBestAnswer)
+                        _glyph(Icons.check_circle, ForumColors.of(context).success, label: l10n.answered),
                       TextSpan(text: d.title),
                     ]),
                     maxLines: 3,

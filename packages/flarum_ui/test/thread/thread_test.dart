@@ -132,6 +132,25 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets('a question shows its best answer, and offers the way to it', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('answered')),
+        ));
+        await _pumpUntil(tester, find.text('Go to best answer'));
+        expect(find.text('Go to best answer'), findsOneWidget, reason: 'under the question');
+        expect(find.text('Best answer'), findsOneWidget, reason: 'above the answer, the second post');
+        final answer = find.ancestor(of: find.text('Best answer'), matching: find.byType(PostTile));
+        expect(tester.widget<PostTile>(answer).post.number, 2);
+
+        await tester.tap(find.text('Go to best answer'));
+        await tester.pump(const Duration(seconds: 1));
+        expect(fixtures.requests.where((r) => r.path.startsWith('/posts/')), isEmpty,
+            reason: 'the answer is loaded, so it scrolls there without asking the forum');
+        await _close(tester);
+      });
+
       testWidgets('opened part-way down, it offers the posts before', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(

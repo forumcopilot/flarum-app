@@ -71,6 +71,20 @@ void main() {
         following.dispose();
       });
 
+      testWidgets('a question with a best answer is marked answered', (tester) async {
+        final api = fixtures.api();
+        final (answered, plain) = (await tester.runAsync(() => (
+              api.discussion(fixtures.discussionId('answered')),
+              api.discussion(fixtures.discussionId('welcome')),
+            ).wait))!;
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: Scaffold(body: Column(children: [DiscussionTile(discussion: answered), DiscussionTile(discussion: plain)])),
+        ));
+        expect(find.byIcon(Icons.check_circle), findsOneWidget, reason: 'only the answered one');
+        expect(tester.widget<Icon>(find.byIcon(Icons.check_circle)).semanticLabel, 'Answered');
+      });
+
       testWidgets('the home page lists discussions and opens one where the reader left off', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));

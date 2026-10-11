@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/theme/forum_colors.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forum_kit/views/widgets/user_avatar.dart';
@@ -14,7 +15,15 @@ import '../render/flarum_html.dart';
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
 class PostTile extends StatelessWidget {
   const PostTile(
-      {super.key, required this.site, required this.post, this.callbacks, this.onAuthorTap, this.onOpenReply, this.tags});
+      {super.key,
+      required this.site,
+      required this.post,
+      this.callbacks,
+      this.onAuthorTap,
+      this.onOpenReply,
+      this.tags,
+      this.isBestAnswer = false,
+      this.onGoToBestAnswer});
 
   final SiteContext site;
   final FlarumPost post;
@@ -28,6 +37,12 @@ class PostTile extends StatelessWidget {
 
   /// The forum's tags by id, to name the tags in a retag event.
   final Map<String, FlarumTag>? tags;
+
+  /// fof/best-answer chose this post as the discussion's answer.
+  final bool isBestAnswer;
+
+  /// Set on the question when another post is its best answer: offers a way there.
+  final VoidCallback? onGoToBestAnswer;
 
   @override
   Widget build(BuildContext context) =>
@@ -81,6 +96,11 @@ class PostTile extends StatelessWidget {
             ],
           ),
           const SizedBox(height: DesignTokens.spacingM),
+          if (isBestAnswer)
+            Padding(
+              padding: const EdgeInsets.only(bottom: DesignTokens.spacingS),
+              child: _BestAnswerLabel(text: l10n.bestAnswer),
+            ),
           if (post.isHidden)
             Text(l10n.postHidden,
                 style: theme.textTheme.bodyMedium
@@ -90,6 +110,15 @@ class PostTile extends StatelessWidget {
               siteContext: site,
               content: FlarumHtml.parse(post.contentHtml ?? '', forumBaseUrl: site.site.url).html,
               callbacks: callbacks,
+            ),
+          if (onGoToBestAnswer != null)
+            Padding(
+              padding: const EdgeInsets.only(top: DesignTokens.spacingS),
+              child: OutlinedButton.icon(
+                onPressed: onGoToBestAnswer,
+                icon: Icon(Icons.check_circle_outline, color: ForumColors.of(context).success),
+                label: Text(l10n.goToBestAnswer),
+              ),
             ),
           if (post.likesCount > 0)
             Padding(
@@ -163,6 +192,26 @@ extension on PostTile {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// "✓ Best answer", in the forum's success colour, above the answer.
+class _BestAnswerLabel extends StatelessWidget {
+  const _BestAnswerLabel({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = ForumColors.of(context).success;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.check_circle, size: 18, color: color),
+        const SizedBox(width: DesignTokens.spacingXS),
+        Text(text, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: color, fontWeight: FontWeight.w600)),
+      ],
     );
   }
 }

@@ -477,4 +477,13 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get privateDiscussion => 'Private discussion';
+
+  @override
+  String get bestAnswer => 'Best answer';
+
+  @override
+  String get goToBestAnswer => 'Go to best answer';
+
+  @override
+  String get answered => 'Answered';
 }

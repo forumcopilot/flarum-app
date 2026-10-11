@@ -22,7 +22,8 @@
     "support": "6",
     "feedback": "7",
     "long": "8",
-    "private": "10"
+    "private": "10",
+    "answered": "33"
   },
   "posts": {
     "welcome": [

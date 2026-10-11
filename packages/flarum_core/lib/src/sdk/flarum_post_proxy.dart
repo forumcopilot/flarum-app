@@ -31,7 +31,7 @@ class FlarumPostProxy implements IFCPostProxy {
       final limit = (lastNum >= offset ? lastNum - offset + 1 : 20).clamp(1, FlarumApi.maxPageSize);
       final (discussion, page) = await (_forum.api.discussion(topicId), _forum.api.posts(topicId, offset: offset, limit: limit)).wait;
       final topic = await _topic(discussion);
-      return _thread(topic, discussion, _posts(page.items, topic));
+      return _thread(topic, discussion, _posts(page.items, topic, discussion));
     } catch (e) {
       return FCThreadResult(result: false, resultText: describeFlarumError(e), totalPostNum: 0, id: topicId, title: '',
           forumId: '', forumName: '', authorId: '', authorName: '', authorUserType: 'normal', timestamp: _epoch);
@@ -47,7 +47,7 @@ class FlarumPostProxy implements IFCPostProxy {
       final anchor = ((discussion.lastReadPostNumber ?? 0) + 1).clamp(1, last);
       final page = await _forum.api.postsNear(topicId, anchor, limit: postsPerRequest);
       final topic = await _topic(discussion);
-      final posts = _posts(page.items, topic);
+      final posts = _posts(page.items, topic, discussion);
       return FCThreadByUnreadResult(
         result: true,
         resultText: '',
@@ -97,7 +97,7 @@ class FlarumPostProxy implements IFCPostProxy {
         resultText: '',
         totalPostNum: _total(discussion),
         position: target.number,
-        posts: _posts(page.items, topic),
+        posts: _posts(page.items, topic, discussion),
         canReply: topic.canReply,
         canReport: topic.canReport,
         canUpload: _forum.extensions.upload,
@@ -220,8 +220,10 @@ class FlarumPostProxy implements IFCPostProxy {
 
   static int _total(FlarumDiscussion d) => d.lastPostNumber ?? d.commentCount;
 
-  List<FCPost> _posts(List<FlarumPost> posts, FCTopic topic) =>
-      [for (final post in posts) toPost(post, topicId: topic.id, topicTitle: topic.title)];
+  List<FCPost> _posts(List<FlarumPost> posts, FCTopic topic, FlarumDiscussion discussion) => [
+        for (final post in posts)
+          toPost(post, topicId: topic.id, topicTitle: topic.title, isSolution: post.id == discussion.bestAnswerPostId),
+      ];
 
   FCThreadResult _thread(FCTopic topic, FlarumDiscussion discussion, List<FCPost> posts) => FCThreadResult(
         result: true,
@@ -261,8 +263,9 @@ class FlarumPostProxy implements IFCPostProxy {
       );
 
   /// [post] as the SDK's post. Event posts (a rename, lock, sticky, retag…)
-  /// carry their type as [FCPost.actionCode] and no text.
-  static FCPost toPost(FlarumPost post, {required String topicId, String? topicTitle}) => FCPost(
+  /// carry their type as [FCPost.actionCode] and no text. [isSolution]: fof/best-answer chose it.
+  static FCPost toPost(FlarumPost post, {required String topicId, String? topicTitle, bool isSolution = false}) =>
+      FCPost(
         id: post.id,
         title: '',
         content: post.isComment ? post.contentHtml ?? '' : '',
@@ -285,6 +288,7 @@ class FlarumPostProxy implements IFCPostProxy {
         isDeleted: post.isHidden,
         isHidden: post.isHidden,
         bookmarked: post.bookmarked,
+        isSolution: isSolution,
         canAcceptAnswer: post.canSelectAsBestAnswer,
         actionCode: post.isComment ? null : post.contentType,
         isModeratorAction: !post.isComment,

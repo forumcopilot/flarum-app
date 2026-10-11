@@ -744,5 +744,17 @@
   "privateDiscussion": "Private discussion",
   "@privateDiscussion": {
     "description": "Label for a private discussion (fof/byobu) in a list"
+  },
+  "bestAnswer": "Best answer",
+  "@bestAnswer": {
+    "description": "Label above the post fof/best-answer chose as a discussion's answer"
+  },
+  "goToBestAnswer": "Go to best answer",
+  "@goToBestAnswer": {
+    "description": "Button under a question whose best answer (fof/best-answer) is another post"
+  },
+  "answered": "Answered",
+  "@answered": {
+    "description": "Screen-reader label for the check mark on a discussion that has a best answer (fof/best-answer)"
   }
 }

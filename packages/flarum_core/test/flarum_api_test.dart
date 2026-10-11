@@ -96,6 +96,17 @@ void main() {
           expect(discussion.lastReadPostNumber, 2);
           expect(discussion.canReply, isTrue);
         });
+
+        test('reads which post fof/best-answer chose', () async {
+          final answered = await api.discussion(forum.discussionId('answered'));
+          final posts = await api.posts(answered.id, limit: 20);
+          expect(answered.hasBestAnswer, isTrue);
+          expect(answered.bestAnswerPostId, posts.items[1].id, reason: 'the second post answered the question');
+
+          final welcome = await api.discussion(forum.discussionId('welcome'));
+          expect(welcome.hasBestAnswer, isFalse);
+          expect(welcome.bestAnswerPostId, isNull);
+        });
       });
 
       group('posts', () {

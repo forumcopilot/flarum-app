@@ -32,6 +32,7 @@ class FlarumDiscussion {
     this.isPrivate = false,
     this.hasPoll = false,
     this.hasBestAnswer = false,
+    this.bestAnswerPostId,
     this.bookmarked = false,
     this.author,
     this.lastPostedUser,
@@ -71,6 +72,8 @@ class FlarumDiscussion {
       isPrivate: a.boolean('isPrivateDiscussion') ?? false,
       hasPoll: a.boolean('hasPoll') ?? false,
       hasBestAnswer: a.boolean('hasBestAnswer') ?? false,
+      // The same attribute holds the answer's post id, on 1.x and 2.0 alike (false when there's none).
+      bestAnswerPostId: a.integer('hasBestAnswer')?.toString(),
       bookmarked: a.boolean('bookmarked') ?? false,
       author: author == null ? null : FlarumUser.fromResource(author),
       lastPostedUser: lastPostedUser == null ? null : FlarumUser.fromResource(lastPostedUser),
@@ -123,6 +126,9 @@ class FlarumDiscussion {
 
   /// fof/best-answer chose an answer.
   final bool hasBestAnswer;
+
+  /// fof/best-answer: the id of the post chosen as the answer.
+  final String? bestAnswerPostId;
 
   /// fof/bookmarks: the reader bookmarked it.
   final bool bookmarked;

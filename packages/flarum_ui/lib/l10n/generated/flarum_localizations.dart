@@ -787,6 +787,24 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Private discussion'**
   String get privateDiscussion;
+
+  /// Label above the post fof/best-answer chose as a discussion's answer
+  ///
+  /// In en, this message translates to:
+  /// **'Best answer'**
+  String get bestAnswer;
+
+  /// Button under a question whose best answer (fof/best-answer) is another post
+  ///
+  /// In en, this message translates to:
+  /// **'Go to best answer'**
+  String get goToBestAnswer;
+
+  /// Screen-reader label for the check mark on a discussion that has a best answer (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'Answered'**
+  String get answered;
 }
 
 class _FlarumLocalizationsDelegate

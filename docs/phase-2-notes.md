@@ -53,6 +53,12 @@ pauses, only forward, and only for a signed-in reader. Links to the forum's disc
 app (the same discussion scrolls to the post); users and tags go to the host's callbacks, the web
 until those screens exist. Pictures open in a full-screen gallery.
 
+fof/best-answer, read side: the discussion's `hasBestAnswer` attribute is the answer's post id (or
+`false`) on both versions, so no include is needed. Lists mark answered discussions with a check;
+the answer carries a "Best answer" label, and the question a "Go to best answer" button (it scrolls
+there, or opens the thread at the answer's number from `GET /api/posts/{id}`). The SDK's
+`FCPost.isSolution` is set the same way. Choosing an answer is Phase 3.
+
 Tests run on both versions' fixtures through `package:flarum_core/testing.dart` (`FixtureForum`,
 with `root` pointing at flarum_core's fixtures); the screenshot harness also renders the page.
 
@@ -84,6 +90,9 @@ the summary is the report.
 - Not on Flarum: `loginForum` (no password-protected tags), `getBoardStatAsync` (admin-only),
   `loginTwoStepAsync`, `getOnlineUsersAsync`, `getRecommendedUsersAsync`.
 - The test data: `getAvatarAsync` (the seed users have no avatar).
+
+11 October 2026, both versions: 42 of 60 pass, the tag proxy's suite now included; the 18 that
+don't are the same ones.
 
 It found one real bug, now fixed: "mark all read" sent `markedAllAsReadAt: true`, which 1.8 takes
 and 2.0 refuses (422); it now sends the time.

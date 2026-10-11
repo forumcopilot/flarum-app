@@ -19,6 +19,13 @@ void main() {
 
       String welcomePost(int index) => ((fixtures.seed['posts'] as Map)['welcome'] as List)[index] as String;
 
+      test('marks the post fof/best-answer chose as the solution', () async {
+        final thread = await proxy.getThreadAsync(fixtures.discussionId('answered'), 0, 19, true);
+        expect(thread.result, isTrue);
+        expect(thread.isSolved, isTrue);
+        expect([for (final post in thread.posts) if (post.isSolution) post.postNumber], [2]);
+      });
+
       test('a page of a thread, with its discussion as the header', () async {
         final thread = await proxy.getThreadAsync(fixtures.discussionId('welcome'), 0, 19, true);
         expect(thread.result, isTrue);

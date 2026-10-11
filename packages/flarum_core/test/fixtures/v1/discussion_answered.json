@@ -1,0 +1,106 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/33",
+    "query": {
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "33",
+      "attributes": {
+        "title": "Router keeps dropping Wi-Fi every evening",
+        "slug": "33-router-keeps-dropping-wi-fi-every-evening",
+        "commentCount": 4,
+        "participantCount": 3,
+        "createdAt": "2026-09-23T20:50:00+00:00",
+        "lastPostedAt": "2026-09-27T03:50:00+00:00",
+        "lastPostNumber": 4,
+        "canReply": false,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "isApproved": true,
+        "hasBestAnswer": 208,
+        "bestAnswerSetAt": "2026-10-10T17:41:59+00:00",
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": true,
+        "canLock": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "20"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "20"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "20"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "20",
+        "attributes": {
+          "username": "dmitri",
+          "displayName": "Dmitri Volkov",
+          "avatarUrl": null,
+          "slug": "dmitri"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 5,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-04T16:15:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

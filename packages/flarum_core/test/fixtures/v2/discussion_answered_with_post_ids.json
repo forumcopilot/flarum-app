@@ -1,0 +1,202 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/41",
+    "query": {
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "41",
+      "links": {
+        "self": "/discussions/41"
+      },
+      "attributes": {
+        "title": "Router keeps dropping Wi-Fi every evening",
+        "slug": "41-router-keeps-dropping-wi-fi-every-evening",
+        "commentCount": 4,
+        "participantCount": 3,
+        "createdAt": "2026-09-23T20:50:00+00:00",
+        "lastPostedAt": "2026-09-27T03:50:00+00:00",
+        "lastPostNumber": 4,
+        "canReply": false,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "canTag": false,
+        "isApproved": true,
+        "subscription": null,
+        "isPrivateDiscussion": false,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "canDownloadFiles": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectBestAnswer": false,
+        "hasBestAnswer": 261,
+        "bestAnswerSetAt": "2026-10-10T17:40:50+00:00",
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": true,
+        "canLock": false
+      },
+      "relationships": {
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "260"
+          }
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "263"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "260"
+            },
+            {
+              "type": "posts",
+              "id": "261"
+            },
+            {
+              "type": "posts",
+              "id": "262"
+            },
+            {
+              "type": "posts",
+              "id": "263"
+            },
+            {
+              "type": "posts",
+              "id": "264"
+            }
+          ]
+        },
+        "hideUser": {
+          "data": null
+        },
+        "bestAnswerPost": {
+          "data": {
+            "type": "posts",
+            "id": "261"
+          }
+        },
+        "bestAnswerUser": {
+          "data": {
+            "type": "users",
+            "id": "1"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "45"
+            }
+          ]
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "45"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "45"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "tags",
+        "id": "45",
+        "links": {
+          "self": "/tags/45"
+        },
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "icon": "fas fa-laptop",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 5,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-04T16:15:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        },
+        "relationships": {
+          "parent": {
+            "data": null
+          },
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "42"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "45",
+        "links": {
+          "self": "/users/45"
+        },
+        "attributes": {
+          "username": "dmitri",
+          "displayName": "Dmitri Volkov",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "dmitri",
+          "joinTime": "2026-08-18T03:50:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 8,
+          "lastSeenAt": "2026-09-28T02:00:00+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 1,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 1,
+          "fof-upload-uploadCountAll": 1
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

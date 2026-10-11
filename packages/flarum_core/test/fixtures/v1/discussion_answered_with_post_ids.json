@@ -1,0 +1,301 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/33",
+    "query": {
+      "include": "user,lastPostedUser,tags,posts"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "33",
+      "attributes": {
+        "title": "Router keeps dropping Wi-Fi every evening",
+        "slug": "33-router-keeps-dropping-wi-fi-every-evening",
+        "commentCount": 4,
+        "participantCount": 3,
+        "createdAt": "2026-09-23T20:50:00+00:00",
+        "lastPostedAt": "2026-09-27T03:50:00+00:00",
+        "lastPostNumber": 4,
+        "canReply": false,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "isApproved": true,
+        "hasBestAnswer": 208,
+        "bestAnswerSetAt": "2026-10-10T17:41:59+00:00",
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": true,
+        "canLock": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "20"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "20"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "20"
+            }
+          ]
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "207"
+            },
+            {
+              "type": "posts",
+              "id": "208"
+            },
+            {
+              "type": "posts",
+              "id": "209"
+            },
+            {
+              "type": "posts",
+              "id": "210"
+            },
+            {
+              "type": "posts",
+              "id": "211"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "20",
+        "attributes": {
+          "username": "dmitri",
+          "displayName": "Dmitri Volkov",
+          "avatarUrl": null,
+          "slug": "dmitri"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 5,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-04T16:15:00+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      },
+      {
+        "type": "posts",
+        "id": "207",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-09-23T20:50:00+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Every evening around 8 pm our Wi-Fi drops for a minute or two, several times. Daytime is fine. The provider says the line is OK.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "208",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-09-23T21:50:00+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Sounds like interference: everyone in your building is home and on Wi-Fi at the same time. Try changing the channel in the router settings, or use 5 GHz if your devices support it.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 2
+        }
+      },
+      {
+        "type": "posts",
+        "id": "209",
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-09-24T00:50:00+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Also check for a firmware update for the router. Mine had a bug that caused exactly this.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 1
+        }
+      },
+      {
+        "type": "posts",
+        "id": "210",
+        "attributes": {
+          "number": 4,
+          "createdAt": "2026-09-27T03:50:00+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Switched to a quieter 5 GHz channel. Three evenings without a drop! Marking this solved and locking it.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 2
+        }
+      },
+      {
+        "type": "posts",
+        "id": "211",
+        "attributes": {
+          "number": 5,
+          "createdAt": "2026-09-27T04:05:00+00:00",
+          "contentType": "discussionLocked",
+          "content": {
+            "locked": true
+          },
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      }
+    ]
+  }
+}

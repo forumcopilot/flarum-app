@@ -53,7 +53,13 @@ list's first page. The members get random passwords, appended to the credentials
 directory caches the photos (downloaded when missing). It checks every discussion's tags against the
 forum's tag rules before writing anything, and refuses to run twice.
 
-Then record fixtures from `packages/flarum_core`:
+Then record fixtures from `packages/flarum_core`. Besides the seed's ids, the recorder takes the
+first discussion in Latest with a best answer from the community content (saved in the fixtures'
+`seed.json` as `answered`).
+
+The fixtures depend on alice's state as the seed left it (what she has read, follows, has been
+notified of), and phone runs sign in as alice on the same forums. Before re-recording after one,
+check her state, or record only the fixtures you need and keep the others.
 
 ```bash
 FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json

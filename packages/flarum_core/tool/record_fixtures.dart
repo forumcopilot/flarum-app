@@ -71,6 +71,14 @@ Future<void> main(List<String> args) async {
   await record('discussion_not_found', () => api.discussion('999999'));
   await record('discussion_feedback', () => api.discussion(discussions['feedback']!)); // alice follows it
   await record('posts_welcome', () => api.posts(discussions['welcome']!));
+  // A question with a best answer (fof/best-answer, from community_seed.php): the first in Latest
+  // that has one, saved in seed.json as discussions.answered.
+  final answered = (await api.discussions()).items.firstWhere((d) => d.bestAnswerPostId != null);
+  (seed['discussions'] as Map)['answered'] = answered.id;
+  await record('discussion_answered', () => api.discussion(answered.id));
+  await record('discussion_answered_with_post_ids', () => api.discussion(answered.id, withPostIds: true));
+  await record('posts_answered', () => api.posts(answered.id, limit: 20));
+  await record('post_answered_best', () => api.post(answered.bestAnswerPostId!));
   await record('posts_long_0', () => api.posts(discussions['long']!, limit: 50));
   await record('posts_long_50', () => api.posts(discussions['long']!, offset: 50, limit: 50));
   await record('posts_long_near_30', () => api.postsNear(discussions['long']!, 30, limit: 5));

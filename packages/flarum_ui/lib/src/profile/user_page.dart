@@ -18,7 +18,8 @@ import '../widgets/flarum_avatar.dart';
 ///
 /// Found by [slug], as the forum's `/u/{slug}` links name users: the username
 /// by default, the user's id on forums that use the ID slug driver. Their
-/// posts and discussions are then filtered by the username the forum returns.
+/// posts and discussions are then filtered as the forum's version wants
+/// ([FlarumApi.authorKey]: the username on 1.x, the slug on 2.0).
 class UserPage extends StatefulWidget {
   const UserPage({super.key, required this.site, required this.slug});
 
@@ -65,11 +66,12 @@ class _UserPageState extends State<UserPage> {
   Future<void> _load() async {
     try {
       final user = await _forum.api.userBySlug(widget.slug);
+      final author = await _forum.api.authorKey(user);
       if (!mounted) return;
       setState(() {
         _user = user;
-        _posts ??= _UserPostsModel(_forum, user.username)..addListener(_changed);
-        _discussions ??= DiscussionListModel(_forum, author: user.username)..addListener(_changed);
+        _posts ??= _UserPostsModel(_forum, author)..addListener(_changed);
+        _discussions ??= DiscussionListModel(_forum, author: author)..addListener(_changed);
       });
       _posts!.refresh();
       _discussions!.refresh();

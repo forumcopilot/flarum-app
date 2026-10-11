@@ -103,51 +103,51 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => 'Load earlier posts';
+  String get loadEarlierPosts => 'Carregar publicações anteriores';
 
   @override
-  String get postHidden => 'This post was deleted.';
+  String get postHidden => 'Esta publicação foi excluída.';
 
   @override
-  String get threadLoadFailed => 'Couldn\'t load this discussion.';
+  String get threadLoadFailed => 'Não foi possível carregar esta discussão.';
 
   @override
   String eventRenamed(String user, String from, String to) {
-    return '$user changed the title from “$from” to “$to”.';
+    return '$user alterou o título de “$from” para “$to”.';
   }
 
   @override
   String eventLocked(String user) {
-    return '$user locked the discussion.';
+    return '$user bloqueou a discussão.';
   }
 
   @override
   String eventUnlocked(String user) {
-    return '$user unlocked the discussion.';
+    return '$user desbloqueou a discussão.';
   }
 
   @override
   String eventStickied(String user) {
-    return '$user stickied the discussion.';
+    return '$user fixou a discussão.';
   }
 
   @override
   String eventUnstickied(String user) {
-    return '$user unstickied the discussion.';
+    return '$user desafixou a discussão.';
   }
 
   @override
   String eventTagged(String user) {
-    return '$user changed the tags.';
+    return '$user alterou as tags.';
   }
 
   @override
   String eventOther(String user) {
-    return '$user changed the discussion.';
+    return '$user alterou a discussão.';
   }
 
   @override
-  String get someone => 'Someone';
+  String get someone => 'Alguém';
 
   @override
   String get latest => 'Recentes';
@@ -183,26 +183,27 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get filterTop => 'Top';
 
   @override
-  String get viewNewest => 'Newest';
+  String get viewNewest => 'Novas';
 
   @override
   String discussionReplied(String user, String time) {
-    return '$user replied $time';
+    return '$user respondeu $time';
   }
 
   @override
   String discussionStarted(String user, String time) {
-    return '$user started $time';
+    return '$user iniciou $time';
   }
 
   @override
-  String get noDiscussions => 'No discussions here yet.';
+  String get noDiscussions => 'Ainda não há discussões aqui.';
 
   @override
-  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
+  String get discussionsLoadFailed =>
+      'Não foi possível carregar as discussões.';
 
   @override
-  String get tagsLoadFailed => 'Couldn\'t load the tags.';
+  String get tagsLoadFailed => 'Não foi possível carregar as tags.';
 
   @override
   String get signOut => 'Sair';
@@ -215,16 +216,16 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String signInFailedReason(String reason) {
-    return 'Couldn\'t sign in: $reason';
+    return 'Não foi possível entrar: $reason';
   }
 
   @override
   String get signInHint =>
-      'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.';
+      'Entre pela própria página do fórum. O app mantém você conectado até você sair.';
 
   @override
   String signedInAs(String name) {
-    return 'Signed in as $name';
+    return 'Conectado como $name';
   }
 
   @override
@@ -240,122 +241,123 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user replied to $title';
+    return '$user respondeu em $title';
   }
 
   @override
   String notifPostLiked(String user, String title) {
-    return '$user liked your post in $title';
+    return '$user curtiu sua publicação em $title';
   }
 
   @override
   String notifPostReacted(String user, String title) {
-    return '$user reacted to your post in $title';
+    return '$user reagiu à sua publicação em $title';
   }
 
   @override
   String notifPostMentioned(String user, String title) {
-    return '$user replied to your post in $title';
+    return '$user respondeu à sua publicação em $title';
   }
 
   @override
   String notifUserMentioned(String user, String title) {
-    return '$user mentioned you in $title';
+    return '$user mencionou você em $title';
   }
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user mentioned a group you\'re in, in $title';
+    return '$user mencionou um grupo do qual você faz parte em $title';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user renamed a discussion to $title';
+    return '$user renomeou uma discussão para $title';
   }
 
   @override
   String notifLocked(String user, String title) {
-    return '$user locked $title';
+    return '$user bloqueou $title';
   }
 
   @override
   String notifNewDiscussion(String user, String title) {
-    return '$user started $title';
+    return '$user iniciou $title';
   }
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user moved $title to a tag you follow';
+    return '$user moveu $title para uma tag que você segue';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user started a private discussion with you: $title';
+    return '$user iniciou uma discussão privada com você: $title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user replied to the private discussion $title';
+    return '$user respondeu na discussão privada $title';
   }
 
   @override
   String notifPrivateAdded(String user, String title) {
-    return '$user added you to the private discussion $title';
+    return '$user adicionou você à discussão privada $title';
   }
 
   @override
   String notifPrivateRemoved(String user, String title) {
-    return '$user removed you from the private discussion $title';
+    return '$user removeu você da discussão privada $title';
   }
 
   @override
   String notifMadePublic(String user, String title) {
-    return '$user made $title public';
+    return '$user tornou $title pública';
   }
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user chose your post as the best answer in $title';
+    return '$user escolheu sua publicação como a melhor resposta em $title';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user chose a best answer in $title';
+    return '$user escolheu uma melhor resposta em $title';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return 'Choose a best answer in $title';
+    return 'Escolha uma melhor resposta em $title';
   }
 
   @override
   String notifMessage(String user) {
-    return '$user sent you a message';
+    return '$user enviou uma mensagem para você';
   }
 
   @override
-  String get notifSuspended => 'You have been suspended';
+  String get notifSuspended => 'Sua conta foi suspensa';
 
   @override
-  String get notifUnsuspended => 'Your suspension has been lifted';
+  String get notifUnsuspended => 'A suspensão da sua conta foi encerrada';
 
   @override
-  String get notifExport => 'Your data export is ready';
+  String get notifExport => 'Sua exportação de dados está pronta';
 
   @override
-  String get notifOther => 'New notification';
+  String get notifOther => 'Nova notificação';
 
   @override
-  String get aDiscussion => 'a discussion';
+  String get aDiscussion => 'uma discussão';
 
   @override
-  String get notificationsLoadFailed => 'Couldn\'t load your notifications.';
+  String get notificationsLoadFailed =>
+      'Não foi possível carregar suas notificações.';
 
   @override
-  String get notificationsSignIn => 'Sign in to see your notifications.';
+  String get notificationsSignIn => 'Entre para ver suas notificações.';
 
   @override
-  String get markAllRead => 'Mark all as read';
+  String get markAllRead => 'Marcar tudo como lido';
 
   @override
   String get posts => 'Publicações';
@@ -366,11 +368,11 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   }
 
   @override
-  String get discussionsTab => 'Discussions';
+  String get discussionsTab => 'Discussões';
 
   @override
   String lastSeen(String time) {
-    return 'Last seen $time';
+    return 'Última visita $time';
   }
 
   @override
@@ -378,23 +380,23 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       discussions,
       locale: localeName,
-      other: '$discussions discussions',
-      one: '1 discussion',
+      other: '$discussions discussões',
+      one: '1 discussão',
     );
     String _temp1 = intl.Intl.pluralLogic(
       comments,
       locale: localeName,
-      other: '$comments posts',
-      one: '1 post',
+      other: '$comments publicações',
+      one: '1 publicação',
     );
     return '$_temp0 · $_temp1';
   }
 
   @override
-  String get userLoadFailed => 'Couldn\'t load this profile.';
+  String get userLoadFailed => 'Não foi possível carregar este perfil.';
 
   @override
-  String get noPostsYet => 'No posts yet.';
+  String get noPostsYet => 'Nenhuma publicação ainda.';
 
   @override
   String searchFailedWithError(String error) {
@@ -402,11 +404,11 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'Search discussions and posts';
+  String get searchHint => 'Pesquisar discussões e publicações';
 
   @override
   String noResultsFor(String query) {
-    return 'Nothing found for “$query”.';
+    return 'Nada encontrado para “$query”.';
   }
 
   @override
@@ -423,12 +425,12 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String repliedByOne(String a) {
-    return '$a replied to this.';
+    return '$a respondeu a isto.';
   }
 
   @override
   String repliedByTwo(String a, String b) {
-    return '$a and $b replied to this.';
+    return '$a e $b responderam a isto.';
   }
 
   @override
@@ -436,18 +438,18 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: 'mais $others',
+      one: 'mais 1',
     );
-    return '$a, $b and $_temp0 replied to this.';
+    return '$a, $b e $_temp0 responderam a isto.';
   }
 
   @override
-  String get repliesTitle => 'Replies';
+  String get repliesTitle => 'Respostas';
 
   @override
   String postNumber(int number) {
-    return 'Post #$number';
+    return 'Publicação #$number';
   }
 
   @override
@@ -455,44 +457,47 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: 'mais $others',
+      one: 'mais 1',
     );
-    return '$a and $_temp0 replied to this.';
+    return '$a e $_temp0 responderam a isto.';
   }
 
   @override
   String eventTagsAdded(String user, String tags) {
-    return '$user added $tags.';
+    return '$user adicionou $tags.';
   }
 
   @override
   String eventTagsRemoved(String user, String tags) {
-    return '$user removed $tags.';
+    return '$user removeu $tags.';
   }
 
   @override
   String eventTagsMoved(String user, String added, String removed) {
-    return '$user added $added and removed $removed.';
+    return '$user adicionou $added e removeu $removed.';
   }
 
   @override
-  String get privateDiscussion => 'Private discussion';
+  String get privateDiscussion => 'Discussão privada';
 
   @override
-  String get bestAnswer => 'Best answer';
+  String get bestAnswer => 'Melhor resposta';
 
   @override
-  String get goToBestAnswer => 'Go to best answer';
+  String get goToBestAnswer => 'Ir para a melhor resposta';
 
   @override
-  String get answered => 'Answered';
+  String get answered => 'Respondida';
 
   @override
   String eventRecipientsChanged(String user) {
-    return '$user changed who is in this private discussion.';
+    return '$user alterou os participantes desta discussão privada.';
   }
 
   @override
-  String get permissionRequired => 'Permission required';
+  String get noTagsOnForum => 'Este fórum não usa tags.';
+
+  @override
+  String get permissionRequired => 'Permissão necessária';
 }

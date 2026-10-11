@@ -66,6 +66,43 @@ class FlarumApi {
   /// loads them.
   static const _postIncludes = 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion';
 
+  /// Includes from extensions a forum may not run: flarum/tags' `tags` and flarum/mentions'
+  /// `mentionedBy…`. A forum without the extension refuses the whole request (400
+  /// invalid_parameter), as the census found on real forums.
+  static bool _fromExtension(String include) => include == 'tags' || include.startsWith('mentionedBy');
+
+  /// The extension includes this forum refused: left off from then on.
+  final _refusedIncludes = <String>{};
+
+  /// GET [path] with [query]'s includes; when the forum refuses ones from an extension it doesn't
+  /// run ([_fromExtension]), sent again without them. Only when that works are they given up, so
+  /// a request refused for another reason fails as it was.
+  Future<JsonApiDocument> _getIncluding(String path, {required Map<String, String> query}) async {
+    final wanted = [
+      for (final include in (query['include'] ?? '').split(','))
+        if (include.isNotEmpty && !_refusedIncludes.contains(include)) include,
+    ];
+    Map<String, String> including(List<String> includes) => {
+          for (final MapEntry(:key, :value) in query.entries)
+            if (key != 'include') key: value,
+          if (includes.isNotEmpty) 'include': includes.join(','),
+        };
+    try {
+      return await client.get(path, query: including(wanted));
+    } on FlarumApiException catch (e, stack) {
+      final optional = wanted.where(_fromExtension).toList();
+      if (e.statusCode != 400 || optional.isEmpty) rethrow;
+      final JsonApiDocument document;
+      try {
+        document = await client.get(path, query: including([...wanted.where((i) => !_fromExtension(i))]));
+      } catch (_) {
+        Error.throwWithStackTrace(e, stack);
+      }
+      _refusedIncludes.addAll(optional);
+      return document;
+    }
+  }
+
   /// The forum's settings and, when signed in, the reader (`actor`).
   Future<FlarumForumInfo> forumInfo() async {
     final info = FlarumForumInfo.fromDocument(await client.get(''));
@@ -186,7 +223,7 @@ class FlarumApi {
           if (created != null) 'created:$created',
         ].join(' ');
     }
-    final document = await client.get('/discussions', query: {
+    final document = await _getIncluding('/discussions', query: {
       ...filters,
       // Latest is the forum's own order, so it's left to the forum: only then does flarum/sticky
       // pin stickied discussions to the top, as the web's default view shows them.
@@ -260,7 +297,7 @@ class FlarumApi {
     // 2.0 lists the post ids by default and refuses `include=posts` (400);
     // 1.x lists them only when asked (and then also sends 20 posts, unused).
     final posts = withPostIds && await version() == FlarumVersion.v1;
-    final document = await client.get('/discussions/$id', query: {
+    final document = await _getIncluding('/discussions/$id', query: {
       'include': posts ? '$_discussionIncludes,posts' : _discussionIncludes,
     });
     return FlarumDiscussion.fromResource(document.single, document);
@@ -281,7 +318,7 @@ class FlarumApi {
   /// A page of a discussion's posts in number order, through `/posts` (the same
   /// on both versions) rather than the discussion's own `posts` relationship.
   Future<FlarumPage<FlarumPost>> posts(String discussionId, {int offset = 0, int limit = 20}) async {
-    final document = await client.get('/posts', query: {
+    final document = await _getIncluding('/posts', query: {
       'filter[discussion]': discussionId,
       'sort': 'number',
       ..._page(offset, limit),
@@ -298,7 +335,7 @@ class FlarumApi {
   /// land a post or two off-centre. Find the post by its number, not by index.
   Future<FlarumPage<FlarumPost>> postsNear(String discussionId, int number, {int limit = 20}) async {
     // 1.x refuses page[near] together with a sort parameter, so none is sent.
-    final document = await client.get('/posts', query: {
+    final document = await _getIncluding('/posts', query: {
       'filter[discussion]': discussionId,
       'page[near]': '$number',
       'page[limit]': '${_clampLimit(limit)}',
@@ -308,6 +345,11 @@ class FlarumApi {
   }
 
   Future<FlarumUser> user(String id) async => FlarumUser.fromResource((await client.get('/users/$id')).single);
+
+  /// What [user]'s posts and discussions are filtered by (`author`): 2.0 resolves it as a slug,
+  /// the user's id on forums with the ID slug driver, while 1.x matches the username.
+  Future<String> authorKey(FlarumUser user) async =>
+      await version() == FlarumVersion.v2 ? (user.slug ?? user.username) : user.username;
 
   /// A user by slug, as `/u/{slug}` names them: the username, or the id on forums that use the ID
   /// slug driver (where a username 404s). Without `bySlug` Flarum reads it as an id.

@@ -56,6 +56,8 @@ class _TagsPageState extends State<TagsPage> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.tags)),
       body: switch ((tags, _error)) {
+        // A forum without flarum/tags has no /api/tags.
+        (null, FlarumApiException(statusCode: 404)) => EmptyStateView(icon: Icons.sell_outlined, message: l10n.noTagsOnForum),
         (null, final Object error) => EmptyStateView.error(
             message: l10n.tagsLoadFailed,
             hint: describeFlarumError(error),

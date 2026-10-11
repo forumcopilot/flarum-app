@@ -101,51 +101,51 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => 'Load earlier posts';
+  String get loadEarlierPosts => '이전 게시물 불러오기';
 
   @override
-  String get postHidden => 'This post was deleted.';
+  String get postHidden => '삭제된 게시물입니다.';
 
   @override
-  String get threadLoadFailed => 'Couldn\'t load this discussion.';
+  String get threadLoadFailed => '이 토론을 불러오지 못했습니다.';
 
   @override
   String eventRenamed(String user, String from, String to) {
-    return '$user changed the title from “$from” to “$to”.';
+    return '$user님이 제목을 “$from”에서 “$to”(으)로 변경했습니다.';
   }
 
   @override
   String eventLocked(String user) {
-    return '$user locked the discussion.';
+    return '$user님이 토론을 잠갔습니다.';
   }
 
   @override
   String eventUnlocked(String user) {
-    return '$user unlocked the discussion.';
+    return '$user님이 토론 잠금을 해제했습니다.';
   }
 
   @override
   String eventStickied(String user) {
-    return '$user stickied the discussion.';
+    return '$user님이 토론을 고정했습니다.';
   }
 
   @override
   String eventUnstickied(String user) {
-    return '$user unstickied the discussion.';
+    return '$user님이 토론 고정을 해제했습니다.';
   }
 
   @override
   String eventTagged(String user) {
-    return '$user changed the tags.';
+    return '$user님이 태그를 변경했습니다.';
   }
 
   @override
   String eventOther(String user) {
-    return '$user changed the discussion.';
+    return '$user님이 토론을 변경했습니다.';
   }
 
   @override
-  String get someone => 'Someone';
+  String get someone => '누군가';
 
   @override
   String get latest => '최신';
@@ -181,26 +181,26 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get filterTop => '인기';
 
   @override
-  String get viewNewest => 'Newest';
+  String get viewNewest => '새 토론';
 
   @override
   String discussionReplied(String user, String time) {
-    return '$user replied $time';
+    return '$user님이 $time에 답글';
   }
 
   @override
   String discussionStarted(String user, String time) {
-    return '$user started $time';
+    return '$user님이 $time에 시작';
   }
 
   @override
-  String get noDiscussions => 'No discussions here yet.';
+  String get noDiscussions => '아직 토론이 없습니다.';
 
   @override
-  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
+  String get discussionsLoadFailed => '토론을 불러오지 못했습니다.';
 
   @override
-  String get tagsLoadFailed => 'Couldn\'t load the tags.';
+  String get tagsLoadFailed => '태그를 불러오지 못했습니다.';
 
   @override
   String get signOut => '로그아웃';
@@ -213,16 +213,15 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String signInFailedReason(String reason) {
-    return 'Couldn\'t sign in: $reason';
+    return '로그인하지 못했습니다: $reason';
   }
 
   @override
-  String get signInHint =>
-      'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.';
+  String get signInHint => '포럼 페이지에서 로그인하세요. 로그아웃할 때까지 로그인 상태가 유지됩니다.';
 
   @override
   String signedInAs(String name) {
-    return 'Signed in as $name';
+    return '$name(으)로 로그인됨';
   }
 
   @override
@@ -236,122 +235,122 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user replied to $title';
+    return '$user님이 $title에 답글을 남겼습니다';
   }
 
   @override
   String notifPostLiked(String user, String title) {
-    return '$user liked your post in $title';
+    return '$user님이 $title의 내 게시물을 좋아합니다';
   }
 
   @override
   String notifPostReacted(String user, String title) {
-    return '$user reacted to your post in $title';
+    return '$user님이 $title의 내 게시물에 반응했습니다';
   }
 
   @override
   String notifPostMentioned(String user, String title) {
-    return '$user replied to your post in $title';
+    return '$user님이 $title의 내 게시물에 답글을 남겼습니다';
   }
 
   @override
   String notifUserMentioned(String user, String title) {
-    return '$user mentioned you in $title';
+    return '$user님이 $title에서 나를 언급했습니다';
   }
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user mentioned a group you\'re in, in $title';
+    return '$user님이 $title에서 내가 속한 그룹을 언급했습니다';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user renamed a discussion to $title';
+    return '$user님이 토론 제목을 $title(으)로 바꿨습니다';
   }
 
   @override
   String notifLocked(String user, String title) {
-    return '$user locked $title';
+    return '$user님이 $title을(를) 잠갔습니다';
   }
 
   @override
   String notifNewDiscussion(String user, String title) {
-    return '$user started $title';
+    return '$user님이 $title을(를) 시작했습니다';
   }
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user moved $title to a tag you follow';
+    return '$user님이 $title을(를) 내가 팔로우하는 태그로 옮겼습니다';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user started a private discussion with you: $title';
+    return '$user님이 나와 비공개 토론을 시작했습니다: $title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user replied to the private discussion $title';
+    return '$user님이 비공개 토론 $title에 답글을 남겼습니다';
   }
 
   @override
   String notifPrivateAdded(String user, String title) {
-    return '$user added you to the private discussion $title';
+    return '$user님이 나를 비공개 토론 $title에 추가했습니다';
   }
 
   @override
   String notifPrivateRemoved(String user, String title) {
-    return '$user removed you from the private discussion $title';
+    return '$user님이 나를 비공개 토론 $title에서 제외했습니다';
   }
 
   @override
   String notifMadePublic(String user, String title) {
-    return '$user made $title public';
+    return '$user님이 $title을(를) 공개했습니다';
   }
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user chose your post as the best answer in $title';
+    return '$user님이 $title에서 내 게시물을 베스트 답변으로 선택했습니다';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user chose a best answer in $title';
+    return '$user님이 $title에서 베스트 답변을 선택했습니다';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return 'Choose a best answer in $title';
+    return '$title에서 베스트 답변을 선택하세요';
   }
 
   @override
   String notifMessage(String user) {
-    return '$user sent you a message';
+    return '$user님이 메시지를 보냈습니다';
   }
 
   @override
-  String get notifSuspended => 'You have been suspended';
+  String get notifSuspended => '계정이 정지되었습니다';
 
   @override
-  String get notifUnsuspended => 'Your suspension has been lifted';
+  String get notifUnsuspended => '계정 정지가 해제되었습니다';
 
   @override
-  String get notifExport => 'Your data export is ready';
+  String get notifExport => '데이터 내보내기가 준비되었습니다';
 
   @override
-  String get notifOther => 'New notification';
+  String get notifOther => '새 알림';
 
   @override
-  String get aDiscussion => 'a discussion';
+  String get aDiscussion => '토론';
 
   @override
-  String get notificationsLoadFailed => 'Couldn\'t load your notifications.';
+  String get notificationsLoadFailed => '알림을 불러오지 못했습니다.';
 
   @override
-  String get notificationsSignIn => 'Sign in to see your notifications.';
+  String get notificationsSignIn => '알림을 보려면 로그인하세요.';
 
   @override
-  String get markAllRead => 'Mark all as read';
+  String get markAllRead => '모두 읽음으로 표시';
 
   @override
   String get posts => '게시물';
@@ -362,11 +361,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get discussionsTab => 'Discussions';
+  String get discussionsTab => '토론';
 
   @override
   String lastSeen(String time) {
-    return 'Last seen $time';
+    return '마지막 접속: $time';
   }
 
   @override
@@ -374,23 +373,21 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       discussions,
       locale: localeName,
-      other: '$discussions discussions',
-      one: '1 discussion',
+      other: '토론 $discussions개',
     );
     String _temp1 = intl.Intl.pluralLogic(
       comments,
       locale: localeName,
-      other: '$comments posts',
-      one: '1 post',
+      other: '게시물 $comments개',
     );
     return '$_temp0 · $_temp1';
   }
 
   @override
-  String get userLoadFailed => 'Couldn\'t load this profile.';
+  String get userLoadFailed => '이 프로필을 불러오지 못했습니다.';
 
   @override
-  String get noPostsYet => 'No posts yet.';
+  String get noPostsYet => '아직 게시물이 없습니다.';
 
   @override
   String searchFailedWithError(String error) {
@@ -398,11 +395,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'Search discussions and posts';
+  String get searchHint => '토론과 게시물 검색';
 
   @override
   String noResultsFor(String query) {
-    return 'Nothing found for “$query”.';
+    return '“$query”에 대한 결과가 없습니다.';
   }
 
   @override
@@ -419,12 +416,12 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String repliedByOne(String a) {
-    return '$a replied to this.';
+    return '$a님이 답글을 남겼습니다.';
   }
 
   @override
   String repliedByTwo(String a, String b) {
-    return '$a and $b replied to this.';
+    return '$a님과 $b님이 답글을 남겼습니다.';
   }
 
   @override
@@ -432,18 +429,17 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: '$others건',
     );
-    return '$a, $b and $_temp0 replied to this.';
+    return '$a님, $b님 외 $_temp0의 답글이 있습니다.';
   }
 
   @override
-  String get repliesTitle => 'Replies';
+  String get repliesTitle => '답글';
 
   @override
   String postNumber(int number) {
-    return 'Post #$number';
+    return '게시물 #$number';
   }
 
   @override
@@ -451,44 +447,46 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: '$others건',
     );
-    return '$a and $_temp0 replied to this.';
+    return '$a님 외 $_temp0의 답글이 있습니다.';
   }
 
   @override
   String eventTagsAdded(String user, String tags) {
-    return '$user added $tags.';
+    return '$user님이 $tags을(를) 추가했습니다.';
   }
 
   @override
   String eventTagsRemoved(String user, String tags) {
-    return '$user removed $tags.';
+    return '$user님이 $tags을(를) 제거했습니다.';
   }
 
   @override
   String eventTagsMoved(String user, String added, String removed) {
-    return '$user added $added and removed $removed.';
+    return '$user님이 $added을(를) 추가하고 $removed을(를) 제거했습니다.';
   }
 
   @override
-  String get privateDiscussion => 'Private discussion';
+  String get privateDiscussion => '비공개 토론';
 
   @override
-  String get bestAnswer => 'Best answer';
+  String get bestAnswer => '베스트 답변';
 
   @override
-  String get goToBestAnswer => 'Go to best answer';
+  String get goToBestAnswer => '베스트 답변으로 이동';
 
   @override
-  String get answered => 'Answered';
+  String get answered => '해결됨';
 
   @override
   String eventRecipientsChanged(String user) {
-    return '$user changed who is in this private discussion.';
+    return '$user님이 이 비공개 토론의 참여자를 변경했습니다.';
   }
 
   @override
-  String get permissionRequired => 'Permission required';
+  String get noTagsOnForum => '이 포럼은 태그를 사용하지 않습니다.';
+
+  @override
+  String get permissionRequired => '권한이 필요합니다';
 }

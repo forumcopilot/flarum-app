@@ -766,6 +766,10 @@
       }
     }
   },
+  "noTagsOnForum": "This forum doesn't use tags.",
+  "@noTagsOnForum": {
+    "description": "Tags tab on a forum that doesn't run flarum/tags"
+  },
   "permissionRequired": "Permission required",
   "@permissionRequired": {
     "description": "On a file card in a post, instead of Download, when the reader may not download files (fof/upload's download permission)"

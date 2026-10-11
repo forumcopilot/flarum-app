@@ -120,8 +120,7 @@ class FlarumUserProxy implements IFCUserProxy {
   @override
   Future<FCUserTopicResult> getUserTopicAsync(String? username, String? userId) async {
     try {
-      final name = username ?? (await _user(userId: userId)).username;
-      final page = await _forum.api.discussions(author: name);
+      final page = await _forum.api.discussions(author: await _author(username: username, userId: userId));
       final topics = [
         for (final d in page.items) FlarumTopicProxy.toTopic(d, baseUrl: _forum.baseUrl),
       ];
@@ -149,10 +148,10 @@ class FlarumUserProxy implements IFCUserProxy {
   @override
   Future<FCUserReplyResult> getUserReplyPostAsync(int startNum, int lastNum, String? searchId, String? username, String? userId) async {
     try {
-      final name = username ?? (await _user(userId: userId)).username;
       final offset = startNum < 0 ? 0 : startNum;
       final limit = lastNum >= offset ? lastNum - offset + 1 : 20;
-      final page = await _forum.api.userPosts(name, offset: offset, limit: limit);
+      final author = await _author(username: username, userId: userId);
+      final page = await _forum.api.userPosts(author, offset: offset, limit: limit);
       return FCUserReplyResult(
         result: true,
         resultText: '',
@@ -166,7 +165,7 @@ class FlarumUserProxy implements IFCUserProxy {
               forumId: '',
               forumName: '',
               authorId: post.author?.id ?? '',
-              authorName: post.author?.username ?? name,
+              authorName: post.author?.username ?? username ?? '',
               authorIconUrl: post.author?.avatarUrl ?? '',
               postTime: post.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0),
               replyNumber: post.number,
@@ -258,6 +257,14 @@ class FlarumUserProxy implements IFCUserProxy {
   @override
   Future<FCBadgeResult> getUserBadgesAsync(String username) async =>
       FCBadgeResult(result: false, resultText: 'Flarum has no badges in core');
+
+  /// What to filter a user's posts and discussions by: from their record when there's an id
+  /// ([FlarumApi.authorKey]: on 2.0 the slug, which can be the id), else the username.
+  Future<String> _author({String? username, String? userId}) async {
+    if (userId != null && userId.isNotEmpty) return _forum.api.authorKey(await _forum.api.user(userId));
+    if (username != null && username.isNotEmpty) return username;
+    throw ArgumentError('A user id or username is needed');
+  }
 
   Future<FlarumUser> _user({String? userId, String? username}) {
     if (userId != null && userId.isNotEmpty) return _forum.api.user(userId);

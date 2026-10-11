@@ -493,5 +493,8 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   }
 
   @override
+  String get noTagsOnForum => 'This forum doesn\'t use tags.';
+
+  @override
   String get permissionRequired => 'Permission required';
 }

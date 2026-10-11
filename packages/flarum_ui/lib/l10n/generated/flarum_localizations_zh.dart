@@ -101,51 +101,51 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => 'Load earlier posts';
+  String get loadEarlierPosts => '加载更早的帖子';
 
   @override
-  String get postHidden => 'This post was deleted.';
+  String get postHidden => '此帖子已被删除。';
 
   @override
-  String get threadLoadFailed => 'Couldn\'t load this discussion.';
+  String get threadLoadFailed => '无法加载此讨论。';
 
   @override
   String eventRenamed(String user, String from, String to) {
-    return '$user changed the title from “$from” to “$to”.';
+    return '$user 将标题从“$from”改为“$to”。';
   }
 
   @override
   String eventLocked(String user) {
-    return '$user locked the discussion.';
+    return '$user 锁定了讨论。';
   }
 
   @override
   String eventUnlocked(String user) {
-    return '$user unlocked the discussion.';
+    return '$user 解锁了讨论。';
   }
 
   @override
   String eventStickied(String user) {
-    return '$user stickied the discussion.';
+    return '$user 置顶了讨论。';
   }
 
   @override
   String eventUnstickied(String user) {
-    return '$user unstickied the discussion.';
+    return '$user 取消了讨论置顶。';
   }
 
   @override
   String eventTagged(String user) {
-    return '$user changed the tags.';
+    return '$user 更改了标签。';
   }
 
   @override
   String eventOther(String user) {
-    return '$user changed the discussion.';
+    return '$user 修改了讨论。';
   }
 
   @override
-  String get someone => 'Someone';
+  String get someone => '某人';
 
   @override
   String get latest => '最新';
@@ -181,26 +181,26 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get filterTop => '热门';
 
   @override
-  String get viewNewest => 'Newest';
+  String get viewNewest => '最新发布';
 
   @override
   String discussionReplied(String user, String time) {
-    return '$user replied $time';
+    return '$user 回复于 $time';
   }
 
   @override
   String discussionStarted(String user, String time) {
-    return '$user started $time';
+    return '$user 发起于 $time';
   }
 
   @override
-  String get noDiscussions => 'No discussions here yet.';
+  String get noDiscussions => '这里还没有讨论。';
 
   @override
-  String get discussionsLoadFailed => 'Couldn\'t load discussions.';
+  String get discussionsLoadFailed => '无法加载讨论。';
 
   @override
-  String get tagsLoadFailed => 'Couldn\'t load the tags.';
+  String get tagsLoadFailed => '无法加载标签。';
 
   @override
   String get signOut => '退出登录';
@@ -213,16 +213,15 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String signInFailedReason(String reason) {
-    return 'Couldn\'t sign in: $reason';
+    return '无法登录：$reason';
   }
 
   @override
-  String get signInHint =>
-      'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.';
+  String get signInHint => '请在论坛自己的页面登录。退出之前，应用会一直保持登录。';
 
   @override
   String signedInAs(String name) {
-    return 'Signed in as $name';
+    return '已登录为 $name';
   }
 
   @override
@@ -236,122 +235,122 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user replied to $title';
+    return '$user 回复了 $title';
   }
 
   @override
   String notifPostLiked(String user, String title) {
-    return '$user liked your post in $title';
+    return '$user 赞了你在 $title 中的帖子';
   }
 
   @override
   String notifPostReacted(String user, String title) {
-    return '$user reacted to your post in $title';
+    return '$user 对你在 $title 中的帖子做出了回应';
   }
 
   @override
   String notifPostMentioned(String user, String title) {
-    return '$user replied to your post in $title';
+    return '$user 回复了你在 $title 中的帖子';
   }
 
   @override
   String notifUserMentioned(String user, String title) {
-    return '$user mentioned you in $title';
+    return '$user 在 $title 中提到了你';
   }
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user mentioned a group you\'re in, in $title';
+    return '$user 在 $title 中提到了你所在的群组';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user renamed a discussion to $title';
+    return '$user 将一个讨论重命名为 $title';
   }
 
   @override
   String notifLocked(String user, String title) {
-    return '$user locked $title';
+    return '$user 锁定了 $title';
   }
 
   @override
   String notifNewDiscussion(String user, String title) {
-    return '$user started $title';
+    return '$user 发起了 $title';
   }
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user moved $title to a tag you follow';
+    return '$user 将 $title 移到了你关注的标签';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user started a private discussion with you: $title';
+    return '$user 与你发起了私密讨论：$title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user replied to the private discussion $title';
+    return '$user 回复了私密讨论 $title';
   }
 
   @override
   String notifPrivateAdded(String user, String title) {
-    return '$user added you to the private discussion $title';
+    return '$user 将你加入了私密讨论 $title';
   }
 
   @override
   String notifPrivateRemoved(String user, String title) {
-    return '$user removed you from the private discussion $title';
+    return '$user 将你移出了私密讨论 $title';
   }
 
   @override
   String notifMadePublic(String user, String title) {
-    return '$user made $title public';
+    return '$user 公开了 $title';
   }
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user chose your post as the best answer in $title';
+    return '$user 在 $title 中将你的帖子选为最佳答案';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user chose a best answer in $title';
+    return '$user 在 $title 中选出了最佳答案';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return 'Choose a best answer in $title';
+    return '请在 $title 中选出最佳答案';
   }
 
   @override
   String notifMessage(String user) {
-    return '$user sent you a message';
+    return '$user 给你发送了一条消息';
   }
 
   @override
-  String get notifSuspended => 'You have been suspended';
+  String get notifSuspended => '你的账号已被封禁';
 
   @override
-  String get notifUnsuspended => 'Your suspension has been lifted';
+  String get notifUnsuspended => '你的账号已解除封禁';
 
   @override
-  String get notifExport => 'Your data export is ready';
+  String get notifExport => '你的数据导出已就绪';
 
   @override
-  String get notifOther => 'New notification';
+  String get notifOther => '新通知';
 
   @override
-  String get aDiscussion => 'a discussion';
+  String get aDiscussion => '一个讨论';
 
   @override
-  String get notificationsLoadFailed => 'Couldn\'t load your notifications.';
+  String get notificationsLoadFailed => '无法加载你的通知。';
 
   @override
-  String get notificationsSignIn => 'Sign in to see your notifications.';
+  String get notificationsSignIn => '登录后查看你的通知。';
 
   @override
-  String get markAllRead => 'Mark all as read';
+  String get markAllRead => '全部标为已读';
 
   @override
   String get posts => '帖子';
@@ -362,11 +361,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get discussionsTab => 'Discussions';
+  String get discussionsTab => '讨论';
 
   @override
   String lastSeen(String time) {
-    return 'Last seen $time';
+    return '最后在线：$time';
   }
 
   @override
@@ -374,23 +373,21 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       discussions,
       locale: localeName,
-      other: '$discussions discussions',
-      one: '1 discussion',
+      other: '$discussions 个讨论',
     );
     String _temp1 = intl.Intl.pluralLogic(
       comments,
       locale: localeName,
-      other: '$comments posts',
-      one: '1 post',
+      other: '$comments 个帖子',
     );
     return '$_temp0 · $_temp1';
   }
 
   @override
-  String get userLoadFailed => 'Couldn\'t load this profile.';
+  String get userLoadFailed => '无法加载此个人资料。';
 
   @override
-  String get noPostsYet => 'No posts yet.';
+  String get noPostsYet => '还没有帖子。';
 
   @override
   String searchFailedWithError(String error) {
@@ -398,11 +395,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'Search discussions and posts';
+  String get searchHint => '搜索讨论和帖子';
 
   @override
   String noResultsFor(String query) {
-    return 'Nothing found for “$query”.';
+    return '未找到与“$query”相关的内容。';
   }
 
   @override
@@ -419,12 +416,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String repliedByOne(String a) {
-    return '$a replied to this.';
+    return '$a 回复了此帖。';
   }
 
   @override
   String repliedByTwo(String a, String b) {
-    return '$a and $b replied to this.';
+    return '$a 和 $b 回复了此帖。';
   }
 
   @override
@@ -432,18 +429,17 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: '$others',
     );
-    return '$a, $b and $_temp0 replied to this.';
+    return '$a、$b 和另外 $_temp0 条回复。';
   }
 
   @override
-  String get repliesTitle => 'Replies';
+  String get repliesTitle => '回复';
 
   @override
   String postNumber(int number) {
-    return 'Post #$number';
+    return '第 $number 楼';
   }
 
   @override
@@ -451,44 +447,46 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       others,
       locale: localeName,
-      other: '$others others',
-      one: '1 other',
+      other: '$others',
     );
-    return '$a and $_temp0 replied to this.';
+    return '$a 和另外 $_temp0 条回复。';
   }
 
   @override
   String eventTagsAdded(String user, String tags) {
-    return '$user added $tags.';
+    return '$user 添加了 $tags。';
   }
 
   @override
   String eventTagsRemoved(String user, String tags) {
-    return '$user removed $tags.';
+    return '$user 移除了 $tags。';
   }
 
   @override
   String eventTagsMoved(String user, String added, String removed) {
-    return '$user added $added and removed $removed.';
+    return '$user 添加了 $added，移除了 $removed。';
   }
 
   @override
-  String get privateDiscussion => 'Private discussion';
+  String get privateDiscussion => '私密讨论';
 
   @override
-  String get bestAnswer => 'Best answer';
+  String get bestAnswer => '最佳答案';
 
   @override
-  String get goToBestAnswer => 'Go to best answer';
+  String get goToBestAnswer => '查看最佳答案';
 
   @override
-  String get answered => 'Answered';
+  String get answered => '已解决';
 
   @override
   String eventRecipientsChanged(String user) {
-    return '$user changed who is in this private discussion.';
+    return '$user 更改了此私密讨论的参与者。';
   }
 
   @override
-  String get permissionRequired => 'Permission required';
+  String get noTagsOnForum => '此论坛未使用标签。';
+
+  @override
+  String get permissionRequired => '需要权限';
 }

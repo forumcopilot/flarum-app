@@ -101,8 +101,12 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   `POST /api/notifications/read` marks all read (204).
 - byobu private discussions are invisible to admins who aren't recipients.
 - Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
-  the username by default, the id on forums with the ID slug driver, where a username 404s. Filter
-  posts and discussions by the username the forum returns.
+  the username by default, the id on forums with the ID slug driver, where a username 404s. Their
+  posts and discussions: `filter[author]` (and 1.x's `author:` gambit) takes the username on 1.x
+  but resolves a slug on 2.0 (`FlarumApi.authorKey`).
+- Includes from an extension the forum doesn't run (flarum/tags' `tags`, flarum/mentions'
+  `mentionedBy…`) make the whole request fail with 400 invalid_parameter; `FlarumApi` retries
+  without them. Without flarum/tags, `/api/tags` is a 404.
 - fof/upload: `fof-upload.canDownload` (forum attribute) is the reader's download permission;
   without it `/api/fof/download/…` answers 403. Members don't have it by default.
 - The unread notification count (`GET /api` actor) is cached for 5 minutes and not cleared when a

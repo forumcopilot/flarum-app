@@ -135,3 +135,20 @@ Scroll benchmark, profile mode, the Pixel 4a, discuss.flarum.org (two runs): the
 0.5–0.6 ms build p50, 4.9 ms raster p50, 0–1 frames over 16.7 ms; the thread at 0.7 ms build p50,
 3.0 ms raster p50.
 
+## The whole census (11 October 2026)
+
+`test/census/census_test.dart` with `CENSUS_FILE` set reads every guest-readable census forum on
+1.0 or later: 204, of which 200 answered (149 on 1.x, 51 on 2.0; 4 blocked this server or were
+down). Besides the latest list, a thread and its posts rendered, it now opens a tag's list and the
+first poster's profile as the app does. 1,591 posts rendered without an error; nothing failed to
+parse. It found three things, fixed:
+
+- Forums without flarum/mentions (3) or flarum/tags (1) refuse a request that includes
+  `mentionedBy…` or `tags` with 400 invalid_parameter, so their threads, or the home list, didn't
+  load. `FlarumApi` now sends such a request again without them and leaves them off for that forum.
+- 19 forums use the ID slug driver (`/u/23`); profiles there are found by slug since the phone run.
+  On 2.0, `filter[author]` resolves a slug too, so a profile's posts and discussions came back
+  empty there (1.x matches the username): `FlarumApi.authorKey`.
+- A forum without flarum/tags answers 404 for `/api/tags`: the Tags tab says the forum doesn't use
+  tags instead of offering a retry.
+

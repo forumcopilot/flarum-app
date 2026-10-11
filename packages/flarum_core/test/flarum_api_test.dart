@@ -97,6 +97,13 @@ void main() {
           expect(discussion.canReply, isTrue);
         });
 
+        test('filters a user\'s posts by username on 1.x and by slug on 2.0', () async {
+          const user = FlarumUser(id: '1', username: 'huseyinfiliz', displayName: 'Hüseyin', slug: '1');
+          expect(await api.authorKey(user), version == FlarumVersion.v2 ? '1' : 'huseyinfiliz');
+          const plain = FlarumUser(id: '6', username: 'bob', displayName: 'bob', slug: 'bob');
+          expect(await api.authorKey(plain), 'bob');
+        });
+
         test('reads which post fof/best-answer chose', () async {
           final answered = await api.discussion(forum.discussionId('answered'));
           final posts = await api.posts(answered.id, limit: 20);

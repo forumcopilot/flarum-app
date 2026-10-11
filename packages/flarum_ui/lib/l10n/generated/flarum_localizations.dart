@@ -812,6 +812,12 @@ abstract class FlarumLocalizations {
   /// **'{user} changed who is in this private discussion.'**
   String eventRecipientsChanged(String user);
 
+  /// Tags tab on a forum that doesn't run flarum/tags
+  ///
+  /// In en, this message translates to:
+  /// **'This forum doesn\'t use tags.'**
+  String get noTagsOnForum;
+
   /// On a file card in a post, instead of Download, when the reader may not download files (fof/upload's download permission)
   ///
   /// In en, this message translates to:

@@ -58,7 +58,7 @@ class _IdSlugForum implements HttpClientAdapter {
 void main() {
   setUp(FlarumForum.resetForTesting);
 
-  testWidgets('a profile is found by slug, and its lists by the username the forum returns', (tester) async {
+  testWidgets('a profile is found by slug, and on 2.0 its lists by slug too', (tester) async {
     final adapter = _IdSlugForum();
     FlarumForum.forTesting(FixtureForum.baseUrl, Dio()..httpClientAdapter = adapter);
     await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: UserPage(site: _site(), slug: '1')));
@@ -67,7 +67,8 @@ void main() {
     final lists = adapter.requests.where((uri) => uri.path == '/api/posts' || uri.path == '/api/discussions');
     expect(lists, hasLength(2));
     for (final uri in lists) {
-      expect(uri.query, contains('huseyinfiliz'), reason: '${uri.path} filters by the username, not the slug');
+      // 2.0's author filter resolves a slug, which this forum's ID slug driver makes the id.
+      expect(uri.queryParameters['filter[author]'], '1', reason: uri.path);
     }
     await tester.pumpWidget(const SizedBox());
     await tester.pump(const Duration(seconds: 5));

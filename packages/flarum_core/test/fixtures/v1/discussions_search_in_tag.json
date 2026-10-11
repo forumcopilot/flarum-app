@@ -14,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bq%5D=thread+tag%3Asupport&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+      "first": "https://flarum18.betterdiscourse.app/api/discussions?filter%5Bq%5D=thread+tag%3Asupport&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
     },
     "data": [
       {

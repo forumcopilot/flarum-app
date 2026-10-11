@@ -664,7 +664,7 @@
           "number": 3,
           "createdAt": "2026-10-08T17:53:49+00:00",
           "contentType": "comment",
-          "contentHtml": "<p><a href=\"http://127.0.0.1:8082/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a> Welcome! I'll take the iOS side.</p>",
+          "contentHtml": "<p><a href=\"https://flarum20.betterdiscourse.app/d/3-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"6\"><i class=\"icon fas fa-reply\"></i>alice</a> Welcome! I'll take the iOS side.</p>",
           "renderFailed": null,
           "editedAt": null,
           "canEdit": false,

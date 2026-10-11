@@ -1,7 +1,11 @@
 # Test forums
 
-flarum_core's fixtures and live tests come from two local forums, one per Flarum major version,
-seeded with the same content by `seed.php`.
+flarum_core's fixtures and live tests come from two forums on the dev server, one per Flarum major
+version, seeded with the same content by `seed.php`. The tools reach them on the server's local
+ports, 127.0.0.1:8081 (1.8) and 8082 (2.0). Phones reach them at https://flarum18.betterdiscourse.app
+and https://flarum20.betterdiscourse.app (behind Cloudflare, which challenges cloud networks such as
+the server's own; see docs/device-testing.md). Each forum's `url` is its public address, so the
+links in API responses and fixtures use it.
 
 | | Flarum 1 | Flarum 2 |
 |---|---|---|

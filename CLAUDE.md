@@ -47,6 +47,10 @@ API test runs against both. `FixtureForum` lives in `package:flarum_core/testing
 tests replay the same fixtures (`root: '../flarum_core/test/fixtures'`). Live tests and re-recording: `test/live_test.dart`,
 `tool/test_forums/README.md`.
 
+The test forums are public at https://flarum18.betterdiscourse.app and https://flarum20.betterdiscourse.app
+(phones use these), behind Cloudflare, which challenges the dev server's own network: tools on the
+server use 127.0.0.1:8081 and 8082.
+
 flarum_ui's post renderer is `FlarumContent` (copied from discourse_ui's RichTextContent) on HTML
 prepared by `FlarumHtml`, which rewrites Flarum's own markup (code-block scripts, task lists,
 fof/upload files and previews, s9e embeds, mention icons) into shapes the renderer draws. Its strings

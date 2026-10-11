@@ -14,7 +14,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?filter%5Bq%5D=thread&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags%2CmostRelevantPost%2CmostRelevantPost.user"
+      "first": "https://flarum18.betterdiscourse.app/api/discussions?filter%5Bq%5D=thread&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags%2CmostRelevantPost%2CmostRelevantPost.user"
     },
     "data": [
       {
@@ -170,7 +170,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-10T18:30:46+00:00",
+          "lastSeenAt": "2026-10-11T01:03:34+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -329,7 +329,7 @@
           "number": 1,
           "createdAt": "2026-10-08T17:52:29+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><img class=\"FoFUpload--Upl-Image-Preview\" src=\"http://127.0.0.1:8081/assets/files/2026-10-08/1791481948-212922-screenshot.png\" title=\"screenshot.png\" alt=\"\" data-id=\"0eceaeb3-bc91-451c-9ff8-12d391f8a64a\" loading=\"lazy\" width=\"320\" height=\"200\"></p>",
+          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><img class=\"FoFUpload--Upl-Image-Preview\" src=\"https://flarum18.betterdiscourse.app/assets/files/2026-10-08/1791481948-212922-screenshot.png\" title=\"screenshot.png\" alt=\"\" data-id=\"0eceaeb3-bc91-451c-9ff8-12d391f8a64a\" loading=\"lazy\" width=\"320\" height=\"200\"></p>",
           "renderFailed": false,
           "canEdit": false,
           "canDelete": false,

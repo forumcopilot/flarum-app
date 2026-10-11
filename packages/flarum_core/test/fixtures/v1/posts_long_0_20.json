@@ -15,8 +15,8 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion",
-      "next": "http://127.0.0.1:8081/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion",
+      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
     },
     "data": [
       {
@@ -1083,7 +1083,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-10T17:47:51+00:00",
+          "lastSeenAt": "2026-10-10T18:30:56+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -1110,7 +1110,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-10T18:30:46+00:00",
+          "lastSeenAt": "2026-10-11T01:03:34+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,

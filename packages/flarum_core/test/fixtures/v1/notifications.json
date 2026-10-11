@@ -13,7 +13,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/notifications?page%5Blimit%5D=20&include=fromUser%2Csubject%2Csubject.discussion"
+      "first": "https://flarum18.betterdiscourse.app/api/notifications?page%5Blimit%5D=20&include=fromUser%2Csubject%2Csubject.discussion"
     },
     "data": [
       {
@@ -206,7 +206,7 @@
           "number": 2,
           "createdAt": "2026-10-08T17:52:28+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Hi all! Looking forward to testing with <a href=\"http://127.0.0.1:8081/u/bob\" class=\"UserMention\">@bob</a> and <a href=\"http://127.0.0.1:8081/u/carol\" class=\"UserMention\">@carol</a>.</p>",
+          "contentHtml": "<p>Hi all! Looking forward to testing with <a href=\"https://flarum18.betterdiscourse.app/u/bob\" class=\"UserMention\">@bob</a> and <a href=\"https://flarum18.betterdiscourse.app/u/carol\" class=\"UserMention\">@carol</a>.</p>",
           "renderFailed": false,
           "canEdit": false,
           "canDelete": false,
@@ -248,7 +248,7 @@
           "number": 1,
           "createdAt": "2026-10-08T17:52:29+00:00",
           "contentType": "comment",
-          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><img class=\"FoFUpload--Upl-Image-Preview\" src=\"http://127.0.0.1:8081/assets/files/2026-10-08/1791481948-212922-screenshot.png\" title=\"screenshot.png\" alt=\"\" data-id=\"0eceaeb3-bc91-451c-9ff8-12d391f8a64a\" loading=\"lazy\" width=\"320\" height=\"200\"></p>",
+          "contentHtml": "<p>Steps: open any thread with 50+ replies.</p>\n\n<p><img class=\"FoFUpload--Upl-Image-Preview\" src=\"https://flarum18.betterdiscourse.app/assets/files/2026-10-08/1791481948-212922-screenshot.png\" title=\"screenshot.png\" alt=\"\" data-id=\"0eceaeb3-bc91-451c-9ff8-12d391f8a64a\" loading=\"lazy\" width=\"320\" height=\"200\"></p>",
           "renderFailed": false,
           "canEdit": false,
           "canDelete": false,

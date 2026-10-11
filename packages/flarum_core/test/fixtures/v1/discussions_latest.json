@@ -13,8 +13,8 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/discussions?page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags",
-      "next": "http://127.0.0.1:8081/api/discussions?page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
+      "first": "https://flarum18.betterdiscourse.app/api/discussions?page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags",
+      "next": "https://flarum18.betterdiscourse.app/api/discussions?page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2ClastPostedUser%2Ctags"
     },
     "data": [
       {

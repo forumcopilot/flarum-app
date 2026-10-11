@@ -13,7 +13,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/users?filter%5Bq%5D=bo&page%5Blimit%5D=20"
+      "first": "https://flarum18.betterdiscourse.app/api/users?filter%5Bq%5D=bo&page%5Blimit%5D=20"
     },
     "data": [
       {

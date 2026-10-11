@@ -5,11 +5,11 @@ import '../../config/app_forum_config.dart';
 import '../../l10n/flarum_l10n.dart';
 
 /// Forums to switch to in a debug build, for Phase 2's exit check (browse the census forums
-/// on a phone): the local test forums, reached through adb reverse (docs/device-testing.md),
-/// and the 21 forums the census check reads (test/census/census_test.dart).
+/// on a phone): the two test forums (docs/device-testing.md) and the 21 forums the census check
+/// reads (test/census/census_test.dart).
 const debugForums = <AppForumConfig>[
-  AppForumConfig(name: 'Test forum 2.0 (local)', baseUrl: 'http://127.0.0.1:8082'),
-  AppForumConfig(name: 'Test forum 1.8 (local)', baseUrl: 'http://127.0.0.1:8081'),
+  AppForumConfig(name: 'Test forum 2.0', baseUrl: 'https://flarum20.betterdiscourse.app'),
+  AppForumConfig(name: 'Test forum 1.8', baseUrl: 'https://flarum18.betterdiscourse.app'),
   AppForumConfig(name: 'Flarum Community', baseUrl: 'https://discuss.flarum.org'),
   AppForumConfig(name: 'mondedie.fr', baseUrl: 'https://mondedie.fr'),
   AppForumConfig(name: 'osTicket Forum', baseUrl: 'https://forum.osticket.com'),

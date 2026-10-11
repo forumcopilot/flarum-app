@@ -16,8 +16,8 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "http://127.0.0.1:8081/api/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&sort=-createdAt&page%5Blimit%5D=20&include=user%2Cdiscussion",
-      "next": "http://127.0.0.1:8081/api/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&sort=-createdAt&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2Cdiscussion"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&sort=-createdAt&page%5Blimit%5D=20&include=user%2Cdiscussion",
+      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bauthor%5D=bob&filter%5Btype%5D=comment&sort=-createdAt&page%5Boffset%5D=20&page%5Blimit%5D=20&include=user%2Cdiscussion"
     },
     "data": [
       {
@@ -603,7 +603,7 @@
           "number": 3,
           "createdAt": "2026-10-08T17:52:28+00:00",
           "contentType": "comment",
-          "contentHtml": "<p><a href=\"http://127.0.0.1:8081/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a> Welcome! I'll take the iOS side.</p>",
+          "contentHtml": "<p><a href=\"https://flarum18.betterdiscourse.app/d/5-welcome-to-the-test-forum/2\" class=\"PostMention\" data-id=\"13\">alice</a> Welcome! I'll take the iOS side.</p>",
           "renderFailed": false,
           "canEdit": false,
           "canDelete": false,

@@ -27,6 +27,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # The scroll benchmark (integration_test/scroll_perf_test.dart), run on a phone with flutter drive.
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
   # The app test replays flarum_core's recorded forum (package:flarum_core/testing.dart).
   flarum_core:
     path: packages/flarum_core

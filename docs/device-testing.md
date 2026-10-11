@@ -48,3 +48,22 @@ guest. CI builds that as a debug APK on every push (artifact `app-debug.apk` on 
 
 Test accounts on the test forums: alice, bob and carol, and the 14 community members (passwords in
 the server's credentials file, not in the repo).
+
+## Scroll benchmark
+
+`integration_test/scroll_perf_test.dart`, ported from discourse-app (its `docs/perf-benchmarking.md`
+explains the method and the traps): it opens the build's forum, flings the home list eight times,
+opens the second discussion and flings the thread eight times, timing every frame. Profile mode, on
+the phone, never an emulator:
+
+```bash
+flutter drive --profile -d <device id> --driver=test_driver/perf_driver.dart \
+  --target=integration_test/scroll_perf_test.dart > /tmp/drive.log 2>&1
+grep PERF /tmp/drive.log
+```
+
+Without `--dart-define` it measures discuss.flarum.org, a fixed public forum with long threads. It
+prints one line per screen (`topic_list`, `thread`), with the labels discourse-app uses, plus the
+thread it opened. Run it twice before comparing: two runs agree within about 0.2 ms on p50 and 10%
+on the counts of slow frames. `flutter drive` uninstalls the app when it finishes.
+

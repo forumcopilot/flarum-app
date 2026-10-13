@@ -11,6 +11,9 @@ abstract final class WriteSamples {
   static const questionTitle = 'A question from the app';
   static const question = 'How does the app choose a best answer?';
   static const answer = 'The one who asked chooses it.';
+  /// What a report says about the post (Milestone 4).
+  static const flagDetail = 'Reported by the app tests.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

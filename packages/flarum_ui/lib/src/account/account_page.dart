@@ -9,6 +9,7 @@ import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
+import '../safety/ignored_users_page.dart';
 import 'sign_in_page.dart';
 import '../widgets/flarum_avatar.dart';
 
@@ -91,8 +92,15 @@ class _AccountPageState extends State<AccountPage> {
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => BookmarksPage.open(context, widget.site),
               ),
-              const SizedBox(height: DesignTokens.spacingL),
             ],
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.person_off_outlined),
+              title: Text(l10n.ignoredUsers),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => IgnoredUsersPage.open(context, widget.site),
+            ),
+            const SizedBox(height: DesignTokens.spacingL),
             OutlinedButton.icon(
               onPressed: _busy ? null : _signOut,
               icon: _busy

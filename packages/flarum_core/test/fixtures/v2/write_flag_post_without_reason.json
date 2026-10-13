@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flags",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "flags",
+        "attributes": {
+          "reason": null,
+          "reasonDetail": ""
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "315"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "source": {
+          "pointer": "/data/attributes/reason"
+        },
+        "detail": "Please provide some details for our moderators."
+      },
+      {
+        "status": "422",
+        "code": "validation_error",
+        "source": {
+          "pointer": "/data/attributes/reasonDetail"
+        },
+        "detail": "Please provide some details for our moderators."
+      }
+    ]
+  }
+}

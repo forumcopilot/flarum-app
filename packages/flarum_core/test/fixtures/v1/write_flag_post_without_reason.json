@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flags",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "flags",
+        "attributes": {
+          "reason": null,
+          "reasonDetail": ""
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "262"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "detail": "Please provide some details for our moderators.",
+        "source": {
+          "pointer": "/data/attributes/message"
+        }
+      }
+    ]
+  }
+}

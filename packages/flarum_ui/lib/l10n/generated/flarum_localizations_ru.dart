@@ -749,4 +749,81 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return 'Размер $fileName: $fileBytes. Форум допускает до $maxBytes.';
   }
+
+  @override
+  String get flagAction => 'Пожаловаться';
+
+  @override
+  String get ignoredUsers => 'Игнорируемые пользователи';
+
+  @override
+  String get ignoredUsersEmpty => 'Вы никого не игнорируете.';
+
+  @override
+  String get flagPostTitle => 'Пожаловаться на сообщение';
+
+  @override
+  String get flagReasonOffTopic => 'Не по теме';
+
+  @override
+  String get flagReasonOffTopicText =>
+      'Это сообщение не относится к обсуждению, его стоит перенести.';
+
+  @override
+  String get flagReasonInappropriate => 'Неприемлемо';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'Это сообщение оскорбительное, грубое или нарушает правила сообщества.';
+
+  @override
+  String get flagReasonSpam => 'Спам';
+
+  @override
+  String get flagReasonSpamText => 'Это сообщение — реклама.';
+
+  @override
+  String get flagReasonOther => 'Другое (уточните)';
+
+  @override
+  String get flagDetails => 'Подробности (необязательно)';
+
+  @override
+  String get flagDetailsNeeded => 'Опишите проблему для модераторов.';
+
+  @override
+  String get communityGuidelines => 'Правила сообщества';
+
+  @override
+  String get flagSent => 'Спасибо за жалобу. Модераторы её рассмотрят.';
+
+  @override
+  String ignoreUser(String name) {
+    return 'Игнорировать $name';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return 'Не игнорировать $name';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return 'Игнорировать $name? Сообщения этого пользователя будут свёрнуты. Отменить можно в вашей учётной записи.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return 'Сообщение от $name, которого вы игнорируете.';
+  }
+
+  @override
+  String get showPost => 'Показать сообщение';
+
+  @override
+  String get ignoredOnThisPhone =>
+      'Этот форум не хранит список игнорируемых, поэтому приложение хранит ваш на этом телефоне.';
+
+  @override
+  String get stopIgnoring => 'Не игнорировать';
 }

@@ -68,3 +68,26 @@ is on branch `phase-3`, started 13 October 2026 from `phase-2` at 39fbc95.
 - **Tests:** the write recorder uploads a 1×1 PNG and a text file as bob, tries to delete one (403),
   and has the admin delete both; `FixtureForum` matches an upload by its files' names. The shrink
   and retry is tested with scripted refusals.
+
+## Milestone 4: safety and private discussions
+
+Drafts and polls (Milestone 3) wait for Tung's answer on member permissions: members on the test
+forums have no fof/polls permission at all (not even to vote) and only moderators may save drafts.
+Milestone 4 needs none: members may already flag posts, start private discussions and (2.0) send
+messages.
+
+- **Report (flarum/flags):** Flag in a post's menu (where the post's `canFlag`) opens the web's
+  reasons: off-topic, inappropriate (with the forum's community guidelines when it sets them),
+  spam, or the reporter's own words. `POST /api/flags` always carries `reasonDetail`: 1.x checks for
+  an empty one, and would take a flag with neither as having no reason. A second flag from the same
+  reader replaces the first. `reportPostAsync` sends a known reason as itself and anything else as
+  "Other".
+- **Ignore (fof/ignore-users):** Ignore in a post's menu and on a profile (where the author's
+  `canBeIgnored`: not the reader, not moderators by default), after asking. Their posts fold to a
+  line with Show, as the web folds them; Account lists everyone ignored, each with Stop ignoring.
+  `PATCH /api/users/{id}` with `ignored`; each post's author carries `ignored` and `canBeIgnored`,
+  and the forum's `GET /api` includes `actor.ignoredUsers`. On a forum without the extension, or
+  for a guest, the app keeps the list on the phone (App Store guideline 1.2 asks for a way to block).
+- **Tests:** the write recorder has carol flag bob's answer (and once without a reason, 422) and
+  ignore him (and herself, 403). The fixtures recorded while she ignores him carry a state,
+  `ignoring`, that `FixtureForum(states:)` serves in place of the same requests' plain fixtures.

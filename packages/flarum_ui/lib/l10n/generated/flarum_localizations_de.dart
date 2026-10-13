@@ -747,4 +747,83 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName ist $fileBytes groß. Dieses Forum erlaubt bis zu $maxBytes.';
   }
+
+  @override
+  String get flagAction => 'Melden';
+
+  @override
+  String get ignoredUsers => 'Ignorierte Benutzer';
+
+  @override
+  String get ignoredUsersEmpty => 'Du ignorierst niemanden.';
+
+  @override
+  String get flagPostTitle => 'Beitrag melden';
+
+  @override
+  String get flagReasonOffTopic => 'Themenfremd';
+
+  @override
+  String get flagReasonOffTopicText =>
+      'Dieser Beitrag gehört nicht zur aktuellen Diskussion und sollte verschoben werden.';
+
+  @override
+  String get flagReasonInappropriate => 'Unangemessen';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'Dieser Beitrag ist beleidigend, missbräuchlich oder verstößt gegen die Community-Richtlinien.';
+
+  @override
+  String get flagReasonSpam => 'Spam';
+
+  @override
+  String get flagReasonSpamText => 'Dieser Beitrag ist Werbung.';
+
+  @override
+  String get flagReasonOther => 'Sonstiges (bitte angeben)';
+
+  @override
+  String get flagDetails => 'Weitere Angaben (optional)';
+
+  @override
+  String get flagDetailsNeeded =>
+      'Bitte gib den Moderatoren ein paar Details an.';
+
+  @override
+  String get communityGuidelines => 'Community-Richtlinien';
+
+  @override
+  String get flagSent =>
+      'Danke für deine Meldung. Unsere Moderatoren sehen sich den Beitrag an.';
+
+  @override
+  String ignoreUser(String name) {
+    return '$name ignorieren';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return '$name nicht mehr ignorieren';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '$name ignorieren? Die Beiträge werden eingeklappt. Du kannst das in deinem Konto wieder aufheben.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return 'Ein Beitrag von $name, den du ignorierst.';
+  }
+
+  @override
+  String get showPost => 'Beitrag anzeigen';
+
+  @override
+  String get ignoredOnThisPhone =>
+      'Dieses Forum führt keine Liste ignorierter Nutzer, daher speichert die App deine auf diesem Telefon.';
+
+  @override
+  String get stopIgnoring => 'Nicht mehr ignorieren';
 }

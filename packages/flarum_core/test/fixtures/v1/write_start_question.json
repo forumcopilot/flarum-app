@@ -29,20 +29,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "49",
+      "id": "55",
       "attributes": {
         "title": "A question from the app",
-        "slug": "49-a-question-from-the-app",
+        "slug": "55-a-question-from-the-app",
         "commentCount": 1,
         "participantCount": 1,
-        "createdAt": "2026-10-13T18:12:07+00:00",
-        "lastPostedAt": "2026-10-13T18:12:07+00:00",
+        "createdAt": "2026-10-13T18:59:14+00:00",
+        "lastPostedAt": "2026-10-13T18:59:14+00:00",
         "lastPostNumber": 1,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": true,
-        "lastReadAt": "2026-10-13T18:12:07+00:00",
+        "lastReadAt": "2026-10-13T18:59:14+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -67,7 +67,7 @@
           "data": [
             {
               "type": "posts",
-              "id": "249"
+              "id": "261"
             }
           ]
         },
@@ -86,13 +86,13 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "249"
+            "id": "261"
           }
         },
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "249"
+            "id": "261"
           }
         },
         "tags": {
@@ -114,10 +114,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "249",
+        "id": "261",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T18:12:07+00:00",
+          "createdAt": "2026-10-13T18:59:14+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": false,
@@ -173,7 +173,7 @@
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-13T18:12:07+00:00",
+          "lastPostedAt": "2026-10-13T18:59:14+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

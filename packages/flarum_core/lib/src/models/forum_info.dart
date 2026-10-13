@@ -48,11 +48,13 @@ class FlarumForumInfo {
     this.logoUrl,
     this.logoDarkUrl,
     this.faviconUrl,
+    this.guidelinesUrl,
     this.allowSignUp = false,
     this.tagRules,
     this.reactions = const [],
     this.actor,
     this.actorAttributes = const {},
+    this.ignoredUsers,
   });
 
   factory FlarumForumInfo.fromDocument(JsonApiDocument document) {
@@ -72,6 +74,7 @@ class FlarumForumInfo {
       logoUrl: a.nonEmptyString('logoUrl'),
       logoDarkUrl: a.nonEmptyString('logoDarkModeUrl'),
       faviconUrl: a.nonEmptyString('faviconUrl'),
+      guidelinesUrl: a.nonEmptyString('guidelinesUrl'),
       allowSignUp: a.boolean('allowSignUp') ?? false,
       tagRules: minPrimary == null
           ? null
@@ -88,6 +91,10 @@ class FlarumForumInfo {
       ],
       actor: actor == null ? null : FlarumUser.fromResource(actor),
       actorAttributes: actor?.attributes ?? const {},
+      // fof/ignore-users has the forum include them (`actor.ignoredUsers`).
+      ignoredUsers: actor == null || !actor.relationships.containsKey('ignoredUsers')
+          ? null
+          : [for (final user in document.findAll(actor.toMany('ignoredUsers'))) FlarumUser.fromResource(user)],
       attributes: a,
     );
   }
@@ -107,6 +114,9 @@ class FlarumForumInfo {
   /// 2.0 only.
   final String? logoDarkUrl;
   final String? faviconUrl;
+
+  /// flarum/flags' community guidelines, which a report for "Inappropriate" points to.
+  final String? guidelinesUrl;
   final bool allowSignUp;
 
   /// Null when flarum/tags is off.
@@ -116,6 +126,9 @@ class FlarumForumInfo {
   final List<FlarumReaction> reactions;
 
   /// The signed-in reader; null for guests.
+  /// The users the reader ignores (fof/ignore-users). Null without the extension, or for a guest.
+  final List<FlarumUser>? ignoredUsers;
+
   final FlarumUser? actor;
 
   /// The reader's raw attributes, including ones extensions add

@@ -562,6 +562,39 @@ class FlarumApi {
     return document.data.isEmpty ? null : document.data.first.id;
   }
 
+  /// Flags post [id] for the forum's moderators (flarum/flags). [reason] is `off_topic`,
+  /// `inappropriate` or `spam`, or null for "Other", which needs a [detail]. A second flag from
+  /// the same reader replaces the first.
+  Future<void> flagPost(String id, {String? reason, String detail = ''}) async {
+    await client.post('/flags', {
+      'data': {
+        'type': 'flags',
+        // reasonDetail always, as the web sends it: 1.x checks for an empty one, and takes a
+        // flag with neither as having no reason at all.
+        'attributes': {'reason': reason, 'reasonDetail': detail},
+        'relationships': {
+          'post': {
+            'data': {'type': 'posts', 'id': id},
+          },
+        },
+      },
+    });
+  }
+
+  /// Ignores user [id], or stops (fof/ignore-users): the web then folds their posts away and
+  /// they can't start a private discussion with the reader. Returns the user as the reader now
+  /// sees them.
+  Future<FlarumUser> setIgnored(String id, bool ignored) async {
+    final document = await client.patch('/users/$id', {
+      'data': {
+        'type': 'users',
+        'id': id,
+        'attributes': {'ignored': ignored},
+      },
+    });
+    return FlarumUser.fromResource(document.single);
+  }
+
   /// Marks every discussion read for the reader [userId]: Flarum records the
   /// time, and treats anything older as read. There's no per-tag version.
   Future<void> markAllAsRead(String userId) async {

@@ -33,8 +33,8 @@ Future<void> main(List<String> args) async {
   final carol = member(recorder);
   final bob = member(recorder);
   final admin = FlarumApi(FlarumClient(url, dio: Dio()));
-  await carol.logIn('carol', password);
-  await bob.logIn('bob', password);
+  final carolId = (await carol.logIn('carol', password)).userId;
+  final bobId = (await bob.logIn('bob', password)).userId;
   await admin.logIn(adminUser, adminPassword);
 
   /// Records the response [call] gets as fixture [name], refusals included; returns its value.
@@ -126,6 +126,20 @@ Future<void> main(List<String> args) async {
     await record('write_unbookmark_discussion', () => bob.bookmarkDiscussion(question.id, bookmarked: false));
     await record('write_tag_follow', () => bob.setTagSubscription(tagId('cycling'), 'follow'));
     await record('write_tag_none', () => bob.setTagSubscription(tagId('cycling'), null));
+
+    // Milestone 4: carol reports bob's answer, and ignores him for a while.
+    recorder.states.addAll({
+      for (final name in ['write_forum_ignoring', 'write_question_posts_ignoring', 'write_user_ignored']) name: 'ignoring',
+    });
+    await record('write_flag_post',
+        () => carol.flagPost(answer.id, reason: 'off_topic', detail: WriteSamples.flagDetail));
+    await record('write_flag_post_without_reason', () => carol.flagPost(answer.id));
+    await record('write_ignore_user', () => carol.setIgnored(bobId, true));
+    await record('write_ignore_self', () => carol.setIgnored(carolId, true));
+    await record('write_forum_ignoring', () => carol.forumInfo());
+    await record('write_question_posts_ignoring', () => carol.posts(question.id));
+    await record('write_user_ignored', () => carol.user(bobId));
+    await record('write_unignore_user', () => carol.setIgnored(bobId, false));
   } finally {
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {

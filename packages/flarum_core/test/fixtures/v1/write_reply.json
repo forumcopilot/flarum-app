@@ -15,7 +15,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "48"
+              "id": "54"
             }
           }
         }
@@ -26,10 +26,10 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "248",
+      "id": "260",
       "attributes": {
         "number": 2,
-        "createdAt": "2026-10-13T18:11:54+00:00",
+        "createdAt": "2026-10-13T18:59:01+00:00",
         "contentType": "comment",
         "contentHtml": "<p>A reply from the composer tests.</p>",
         "renderFailed": false,
@@ -68,7 +68,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "48"
+            "id": "54"
           }
         },
         "polls": {
@@ -95,7 +95,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T18:11:52+00:00",
+          "lastSeenAt": "2026-10-13T18:58:59+00:00",
           "isEmailConfirmed": true,
           "email": "bob@flarumapp.local",
           "suspendMessage": null,
@@ -116,10 +116,10 @@
       },
       {
         "type": "discussions",
-        "id": "48",
+        "id": "54",
         "attributes": {
           "title": "Written from the app",
-          "slug": "48-written-from-the-app",
+          "slug": "54-written-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null
@@ -129,11 +129,11 @@
             "data": [
               {
                 "type": "posts",
-                "id": "247"
+                "id": "259"
               },
               {
                 "type": "posts",
-                "id": "248"
+                "id": "260"
               }
             ]
           },

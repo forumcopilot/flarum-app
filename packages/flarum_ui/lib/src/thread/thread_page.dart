@@ -15,6 +15,9 @@ import '../navigation/forum_links.dart';
 import '../render/flarum_html.dart';
 import '../render/links.dart';
 import '../profile/user_page.dart';
+import '../safety/flag_post_page.dart';
+import '../safety/ignore_actions.dart';
+import '../safety/ignored_users.dart';
 import '../tags/tag_label.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
@@ -61,6 +64,7 @@ class ThreadPage extends StatefulWidget {
 
 class _ThreadPageState extends State<ThreadPage> {
   late final ThreadModel _model = ThreadModel(FlarumForum.of(widget.site), widget.discussionId)..addListener(_changed);
+  late final IgnoredUsers _ignored = IgnoredUsers.of(widget.site)..addListener(_changed);
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
 
@@ -91,6 +95,7 @@ class _ThreadPageState extends State<ThreadPage> {
     _model
       ..removeListener(_changed)
       ..dispose();
+    _ignored.removeListener(_changed);
     super.dispose();
   }
 
@@ -255,6 +260,12 @@ class _ThreadPageState extends State<ThreadPage> {
       () => takingBack ? _forum.api.unreactToPost(post.id, reaction.id) : _forum.api.reactToPost(post.id, reaction.id),
       (shown, saved) => shown.copyWith(reactionCounts: saved.reactionCounts, userReactionId: () => saved.userReactionId),
     );
+  }
+
+  Future<void> _flag(FlarumPost post) async {
+    if (await FlagPostPage.open(context, widget.site, post) && mounted) {
+      SnackbarHelper.showInfo(context, flarumL10n(context).flagSent);
+    }
   }
 
   void _bookmarkPost(FlarumPost post) => _changePost(
@@ -431,6 +442,9 @@ class _ThreadPageState extends State<ThreadPage> {
         onReact: post.canReact ? (reaction) => _react(post, reaction) : null,
         onBookmark: _signedIn && _forum.extensions.bookmarks ? () => _bookmarkPost(post) : null,
         onChooseBestAnswer: post.canSelectAsBestAnswer && post.number > 1 ? () => _chooseBestAnswer(post) : null,
+        onFlag: post.canFlag ? () => _flag(post) : null,
+        authorIgnored: _ignored.isIgnored(post.author),
+        onIgnore: _ignored.canIgnore(post.author) ? () => toggleIgnore(context, widget.site, post.author!) : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.

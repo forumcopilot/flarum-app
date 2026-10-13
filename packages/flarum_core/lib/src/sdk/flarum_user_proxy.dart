@@ -234,13 +234,39 @@ class FlarumUserProxy implements IFCUserProxy {
   Future<FCRecommendedUserResult> getRecommendedUsersAsync(int page, int perpage, int mode) async =>
       FCRecommendedUserResult(result: false, resultText: 'Flarum has no recommended users');
 
+  /// fof/ignore-users: [mode] 1 ignores the user, 0 stops. The forum's list is read again after.
   @override
-  Future<FCIgnoreUserResult> ignoreUserAsync(String userId, int mode) async =>
-      FCIgnoreUserResult(result: false, resultText: 'Not available yet');
+  Future<FCIgnoreUserResult> ignoreUserAsync(String userId, int mode) async {
+    try {
+      await _forum.api.setIgnored(userId, mode == 1);
+      await _forum.refresh();
+      return FCIgnoreUserResult(result: true, resultText: '');
+    } catch (e) {
+      return FCIgnoreUserResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
+  /// The users the reader ignores: the forum sends them all with its info, so [page] (from 1) and
+  /// [perpage] only slice that list.
   @override
-  Future<FCIgnoredUserResult> getIgnoredUsersAsync(int page, int perpage) async =>
-      FCIgnoredUserResult(result: false, resultText: 'Not available yet');
+  Future<FCIgnoredUserResult> getIgnoredUsersAsync(int page, int perpage) async {
+    try {
+      final ignored = (await _forum.refresh()).ignoredUsers;
+      if (ignored == null) return FCIgnoredUserResult(result: false, resultText: 'This forum has no fof/ignore-users');
+      final start = ((page < 1 ? 1 : page) - 1) * perpage;
+      return FCIgnoredUserResult(
+        result: true,
+        resultText: '',
+        total: ignored.length,
+        list: [
+          for (final user in ignored.skip(start).take(perpage))
+            FCIgnoredUser(id: user.id, username: user.username, displayText: user.displayName, iconUrl: user.avatarUrl),
+        ],
+      );
+    } catch (e) {
+      return FCIgnoredUserResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   /// flarum/flags reports posts only.
   @override

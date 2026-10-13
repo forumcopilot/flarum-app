@@ -1,0 +1,99 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flags",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "flags",
+        "attributes": {
+          "reason": "off_topic",
+          "reasonDetail": "Reported by the app tests."
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "262"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "flags",
+      "id": "1",
+      "attributes": {
+        "type": "user",
+        "reason": "off_topic",
+        "reasonDetail": "Reported by the app tests.",
+        "createdAt": "2026-10-13T18:59:17+00:00"
+      },
+      "relationships": {
+        "post": {
+          "data": {
+            "type": "posts",
+            "id": "262"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "posts",
+        "id": "262",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-13T18:59:14+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>The one who asked chooses it.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": true,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      }
+    ]
+  }
+}

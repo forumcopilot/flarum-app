@@ -3,7 +3,7 @@
     "method": "GET",
     "path": "/posts",
     "query": {
-      "filter[discussion]": "57",
+      "filter[discussion]": "63",
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
@@ -17,13 +17,13 @@
     "data": [
       {
         "type": "posts",
-        "id": "302",
+        "id": "314",
         "links": {
-          "self": "/posts/302"
+          "self": "/posts/314"
         },
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T18:12:32+00:00",
+          "createdAt": "2026-10-13T18:59:40+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": null,
@@ -68,7 +68,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "57"
+              "id": "63"
             }
           },
           "user": {
@@ -81,13 +81,13 @@
       },
       {
         "type": "posts",
-        "id": "303",
+        "id": "315",
         "links": {
-          "self": "/posts/303"
+          "self": "/posts/315"
         },
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T18:12:32+00:00",
+          "createdAt": "2026-10-13T18:59:40+00:00",
           "contentType": "comment",
           "contentHtml": "<p>The one who asked chooses it.</p>",
           "renderFailed": null,
@@ -132,7 +132,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "57"
+              "id": "63"
             }
           },
           "user": {
@@ -147,23 +147,23 @@
     "included": [
       {
         "type": "discussions",
-        "id": "57",
+        "id": "63",
         "links": {
-          "self": "/discussions/57"
+          "self": "/discussions/63"
         },
         "attributes": {
           "title": "A question from the app",
-          "slug": "57-a-question-from-the-app",
+          "slug": "63-a-question-from-the-app",
           "commentCount": 2,
           "participantCount": 2,
-          "createdAt": "2026-10-13T18:12:32+00:00",
-          "lastPostedAt": "2026-10-13T18:12:32+00:00",
+          "createdAt": "2026-10-13T18:59:40+00:00",
+          "lastPostedAt": "2026-10-13T18:59:40+00:00",
           "lastPostNumber": 2,
           "canReply": true,
           "canRename": true,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-13T18:12:32+00:00",
+          "lastReadAt": "2026-10-13T18:59:40+00:00",
           "lastReadPostNumber": 1,
           "canTag": false,
           "isApproved": true,
@@ -196,7 +196,7 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "302"
+              "id": "314"
             }
           },
           "lastPostedUser": {
@@ -208,7 +208,7 @@
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "303"
+              "id": "315"
             }
           },
           "mostRelevantPost": {
@@ -241,7 +241,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T18:12:18+00:00",
+          "lastSeenAt": "2026-10-13T18:59:26+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -276,7 +276,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T18:12:17+00:00",
+          "lastSeenAt": "2026-10-13T18:59:25+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

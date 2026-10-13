@@ -744,4 +744,82 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName is $fileBytes. Dit forum staat maximaal $maxBytes toe.';
   }
+
+  @override
+  String get flagAction => 'Melden';
+
+  @override
+  String get ignoredUsers => 'Genegeerde gebruikers';
+
+  @override
+  String get ignoredUsersEmpty => 'Je negeert niemand.';
+
+  @override
+  String get flagPostTitle => 'Bericht melden';
+
+  @override
+  String get flagReasonOffTopic => 'Off-topic';
+
+  @override
+  String get flagReasonOffTopicText =>
+      'Dit bericht hoort niet bij deze discussie en zou ergens anders moeten staan.';
+
+  @override
+  String get flagReasonInappropriate => 'Ongepast';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'Dit bericht is beledigend, kwetsend of in strijd met de communityrichtlijnen.';
+
+  @override
+  String get flagReasonSpam => 'Spam';
+
+  @override
+  String get flagReasonSpamText => 'Dit bericht is reclame.';
+
+  @override
+  String get flagReasonOther => 'Anders (licht toe)';
+
+  @override
+  String get flagDetails => 'Extra toelichting (optioneel)';
+
+  @override
+  String get flagDetailsNeeded => 'Geef de moderators wat meer details.';
+
+  @override
+  String get communityGuidelines => 'Communityrichtlijnen';
+
+  @override
+  String get flagSent =>
+      'Bedankt voor je melding. Onze moderators kijken ernaar.';
+
+  @override
+  String ignoreUser(String name) {
+    return '$name negeren';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return '$name niet meer negeren';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '$name negeren? Hun berichten worden ingeklapt. Je kunt dit ongedaan maken vanuit je account.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return 'Een bericht van $name, die je negeert.';
+  }
+
+  @override
+  String get showPost => 'Bericht tonen';
+
+  @override
+  String get ignoredOnThisPhone =>
+      'Dit forum houdt geen lijst van genegeerde gebruikers bij, dus de app bewaart de jouwe op deze telefoon.';
+
+  @override
+  String get stopIgnoring => 'Niet meer negeren';
 }

@@ -16,22 +16,22 @@
     "data": [
       {
         "type": "files",
-        "id": "19",
+        "id": "21",
         "links": {
-          "self": "/files/19"
+          "self": "/files/21"
         },
         "attributes": {
           "baseName": "composer-test.png",
-          "path": "2026-10-13/1791916327-408037-composer-test.png",
-          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test.png",
+          "path": "2026-10-13/1791917968-900609-composer-test.png",
+          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791917968-900609-composer-test.png",
           "type": "image/png",
           "size": 69,
           "humanSize": "69B",
           "createdAt": null,
-          "uuid": "c288d759-56ae-4e31-b058-b44f1060ec3d",
+          "uuid": "aac6b027-c987-4b68-8792-d91ae660efdb",
           "tag": "image-preview",
           "hidden": false,
-          "bbcode": "[upl-image-preview uuid=c288d759-56ae-4e31-b058-b44f1060ec3d url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test.png alt=composer-test.png thumbnail_url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test-thumb.webp]",
+          "bbcode": "[upl-image-preview uuid=aac6b027-c987-4b68-8792-d91ae660efdb url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791917968-900609-composer-test.png alt=composer-test.png thumbnail_url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791917968-900609-composer-test-thumb.webp]",
           "shared": false,
           "isPrivateShared": false,
           "canViewInfo": false,
@@ -67,7 +67,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T18:32:06+00:00",
+          "lastSeenAt": "2026-10-13T18:59:26+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

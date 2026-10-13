@@ -45,7 +45,8 @@ override (an unused import did once): before pushing a change to imports, analyz
 override moved aside.
 
 flarum_core's tests replay fixtures recorded from both versions (`test/fixtures/v1`, `v2`); every
-API test runs against both. `FixtureForum` lives in `package:flarum_core/testing.dart`, so flarum_ui's
+API test runs against both. Fixtures recorded with a `state` (such as `ignoring`) are served only to
+a `FixtureForum(states: {...})`, in place of the same request's plain fixture. `FixtureForum` lives in `package:flarum_core/testing.dart`, so flarum_ui's
 tests replay the same fixtures (`root: '../flarum_core/test/fixtures'`). Live tests and re-recording: `test/live_test.dart`,
 `tool/test_forums/README.md`.
 
@@ -127,6 +128,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   answers with each file's `bbcode`; 1.x leaves an image's alt as `{TEXT?}`. Only moderators may
   delete uploads by default (`canDelete`). The size limit isn't published: refusals name it (a 422
   or 400 saying "… 2048 kb"), or are a 413 from PHP or nginx (docs/phase-3-notes.md, Milestone 3).
+- Reports (flarum/flags): `POST /api/flags` with `reason` (`off_topic`, `inappropriate`, `spam`, or
+  null for "Other") and always `reasonDetail` (1.x takes neither as no reason at all). Ignoring
+  (fof/ignore-users): `PATCH /api/users/{id}` with `ignored`; users carry `ignored` and
+  `canBeIgnored`, and `GET /api` includes `actor.ignoredUsers`.
 - The unread notification count (`GET /api` actor) is cached for 5 minutes and not cleared when a
   notification is deleted (a like withdrawn), so it can exceed what the list shows until then.
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the

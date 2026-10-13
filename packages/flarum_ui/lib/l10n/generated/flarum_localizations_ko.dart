@@ -723,4 +723,79 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName의 크기는 $fileBytes입니다. 이 포럼은 최대 $maxBytes까지 허용합니다.';
   }
+
+  @override
+  String get flagAction => '신고';
+
+  @override
+  String get ignoredUsers => '무시한 사용자';
+
+  @override
+  String get ignoredUsersEmpty => '무시하고 있는 사용자가 없습니다.';
+
+  @override
+  String get flagPostTitle => '게시물 신고';
+
+  @override
+  String get flagReasonOffTopic => '주제에서 벗어남';
+
+  @override
+  String get flagReasonOffTopicText => '이 게시물은 현재 토론과 관련이 없어 다른 곳으로 옮겨야 합니다.';
+
+  @override
+  String get flagReasonInappropriate => '부적절함';
+
+  @override
+  String get flagReasonInappropriateText =>
+      '이 게시물은 공격적이거나 모욕적이거나 커뮤니티 가이드라인을 위반합니다.';
+
+  @override
+  String get flagReasonSpam => '스팸';
+
+  @override
+  String get flagReasonSpamText => '이 게시물은 광고입니다.';
+
+  @override
+  String get flagReasonOther => '기타 (직접 입력)';
+
+  @override
+  String get flagDetails => '추가 설명 (선택)';
+
+  @override
+  String get flagDetailsNeeded => '운영진에게 자세한 내용을 알려 주세요.';
+
+  @override
+  String get communityGuidelines => '커뮤니티 가이드라인';
+
+  @override
+  String get flagSent => '신고해 주셔서 감사합니다. 운영진이 확인할 예정입니다.';
+
+  @override
+  String ignoreUser(String name) {
+    return '$name 무시하기';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return '$name 무시 해제';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '$name 님을 무시할까요? 이 사용자의 게시물이 접혀서 표시됩니다. 계정에서 언제든 해제할 수 있습니다.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return '무시 중인 $name 님의 게시물입니다.';
+  }
+
+  @override
+  String get showPost => '게시물 보기';
+
+  @override
+  String get ignoredOnThisPhone => '이 포럼에는 무시 목록이 없어 앱이 이 기기에 목록을 저장합니다.';
+
+  @override
+  String get stopIgnoring => '무시 해제';
 }

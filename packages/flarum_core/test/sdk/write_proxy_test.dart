@@ -123,6 +123,25 @@ void main() {
         expect(removed.resultText, isNotEmpty);
       });
 
+      test('reportPostAsync passes on the forum\'s request for details', () async {
+        final result = await FlarumPostProxy(testSite()).reportPostAsync(answerId(), '');
+        expect(result.result, isFalse);
+        expect(result.resultText, startsWith('Please provide some details for our moderators.'));
+      });
+
+      test('ignoreUserAsync ignores; getIgnoredUsersAsync lists who', () async {
+        final bobId = pathId('write_ignore_user', 2);
+        final users = FlarumUserProxy(testSite());
+        expect((await users.ignoreUserAsync(bobId, 1)).result, isTrue);
+        expect((await users.ignoreUserAsync(bobId, 0)).result, isTrue);
+
+        FixtureForum(version, states: {'ignoring'}).forum();
+        final ignored = await users.getIgnoredUsersAsync(1, 20);
+        expect(ignored.result, isTrue, reason: ignored.resultText);
+        expect(ignored.total, 1);
+        expect([for (final u in ignored.list) u.username], ['bob']);
+      });
+
       test('replyPostAsync passes the throttle\'s refusal on', () async {
         final reply = await FlarumPostProxy(testSite()).replyPostAsync('', '1', '', WriteSamples.throttledReply, null, null, true);
         expect(reply.result, isFalse);

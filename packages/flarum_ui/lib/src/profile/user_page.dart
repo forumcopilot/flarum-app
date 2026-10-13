@@ -10,6 +10,8 @@ import '../../l10n/flarum_l10n.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
 import '../home/post_list.dart';
+import '../safety/ignore_actions.dart';
+import '../safety/ignored_users.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// A user's profile: who they are, when they joined and were last seen, and
@@ -35,6 +37,7 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
+  late final IgnoredUsers _ignored = IgnoredUsers.of(widget.site)..addListener(_changed);
   FlarumUser? _user;
   Object? _error;
 
@@ -56,6 +59,7 @@ class _UserPageState extends State<UserPage> {
     _discussions
       ?..removeListener(_changed)
       ..dispose();
+    _ignored.removeListener(_changed);
     super.dispose();
   }
 
@@ -102,7 +106,24 @@ class _UserPageState extends State<UserPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(title: Text(user.displayName)),
+        appBar: AppBar(
+          title: Text(user.displayName),
+          actions: [
+            if (_ignored.canIgnore(user))
+              PopupMenuButton<VoidCallback>(
+                tooltip: MaterialLocalizations.of(context).showMenuTooltip,
+                onSelected: (action) => action(),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: () => toggleIgnore(context, widget.site, user),
+                    child: Text(_ignored.isIgnored(user)
+                        ? l10n.stopIgnoringUser(user.displayName)
+                        : l10n.ignoreUser(user.displayName)),
+                  ),
+                ],
+              ),
+          ],
+        ),
         body: NestedScrollView(
           headerSliverBuilder: (context, _) => [
             SliverToBoxAdapter(child: _UserHeader(user: user)),

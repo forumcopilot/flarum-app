@@ -10,7 +10,7 @@ import '../../flarum_core.dart';
 /// [FlarumApi] in place of the network. For tests only: flarum_core's own, and
 /// flarum_ui's, which pass [root] as the path to flarum_core's fixtures.
 class FixtureForum {
-  FixtureForum(this.version, {String root = 'test/fixtures'})
+  FixtureForum(this.version, {String root = 'test/fixtures', this.states = const {}})
       : _fixtures = [
           for (final file in Directory('$root/${version.name}').listSync().whereType<File>().toList()
             ..sort((a, b) => a.path.compareTo(b.path)))
@@ -20,6 +20,10 @@ class FixtureForum {
 
   final FlarumVersion version;
   final List<_Fixture> _fixtures;
+
+  /// The states the forum is in, such as `ignoring` (the reader ignores bob): fixtures recorded
+  /// in one are served only when it's on, in place of the same request's plain fixture.
+  final Set<String> states;
 
   /// The fixtures served so far, for requests recorded more than once.
   final _served = <_Fixture>{};
@@ -58,6 +62,7 @@ class _Fixture {
         query = (json['request']['query'] as Map).map((key, value) => MapEntry('$key', '$value')),
         signedIn = json['request']['signedIn'] as bool,
         rememberCookie = json['request']['rememberCookie'] as bool? ?? false,
+        state = json['request']['state'] as String?,
         attributes = _attributesOf(json['request']['body']),
         data = json['request']['match'] == 'data' ? _dataOf(json['request']['body']) : null,
         files = switch (json['request']['body']) {
@@ -72,6 +77,9 @@ class _Fixture {
   final Map<String, String> query;
   final bool signedIn;
   final bool rememberCookie;
+
+  /// The state the forum was recorded in, if any (FixtureForum.states).
+  final String? state;
 
   /// A write's `data.attributes` as recorded (a reply's text, a discussion's title): told apart by
   /// them, a reply that worked and one the throttle refused share a method and path.
@@ -130,7 +138,11 @@ class _FixtureAdapter implements HttpClientAdapter {
     forum.requests.add(options);
     // Where the same request was recorded more than once (a reaction, then the same reaction
     // again to take it back), each is served once, in file-name order, the last one after that.
-    final matching = [for (final fixture in forum._fixtures) if (fixture.matches(options)) fixture];
+    var matching = [
+      for (final fixture in forum._fixtures)
+        if (fixture.matches(options) && (fixture.state == null || forum.states.contains(fixture.state))) fixture,
+    ];
+    if (matching.any((f) => f.state != null)) matching = [for (final f in matching) if (f.state != null) f];
     final fixture = matching.where((f) => !forum._served.contains(f)).firstOrNull ?? matching.lastOrNull;
     if (fixture != null) {
       forum._served.add(fixture);

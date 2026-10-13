@@ -745,4 +745,82 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName è di $fileBytes. Questo forum consente fino a $maxBytes.';
   }
+
+  @override
+  String get flagAction => 'Segnala';
+
+  @override
+  String get ignoredUsers => 'Utenti ignorati';
+
+  @override
+  String get ignoredUsersEmpty => 'Non stai ignorando nessuno.';
+
+  @override
+  String get flagPostTitle => 'Segnala post';
+
+  @override
+  String get flagReasonOffTopic => 'Fuori tema';
+
+  @override
+  String get flagReasonOffTopicText =>
+      'Questo post non riguarda la discussione e andrebbe spostato altrove.';
+
+  @override
+  String get flagReasonInappropriate => 'Inappropriato';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'Questo post è offensivo, abusivo o viola le linee guida della community.';
+
+  @override
+  String get flagReasonSpam => 'Spam';
+
+  @override
+  String get flagReasonSpamText => 'Questo post è pubblicità.';
+
+  @override
+  String get flagReasonOther => 'Altro (specifica)';
+
+  @override
+  String get flagDetails => 'Dettagli aggiuntivi (facoltativi)';
+
+  @override
+  String get flagDetailsNeeded => 'Fornisci qualche dettaglio ai moderatori.';
+
+  @override
+  String get communityGuidelines => 'Linee guida della community';
+
+  @override
+  String get flagSent =>
+      'Grazie per la segnalazione. I moderatori la esamineranno.';
+
+  @override
+  String ignoreUser(String name) {
+    return 'Ignora $name';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return 'Smetti di ignorare $name';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return 'Ignorare $name? I suoi post verranno compressi. Puoi annullare dal tuo account.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return 'Un post di $name, che ignori.';
+  }
+
+  @override
+  String get showPost => 'Mostra post';
+
+  @override
+  String get ignoredOnThisPhone =>
+      'Questo forum non tiene un elenco degli utenti ignorati, quindi l’app conserva il tuo su questo telefono.';
+
+  @override
+  String get stopIgnoring => 'Smetti di ignorare';
 }

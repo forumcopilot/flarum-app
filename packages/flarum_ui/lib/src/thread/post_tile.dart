@@ -34,7 +34,10 @@ class PostTile extends StatelessWidget {
       this.onLike,
       this.onReact,
       this.onBookmark,
-      this.onChooseBestAnswer});
+      this.onChooseBestAnswer,
+      this.onFlag,
+      this.authorIgnored = false,
+      this.onIgnore});
 
   final SiteContext site;
   final FlarumPost post;
@@ -73,9 +76,34 @@ class PostTile extends StatelessWidget {
   final VoidCallback? onBookmark;
   final VoidCallback? onChooseBestAnswer;
 
+  /// Report the post to the moderators (flarum/flags).
+  final VoidCallback? onFlag;
+
+  /// The reader ignores the post's author: it's folded away, a tap from showing.
+  final bool authorIgnored;
+
+  /// Ignore the author, or stop ([authorIgnored]).
+  final VoidCallback? onIgnore;
+
+  bool get _hasMenu =>
+      onReply != null ||
+      onQuote != null ||
+      onEdit != null ||
+      onBookmark != null ||
+      onChooseBestAnswer != null ||
+      onFlag != null ||
+      onIgnore != null;
+
   @override
-  Widget build(BuildContext context) =>
-      post.isComment ? _comment(context) : EventPostNotice(post: post, tags: tags);
+  Widget build(BuildContext context) {
+    if (!post.isComment) return EventPostNotice(post: post, tags: tags);
+    if (!authorIgnored) return _comment(context);
+    return _Folded(
+      label: flarumL10n(context).ignoredUserPost(post.author?.displayName ?? flarumL10n(context).someone),
+      menu: _hasMenu ? _menu(context) : null,
+      child: Builder(builder: _comment),
+    );
+  }
 
   Widget _comment(BuildContext context) {
     final theme = Theme.of(context);
@@ -120,8 +148,7 @@ class PostTile extends StatelessWidget {
                   ],
                 ),
               ),
-              if (onReply != null || onQuote != null || onEdit != null || onBookmark != null || onChooseBestAnswer != null)
-                _menu(context),
+              if (_hasMenu) _menu(context),
             ],
           ),
           const SizedBox(height: DesignTokens.spacingM),
@@ -165,7 +192,7 @@ class PostTile extends StatelessWidget {
 }
 
 extension on PostTile {
-  /// Reply, Quote and Edit, as the web offers them on a post.
+  /// Reply, Quote and Edit, as the web offers them on a post, and the ways to object to it.
   Widget _menu(BuildContext context) {
     final kit = kitL10n(context);
     final l10n = flarumL10n(context);
@@ -190,6 +217,15 @@ extension on PostTile {
             child: isBestAnswer
                 ? _MenuRow(Icons.highlight_off, l10n.removeBestAnswer)
                 : _MenuRow(Icons.check_circle_outline, l10n.chooseBestAnswer),
+          ),
+        if (onFlag != null || onIgnore != null) const PopupMenuDivider(),
+        if (onFlag case final flag?) PopupMenuItem(value: flag, child: _MenuRow(Icons.flag_outlined, l10n.flagAction)),
+        if (onIgnore case final ignore?)
+          PopupMenuItem(
+            value: ignore,
+            child: authorIgnored
+                ? _MenuRow(Icons.person_outline, l10n.stopIgnoringUser(post.author?.displayName ?? l10n.someone))
+                : _MenuRow(Icons.person_off_outlined, l10n.ignoreUser(post.author?.displayName ?? l10n.someone)),
           ),
       ],
     );
@@ -284,6 +320,44 @@ extension on PostTile {
 /// A reaction's glyph: its emoji, from the shortcode it's named by; else its name.
 String reactionGlyph(FlarumReaction reaction) =>
     (reaction.type == 'emoji' ? discourseEmojiChar(reaction.identifier) : null) ?? reaction.display ?? reaction.identifier;
+
+/// A post by someone the reader ignores, folded to a line until the reader shows it, as the web
+/// folds it (fof/ignore-users).
+class _Folded extends StatefulWidget {
+  const _Folded({required this.label, required this.child, this.menu});
+
+  final String label;
+  final Widget child;
+  final Widget? menu;
+
+  @override
+  State<_Folded> createState() => _FoldedState();
+}
+
+class _FoldedState extends State<_Folded> {
+  bool _shown = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (_shown) return widget.child;
+    final theme = Theme.of(context);
+    final muted = theme.colorScheme.onSurfaceVariant;
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(DesignTokens.spacingL, DesignTokens.spacingS, 0, DesignTokens.spacingS),
+      child: Row(
+        children: [
+          Icon(Icons.visibility_off_outlined, size: DesignTokens.iconSizeM, color: muted),
+          const SizedBox(width: DesignTokens.spacingM),
+          Expanded(
+            child: Text(widget.label, style: theme.textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, color: muted)),
+          ),
+          TextButton(onPressed: () => setState(() => _shown = true), child: Text(flarumL10n(context).showPost)),
+          if (widget.menu case final menu?) menu,
+        ],
+      ),
+    );
+  }
+}
 
 class _MenuRow extends StatelessWidget {
   const _MenuRow(this.icon, this.label);

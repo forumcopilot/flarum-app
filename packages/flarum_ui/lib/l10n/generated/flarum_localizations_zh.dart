@@ -722,4 +722,78 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName 大小为 $fileBytes。此论坛最多允许 $maxBytes。';
   }
+
+  @override
+  String get flagAction => '举报';
+
+  @override
+  String get ignoredUsers => '已忽略的用户';
+
+  @override
+  String get ignoredUsersEmpty => '你没有忽略任何人。';
+
+  @override
+  String get flagPostTitle => '举报帖子';
+
+  @override
+  String get flagReasonOffTopic => '离题';
+
+  @override
+  String get flagReasonOffTopicText => '此帖子与当前讨论无关，应移到别处。';
+
+  @override
+  String get flagReasonInappropriate => '不当内容';
+
+  @override
+  String get flagReasonInappropriateText => '此帖子具有冒犯性、辱骂性或违反社区准则。';
+
+  @override
+  String get flagReasonSpam => '垃圾信息';
+
+  @override
+  String get flagReasonSpamText => '此帖子是广告。';
+
+  @override
+  String get flagReasonOther => '其他（请说明）';
+
+  @override
+  String get flagDetails => '补充说明（可选）';
+
+  @override
+  String get flagDetailsNeeded => '请向版主提供一些详细信息。';
+
+  @override
+  String get communityGuidelines => '社区准则';
+
+  @override
+  String get flagSent => '感谢你的举报，版主会尽快处理。';
+
+  @override
+  String ignoreUser(String name) {
+    return '忽略 $name';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return '取消忽略 $name';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '要忽略 $name 吗？其帖子将被折叠。你可以在账户中取消忽略。';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return '你已忽略的 $name 的帖子。';
+  }
+
+  @override
+  String get showPost => '显示帖子';
+
+  @override
+  String get ignoredOnThisPhone => '此论坛没有忽略列表，因此应用会将你的列表保存在此手机上。';
+
+  @override
+  String get stopIgnoring => '取消忽略';
 }

@@ -160,13 +160,20 @@ class FlarumPostProxy implements IFCPostProxy {
     }
   }
 
-  // ---- The write path arrives in Phase 3. ----
+  // ---- The write path (Phase 3). ----
 
-  static const _later = 'Not available yet';
-
+  /// flarum/flags: [reason] is one of the forum's (`off_topic`, `inappropriate`, `spam`), or the
+  /// reporter's own words, sent as "Other".
   @override
-  Future<FCReportPostResult> reportPostAsync(String postId, String reason) async =>
-      FCReportPostResult(result: false, resultText: _later);
+  Future<FCReportPostResult> reportPostAsync(String postId, String reason) async {
+    try {
+      final known = const {'off_topic', 'inappropriate', 'spam'}.contains(reason);
+      await _forum.api.flagPost(postId, reason: known ? reason : null, detail: known ? '' : reason);
+      return FCReportPostResult(result: true, resultText: '');
+    } catch (e) {
+      return FCReportPostResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
   Future<FCReplyPostResult> replyPostAsync(String forumId, String topicId, String subject, String textBody,

@@ -1095,5 +1095,113 @@
         "type": "Object"
       }
     }
+  },
+  "flagAction": "Flag",
+  "@flagAction": {
+    "description": "Discourse post.controls.flag_action: the post menu item that opens the flag dialog"
+  },
+  "ignoredUsers": "Ignored users",
+  "@ignoredUsers": {
+    "description": "UI text: Ignored users"
+  },
+  "ignoredUsersEmpty": "You're not ignoring anyone.",
+  "@ignoredUsersEmpty": {
+    "description": "Ignored users page: empty state"
+  },
+  "flagPostTitle": "Flag post",
+  "@flagPostTitle": {
+    "description": "Title of the page that reports a post to the moderators (flarum/flags)"
+  },
+  "flagReasonOffTopic": "Off-topic",
+  "@flagReasonOffTopic": {
+    "description": "Report reason (Flarum: reason_off_topic_label)"
+  },
+  "flagReasonOffTopicText": "This post is not relevant to the current discussion and should be moved elsewhere.",
+  "@flagReasonOffTopicText": {
+    "description": "Explains the off-topic report reason"
+  },
+  "flagReasonInappropriate": "Inappropriate",
+  "@flagReasonInappropriate": {
+    "description": "Report reason (Flarum: reason_inappropriate_label)"
+  },
+  "flagReasonInappropriateText": "This post is offensive, abusive, or breaks the community guidelines.",
+  "@flagReasonInappropriateText": {
+    "description": "Explains the inappropriate report reason"
+  },
+  "flagReasonSpam": "Spam",
+  "@flagReasonSpam": {
+    "description": "Report reason (Flarum: reason_spam_label)"
+  },
+  "flagReasonSpamText": "This post is an advertisement.",
+  "@flagReasonSpamText": {
+    "description": "Explains the spam report reason"
+  },
+  "flagReasonOther": "Other (please specify)",
+  "@flagReasonOther": {
+    "description": "Report reason that needs the reporter's own words"
+  },
+  "flagDetails": "Additional details (optional)",
+  "@flagDetails": {
+    "description": "Report page: the field for more details"
+  },
+  "flagDetailsNeeded": "Please provide some details for our moderators.",
+  "@flagDetailsNeeded": {
+    "description": "Report page: \"Other\" chosen without details"
+  },
+  "communityGuidelines": "Community guidelines",
+  "@communityGuidelines": {
+    "description": "Link to the forum's community guidelines, on the report page"
+  },
+  "flagSent": "Thank you for flagging this post. Our moderators will look into it.",
+  "@flagSent": {
+    "description": "Shown after a post was reported"
+  },
+  "ignoreUser": "Ignore {name}",
+  "@ignoreUser": {
+    "description": "Post and profile menu: ignore this person (fof/ignore-users), their posts folded away",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "stopIgnoringUser": "Stop ignoring {name}",
+  "@stopIgnoringUser": {
+    "description": "Post and profile menu: stop ignoring this person",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ignoreUserConfirm": "Ignore {name}? Their posts will be folded away. You can stop ignoring them from your account.",
+  "@ignoreUserConfirm": {
+    "description": "Confirmation before ignoring someone",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ignoredUserPost": "A post by {name}, whom you ignore.",
+  "@ignoredUserPost": {
+    "description": "In place of a post by someone the reader ignores",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "showPost": "Show post",
+  "@showPost": {
+    "description": "Button that unfolds a post by someone the reader ignores"
+  },
+  "ignoredOnThisPhone": "This forum keeps no list of ignored users, so the app keeps yours on this phone.",
+  "@ignoredOnThisPhone": {
+    "description": "Ignored users page, on a forum without fof/ignore-users"
+  },
+  "stopIgnoring": "Stop ignoring",
+  "@stopIgnoring": {
+    "description": "Ignored users page: button on each person"
   }
 }

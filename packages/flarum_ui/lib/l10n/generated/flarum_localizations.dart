@@ -1210,6 +1210,138 @@ abstract class FlarumLocalizations {
   /// **'{fileName} is {fileBytes}. This forum allows up to {maxBytes}.'**
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes);
+
+  /// Discourse post.controls.flag_action: the post menu item that opens the flag dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Flag'**
+  String get flagAction;
+
+  /// UI text: Ignored users
+  ///
+  /// In en, this message translates to:
+  /// **'Ignored users'**
+  String get ignoredUsers;
+
+  /// Ignored users page: empty state
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re not ignoring anyone.'**
+  String get ignoredUsersEmpty;
+
+  /// Title of the page that reports a post to the moderators (flarum/flags)
+  ///
+  /// In en, this message translates to:
+  /// **'Flag post'**
+  String get flagPostTitle;
+
+  /// Report reason (Flarum: reason_off_topic_label)
+  ///
+  /// In en, this message translates to:
+  /// **'Off-topic'**
+  String get flagReasonOffTopic;
+
+  /// Explains the off-topic report reason
+  ///
+  /// In en, this message translates to:
+  /// **'This post is not relevant to the current discussion and should be moved elsewhere.'**
+  String get flagReasonOffTopicText;
+
+  /// Report reason (Flarum: reason_inappropriate_label)
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate'**
+  String get flagReasonInappropriate;
+
+  /// Explains the inappropriate report reason
+  ///
+  /// In en, this message translates to:
+  /// **'This post is offensive, abusive, or breaks the community guidelines.'**
+  String get flagReasonInappropriateText;
+
+  /// Report reason (Flarum: reason_spam_label)
+  ///
+  /// In en, this message translates to:
+  /// **'Spam'**
+  String get flagReasonSpam;
+
+  /// Explains the spam report reason
+  ///
+  /// In en, this message translates to:
+  /// **'This post is an advertisement.'**
+  String get flagReasonSpamText;
+
+  /// Report reason that needs the reporter's own words
+  ///
+  /// In en, this message translates to:
+  /// **'Other (please specify)'**
+  String get flagReasonOther;
+
+  /// Report page: the field for more details
+  ///
+  /// In en, this message translates to:
+  /// **'Additional details (optional)'**
+  String get flagDetails;
+
+  /// Report page: "Other" chosen without details
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide some details for our moderators.'**
+  String get flagDetailsNeeded;
+
+  /// Link to the forum's community guidelines, on the report page
+  ///
+  /// In en, this message translates to:
+  /// **'Community guidelines'**
+  String get communityGuidelines;
+
+  /// Shown after a post was reported
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for flagging this post. Our moderators will look into it.'**
+  String get flagSent;
+
+  /// Post and profile menu: ignore this person (fof/ignore-users), their posts folded away
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore {name}'**
+  String ignoreUser(String name);
+
+  /// Post and profile menu: stop ignoring this person
+  ///
+  /// In en, this message translates to:
+  /// **'Stop ignoring {name}'**
+  String stopIgnoringUser(String name);
+
+  /// Confirmation before ignoring someone
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore {name}? Their posts will be folded away. You can stop ignoring them from your account.'**
+  String ignoreUserConfirm(String name);
+
+  /// In place of a post by someone the reader ignores
+  ///
+  /// In en, this message translates to:
+  /// **'A post by {name}, whom you ignore.'**
+  String ignoredUserPost(String name);
+
+  /// Button that unfolds a post by someone the reader ignores
+  ///
+  /// In en, this message translates to:
+  /// **'Show post'**
+  String get showPost;
+
+  /// Ignored users page, on a forum without fof/ignore-users
+  ///
+  /// In en, this message translates to:
+  /// **'This forum keeps no list of ignored users, so the app keeps yours on this phone.'**
+  String get ignoredOnThisPhone;
+
+  /// Ignored users page: button on each person
+  ///
+  /// In en, this message translates to:
+  /// **'Stop ignoring'**
+  String get stopIgnoring;
 }
 
 class _FlarumLocalizationsDelegate

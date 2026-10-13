@@ -18,6 +18,8 @@ class FlarumUser {
     this.unreadNotificationCount,
     this.newNotificationCount,
     this.markedAllAsReadAt,
+    this.ignored,
+    this.canBeIgnored,
   });
 
   factory FlarumUser.fromResource(JsonApiResource resource) {
@@ -36,8 +38,28 @@ class FlarumUser {
       unreadNotificationCount: a.integer('unreadNotificationCount'),
       newNotificationCount: a.integer('newNotificationCount'),
       markedAllAsReadAt: a.date('markedAllAsReadAt'),
+      ignored: a.boolean('ignored'),
+      canBeIgnored: a.boolean('canBeIgnored'),
     );
   }
+
+  /// This user after the reader ignored or stopped ignoring them.
+  FlarumUser copyWith({bool? ignored}) => FlarumUser(
+        id: id,
+        username: username,
+        displayName: displayName,
+        slug: slug,
+        avatarUrl: avatarUrl,
+        joinTime: joinTime,
+        lastSeenAt: lastSeenAt,
+        discussionCount: discussionCount,
+        commentCount: commentCount,
+        unreadNotificationCount: unreadNotificationCount,
+        newNotificationCount: newNotificationCount,
+        markedAllAsReadAt: markedAllAsReadAt,
+        ignored: ignored ?? this.ignored,
+        canBeIgnored: canBeIgnored,
+      );
 
   final String id;
   final String username;
@@ -60,4 +82,12 @@ class FlarumUser {
   /// When the reader last marked everything read; discussions with no
   /// activity since then count as read. Own account only.
   final DateTime? markedAllAsReadAt;
+
+  /// Whether the reader ignores this user (fof/ignore-users): the web folds their posts away.
+  /// Null on forums without the extension.
+  final bool? ignored;
+
+  /// Whether the reader may ignore this user: not themselves, nor a moderator by default. Null on
+  /// forums without fof/ignore-users.
+  final bool? canBeIgnored;
 }

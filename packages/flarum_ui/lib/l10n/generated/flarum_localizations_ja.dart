@@ -723,4 +723,79 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName は $fileBytes です。このフォーラムの上限は $maxBytes です。';
   }
+
+  @override
+  String get flagAction => '通報';
+
+  @override
+  String get ignoredUsers => '無視中のユーザー';
+
+  @override
+  String get ignoredUsersEmpty => '無視しているユーザーはいません。';
+
+  @override
+  String get flagPostTitle => '投稿を通報';
+
+  @override
+  String get flagReasonOffTopic => '話題から外れている';
+
+  @override
+  String get flagReasonOffTopicText => 'この投稿は現在のディスカッションに関係がなく、別の場所に移すべきです。';
+
+  @override
+  String get flagReasonInappropriate => '不適切';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'この投稿は攻撃的・侮辱的であるか、コミュニティのガイドラインに違反しています。';
+
+  @override
+  String get flagReasonSpam => 'スパム';
+
+  @override
+  String get flagReasonSpamText => 'この投稿は広告です。';
+
+  @override
+  String get flagReasonOther => 'その他（具体的に記入）';
+
+  @override
+  String get flagDetails => '詳細（任意）';
+
+  @override
+  String get flagDetailsNeeded => 'モデレーターのために詳細を入力してください。';
+
+  @override
+  String get communityGuidelines => 'コミュニティガイドライン';
+
+  @override
+  String get flagSent => '通報ありがとうございます。モデレーターが確認します。';
+
+  @override
+  String ignoreUser(String name) {
+    return '$nameを無視';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return '$nameの無視をやめる';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '$nameを無視しますか？この人の投稿は折りたたまれます。アカウントからいつでも解除できます。';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return '無視している$nameの投稿です。';
+  }
+
+  @override
+  String get showPost => '投稿を表示';
+
+  @override
+  String get ignoredOnThisPhone => 'このフォーラムには無視リストがないため、アプリがこの端末に保存します。';
+
+  @override
+  String get stopIgnoring => '無視をやめる';
 }

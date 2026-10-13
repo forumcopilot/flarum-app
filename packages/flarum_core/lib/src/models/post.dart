@@ -81,9 +81,10 @@ class FlarumPost {
     );
   }
 
-  /// This post after a like, a reaction or a bookmark, the rest as it was (its replies stay, which
+  /// This post after a like, a reaction, a bookmark or its author ignored, the rest as it was (its replies stay, which
   /// the forum's answer to the change leaves out).
   FlarumPost copyWith({
+    FlarumUser? author,
     int? likesCount,
     List<FlarumUser>? likedBy,
     Map<String, int>? reactionCounts,
@@ -101,7 +102,7 @@ class FlarumPost {
         isHidden: isHidden,
         discussionId: discussionId,
         discussionTitle: discussionTitle,
-        author: author,
+        author: author ?? this.author,
         canEdit: canEdit,
         canDelete: canDelete,
         canHide: canHide,

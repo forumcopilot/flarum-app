@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/posts/250",
+    "path": "/posts/262",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "posts",
-        "id": "250",
+        "id": "262",
         "attributes": {
           "bookmarked": true
         }
@@ -19,10 +19,10 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "250",
+      "id": "262",
       "attributes": {
         "number": 2,
-        "createdAt": "2026-10-13T18:12:07+00:00",
+        "createdAt": "2026-10-13T18:59:14+00:00",
         "contentType": "comment",
         "contentHtml": "<p>The one who asked chooses it.</p>",
         "renderFailed": false,
@@ -55,7 +55,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "49"
+            "id": "55"
           }
         },
         "likes": {
@@ -66,10 +66,10 @@
     "included": [
       {
         "type": "discussions",
-        "id": "49",
+        "id": "55",
         "attributes": {
           "title": "A question from the app",
-          "slug": "49-a-question-from-the-app",
+          "slug": "55-a-question-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null

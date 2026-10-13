@@ -1,0 +1,167 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flags",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "flags",
+        "attributes": {
+          "reason": "off_topic",
+          "reasonDetail": "Reported by the app tests."
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "315"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "flags",
+      "id": "1",
+      "links": {
+        "self": "/flags/1"
+      },
+      "attributes": {
+        "type": "user",
+        "reason": "off_topic",
+        "reasonDetail": "Reported by the app tests.",
+        "createdAt": "2026-10-13T18:59:43+00:00"
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "post": {
+          "data": {
+            "type": "posts",
+            "id": "315"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "email": "carol@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 1,
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T18:59:25+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "315",
+        "links": {
+          "self": "/posts/315"
+        },
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-13T18:59:40+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>The one who asked chooses it.</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": true,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "63"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "flags": {
+            "data": []
+          }
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

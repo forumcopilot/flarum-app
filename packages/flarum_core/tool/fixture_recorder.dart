@@ -8,6 +8,10 @@ class FixtureRecorder extends Interceptor {
 
   /// Fixtures to replay only for a request with the same whole `data` (see FixtureForum).
   final matchData = <String>{};
+
+  /// Fixtures that show the forum in a state (`ignoring`: the reader ignores someone), replayed
+  /// only to tests that ask for it, in place of the same request's plain fixture.
+  final states = <String, String>{};
   final recorded = <String, Map<String, Object?>>{};
 
   @override
@@ -29,6 +33,7 @@ class FixtureRecorder extends Interceptor {
     recorded[name] = {
       'request': {
         if (matchData.contains(name)) 'match': 'data',
+        if (states[name] case final state?) 'state': state,
         'method': options.method,
         'path': options.path,
         'query': options.queryParameters,

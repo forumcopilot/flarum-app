@@ -745,4 +745,82 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
       Object fileName, Object fileBytes, Object maxBytes) {
     return '$fileName pesa $fileBytes. Este foro permite hasta $maxBytes.';
   }
+
+  @override
+  String get flagAction => 'Reportar';
+
+  @override
+  String get ignoredUsers => 'Usuarios ignorados';
+
+  @override
+  String get ignoredUsersEmpty => 'No estás ignorando a nadie.';
+
+  @override
+  String get flagPostTitle => 'Reportar publicación';
+
+  @override
+  String get flagReasonOffTopic => 'Fuera de tema';
+
+  @override
+  String get flagReasonOffTopicText =>
+      'Esta publicación no tiene que ver con la discusión actual y debería moverse a otro lugar.';
+
+  @override
+  String get flagReasonInappropriate => 'Inapropiado';
+
+  @override
+  String get flagReasonInappropriateText =>
+      'Esta publicación es ofensiva, abusiva o incumple las normas de la comunidad.';
+
+  @override
+  String get flagReasonSpam => 'Spam';
+
+  @override
+  String get flagReasonSpamText => 'Esta publicación es publicidad.';
+
+  @override
+  String get flagReasonOther => 'Otro (especifica)';
+
+  @override
+  String get flagDetails => 'Detalles adicionales (opcional)';
+
+  @override
+  String get flagDetailsNeeded => 'Da algunos detalles a los moderadores.';
+
+  @override
+  String get communityGuidelines => 'Normas de la comunidad';
+
+  @override
+  String get flagSent =>
+      'Gracias por reportar esta publicación. Nuestros moderadores la revisarán.';
+
+  @override
+  String ignoreUser(String name) {
+    return 'Ignorar a $name';
+  }
+
+  @override
+  String stopIgnoringUser(String name) {
+    return 'Dejar de ignorar a $name';
+  }
+
+  @override
+  String ignoreUserConfirm(String name) {
+    return '¿Ignorar a $name? Sus publicaciones se plegarán. Puedes dejar de ignorarle desde tu cuenta.';
+  }
+
+  @override
+  String ignoredUserPost(String name) {
+    return 'Una publicación de $name, a quien ignoras.';
+  }
+
+  @override
+  String get showPost => 'Mostrar publicación';
+
+  @override
+  String get ignoredOnThisPhone =>
+      'Este foro no guarda una lista de usuarios ignorados, así que la app guarda la tuya en este teléfono.';
+
+  @override
+  String get stopIgnoring => 'Dejar de ignorar';
 }

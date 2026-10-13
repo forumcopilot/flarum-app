@@ -152,3 +152,22 @@ parse. It found three things, fixed:
 - A forum without flarum/tags answers 404 for `/api/tags`: the Tags tab says the forum doesn't use
   tags instead of offering a retry.
 
+
+## Phone re-check (13 October 2026)
+
+The Pixel 4a re-check of 39fbc95 passed but for one check, and found two more things; fixed:
+
+- **Tag links opened the website.** A tag in a post (a tag mention, a `/t/{slug}` link) opened in the
+  app only when a host set `ThreadPage.onOpenTag`, and the app doesn't. The thread now finds the tag
+  by its slug among the forum's tags and opens its page (`TagPage.openBySlug`), as profiles open; a
+  tag the forum doesn't list goes to the web.
+- **The notification badge was one higher than the list.** Flarum lists notifications of the same
+  kind about the same thing as one (its list groups by type and subject, the latest of each; two
+  likes of one post are one row), counts each in the reader's `unreadNotificationCount`, and reads
+  the whole group when one is read. Once the Notifications tab has loaded, the badge counts the
+  rows it shows, plus whatever the forum counts after that; before, the forum's count.
+- **Slow frames on thread 26838 were rebuilds.** Loading the next page of posts notifies the thread
+  twice (loading, then loaded), each rebuilding every post on screen, and flutter_html styles and
+  builds a post again on every rebuild. A post's text is now built once for its HTML and handed back
+  unchanged, so Flutter skips it: rebuilding six posts went from about 160 ms to 17 ms a frame in a
+  debug test. To be confirmed on the phone with the benchmark.

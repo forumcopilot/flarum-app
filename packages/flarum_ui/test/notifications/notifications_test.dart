@@ -70,6 +70,20 @@ void main() {
         await _pumpUntil(tester, find.byType(NotificationTile));
         expect(fixtures.requests.where((r) => r.path == '/notifications'), hasLength(1));
       });
+
+      testWidgets('the badge counts the rows the list shows, not each notification it groups', (tester) async {
+        // Read before the app starts, as it is when the app starts signed in.
+        await tester.runAsync(fixtures.forum().refresh);
+        await tester.pumpWidget(FlarumApp(site: _site()));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        Finder badge(String count) => find.descendant(of: find.byType(NavigationBar), matching: find.text(count));
+        // The forum counts 5 unread: two of them about the same thing, which it lists as one.
+        expect(badge('5'), findsOneWidget);
+        await tester.tap(find.text('Notifications'));
+        await _pumpUntil(tester, find.byType(NotificationTile));
+        await _pumpUntil(tester, badge('4'));
+        expect(find.byType(NotificationTile), findsNWidgets(4));
+      });
     });
   }
 

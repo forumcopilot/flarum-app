@@ -15,6 +15,16 @@ class NotificationsModel extends ChangeNotifier {
   bool hasMore = true;
   bool loading = false;
   Object? error;
+  bool _loaded = false;
+
+  /// The unread rows the list holds, as the reader sees it: the forum lists notifications of the
+  /// same kind about the same thing as one (two likes of a post), while its unread count counts
+  /// each, and reading one reads them all. Null until the list has loaded, or while unread rows may
+  /// run past what it holds.
+  int? get unreadShown {
+    if (!_loaded || (hasMore && items.isNotEmpty && !items.last.isRead)) return null;
+    return items.where((n) => !n.isRead).length;
+  }
 
   Future<void> refresh() => _load(reset: true);
 
@@ -33,6 +43,7 @@ class NotificationsModel extends ChangeNotifier {
       items.addAll(page.items);
       hasMore = page.hasMore;
       error = null;
+      _loaded = true;
     } catch (e) {
       error = e;
     } finally {

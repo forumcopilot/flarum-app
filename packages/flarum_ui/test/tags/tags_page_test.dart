@@ -23,4 +23,39 @@ void main() {
     expect(find.text("This forum doesn't use tags."), findsOneWidget);
     expect(find.text('Retry'), findsNothing);
   });
+
+  for (final version in FlarumVersion.values) {
+    testWidgets('Flarum ${version.name}: a tag link opens the tag in the app, by its slug', (tester) async {
+      FixtureForum(version, root: '../flarum_core/test/fixtures').forum();
+      final site = SiteContext(
+        siteType: FlarumProxyFactory.siteType,
+        site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+      );
+      final opened = <String, bool>{};
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        localizationsDelegates: FlarumLocalizations.localizationsDelegates,
+        home: Builder(
+          builder: (context) => Column(children: [
+            for (final slug in ['general', 'no-such-tag'])
+              TextButton(
+                onPressed: () async => opened[slug] = await TagPage.openBySlug(context, site, slug),
+                child: Text(slug),
+              ),
+          ]),
+        ),
+      ));
+      await tester.tap(find.text('no-such-tag'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(opened['no-such-tag'], isFalse, reason: 'left for the web');
+
+      await tester.tap(find.text('general'));
+      for (var i = 0; i < 20 && find.byType(TagPage).evaluate().isEmpty; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+      expect(opened['general'], isTrue);
+      expect(find.byType(TagPage), findsOneWidget);
+    });
+  }
 }

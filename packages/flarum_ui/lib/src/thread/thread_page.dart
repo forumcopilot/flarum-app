@@ -13,6 +13,7 @@ import '../render/flarum_html.dart';
 import '../render/links.dart';
 import '../profile/user_page.dart';
 import '../tags/tag_label.dart';
+import '../tags/tags_page.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
 
@@ -135,9 +136,16 @@ class _ThreadPageState extends State<ThreadPage> {
         _openUser(slug);
       case TagLink(:final slug) when widget.onOpenTag != null:
         widget.onOpenTag!(context, slug);
+      case TagLink(:final slug):
+        _openTag(slug, url);
       default:
         openExternally(url);
     }
+  }
+
+  /// A tag in the app, as a profile opens in it; a tag the forum doesn't list, on the web.
+  Future<void> _openTag(String slug, String url) async {
+    if (!await TagPage.openBySlug(context, widget.site, slug)) openExternally(url);
   }
 
   /// Opens the profile of the user whose slug is [slug] (see [UserPage]).

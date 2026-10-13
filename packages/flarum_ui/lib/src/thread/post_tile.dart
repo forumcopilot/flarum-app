@@ -104,11 +104,7 @@ class PostTile extends StatelessWidget {
                 style: theme.textTheme.bodyMedium
                     ?.copyWith(fontStyle: FontStyle.italic, color: colorScheme.onSurfaceVariant))
           else
-            FlarumContent(
-              siteContext: site,
-              content: FlarumHtml.parse(post.contentHtml ?? '', forumBaseUrl: site.site.url).html,
-              callbacks: callbacks,
-            ),
+            _PostBody(site: site, html: post.contentHtml ?? '', callbacks: callbacks),
           if (onGoToBestAnswer != null)
             Padding(
               padding: const EdgeInsets.only(top: DesignTokens.spacingS),
@@ -307,5 +303,46 @@ class EventPostNotice extends StatelessWidget {
         return (Icons.group_outlined, l10n.eventRecipientsChanged(user));
     }
     return (Icons.info_outline, l10n.eventOther(user));
+  }
+}
+
+/// A post's text, built once for its HTML. flutter_html styles and builds the whole post again on
+/// every rebuild, and a thread rebuilds each post on screen whenever a page of posts loads: the same
+/// widget handed back lets Flutter skip that (it still rebuilds for a theme or text-size change).
+/// Taps go to the tile's current [callbacks].
+class _PostBody extends StatefulWidget {
+  const _PostBody({required this.site, required this.html, this.callbacks});
+
+  final SiteContext site;
+  final String html;
+  final PostContentCallbacks? callbacks;
+
+  @override
+  State<_PostBody> createState() => _PostBodyState();
+}
+
+class _PostBodyState extends State<_PostBody> {
+  Widget? _content;
+  String? _builtFor;
+  bool _builtWithCallbacks = false;
+
+  late final _callbacks = PostContentCallbacks(
+    onUrlTap: (url) => widget.callbacks?.onUrlTap?.call(url),
+    onImageTap: (url, context, heroTag) => widget.callbacks?.onImageTap?.call(url, context, heroTag),
+    onMentionTap: (username) => widget.callbacks?.onMentionTap?.call(username),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    if (_content == null || _builtFor != widget.html || _builtWithCallbacks != (widget.callbacks != null)) {
+      _builtFor = widget.html;
+      _builtWithCallbacks = widget.callbacks != null;
+      _content = FlarumContent(
+        siteContext: widget.site,
+        content: FlarumHtml.parse(widget.html, forumBaseUrl: widget.site.site.url).html,
+        callbacks: widget.callbacks == null ? null : _callbacks,
+      );
+    }
+    return _content!;
   }
 }

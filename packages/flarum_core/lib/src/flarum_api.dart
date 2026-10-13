@@ -303,6 +303,58 @@ class FlarumApi {
     return FlarumDiscussion.fromResource(document.single, document);
   }
 
+  /// Replies in discussion [discussionId] with [content], its source as Markdown and BBCode. The
+  /// reply comes back rendered; a forum can hold it for approval (`isApproved` false). A second
+  /// post inside the forum's posting throttle (10 seconds by default) is refused with 429.
+  Future<FlarumPost> reply(String discussionId, String content) async {
+    final document = await client.post('/posts', {
+      'data': {
+        'type': 'posts',
+        'attributes': {'content': content},
+        'relationships': {
+          'discussion': {
+            'data': {'type': 'discussions', 'id': discussionId},
+          },
+        },
+      },
+    });
+    return FlarumPost.fromResource(document.single, document);
+  }
+
+  /// Starts a discussion: its [title], its first post's [content], and with flarum/tags the tags
+  /// [tagIds], as many as the forum's tag rules ask. A refusal (422) names what was wrong: 1.x the
+  /// first rule that failed, 2.0 every field.
+  Future<FlarumDiscussion> startDiscussion(String title, String content, {List<String> tagIds = const []}) async {
+    final document = await client.post('/discussions', {
+      'data': {
+        'type': 'discussions',
+        'attributes': {'title': title, 'content': content},
+        if (tagIds.isNotEmpty)
+          'relationships': {
+            'tags': {
+              'data': [
+                for (final id in tagIds) {'type': 'tags', 'id': id},
+              ],
+            },
+          },
+      },
+    });
+    return FlarumDiscussion.fromResource(document.single, document);
+  }
+
+  /// Saves [content] as post [id]'s source. Only someone who may edit it (its author, a
+  /// moderator) can: others get 403.
+  Future<FlarumPost> editPost(String id, String content) async {
+    final document = await client.patch('/posts/$id', {
+      'data': {
+        'type': 'posts',
+        'id': id,
+        'attributes': {'content': content},
+      },
+    });
+    return FlarumPost.fromResource(document.single, document);
+  }
+
   /// Records that the reader has read discussion [id] up to post [number].
   /// Flarum keeps one high-water mark per discussion and never lowers it.
   Future<void> markDiscussionRead(String id, int number) async {

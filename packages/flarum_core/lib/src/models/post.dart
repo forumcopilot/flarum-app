@@ -79,6 +79,10 @@ class FlarumPost {
   /// For a comment, its source text, sent only to readers who may edit it.
   /// For an event post, the event's data (e.g. the old and new title).
   final Object? content;
+
+  /// The post's source (Markdown and BBCode as written), for editing it. Flarum sends it only to
+  /// readers who may edit the post; quoting someone else's post works from [contentHtml].
+  String? get source => isComment && content is String ? content as String : null;
   final DateTime? createdAt;
   final DateTime? editedAt;
   final bool isHidden;

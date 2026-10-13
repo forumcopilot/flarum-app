@@ -196,4 +196,4 @@ class FlarumForumProxy implements IFCForumProxy {
 }
 
 /// A failure as a short message for an `FC*Result`'s resultText.
-String describeFlarumError(Object error) => error is FlarumApiException ? error.message : '$error';
+String describeFlarumError(Object error) => error is FlarumApiException ? error.reasons : '$error';

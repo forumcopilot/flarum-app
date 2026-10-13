@@ -1,0 +1,97 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/posts/232",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "id": "232",
+        "attributes": {
+          "content": "The reply, edited."
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "232",
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T17:29:19+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>The reply, edited.</p>",
+        "renderFailed": false,
+        "content": "The reply, edited.",
+        "editedAt": "2026-10-13T17:29:20+00:00",
+        "canEdit": true,
+        "canDelete": false,
+        "canHide": true,
+        "mentionedByCount": 0,
+        "canFlag": false,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": false,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReactionIdentifier": null,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": false,
+        "canLike": true,
+        "likesCount": 0
+      },
+      "relationships": {
+        "editedUser": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "40"
+          }
+        },
+        "likes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "40",
+        "attributes": {
+          "title": "Written from the app",
+          "slug": "40-written-from-the-app",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      }
+    ]
+  }
+}

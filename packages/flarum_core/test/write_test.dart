@@ -1,0 +1,77 @@
+import 'package:flarum_core/flarum_core.dart';
+import 'package:flarum_core/testing.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+/// The composer's writes, replayed from fixtures recorded on both test forums
+/// (tool/record_write_fixtures.dart).
+void main() {
+  for (final version in FlarumVersion.values) {
+    group('Flarum ${version.name}:', () {
+      late FixtureForum fixtures;
+      late FlarumApi api;
+
+      setUp(() {
+        fixtures = FixtureForum(version);
+        api = fixtures.api();
+      });
+
+      Future<FlarumApiException> refusal(Future<Object?> call) async {
+        try {
+          await call;
+        } on FlarumApiException catch (e) {
+          return e;
+        }
+        fail('Expected the forum to refuse');
+      }
+
+      test('starts a discussion with its tags', () async {
+        final discussion =
+            await api.startDiscussion(WriteSamples.title, WriteSamples.content, tagIds: [fixtures.tagId('general')]);
+        expect(discussion.title, WriteSamples.title);
+        expect(discussion.tags.map((t) => t.slug), ['general']);
+        final sent = fixtures.requests.single.data as Map;
+        expect(sent['data']['relationships']['tags']['data'], [
+          {'type': 'tags', 'id': fixtures.tagId('general')},
+        ]);
+      });
+
+      test('without the tags the forum asks for, it says why', () async {
+        final e = await refusal(api.startDiscussion(WriteSamples.title, WriteSamples.noTagsContent));
+        expect(e.isValidationError, isTrue);
+        expect(e.reasons, version == FlarumVersion.v2 ? 'The tags field is required.' : 'The number of primary tags must be 1.');
+      });
+
+      test('replies, and the reply comes back rendered with its source for its author', () async {
+        final post = await api.reply('1', WriteSamples.reply);
+        expect(post.number, 2);
+        expect(post.contentHtml, '<p>${WriteSamples.reply}</p>');
+        expect(post.source, WriteSamples.reply);
+        expect(post.isApproved, isTrue);
+      });
+
+      test('a second post straight after meets the posting throttle', () async {
+        final e = await refusal(api.reply('1', WriteSamples.throttledReply));
+        expect(e.isThrottled, isTrue);
+      });
+
+      test('edits the reader\'s own post, and not someone else\'s', () async {
+        final post = await api.reply('1', WriteSamples.reply);
+        final edited = await api.editPost(post.id, WriteSamples.edit);
+        expect(edited.source, WriteSamples.edit);
+        expect(edited.editedAt, isNotNull);
+
+        final e = await refusal(api.editPost(post.id, WriteSamples.editByOther));
+        expect(e.isForbidden, isTrue);
+      });
+    });
+  }
+
+  test('a refusal lists every reason the forum gave', () {
+    final e = FlarumApiException(422, const [
+      FlarumApiError(code: 'validation_error', detail: 'The title field is required.'),
+      FlarumApiError(code: 'validation_error', detail: 'The content field is required.'),
+    ]);
+    expect(e.reasons, 'The title field is required.\nThe content field is required.');
+    expect(e.message, 'The title field is required.');
+  });
+}

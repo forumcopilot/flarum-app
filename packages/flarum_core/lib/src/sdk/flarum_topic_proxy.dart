@@ -158,10 +158,26 @@ class FlarumTopicProxy implements IFCTopicProxy {
   }
 
   /// Starting discussions arrives with the write path (Phase 3).
+  /// Starts a discussion in [forumId], a primary tag (the SDK's forums are Flarum's primary tags),
+  /// with the [tags] named too (by name or slug).
   @override
   Future<FCNewTopicResult> newTopic(String forumId, String subject, String textBody,
-          {String? prefixId, List<String>? attachmentIds, String? groupId, List<String>? tags}) async =>
-      FCNewTopicResult(result: false, resultText: 'Starting discussions is not available yet', topicId: '', state: 0);
+      {String? prefixId, List<String>? attachmentIds, String? groupId, List<String>? tags}) async {
+    try {
+      final named = tags ?? const [];
+      final all = named.isEmpty ? const <FlarumTag>[] : await _forum.tags();
+      final tagIds = {
+        if (forumId.isNotEmpty) forumId,
+        for (final name in named)
+          ...all.where((t) => t.slug == name || t.name.toLowerCase() == name.toLowerCase()).map((t) => t.id),
+      }.toList();
+      final discussion = await _forum.api.startDiscussion(subject, textBody, tagIds: tagIds);
+      // 1: started, but held for a moderator's approval.
+      return FCNewTopicResult(result: true, resultText: '', topicId: discussion.id, state: discussion.isApproved ? 0 : 1);
+    } catch (e) {
+      return FCNewTopicResult(result: false, resultText: describeFlarumError(e), topicId: '', state: 0);
+    }
+  }
 
   Future<FCTopicDataResult> _tagList(String forumId, int startNum, int lastNum, DiscussionSort sort) async {
     try {

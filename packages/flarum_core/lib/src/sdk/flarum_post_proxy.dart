@@ -168,13 +168,37 @@ class FlarumPostProxy implements IFCPostProxy {
 
   @override
   Future<FCReplyPostResult> replyPostAsync(String forumId, String topicId, String subject, String textBody,
-          List<String>? attachmentIds, String? groupId, bool returnHtml) async =>
-      FCReplyPostResult(result: false, resultText: _later);
+      List<String>? attachmentIds, String? groupId, bool returnHtml) async {
+    try {
+      final post = await _forum.api.reply(topicId, textBody);
+      return FCReplyPostResult(
+        result: true,
+        resultText: '',
+        postId: post.id,
+        // 1: posted, but held for a moderator's approval.
+        state: post.isApproved ? 0 : 1,
+        postContent: post.contentHtml ?? '',
+        canEdit: post.canEdit,
+        canDelete: post.canDelete || post.canHide,
+        canReport: post.canFlag,
+      );
+    } catch (e) {
+      return FCReplyPostResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
+  /// Saves an edit. [postTitle] is ignored: on Flarum the title is the discussion's, renamed on
+  /// its own (`renameTopicAsync`).
   @override
   Future<FCSaveRawPostResult> saveRawPostAsync(String postId, String postTitle, String postContent, bool returnHtml,
-          String? reason, List<String>? attachmentIds, String? groupId, String? prefix) async =>
-      FCSaveRawPostResult(result: false, resultText: _later);
+      String? reason, List<String>? attachmentIds, String? groupId, String? prefix) async {
+    try {
+      final post = await _forum.api.editPost(postId, postContent);
+      return FCSaveRawPostResult(result: true, resultText: '', postContent: post.contentHtml ?? '');
+    } catch (e) {
+      return FCSaveRawPostResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
   Future<FCPoll?> votePollAsync(String topicId, List<String> responseIds) async => null;

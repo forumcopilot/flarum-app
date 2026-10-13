@@ -54,6 +54,7 @@ class _Fixture {
         query = (json['request']['query'] as Map).map((key, value) => MapEntry('$key', '$value')),
         signedIn = json['request']['signedIn'] as bool,
         rememberCookie = json['request']['rememberCookie'] as bool? ?? false,
+        attributes = _attributesOf(json['request']['body']),
         status = json['status'] as int,
         body = json['body'];
 
@@ -62,6 +63,10 @@ class _Fixture {
   final Map<String, String> query;
   final bool signedIn;
   final bool rememberCookie;
+
+  /// A write's `data.attributes` as recorded (a reply's text, a discussion's title): told apart by
+  /// them, a reply that worked and one the throttle refused share a method and path.
+  final Object? attributes;
   final int status;
   final Object? body;
 
@@ -70,7 +75,23 @@ class _Fixture {
       options.path == path &&
       options.headers.containsKey('Authorization') == signedIn &&
       '${options.headers['Cookie'] ?? ''}'.contains('_remember=') == rememberCookie &&
-      _sameQuery(options.queryParameters, query);
+      _sameQuery(options.queryParameters, query) &&
+      (attributes == null || _canonical(_attributesOf(options.data)) == _canonical(attributes));
+
+  static Object? _attributesOf(Object? body) {
+    final data = body is Map ? body['data'] : null;
+    return data is Map ? data['attributes'] : null;
+  }
+
+  /// [value] as JSON with its keys sorted, to compare maps whatever their order.
+  static String _canonical(Object? value) {
+    Object? sorted(Object? v) => switch (v) {
+          Map() => {for (final key in v.keys.map((k) => '$k').toList()..sort()) key: sorted(v[key])},
+          List() => [for (final e in v) sorted(e)],
+          _ => v,
+        };
+    return jsonEncode(sorted(value));
+  }
 
   static bool _sameQuery(Map<String, dynamic> sent, Map<String, String> recorded) =>
       sent.length == recorded.length && sent.entries.every((e) => recorded[e.key] == '${e.value}');

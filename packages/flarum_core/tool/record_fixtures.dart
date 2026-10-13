@@ -16,6 +16,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flarum_core/api.dart';
 
+import 'fixture_recorder.dart';
+
 Future<void> main(List<String> args) async {
   final password = Platform.environment['FLARUM_TEST_PASSWORD'];
   if (args.length != 2 || password == null) {
@@ -27,7 +29,7 @@ Future<void> main(List<String> args) async {
   final users = (seed['users'] as Map).cast<String, String>();
   final welcomePosts = ((seed['posts'] as Map)['welcome'] as List).cast<String>();
 
-  final recorder = _Recorder();
+  final recorder = FixtureRecorder();
   final guest = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
   final api = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
 
@@ -130,38 +132,4 @@ Future<void> main(List<String> args) async {
   }
   File('${dir.path}/seed.json').writeAsStringSync('${encoder.convert(seed)}\n');
   stdout.writeln('Recorded ${recorder.recorded.length} fixtures into ${dir.path}');
-}
-
-class _Recorder extends Interceptor {
-  final names = <String>[];
-  final recorded = <String, Map<String, Object?>>{};
-
-  @override
-  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
-    _save(response.requestOptions, response.statusCode, response.data);
-    handler.next(response);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    final response = err.response;
-    if (response != null) _save(err.requestOptions, response.statusCode, response.data);
-    handler.next(err);
-  }
-
-  void _save(RequestOptions options, int? status, Object? body) {
-    if (names.isEmpty) return;
-    recorded[names.removeAt(0)] = {
-      'request': {
-        'method': options.method,
-        'path': options.path,
-        'query': options.queryParameters,
-        'signedIn': options.headers.containsKey('Authorization'),
-        'rememberCookie': '${options.headers['Cookie'] ?? ''}'.contains('_remember='),
-        if (options.data != null) 'body': options.data,
-      },
-      'status': status,
-      'body': body,
-    };
-  }
 }

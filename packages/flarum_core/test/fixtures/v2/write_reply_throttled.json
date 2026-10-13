@@ -1,0 +1,34 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/posts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "attributes": {
+          "content": "A second reply, straight after the first."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "48"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 429,
+  "body": {
+    "errors": [
+      {
+        "status": "429",
+        "code": "too_many_requests"
+      }
+    ]
+  }
+}

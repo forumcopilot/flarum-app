@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "Written from the app",
+          "content": "A discussion without its tags."
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "source": {
+          "pointer": "/data/relationships/tags"
+        },
+        "detail": "The tags field is required."
+      }
+    ]
+  }
+}

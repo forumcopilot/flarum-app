@@ -64,6 +64,16 @@ class FlarumApiException implements Exception {
   bool get isNotFound => statusCode == 404;
   bool get isValidationError => statusCode == 422;
 
+  /// The forum's posting throttle refused it: one post every 10 seconds by default.
+  bool get isThrottled => statusCode == 429;
+
+  /// Every reason the forum gave, one a line: 2.0 names each invalid field, 1.x the first rule
+  /// that failed. [message] when it gave none.
+  String get reasons {
+    final details = [for (final error in errors) if (error.detail?.isNotEmpty ?? false) error.detail!];
+    return details.isEmpty ? message : details.join('\n');
+  }
+
   /// The first error's detail or code, for logs and fallback messages.
   String get message {
     for (final error in errors) {

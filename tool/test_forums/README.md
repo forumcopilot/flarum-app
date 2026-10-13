@@ -65,6 +65,17 @@ check her state, or record only the fixtures you need and keep the others.
 FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json
 ```
 
+The composer's writes have their own recorder, which posts as carol and bob (leaving alice as
+seeded) in a discussion an admin deletes afterwards:
+
+```bash
+FLARUM_TEST_PASSWORD=… FLARUM_ADMIN_USER=admin FLARUM_ADMIN_PASSWORD=… \
+  dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
+```
+
+A write fixture is matched by its request's attributes (the texts in `WriteSamples`) as well as
+its method and path, so a reply that worked and one the throttle refused can both be replayed.
+
 ## CAPTCHA
 
 For sign-in tests, 1.8 runs blomstra/turnstile (on sign-in, sign-up and password reset) and

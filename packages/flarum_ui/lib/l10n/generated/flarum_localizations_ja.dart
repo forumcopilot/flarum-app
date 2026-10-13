@@ -489,4 +489,131 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get permissionRequired => '権限が必要です';
+
+  @override
+  String get bold => '太字';
+
+  @override
+  String get underline => '下線';
+
+  @override
+  String get strikethrough => '取り消し線';
+
+  @override
+  String get bulletList => '箇条書きリスト';
+
+  @override
+  String get numberedList => '番号付きリスト';
+
+  @override
+  String get listItem => 'リスト項目';
+
+  @override
+  String get mentionUser => 'ユーザーをメンション';
+
+  @override
+  String get title => 'タイトル';
+
+  @override
+  String get content => 'コンテンツ';
+
+  @override
+  String get send => '送信';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String get formatting => '書式設定';
+
+  @override
+  String get pleaseEnterTitle => 'タイトルを入力してください';
+
+  @override
+  String get pleaseEnterContent => 'コンテンツを入力してください';
+
+  @override
+  String get composerTitleHint => 'タイトルを書く...';
+
+  @override
+  String get composerContentHint => '内容を書く...';
+
+  @override
+  String get composerFormattingHint => '書式オプションを開く';
+
+  @override
+  String get searchUsers => 'ユーザーを検索...';
+
+  @override
+  String get startDiscussion => 'ディスカッションを開始';
+
+  @override
+  String get editPost => '投稿を編集';
+
+  @override
+  String get postingThrottled => '投稿の間隔が短すぎます。数秒待ってからもう一度お試しください。';
+
+  @override
+  String get postAwaitingApproval => '送信しました。モデレーターが承認すると表示されます。';
+
+  @override
+  String get chooseTags => 'タグを選択';
+
+  @override
+  String get primaryTags => 'メインタグ';
+
+  @override
+  String get secondaryTags => 'その他のタグ';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'メインタグを$countつ選んでください。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'メインタグは$countつまでです。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'あと$countつタグを選んでください。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'その他のタグは$countつまでです。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => '完了';
+
+  @override
+  String get noMembersFound => 'メンバーが見つかりません。';
+
+  @override
+  String get memberSearchNotAllowed => 'このフォーラムではメンバーを検索できません。';
+
+  @override
+  String get editLoadFailed => '編集のためにこの投稿を読み込めませんでした。';
 }

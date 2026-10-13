@@ -4,6 +4,7 @@ import 'package:forum_kit/views/widgets/filter_chip_bar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../compose/start_discussion_button.dart';
 import 'discussion_list_model.dart';
 import '../search/search_page.dart';
 import 'discussion_list_view.dart';
@@ -93,6 +94,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: DiscussionListView(site: widget.site, list: list),
+      floatingActionButton: startDiscussionButton(context, widget.site, onStarted: list.refresh),
     );
   }
 }

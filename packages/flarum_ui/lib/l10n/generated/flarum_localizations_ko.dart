@@ -489,4 +489,131 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get permissionRequired => '권한이 필요합니다';
+
+  @override
+  String get bold => '굵게';
+
+  @override
+  String get underline => '밑줄';
+
+  @override
+  String get strikethrough => '취소선';
+
+  @override
+  String get bulletList => '글머리 기호 목록';
+
+  @override
+  String get numberedList => '번호 매기기 목록';
+
+  @override
+  String get listItem => '목록 항목';
+
+  @override
+  String get mentionUser => '사용자 멘션';
+
+  @override
+  String get title => '제목';
+
+  @override
+  String get content => '내용';
+
+  @override
+  String get send => '보내기';
+
+  @override
+  String get save => '저장';
+
+  @override
+  String get formatting => '서식';
+
+  @override
+  String get pleaseEnterTitle => '제목을 입력하세요';
+
+  @override
+  String get pleaseEnterContent => '내용을 입력하세요';
+
+  @override
+  String get composerTitleHint => '제목 작성...';
+
+  @override
+  String get composerContentHint => '내용 작성...';
+
+  @override
+  String get composerFormattingHint => '서식 옵션 열기';
+
+  @override
+  String get searchUsers => '사용자 검색...';
+
+  @override
+  String get startDiscussion => '토론 시작하기';
+
+  @override
+  String get editPost => '게시물 수정';
+
+  @override
+  String get postingThrottled => '너무 빨리 게시하고 있습니다. 몇 초 후에 다시 시도하세요.';
+
+  @override
+  String get postAwaitingApproval => '게시되었습니다. 운영자가 승인하면 표시됩니다.';
+
+  @override
+  String get chooseTags => '태그 선택';
+
+  @override
+  String get primaryTags => '주요 태그';
+
+  @override
+  String get secondaryTags => '추가 태그';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '주요 태그를 $count개 선택하세요.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '주요 태그는 최대 $count개까지 선택할 수 있습니다.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '태그를 $count개 더 선택하세요.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '추가 태그는 최대 $count개까지 선택할 수 있습니다.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => '완료';
+
+  @override
+  String get noMembersFound => '회원을 찾을 수 없습니다.';
+
+  @override
+  String get memberSearchNotAllowed => '이 포럼에서는 회원을 검색할 수 없습니다.';
+
+  @override
+  String get editLoadFailed => '수정할 게시물을 불러오지 못했습니다.';
 }

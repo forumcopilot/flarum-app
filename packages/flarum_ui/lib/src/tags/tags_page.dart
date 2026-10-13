@@ -5,6 +5,7 @@ import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../compose/start_discussion_button.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
 import 'tag_label.dart';
@@ -191,6 +192,7 @@ class _TagPageState extends State<TagPage> {
         shape: Border(bottom: BorderSide(color: flarumTagColor(widget.tag) ?? Colors.transparent, width: 3)),
       ),
       body: DiscussionListView(site: widget.site, list: _list),
+      floatingActionButton: startDiscussionButton(context, widget.site, tag: widget.tag, onStarted: _list.refresh),
     );
   }
 }

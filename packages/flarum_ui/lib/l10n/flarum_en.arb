@@ -773,5 +773,157 @@
   "permissionRequired": "Permission required",
   "@permissionRequired": {
     "description": "On a file card in a post, instead of Download, when the reader may not download files (fof/upload's download permission)"
+  },
+  "bold": "Bold",
+  "@bold": {
+    "description": "Composer: bold"
+  },
+  "underline": "Underline",
+  "@underline": {
+    "description": "Composer: underline"
+  },
+  "strikethrough": "Strikethrough",
+  "@strikethrough": {
+    "description": "Composer: strikethrough"
+  },
+  "bulletList": "Bullet List",
+  "@bulletList": {
+    "description": "Composer: bulletList"
+  },
+  "numberedList": "Numbered List",
+  "@numberedList": {
+    "description": "Composer: numberedList"
+  },
+  "listItem": "List Item",
+  "@listItem": {
+    "description": "Composer: listItem"
+  },
+  "mentionUser": "Mention User",
+  "@mentionUser": {
+    "description": "Tooltip for mention user button"
+  },
+  "title": "Title",
+  "@title": {
+    "description": "UI text: Title"
+  },
+  "content": "Content",
+  "@content": {
+    "description": "Content label for message compose"
+  },
+  "send": "Send",
+  "@send": {
+    "description": "UI text: Send"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "UI text: Save"
+  },
+  "formatting": "Formatting",
+  "@formatting": {
+    "description": "Composer: formatting"
+  },
+  "pleaseEnterTitle": "Please enter a title",
+  "@pleaseEnterTitle": {
+    "description": "Validation message when title is empty"
+  },
+  "pleaseEnterContent": "Please enter some content",
+  "@pleaseEnterContent": {
+    "description": "Validation message when content is empty"
+  },
+  "composerTitleHint": "Write your title...",
+  "@composerTitleHint": {
+    "description": "Default hint in a composer's title field, when the page gives none of its own"
+  },
+  "composerContentHint": "Write your content...",
+  "@composerContentHint": {
+    "description": "Default hint in a composer's text field, when the page gives none of its own"
+  },
+  "composerFormattingHint": "Open formatting options",
+  "@composerFormattingHint": {
+    "description": "Screen-reader hint of the composer's formatting menu button"
+  },
+  "searchUsers": "Search users...",
+  "@searchUsers": {
+    "description": "Hint text for searching users"
+  },
+  "startDiscussion": "Start a discussion",
+  "@startDiscussion": {
+    "description": "Button and page title: start a new discussion"
+  },
+  "editPost": "Edit post",
+  "@editPost": {
+    "description": "Title of the composer editing a post"
+  },
+  "postingThrottled": "You're posting too quickly. Wait a few seconds and try again.",
+  "@postingThrottled": {
+    "description": "The forum's posting throttle refused a post (one every 10 seconds by default)"
+  },
+  "postAwaitingApproval": "Posted. It will appear once a moderator approves it.",
+  "@postAwaitingApproval": {
+    "description": "After posting, when the forum holds the post for approval"
+  },
+  "chooseTags": "Choose tags",
+  "@chooseTags": {
+    "description": "Button and page title: choose a new discussion's tags"
+  },
+  "primaryTags": "Primary tags",
+  "@primaryTags": {
+    "description": "Tag picker section: the forum's primary tags"
+  },
+  "secondaryTags": "More tags",
+  "@secondaryTags": {
+    "description": "Tag picker section: the forum's secondary tags"
+  },
+  "tagsNeedPrimary": "{count, plural, =1{Choose a primary tag.} other{Choose {count} primary tags.}}",
+  "@tagsNeedPrimary": {
+    "description": "Tag picker: fewer primary tags than the forum asks for",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tagsTooManyPrimary": "{count, plural, =1{Choose only 1 primary tag.} other{Choose at most {count} primary tags.}}",
+  "@tagsTooManyPrimary": {
+    "description": "Tag picker: more primary tags than the forum allows",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tagsNeedSecondary": "{count, plural, =1{Choose 1 more tag.} other{Choose {count} more tags.}}",
+  "@tagsNeedSecondary": {
+    "description": "Tag picker: fewer secondary tags than the forum asks for",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tagsTooManySecondary": "{count, plural, =1{Choose at most 1 more tag.} other{Choose at most {count} more tags.}}",
+  "@tagsTooManySecondary": {
+    "description": "Tag picker: more secondary tags than the forum allows",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Closes a picker, keeping the choice"
+  },
+  "noMembersFound": "No members found.",
+  "@noMembersFound": {
+    "description": "Mention picker: nobody matches the search"
+  },
+  "memberSearchNotAllowed": "This forum doesn't let you search for members.",
+  "@memberSearchNotAllowed": {
+    "description": "Mention picker: the reader lacks the forum's search-users permission"
+  },
+  "editLoadFailed": "Couldn't load this post for editing.",
+  "@editLoadFailed": {
+    "description": "The post's source couldn't be loaded for editing"
   }
 }

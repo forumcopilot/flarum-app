@@ -1,5 +1,6 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
 import 'package:forum_kit/utils/time_utils.dart';
@@ -23,7 +24,10 @@ class PostTile extends StatelessWidget {
       this.onOpenReply,
       this.tags,
       this.isBestAnswer = false,
-      this.onGoToBestAnswer});
+      this.onGoToBestAnswer,
+      this.onReply,
+      this.onQuote,
+      this.onEdit});
 
   final SiteContext site;
   final FlarumPost post;
@@ -43,6 +47,11 @@ class PostTile extends StatelessWidget {
 
   /// Set on the question when another post is its best answer: offers a way there.
   final VoidCallback? onGoToBestAnswer;
+
+  /// The post's menu: reply to it, quote it, edit it. Each shows only when given.
+  final VoidCallback? onReply;
+  final VoidCallback? onQuote;
+  final VoidCallback? onEdit;
 
   @override
   Widget build(BuildContext context) =>
@@ -91,6 +100,7 @@ class PostTile extends StatelessWidget {
                   ],
                 ),
               ),
+              if (onReply != null || onQuote != null || onEdit != null) _menu(context),
             ],
           ),
           const SizedBox(height: DesignTokens.spacingM),
@@ -135,6 +145,39 @@ class PostTile extends StatelessWidget {
       ),
     );
   }
+}
+
+extension on PostTile {
+  /// Reply, Quote and Edit, as the web offers them on a post.
+  Widget _menu(BuildContext context) {
+    final kit = kitL10n(context);
+    return PopupMenuButton<VoidCallback>(
+      icon: const Icon(Icons.more_vert),
+      tooltip: MaterialLocalizations.of(context).showMenuTooltip,
+      onSelected: (action) => action(),
+      itemBuilder: (context) => [
+        if (onReply case final reply?) PopupMenuItem(value: reply, child: _MenuRow(Icons.reply, kit.reply)),
+        if (onQuote case final quote?) PopupMenuItem(value: quote, child: _MenuRow(Icons.format_quote, kit.quote)),
+        if (onEdit case final edit?) PopupMenuItem(value: edit, child: _MenuRow(Icons.edit_outlined, kit.edit)),
+      ],
+    );
+  }
+}
+
+class _MenuRow extends StatelessWidget {
+  const _MenuRow(this.icon, this.label);
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          Icon(icon, color: Theme.of(context).colorScheme.onSurfaceVariant),
+          const SizedBox(width: DesignTokens.spacingS),
+          Text(label),
+        ],
+      );
 }
 
 /// "bob and alice replied to this.", as the web words it: up to two names,

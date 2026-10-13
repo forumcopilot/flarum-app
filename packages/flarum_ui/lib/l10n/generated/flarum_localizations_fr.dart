@@ -500,4 +500,139 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Autorisation requise';
+
+  @override
+  String get bold => 'Gras';
+
+  @override
+  String get underline => 'Souligné';
+
+  @override
+  String get strikethrough => 'Barré';
+
+  @override
+  String get bulletList => 'Liste à Puces';
+
+  @override
+  String get numberedList => 'Liste Numérotée';
+
+  @override
+  String get listItem => 'Élément de Liste';
+
+  @override
+  String get mentionUser => 'Mentionner un utilisateur';
+
+  @override
+  String get title => 'Titre';
+
+  @override
+  String get content => 'Contenu';
+
+  @override
+  String get send => 'Envoyer';
+
+  @override
+  String get save => 'Enregistrer';
+
+  @override
+  String get formatting => 'Formatage';
+
+  @override
+  String get pleaseEnterTitle => 'Veuillez entrer un titre';
+
+  @override
+  String get pleaseEnterContent => 'Veuillez entrer du contenu';
+
+  @override
+  String get composerTitleHint => 'Écrivez votre titre...';
+
+  @override
+  String get composerContentHint => 'Écrivez votre contenu...';
+
+  @override
+  String get composerFormattingHint => 'Ouvrir les options de mise en forme';
+
+  @override
+  String get searchUsers => 'Rechercher des utilisateurs...';
+
+  @override
+  String get startDiscussion => 'Lancer une discussion';
+
+  @override
+  String get editPost => 'Modifier le message';
+
+  @override
+  String get postingThrottled =>
+      'Vous publiez trop vite. Patientez quelques secondes et réessayez.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Envoyé. Il apparaîtra dès qu’un modérateur l’aura approuvé.';
+
+  @override
+  String get chooseTags => 'Choisir des étiquettes';
+
+  @override
+  String get primaryTags => 'Étiquettes principales';
+
+  @override
+  String get secondaryTags => 'Autres étiquettes';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choisissez $count étiquettes principales.',
+      one: 'Choisissez une étiquette principale.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choisissez au plus $count étiquettes principales.',
+      one: 'Choisissez une seule étiquette principale.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choisissez $count étiquettes de plus.',
+      one: 'Choisissez 1 étiquette de plus.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choisissez au plus $count autres étiquettes.',
+      one: 'Choisissez au plus 1 autre étiquette.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Terminé';
+
+  @override
+  String get noMembersFound => 'Aucun membre trouvé.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'Ce forum ne permet pas de rechercher des membres.';
+
+  @override
+  String get editLoadFailed =>
+      'Impossible de charger ce message pour le modifier.';
 }

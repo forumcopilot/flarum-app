@@ -499,4 +499,139 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Toestemming vereist';
+
+  @override
+  String get bold => 'Vet';
+
+  @override
+  String get underline => 'Onderstreept';
+
+  @override
+  String get strikethrough => 'Doorgehaald';
+
+  @override
+  String get bulletList => 'Opsomming';
+
+  @override
+  String get numberedList => 'Genummerde lijst';
+
+  @override
+  String get listItem => 'Lijstitem';
+
+  @override
+  String get mentionUser => 'Gebruiker vermelden';
+
+  @override
+  String get title => 'Titel';
+
+  @override
+  String get content => 'Inhoud';
+
+  @override
+  String get send => 'Verzenden';
+
+  @override
+  String get save => 'Opslaan';
+
+  @override
+  String get formatting => 'Opmaak';
+
+  @override
+  String get pleaseEnterTitle => 'Voer een titel in';
+
+  @override
+  String get pleaseEnterContent => 'Voer inhoud in';
+
+  @override
+  String get composerTitleHint => 'Schrijf je titel…';
+
+  @override
+  String get composerContentHint => 'Schrijf je inhoud…';
+
+  @override
+  String get composerFormattingHint => 'Opmaakopties openen';
+
+  @override
+  String get searchUsers => 'Gebruikers zoeken...';
+
+  @override
+  String get startDiscussion => 'Discussie starten';
+
+  @override
+  String get editPost => 'Bericht bewerken';
+
+  @override
+  String get postingThrottled =>
+      'Je plaatst te snel. Wacht een paar seconden en probeer het opnieuw.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Verzonden. Het verschijnt zodra een moderator het goedkeurt.';
+
+  @override
+  String get chooseTags => 'Tags kiezen';
+
+  @override
+  String get primaryTags => 'Hoofdtags';
+
+  @override
+  String get secondaryTags => 'Meer tags';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Kies $count hoofdtags.',
+      one: 'Kies een hoofdtag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Kies hoogstens $count hoofdtags.',
+      one: 'Kies maar één hoofdtag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Kies nog $count tags.',
+      one: 'Kies nog 1 tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Kies hoogstens $count andere tags.',
+      one: 'Kies hoogstens 1 andere tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Klaar';
+
+  @override
+  String get noMembersFound => 'Geen leden gevonden.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'Dit forum staat het zoeken naar leden niet toe.';
+
+  @override
+  String get editLoadFailed =>
+      'Dit bericht kon niet worden geladen om te bewerken.';
 }

@@ -499,4 +499,139 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Autorizzazione richiesta';
+
+  @override
+  String get bold => 'Grassetto';
+
+  @override
+  String get underline => 'Sottolineato';
+
+  @override
+  String get strikethrough => 'Barrato';
+
+  @override
+  String get bulletList => 'Elenco Puntato';
+
+  @override
+  String get numberedList => 'Elenco Numerato';
+
+  @override
+  String get listItem => 'Elemento Elenco';
+
+  @override
+  String get mentionUser => 'Menziona utente';
+
+  @override
+  String get title => 'Titolo';
+
+  @override
+  String get content => 'Contenuto';
+
+  @override
+  String get send => 'Invia';
+
+  @override
+  String get save => 'Salva';
+
+  @override
+  String get formatting => 'Formattazione';
+
+  @override
+  String get pleaseEnterTitle => 'Inserisci un titolo';
+
+  @override
+  String get pleaseEnterContent => 'Inserisci del contenuto';
+
+  @override
+  String get composerTitleHint => 'Scrivi il tuo titolo...';
+
+  @override
+  String get composerContentHint => 'Scrivi il tuo contenuto...';
+
+  @override
+  String get composerFormattingHint => 'Apri le opzioni di formattazione';
+
+  @override
+  String get searchUsers => 'Cerca utenti...';
+
+  @override
+  String get startDiscussion => 'Avvia una discussione';
+
+  @override
+  String get editPost => 'Modifica post';
+
+  @override
+  String get postingThrottled =>
+      'Stai pubblicando troppo in fretta. Attendi qualche secondo e riprova.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Inviato. Apparirà quando un moderatore lo approverà.';
+
+  @override
+  String get chooseTags => 'Scegli i tag';
+
+  @override
+  String get primaryTags => 'Tag principali';
+
+  @override
+  String get secondaryTags => 'Altri tag';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Scegli $count tag principali.',
+      one: 'Scegli un tag principale.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Scegli al massimo $count tag principali.',
+      one: 'Scegli un solo tag principale.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Scegli altri $count tag.',
+      one: 'Scegli un altro tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Scegli al massimo altri $count tag.',
+      one: 'Scegli al massimo un altro tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Fatto';
+
+  @override
+  String get noMembersFound => 'Nessun membro trovato.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'Questo forum non permette di cercare i membri.';
+
+  @override
+  String get editLoadFailed =>
+      'Impossibile caricare questo post per modificarlo.';
 }

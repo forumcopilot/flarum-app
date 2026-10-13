@@ -1,12 +1,15 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../compose/composers.dart';
 import '../media/image_viewer_page.dart';
 import '../navigation/forum_links.dart';
 import '../render/flarum_html.dart';
@@ -47,8 +50,7 @@ class ThreadPage extends StatefulWidget {
   final void Function(BuildContext context, String slug)? onOpenTag;
 
   /// Pushes a thread page for [discussionId].
-  static Future<void> open(BuildContext context, SiteContext site, String discussionId,
-          {int? near, String? title}) =>
+  static Future<void> open(BuildContext context, SiteContext site, String discussionId, {int? near, String? title}) =>
       Navigator.of(context).push(MaterialPageRoute<void>(
         builder: (_) => ThreadPage(site: site, discussionId: discussionId, near: near, title: title),
       ));
@@ -181,6 +183,36 @@ class _ThreadPageState extends State<ThreadPage> {
     }
   }
 
+  /// Whether the reader may reply here: signed in, and the discussion lets them.
+  bool get _canReply => FlarumForum.of(widget.site).isSignedIn && (_model.discussion?.canReply ?? false);
+
+  /// Opens the composer for a reply, starting from [initial] (a quote, a reply to a post).
+  Future<void> _reply({String? initial}) async {
+    final discussion = _model.discussion;
+    if (discussion == null) return;
+    final post = await composeReply(context, widget.site, discussion, initialContent: initial);
+    if (post == null || !mounted) return;
+    if (!post.isApproved) {
+      SnackbarHelper.showInfo(context, flarumL10n(context).postAwaitingApproval);
+      return;
+    }
+    _reload(at: post.number);
+  }
+
+  Future<void> _edit(FlarumPost post) async {
+    final saved = await composeEdit(context, widget.site, post);
+    if (saved != null && mounted) _reload(at: post.number);
+  }
+
+  /// Opens the thread again at post [number], loaded afresh: a new reply, an edited post.
+  void _reload({required int at}) {
+    setState(() {
+      _near = at;
+      _generation++;
+    });
+    _model.open(near: at);
+  }
+
   /// Scrolls to post [number], reopening the thread there if it isn't loaded.
   void _goTo(int number) {
     final index = _model.indexOfNumber(number);
@@ -213,6 +245,13 @@ class _ThreadPageState extends State<ThreadPage> {
       appBar: AppBar(
         title: Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
       ),
+      floatingActionButton: _canReply
+          ? FloatingActionButton.extended(
+              onPressed: _reply,
+              icon: const Icon(Icons.reply),
+              label: Text(kitL10n(context).reply),
+            )
+          : null,
       body: switch (_model) {
         ThreadModel(discussion: null, error: final error?) => EmptyStateView.error(
             message: l10n.threadLoadFailed,
@@ -279,6 +318,9 @@ class _ThreadPageState extends State<ThreadPage> {
         tags: _tags,
         isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,
         onGoToBestAnswer: post.number == 1 && _bestAnswerElsewhere ? _goToBestAnswer : null,
+        onReply: _canReply ? () => _reply(initial: replyTo(post, l10n)) : null,
+        onQuote: _canReply ? () => _reply(initial: quoteOf(post, l10n)) : null,
+        onEdit: post.canEdit ? () => _edit(post) : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.
@@ -292,7 +334,8 @@ class _ThreadPageState extends State<ThreadPage> {
         ),
       );
     }
-    return const SizedBox(height: DesignTokens.spacingXXXL);
+    // Room under the last post for the Reply button.
+    return SizedBox(height: _canReply ? 96 : DesignTokens.spacingXXXL);
   }
 }
 

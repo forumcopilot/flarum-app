@@ -823,6 +823,204 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Permission required'**
   String get permissionRequired;
+
+  /// Composer: bold
+  ///
+  /// In en, this message translates to:
+  /// **'Bold'**
+  String get bold;
+
+  /// Composer: underline
+  ///
+  /// In en, this message translates to:
+  /// **'Underline'**
+  String get underline;
+
+  /// Composer: strikethrough
+  ///
+  /// In en, this message translates to:
+  /// **'Strikethrough'**
+  String get strikethrough;
+
+  /// Composer: bulletList
+  ///
+  /// In en, this message translates to:
+  /// **'Bullet List'**
+  String get bulletList;
+
+  /// Composer: numberedList
+  ///
+  /// In en, this message translates to:
+  /// **'Numbered List'**
+  String get numberedList;
+
+  /// Composer: listItem
+  ///
+  /// In en, this message translates to:
+  /// **'List Item'**
+  String get listItem;
+
+  /// Tooltip for mention user button
+  ///
+  /// In en, this message translates to:
+  /// **'Mention User'**
+  String get mentionUser;
+
+  /// UI text: Title
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// Content label for message compose
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get content;
+
+  /// UI text: Send
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// UI text: Save
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Composer: formatting
+  ///
+  /// In en, this message translates to:
+  /// **'Formatting'**
+  String get formatting;
+
+  /// Validation message when title is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a title'**
+  String get pleaseEnterTitle;
+
+  /// Validation message when content is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter some content'**
+  String get pleaseEnterContent;
+
+  /// Default hint in a composer's title field, when the page gives none of its own
+  ///
+  /// In en, this message translates to:
+  /// **'Write your title...'**
+  String get composerTitleHint;
+
+  /// Default hint in a composer's text field, when the page gives none of its own
+  ///
+  /// In en, this message translates to:
+  /// **'Write your content...'**
+  String get composerContentHint;
+
+  /// Screen-reader hint of the composer's formatting menu button
+  ///
+  /// In en, this message translates to:
+  /// **'Open formatting options'**
+  String get composerFormattingHint;
+
+  /// Hint text for searching users
+  ///
+  /// In en, this message translates to:
+  /// **'Search users...'**
+  String get searchUsers;
+
+  /// Button and page title: start a new discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Start a discussion'**
+  String get startDiscussion;
+
+  /// Title of the composer editing a post
+  ///
+  /// In en, this message translates to:
+  /// **'Edit post'**
+  String get editPost;
+
+  /// The forum's posting throttle refused a post (one every 10 seconds by default)
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re posting too quickly. Wait a few seconds and try again.'**
+  String get postingThrottled;
+
+  /// After posting, when the forum holds the post for approval
+  ///
+  /// In en, this message translates to:
+  /// **'Posted. It will appear once a moderator approves it.'**
+  String get postAwaitingApproval;
+
+  /// Button and page title: choose a new discussion's tags
+  ///
+  /// In en, this message translates to:
+  /// **'Choose tags'**
+  String get chooseTags;
+
+  /// Tag picker section: the forum's primary tags
+  ///
+  /// In en, this message translates to:
+  /// **'Primary tags'**
+  String get primaryTags;
+
+  /// Tag picker section: the forum's secondary tags
+  ///
+  /// In en, this message translates to:
+  /// **'More tags'**
+  String get secondaryTags;
+
+  /// Tag picker: fewer primary tags than the forum asks for
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Choose a primary tag.} other{Choose {count} primary tags.}}'**
+  String tagsNeedPrimary(int count);
+
+  /// Tag picker: more primary tags than the forum allows
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Choose only 1 primary tag.} other{Choose at most {count} primary tags.}}'**
+  String tagsTooManyPrimary(int count);
+
+  /// Tag picker: fewer secondary tags than the forum asks for
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Choose 1 more tag.} other{Choose {count} more tags.}}'**
+  String tagsNeedSecondary(int count);
+
+  /// Tag picker: more secondary tags than the forum allows
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Choose at most 1 more tag.} other{Choose at most {count} more tags.}}'**
+  String tagsTooManySecondary(int count);
+
+  /// Closes a picker, keeping the choice
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// Mention picker: nobody matches the search
+  ///
+  /// In en, this message translates to:
+  /// **'No members found.'**
+  String get noMembersFound;
+
+  /// Mention picker: the reader lacks the forum's search-users permission
+  ///
+  /// In en, this message translates to:
+  /// **'This forum doesn\'t let you search for members.'**
+  String get memberSearchNotAllowed;
+
+  /// The post's source couldn't be loaded for editing
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this post for editing.'**
+  String get editLoadFailed;
 }
 
 class _FlarumLocalizationsDelegate

@@ -502,4 +502,139 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Berechtigung erforderlich';
+
+  @override
+  String get bold => 'Fett';
+
+  @override
+  String get underline => 'Unterstrichen';
+
+  @override
+  String get strikethrough => 'Durchgestrichen';
+
+  @override
+  String get bulletList => 'Aufzählungsliste';
+
+  @override
+  String get numberedList => 'Nummerierte Liste';
+
+  @override
+  String get listItem => 'Listenelement';
+
+  @override
+  String get mentionUser => 'Benutzer erwähnen';
+
+  @override
+  String get title => 'Titel';
+
+  @override
+  String get content => 'Inhalt';
+
+  @override
+  String get send => 'Senden';
+
+  @override
+  String get save => 'Speichern';
+
+  @override
+  String get formatting => 'Formatierung';
+
+  @override
+  String get pleaseEnterTitle => 'Bitte geben Sie einen Titel ein';
+
+  @override
+  String get pleaseEnterContent => 'Bitte geben Sie einen Inhalt ein';
+
+  @override
+  String get composerTitleHint => 'Schreiben Sie Ihren Titel...';
+
+  @override
+  String get composerContentHint => 'Schreiben Sie Ihren Inhalt...';
+
+  @override
+  String get composerFormattingHint => 'Formatierungsoptionen öffnen';
+
+  @override
+  String get searchUsers => 'Benutzer suchen...';
+
+  @override
+  String get startDiscussion => 'Diskussion starten';
+
+  @override
+  String get editPost => 'Beitrag bearbeiten';
+
+  @override
+  String get postingThrottled =>
+      'Du schreibst zu schnell. Warte ein paar Sekunden und versuche es erneut.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Gesendet. Der Beitrag erscheint, sobald ein Moderator ihn freigibt.';
+
+  @override
+  String get chooseTags => 'Schlagwörter wählen';
+
+  @override
+  String get primaryTags => 'Hauptschlagwörter';
+
+  @override
+  String get secondaryTags => 'Weitere Schlagwörter';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wähle $count Hauptschlagwörter.',
+      one: 'Wähle ein Hauptschlagwort.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wähle höchstens $count Hauptschlagwörter.',
+      one: 'Wähle nur ein Hauptschlagwort.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wähle noch $count Schlagwörter.',
+      one: 'Wähle noch ein Schlagwort.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wähle höchstens $count weitere Schlagwörter.',
+      one: 'Wähle höchstens ein weiteres Schlagwort.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Fertig';
+
+  @override
+  String get noMembersFound => 'Keine Mitglieder gefunden.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'Dieses Forum erlaubt keine Mitgliedersuche.';
+
+  @override
+  String get editLoadFailed =>
+      'Dieser Beitrag konnte nicht zum Bearbeiten geladen werden.';
 }

@@ -489,4 +489,131 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get permissionRequired => '需要权限';
+
+  @override
+  String get bold => '粗体';
+
+  @override
+  String get underline => '下划线';
+
+  @override
+  String get strikethrough => '删除线';
+
+  @override
+  String get bulletList => '项目符号列表';
+
+  @override
+  String get numberedList => '编号列表';
+
+  @override
+  String get listItem => '列表项';
+
+  @override
+  String get mentionUser => '提及用户';
+
+  @override
+  String get title => '标题';
+
+  @override
+  String get content => '内容';
+
+  @override
+  String get send => '发送';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String get formatting => '格式';
+
+  @override
+  String get pleaseEnterTitle => '请输入标题';
+
+  @override
+  String get pleaseEnterContent => '请输入内容';
+
+  @override
+  String get composerTitleHint => '编写您的标题...';
+
+  @override
+  String get composerContentHint => '编写您的内容...';
+
+  @override
+  String get composerFormattingHint => '打开格式选项';
+
+  @override
+  String get searchUsers => '搜索用户...';
+
+  @override
+  String get startDiscussion => '发起讨论';
+
+  @override
+  String get editPost => '编辑帖子';
+
+  @override
+  String get postingThrottled => '发帖太快了。请等几秒后再试。';
+
+  @override
+  String get postAwaitingApproval => '已发送。管理员审核通过后才会显示。';
+
+  @override
+  String get chooseTags => '选择标签';
+
+  @override
+  String get primaryTags => '主标签';
+
+  @override
+  String get secondaryTags => '更多标签';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '请选择 $count 个主标签。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '最多选择 $count 个主标签。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '请再选择 $count 个标签。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '最多再选择 $count 个标签。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => '完成';
+
+  @override
+  String get noMembersFound => '未找到成员。';
+
+  @override
+  String get memberSearchNotAllowed => '此论坛不允许搜索成员。';
+
+  @override
+  String get editLoadFailed => '无法加载此帖子进行编辑。';
 }

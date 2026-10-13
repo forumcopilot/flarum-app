@@ -503,4 +503,143 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Нужно разрешение';
+
+  @override
+  String get bold => 'Жирный';
+
+  @override
+  String get underline => 'Подчеркнутый';
+
+  @override
+  String get strikethrough => 'Зачеркнутый';
+
+  @override
+  String get bulletList => 'Маркированный Список';
+
+  @override
+  String get numberedList => 'Нумерованный Список';
+
+  @override
+  String get listItem => 'Элемент Списка';
+
+  @override
+  String get mentionUser => 'Упомянуть пользователя';
+
+  @override
+  String get title => 'Заголовок';
+
+  @override
+  String get content => 'Содержание';
+
+  @override
+  String get send => 'Отправить';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get formatting => 'Форматирование';
+
+  @override
+  String get pleaseEnterTitle => 'Пожалуйста, введите заголовок';
+
+  @override
+  String get pleaseEnterContent => 'Пожалуйста, введите содержимое';
+
+  @override
+  String get composerTitleHint => 'Напишите заголовок...';
+
+  @override
+  String get composerContentHint => 'Напишите текст...';
+
+  @override
+  String get composerFormattingHint => 'Открыть параметры форматирования';
+
+  @override
+  String get searchUsers => 'Поиск пользователей...';
+
+  @override
+  String get startDiscussion => 'Начать обсуждение';
+
+  @override
+  String get editPost => 'Редактировать сообщение';
+
+  @override
+  String get postingThrottled =>
+      'Вы публикуете слишком часто. Подождите несколько секунд и попробуйте снова.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Отправлено. Сообщение появится после одобрения модератором.';
+
+  @override
+  String get chooseTags => 'Выбрать теги';
+
+  @override
+  String get primaryTags => 'Основные теги';
+
+  @override
+  String get secondaryTags => 'Другие теги';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Выберите $count основных тега.',
+      many: 'Выберите $count основных тегов.',
+      few: 'Выберите $count основных тега.',
+      one: 'Выберите $count основной тег.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Выберите не больше $count основных тегов.',
+      one: 'Выберите не больше $count основного тега.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Выберите ещё $count тега.',
+      many: 'Выберите ещё $count тегов.',
+      few: 'Выберите ещё $count тега.',
+      one: 'Выберите ещё $count тег.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Выберите не больше $count дополнительных тегов.',
+      one: 'Выберите не больше $count дополнительного тега.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Готово';
+
+  @override
+  String get noMembersFound => 'Участники не найдены.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'На этом форуме нельзя искать участников.';
+
+  @override
+  String get editLoadFailed =>
+      'Не удалось загрузить сообщение для редактирования.';
 }

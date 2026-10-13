@@ -6,7 +6,9 @@ Guidance for Claude Code sessions working in this repository.
 
 flarum-app is a Flutter client for Flarum forums, the Flarum counterpart of discourse-app. The plan
 (phases, decisions, scope) is the "Flarum App Plan": https://claude.ai/artifact/W61kE9VGWeUbHWxMycWedL.
-Current phase: **2** (flarum_core on the SDK, flarum_ui). Phase 0 findings: docs/phase-0-notes.md.
+Current phase: **3** (the write path; plan: the "flarum-app Phase 3 Plan" doc,
+https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce), on branch `phase-3`; Phase 2 is on
+`phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md, docs/phase-3-notes.md.
 
 UI building blocks come from `forum_kit` (theme, shared widgets, caches, emoji, its own strings),
 which lives in discourse-app's `packages/forum_kit` and is shared with it. Only generic code goes
@@ -100,6 +102,12 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   subject is the reader's own post, and the reply that mentions it is `content.replyNumber`.
   `POST /api/notifications/read` marks all read (204).
 - byobu private discussions are invisible to admins who aren't recipients.
+- Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
+  source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made
+  from its HTML. A second post within the posting throttle (10 s by default) is 429 `too_many_requests`,
+  checked before validation. Editing someone else's post: 1.x 403 `permission_denied`, 2.0 403
+  `validation_error` ("Field [content] is not writable"). Flarum stops a member editing a post once
+  someone has replied after it (the default `allow_post_editing`).
 - Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
   the username by default, the id on forums with the ID slug driver, where a username 404s. Their
   posts and discussions: `filter[author]` (and 1.x's `author:` gambit) takes the username on 1.x

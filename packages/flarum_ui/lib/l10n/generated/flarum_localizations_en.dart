@@ -497,4 +497,138 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get permissionRequired => 'Permission required';
+
+  @override
+  String get bold => 'Bold';
+
+  @override
+  String get underline => 'Underline';
+
+  @override
+  String get strikethrough => 'Strikethrough';
+
+  @override
+  String get bulletList => 'Bullet List';
+
+  @override
+  String get numberedList => 'Numbered List';
+
+  @override
+  String get listItem => 'List Item';
+
+  @override
+  String get mentionUser => 'Mention User';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get content => 'Content';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get formatting => 'Formatting';
+
+  @override
+  String get pleaseEnterTitle => 'Please enter a title';
+
+  @override
+  String get pleaseEnterContent => 'Please enter some content';
+
+  @override
+  String get composerTitleHint => 'Write your title...';
+
+  @override
+  String get composerContentHint => 'Write your content...';
+
+  @override
+  String get composerFormattingHint => 'Open formatting options';
+
+  @override
+  String get searchUsers => 'Search users...';
+
+  @override
+  String get startDiscussion => 'Start a discussion';
+
+  @override
+  String get editPost => 'Edit post';
+
+  @override
+  String get postingThrottled =>
+      'You\'re posting too quickly. Wait a few seconds and try again.';
+
+  @override
+  String get postAwaitingApproval =>
+      'Posted. It will appear once a moderator approves it.';
+
+  @override
+  String get chooseTags => 'Choose tags';
+
+  @override
+  String get primaryTags => 'Primary tags';
+
+  @override
+  String get secondaryTags => 'More tags';
+
+  @override
+  String tagsNeedPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choose $count primary tags.',
+      one: 'Choose a primary tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManyPrimary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choose at most $count primary tags.',
+      one: 'Choose only 1 primary tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsNeedSecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choose $count more tags.',
+      one: 'Choose 1 more tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagsTooManySecondary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choose at most $count more tags.',
+      one: 'Choose at most 1 more tag.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get noMembersFound => 'No members found.';
+
+  @override
+  String get memberSearchNotAllowed =>
+      'This forum doesn\'t let you search for members.';
+
+  @override
+  String get editLoadFailed => 'Couldn\'t load this post for editing.';
 }

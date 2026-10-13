@@ -217,5 +217,11 @@
   "addPerson": "Iemand toevoegen",
   "choosePerson": "Kies aan wie je schrijft.",
   "noPrivateDiscussions": "Nog geen privédiscussies.",
-  "privateOnlyOne": "Op dit forum kun je privé maar naar één persoon tegelijk schrijven."
+  "privateOnlyOne": "Op dit forum kun je privé maar naar één persoon tegelijk schrijven.",
+  "messages": "Berichten",
+  "newMessage": "Nieuw bericht",
+  "noMessages": "Nog geen berichten.",
+  "sendMessage": "Een bericht sturen",
+  "messageHint": "Schrijf een bericht…",
+  "messagesLoadFailed": "De berichten konden niet worden geladen."
 }

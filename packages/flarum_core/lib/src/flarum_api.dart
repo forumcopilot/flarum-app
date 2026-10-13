@@ -4,6 +4,7 @@ import 'attributes.dart';
 import 'flarum_client.dart';
 import 'flarum_exception.dart';
 import 'json_api.dart';
+import 'models/dialog.dart';
 import 'models/discussion.dart';
 import 'models/forum_info.dart';
 import 'models/notification.dart';
@@ -651,6 +652,76 @@ class FlarumApi {
   /// they've accepted every one they must. Forum info read before this is out of date.
   Future<void> acceptPolicy(String id) async {
     await client.postEmpty('${await _policiesPath()}/$id/accept');
+  }
+
+  // ---- flarum/messages (2.0's direct messages). ----
+
+  /// The reader's dialogs, the latest first, with their people and last message.
+  Future<FlarumPage<FlarumDialog>> dialogs({int offset = 0, int limit = 20}) async {
+    final document = await client.get('/dialogs', query: {
+      'sort': '-lastMessageAt',
+      ..._page(offset, limit),
+      'include': 'users,lastMessage,lastMessageUser',
+    });
+    return FlarumPage(
+      [for (final resource in document.data) FlarumDialog.fromResource(resource, document)],
+      offset: offset,
+      hasMore: document.hasNext,
+      total: _total(document),
+    );
+  }
+
+  /// Dialog [id], with its people.
+  Future<FlarumDialog> dialog(String id) async {
+    final document = await client.get('/dialogs/$id', query: {'include': 'users'});
+    return FlarumDialog.fromResource(document.single, document);
+  }
+
+  /// A page of dialog [dialogId]'s messages, the newest first, with their authors.
+  Future<FlarumPage<FlarumDialogMessage>> dialogMessages(String dialogId, {int offset = 0, int limit = 20}) async {
+    final document = await client.get('/dialog-messages', query: {
+      'filter[dialog]': dialogId,
+      ..._page(offset, limit),
+      'include': 'user',
+    });
+    return FlarumPage(
+      [for (final resource in document.data) FlarumDialogMessage.fromResource(resource, document)],
+      offset: offset,
+      hasMore: document.hasNext,
+      total: _total(document),
+    );
+  }
+
+  /// Sends [content] in dialog [dialogId], or to [userIds]: the forum finds the dialog it has with
+  /// them, or starts one. The message, with its dialog's id.
+  Future<FlarumDialogMessage> sendMessage(String content, {String? dialogId, List<String> userIds = const []}) async {
+    final document = await client.post('/dialog-messages', {
+      'data': {
+        'type': 'dialog-messages',
+        'attributes': {
+          'content': content,
+          if (dialogId == null) 'users': [for (final id in userIds) {'id': id}],
+        },
+        if (dialogId != null)
+          'relationships': {
+            'dialog': {
+              'data': {'type': 'dialogs', 'id': dialogId},
+            },
+          },
+      },
+    });
+    return FlarumDialogMessage.fromResource(document.single, document);
+  }
+
+  /// Records that the reader has read dialog [dialogId] up to message [messageId].
+  Future<void> markDialogRead(String dialogId, String messageId) async {
+    await client.patch('/dialogs/$dialogId', {
+      'data': {
+        'type': 'dialogs',
+        'id': dialogId,
+        'attributes': {'lastReadMessageId': int.tryParse(messageId) ?? messageId},
+      },
+    });
   }
 
   /// Marks every discussion read for the reader [userId]: Flarum records the

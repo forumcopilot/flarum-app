@@ -1,0 +1,59 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/dialog-messages",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "dialog-messages",
+        "attributes": {
+          "content": "Got it, thanks."
+        },
+        "relationships": {
+          "dialog": {
+            "data": {
+              "type": "dialogs",
+              "id": "3"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "dialog-messages",
+      "id": "7",
+      "links": {
+        "self": "/dialog-messages/7"
+      },
+      "attributes": {
+        "number": 2,
+        "contentHtml": "<p>Got it, thanks.</p>",
+        "renderFailed": null,
+        "createdAt": "2026-10-13T19:51:40+00:00",
+        "canDelete": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "3"
+          }
+        },
+        "dialog": {
+          "data": {
+            "type": "dialogs",
+            "id": "3"
+          }
+        }
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

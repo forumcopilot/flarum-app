@@ -1,0 +1,166 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/dialog-messages",
+    "query": {
+      "filter[dialog]": "3",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "dialog-messages",
+        "id": "7",
+        "links": {
+          "self": "/dialog-messages/7"
+        },
+        "attributes": {
+          "number": 2,
+          "contentHtml": "<p>Got it, thanks.</p>",
+          "renderFailed": null,
+          "createdAt": "2026-10-13T19:51:40+00:00",
+          "canDelete": false
+        },
+        "relationships": {
+          "dialog": {
+            "data": {
+              "type": "dialogs",
+              "id": "3"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "dialog-messages",
+        "id": "6",
+        "links": {
+          "self": "/dialog-messages/6"
+        },
+        "attributes": {
+          "number": 1,
+          "contentHtml": "<p>A direct message from the app.</p>",
+          "renderFailed": null,
+          "createdAt": "2026-10-13T19:51:40+00:00",
+          "canDelete": false
+        },
+        "relationships": {
+          "dialog": {
+            "data": {
+              "type": "dialogs",
+              "id": "3"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "email": "carol@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 1,
+          "commentCount": 25,
+          "lastSeenAt": "2026-10-13T19:48:54+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 1,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 25,
+          "lastSeenAt": "2026-10-13T19:49:09+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 2,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

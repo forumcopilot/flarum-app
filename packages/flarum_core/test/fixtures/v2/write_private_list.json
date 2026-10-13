@@ -16,23 +16,23 @@
     "data": [
       {
         "type": "discussions",
-        "id": "74",
+        "id": "77",
         "links": {
-          "self": "/discussions/74"
+          "self": "/discussions/77"
         },
         "attributes": {
           "title": "A private word from the app",
-          "slug": "74-a-private-word-from-the-app",
+          "slug": "77-a-private-word-from-the-app",
           "commentCount": 1,
           "participantCount": 1,
-          "createdAt": "2026-10-13T19:43:24+00:00",
-          "lastPostedAt": "2026-10-13T19:43:24+00:00",
+          "createdAt": "2026-10-13T19:51:39+00:00",
+          "lastPostedAt": "2026-10-13T19:51:39+00:00",
           "lastPostNumber": 1,
           "canReply": true,
           "canRename": true,
           "canDelete": false,
           "canHide": true,
-          "lastReadAt": "2026-10-13T19:43:24+00:00",
+          "lastReadAt": "2026-10-13T19:51:39+00:00",
           "lastReadPostNumber": 1,
           "canTag": false,
           "isApproved": true,
@@ -59,13 +59,13 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "337"
+              "id": "344"
             }
           },
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "337"
+              "id": "344"
             }
           },
           "mostRelevantPost": {
@@ -127,7 +127,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:42:54+00:00",
+          "lastSeenAt": "2026-10-13T19:49:09+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -162,7 +162,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 25,
-          "lastSeenAt": "2026-10-13T19:42:53+00:00",
+          "lastSeenAt": "2026-10-13T19:48:54+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

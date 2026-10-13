@@ -869,4 +869,22 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   @override
   String get privateOnlyOne =>
       'Op dit forum kun je privé maar naar één persoon tegelijk schrijven.';
+
+  @override
+  String get messages => 'Berichten';
+
+  @override
+  String get newMessage => 'Nieuw bericht';
+
+  @override
+  String get noMessages => 'Nog geen berichten.';
+
+  @override
+  String get sendMessage => 'Een bericht sturen';
+
+  @override
+  String get messageHint => 'Schrijf een bericht…';
+
+  @override
+  String get messagesLoadFailed => 'De berichten konden niet worden geladen.';
 }

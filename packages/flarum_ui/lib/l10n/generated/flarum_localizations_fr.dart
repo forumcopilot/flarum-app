@@ -870,4 +870,22 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   @override
   String get privateOnlyOne =>
       'Ce forum vous permet d’écrire en privé à une seule personne à la fois.';
+
+  @override
+  String get messages => 'Messages';
+
+  @override
+  String get newMessage => 'Nouveau message';
+
+  @override
+  String get noMessages => 'Aucun message pour l’instant.';
+
+  @override
+  String get sendMessage => 'Envoyer un message';
+
+  @override
+  String get messageHint => 'Écrire un message…';
+
+  @override
+  String get messagesLoadFailed => 'Impossible de charger les messages.';
 }

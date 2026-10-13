@@ -1,0 +1,56 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/dialog-messages",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "dialog-messages",
+        "attributes": {
+          "content": "A direct message from the app.",
+          "users": [
+            {
+              "id": "3"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "dialog-messages",
+      "id": "6",
+      "links": {
+        "self": "/dialog-messages/6"
+      },
+      "attributes": {
+        "number": 1,
+        "contentHtml": "<p>A direct message from the app.</p>",
+        "renderFailed": null,
+        "createdAt": "2026-10-13T19:51:40+00:00",
+        "canDelete": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "dialog": {
+          "data": {
+            "type": "dialogs",
+            "id": "3"
+          }
+        }
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

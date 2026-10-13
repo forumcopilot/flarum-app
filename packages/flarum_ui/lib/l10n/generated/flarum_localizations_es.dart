@@ -870,4 +870,22 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   @override
   String get privateOnlyOne =>
       'Este foro te permite escribir en privado a una sola persona a la vez.';
+
+  @override
+  String get messages => 'Mensajes';
+
+  @override
+  String get newMessage => 'Nuevo mensaje';
+
+  @override
+  String get noMessages => 'Aún no hay mensajes.';
+
+  @override
+  String get sendMessage => 'Enviar un mensaje';
+
+  @override
+  String get messageHint => 'Escribe un mensaje…';
+
+  @override
+  String get messagesLoadFailed => 'No se pudieron cargar los mensajes.';
 }

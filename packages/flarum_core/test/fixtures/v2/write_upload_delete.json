@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/fof/upload/delete/6eca5495-9a8a-4502-befa-99216a8e8a86",
+    "path": "/fof/upload/delete/1534be2e-154b-4801-8e8d-a681acfc1c98",
     "query": {},
     "signedIn": true,
     "rememberCookie": false

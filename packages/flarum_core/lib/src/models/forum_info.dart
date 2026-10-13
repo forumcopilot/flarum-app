@@ -139,6 +139,9 @@ class FlarumForumInfo {
             if (value is Map<String, dynamic>) key: FlarumPolicyState.fromJson(value),
       };
 
+  /// The reader's dialogs with messages they haven't read (flarum/messages, 2.0). Null without it.
+  int? get unreadDialogCount => actorAttributes.integer('messageCount');
+
   /// The policies the reader must accept before they may post again: until they do, the forum
   /// gives them a guest's permissions.
   List<FlarumPolicy> get policiesToAccept => [

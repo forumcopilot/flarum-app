@@ -9,6 +9,7 @@ export 'src/flarum_api.dart';
 export 'src/flarum_client.dart';
 export 'src/flarum_exception.dart';
 export 'src/json_api.dart';
+export 'src/models/dialog.dart';
 export 'src/models/discussion.dart';
 export 'src/models/forum_info.dart';
 export 'src/models/notification.dart';

@@ -1264,5 +1264,29 @@
   "privateOnlyOne": "This forum lets you write privately to one person at a time.",
   "@privateOnlyOne": {
     "description": "Composer: the forum lets members write privately to one other person only"
+  },
+  "messages": "Messages",
+  "@messages": {
+    "description": "Account entry and page title: direct messages (flarum/messages, Flarum 2.0)"
+  },
+  "newMessage": "New message",
+  "@newMessage": {
+    "description": "Button that starts a direct message to someone"
+  },
+  "noMessages": "No messages yet.",
+  "@noMessages": {
+    "description": "Empty messages page"
+  },
+  "sendMessage": "Send a message",
+  "@sendMessage": {
+    "description": "Profile menu: write a direct message to this person"
+  },
+  "messageHint": "Write a message…",
+  "@messageHint": {
+    "description": "The reply field at the bottom of a conversation"
+  },
+  "messagesLoadFailed": "Couldn't load the messages.",
+  "@messagesLoadFailed": {
+    "description": "A conversation or the messages list failed to load"
   }
 }

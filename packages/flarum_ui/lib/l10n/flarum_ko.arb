@@ -217,5 +217,11 @@
   "addPerson": "사람 추가",
   "choosePerson": "글을 보낼 사람을 선택하세요.",
   "noPrivateDiscussions": "아직 비공개 토론이 없습니다.",
-  "privateOnlyOne": "이 포럼에서는 한 번에 한 사람에게만 비공개로 글을 쓸 수 있습니다."
+  "privateOnlyOne": "이 포럼에서는 한 번에 한 사람에게만 비공개로 글을 쓸 수 있습니다.",
+  "messages": "메시지",
+  "newMessage": "새 메시지",
+  "noMessages": "아직 메시지가 없습니다.",
+  "sendMessage": "메시지 보내기",
+  "messageHint": "메시지 작성…",
+  "messagesLoadFailed": "메시지를 불러오지 못했습니다."
 }

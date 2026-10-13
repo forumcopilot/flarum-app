@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "path": "/discussions/73",
+    "path": "/discussions/76",
     "query": {
       "include": "user,lastPostedUser,tags"
     },
@@ -12,23 +12,23 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "73",
+      "id": "76",
       "links": {
-        "self": "/discussions/73"
+        "self": "/discussions/76"
       },
       "attributes": {
         "title": "A question from the app",
-        "slug": "73-a-question-from-the-app",
+        "slug": "76-a-question-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T19:43:08+00:00",
-        "lastPostedAt": "2026-10-13T19:43:09+00:00",
+        "createdAt": "2026-10-13T19:51:24+00:00",
+        "lastPostedAt": "2026-10-13T19:51:24+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": false,
-        "lastReadAt": "2026-10-13T19:43:08+00:00",
+        "lastReadAt": "2026-10-13T19:51:24+00:00",
         "lastReadPostNumber": 1,
         "canTag": false,
         "isApproved": true,
@@ -55,24 +55,24 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "335"
+            "id": "342"
           }
         },
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "336"
+            "id": "343"
           }
         },
         "posts": {
           "data": [
             {
               "type": "posts",
-              "id": "335"
+              "id": "342"
             },
             {
               "type": "posts",
-              "id": "336"
+              "id": "343"
             }
           ]
         },
@@ -126,7 +126,7 @@
           "position": 9,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-13T19:43:09+00:00",
+          "lastPostedAt": "2026-10-13T19:51:24+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -140,7 +140,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "73"
+              "id": "76"
             }
           }
         }
@@ -161,7 +161,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:42:54+00:00",
+          "lastSeenAt": "2026-10-13T19:49:09+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -196,7 +196,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:42:53+00:00",
+          "lastSeenAt": "2026-10-13T19:48:54+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

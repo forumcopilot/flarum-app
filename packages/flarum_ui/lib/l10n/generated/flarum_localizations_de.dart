@@ -873,4 +873,23 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   @override
   String get privateOnlyOne =>
       'In diesem Forum kannst du jeweils nur einer Person privat schreiben.';
+
+  @override
+  String get messages => 'Nachrichten';
+
+  @override
+  String get newMessage => 'Neue Nachricht';
+
+  @override
+  String get noMessages => 'Noch keine Nachrichten.';
+
+  @override
+  String get sendMessage => 'Nachricht senden';
+
+  @override
+  String get messageHint => 'Nachricht schreiben …';
+
+  @override
+  String get messagesLoadFailed =>
+      'Die Nachrichten konnten nicht geladen werden.';
 }

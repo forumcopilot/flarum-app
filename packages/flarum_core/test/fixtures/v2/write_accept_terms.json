@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "path": "/fof-terms-policies/5/accept",
+    "path": "/fof-terms-policies/6/accept",
     "query": {},
     "signedIn": true,
     "rememberCookie": false
@@ -26,7 +26,7 @@
         "joinTime": "2026-10-08T17:53:47+00:00",
         "discussionCount": 1,
         "commentCount": 24,
-        "lastSeenAt": "2026-10-13T19:42:53+00:00",
+        "lastSeenAt": "2026-10-13T19:48:54+00:00",
         "canEdit": false,
         "canEditCredentials": false,
         "canEditGroups": false,
@@ -48,8 +48,8 @@
         "fof-upload-uploadCountCurrent": 0,
         "fof-upload-uploadCountAll": 0,
         "fofTermsPoliciesState": {
-          "5": {
-            "accepted_at": "2026-10-13T19:43:23+00:00",
+          "6": {
+            "accepted_at": "2026-10-13T19:51:39+00:00",
             "has_update": false,
             "must_accept": false,
             "is_accepted": 1

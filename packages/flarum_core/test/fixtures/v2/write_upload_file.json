@@ -16,22 +16,22 @@
     "data": [
       {
         "type": "files",
-        "id": "30",
+        "id": "32",
         "links": {
-          "self": "/files/30"
+          "self": "/files/32"
         },
         "attributes": {
           "baseName": "composer-test.txt",
-          "path": "2026-10-13/1791920577-393933-composer-test.txt",
-          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791920577-393933-composer-test.txt",
+          "path": "2026-10-13/1791921073-107899-composer-test.txt",
+          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791921073-107899-composer-test.txt",
           "type": "text/plain",
           "size": 32,
           "humanSize": "32B",
           "createdAt": null,
-          "uuid": "6eca5495-9a8a-4502-befa-99216a8e8a86",
+          "uuid": "1534be2e-154b-4801-8e8d-a681acfc1c98",
           "tag": "file",
           "hidden": false,
-          "bbcode": "[upl-file uuid=6eca5495-9a8a-4502-befa-99216a8e8a86 size=32B]composer-test.txt[/upl-file]",
+          "bbcode": "[upl-file uuid=1534be2e-154b-4801-8e8d-a681acfc1c98 size=32B]composer-test.txt[/upl-file]",
           "shared": false,
           "isPrivateShared": false,
           "canViewInfo": false,
@@ -67,7 +67,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:42:54+00:00",
+          "lastSeenAt": "2026-10-13T19:49:09+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

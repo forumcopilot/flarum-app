@@ -11,6 +11,8 @@ import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
 import '../compose/composers.dart';
 import '../home/post_list.dart';
+import '../messages/dialog_page.dart';
+import '../messages/dialogs_page.dart';
 import '../private/private_discussions_page.dart';
 import '../safety/ignore_actions.dart';
 import '../safety/ignored_users.dart';
@@ -92,6 +94,9 @@ class _UserPageState extends State<UserPage> {
   bool _canWriteTo(FlarumUser user) =>
       canStartPrivateDiscussion(_forum) && user.id != _forum.info?.actor?.id && !user.blocksPd;
 
+  /// Whether the reader may send [user] a direct message (flarum/messages, 2.0).
+  bool _canMessage(FlarumUser user) => canSendMessages(_forum) && user.id != _forum.info?.actor?.id;
+
   Future<void> _writeTo(FlarumUser user) async {
     final discussion = await composePrivateDiscussion(context, widget.site, to: user);
     if (discussion != null && mounted) ThreadPage.open(context, widget.site, discussion.id, title: discussion.title);
@@ -122,11 +127,16 @@ class _UserPageState extends State<UserPage> {
         appBar: AppBar(
           title: Text(user.displayName),
           actions: [
-            if (_ignored.canIgnore(user) || _canWriteTo(user))
+            if (_ignored.canIgnore(user) || _canWriteTo(user) || _canMessage(user))
               PopupMenuButton<VoidCallback>(
                 tooltip: MaterialLocalizations.of(context).showMenuTooltip,
                 onSelected: (action) => action(),
                 itemBuilder: (context) => [
+                  if (_canMessage(user))
+                    PopupMenuItem(
+                      value: () => DialogPage.open(context, widget.site, to: user),
+                      child: Text(l10n.sendMessage),
+                    ),
                   if (_canWriteTo(user))
                     PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
                   if (_ignored.canIgnore(user))

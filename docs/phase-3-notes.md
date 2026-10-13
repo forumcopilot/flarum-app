@@ -106,6 +106,17 @@ messages.
   it's known to be private (the thread's own request stays as it was, so its fixtures do too).
   Members may not change who's in one (`canEditUserRecipients` false; a PATCH is 403), so the app
   doesn't offer it yet. The SDK's conversation proxy sits on the same calls.
+- **Messages (flarum/messages, 2.0):** Account has Messages, with the number of conversations with
+  something unread (the actor's `messageCount`); each conversation reads newest at the bottom, with a
+  field to answer in, and New message (or Send a message on a profile) writes to someone. The API
+  is its own: `GET /api/dialogs` (`include=users,lastMessage,lastMessageUser`, `sort=-lastMessageAt`),
+  `GET /api/dialog-messages?filter[dialog]=` (the newest first), `POST /api/dialog-messages` with
+  `attributes.users` for a first message (the forum finds the dialog it has with them, or starts
+  one) or `relationships.dialog` after, and `PATCH /api/dialogs/{id}` `lastReadMessageId`
+  (`POST /api/dialogs/read` reads them all). The answer to a send names its author without
+  including them. Dialogs can't be deleted, nor (by default) a member's messages, so the recorder's
+  is deleted on the server (`tool/test_forums/delete_dialogs.php`). The SDK's conversation proxy
+  covers byobu only so far.
 - **Cleaning up after byobu:** byobu hides a private discussion even from an admin who isn't in it,
   so the API can't delete the recorder's. `tool/test_forums/delete_discussions.php` deletes them on
   the server through Flarum's models; the recorder runs it when given `FLARUM_DIR`.

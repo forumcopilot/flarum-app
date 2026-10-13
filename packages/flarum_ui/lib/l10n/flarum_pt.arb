@@ -217,5 +217,11 @@
   "addPerson": "Adicionar alguém",
   "choosePerson": "Escolha para quem escrever.",
   "noPrivateDiscussions": "Nenhuma discussão privada ainda.",
-  "privateOnlyOne": "Este fórum permite escrever em privado para uma pessoa de cada vez."
+  "privateOnlyOne": "Este fórum permite escrever em privado para uma pessoa de cada vez.",
+  "messages": "Mensagens",
+  "newMessage": "Nova mensagem",
+  "noMessages": "Nenhuma mensagem ainda.",
+  "sendMessage": "Enviar uma mensagem",
+  "messageHint": "Escreva uma mensagem…",
+  "messagesLoadFailed": "Não foi possível carregar as mensagens."
 }

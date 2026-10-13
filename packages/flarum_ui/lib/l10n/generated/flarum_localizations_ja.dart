@@ -842,4 +842,22 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get privateOnlyOne => 'このフォーラムでは、一度に1人にだけ非公開で書けます。';
+
+  @override
+  String get messages => 'メッセージ';
+
+  @override
+  String get newMessage => '新しいメッセージ';
+
+  @override
+  String get noMessages => 'メッセージはまだありません。';
+
+  @override
+  String get sendMessage => 'メッセージを送る';
+
+  @override
+  String get messageHint => 'メッセージを入力…';
+
+  @override
+  String get messagesLoadFailed => 'メッセージを読み込めませんでした。';
 }

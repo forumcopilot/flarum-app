@@ -873,4 +873,22 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   @override
   String get privateOnlyOne =>
       'На этом форуме можно писать лично только одному человеку за раз.';
+
+  @override
+  String get messages => 'Сообщения';
+
+  @override
+  String get newMessage => 'Новое сообщение';
+
+  @override
+  String get noMessages => 'Сообщений пока нет.';
+
+  @override
+  String get sendMessage => 'Отправить сообщение';
+
+  @override
+  String get messageHint => 'Напишите сообщение…';
+
+  @override
+  String get messagesLoadFailed => 'Не удалось загрузить сообщения.';
 }

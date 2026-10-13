@@ -217,5 +217,11 @@
   "addPerson": "Jemanden hinzufügen",
   "choosePerson": "Wähle aus, an wen du schreibst.",
   "noPrivateDiscussions": "Noch keine privaten Diskussionen.",
-  "privateOnlyOne": "In diesem Forum kannst du jeweils nur einer Person privat schreiben."
+  "privateOnlyOne": "In diesem Forum kannst du jeweils nur einer Person privat schreiben.",
+  "messages": "Nachrichten",
+  "newMessage": "Neue Nachricht",
+  "noMessages": "Noch keine Nachrichten.",
+  "sendMessage": "Nachricht senden",
+  "messageHint": "Nachricht schreiben …",
+  "messagesLoadFailed": "Die Nachrichten konnten nicht geladen werden."
 }

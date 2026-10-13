@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "path": "/discussions/66",
+    "path": "/discussions/69",
     "query": {
       "include": "user,lastPostedUser,tags,posts"
     },
@@ -12,20 +12,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "66",
+      "id": "69",
       "attributes": {
         "title": "A private word from the app",
-        "slug": "66-a-private-word-from-the-app",
+        "slug": "69-a-private-word-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T19:42:44+00:00",
-        "lastPostedAt": "2026-10-13T19:42:45+00:00",
+        "createdAt": "2026-10-13T19:51:02+00:00",
+        "lastPostedAt": "2026-10-13T19:51:03+00:00",
         "lastPostNumber": 3,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": false,
-        "lastReadAt": "2026-10-13T19:42:45+00:00",
+        "lastReadAt": "2026-10-13T19:51:02+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -66,15 +66,15 @@
           "data": [
             {
               "type": "posts",
-              "id": "284"
+              "id": "291"
             },
             {
               "type": "posts",
-              "id": "285"
+              "id": "292"
             },
             {
               "type": "posts",
-              "id": "286"
+              "id": "293"
             }
           ]
         }
@@ -103,10 +103,10 @@
       },
       {
         "type": "posts",
-        "id": "284",
+        "id": "291",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T19:42:44+00:00",
+          "createdAt": "2026-10-13T19:51:02+00:00",
           "contentType": "comment",
           "contentHtml": "<p>Only bob and I can read this.</p>",
           "renderFailed": false,
@@ -137,10 +137,10 @@
       },
       {
         "type": "posts",
-        "id": "285",
+        "id": "292",
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T19:42:44+00:00",
+          "createdAt": "2026-10-13T19:51:02+00:00",
           "contentType": "recipientsModified",
           "content": {
             "new": {
@@ -182,10 +182,10 @@
       },
       {
         "type": "posts",
-        "id": "286",
+        "id": "293",
         "attributes": {
           "number": 3,
-          "createdAt": "2026-10-13T19:42:45+00:00",
+          "createdAt": "2026-10-13T19:51:03+00:00",
           "contentType": "comment",
           "contentHtml": "<p>Read you, carol.</p>",
           "renderFailed": false,

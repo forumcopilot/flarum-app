@@ -9,6 +9,7 @@ import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
+import '../messages/dialogs_page.dart';
 import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
 import 'sign_in_page.dart';
@@ -94,6 +95,23 @@ class _AccountPageState extends State<AccountPage> {
                 onTap: () => BookmarksPage.open(context, widget.site),
               ),
             ],
+            if (_forum.extensions.messages)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.chat_bubble_outline),
+                title: Text(l10n.messages),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if ((_forum.info?.unreadDialogCount ?? 0) > 0) Badge(label: Text('${_forum.info!.unreadDialogCount}')),
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
+                onTap: () async {
+                  await DialogsPage.open(context, widget.site);
+                  if (mounted) setState(() {});
+                },
+              ),
             if (_forum.extensions.byobu)
               ListTile(
                 contentPadding: EdgeInsets.zero,

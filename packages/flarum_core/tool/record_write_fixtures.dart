@@ -8,8 +8,9 @@
 //   FLARUM_TEST_PASSWORD=… FLARUM_ADMIN_USER=admin FLARUM_ADMIN_PASSWORD=… \
 //     FLARUM_DIR=/var/www/flarumapp/flarum1 dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
 //
-// fof/byobu hides a private discussion even from an admin who isn't in it, so carol's is deleted on
-// the server, by tool/test_forums/delete_discussions.php in FLARUM_DIR (or the command is printed).
+// fof/byobu hides a private discussion even from an admin who isn't in it, and flarum/messages can't
+// delete a dialog, so carol's are deleted on the server, by tool/test_forums/delete_discussions.php
+// and delete_dialogs.php in FLARUM_DIR (or the commands are printed).
 
 import 'dart:convert';
 import 'dart:io';
@@ -40,8 +41,10 @@ Future<void> main(List<String> args) async {
   final bobId = (await bob.logIn('bob', password)).userId;
   await admin.logIn(adminUser, adminPassword);
 
-  /// Private discussions to delete on the server at the end (fof/byobu hides them from the admin).
+  /// Private discussions to delete on the server at the end (fof/byobu hides them from the admin),
+  /// and dialogs (flarum/messages has no way to delete them).
   final privateIds = <String>[];
+  final dialogIds = <String>[];
 
   /// Records the response [call] gets as fixture [name], refusals included; returns its value.
   Future<T?> record<T>(String name, Future<T> Function() call) async {
@@ -193,12 +196,31 @@ Future<void> main(List<String> args) async {
       await record('write_private_posts', () => carol.posts(private.id));
       await record('write_private_set_recipients', () => carol.setRecipients(private.id, [carolId]));
     }
+
+    // flarum/messages (2.0): carol writes to bob, he answers, and she reads it. Dialogs have no
+    // delete endpoint (and members may not delete messages), so hers is deleted on the server too.
+    if (version == FlarumVersion.v2) {
+      final sent = await record('write_message_new', () => carol.sendMessage(WriteSamples.message, userIds: [bobId]));
+      final dialogId = sent?.dialogId;
+      if (dialogId != null) {
+        dialogIds.add(dialogId);
+        final reply =
+            await record('write_message_reply', () => bob.sendMessage(WriteSamples.messageReply, dialogId: dialogId));
+        await record('write_dialogs', () => carol.dialogs());
+        await record('write_dialog', () => carol.dialog(dialogId));
+        await record('write_dialog_messages', () => carol.dialogMessages(dialogId));
+        recorder.states['write_forum_messages'] = 'messages';
+        await record('write_forum_messages', () => carol.forumInfo());
+        if (reply != null) await record('write_dialog_read', () => carol.markDialogRead(dialogId, reply.id));
+      }
+    }
   } finally {
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {
       await api.logOut();
     }
-    if (privateIds.isNotEmpty) await deletePrivate(privateIds);
+    if (privateIds.isNotEmpty) await deleteOnServer('delete_discussions.php', privateIds);
+    if (dialogIds.isNotEmpty) await deleteOnServer('delete_dialogs.php', dialogIds);
   }
 
   final dir = Directory('test/fixtures/${version.name}')..createSync(recursive: true);
@@ -209,14 +231,14 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Recorded ${recorder.recorded.length} write fixtures into ${dir.path}');
 }
 
-/// Deletes the private discussions [ids] with tool/test_forums/delete_discussions.php, in the forum
-/// at FLARUM_DIR; without it, says how.
-Future<void> deletePrivate(List<String> ids) async {
+/// Deletes [ids] with [script] from tool/test_forums, in the forum at FLARUM_DIR; without it, says
+/// how.
+Future<void> deleteOnServer(String script, List<String> ids) async {
   final dir = Platform.environment['FLARUM_DIR'];
-  final script = File('../../tool/test_forums/delete_discussions.php').absolute.path;
+  script = File('../../tool/test_forums/$script').absolute.path;
   final command = ['sudo', '-u', 'www-data', 'php', script, dir ?? '<the forum\'s directory>', ...ids];
   if (dir == null) {
-    stderr.writeln('Private discussions to delete: ${command.join(' ')}');
+    stderr.writeln('To delete: ${command.join(' ')}');
     return;
   }
   final result = await Process.run(command.first, command.skip(1).toList());

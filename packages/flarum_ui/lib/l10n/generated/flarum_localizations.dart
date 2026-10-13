@@ -1426,6 +1426,42 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'This forum lets you write privately to one person at a time.'**
   String get privateOnlyOne;
+
+  /// Account entry and page title: direct messages (flarum/messages, Flarum 2.0)
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messages;
+
+  /// Button that starts a direct message to someone
+  ///
+  /// In en, this message translates to:
+  /// **'New message'**
+  String get newMessage;
+
+  /// Empty messages page
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet.'**
+  String get noMessages;
+
+  /// Profile menu: write a direct message to this person
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message'**
+  String get sendMessage;
+
+  /// The reply field at the bottom of a conversation
+  ///
+  /// In en, this message translates to:
+  /// **'Write a message…'**
+  String get messageHint;
+
+  /// A conversation or the messages list failed to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the messages.'**
+  String get messagesLoadFailed;
 }
 
 class _FlarumLocalizationsDelegate

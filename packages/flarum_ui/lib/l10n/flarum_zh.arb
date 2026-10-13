@@ -217,5 +217,11 @@
   "addPerson": "添加成员",
   "choosePerson": "请选择要写给谁。",
   "noPrivateDiscussions": "还没有私密讨论。",
-  "privateOnlyOne": "此论坛一次只允许你私下写给一个人。"
+  "privateOnlyOne": "此论坛一次只允许你私下写给一个人。",
+  "messages": "私信",
+  "newMessage": "新私信",
+  "noMessages": "还没有私信。",
+  "sendMessage": "发送私信",
+  "messageHint": "写一条私信…",
+  "messagesLoadFailed": "无法加载私信。"
 }

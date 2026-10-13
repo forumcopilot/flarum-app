@@ -106,6 +106,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   deletes its own with `tool/test_forums/delete_discussions.php`). One is started with
   `relationships.recipientUsers` and no tags; members may have one other person in it and may not
   change who's in it. Listing: 1.x only the `is:private` gambit, 2.0 `filter[private]`.
+- flarum/messages (2.0): `/api/dialogs` and `/api/dialog-messages` (newest first); a first message
+  carries `attributes.users`, later ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}`
+  `lastReadMessageId`. No notifications, only the actor's `messageCount`. Dialogs can't be deleted
+  through the API (the recorder uses `tool/test_forums/delete_dialogs.php`).
 - Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
   source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made
   from its HTML. A second post within the posting throttle (10 s by default) is 429 `too_many_requests`,

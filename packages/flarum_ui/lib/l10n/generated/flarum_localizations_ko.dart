@@ -842,4 +842,22 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get privateOnlyOne => '이 포럼에서는 한 번에 한 사람에게만 비공개로 글을 쓸 수 있습니다.';
+
+  @override
+  String get messages => '메시지';
+
+  @override
+  String get newMessage => '새 메시지';
+
+  @override
+  String get noMessages => '아직 메시지가 없습니다.';
+
+  @override
+  String get sendMessage => '메시지 보내기';
+
+  @override
+  String get messageHint => '메시지 작성…';
+
+  @override
+  String get messagesLoadFailed => '메시지를 불러오지 못했습니다.';
 }

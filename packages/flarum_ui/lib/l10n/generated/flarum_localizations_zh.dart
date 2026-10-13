@@ -840,4 +840,22 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get privateOnlyOne => '此论坛一次只允许你私下写给一个人。';
+
+  @override
+  String get messages => '私信';
+
+  @override
+  String get newMessage => '新私信';
+
+  @override
+  String get noMessages => '还没有私信。';
+
+  @override
+  String get sendMessage => '发送私信';
+
+  @override
+  String get messageHint => '写一条私信…';
+
+  @override
+  String get messagesLoadFailed => '无法加载私信。';
 }

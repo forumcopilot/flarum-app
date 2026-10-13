@@ -25,6 +25,10 @@ abstract final class WriteSamples {
   static const privateContent = 'Only bob and I can read this.';
   static const privateReply = 'Read you, carol.';
 
+  /// carol's direct message to bob (flarum/messages, 2.0), and his answer.
+  static const message = 'A direct message from the app.';
+  static const messageReply = 'Got it, thanks.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

@@ -217,5 +217,11 @@
   "addPerson": "相手を追加",
   "choosePerson": "送る相手を選んでください。",
   "noPrivateDiscussions": "非公開ディスカッションはまだありません。",
-  "privateOnlyOne": "このフォーラムでは、一度に1人にだけ非公開で書けます。"
+  "privateOnlyOne": "このフォーラムでは、一度に1人にだけ非公開で書けます。",
+  "messages": "メッセージ",
+  "newMessage": "新しいメッセージ",
+  "noMessages": "メッセージはまだありません。",
+  "sendMessage": "メッセージを送る",
+  "messageHint": "メッセージを入力…",
+  "messagesLoadFailed": "メッセージを読み込めませんでした。"
 }

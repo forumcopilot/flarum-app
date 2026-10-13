@@ -11,6 +11,7 @@ import '../models/forum_info.dart';
 import '../models/user.dart';
 import 'flarum_forum.dart';
 import 'flarum_forum_proxy.dart' show describeFlarumError;
+import 'flarum_private_conversation_proxy.dart';
 import 'flarum_topic_proxy.dart';
 
 /// Signing in and out, and users.
@@ -220,10 +221,10 @@ class FlarumUserProxy implements IFCUserProxy {
   Future<FCLoginTwoStepResult> loginTwoStepAsync(String codeTwoStep, bool trust) async =>
       FCLoginTwoStepResult(result: false, resultText: 'Two-step sign-in happens on the forum\'s page', id: '', username: '');
 
-  /// Comes with private messages (Phase 3).
+  /// The reader's private discussions (fof/byobu), as the conversation proxy counts them.
   @override
-  Future<FCInboxStatResult> getInboxStatAsync(DateTime pmLastCheckedTime, DateTime subscribedTopicLastCheckedTime) async =>
-      FCInboxStatResult(result: false, resultText: 'Not available yet', totalConversations: 0, unreadConversations: 0, unreadMessages: 0);
+  Future<FCInboxStatResult> getInboxStatAsync(DateTime pmLastCheckedTime, DateTime subscribedTopicLastCheckedTime) =>
+      FlarumPrivateConversationProxy(siteContext).getInboxStatAsync();
 
   /// Seeing who's online needs viewLastSeenAt, which members lack by default.
   @override

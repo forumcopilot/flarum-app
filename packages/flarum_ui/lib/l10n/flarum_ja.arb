@@ -210,5 +210,12 @@
   "termsIntro": "再び投稿する前に、フォーラムの更新されたポリシーに同意してください。",
   "readPolicy": "読む",
   "acceptTerms": "同意する",
-  "termsAccepted": "ありがとうございます。再び投稿できます。"
+  "termsAccepted": "ありがとうございます。再び投稿できます。",
+  "privateDiscussions": "非公開ディスカッション",
+  "startPrivateDiscussion": "非公開ディスカッションを始める",
+  "privateWith": "{names}と",
+  "addPerson": "相手を追加",
+  "choosePerson": "送る相手を選んでください。",
+  "noPrivateDiscussions": "非公開ディスカッションはまだありません。",
+  "privateOnlyOne": "このフォーラムでは、一度に1人にだけ非公開で書けます。"
 }

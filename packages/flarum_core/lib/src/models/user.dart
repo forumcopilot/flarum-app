@@ -20,6 +20,7 @@ class FlarumUser {
     this.markedAllAsReadAt,
     this.ignored,
     this.canBeIgnored,
+    this.blocksPd = false,
   });
 
   factory FlarumUser.fromResource(JsonApiResource resource) {
@@ -40,6 +41,7 @@ class FlarumUser {
       markedAllAsReadAt: a.date('markedAllAsReadAt'),
       ignored: a.boolean('ignored'),
       canBeIgnored: a.boolean('canBeIgnored'),
+      blocksPd: a.boolean('blocksPd') ?? false,
     );
   }
 
@@ -59,6 +61,7 @@ class FlarumUser {
         markedAllAsReadAt: markedAllAsReadAt,
         ignored: ignored ?? this.ignored,
         canBeIgnored: canBeIgnored,
+        blocksPd: blocksPd,
       );
 
   final String id;
@@ -90,4 +93,7 @@ class FlarumUser {
   /// Whether the reader may ignore this user: not themselves, nor a moderator by default. Null on
   /// forums without fof/ignore-users.
   final bool? canBeIgnored;
+
+  /// The user takes no private discussions (fof/byobu's setting on their account).
+  final bool blocksPd;
 }

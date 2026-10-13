@@ -8,7 +8,7 @@ enum DiscussionView { latest, top, newest, following }
 /// user, loaded a page at a time.
 class DiscussionListModel extends ChangeNotifier {
   DiscussionListModel(this.forum,
-      {this.view = DiscussionView.latest, this.tagSlug, this.author, this.bookmarked = false, this.pageSize = 20});
+      {this.view = DiscussionView.latest, this.tagSlug, this.author, this.bookmarked = false, this.private = false, this.pageSize = 20});
 
   final FlarumForum forum;
   final DiscussionView view;
@@ -19,6 +19,9 @@ class DiscussionListModel extends ChangeNotifier {
 
   /// The reader's bookmarked discussions (fof/bookmarks).
   final bool bookmarked;
+
+  /// The reader's private discussions (fof/byobu).
+  final bool private;
   final int pageSize;
 
   final List<FlarumDiscussion> items = [];
@@ -57,6 +60,7 @@ class DiscussionListModel extends ChangeNotifier {
         tagSlug: tagSlug,
         author: author,
         bookmarked: bookmarked,
+        private: private,
         offset: reset ? 0 : items.length,
         limit: pageSize,
       );

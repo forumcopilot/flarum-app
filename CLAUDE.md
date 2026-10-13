@@ -102,7 +102,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   1.x. Discussion-subject types carry the post to open in `content.postNumber`; `postMentioned`'s
   subject is the reader's own post, and the reply that mentions it is `content.replyNumber`.
   `POST /api/notifications/read` marks all read (204).
-- byobu private discussions are invisible to admins who aren't recipients.
+- byobu private discussions are invisible to admins who aren't recipients (the write recorder
+  deletes its own with `tool/test_forums/delete_discussions.php`). One is started with
+  `relationships.recipientUsers` and no tags; members may have one other person in it and may not
+  change who's in it. Listing: 1.x only the `is:private` gambit, 2.0 `filter[private]`.
 - Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
   source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made
   from its HTML. A second post within the posting throttle (10 s by default) is 429 `too_many_requests`,

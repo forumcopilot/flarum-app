@@ -210,5 +210,12 @@
   "termsIntro": "Accepteer het bijgewerkte beleid van het forum voordat je weer post.",
   "readPolicy": "Lezen",
   "acceptTerms": "Accepteren",
-  "termsAccepted": "Bedankt. Je kunt weer posten."
+  "termsAccepted": "Bedankt. Je kunt weer posten.",
+  "privateDiscussions": "Privédiscussies",
+  "startPrivateDiscussion": "Een privédiscussie starten",
+  "privateWith": "Met {names}",
+  "addPerson": "Iemand toevoegen",
+  "choosePerson": "Kies aan wie je schrijft.",
+  "noPrivateDiscussions": "Nog geen privédiscussies.",
+  "privateOnlyOne": "Op dit forum kun je privé maar naar één persoon tegelijk schrijven."
 }

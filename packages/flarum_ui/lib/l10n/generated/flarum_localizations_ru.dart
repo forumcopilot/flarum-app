@@ -849,4 +849,28 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get termsAccepted => 'Спасибо. Теперь вы снова можете публиковать.';
+
+  @override
+  String get privateDiscussions => 'Личные обсуждения';
+
+  @override
+  String get startPrivateDiscussion => 'Начать личное обсуждение';
+
+  @override
+  String privateWith(String names) {
+    return 'С $names';
+  }
+
+  @override
+  String get addPerson => 'Добавить участника';
+
+  @override
+  String get choosePerson => 'Выберите, кому написать.';
+
+  @override
+  String get noPrivateDiscussions => 'Личных обсуждений пока нет.';
+
+  @override
+  String get privateOnlyOne =>
+      'На этом форуме можно писать лично только одному человеку за раз.';
 }

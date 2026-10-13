@@ -1,0 +1,219 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/66",
+    "query": {
+      "include": "user,lastPostedUser,tags,posts"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "66",
+      "attributes": {
+        "title": "A private word from the app",
+        "slug": "66-a-private-word-from-the-app",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-13T19:42:44+00:00",
+        "lastPostedAt": "2026-10-13T19:42:45+00:00",
+        "lastPostNumber": 3,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": false,
+        "lastReadAt": "2026-10-13T19:42:45+00:00",
+        "lastReadPostNumber": 1,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "isPrivateDiscussion": true,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "tags": {
+          "data": []
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "284"
+            },
+            {
+              "type": "posts",
+              "id": "285"
+            },
+            {
+              "type": "posts",
+              "id": "286"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "posts",
+        "id": "284",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-13T19:42:44+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Only bob and I can read this.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "285",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-13T19:42:44+00:00",
+          "contentType": "recipientsModified",
+          "content": {
+            "new": {
+              "users": [
+                6,
+                7
+              ],
+              "groups": []
+            },
+            "old": {
+              "users": [],
+              "groups": []
+            }
+          },
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "286",
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-13T19:42:45+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Read you, carol.</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      }
+    ]
+  }
+}

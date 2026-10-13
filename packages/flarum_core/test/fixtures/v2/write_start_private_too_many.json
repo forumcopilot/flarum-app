@@ -1,0 +1,42 @@
+{
+  "request": {
+    "match": "data",
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "A private word from the app",
+          "content": "Only bob and I can read this."
+        },
+        "relationships": {
+          "recipientUsers": {
+            "data": [
+              {
+                "type": "users",
+                "id": "3"
+              },
+              {
+                "type": "users",
+                "id": "2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "permission_denied"
+      }
+    ]
+  }
+}

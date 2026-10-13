@@ -9,9 +9,12 @@ import 'package:intl/intl.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
+import '../compose/composers.dart';
 import '../home/post_list.dart';
+import '../private/private_discussions_page.dart';
 import '../safety/ignore_actions.dart';
 import '../safety/ignored_users.dart';
+import '../thread/thread_page.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// A user's profile: who they are, when they joined and were last seen, and
@@ -84,6 +87,16 @@ class _UserPageState extends State<UserPage> {
     }
   }
 
+  /// Whether the reader may start a private discussion with [user] (fof/byobu): not with
+  /// themselves, nor with someone who takes none.
+  bool _canWriteTo(FlarumUser user) =>
+      canStartPrivateDiscussion(_forum) && user.id != _forum.info?.actor?.id && !user.blocksPd;
+
+  Future<void> _writeTo(FlarumUser user) async {
+    final discussion = await composePrivateDiscussion(context, widget.site, to: user);
+    if (discussion != null && mounted) ThreadPage.open(context, widget.site, discussion.id, title: discussion.title);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
@@ -109,17 +122,20 @@ class _UserPageState extends State<UserPage> {
         appBar: AppBar(
           title: Text(user.displayName),
           actions: [
-            if (_ignored.canIgnore(user))
+            if (_ignored.canIgnore(user) || _canWriteTo(user))
               PopupMenuButton<VoidCallback>(
                 tooltip: MaterialLocalizations.of(context).showMenuTooltip,
                 onSelected: (action) => action(),
                 itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: () => toggleIgnore(context, widget.site, user),
-                    child: Text(_ignored.isIgnored(user)
-                        ? l10n.stopIgnoringUser(user.displayName)
-                        : l10n.ignoreUser(user.displayName)),
-                  ),
+                  if (_canWriteTo(user))
+                    PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
+                  if (_ignored.canIgnore(user))
+                    PopupMenuItem(
+                      value: () => toggleIgnore(context, widget.site, user),
+                      child: Text(_ignored.isIgnored(user)
+                          ? l10n.stopIgnoringUser(user.displayName)
+                          : l10n.ignoreUser(user.displayName)),
+                    ),
                 ],
               ),
           ],

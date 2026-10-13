@@ -1231,5 +1231,38 @@
   "termsAccepted": "Thank you. You can post again.",
   "@termsAccepted": {
     "description": "Shown once the policies are accepted"
+  },
+  "privateDiscussions": "Private discussions",
+  "@privateDiscussions": {
+    "description": "Account entry and page title: the reader's private discussions (fof/byobu)"
+  },
+  "startPrivateDiscussion": "Start a private discussion",
+  "@startPrivateDiscussion": {
+    "description": "Button and composer title: a discussion only the people in it can read"
+  },
+  "privateWith": "With {names}",
+  "@privateWith": {
+    "description": "Who a private discussion is with; names is a list of display names",
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "addPerson": "Add someone",
+  "@addPerson": {
+    "description": "Composer button that adds someone to a private discussion"
+  },
+  "choosePerson": "Choose who to write to.",
+  "@choosePerson": {
+    "description": "Composer: a private discussion started with no one in it"
+  },
+  "noPrivateDiscussions": "No private discussions yet.",
+  "@noPrivateDiscussions": {
+    "description": "Empty private discussions page"
+  },
+  "privateOnlyOne": "This forum lets you write privately to one person at a time.",
+  "@privateOnlyOne": {
+    "description": "Composer: the forum lets members write privately to one other person only"
   }
 }

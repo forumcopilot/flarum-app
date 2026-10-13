@@ -210,5 +210,12 @@
   "termsIntro": "Prima di pubblicare di nuovo, accetta le norme aggiornate del forum.",
   "readPolicy": "Leggi",
   "acceptTerms": "Accetta",
-  "termsAccepted": "Grazie. Ora puoi pubblicare di nuovo."
+  "termsAccepted": "Grazie. Ora puoi pubblicare di nuovo.",
+  "privateDiscussions": "Discussioni private",
+  "startPrivateDiscussion": "Avvia una discussione privata",
+  "privateWith": "Con {names}",
+  "addPerson": "Aggiungi qualcuno",
+  "choosePerson": "Scegli a chi scrivere.",
+  "noPrivateDiscussions": "Ancora nessuna discussione privata.",
+  "privateOnlyOne": "Questo forum ti consente di scrivere in privato a una sola persona alla volta."
 }

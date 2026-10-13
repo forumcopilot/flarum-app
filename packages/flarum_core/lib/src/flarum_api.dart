@@ -73,7 +73,7 @@ class FlarumApi {
   /// `mentionedBy…` and flarum/likes' `likes`. A forum without the extension refuses the whole
   /// request (400 invalid_parameter), as the census found on real forums.
   static bool _fromExtension(String include) =>
-      include == 'tags' || include == 'likes' || include.startsWith('mentionedBy');
+      include == 'tags' || include == 'likes' || include.startsWith('mentionedBy') || include == 'recipientUsers';
 
   /// The extension includes this forum refused: left off from then on.
   final _refusedIncludes = <String>{};
@@ -189,6 +189,7 @@ class FlarumApi {
     bool unread = false,
     bool sticky = false,
     bool bookmarked = false,
+    bool private = false,
     String? author,
     DateTime? createdSince,
     String? query,
@@ -207,6 +208,7 @@ class FlarumApi {
       if (unread) 'filter[unread]': '1',
       if (sticky) 'filter[sticky]': '1',
       if (bookmarked) 'filter[bookmarked]': '1',
+      if (private) 'filter[private]': '1',
       if (author != null) 'filter[author]': author,
       if (created != null) 'filter[created]': created,
       if (query != null) 'filter[q]': query,
@@ -214,8 +216,8 @@ class FlarumApi {
     // Once filter[q] is present, 1.x ignores every other filter key: its search
     // takes those conditions as gambits inside q. 2.0 is the reverse: it reads
     // only filter keys and treats gambits in q as search words.
-    // 1.x's bookmarked filter is a gambit only: the key alone lists everything.
-    final gambits = (query != null && filters.length > 1 || bookmarked) && await version() == FlarumVersion.v1;
+    // 1.x's bookmarked and private filters (fof/byobu) are gambits only: the key alone lists everything.
+    final gambits = (query != null && filters.length > 1 || bookmarked || private) && await version() == FlarumVersion.v1;
     if (gambits) {
       filters
         ..clear()
@@ -227,6 +229,7 @@ class FlarumApi {
           if (unread) 'is:unread',
           if (sticky) 'is:sticky',
           if (bookmarked) 'is:bookmarked',
+          if (private) 'is:private',
           if (author != null) 'author:$author',
           if (created != null) 'created:$created',
         ].join(' ');
@@ -238,7 +241,12 @@ class FlarumApi {
       if (sort != null && sort != DiscussionSort.latest) 'sort': sort.param,
       ..._page(offset, limit),
       // 1.x refuses mostRelevantPost.discussion; the post gets its discussion from the row instead.
-      'include': withRelevantPost ? '$_discussionIncludes,mostRelevantPost,mostRelevantPost.user' : _discussionIncludes,
+      'include': [
+        _discussionIncludes,
+        if (withRelevantPost) 'mostRelevantPost,mostRelevantPost.user',
+        // Who each private discussion is with.
+        if (private) 'recipientUsers',
+      ].join(','),
     });
     final discussions = [for (final resource in document.data) FlarumDiscussion.fromResource(resource, document)];
     final excluded = gambits ? const <String>{} : excludeTagSlugs.skip(1).toSet();
@@ -349,6 +357,47 @@ class FlarumApi {
     });
     return FlarumDiscussion.fromResource(document.single, document);
   }
+
+  /// Starts a private discussion (fof/byobu) with the users [recipientIds]; the reader is one of
+  /// its people too. It takes no tags: 2.0's byobu drops them, and 1.x's doesn't ask for any.
+  /// Members may have only one other person in it unless the forum lets them add more
+  /// (`canAddMoreThanTwoUserRecipients`); more is refused with 403.
+  Future<FlarumDiscussion> startPrivateDiscussion(String title, String content, List<String> recipientIds) async {
+    final document = await client.post('/discussions', {
+      'data': {
+        'type': 'discussions',
+        'attributes': {'title': title, 'content': content},
+        'relationships': {'recipientUsers': _users(recipientIds)},
+      },
+    });
+    return FlarumDiscussion.fromResource(document.single, document);
+  }
+
+  /// The people in private discussion [id] (fof/byobu).
+  Future<List<FlarumUser>> recipients(String id) async {
+    final document = await client.get('/discussions/$id', query: {'include': 'recipientUsers'});
+    return [for (final user in document.findAll(document.single.toMany('recipientUsers'))) FlarumUser.fromResource(user)];
+  }
+
+  /// Sets who's in private discussion [id]: the whole list, as [userIds] (fof/byobu).
+  Future<List<FlarumUser>> setRecipients(String id, List<String> userIds) async {
+    final document = await client.patch('/discussions/$id', {
+      'data': {
+        'type': 'discussions',
+        'id': id,
+        // 2.0 rc.8 fails with 500 on an update with only relationships (see setBestAnswer).
+        'attributes': <String, Object?>{},
+        'relationships': {'recipientUsers': _users(userIds)},
+      },
+    });
+    return [for (final user in document.findAll(document.single.toMany('recipientUsers'))) FlarumUser.fromResource(user)];
+  }
+
+  static Map<String, Object> _users(List<String> ids) => {
+        'data': [
+          for (final id in ids) {'type': 'users', 'id': id},
+        ],
+      };
 
   /// Saves [content] as post [id]'s source. Only someone who may edit it (its author, a
   /// moderator) can: others get 403.

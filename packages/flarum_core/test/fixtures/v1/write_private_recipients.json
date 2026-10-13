@@ -1,0 +1,87 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/66",
+    "query": {
+      "include": "recipientUsers"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "66",
+      "attributes": {
+        "title": "A private word from the app",
+        "slug": "66-a-private-word-from-the-app",
+        "commentCount": 1,
+        "participantCount": 1,
+        "createdAt": "2026-10-13T19:42:44+00:00",
+        "lastPostedAt": "2026-10-13T19:42:44+00:00",
+        "lastPostNumber": 1,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": true,
+        "lastReadAt": "2026-10-13T19:42:45+00:00",
+        "lastReadPostNumber": 1,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "isPrivateDiscussion": true,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "recipientUsers": {
+          "data": [
+            {
+              "type": "users",
+              "id": "6"
+            },
+            {
+              "type": "users",
+              "id": "7"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      }
+    ]
+  }
+}

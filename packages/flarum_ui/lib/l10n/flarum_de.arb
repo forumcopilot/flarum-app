@@ -210,5 +210,12 @@
   "termsIntro": "Bevor du wieder schreiben kannst, akzeptiere bitte die aktualisierten Richtlinien des Forums.",
   "readPolicy": "Lesen",
   "acceptTerms": "Akzeptieren",
-  "termsAccepted": "Danke. Du kannst wieder schreiben."
+  "termsAccepted": "Danke. Du kannst wieder schreiben.",
+  "privateDiscussions": "Private Diskussionen",
+  "startPrivateDiscussion": "Private Diskussion starten",
+  "privateWith": "Mit {names}",
+  "addPerson": "Jemanden hinzufügen",
+  "choosePerson": "Wähle aus, an wen du schreibst.",
+  "noPrivateDiscussions": "Noch keine privaten Diskussionen.",
+  "privateOnlyOne": "In diesem Forum kannst du jeweils nur einer Person privat schreiben."
 }

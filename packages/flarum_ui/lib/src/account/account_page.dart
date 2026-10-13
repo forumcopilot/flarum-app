@@ -9,6 +9,7 @@ import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
+import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
 import 'sign_in_page.dart';
 import '../widgets/flarum_avatar.dart';
@@ -93,6 +94,14 @@ class _AccountPageState extends State<AccountPage> {
                 onTap: () => BookmarksPage.open(context, widget.site),
               ),
             ],
+            if (_forum.extensions.byobu)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.mail_outline),
+                title: Text(l10n.privateDiscussions),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => PrivateDiscussionsPage.open(context, widget.site),
+              ),
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.person_off_outlined),

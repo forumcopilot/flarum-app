@@ -210,5 +210,12 @@
   "termsIntro": "Antes de publicar de novo, aceite as políticas atualizadas do fórum.",
   "readPolicy": "Ler",
   "acceptTerms": "Aceitar",
-  "termsAccepted": "Obrigado. Você já pode publicar de novo."
+  "termsAccepted": "Obrigado. Você já pode publicar de novo.",
+  "privateDiscussions": "Discussões privadas",
+  "startPrivateDiscussion": "Iniciar uma discussão privada",
+  "privateWith": "Com {names}",
+  "addPerson": "Adicionar alguém",
+  "choosePerson": "Escolha para quem escrever.",
+  "noPrivateDiscussions": "Nenhuma discussão privada ainda.",
+  "privateOnlyOne": "Este fórum permite escrever em privado para uma pessoa de cada vez."
 }

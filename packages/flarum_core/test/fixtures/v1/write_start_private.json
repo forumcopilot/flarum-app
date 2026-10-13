@@ -1,0 +1,227 @@
+{
+  "request": {
+    "match": "data",
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "A private word from the app",
+          "content": "Only bob and I can read this."
+        },
+        "relationships": {
+          "recipientUsers": {
+            "data": [
+              {
+                "type": "users",
+                "id": "6"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "66",
+      "attributes": {
+        "title": "A private word from the app",
+        "slug": "66-a-private-word-from-the-app",
+        "commentCount": 1,
+        "participantCount": 1,
+        "createdAt": "2026-10-13T19:42:44+00:00",
+        "lastPostedAt": "2026-10-13T19:42:44+00:00",
+        "lastPostNumber": 1,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": true,
+        "lastReadAt": "2026-10-13T19:42:45+00:00",
+        "lastReadPostNumber": 1,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "isPrivateDiscussion": true,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "284"
+            },
+            {
+              "type": "posts",
+              "id": "285"
+            }
+          ]
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "284"
+          }
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "284"
+          }
+        },
+        "tags": {
+          "data": []
+        },
+        "recipientUsers": {
+          "data": [
+            {
+              "type": "users",
+              "id": "6"
+            },
+            {
+              "type": "users",
+              "id": "7"
+            }
+          ]
+        },
+        "recipientGroups": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "posts",
+        "id": "284",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-13T19:42:44+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Only bob and I can read this.</p>",
+          "renderFailed": false,
+          "content": "Only bob and I can read this.",
+          "canEdit": true,
+          "canDelete": false,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "285",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-13T19:42:44+00:00",
+          "contentType": "recipientsModified",
+          "content": {
+            "new": {
+              "users": [
+                6,
+                7
+              ],
+              "groups": []
+            },
+            "old": {
+              "users": [],
+              "groups": []
+            }
+          },
+          "canEdit": true,
+          "canDelete": false,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      }
+    ]
+  }
+}

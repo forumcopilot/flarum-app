@@ -100,11 +100,30 @@ class _ThreadPageState extends State<ThreadPage> {
   }
 
   void _changed() {
-    if (mounted) setState(() {});
+    if (!mounted) return;
+    if ((_model.discussion?.isPrivate ?? false) && !_readingRecipients) _readRecipients();
+    setState(() {});
   }
 
-  /// The discussion's tags head the thread while it starts at its first post.
-  bool get _header => !_model.hasPrevious && (_model.discussion?.tags.isNotEmpty ?? false);
+  /// The head row, while the thread starts at its first post: the discussion's tags, and who a
+  /// private one is with. A private one has it from the start, so the rows don't shift when its
+  /// people arrive.
+  bool get _header =>
+      !_model.hasPrevious && ((_model.discussion?.tags.isNotEmpty ?? false) || (_model.discussion?.isPrivate ?? false));
+
+  /// Who a private discussion is with (fof/byobu), read once it's known to be one.
+  List<FlarumUser>? _recipients;
+  bool _readingRecipients = false;
+
+  Future<void> _readRecipients() async {
+    _readingRecipients = true;
+    try {
+      final recipients = await _forum.api.recipients(widget.discussionId);
+      if (mounted) setState(() => _recipients = recipients);
+    } catch (_) {
+      // The thread reads as well without its people listed.
+    }
+  }
 
   /// Rows before the first post: "Load earlier posts", or the tags header.
   int get _leading => _model.hasPrevious || _header ? 1 : 0;
@@ -402,7 +421,15 @@ class _ThreadPageState extends State<ThreadPage> {
         child: Wrap(
           spacing: DesignTokens.spacingS,
           runSpacing: DesignTokens.spacingXS,
-          children: [for (final tag in tagsInWebOrder(_model.discussion!.tags)) TagLabel(tag: tag)],
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            for (final tag in tagsInWebOrder(_model.discussion!.tags)) TagLabel(tag: tag),
+            if (_recipients case final people? when people.isNotEmpty) ...[
+              Icon(Icons.mail_outline, size: DesignTokens.iconSizeS, color: Theme.of(context).colorScheme.onSurfaceVariant),
+              Text(l10n.privateWith(people.map((user) => user.displayName).join(', ')),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+            ],
+          ],
         ),
       );
     }

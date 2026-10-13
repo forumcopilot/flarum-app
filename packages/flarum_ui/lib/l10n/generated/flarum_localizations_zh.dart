@@ -817,4 +817,27 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get termsAccepted => '谢谢，你现在可以继续发帖了。';
+
+  @override
+  String get privateDiscussions => '私密讨论';
+
+  @override
+  String get startPrivateDiscussion => '发起私密讨论';
+
+  @override
+  String privateWith(String names) {
+    return '与 $names';
+  }
+
+  @override
+  String get addPerson => '添加成员';
+
+  @override
+  String get choosePerson => '请选择要写给谁。';
+
+  @override
+  String get noPrivateDiscussions => '还没有私密讨论。';
+
+  @override
+  String get privateOnlyOne => '此论坛一次只允许你私下写给一个人。';
 }

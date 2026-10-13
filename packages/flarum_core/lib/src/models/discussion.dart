@@ -30,6 +30,8 @@ class FlarumDiscussion {
     this.isApproved = true,
     this.isHidden = false,
     this.isPrivate = false,
+    this.recipients = const [],
+    this.canEditRecipients = false,
     this.hasPoll = false,
     this.hasBestAnswer = false,
     this.bestAnswerPostId,
@@ -70,6 +72,9 @@ class FlarumDiscussion {
       isApproved: a.boolean('isApproved') ?? true,
       isHidden: a.boolean('isHidden') ?? false,
       isPrivate: a.boolean('isPrivateDiscussion') ?? false,
+      recipients: [for (final user in document.findAll(resource.toMany('recipientUsers'))) FlarumUser.fromResource(user)],
+      // 1.x says it for the discussion as a whole; the people in it are what the app changes.
+      canEditRecipients: a.boolean('canEditUserRecipients') ?? false,
       hasPoll: a.boolean('hasPoll') ?? false,
       hasBestAnswer: a.boolean('hasBestAnswer') ?? false,
       // The same attribute holds the answer's post id, on 1.x and 2.0 alike (false when there's none).
@@ -115,6 +120,8 @@ class FlarumDiscussion {
         isApproved: isApproved,
         isHidden: isHidden,
         isPrivate: isPrivate,
+        recipients: recipients,
+        canEditRecipients: canEditRecipients,
         hasPoll: hasPoll,
         hasBestAnswer: bestAnswerPostId == null ? hasBestAnswer : bestAnswerPostId() != null,
         bestAnswerPostId: bestAnswerPostId == null ? this.bestAnswerPostId : bestAnswerPostId(),
@@ -165,6 +172,13 @@ class FlarumDiscussion {
 
   /// A fof/byobu private discussion.
   final bool isPrivate;
+
+  /// The people in a private discussion (fof/byobu), when the response included them.
+  final List<FlarumUser> recipients;
+
+  /// Whether the reader may add people to the private discussion or take them out.
+  final bool canEditRecipients;
+
   final bool hasPoll;
 
   /// fof/best-answer chose an answer.

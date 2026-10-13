@@ -8,7 +8,9 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../tags/tag_label.dart';
 import 'compose_page.dart';
+import '../widgets/flarum_avatar.dart';
 import 'flarum_markup.dart';
+import 'mention_picker_page.dart';
 import 'tag_picker_page.dart';
 
 /// Opens the composer for a reply in [discussion], starting from [initialContent] (a quote, a
@@ -63,6 +65,14 @@ Future<FlarumDiscussion?> composeDiscussion(BuildContext context, SiteContext si
     Navigator.of(context).push(MaterialPageRoute<FlarumDiscussion>(
       fullscreenDialog: true,
       builder: (_) => _NewDiscussionPage(site: site, tag: tag),
+    ));
+
+/// Opens the composer for a private discussion (fof/byobu), with [to] when given. The discussion
+/// once started, or null.
+Future<FlarumDiscussion?> composePrivateDiscussion(BuildContext context, SiteContext site, {FlarumUser? to}) =>
+    Navigator.of(context).push(MaterialPageRoute<FlarumDiscussion>(
+      fullscreenDialog: true,
+      builder: (_) => _NewPrivateDiscussionPage(site: site, to: to),
     ));
 
 /// A reply to [post], as the web's Reply button on a post starts one.
@@ -149,6 +159,71 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
               ],
             )
           : null,
+      onSubmit: _start,
+    );
+  }
+}
+
+/// The private-discussion composer: who it's with, the title and the text. No tags: byobu lets a
+/// private discussion go without.
+class _NewPrivateDiscussionPage extends StatefulWidget {
+  const _NewPrivateDiscussionPage({required this.site, this.to});
+
+  final SiteContext site;
+  final FlarumUser? to;
+
+  @override
+  State<_NewPrivateDiscussionPage> createState() => _NewPrivateDiscussionPageState();
+}
+
+class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
+  late final FlarumForum _forum = FlarumForum.of(widget.site);
+  late final List<FlarumUser> _people = [if (widget.to case final to?) to];
+
+  /// Members may have only one other person in a private discussion, unless the forum lets them
+  /// add more (byobu counts the reader as one of two).
+  bool get _onlyOne => !(_forum.info?.can('canAddMoreThanTwoUserRecipients') ?? false);
+
+  Future<void> _add() async {
+    if (_onlyOne && _people.isNotEmpty) {
+      SnackbarHelper.showInfo(context, flarumL10n(context).privateOnlyOne);
+      return;
+    }
+    final user = await MentionPickerPage.open(context, widget.site);
+    if (user == null || !mounted || user.id == _forum.info?.actor?.id || _people.any((p) => p.id == user.id)) return;
+    setState(() => _people.add(user));
+  }
+
+  Future<FlarumDiscussion> _start(String title, String content) async {
+    if (_people.isEmpty) throw ComposeProblem(flarumL10n(context).choosePerson);
+    return _forum.api.startPrivateDiscussion(title, content, [for (final user in _people) user.id]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    return ComposePage(
+      site: widget.site,
+      title: l10n.startPrivateDiscussion,
+      showTitleField: true,
+      header: Wrap(
+        spacing: DesignTokens.spacingS,
+        runSpacing: DesignTokens.spacingXS,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          for (final user in _people)
+            InputChip(
+              avatar: FlarumAvatar(user: user, radius: 12),
+              label: Text(user.displayName),
+              onDeleted: () => setState(() => _people.remove(user)),
+            ),
+          ActionChip(
+            avatar: const Icon(Icons.person_add_alt, size: 18),
+            label: Text(l10n.addPerson),
+            onPressed: _add,
+          ),
+        ],
+      ),
       onSubmit: _start,
     );
   }

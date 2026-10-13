@@ -819,4 +819,27 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get termsAccepted => '감사합니다. 이제 다시 글을 쓸 수 있습니다.';
+
+  @override
+  String get privateDiscussions => '비공개 토론';
+
+  @override
+  String get startPrivateDiscussion => '비공개 토론 시작';
+
+  @override
+  String privateWith(String names) {
+    return '$names 님과';
+  }
+
+  @override
+  String get addPerson => '사람 추가';
+
+  @override
+  String get choosePerson => '글을 보낼 사람을 선택하세요.';
+
+  @override
+  String get noPrivateDiscussions => '아직 비공개 토론이 없습니다.';
+
+  @override
+  String get privateOnlyOne => '이 포럼에서는 한 번에 한 사람에게만 비공개로 글을 쓸 수 있습니다.';
 }

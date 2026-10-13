@@ -849,4 +849,28 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get termsAccepted => 'Danke. Du kannst wieder schreiben.';
+
+  @override
+  String get privateDiscussions => 'Private Diskussionen';
+
+  @override
+  String get startPrivateDiscussion => 'Private Diskussion starten';
+
+  @override
+  String privateWith(String names) {
+    return 'Mit $names';
+  }
+
+  @override
+  String get addPerson => 'Jemanden hinzufügen';
+
+  @override
+  String get choosePerson => 'Wähle aus, an wen du schreibst.';
+
+  @override
+  String get noPrivateDiscussions => 'Noch keine privaten Diskussionen.';
+
+  @override
+  String get privateOnlyOne =>
+      'In diesem Forum kannst du jeweils nur einer Person privat schreiben.';
 }

@@ -210,5 +210,12 @@
   "termsIntro": "Antes de volver a publicar, acepta las políticas actualizadas del foro.",
   "readPolicy": "Leer",
   "acceptTerms": "Aceptar",
-  "termsAccepted": "Gracias. Ya puedes volver a publicar."
+  "termsAccepted": "Gracias. Ya puedes volver a publicar.",
+  "privateDiscussions": "Discusiones privadas",
+  "startPrivateDiscussion": "Iniciar una discusión privada",
+  "privateWith": "Con {names}",
+  "addPerson": "Añadir a alguien",
+  "choosePerson": "Elige a quién escribir.",
+  "noPrivateDiscussions": "Aún no hay discusiones privadas.",
+  "privateOnlyOne": "Este foro te permite escribir en privado a una sola persona a la vez."
 }

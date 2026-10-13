@@ -6,7 +6,10 @@
 // on, stays as seeded; an admin deletes the discussion at the end. The texts are WriteSamples'.
 //
 //   FLARUM_TEST_PASSWORD=… FLARUM_ADMIN_USER=admin FLARUM_ADMIN_PASSWORD=… \
-//     dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
+//     FLARUM_DIR=/var/www/flarumapp/flarum1 dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
+//
+// fof/byobu hides a private discussion even from an admin who isn't in it, so carol's is deleted on
+// the server, by tool/test_forums/delete_discussions.php in FLARUM_DIR (or the command is printed).
 
 import 'dart:convert';
 import 'dart:io';
@@ -36,6 +39,9 @@ Future<void> main(List<String> args) async {
   final carolId = (await carol.logIn('carol', password)).userId;
   final bobId = (await bob.logIn('bob', password)).userId;
   await admin.logIn(adminUser, adminPassword);
+
+  /// Private discussions to delete on the server at the end (fof/byobu hides them from the admin).
+  final privateIds = <String>[];
 
   /// Records the response [call] gets as fixture [name], refusals included; returns its value.
   Future<T?> record<T>(String name, Future<T> Function() call) async {
@@ -167,11 +173,32 @@ Future<void> main(List<String> args) async {
     } finally {
       await admin.client.delete('$policies/$policy');
     }
+
+    // fof/byobu: carol starts a private discussion with bob (a member may have one other person in
+    // one, not two), and he replies; she may not change who's in it.
+    final aliceId = (await carol.userBySlug('alice')).id;
+    recorder.matchData.addAll(['write_start_private_too_many', 'write_start_private']);
+    await record('write_start_private_too_many',
+        () => carol.startPrivateDiscussion(WriteSamples.privateTitle, WriteSamples.privateContent, [bobId, aliceId]));
+    final private = await record('write_start_private',
+        () => carol.startPrivateDiscussion(WriteSamples.privateTitle, WriteSamples.privateContent, [bobId]));
+    if (private != null) {
+      privateIds.add(private.id);
+      await record('write_private_list', () => carol.discussions(private: true));
+      await record('write_private_recipients', () => carol.recipients(private.id));
+      await record('write_private_reply', () => bob.reply(private.id, WriteSamples.privateReply));
+      await record('write_private_with_post_ids', () => carol.discussion(private.id, withPostIds: true));
+      // The SDK's conversation reads it without the post ids (on 2.0 the same request).
+      await record('write_private_discussion', () => carol.discussion(private.id));
+      await record('write_private_posts', () => carol.posts(private.id));
+      await record('write_private_set_recipients', () => carol.setRecipients(private.id, [carolId]));
+    }
   } finally {
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {
       await api.logOut();
     }
+    if (privateIds.isNotEmpty) await deletePrivate(privateIds);
   }
 
   final dir = Directory('test/fixtures/${version.name}')..createSync(recursive: true);
@@ -180,4 +207,19 @@ Future<void> main(List<String> args) async {
     File('${dir.path}/$name.json').writeAsStringSync('${encoder.convert(fixture)}\n');
   }
   stdout.writeln('Recorded ${recorder.recorded.length} write fixtures into ${dir.path}');
+}
+
+/// Deletes the private discussions [ids] with tool/test_forums/delete_discussions.php, in the forum
+/// at FLARUM_DIR; without it, says how.
+Future<void> deletePrivate(List<String> ids) async {
+  final dir = Platform.environment['FLARUM_DIR'];
+  final script = File('../../tool/test_forums/delete_discussions.php').absolute.path;
+  final command = ['sudo', '-u', 'www-data', 'php', script, dir ?? '<the forum\'s directory>', ...ids];
+  if (dir == null) {
+    stderr.writeln('Private discussions to delete: ${command.join(' ')}');
+    return;
+  }
+  final result = await Process.run(command.first, command.skip(1).toList());
+  stdout.write(result.stdout);
+  if (result.exitCode != 0) stderr.writeln('Deleting ${ids.join(', ')} failed: ${result.stderr}');
 }

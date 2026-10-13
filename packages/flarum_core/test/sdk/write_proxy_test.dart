@@ -142,6 +142,30 @@ void main() {
         expect([for (final u in ignored.list) u.username], ['bob']);
       });
 
+      test('private discussions as conversations: start one, list them, reply and read it', () async {
+        final proxy = FlarumPrivateConversationProxy(testSite());
+        final started = await proxy.newConversationAsync(['bob'], WriteSamples.privateTitle, WriteSamples.privateContent);
+        expect(started.result, isTrue, reason: started.resultText);
+
+        final list = await proxy.getConversationsAsync(0, 19);
+        expect(list.result, isTrue, reason: list.resultText);
+        final summary = list.list.single;
+        expect((summary.convId, summary.subject), (started.convId, WriteSamples.privateTitle));
+        expect({for (final person in summary.participants!) person.username}, {'bob', 'carol'});
+
+        final reply = await proxy.replyConversationAsync(started.convId, WriteSamples.privateReply, null, null);
+        expect(reply.result, isTrue, reason: reply.resultText);
+
+        final conversation = await proxy.getConversationAsync(started.convId, 0, 19, true);
+        expect(conversation.result, isTrue, reason: conversation.resultText);
+        expect([for (final message in conversation.messages) message.username], ['carol', 'bob']);
+        expect(conversation.participants, hasLength(2));
+        expect(conversation.canInvite, isFalse, reason: 'members may not change who\'s in it');
+
+        final invite = await proxy.inviteParticipantAsync(['bob'], started.convId, null);
+        expect(invite.result, isFalse);
+      });
+
       test('replyPostAsync passes the throttle\'s refusal on', () async {
         final reply = await FlarumPostProxy(testSite()).replyPostAsync('', '1', '', WriteSamples.throttledReply, null, null, true);
         expect(reply.result, isFalse);

@@ -210,5 +210,12 @@
   "termsIntro": "继续发帖前，请接受论坛更新后的政策。",
   "readPolicy": "阅读",
   "acceptTerms": "接受",
-  "termsAccepted": "谢谢，你现在可以继续发帖了。"
+  "termsAccepted": "谢谢，你现在可以继续发帖了。",
+  "privateDiscussions": "私密讨论",
+  "startPrivateDiscussion": "发起私密讨论",
+  "privateWith": "与 {names}",
+  "addPerson": "添加成员",
+  "choosePerson": "请选择要写给谁。",
+  "noPrivateDiscussions": "还没有私密讨论。",
+  "privateOnlyOne": "此论坛一次只允许你私下写给一个人。"
 }

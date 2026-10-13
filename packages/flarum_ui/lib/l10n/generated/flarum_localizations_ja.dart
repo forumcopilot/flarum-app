@@ -819,4 +819,27 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get termsAccepted => 'ありがとうございます。再び投稿できます。';
+
+  @override
+  String get privateDiscussions => '非公開ディスカッション';
+
+  @override
+  String get startPrivateDiscussion => '非公開ディスカッションを始める';
+
+  @override
+  String privateWith(String names) {
+    return '$namesと';
+  }
+
+  @override
+  String get addPerson => '相手を追加';
+
+  @override
+  String get choosePerson => '送る相手を選んでください。';
+
+  @override
+  String get noPrivateDiscussions => '非公開ディスカッションはまだありません。';
+
+  @override
+  String get privateOnlyOne => 'このフォーラムでは、一度に1人にだけ非公開で書けます。';
 }

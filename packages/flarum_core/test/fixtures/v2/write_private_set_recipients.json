@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/discussions/74",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "id": "74",
+        "attributes": {},
+        "relationships": {
+          "recipientUsers": {
+            "data": [
+              {
+                "type": "users",
+                "id": "4"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "permission_denied"
+      }
+    ]
+  }
+}

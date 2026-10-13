@@ -13,10 +13,13 @@ import 'discussion_tile.dart';
 /// and a discussion opens at the first post the reader hasn't read. Its row
 /// is refreshed on the way back.
 class DiscussionListView extends StatelessWidget {
-  const DiscussionListView({super.key, required this.site, required this.list});
+  const DiscussionListView({super.key, required this.site, required this.list, this.emptyMessage});
 
   final SiteContext site;
   final DiscussionListModel list;
+
+  /// What an empty list says, when "No discussions" isn't it.
+  final String? emptyMessage;
 
   Future<void> _open(BuildContext context, FlarumDiscussion discussion) async {
     await ThreadPage.open(context, site, discussion.id, near: list.openAt(discussion), title: discussion.title);
@@ -39,7 +42,7 @@ class DiscussionListView extends StatelessWidget {
         );
       }
       if (list.loading) return const TopicListSkeleton();
-      return EmptyStateView.scrollable(icon: Icons.forum_outlined, message: l10n.noDiscussions);
+      return EmptyStateView.scrollable(icon: Icons.forum_outlined, message: emptyMessage ?? l10n.noDiscussions);
     }
     return NotificationListener<ScrollNotification>(
       onNotification: (n) {

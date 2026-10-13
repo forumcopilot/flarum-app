@@ -70,11 +70,17 @@ seeded) in a discussion an admin deletes afterwards:
 
 ```bash
 FLARUM_TEST_PASSWORD=… FLARUM_ADMIN_USER=admin FLARUM_ADMIN_PASSWORD=… \
-  dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
+  FLARUM_DIR=/var/www/flarumapp/flarum1 dart run tool/record_write_fixtures.dart http://127.0.0.1:8081
 ```
+
+It also adds a fof/terms policy for a few seconds (deleted after), and carol's private discussion
+with bob, which fof/byobu hides even from the admin: `FLARUM_DIR` lets the recorder delete it on the
+server (`sudo -u www-data php tool/test_forums/delete_discussions.php <dir> <id>…`); without it the
+command is printed.
 
 A write fixture is matched by its request's attributes (the texts in `WriteSamples`) as well as
 its method and path, so a reply that worked and one the throttle refused can both be replayed.
+Fixtures recorded with a `state` (`ignoring`, `terms`) are served only to tests that ask for it.
 
 ## CAPTCHA
 

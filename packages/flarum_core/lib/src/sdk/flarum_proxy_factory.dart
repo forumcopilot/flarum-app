@@ -6,6 +6,7 @@ import 'flarum_attachment_proxy.dart';
 import 'flarum_bookmark_proxy.dart';
 import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
+import 'flarum_private_conversation_proxy.dart';
 import 'flarum_post_proxy.dart';
 import 'flarum_search_proxy.dart';
 import 'flarum_social_proxy.dart';
@@ -46,7 +47,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCSocialProxy createSocialProxy(SiteContext context) => FlarumSocialProxy(context);
   @override
-  IFCPrivateConversationProxy createPrivateConversationProxy(SiteContext context) => _notYet('private conversation');
+  IFCPrivateConversationProxy createPrivateConversationProxy(SiteContext context) => FlarumPrivateConversationProxy(context);
   @override
   IFCPrivateMessageProxy createPrivateMessageProxy(SiteContext context) => _notYet('private message');
   @override

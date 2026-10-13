@@ -1384,6 +1384,48 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Thank you. You can post again.'**
   String get termsAccepted;
+
+  /// Account entry and page title: the reader's private discussions (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'Private discussions'**
+  String get privateDiscussions;
+
+  /// Button and composer title: a discussion only the people in it can read
+  ///
+  /// In en, this message translates to:
+  /// **'Start a private discussion'**
+  String get startPrivateDiscussion;
+
+  /// Who a private discussion is with; names is a list of display names
+  ///
+  /// In en, this message translates to:
+  /// **'With {names}'**
+  String privateWith(String names);
+
+  /// Composer button that adds someone to a private discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Add someone'**
+  String get addPerson;
+
+  /// Composer: a private discussion started with no one in it
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who to write to.'**
+  String get choosePerson;
+
+  /// Empty private discussions page
+  ///
+  /// In en, this message translates to:
+  /// **'No private discussions yet.'**
+  String get noPrivateDiscussions;
+
+  /// Composer: the forum lets members write privately to one other person only
+  ///
+  /// In en, this message translates to:
+  /// **'This forum lets you write privately to one person at a time.'**
+  String get privateOnlyOne;
 }
 
 class _FlarumLocalizationsDelegate

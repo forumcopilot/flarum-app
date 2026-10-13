@@ -320,7 +320,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:20:20+00:00",
+          "lastSeenAt": "2026-10-13T19:42:53+00:00",
           "markedAllAsReadAt": "2026-10-11T05:47:30+00:00",
           "unreadNotificationCount": 0,
           "newNotificationCount": 0,
@@ -772,7 +772,7 @@
           "position": 9,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-13T19:20:17+00:00",
+          "lastPostedAt": "2026-10-13T19:43:09+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -783,7 +783,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "67"
+              "id": "73"
             }
           },
           "parent": {
@@ -1033,7 +1033,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T19:18:53+00:00",
+          "lastSeenAt": "2026-10-13T19:42:54+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

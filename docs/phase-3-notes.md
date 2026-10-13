@@ -97,6 +97,18 @@ messages.
   `POST /api/fof/terms/policies/{id}/accept` on 1.x and `/api/fof-terms-policies/{id}/accept` on 2.0;
   1.x sends a policy's columns (`update_message`), 2.0 camelCase. A post meanwhile is refused as a
   guest's would be (403), after the posting throttle (429).
+- **Private discussions (fof/byobu):** Account has Private discussions (1.x lists them only by the
+  `is:private` gambit, 2.0 by `filter[private]`), with Start a private discussion; a profile's menu
+  starts one with that person (not with someone whose `blocksPd` is set). The composer picks the
+  people; a member may have only one other person in one (byobu counts the reader:
+  `canAddMoreThanTwoUserRecipients`), so a second asks for a permission they lack. It takes no tags
+  (2.0's byobu drops them). The thread names who it's with, from `include=recipientUsers` read once
+  it's known to be private (the thread's own request stays as it was, so its fixtures do too).
+  Members may not change who's in one (`canEditUserRecipients` false; a PATCH is 403), so the app
+  doesn't offer it yet. The SDK's conversation proxy sits on the same calls.
+- **Cleaning up after byobu:** byobu hides a private discussion even from an admin who isn't in it,
+  so the API can't delete the recorder's. `tool/test_forums/delete_discussions.php` deletes them on
+  the server through Flarum's models; the recorder runs it when given `FLARUM_DIR`.
 - **Tests:** the write recorder has carol flag bob's answer (and once without a reason, 422) and
   ignore him (and herself, 403). The admin then adds a policy for as long as it takes carol to be
   refused a reply and accept it, and deletes it. The fixtures recorded while she ignores him carry a state,

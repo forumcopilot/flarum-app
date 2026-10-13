@@ -20,6 +20,11 @@ abstract final class WriteSamples {
   static const policyUpdate = 'Recorded by the app tests.';
   static const termsReply = 'Posted before accepting the terms.';
 
+  /// carol's private discussion with bob (fof/byobu), and his reply.
+  static const privateTitle = 'A private word from the app';
+  static const privateContent = 'Only bob and I can read this.';
+  static const privateReply = 'Read you, carol.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

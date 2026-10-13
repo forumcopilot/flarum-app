@@ -616,4 +616,70 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get editLoadFailed => '編集のためにこの投稿を読み込めませんでした。';
+
+  @override
+  String get like => 'いいね';
+
+  @override
+  String get unlike => 'いいねを取り消す';
+
+  @override
+  String get react => 'リアクション';
+
+  @override
+  String get reactions => 'リアクション';
+
+  @override
+  String get bookmark => 'ブックマーク';
+
+  @override
+  String get removeBookmark => 'ブックマークを外す';
+
+  @override
+  String get bookmarks => 'ブックマーク';
+
+  @override
+  String get noBookmarks => 'まだブックマークはありません。';
+
+  @override
+  String get chooseBestAnswer => 'ベストアンサーに選ぶ';
+
+  @override
+  String get removeBestAnswer => 'ベストアンサーを取り消す';
+
+  @override
+  String get notificationSettings => 'このディスカッションの通知';
+
+  @override
+  String get notFollowing => 'フォローしていない';
+
+  @override
+  String get notFollowingHint => '@メンションされたときだけ通知します。';
+
+  @override
+  String get followingHint => 'すべての返信を通知します。';
+
+  @override
+  String get ignoring => '無視';
+
+  @override
+  String get ignoringHint => '通知せず、一覧からも非表示にします。';
+
+  @override
+  String get tagFollowingHint => '新しいディスカッションを通知します。';
+
+  @override
+  String get lurking => '見守り';
+
+  @override
+  String get lurkingHint => '新しいディスカッションとすべての返信を通知します。';
+
+  @override
+  String get tagIgnoringHint => 'ここのディスカッションは通知しません。';
+
+  @override
+  String get hidden => '非表示';
+
+  @override
+  String get hiddenHint => 'このタグのディスカッションを一覧から非表示にします。';
 }

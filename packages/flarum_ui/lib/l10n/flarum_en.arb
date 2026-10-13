@@ -925,5 +925,93 @@
   "editLoadFailed": "Couldn't load this post for editing.",
   "@editLoadFailed": {
     "description": "The post's source couldn't be loaded for editing"
+  },
+  "like": "Like",
+  "@like": {
+    "description": "Button under a post: like it (flarum/likes)"
+  },
+  "unlike": "Unlike",
+  "@unlike": {
+    "description": "Tooltip of the like button when the reader already likes the post"
+  },
+  "react": "React",
+  "@react": {
+    "description": "Button under a post: choose a reaction (fof/reactions)"
+  },
+  "reactions": "Reactions",
+  "@reactions": {
+    "description": "Title of the sheet to choose a reaction"
+  },
+  "bookmark": "Bookmark",
+  "@bookmark": {
+    "description": "Post or discussion menu: bookmark it (fof/bookmarks)"
+  },
+  "removeBookmark": "Remove bookmark",
+  "@removeBookmark": {
+    "description": "Post or discussion menu: take the bookmark off"
+  },
+  "bookmarks": "Bookmarks",
+  "@bookmarks": {
+    "description": "The reader's bookmarks: an account tab entry and its page's title"
+  },
+  "noBookmarks": "No bookmarks yet.",
+  "@noBookmarks": {
+    "description": "Bookmarks page with nothing bookmarked"
+  },
+  "chooseBestAnswer": "Choose as best answer",
+  "@chooseBestAnswer": {
+    "description": "Post menu for the one who asked (fof/best-answer)"
+  },
+  "removeBestAnswer": "Remove best answer",
+  "@removeBestAnswer": {
+    "description": "Post menu on the chosen answer: un-choose it"
+  },
+  "notificationSettings": "Notifications for this discussion",
+  "@notificationSettings": {
+    "description": "Tooltip of the thread's follow menu"
+  },
+  "notFollowing": "Not following",
+  "@notFollowing": {
+    "description": "Follow menu: the reader's default for a discussion or tag"
+  },
+  "notFollowingHint": "Be notified only when @mentioned.",
+  "@notFollowingHint": {
+    "description": "Under Not following in a discussion's follow menu"
+  },
+  "followingHint": "Be notified of all replies.",
+  "@followingHint": {
+    "description": "Under Following in a discussion's follow menu"
+  },
+  "ignoring": "Ignoring",
+  "@ignoring": {
+    "description": "Follow menu: ignore the discussion or tag"
+  },
+  "ignoringHint": "Never be notified, and hide it from the discussion lists.",
+  "@ignoringHint": {
+    "description": "Under Ignoring in a discussion's follow menu"
+  },
+  "tagFollowingHint": "Be notified of new discussions.",
+  "@tagFollowingHint": {
+    "description": "Under Following in a tag's follow menu (fof/follow-tags)"
+  },
+  "lurking": "Lurking",
+  "@lurking": {
+    "description": "Tag follow menu: told of new discussions and every reply"
+  },
+  "lurkingHint": "Be notified of new discussions and every reply.",
+  "@lurkingHint": {
+    "description": "Under Lurking in a tag's follow menu"
+  },
+  "tagIgnoringHint": "Never be notified of discussions here.",
+  "@tagIgnoringHint": {
+    "description": "Under Ignoring in a tag's follow menu"
+  },
+  "hidden": "Hidden",
+  "@hidden": {
+    "description": "Tag follow menu: hide the tag's discussions"
+  },
+  "hiddenHint": "Hide this tag's discussions from the discussion lists.",
+  "@hiddenHint": {
+    "description": "Under Hidden in a tag's follow menu"
   }
 }

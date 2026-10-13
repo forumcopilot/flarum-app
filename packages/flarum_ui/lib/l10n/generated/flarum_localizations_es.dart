@@ -634,4 +634,74 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'No se pudo cargar esta publicación para editarla.';
+
+  @override
+  String get like => 'Me gusta';
+
+  @override
+  String get unlike => 'Ya no me gusta';
+
+  @override
+  String get react => 'Reaccionar';
+
+  @override
+  String get reactions => 'Reacciones';
+
+  @override
+  String get bookmark => 'Guardar';
+
+  @override
+  String get removeBookmark => 'Quitar de guardados';
+
+  @override
+  String get bookmarks => 'Guardados';
+
+  @override
+  String get noBookmarks => 'Todavía no hay guardados.';
+
+  @override
+  String get chooseBestAnswer => 'Elegir como mejor respuesta';
+
+  @override
+  String get removeBestAnswer => 'Quitar mejor respuesta';
+
+  @override
+  String get notificationSettings => 'Notificaciones de esta discusión';
+
+  @override
+  String get notFollowing => 'Sin seguir';
+
+  @override
+  String get notFollowingHint => 'Recibir avisos solo cuando te mencionen.';
+
+  @override
+  String get followingHint => 'Recibir avisos de todas las respuestas.';
+
+  @override
+  String get ignoring => 'Ignorando';
+
+  @override
+  String get ignoringHint =>
+      'No recibir avisos nunca y ocultarla de las listas.';
+
+  @override
+  String get tagFollowingHint => 'Recibir avisos de discusiones nuevas.';
+
+  @override
+  String get lurking => 'Observando';
+
+  @override
+  String get lurkingHint =>
+      'Recibir avisos de discusiones nuevas y de cada respuesta.';
+
+  @override
+  String get tagIgnoringHint =>
+      'No recibir avisos nunca de las discusiones de aquí.';
+
+  @override
+  String get hidden => 'Oculta';
+
+  @override
+  String get hiddenHint =>
+      'Ocultar las discusiones de esta etiqueta de las listas.';
 }

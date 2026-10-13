@@ -634,4 +634,71 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Não foi possível carregar esta publicação para editar.';
+
+  @override
+  String get like => 'Curtir';
+
+  @override
+  String get unlike => 'Descurtir';
+
+  @override
+  String get react => 'Reagir';
+
+  @override
+  String get reactions => 'Reações';
+
+  @override
+  String get bookmark => 'Salvar';
+
+  @override
+  String get removeBookmark => 'Remover dos salvos';
+
+  @override
+  String get bookmarks => 'Salvos';
+
+  @override
+  String get noBookmarks => 'Nenhum item salvo ainda.';
+
+  @override
+  String get chooseBestAnswer => 'Escolher como melhor resposta';
+
+  @override
+  String get removeBestAnswer => 'Remover melhor resposta';
+
+  @override
+  String get notificationSettings => 'Notificações desta discussão';
+
+  @override
+  String get notFollowing => 'Sem seguir';
+
+  @override
+  String get notFollowingHint => 'Ser notificado só quando for @mencionado.';
+
+  @override
+  String get followingHint => 'Ser notificado de todas as respostas.';
+
+  @override
+  String get ignoring => 'Ignorando';
+
+  @override
+  String get ignoringHint => 'Nunca ser notificado e ocultá-la das listas.';
+
+  @override
+  String get tagFollowingHint => 'Ser notificado de novas discussões.';
+
+  @override
+  String get lurking => 'Acompanhando';
+
+  @override
+  String get lurkingHint =>
+      'Ser notificado de novas discussões e de cada resposta.';
+
+  @override
+  String get tagIgnoringHint => 'Nunca ser notificado das discussões daqui.';
+
+  @override
+  String get hidden => 'Oculta';
+
+  @override
+  String get hiddenHint => 'Ocultar as discussões desta tag das listas.';
 }

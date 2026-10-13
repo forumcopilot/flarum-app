@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
-import '../thread/thread_page.dart';
+import '../home/post_list.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// A user's profile: who they are, when they joined and were last seen, and
@@ -39,7 +39,7 @@ class _UserPageState extends State<UserPage> {
   Object? _error;
 
   // Made once the user is found, from their username.
-  _UserPostsModel? _posts;
+  PostListModel? _posts;
   DiscussionListModel? _discussions;
 
   @override
@@ -70,7 +70,7 @@ class _UserPageState extends State<UserPage> {
       if (!mounted) return;
       setState(() {
         _user = user;
-        _posts ??= _UserPostsModel(_forum, author)..addListener(_changed);
+        _posts ??= PostListModel((offset) => _forum.api.userPosts(author, offset: offset))..addListener(_changed);
         _discussions ??= DiscussionListModel(_forum, author: author)..addListener(_changed);
       });
       _posts!.refresh();
@@ -113,7 +113,7 @@ class _UserPageState extends State<UserPage> {
           ],
           body: TabBarView(
             children: [
-              _PostsList(site: widget.site, model: _posts!),
+              PostList(site: widget.site, model: _posts!, emptyMessage: flarumL10n(context).noPostsYet, failedMessage: flarumL10n(context).userLoadFailed),
               DiscussionListView(site: widget.site, list: _discussions!),
             ],
           ),
@@ -166,100 +166,6 @@ class _UserHeader extends StatelessWidget {
 }
 
 /// A user's comments, newest first, a page at a time.
-class _UserPostsModel extends ChangeNotifier {
-  _UserPostsModel(this.forum, this.username);
-
-  final FlarumForum forum;
-  final String username;
-  final List<FlarumPost> items = [];
-  bool hasMore = true;
-  bool loading = false;
-  Object? error;
-  bool _disposed = false;
-
-  Future<void> refresh() => _load(reset: true);
-
-  Future<void> loadMore() async {
-    if (loading || !hasMore || error != null) return;
-    await _load(reset: false);
-  }
-
-  Future<void> _load({required bool reset}) async {
-    loading = true;
-    if (reset) error = null;
-    _notify();
-    try {
-      final page = await forum.api.userPosts(username, offset: reset ? 0 : items.length);
-      if (reset) items.clear();
-      items.addAll(page.items);
-      hasMore = page.hasMore;
-      error = null;
-    } catch (e) {
-      error = e;
-    } finally {
-      loading = false;
-      _notify();
-    }
-  }
-
-  void _notify() {
-    if (!_disposed) notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    _disposed = true;
-    super.dispose();
-  }
-}
-
-class _PostsList extends StatelessWidget {
-  const _PostsList({required this.site, required this.model});
-
-  final SiteContext site;
-  final _UserPostsModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = flarumL10n(context);
-    final theme = Theme.of(context);
-    if (model.items.isEmpty) {
-      if (model.error != null) {
-        return EmptyStateView.error(
-            message: l10n.userLoadFailed, hint: describeFlarumError(model.error!), onRetry: model.refresh);
-      }
-      if (model.loading) return const Center(child: CircularProgressIndicator());
-      return EmptyStateView(icon: Icons.chat_bubble_outline, message: l10n.noPostsYet);
-    }
-    return NotificationListener<ScrollNotification>(
-      onNotification: (n) {
-        if (n.metrics.extentAfter < 400) model.loadMore();
-        return false;
-      },
-      child: ListView.separated(
-        itemCount: model.items.length,
-        separatorBuilder: (_, __) => const Divider(height: 1),
-        itemBuilder: (context, i) {
-          final post = model.items[i];
-          final created = post.createdAt;
-          final discussion = post.discussionId;
-          return ListTile(
-            title: Text(post.discussionTitle ?? l10n.aDiscussion, maxLines: 1, overflow: TextOverflow.ellipsis),
-            subtitle: Text(plainText(post.contentHtml ?? ''), maxLines: 3, overflow: TextOverflow.ellipsis),
-            trailing: created == null
-                ? null
-                : Text(formatTimeAgo(created.toLocal(), context),
-                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-            onTap: discussion == null
-                ? null
-                : () => ThreadPage.open(context, site, discussion, near: post.number, title: post.discussionTitle),
-          );
-        },
-      ),
-    );
-  }
-}
-
 /// The profile's tabs, kept under the app bar once the header scrolls away.
 class _PinnedTabs extends SliverPersistentHeaderDelegate {
   _PinnedTabs(this.tabs);

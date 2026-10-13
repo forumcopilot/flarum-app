@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
+import 'package:forum_kit/utils/emoji_shortcodes.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -27,7 +28,13 @@ class PostTile extends StatelessWidget {
       this.onGoToBestAnswer,
       this.onReply,
       this.onQuote,
-      this.onEdit});
+      this.onEdit,
+      this.readerId,
+      this.reactions = const [],
+      this.onLike,
+      this.onReact,
+      this.onBookmark,
+      this.onChooseBestAnswer});
 
   final SiteContext site;
   final FlarumPost post;
@@ -52,6 +59,19 @@ class PostTile extends StatelessWidget {
   final VoidCallback? onReply;
   final VoidCallback? onQuote;
   final VoidCallback? onEdit;
+
+  /// The signed-in reader's id: whether they liked the post.
+  final String? readerId;
+
+  /// The reactions the forum offers (fof/reactions), for the picker and the post's chips.
+  final List<FlarumReaction> reactions;
+
+  /// Like or unlike; react (or take a reaction back); bookmark; choose or remove as the best
+  /// answer. Each shows only when given.
+  final VoidCallback? onLike;
+  final void Function(FlarumReaction reaction)? onReact;
+  final VoidCallback? onBookmark;
+  final VoidCallback? onChooseBestAnswer;
 
   @override
   Widget build(BuildContext context) =>
@@ -100,7 +120,8 @@ class PostTile extends StatelessWidget {
                   ],
                 ),
               ),
-              if (onReply != null || onQuote != null || onEdit != null) _menu(context),
+              if (onReply != null || onQuote != null || onEdit != null || onBookmark != null || onChooseBestAnswer != null)
+                _menu(context),
             ],
           ),
           const SizedBox(height: DesignTokens.spacingM),
@@ -128,11 +149,7 @@ class PostTile extends StatelessWidget {
                 label: Text(l10n.goToBestAnswer),
               ),
             ),
-          if (post.likesCount > 0)
-            Padding(
-              padding: const EdgeInsets.only(top: DesignTokens.spacingS),
-              child: _Count(icon: Icons.favorite_border, label: l10n.summaryLikeCount(post.likesCount)),
-            ),
+          _footer(context),
           if (post.mentionedByCount > 0)
             InkWell(
               onTap: post.mentionedBy.isEmpty ? null : () => _showReplies(context),
@@ -151,6 +168,7 @@ extension on PostTile {
   /// Reply, Quote and Edit, as the web offers them on a post.
   Widget _menu(BuildContext context) {
     final kit = kitL10n(context);
+    final l10n = flarumL10n(context);
     return PopupMenuButton<VoidCallback>(
       icon: const Icon(Icons.more_vert),
       tooltip: MaterialLocalizations.of(context).showMenuTooltip,
@@ -159,10 +177,113 @@ extension on PostTile {
         if (onReply case final reply?) PopupMenuItem(value: reply, child: _MenuRow(Icons.reply, kit.reply)),
         if (onQuote case final quote?) PopupMenuItem(value: quote, child: _MenuRow(Icons.format_quote, kit.quote)),
         if (onEdit case final edit?) PopupMenuItem(value: edit, child: _MenuRow(Icons.edit_outlined, kit.edit)),
+        if (onBookmark case final bookmark?)
+          PopupMenuItem(
+            value: bookmark,
+            child: post.bookmarked
+                ? _MenuRow(Icons.bookmark_remove_outlined, l10n.removeBookmark)
+                : _MenuRow(Icons.bookmark_add_outlined, l10n.bookmark),
+          ),
+        if (onChooseBestAnswer case final choose?)
+          PopupMenuItem(
+            value: choose,
+            child: isBestAnswer
+                ? _MenuRow(Icons.highlight_off, l10n.removeBestAnswer)
+                : _MenuRow(Icons.check_circle_outline, l10n.chooseBestAnswer),
+          ),
       ],
     );
   }
+
+  /// Like, the post's reactions and React, as the web shows them under a post.
+  Widget _footer(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final liked = post.isLikedBy(readerId);
+    final shown = [for (final r in reactions) if ((post.reactionCounts[r.id] ?? 0) > 0) r];
+    final like = onLike != null || post.likesCount > 0;
+    final react = onReact != null && reactions.isNotEmpty;
+    if (!like && shown.isEmpty && !react) return const SizedBox.shrink();
+    final muted = Theme.of(context).colorScheme.onSurfaceVariant;
+    return Padding(
+      padding: const EdgeInsets.only(top: DesignTokens.spacingS),
+      child: Wrap(
+        spacing: DesignTokens.spacingS,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          if (like)
+            TextButton.icon(
+              onPressed: onLike,
+              icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
+                  color: liked ? ForumColors.of(context).love : muted, size: 20),
+              label: Text(post.likesCount > 0 ? '${post.likesCount}' : l10n.like),
+              style: TextButton.styleFrom(foregroundColor: muted, visualDensity: VisualDensity.compact),
+            ),
+          for (final reaction in shown)
+            ChoiceChip(
+              label: Text('${reactionGlyph(reaction)} ${post.reactionCounts[reaction.id]}'),
+              selected: post.userReactionId == reaction.id,
+              onSelected: onReact == null ? null : (_) => onReact!(reaction),
+              visualDensity: VisualDensity.compact,
+              showCheckmark: false,
+            ),
+          if (react)
+            IconButton(
+              icon: Icon(Icons.add_reaction_outlined, color: muted, size: 20),
+              tooltip: l10n.react,
+              visualDensity: VisualDensity.compact,
+              onPressed: () => _pickReaction(context),
+            ),
+        ],
+      ),
+    );
+  }
+
+  /// The forum's reactions in a sheet; the chosen one goes to [onReact].
+  void _pickReaction(BuildContext context) {
+    final l10n = flarumL10n(context);
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheet) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+              DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingL),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.reactions, style: Theme.of(sheet).textTheme.titleMedium),
+              const SizedBox(height: DesignTokens.spacingM),
+              Wrap(
+                spacing: DesignTokens.spacingS,
+                runSpacing: DesignTokens.spacingS,
+                children: [
+                  for (final reaction in reactions)
+                    Tooltip(
+                      message: reaction.display ?? reaction.identifier,
+                      child: ChoiceChip(
+                        label: Text(reactionGlyph(reaction), style: const TextStyle(fontSize: 24)),
+                        selected: post.userReactionId == reaction.id,
+                        showCheckmark: false,
+                        onSelected: (_) {
+                          Navigator.of(sheet).pop();
+                          onReact!(reaction);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
+
+/// A reaction's glyph: its emoji, from the shortcode it's named by; else its name.
+String reactionGlyph(FlarumReaction reaction) =>
+    (reaction.type == 'emoji' ? discourseEmojiChar(reaction.identifier) : null) ?? reaction.display ?? reaction.identifier;
 
 class _MenuRow extends StatelessWidget {
   const _MenuRow(this.icon, this.label);
@@ -175,7 +296,8 @@ class _MenuRow extends StatelessWidget {
         children: [
           Icon(icon, color: Theme.of(context).colorScheme.onSurfaceVariant),
           const SizedBox(width: DesignTokens.spacingS),
-          Text(label),
+          // A long label (in a long language) wraps rather than run past the menu.
+          Flexible(child: Text(label)),
         ],
       );
 }

@@ -631,4 +631,72 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get editLoadFailed => 'Couldn\'t load this post for editing.';
+
+  @override
+  String get like => 'Like';
+
+  @override
+  String get unlike => 'Unlike';
+
+  @override
+  String get react => 'React';
+
+  @override
+  String get reactions => 'Reactions';
+
+  @override
+  String get bookmark => 'Bookmark';
+
+  @override
+  String get removeBookmark => 'Remove bookmark';
+
+  @override
+  String get bookmarks => 'Bookmarks';
+
+  @override
+  String get noBookmarks => 'No bookmarks yet.';
+
+  @override
+  String get chooseBestAnswer => 'Choose as best answer';
+
+  @override
+  String get removeBestAnswer => 'Remove best answer';
+
+  @override
+  String get notificationSettings => 'Notifications for this discussion';
+
+  @override
+  String get notFollowing => 'Not following';
+
+  @override
+  String get notFollowingHint => 'Be notified only when @mentioned.';
+
+  @override
+  String get followingHint => 'Be notified of all replies.';
+
+  @override
+  String get ignoring => 'Ignoring';
+
+  @override
+  String get ignoringHint =>
+      'Never be notified, and hide it from the discussion lists.';
+
+  @override
+  String get tagFollowingHint => 'Be notified of new discussions.';
+
+  @override
+  String get lurking => 'Lurking';
+
+  @override
+  String get lurkingHint => 'Be notified of new discussions and every reply.';
+
+  @override
+  String get tagIgnoringHint => 'Never be notified of discussions here.';
+
+  @override
+  String get hidden => 'Hidden';
+
+  @override
+  String get hiddenHint =>
+      'Hide this tag\'s discussions from the discussion lists.';
 }

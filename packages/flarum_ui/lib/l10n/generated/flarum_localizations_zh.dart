@@ -616,4 +616,70 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get editLoadFailed => '无法加载此帖子进行编辑。';
+
+  @override
+  String get like => '赞';
+
+  @override
+  String get unlike => '取消赞';
+
+  @override
+  String get react => '回应';
+
+  @override
+  String get reactions => '回应';
+
+  @override
+  String get bookmark => '收藏';
+
+  @override
+  String get removeBookmark => '取消收藏';
+
+  @override
+  String get bookmarks => '收藏';
+
+  @override
+  String get noBookmarks => '还没有收藏。';
+
+  @override
+  String get chooseBestAnswer => '选为最佳答案';
+
+  @override
+  String get removeBestAnswer => '取消最佳答案';
+
+  @override
+  String get notificationSettings => '此讨论的通知';
+
+  @override
+  String get notFollowing => '未关注';
+
+  @override
+  String get notFollowingHint => '仅在被 @提及时通知。';
+
+  @override
+  String get followingHint => '所有回复都通知。';
+
+  @override
+  String get ignoring => '忽略';
+
+  @override
+  String get ignoringHint => '从不通知，并在讨论列表中隐藏。';
+
+  @override
+  String get tagFollowingHint => '有新讨论时通知。';
+
+  @override
+  String get lurking => '潜水';
+
+  @override
+  String get lurkingHint => '有新讨论和每条回复时都通知。';
+
+  @override
+  String get tagIgnoringHint => '此处的讨论从不通知。';
+
+  @override
+  String get hidden => '隐藏';
+
+  @override
+  String get hiddenHint => '在讨论列表中隐藏此标签的讨论。';
 }

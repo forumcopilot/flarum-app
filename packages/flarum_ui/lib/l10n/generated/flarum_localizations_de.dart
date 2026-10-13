@@ -637,4 +637,73 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Dieser Beitrag konnte nicht zum Bearbeiten geladen werden.';
+
+  @override
+  String get like => 'Gefällt mir';
+
+  @override
+  String get unlike => 'Gefällt mir nicht mehr';
+
+  @override
+  String get react => 'Reagieren';
+
+  @override
+  String get reactions => 'Reaktionen';
+
+  @override
+  String get bookmark => 'Lesezeichen setzen';
+
+  @override
+  String get removeBookmark => 'Lesezeichen entfernen';
+
+  @override
+  String get bookmarks => 'Lesezeichen';
+
+  @override
+  String get noBookmarks => 'Noch keine Lesezeichen.';
+
+  @override
+  String get chooseBestAnswer => 'Als beste Antwort wählen';
+
+  @override
+  String get removeBestAnswer => 'Beste Antwort entfernen';
+
+  @override
+  String get notificationSettings => 'Benachrichtigungen für diese Diskussion';
+
+  @override
+  String get notFollowing => 'Nicht folgen';
+
+  @override
+  String get notFollowingHint => 'Nur bei @Erwähnungen benachrichtigen.';
+
+  @override
+  String get followingHint => 'Bei allen Antworten benachrichtigen.';
+
+  @override
+  String get ignoring => 'Ignorieren';
+
+  @override
+  String get ignoringHint =>
+      'Nie benachrichtigen und aus den Diskussionslisten ausblenden.';
+
+  @override
+  String get tagFollowingHint => 'Bei neuen Diskussionen benachrichtigen.';
+
+  @override
+  String get lurking => 'Mitlesen';
+
+  @override
+  String get lurkingHint =>
+      'Bei neuen Diskussionen und jeder Antwort benachrichtigen.';
+
+  @override
+  String get tagIgnoringHint => 'Hier nie benachrichtigen.';
+
+  @override
+  String get hidden => 'Ausgeblendet';
+
+  @override
+  String get hiddenHint =>
+      'Die Diskussionen dieses Schlagworts aus den Diskussionslisten ausblenden.';
 }

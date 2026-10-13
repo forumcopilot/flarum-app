@@ -81,6 +81,9 @@ Future<void> main(List<String> args) async {
   try {
     final answer = await record('write_answer', () => bob.reply(question.id, WriteSamples.answer));
     if (answer == null) throw StateError('The answer was not posted');
+    // The thread as carol, who asked, opens it: for the screens' tests.
+    await record('write_question_with_post_ids', () => carol.discussion(question.id, withPostIds: true));
+    await record('write_question_posts', () => carol.posts(question.id));
     // The SDK's reaction toggle and best answer read the post first: before and after a reaction.
     await record('write_answer_read', () => carol.post(answer.id));
     await record('write_like', () => carol.likePost(answer.id, liked: true));

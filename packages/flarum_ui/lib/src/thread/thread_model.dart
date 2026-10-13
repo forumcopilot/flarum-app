@@ -140,6 +140,25 @@ class ThreadModel extends ChangeNotifier {
 
   bool _disposed = false;
 
+  /// The loaded post [id], if it's loaded.
+  FlarumPost? postById(String id) => posts.where((p) => p.id == id).firstOrNull;
+
+  /// Puts [post] in place of the loaded post with its id: after a like, a reaction, a bookmark.
+  void replacePost(FlarumPost post) {
+    final i = posts.indexWhere((p) => p.id == post.id);
+    if (i < 0) return;
+    posts[i] = post;
+    _notify();
+  }
+
+  /// Changes the discussion in place: following it, its bookmark, its best answer.
+  void updateDiscussion(FlarumDiscussion Function(FlarumDiscussion) change) {
+    final current = discussion;
+    if (current == null) return;
+    discussion = change(current);
+    _notify();
+  }
+
   void _notify() {
     if (!_disposed) notifyListeners();
   }

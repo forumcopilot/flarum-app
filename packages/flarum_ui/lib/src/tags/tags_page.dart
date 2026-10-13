@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
@@ -149,8 +150,23 @@ class TagPage extends StatefulWidget {
 }
 
 class _TagPageState extends State<TagPage> {
-  late final DiscussionListModel _list =
-      DiscussionListModel(FlarumForum.of(widget.site), tagSlug: widget.tag.slug)..addListener(_changed);
+  late final FlarumForum _forum = FlarumForum.of(widget.site);
+  late final DiscussionListModel _list = DiscussionListModel(_forum, tagSlug: widget.tag.slug)..addListener(_changed);
+
+  /// The reader's level for the tag (fof/follow-tags): follow, lurk, ignore, hide, or none.
+  late String? _level = widget.tag.subscription;
+
+  Future<void> _setLevel(String? level) async {
+    final before = _level;
+    setState(() => _level = level);
+    try {
+      await _forum.api.setTagSubscription(widget.tag.id, level);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _level = before);
+      SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
 
   @override
   void initState() {
@@ -176,6 +192,9 @@ class _TagPageState extends State<TagPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.tag.name),
+        actions: [
+          if (_forum.isSignedIn && _forum.extensions.followTags) _TagFollowMenu(level: _level, onChanged: _setLevel),
+        ],
         bottom: description == null || description.isEmpty
             ? null
             : PreferredSize(
@@ -193,6 +212,48 @@ class _TagPageState extends State<TagPage> {
       ),
       body: DiscussionListView(site: widget.site, list: _list),
       floatingActionButton: startDiscussionButton(context, widget.site, tag: widget.tag, onStarted: _list.refresh),
+    );
+  }
+}
+
+/// How the reader follows a tag (fof/follow-tags), as the web's menu offers it.
+class _TagFollowMenu extends StatelessWidget {
+  const _TagFollowMenu({required this.level, required this.onChanged});
+
+  final String? level;
+  final ValueChanged<String?> onChanged;
+
+  // A menu item's value can't be null (that reads as dismissing the menu).
+  static const _none = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    PopupMenuItem<String> item(String value, IconData icon, String title, String hint) => PopupMenuItem(
+          value: value,
+          child: ListTile(
+            leading: Icon(icon),
+            title: Text(title),
+            subtitle: Text(hint),
+            trailing: (level ?? _none) == value ? const Icon(Icons.check) : null,
+            contentPadding: EdgeInsets.zero,
+          ),
+        );
+    return PopupMenuButton<String>(
+      icon: Icon(switch (level) {
+        'follow' || 'lurk' => Icons.notifications_active,
+        'ignore' || 'hide' => Icons.notifications_off_outlined,
+        _ => Icons.notifications_none,
+      }),
+      tooltip: l10n.notifications,
+      onSelected: (value) => onChanged(value == _none ? null : value),
+      itemBuilder: (_) => [
+        item(_none, Icons.notifications_none, l10n.notFollowing, l10n.notFollowingHint),
+        item('follow', Icons.notifications_active, l10n.following, l10n.tagFollowingHint),
+        item('lurk', Icons.visibility_outlined, l10n.lurking, l10n.lurkingHint),
+        item('ignore', Icons.notifications_off_outlined, l10n.ignoring, l10n.tagIgnoringHint),
+        item('hide', Icons.visibility_off_outlined, l10n.hidden, l10n.hiddenHint),
+      ],
     );
   }
 }

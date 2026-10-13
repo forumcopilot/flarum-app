@@ -635,4 +635,72 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Impossible de charger ce message pour le modifier.';
+
+  @override
+  String get like => 'J’aime';
+
+  @override
+  String get unlike => 'Je n’aime plus';
+
+  @override
+  String get react => 'Réagir';
+
+  @override
+  String get reactions => 'Réactions';
+
+  @override
+  String get bookmark => 'Ajouter aux favoris';
+
+  @override
+  String get removeBookmark => 'Retirer des favoris';
+
+  @override
+  String get bookmarks => 'Favoris';
+
+  @override
+  String get noBookmarks => 'Aucun favori pour l’instant.';
+
+  @override
+  String get chooseBestAnswer => 'Choisir comme meilleure réponse';
+
+  @override
+  String get removeBestAnswer => 'Retirer la meilleure réponse';
+
+  @override
+  String get notificationSettings => 'Notifications pour cette discussion';
+
+  @override
+  String get notFollowing => 'Pas suivie';
+
+  @override
+  String get notFollowingHint => 'Être notifié seulement en cas de @mention.';
+
+  @override
+  String get followingHint => 'Être notifié de toutes les réponses.';
+
+  @override
+  String get ignoring => 'Ignorée';
+
+  @override
+  String get ignoringHint => 'Ne jamais être notifié et la masquer des listes.';
+
+  @override
+  String get tagFollowingHint => 'Être notifié des nouvelles discussions.';
+
+  @override
+  String get lurking => 'À l’affût';
+
+  @override
+  String get lurkingHint =>
+      'Être notifié des nouvelles discussions et de chaque réponse.';
+
+  @override
+  String get tagIgnoringHint => 'Ne jamais être notifié des discussions d’ici.';
+
+  @override
+  String get hidden => 'Masquée';
+
+  @override
+  String get hiddenHint =>
+      'Masquer les discussions de cette étiquette des listes.';
 }

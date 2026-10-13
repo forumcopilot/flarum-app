@@ -357,7 +357,7 @@ class _ComposePageState extends State<ComposePage> {
             children: [
               Icon(icon, color: colorScheme.onSurfaceVariant),
               const SizedBox(width: DesignTokens.spacingS),
-              Text(label),
+              Flexible(child: Text(label)),
             ],
           ),
         );

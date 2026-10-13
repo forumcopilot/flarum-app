@@ -642,4 +642,70 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Не удалось загрузить сообщение для редактирования.';
+
+  @override
+  String get like => 'Нравится';
+
+  @override
+  String get unlike => 'Больше не нравится';
+
+  @override
+  String get react => 'Реакция';
+
+  @override
+  String get reactions => 'Реакции';
+
+  @override
+  String get bookmark => 'В закладки';
+
+  @override
+  String get removeBookmark => 'Убрать из закладок';
+
+  @override
+  String get bookmarks => 'Закладки';
+
+  @override
+  String get noBookmarks => 'Закладок пока нет.';
+
+  @override
+  String get chooseBestAnswer => 'Выбрать лучшим ответом';
+
+  @override
+  String get removeBestAnswer => 'Отменить лучший ответ';
+
+  @override
+  String get notificationSettings => 'Уведомления об этом обсуждении';
+
+  @override
+  String get notFollowing => 'Не отслеживается';
+
+  @override
+  String get notFollowingHint => 'Уведомлять, только когда вас @упомянут.';
+
+  @override
+  String get followingHint => 'Уведомлять обо всех ответах.';
+
+  @override
+  String get ignoring => 'Игнорируется';
+
+  @override
+  String get ignoringHint => 'Никогда не уведомлять и скрыть из списков.';
+
+  @override
+  String get tagFollowingHint => 'Уведомлять о новых обсуждениях.';
+
+  @override
+  String get lurking => 'Наблюдение';
+
+  @override
+  String get lurkingHint => 'Уведомлять о новых обсуждениях и каждом ответе.';
+
+  @override
+  String get tagIgnoringHint => 'Никогда не уведомлять об обсуждениях здесь.';
+
+  @override
+  String get hidden => 'Скрыт';
+
+  @override
+  String get hiddenHint => 'Скрыть обсуждения с этим тегом из списков.';
 }

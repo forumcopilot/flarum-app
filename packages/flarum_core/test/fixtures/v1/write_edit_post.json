@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/posts/244",
+    "path": "/posts/248",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "posts",
-        "id": "244",
+        "id": "248",
         "attributes": {
           "content": "The reply, edited."
         }
@@ -19,15 +19,15 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "244",
+      "id": "248",
       "attributes": {
         "number": 2,
-        "createdAt": "2026-10-13T18:02:05+00:00",
+        "createdAt": "2026-10-13T18:11:54+00:00",
         "contentType": "comment",
         "contentHtml": "<p>The reply, edited.</p>",
         "renderFailed": false,
         "content": "The reply, edited.",
-        "editedAt": "2026-10-13T18:02:05+00:00",
+        "editedAt": "2026-10-13T18:11:55+00:00",
         "canEdit": true,
         "canDelete": false,
         "canHide": true,
@@ -62,7 +62,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "46"
+            "id": "48"
           }
         },
         "likes": {
@@ -83,10 +83,10 @@
       },
       {
         "type": "discussions",
-        "id": "46",
+        "id": "48",
         "attributes": {
           "title": "Written from the app",
-          "slug": "46-written-from-the-app",
+          "slug": "48-written-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null

@@ -8,6 +8,7 @@ import '../render/links.dart';
 import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
+import '../bookmarks/bookmarks_page.dart';
 import 'sign_in_page.dart';
 import '../widgets/flarum_avatar.dart';
 
@@ -82,6 +83,16 @@ class _AccountPageState extends State<AccountPage> {
                 style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.center),
             const SizedBox(height: DesignTokens.spacingXL),
+            if (_forum.extensions.bookmarks) ...[
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.bookmark_border),
+                title: Text(l10n.bookmarks),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => BookmarksPage.open(context, widget.site),
+              ),
+              const SizedBox(height: DesignTokens.spacingL),
+            ],
             OutlinedButton.icon(
               onPressed: _busy ? null : _signOut,
               icon: _busy

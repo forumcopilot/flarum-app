@@ -634,4 +634,74 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Impossibile caricare questo post per modificarlo.';
+
+  @override
+  String get like => 'Mi piace';
+
+  @override
+  String get unlike => 'Non mi piace più';
+
+  @override
+  String get react => 'Reagisci';
+
+  @override
+  String get reactions => 'Reazioni';
+
+  @override
+  String get bookmark => 'Aggiungi ai segnalibri';
+
+  @override
+  String get removeBookmark => 'Rimuovi dai segnalibri';
+
+  @override
+  String get bookmarks => 'Segnalibri';
+
+  @override
+  String get noBookmarks => 'Ancora nessun segnalibro.';
+
+  @override
+  String get chooseBestAnswer => 'Scegli come migliore risposta';
+
+  @override
+  String get removeBestAnswer => 'Rimuovi migliore risposta';
+
+  @override
+  String get notificationSettings => 'Notifiche per questa discussione';
+
+  @override
+  String get notFollowing => 'Non seguita';
+
+  @override
+  String get notFollowingHint => 'Ricevi notifiche solo se menzionato.';
+
+  @override
+  String get followingHint => 'Ricevi notifiche per tutte le risposte.';
+
+  @override
+  String get ignoring => 'Ignorata';
+
+  @override
+  String get ignoringHint =>
+      'Non ricevere mai notifiche e nascondila dagli elenchi.';
+
+  @override
+  String get tagFollowingHint => 'Ricevi notifiche per le nuove discussioni.';
+
+  @override
+  String get lurking => 'In osservazione';
+
+  @override
+  String get lurkingHint =>
+      'Ricevi notifiche per le nuove discussioni e per ogni risposta.';
+
+  @override
+  String get tagIgnoringHint =>
+      'Non ricevere mai notifiche per le discussioni qui.';
+
+  @override
+  String get hidden => 'Nascosto';
+
+  @override
+  String get hiddenHint =>
+      'Nascondi le discussioni di questo tag dagli elenchi.';
 }

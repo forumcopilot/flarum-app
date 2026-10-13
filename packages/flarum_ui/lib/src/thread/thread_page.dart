@@ -204,6 +204,101 @@ class _ThreadPageState extends State<ThreadPage> {
     if (saved != null && mounted) _reload(at: post.number);
   }
 
+  FlarumForum get _forum => FlarumForum.of(widget.site);
+  bool get _signedIn => _forum.isSignedIn;
+  String? get _readerId => _forum.info?.actor?.id;
+
+  /// Shows [change] to [before] at once, then [send]s it; [reconcile] takes in the forum's answer.
+  /// Refused, the post goes back as it was, with the reason.
+  Future<void> _changePost(FlarumPost before, FlarumPost Function(FlarumPost) change, Future<FlarumPost> Function() send,
+      FlarumPost Function(FlarumPost shown, FlarumPost saved) reconcile) async {
+    _model.replacePost(change(before));
+    try {
+      final saved = await send();
+      final shown = _model.postById(before.id);
+      if (shown != null) _model.replacePost(reconcile(shown, saved));
+    } catch (e) {
+      _model.replacePost(before);
+      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
+
+  void _like(FlarumPost post) {
+    final reader = _forum.info?.actor;
+    final liked = post.isLikedBy(_readerId);
+    _changePost(
+      post,
+      (p) => p.copyWith(
+        likesCount: p.likesCount + (liked ? -1 : 1),
+        likedBy: liked ? [for (final u in p.likedBy) if (u.id != _readerId) u] : [if (reader != null) reader, ...p.likedBy],
+      ),
+      () => _forum.api.likePost(post.id, liked: !liked),
+      (shown, saved) => shown.copyWith(likesCount: saved.likesCount, likedBy: saved.likedBy),
+    );
+  }
+
+  /// A reader has one reaction a post: another replaces it, the same one takes it back.
+  void _react(FlarumPost post, FlarumReaction reaction) {
+    final mine = post.userReactionId;
+    final takingBack = mine == reaction.id;
+    final counts = {...post.reactionCounts};
+    void add(String id, int by) {
+      final n = (counts[id] ?? 0) + by;
+      n > 0 ? counts[id] = n : counts.remove(id);
+    }
+
+    if (mine != null) add(mine, -1);
+    if (!takingBack) add(reaction.id, 1);
+    _changePost(
+      post,
+      (p) => p.copyWith(reactionCounts: counts, userReactionId: () => takingBack ? null : reaction.id),
+      () => takingBack ? _forum.api.unreactToPost(post.id, reaction.id) : _forum.api.reactToPost(post.id, reaction.id),
+      (shown, saved) => shown.copyWith(reactionCounts: saved.reactionCounts, userReactionId: () => saved.userReactionId),
+    );
+  }
+
+  void _bookmarkPost(FlarumPost post) => _changePost(
+        post,
+        (p) => p.copyWith(bookmarked: !post.bookmarked),
+        () => _forum.api.bookmarkPost(post.id, bookmarked: !post.bookmarked),
+        (shown, saved) => shown.copyWith(bookmarked: saved.bookmarked),
+      );
+
+  /// Shows [change] to the discussion at once, then [send]s it; refused, it goes back as it was.
+  Future<void> _changeDiscussion(
+      FlarumDiscussion Function(FlarumDiscussion) change, Future<FlarumDiscussion> Function() send) async {
+    final before = _model.discussion;
+    if (before == null) return;
+    _model.updateDiscussion(change);
+    try {
+      await send();
+    } catch (e) {
+      _model.updateDiscussion((_) => before);
+      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
+
+  void _chooseBestAnswer(FlarumPost post) {
+    final chosen = _model.discussion?.bestAnswerPostId == post.id;
+    _changeDiscussion(
+      (d) => d.copyWith(bestAnswerPostId: () => chosen ? null : post.id),
+      () => _forum.api.setBestAnswer(widget.discussionId, chosen ? null : post.id),
+    );
+  }
+
+  void _setSubscription(String? level) => _changeDiscussion(
+        (d) => d.copyWith(subscription: () => level),
+        () => _forum.api.setSubscription(widget.discussionId, level),
+      );
+
+  void _bookmarkDiscussion() {
+    final bookmarked = !(_model.discussion?.bookmarked ?? false);
+    _changeDiscussion(
+      (d) => d.copyWith(bookmarked: bookmarked),
+      () => _forum.api.bookmarkDiscussion(widget.discussionId, bookmarked: bookmarked),
+    );
+  }
+
   /// Opens the thread again at post [number], loaded afresh: a new reply, an edited post.
   void _reload({required int at}) {
     setState(() {
@@ -244,6 +339,15 @@ class _ThreadPageState extends State<ThreadPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
+        actions: [
+          if (_signedIn && discussion != null && _forum.extensions.bookmarks)
+            IconButton(
+              icon: Icon(discussion.bookmarked ? Icons.bookmark : Icons.bookmark_border),
+              tooltip: discussion.bookmarked ? l10n.removeBookmark : l10n.bookmark,
+              onPressed: _bookmarkDiscussion,
+            ),
+          if (_signedIn && discussion != null) _FollowMenu(level: discussion.subscription, onChanged: _setSubscription),
+        ],
       ),
       floatingActionButton: _canReply
           ? FloatingActionButton.extended(
@@ -321,6 +425,12 @@ class _ThreadPageState extends State<ThreadPage> {
         onReply: _canReply ? () => _reply(initial: replyTo(post, l10n)) : null,
         onQuote: _canReply ? () => _reply(initial: quoteOf(post, l10n)) : null,
         onEdit: post.canEdit ? () => _edit(post) : null,
+        readerId: _readerId,
+        reactions: _forum.info?.reactions ?? const [],
+        onLike: post.canLike ? () => _like(post) : null,
+        onReact: post.canReact ? (reaction) => _react(post, reaction) : null,
+        onBookmark: _signedIn && _forum.extensions.bookmarks ? () => _bookmarkPost(post) : null,
+        onChooseBestAnswer: post.canSelectAsBestAnswer && post.number > 1 ? () => _chooseBestAnswer(post) : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.
@@ -345,4 +455,45 @@ class _Spinner extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2));
+}
+
+/// How the reader follows the discussion (flarum/subscriptions), as the web's menu offers it.
+class _FollowMenu extends StatelessWidget {
+  const _FollowMenu({required this.level, required this.onChanged});
+
+  /// `follow`, `ignore`, or null for neither.
+  final String? level;
+  final ValueChanged<String?> onChanged;
+
+  // A menu item's value can't be null (that reads as dismissing the menu).
+  static const _none = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    PopupMenuItem<String> item(String value, IconData icon, String title, String hint) => PopupMenuItem(
+          value: value,
+          child: ListTile(
+            leading: Icon(icon),
+            title: Text(title),
+            subtitle: Text(hint),
+            trailing: (level ?? _none) == value ? const Icon(Icons.check) : null,
+            contentPadding: EdgeInsets.zero,
+          ),
+        );
+    return PopupMenuButton<String>(
+      icon: Icon(switch (level) {
+        'follow' => Icons.notifications_active,
+        'ignore' => Icons.notifications_off_outlined,
+        _ => Icons.notifications_none,
+      }),
+      tooltip: l10n.notificationSettings,
+      onSelected: (value) => onChanged(value == _none ? null : value),
+      itemBuilder: (_) => [
+        item(_none, Icons.notifications_none, l10n.notFollowing, l10n.notFollowingHint),
+        item('follow', Icons.notifications_active, l10n.following, l10n.followingHint),
+        item('ignore', Icons.notifications_off_outlined, l10n.ignoring, l10n.ignoringHint),
+      ],
+    );
+  }
 }

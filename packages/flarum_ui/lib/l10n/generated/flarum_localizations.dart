@@ -1021,6 +1021,138 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load this post for editing.'**
   String get editLoadFailed;
+
+  /// Button under a post: like it (flarum/likes)
+  ///
+  /// In en, this message translates to:
+  /// **'Like'**
+  String get like;
+
+  /// Tooltip of the like button when the reader already likes the post
+  ///
+  /// In en, this message translates to:
+  /// **'Unlike'**
+  String get unlike;
+
+  /// Button under a post: choose a reaction (fof/reactions)
+  ///
+  /// In en, this message translates to:
+  /// **'React'**
+  String get react;
+
+  /// Title of the sheet to choose a reaction
+  ///
+  /// In en, this message translates to:
+  /// **'Reactions'**
+  String get reactions;
+
+  /// Post or discussion menu: bookmark it (fof/bookmarks)
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark'**
+  String get bookmark;
+
+  /// Post or discussion menu: take the bookmark off
+  ///
+  /// In en, this message translates to:
+  /// **'Remove bookmark'**
+  String get removeBookmark;
+
+  /// The reader's bookmarks: an account tab entry and its page's title
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarks'**
+  String get bookmarks;
+
+  /// Bookmarks page with nothing bookmarked
+  ///
+  /// In en, this message translates to:
+  /// **'No bookmarks yet.'**
+  String get noBookmarks;
+
+  /// Post menu for the one who asked (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'Choose as best answer'**
+  String get chooseBestAnswer;
+
+  /// Post menu on the chosen answer: un-choose it
+  ///
+  /// In en, this message translates to:
+  /// **'Remove best answer'**
+  String get removeBestAnswer;
+
+  /// Tooltip of the thread's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications for this discussion'**
+  String get notificationSettings;
+
+  /// Follow menu: the reader's default for a discussion or tag
+  ///
+  /// In en, this message translates to:
+  /// **'Not following'**
+  String get notFollowing;
+
+  /// Under Not following in a discussion's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Be notified only when @mentioned.'**
+  String get notFollowingHint;
+
+  /// Under Following in a discussion's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Be notified of all replies.'**
+  String get followingHint;
+
+  /// Follow menu: ignore the discussion or tag
+  ///
+  /// In en, this message translates to:
+  /// **'Ignoring'**
+  String get ignoring;
+
+  /// Under Ignoring in a discussion's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Never be notified, and hide it from the discussion lists.'**
+  String get ignoringHint;
+
+  /// Under Following in a tag's follow menu (fof/follow-tags)
+  ///
+  /// In en, this message translates to:
+  /// **'Be notified of new discussions.'**
+  String get tagFollowingHint;
+
+  /// Tag follow menu: told of new discussions and every reply
+  ///
+  /// In en, this message translates to:
+  /// **'Lurking'**
+  String get lurking;
+
+  /// Under Lurking in a tag's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Be notified of new discussions and every reply.'**
+  String get lurkingHint;
+
+  /// Under Ignoring in a tag's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Never be notified of discussions here.'**
+  String get tagIgnoringHint;
+
+  /// Tag follow menu: hide the tag's discussions
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden'**
+  String get hidden;
+
+  /// Under Hidden in a tag's follow menu
+  ///
+  /// In en, this message translates to:
+  /// **'Hide this tag\'s discussions from the discussion lists.'**
+  String get hiddenHint;
 }
 
 class _FlarumLocalizationsDelegate

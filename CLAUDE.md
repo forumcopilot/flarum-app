@@ -108,6 +108,12 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   checked before validation. Editing someone else's post: 1.x 403 `permission_denied`, 2.0 403
   `validation_error` ("Field [content] is not writable"). Flarum stops a member editing a post once
   someone has replied after it (the default `allow_post_editing`).
+- Actions: like = PATCH the post's `isLiked`; a reaction = its `reaction` (an id; the same id again
+  takes it back; 1.x fails with 500 on null); bookmark = `bookmarked` on the post or discussion;
+  follow = the discussion's `subscription`. Best answer: 1.x the discussion's `bestAnswerPostId` (0
+  for none), 2.0 `relationships.bestAnswerPost` with empty attributes. Who liked a post comes only
+  with the `likes` include (up to 4, the reader first). 1.x lists bookmarked discussions only by the
+  `is:bookmarked` gambit.
 - Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
   the username by default, the id on forums with the ID slug driver, where a username 404s. Their
   posts and discussions: `filter[author]` (and 1.x's `author:` gambit) takes the username on 1.x

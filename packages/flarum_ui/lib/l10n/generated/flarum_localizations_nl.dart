@@ -634,4 +634,73 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   @override
   String get editLoadFailed =>
       'Dit bericht kon niet worden geladen om te bewerken.';
+
+  @override
+  String get like => 'Vind ik leuk';
+
+  @override
+  String get unlike => 'Vind ik niet meer leuk';
+
+  @override
+  String get react => 'Reageren';
+
+  @override
+  String get reactions => 'Reacties';
+
+  @override
+  String get bookmark => 'Bladwijzer toevoegen';
+
+  @override
+  String get removeBookmark => 'Bladwijzer verwijderen';
+
+  @override
+  String get bookmarks => 'Bladwijzers';
+
+  @override
+  String get noBookmarks => 'Nog geen bladwijzers.';
+
+  @override
+  String get chooseBestAnswer => 'Kiezen als beste antwoord';
+
+  @override
+  String get removeBestAnswer => 'Beste antwoord verwijderen';
+
+  @override
+  String get notificationSettings => 'Meldingen voor deze discussie';
+
+  @override
+  String get notFollowing => 'Niet volgen';
+
+  @override
+  String get notFollowingHint => 'Alleen een melding bij een @vermelding.';
+
+  @override
+  String get followingHint => 'Een melding bij alle reacties.';
+
+  @override
+  String get ignoring => 'Negeren';
+
+  @override
+  String get ignoringHint =>
+      'Nooit een melding, en verbergen in de discussielijsten.';
+
+  @override
+  String get tagFollowingHint => 'Een melding bij nieuwe discussies.';
+
+  @override
+  String get lurking => 'Meelezen';
+
+  @override
+  String get lurkingHint =>
+      'Een melding bij nieuwe discussies en elke reactie.';
+
+  @override
+  String get tagIgnoringHint => 'Nooit een melding over discussies hier.';
+
+  @override
+  String get hidden => 'Verborgen';
+
+  @override
+  String get hiddenHint =>
+      'De discussies van deze tag verbergen in de discussielijsten.';
 }

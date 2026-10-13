@@ -7,7 +7,8 @@ enum DiscussionView { latest, top, newest, following }
 /// A list of discussions for a view, optionally of one tag or started by one
 /// user, loaded a page at a time.
 class DiscussionListModel extends ChangeNotifier {
-  DiscussionListModel(this.forum, {this.view = DiscussionView.latest, this.tagSlug, this.author, this.pageSize = 20});
+  DiscussionListModel(this.forum,
+      {this.view = DiscussionView.latest, this.tagSlug, this.author, this.bookmarked = false, this.pageSize = 20});
 
   final FlarumForum forum;
   final DiscussionView view;
@@ -15,6 +16,9 @@ class DiscussionListModel extends ChangeNotifier {
 
   /// A username: only the discussions they started.
   final String? author;
+
+  /// The reader's bookmarked discussions (fof/bookmarks).
+  final bool bookmarked;
   final int pageSize;
 
   final List<FlarumDiscussion> items = [];
@@ -52,6 +56,7 @@ class DiscussionListModel extends ChangeNotifier {
         following: view == DiscussionView.following,
         tagSlug: tagSlug,
         author: author,
+        bookmarked: bookmarked,
         offset: reset ? 0 : items.length,
         limit: pageSize,
       );

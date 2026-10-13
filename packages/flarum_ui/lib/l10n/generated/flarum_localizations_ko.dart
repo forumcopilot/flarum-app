@@ -616,4 +616,70 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get editLoadFailed => '수정할 게시물을 불러오지 못했습니다.';
+
+  @override
+  String get like => '좋아요';
+
+  @override
+  String get unlike => '좋아요 취소';
+
+  @override
+  String get react => '반응';
+
+  @override
+  String get reactions => '반응';
+
+  @override
+  String get bookmark => '북마크';
+
+  @override
+  String get removeBookmark => '북마크 해제';
+
+  @override
+  String get bookmarks => '북마크';
+
+  @override
+  String get noBookmarks => '아직 북마크가 없습니다.';
+
+  @override
+  String get chooseBestAnswer => '베스트 답변으로 선택';
+
+  @override
+  String get removeBestAnswer => '베스트 답변 해제';
+
+  @override
+  String get notificationSettings => '이 토론의 알림';
+
+  @override
+  String get notFollowing => '팔로우 안 함';
+
+  @override
+  String get notFollowingHint => '@멘션될 때만 알림을 받습니다.';
+
+  @override
+  String get followingHint => '모든 답글 알림을 받습니다.';
+
+  @override
+  String get ignoring => '무시';
+
+  @override
+  String get ignoringHint => '알림을 받지 않고 목록에서도 숨깁니다.';
+
+  @override
+  String get tagFollowingHint => '새 토론 알림을 받습니다.';
+
+  @override
+  String get lurking => '지켜보기';
+
+  @override
+  String get lurkingHint => '새 토론과 모든 답글 알림을 받습니다.';
+
+  @override
+  String get tagIgnoringHint => '여기의 토론은 알림을 받지 않습니다.';
+
+  @override
+  String get hidden => '숨김';
+
+  @override
+  String get hiddenHint => '이 태그의 토론을 목록에서 숨깁니다.';
 }

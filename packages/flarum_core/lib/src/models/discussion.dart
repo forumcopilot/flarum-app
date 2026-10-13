@@ -83,6 +83,49 @@ class FlarumDiscussion {
     );
   }
 
+  /// This discussion after the reader follows or ignores it, bookmarks it, or chooses its best
+  /// answer, the rest as it was (its post ids stay, which the forum's answer to the change leaves
+  /// out). A function for a value that can become null.
+  FlarumDiscussion copyWith({
+    String? Function()? subscription,
+    String? Function()? bestAnswerPostId,
+    bool? bookmarked,
+  }) =>
+      FlarumDiscussion(
+        id: id,
+        title: title,
+        slug: slug,
+        commentCount: commentCount,
+        participantCount: participantCount,
+        createdAt: createdAt,
+        lastPostedAt: lastPostedAt,
+        lastPostNumber: lastPostNumber,
+        lastReadPostNumber: lastReadPostNumber,
+        lastReadAt: lastReadAt,
+        isSticky: isSticky,
+        isLocked: isLocked,
+        subscription: subscription == null ? this.subscription : subscription(),
+        canReply: canReply,
+        canRename: canRename,
+        canDelete: canDelete,
+        canHide: canHide,
+        canTag: canTag,
+        canLock: canLock,
+        canSticky: canSticky,
+        isApproved: isApproved,
+        isHidden: isHidden,
+        isPrivate: isPrivate,
+        hasPoll: hasPoll,
+        hasBestAnswer: bestAnswerPostId == null ? hasBestAnswer : bestAnswerPostId() != null,
+        bestAnswerPostId: bestAnswerPostId == null ? this.bestAnswerPostId : bestAnswerPostId(),
+        bookmarked: bookmarked ?? this.bookmarked,
+        author: author,
+        lastPostedUser: lastPostedUser,
+        tags: tags,
+        mostRelevantPost: mostRelevantPost,
+        postIds: postIds,
+      );
+
   final String id;
   final String title;
   final String? slug;

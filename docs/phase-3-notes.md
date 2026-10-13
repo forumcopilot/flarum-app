@@ -22,3 +22,25 @@ is on branch `phase-3`, started 13 October 2026 from `phase-2` at 39fbc95.
   to the forum's tag rules. After a reply or an edit the thread opens again at that post.
 - **Tests:** write fixtures from `tool/record_write_fixtures.dart` (carol and bob, the discussion
   deleted after); the flows replayed on both versions.
+
+## Milestone 2: actions on posts and discussions
+
+- **flarum_core:** `likePost`, `reactToPost` and `unreactToPost`, `setBestAnswer`,
+  `setSubscription`, `setTagSubscription`, `bookmarkPost`, `bookmarkDiscussion`,
+  `bookmarkedPosts` and `discussions(bookmarked:)`. Posts carry who liked them (the `likes`
+  include: up to four, the reader first if they did), their reaction counts and the reader's
+  reaction; the forum info carries its reactions. The SDK's like, reaction, best-answer and
+  subscription methods, and a bookmark proxy, sit on these.
+- **Screens:** under each post, Like with its count, the reactions people chose (a tap adds or
+  takes back the reader's) and React (a sheet of the forum's reactions); in the post's menu,
+  Bookmark and, for whoever asked in a Q&A tag, Choose as best answer. On the thread's bar, the
+  follow menu (Not following, Following, Ignoring, as the web words them) and the bookmark. On a
+  tag's page, fof/follow-tags' levels. Bookmarks on the Account tab: discussions and posts. Each
+  change shows at once and goes back, with the forum's reason, if it's refused.
+- **Found on 1.x:** fof/reactions fails with 500 on a null reaction, so a reaction is taken back
+  by sending it again (which 2.0 does too). The discussions' bookmarked filter works only as the
+  `is:bookmarked` gambit; the posts' filter works as a key.
+- **Tests:** the write recorder adds a Q&A discussion (carol asks, bob answers) and every action
+  on it; `FixtureForum` matches 2.0's best answer and 1.x's tag level on their whole `data`, and
+  serves a request recorded twice (a reaction, then the same to take it back) in order.
+

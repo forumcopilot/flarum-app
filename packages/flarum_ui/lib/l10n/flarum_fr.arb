@@ -172,5 +172,14 @@
   "lurkingHint": "Être notifié des nouvelles discussions et de chaque réponse.",
   "tagIgnoringHint": "Ne jamais être notifié des discussions d’ici.",
   "hidden": "Masquée",
-  "hiddenHint": "Masquer les discussions de cette étiquette des listes."
+  "hiddenHint": "Masquer les discussions de cette étiquette des listes.",
+  "attachFile": "Joindre un fichier",
+  "uploadImage": "Téléverser une image",
+  "takePhoto": "Prendre une photo",
+  "uploadingFilename": "Téléversement : {filename}…",
+  "failedToUploadFile2": "Échec de l’envoi du fichier : {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "Veuillez attendre la fin de l’envoi des pièces jointes",
+  "imageResizedToFitLimit": "{fileName} redimensionné à {size}{dimensions} pour respecter la limite de {limit}.",
+  "imageTooLargeCouldNotResize": "{fileName} : trop volumineux ({size}) et impossible à redimensionner. La limite est de {limit}.",
+  "fileTooLargeForForum": "{fileName} fait {fileBytes}. Ce forum autorise jusqu’à {maxBytes}."
 }

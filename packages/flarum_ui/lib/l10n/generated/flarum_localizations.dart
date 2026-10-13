@@ -1153,6 +1153,63 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Hide this tag\'s discussions from the discussion lists.'**
   String get hiddenHint;
+
+  /// Accessibility label for attach file button
+  ///
+  /// In en, this message translates to:
+  /// **'Attach file'**
+  String get attachFile;
+
+  /// Accessibility label for upload image button
+  ///
+  /// In en, this message translates to:
+  /// **'Upload image'**
+  String get uploadImage;
+
+  /// Opens the camera to take a photo to attach.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo'**
+  String get takePhoto;
+
+  /// Placeholder put in the post text where an upload will go while it uploads (Discourse uploading_filename)
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading: {filename}…'**
+  String uploadingFilename(String filename);
+
+  /// UI text: Failed to upload file: {errorMessage}
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload file: {errorMessage}'**
+  String failedToUploadFile2(Object errorMessage);
+
+  /// UI text: Please wait for attachments to finish uploading
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for attachments to finish uploading'**
+  String get pleaseWaitForAttachmentsToFinishUploading;
+
+  /// Composer notice after an oversized image was shrunk to fit the forum's upload limit; size and limit are formatted file sizes; dimensions is empty or ' (1200×800 → 900×600)' with a leading space
+  ///
+  /// In en, this message translates to:
+  /// **'{fileName} resized to {size}{dimensions} to fit the {limit} limit.'**
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit);
+
+  /// Composer error when a picked image is over the forum's upload limit and shrinking it failed; size and limit are formatted file sizes
+  ///
+  /// In en, this message translates to:
+  /// **'{fileName}: too large ({size}) and could not be resized. Limit is {limit}.'**
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit);
+
+  /// UI text: {fileName} is {fileBytes}. This forum allows up to {maxBytes
+  ///
+  /// In en, this message translates to:
+  /// **'{fileName} is {fileBytes}. This forum allows up to {maxBytes}.'**
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes);
 }
 
 class _FlarumLocalizationsDelegate

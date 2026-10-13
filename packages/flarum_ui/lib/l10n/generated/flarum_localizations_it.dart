@@ -704,4 +704,45 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   @override
   String get hiddenHint =>
       'Nascondi le discussioni di questo tag dagli elenchi.';
+
+  @override
+  String get attachFile => 'Allega file';
+
+  @override
+  String get uploadImage => 'Carica immagine';
+
+  @override
+  String get takePhoto => 'Scatta una foto';
+
+  @override
+  String uploadingFilename(String filename) {
+    return 'Caricamento: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return 'Caricamento del file non riuscito: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      'Attendi il completamento del caricamento degli allegati';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName ridimensionato a $size$dimensions per rientrare nel limite di $limit.';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: troppo grande ($size) e non è stato possibile ridimensionarlo. Il limite è $limit.';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName è di $fileBytes. Questo forum consente fino a $maxBytes.';
+  }
 }

@@ -172,5 +172,14 @@
   "lurkingHint": "Уведомлять о новых обсуждениях и каждом ответе.",
   "tagIgnoringHint": "Никогда не уведомлять об обсуждениях здесь.",
   "hidden": "Скрыт",
-  "hiddenHint": "Скрыть обсуждения с этим тегом из списков."
+  "hiddenHint": "Скрыть обсуждения с этим тегом из списков.",
+  "attachFile": "Прикрепить файл",
+  "uploadImage": "Загрузить изображение",
+  "takePhoto": "Сделать фото",
+  "uploadingFilename": "Загрузка: {filename}…",
+  "failedToUploadFile2": "Не удалось загрузить файл: {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "Дождитесь окончания загрузки вложений",
+  "imageResizedToFitLimit": "{fileName} уменьшен до {size}{dimensions}, чтобы уложиться в ограничение {limit}.",
+  "imageTooLargeCouldNotResize": "{fileName}: слишком большой файл ({size}), уменьшить не удалось. Ограничение — {limit}.",
+  "fileTooLargeForForum": "Размер {fileName}: {fileBytes}. Форум допускает до {maxBytes}."
 }

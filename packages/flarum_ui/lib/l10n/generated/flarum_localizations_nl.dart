@@ -703,4 +703,45 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   @override
   String get hiddenHint =>
       'De discussies van deze tag verbergen in de discussielijsten.';
+
+  @override
+  String get attachFile => 'Bestand bijvoegen';
+
+  @override
+  String get uploadImage => 'Afbeelding uploaden';
+
+  @override
+  String get takePhoto => 'Foto maken';
+
+  @override
+  String uploadingFilename(String filename) {
+    return 'Uploaden: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return 'Bestand uploaden mislukt: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      'Wacht tot de bijlagen klaar zijn met uploaden';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName verkleind tot $size$dimensions om binnen de limiet van $limit te blijven.';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: te groot ($size) en kon niet worden verkleind. De limiet is $limit.';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName is $fileBytes. Dit forum staat maximaal $maxBytes toe.';
+  }
 }

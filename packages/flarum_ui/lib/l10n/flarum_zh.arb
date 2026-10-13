@@ -172,5 +172,14 @@
   "lurkingHint": "有新讨论和每条回复时都通知。",
   "tagIgnoringHint": "此处的讨论从不通知。",
   "hidden": "隐藏",
-  "hiddenHint": "在讨论列表中隐藏此标签的讨论。"
+  "hiddenHint": "在讨论列表中隐藏此标签的讨论。",
+  "attachFile": "附加文件",
+  "uploadImage": "上传图片",
+  "takePhoto": "拍照",
+  "uploadingFilename": "正在上传：{filename}…",
+  "failedToUploadFile2": "文件上传失败：{errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "请等待附件上传完成",
+  "imageResizedToFitLimit": "{fileName} 已缩小至 {size}{dimensions}，以符合 {limit} 的上限。",
+  "imageTooLargeCouldNotResize": "{fileName}：文件过大（{size}），且无法缩小。上限为 {limit}。",
+  "fileTooLargeForForum": "{fileName} 大小为 {fileBytes}。此论坛最多允许 {maxBytes}。"
 }

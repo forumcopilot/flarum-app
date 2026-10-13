@@ -172,5 +172,14 @@
   "lurkingHint": "새 토론과 모든 답글 알림을 받습니다.",
   "tagIgnoringHint": "여기의 토론은 알림을 받지 않습니다.",
   "hidden": "숨김",
-  "hiddenHint": "이 태그의 토론을 목록에서 숨깁니다."
+  "hiddenHint": "이 태그의 토론을 목록에서 숨깁니다.",
+  "attachFile": "파일 첨부",
+  "uploadImage": "이미지 업로드",
+  "takePhoto": "사진 촬영",
+  "uploadingFilename": "업로드 중: {filename}…",
+  "failedToUploadFile2": "파일 업로드 실패: {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "첨부 파일 업로드가 끝날 때까지 기다려 주세요",
+  "imageResizedToFitLimit": "{fileName}을(를) {limit} 제한에 맞게 {size}{dimensions}(으)로 줄였습니다.",
+  "imageTooLargeCouldNotResize": "{fileName}: 너무 크며({size}) 크기를 줄일 수 없습니다. 제한은 {limit}입니다.",
+  "fileTooLargeForForum": "{fileName}의 크기는 {fileBytes}입니다. 이 포럼은 최대 {maxBytes}까지 허용합니다."
 }

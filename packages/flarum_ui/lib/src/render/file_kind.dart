@@ -72,6 +72,18 @@ String getFileType(String filename, FlarumLocalizations l10n) {
 }
 
 
+/// Whether [filename] names a picture: a photo or a screenshot, which a post shows inline.
+bool isImageFile(String filename) =>
+    const {'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'heic', 'heif'}.contains(filename.split('.').last.toLowerCase());
+
+/// Returns a human-readable file size string for a given byte count.
+String formatFileSize(int bytes) {
+  if (bytes < 1024) return '$bytes B';
+  if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+  if (bytes < 1024 * 1024 * 1024) return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+  return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
+}
+
 /// Returns an appropriate icon for a given filename or file type string.
 IconData getFileIcon(String filenameOrType) {
   final value = filenameOrType.toLowerCase();

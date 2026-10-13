@@ -101,6 +101,24 @@ void main() {
     });
   }
 
+  test('an upload refused as too big says so, with the most the forum takes', () {
+    FlarumApiException refusal(int status, String code, [String? detail]) =>
+        FlarumApiException(status, [FlarumApiError(code: code, detail: detail)]);
+    // As both test forums refuse a 3 MB and a 9 MB file through their public hosts.
+    final ini = refusal(413, 'fof-upload.max_upload_file_size_ini', 'Upload max filesize limit reached from php.ini.');
+    final post = refusal(400, 'fof-upload.no_files_made_it_to_upload', 'Please upload files no larger than 2048 kb.');
+    final rule = refusal(422, 'validation_error', 'Uploads over 512 kb are not accepted.');
+    final nginx = FlarumApiException(413, const []);
+    expect([ini, post, rule, nginx].map((e) => (e.isTooLarge, e.uploadLimit)), [
+      (true, 2 << 20),
+      (true, 2048 * 1024),
+      (true, 512 * 1024),
+      (true, 1 << 20),
+    ]);
+    final type = refusal(422, 'validation_error', 'This file type is not allowed.');
+    expect((type.isTooLarge, type.uploadLimit), (false, null));
+  });
+
   test('a refusal lists every reason the forum gave', () {
     final e = FlarumApiException(422, const [
       FlarumApiError(code: 'validation_error', detail: 'The title field is required.'),

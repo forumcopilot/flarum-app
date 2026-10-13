@@ -1013,5 +1013,87 @@
   "hiddenHint": "Hide this tag's discussions from the discussion lists.",
   "@hiddenHint": {
     "description": "Under Hidden in a tag's follow menu"
+  },
+  "attachFile": "Attach file",
+  "@attachFile": {
+    "description": "Accessibility label for attach file button"
+  },
+  "uploadImage": "Upload image",
+  "@uploadImage": {
+    "description": "Accessibility label for upload image button"
+  },
+  "takePhoto": "Take photo",
+  "@takePhoto": {
+    "description": "Opens the camera to take a photo to attach."
+  },
+  "uploadingFilename": "Uploading: {filename}…",
+  "@uploadingFilename": {
+    "description": "Placeholder put in the post text where an upload will go while it uploads (Discourse uploading_filename)",
+    "placeholders": {
+      "filename": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToUploadFile2": "Failed to upload file: {errorMessage}",
+  "@failedToUploadFile2": {
+    "description": "UI text: Failed to upload file: {errorMessage}",
+    "placeholders": {
+      "errorMessage": {
+        "type": "Object"
+      }
+    }
+  },
+  "pleaseWaitForAttachmentsToFinishUploading": "Please wait for attachments to finish uploading",
+  "@pleaseWaitForAttachmentsToFinishUploading": {
+    "description": "UI text: Please wait for attachments to finish uploading"
+  },
+  "imageResizedToFitLimit": "{fileName} resized to {size}{dimensions} to fit the {limit} limit.",
+  "@imageResizedToFitLimit": {
+    "description": "Composer notice after an oversized image was shrunk to fit the forum's upload limit; size and limit are formatted file sizes; dimensions is empty or ' (1200×800 → 900×600)' with a leading space",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "dimensions": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "imageTooLargeCouldNotResize": "{fileName}: too large ({size}) and could not be resized. Limit is {limit}.",
+  "@imageTooLargeCouldNotResize": {
+    "description": "Composer error when a picked image is over the forum's upload limit and shrinking it failed; size and limit are formatted file sizes",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "fileTooLargeForForum": "{fileName} is {fileBytes}. This forum allows up to {maxBytes}.",
+  "@fileTooLargeForForum": {
+    "description": "UI text: {fileName} is {fileBytes}. This forum allows up to {maxBytes",
+    "placeholders": {
+      "fileName": {
+        "type": "Object"
+      },
+      "fileBytes": {
+        "type": "Object"
+      },
+      "maxBytes": {
+        "type": "Object"
+      }
+    }
   }
 }

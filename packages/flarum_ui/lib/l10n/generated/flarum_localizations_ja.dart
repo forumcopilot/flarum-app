@@ -682,4 +682,45 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get hiddenHint => 'このタグのディスカッションを一覧から非表示にします。';
+
+  @override
+  String get attachFile => 'ファイルを添付';
+
+  @override
+  String get uploadImage => '画像をアップロード';
+
+  @override
+  String get takePhoto => '写真を撮る';
+
+  @override
+  String uploadingFilename(String filename) {
+    return 'アップロード中: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return 'ファイルをアップロードできませんでした: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      '添付ファイルのアップロード完了までお待ちください';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName を上限 $limit に収まるよう $size$dimensions に縮小しました。';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: サイズが大きすぎ（$size）、縮小できませんでした。上限は $limit です。';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName は $fileBytes です。このフォーラムの上限は $maxBytes です。';
+  }
 }

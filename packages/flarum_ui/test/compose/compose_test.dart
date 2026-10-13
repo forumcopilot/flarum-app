@@ -6,11 +6,14 @@ import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flarum_ui/src/compose/compose_page.dart';
 import 'package:flarum_ui/src/compose/composers.dart';
+import 'package:flarum_ui/src/compose/upload_tile.dart';
+import 'package:flarum_ui/src/compose/uploads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
+import 'package:image_picker/image_picker.dart' show XFile;
 
 const _fixtures = '../flarum_core/test/fixtures';
 
@@ -40,6 +43,16 @@ Future<void> _settle(WidgetTester tester) async {
   }
 }
 
+/// Pumps while [waiting], letting real file reads finish between frames: an upload reads the
+/// picked file.
+Future<void> _pumpWhile(WidgetTester tester, bool Function() waiting) async {
+  for (var i = 0; i < 100 && waiting(); i++) {
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+    await tester.pump(const Duration(milliseconds: 10));
+  }
+  expect(waiting(), isFalse);
+}
+
 Future<void> _close(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox());
   await tester.pump(const Duration(seconds: 5));
@@ -48,6 +61,8 @@ Future<void> _close(WidgetTester tester) async {
 /// The text field of the composer: the post's text (the last field), or its title.
 Finder _field({bool title = false}) =>
     title ? find.widgetWithText(TextField, 'Title') : find.byType(TextField).last;
+
+String _text(WidgetTester tester) => tester.widget<TextField>(_field()).controller!.text;
 
 void main() {
   setUp(FlarumForum.resetForTesting);
@@ -194,6 +209,69 @@ void main() {
         await tester.tap(find.text('Save'));
         await _pumpUntil(tester, find.byType(ComposePage), gone: true);
         expect(saved?.source, WriteSamples.edit);
+        await _close(tester);
+      });
+
+      testWidgets('a photo and a file go into the text as they upload, each with a tile; Send waits for them',
+          (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        final dir = (await tester.runAsync(() => Directory.systemTemp.createTemp('compose_uploads')))!;
+        addTearDown(() => dir.deleteSync(recursive: true));
+        final image = File('${dir.path}/${WriteSamples.uploadImageName}');
+        final file = File('${dir.path}/${WriteSamples.uploadFileName}');
+        await tester.runAsync(() async {
+          await image.writeAsBytes(base64Decode(WriteSamples.uploadImageBase64));
+          await file.writeAsString(WriteSamples.uploadFileText);
+        });
+        String? sent;
+        await tester.pumpWidget(_app(ComposePage(
+          site: _site(),
+          title: 'Reply',
+          onSubmit: (_, content) async {
+            sent = content;
+            throw const ComposeProblem('Kept open');
+          },
+          pickFiles: (source) async => [XFile(source == UploadSource.files ? file.path : image.path)],
+        )));
+        await _settle(tester);
+        await tester.enterText(_field(), 'Here they are');
+
+        await tester.tap(find.byTooltip('Upload image'));
+        await tester.pump();
+        expect(_text(tester), 'Here they are\n[Uploading: ${WriteSamples.uploadImageName}…]()\n');
+        expect(find.byType(UploadTile), findsOneWidget);
+        await tester.tap(find.text('Send'));
+        await tester.pump();
+        expect(find.text('Please wait for attachments to finish uploading'), findsOneWidget);
+        expect(sent, isNull);
+
+        await _pumpWhile(tester, () => _text(tester).contains('Uploading'));
+        expect(_text(tester), matches(RegExp(r'^Here they are\n\[upl-image-preview uuid=\S+ url=\S+ alt=')));
+        expect(_text(tester), isNot(contains('{TEXT?}')));
+
+        await tester.tap(find.byTooltip('Attach file'));
+        await tester.pump();
+        await _pumpWhile(tester, () => _text(tester).contains('Uploading'));
+        expect(_text(tester), contains('[upl-file uuid='));
+        expect(find.byType(UploadTile), findsNWidgets(2));
+
+        // Removing the file takes its BBCode out; it stays on the forum, which lets only
+        // moderators delete.
+        await tester.tap(find.descendant(of: find.byType(UploadTile).last, matching: find.byTooltip('Remove')));
+        await tester.pump();
+        expect(_text(tester), isNot(contains('[upl-file')));
+        expect(find.byType(UploadTile), findsOneWidget);
+        expect(fixtures.requests.where((r) => r.method == 'DELETE'), isEmpty);
+
+        await tester.tap(find.text('Send'));
+        await tester.pump();
+        expect(sent, startsWith('Here they are\n[upl-image-preview uuid='));
+
+        // Deleting a photo's BBCode from the text takes its tile away too.
+        await tester.enterText(_field(), 'Here they are');
+        await tester.pump();
+        expect(find.byType(UploadTile), findsNothing);
         await _close(tester);
       });
 

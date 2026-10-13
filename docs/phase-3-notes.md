@@ -44,3 +44,27 @@ is on branch `phase-3`, started 13 October 2026 from `phase-2` at 39fbc95.
   on it; `FixtureForum` matches 2.0's best answer and 1.x's tag level on their whole `data`, and
   serves a request recorded twice (a reaction, then the same to take it back) in order.
 
+
+## Milestone 3: uploads
+
+- **flarum_core:** `FlarumApi.upload` (fof/upload's `POST /api/fof/upload`, multipart `files[]`)
+  gives each file with the BBCode that puts it in a post: an image preview, or a download card for
+  anything else. 1.x leaves the image's alt text as its template's `{TEXT?}`; the app fills in the
+  file's name, as 2.0 does. `deleteUpload` is for moderators: fof/upload refuses members by default
+  (`canDelete` false even for their own). The SDK's attachment proxy uploads too, and a reply or a
+  new discussion given its ids gets their BBCode at the end.
+- **Composer:** on forums where the reader may upload (`fof-upload.canUpload`), Upload image (several
+  from the gallery), Take photo, and Attach file. Each goes into the text at the cursor as the web's
+  `[Uploading: name…]()` and becomes its BBCode when it lands, with a tile above the toolbar (a
+  thumbnail or the file's kind, a spinner, Remove). Send waits for uploads still on their way.
+  Removing a tile takes its BBCode out; the file stays on the forum unless the reader may delete it.
+- **Size:** Flarum doesn't tell the app its upload limit. A file goes as picked; refused as too big,
+  a photo is shrunk to the limit the refusal names (forum_kit's `shrinkImageToFit`) and sent once
+  more, and the limit is remembered, so the next file over it is shrunk (or refused) before it goes.
+  The refusals: fof/upload's own rule (2048 kB by default) is a 422 naming it; past PHP's
+  `post_max_size` the files never arrive, a 400 that names fof/upload's limit; past PHP's
+  `upload_max_filesize` (2 MB by default) a 413 `max_upload_file_size_ini`; past nginx's
+  `client_max_body_size` (1 MB by default) a 413 page of HTML.
+- **Tests:** the write recorder uploads a 1×1 PNG and a text file as bob, tries to delete one (403),
+  and has the admin delete both; `FixtureForum` matches an upload by its files' names. The shrink
+  and retry is tested with scripted refusals.

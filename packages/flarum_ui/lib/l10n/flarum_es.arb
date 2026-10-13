@@ -172,5 +172,14 @@
   "lurkingHint": "Recibir avisos de discusiones nuevas y de cada respuesta.",
   "tagIgnoringHint": "No recibir avisos nunca de las discusiones de aquí.",
   "hidden": "Oculta",
-  "hiddenHint": "Ocultar las discusiones de esta etiqueta de las listas."
+  "hiddenHint": "Ocultar las discusiones de esta etiqueta de las listas.",
+  "attachFile": "Adjuntar archivo",
+  "uploadImage": "Subir imagen",
+  "takePhoto": "Tomar foto",
+  "uploadingFilename": "Subiendo: {filename}…",
+  "failedToUploadFile2": "No se pudo subir el archivo: {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "Espera a que terminen de subirse los adjuntos",
+  "imageResizedToFitLimit": "{fileName} se redujo a {size}{dimensions} para ajustarse al límite de {limit}.",
+  "imageTooLargeCouldNotResize": "{fileName}: demasiado grande ({size}) y no se pudo reducir. El límite es {limit}.",
+  "fileTooLargeForForum": "{fileName} pesa {fileBytes}. Este foro permite hasta {maxBytes}."
 }

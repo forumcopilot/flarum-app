@@ -682,4 +682,44 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get hiddenHint => '在讨论列表中隐藏此标签的讨论。';
+
+  @override
+  String get attachFile => '附加文件';
+
+  @override
+  String get uploadImage => '上传图片';
+
+  @override
+  String get takePhoto => '拍照';
+
+  @override
+  String uploadingFilename(String filename) {
+    return '正在上传：$filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return '文件上传失败：$errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading => '请等待附件上传完成';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName 已缩小至 $size$dimensions，以符合 $limit 的上限。';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName：文件过大（$size），且无法缩小。上限为 $limit。';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName 大小为 $fileBytes。此论坛最多允许 $maxBytes。';
+  }
 }

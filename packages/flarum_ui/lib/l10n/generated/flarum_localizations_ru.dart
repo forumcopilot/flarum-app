@@ -708,4 +708,45 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get hiddenHint => 'Скрыть обсуждения с этим тегом из списков.';
+
+  @override
+  String get attachFile => 'Прикрепить файл';
+
+  @override
+  String get uploadImage => 'Загрузить изображение';
+
+  @override
+  String get takePhoto => 'Сделать фото';
+
+  @override
+  String uploadingFilename(String filename) {
+    return 'Загрузка: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return 'Не удалось загрузить файл: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      'Дождитесь окончания загрузки вложений';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName уменьшен до $size$dimensions, чтобы уложиться в ограничение $limit.';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: слишком большой файл ($size), уменьшить не удалось. Ограничение — $limit.';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return 'Размер $fileName: $fileBytes. Форум допускает до $maxBytes.';
+  }
 }

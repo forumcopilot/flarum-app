@@ -172,5 +172,14 @@
   "lurkingHint": "新しいディスカッションとすべての返信を通知します。",
   "tagIgnoringHint": "ここのディスカッションは通知しません。",
   "hidden": "非表示",
-  "hiddenHint": "このタグのディスカッションを一覧から非表示にします。"
+  "hiddenHint": "このタグのディスカッションを一覧から非表示にします。",
+  "attachFile": "ファイルを添付",
+  "uploadImage": "画像をアップロード",
+  "takePhoto": "写真を撮る",
+  "uploadingFilename": "アップロード中: {filename}…",
+  "failedToUploadFile2": "ファイルをアップロードできませんでした: {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "添付ファイルのアップロード完了までお待ちください",
+  "imageResizedToFitLimit": "{fileName} を上限 {limit} に収まるよう {size}{dimensions} に縮小しました。",
+  "imageTooLargeCouldNotResize": "{fileName}: サイズが大きすぎ（{size}）、縮小できませんでした。上限は {limit} です。",
+  "fileTooLargeForForum": "{fileName} は {fileBytes} です。このフォーラムの上限は {maxBytes} です。"
 }

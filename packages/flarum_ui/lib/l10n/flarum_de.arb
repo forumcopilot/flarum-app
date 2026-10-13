@@ -172,5 +172,14 @@
   "lurkingHint": "Bei neuen Diskussionen und jeder Antwort benachrichtigen.",
   "tagIgnoringHint": "Hier nie benachrichtigen.",
   "hidden": "Ausgeblendet",
-  "hiddenHint": "Die Diskussionen dieses Schlagworts aus den Diskussionslisten ausblenden."
+  "hiddenHint": "Die Diskussionen dieses Schlagworts aus den Diskussionslisten ausblenden.",
+  "attachFile": "Datei anhängen",
+  "uploadImage": "Bild hochladen",
+  "takePhoto": "Foto aufnehmen",
+  "uploadingFilename": "Wird hochgeladen: {filename} …",
+  "failedToUploadFile2": "Datei konnte nicht hochgeladen werden: {errorMessage}",
+  "pleaseWaitForAttachmentsToFinishUploading": "Bitte warten, bis alle Anhänge hochgeladen sind",
+  "imageResizedToFitLimit": "{fileName} wurde auf {size}{dimensions} verkleinert, um das Limit von {limit} einzuhalten.",
+  "imageTooLargeCouldNotResize": "{fileName}: zu groß ({size}) und konnte nicht verkleinert werden. Das Limit ist {limit}.",
+  "fileTooLargeForForum": "{fileName} ist {fileBytes} groß. Dieses Forum erlaubt bis zu {maxBytes}."
 }

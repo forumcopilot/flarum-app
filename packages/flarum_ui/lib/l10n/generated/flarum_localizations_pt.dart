@@ -701,4 +701,45 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get hiddenHint => 'Ocultar as discussões desta tag das listas.';
+
+  @override
+  String get attachFile => 'Anexar arquivo';
+
+  @override
+  String get uploadImage => 'Enviar imagem';
+
+  @override
+  String get takePhoto => 'Tirar foto';
+
+  @override
+  String uploadingFilename(String filename) {
+    return 'A enviar: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return 'Falha ao enviar o arquivo: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      'Aguarde o término do envio dos anexos';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName redimensionado para $size$dimensions para caber no limite de $limit.';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: grande demais ($size) e não pôde ser redimensionado. O limite é $limit.';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName tem $fileBytes. Este fórum permite até $maxBytes.';
+  }
 }

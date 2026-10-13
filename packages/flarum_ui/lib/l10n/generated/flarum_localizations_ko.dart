@@ -682,4 +682,45 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get hiddenHint => '이 태그의 토론을 목록에서 숨깁니다.';
+
+  @override
+  String get attachFile => '파일 첨부';
+
+  @override
+  String get uploadImage => '이미지 업로드';
+
+  @override
+  String get takePhoto => '사진 촬영';
+
+  @override
+  String uploadingFilename(String filename) {
+    return '업로드 중: $filename…';
+  }
+
+  @override
+  String failedToUploadFile2(Object errorMessage) {
+    return '파일 업로드 실패: $errorMessage';
+  }
+
+  @override
+  String get pleaseWaitForAttachmentsToFinishUploading =>
+      '첨부 파일 업로드가 끝날 때까지 기다려 주세요';
+
+  @override
+  String imageResizedToFitLimit(
+      String fileName, String size, String dimensions, String limit) {
+    return '$fileName을(를) $limit 제한에 맞게 $size$dimensions(으)로 줄였습니다.';
+  }
+
+  @override
+  String imageTooLargeCouldNotResize(
+      String fileName, String size, String limit) {
+    return '$fileName: 너무 크며($size) 크기를 줄일 수 없습니다. 제한은 $limit입니다.';
+  }
+
+  @override
+  String fileTooLargeForForum(
+      Object fileName, Object fileBytes, Object maxBytes) {
+    return '$fileName의 크기는 $fileBytes입니다. 이 포럼은 최대 $maxBytes까지 허용합니다.';
+  }
 }

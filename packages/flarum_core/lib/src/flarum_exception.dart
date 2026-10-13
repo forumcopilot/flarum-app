@@ -67,6 +67,31 @@ class FlarumApiException implements Exception {
   /// The forum's posting throttle refused it: one post every 10 seconds by default.
   bool get isThrottled => statusCode == 429;
 
+  /// An upload the forum refused as too big. fof/upload's own limit (2048 kB by default) is a 422
+  /// naming it ("Uploads over 2048 kb are not accepted."); a request past PHP's `post_max_size`
+  /// arrives with no files, a 400 that names it too; past PHP's `upload_max_filesize` it is a 413
+  /// `max_upload_file_size_ini`, and past the web server's limit a 413 page of HTML.
+  bool get isTooLarge =>
+      statusCode == 413 ||
+      errors.any((e) => e.code == 'fof-upload.no_files_made_it_to_upload') ||
+      (isValidationError && _namedLimit != null);
+
+  /// For a refusal that [isTooLarge], the most the forum takes, in bytes: the limit it names, else
+  /// the default of whatever refused it (2 MB for PHP's, 1 MB for nginx's). Null otherwise.
+  int? get uploadLimit {
+    if (!isTooLarge) return null;
+    if (_namedLimit case final limit?) return limit;
+    return errors.any((e) => e.code == 'fof-upload.max_upload_file_size_ini') ? 2 << 20 : 1 << 20;
+  }
+
+  int? get _namedLimit {
+    for (final error in errors) {
+      final kb = RegExp(r'(\d+)\s*kb\b', caseSensitive: false).firstMatch(error.detail ?? '');
+      if (kb != null) return int.parse(kb.group(1)!) * 1024;
+    }
+    return null;
+  }
+
   /// Every reason the forum gave, one a line: 2.0 names each invalid field, 1.x the first rule
   /// that failed. [message] when it gave none.
   String get reasons {

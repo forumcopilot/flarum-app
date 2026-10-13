@@ -123,6 +123,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   without them. Without flarum/tags, `/api/tags` is a 404.
 - fof/upload: `fof-upload.canDownload` (forum attribute) is the reader's download permission;
   without it `/api/fof/download/…` answers 403. Members don't have it by default.
+  `fof-upload.canUpload` is the upload permission. `POST /api/fof/upload` (multipart `files[]`)
+  answers with each file's `bbcode`; 1.x leaves an image's alt as `{TEXT?}`. Only moderators may
+  delete uploads by default (`canDelete`). The size limit isn't published: refusals name it (a 422
+  or 400 saying "… 2048 kb"), or are a 413 from PHP or nginx (docs/phase-3-notes.md, Milestone 3).
 - The unread notification count (`GET /api` actor) is cached for 5 minutes and not cleared when a
   notification is deleted (a like withdrawn), so it can exceed what the list shows until then.
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the

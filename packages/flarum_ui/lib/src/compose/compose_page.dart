@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
@@ -8,6 +10,7 @@ import 'package:forum_kit/views/widgets/discard_changes_scope.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../widgets/flarum_avatar.dart';
 import 'flarum_markup.dart';
 import 'mention_picker_page.dart';
 
@@ -66,6 +69,11 @@ class _ComposePageState extends State<ComposePage> {
   bool _isSubmitting = false;
   bool _isContentFieldFocused = false;
 
+  /// Members matching the `@name` being typed, offered above the toolbar.
+  List<FlarumUser> _suggestions = const [];
+  Timer? _suggestTimer;
+  int _suggestSearches = 0;
+
   /// What the composer opened with, for [_hasChanges].
   late final String _openedTitle = _titleController.text;
   late final String _openedContent = _contentController.text;
@@ -84,10 +92,12 @@ class _ComposePageState extends State<ComposePage> {
       (widget.showTitleField && _titleController.text.isEmpty ? _titleFocusNode : _contentFocusNode).requestFocus();
     });
     _contentFocusNode.addListener(() => setState(() => _isContentFieldFocused = _contentFocusNode.hasFocus));
+    _contentController.addListener(_contentChanged);
   }
 
   @override
   void dispose() {
+    _suggestTimer?.cancel();
     _titleController.dispose();
     _contentController.dispose();
     _titleFocusNode.dispose();
@@ -111,6 +121,52 @@ class _ComposePageState extends State<ComposePage> {
       text: newText,
       selection: TextSelection.collapsed(offset: selection.start + text.length),
     );
+  }
+
+  /// The `@name` typed just before the cursor, as the web's mention autocomplete reads it.
+  ({int start, String query})? _mentionAtCursor() {
+    final value = _contentController.value;
+    final cursor = value.selection.baseOffset;
+    if (!value.selection.isCollapsed || cursor < 0 || cursor > value.text.length) return null;
+    final typed = RegExp(r'(?:^|[\s(])@([^\s@"#]{2,30})$').firstMatch(value.text.substring(0, cursor));
+    if (typed == null) return null;
+    final query = typed.group(1)!;
+    return (start: cursor - query.length - 1, query: query);
+  }
+
+  void _contentChanged() {
+    if (!_canMention) return;
+    _suggestTimer?.cancel();
+    final typing = _mentionAtCursor();
+    if (typing == null) {
+      if (_suggestions.isNotEmpty) setState(() => _suggestions = const []);
+      return;
+    }
+    _suggestTimer = Timer(const Duration(milliseconds: 250), () => _suggest(typing.query));
+  }
+
+  Future<void> _suggest(String query) async {
+    final search = ++_suggestSearches;
+    try {
+      final page = await FlarumForum.of(widget.site).api.searchUsers(query);
+      if (!mounted || search != _suggestSearches || _mentionAtCursor()?.query != query) return;
+      setState(() => _suggestions = page.items.take(5).toList());
+    } catch (_) {
+      // Suggestions are a convenience; the mention button still searches.
+    }
+  }
+
+  /// Puts [user]'s mention in place of the `@name` being typed.
+  void _pickSuggestion(FlarumUser user) {
+    final typing = _mentionAtCursor();
+    if (typing == null) return;
+    final value = _contentController.value;
+    final mention = '${FlarumMarkup.userMention(user.displayName, user.id)} ';
+    _contentController.value = TextEditingValue(
+      text: value.text.replaceRange(typing.start, value.selection.baseOffset, mention),
+      selection: TextSelection.collapsed(offset: typing.start + mention.length),
+    );
+    setState(() => _suggestions = const []);
   }
 
   Future<void> _mention() async {
@@ -265,6 +321,7 @@ class _ComposePageState extends State<ComposePage> {
                   ),
                 ),
               ),
+              if (_suggestions.isNotEmpty && _isContentFieldFocused) _suggestionStrip(),
               _toolbar(context),
             ],
           ),
@@ -272,6 +329,22 @@ class _ComposePageState extends State<ComposePage> {
       ),
     );
   }
+
+  /// The members matching the `@name` being typed, a tap away.
+  Widget _suggestionStrip() => SizedBox(
+        height: 48,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL, vertical: DesignTokens.spacingXS),
+          itemCount: _suggestions.length,
+          separatorBuilder: (_, __) => const SizedBox(width: DesignTokens.spacingS),
+          itemBuilder: (_, i) => ActionChip(
+            avatar: FlarumAvatar(user: _suggestions[i], radius: 12),
+            label: Text(_suggestions[i].displayName),
+            onPressed: () => _pickSuggestion(_suggestions[i]),
+          ),
+        ),
+      );
 
   Widget _toolbar(BuildContext context) {
     final l10n = flarumL10n(context);

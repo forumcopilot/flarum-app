@@ -143,6 +143,29 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets('typing @ and a name offers members to mention', (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        await tester.pumpWidget(_app(Builder(
+          builder: (context) => TextButton(
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (_) => ComposePage(site: _site(), title: 'Reply', onSubmit: (_, __) async => null),
+            )),
+            child: const Text('open'),
+          ),
+        )));
+        await tester.tap(find.text('open'));
+        await _settle(tester);
+        await tester.tap(_field());
+        await tester.enterText(_field(), 'Thanks @bo');
+        await _pumpUntil(tester, find.widgetWithText(ActionChip, 'bob'));
+        await tester.tap(find.widgetWithText(ActionChip, 'bob'));
+        await tester.pump();
+        expect(tester.widget<TextField>(_field()).controller!.text, 'Thanks @"bob"#${fixtures.userId('bob')} ');
+        expect(find.byType(ActionChip), findsNothing, reason: 'the strip goes once one is picked');
+        await _close(tester);
+      });
+
       testWidgets('an edit opens on the post\'s source and saves it', (tester) async {
         fixtures.forum();
         // The reply the write fixtures recorded: bob's, his to edit.

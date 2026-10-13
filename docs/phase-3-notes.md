@@ -11,8 +11,9 @@ is on branch `phase-3`, started 13 October 2026 from `phase-2` at 39fbc95.
   first rule); `isThrottled` is the posting throttle (429).
 - **Composer (flarum_ui `src/compose`):** `ComposePage`, copied from discourse_ui's
   MessageComposePage and adapted (uploads come in milestone 3): Flarum's markup
-  (`FlarumMarkup`: Markdown, `[u]`, `>!` and `||` spoilers), @-mentions as `@"Name"#id` through a
-  member search (`MentionPickerPage`, when the forum lets the reader search members), the
+  (`FlarumMarkup`: Markdown, `[u]`, `>!` and `||` spoilers), @-mentions as `@"Name"#id`: offered
+  while typing `@` and two letters, as the web's autocomplete does, or found with the mention
+  button (`MentionPickerPage`), when the forum lets the reader search members; the
   throttle and the forum's reasons shown as they come.
 - **Where it opens:** Reply on a thread, and Reply and Quote in each post's menu (a reply to a
   post starts `@"Name"#p<id>`, a quote `> @"Name"#p<id> …` from its source or else its words);

@@ -242,5 +242,13 @@
   "awaitingApproval": "等待审核",
   "eventMerged": "{user} 将 {titles} 中的{count, plural, other{{count} 个帖子}}合并到了此讨论。",
   "eventSplitTo": "{user} 将{count, plural, other{{count} 个帖子}}拆分到了 {title}。",
-  "eventSplitFrom": "{user} 从 {title} 拆分出了{count, plural, other{{count} 个帖子}}。"
+  "eventSplitFrom": "{user} 从 {title} 拆分出了{count, plural, other{{count} 个帖子}}。",
+  "errorNoConnection": "无法连接到论坛。请检查网络连接后重试。",
+  "errorTimedOut": "论坛响应超时，请重试。",
+  "errorBlocked": "论坛的防火墙拦截了本应用。请稍后重试，或在浏览器中打开论坛。",
+  "errorNotFound": "该内容不存在或已被删除。",
+  "errorRateLimited": "操作过于频繁，请稍候再试。",
+  "errorForumDown": "论坛暂时没有响应，请稍后再试。",
+  "errorNotAllowed": "你没有权限执行此操作。",
+  "errorUnknown": "出了点问题。请重试。"
 }

@@ -29,6 +29,6 @@ Future<void> toggleIgnore(BuildContext context, SiteContext site, FlarumUser use
   try {
     await ignored.setIgnored(user, ignoring);
   } catch (e) {
-    if (context.mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    if (context.mounted) SnackbarHelper.showError(context, describeError(context, e));
   }
 }

@@ -78,6 +78,14 @@ void main() {
         await _pumpUntil(tester, find.byType(PostTile));
         await _pumpUntil(tester, find.text('With bob, carol'));
         expect(find.text(WriteSamples.privateReply), findsOneWidget);
+        // carol may rename hers, but she's no moderator.
+        expect(find.byTooltip('Moderate'), findsNothing);
+        await _settle(tester);
+        await tester.tap(find.descendant(of: find.byType(AppBar), matching: find.byTooltip('Show menu')));
+        await _settle(tester);
+        expect(find.text('Rename'), findsOneWidget);
+        await tester.tapAt(const Offset(10, 700));
+        await _settle(tester);
         await _close(tester);
       });
 
@@ -94,7 +102,13 @@ void main() {
         await _settle(tester);
 
         await tester.enterText(find.widgetWithText(TextField, 'Title'), WriteSamples.privateTitle);
+        await tester.tap(find.text('Send'));
+        await _settle(tester);
+        // Under the field, until there's something in it.
+        expect(find.text('Please enter some content'), findsOneWidget);
         await tester.enterText(find.byType(TextField).last, WriteSamples.privateContent);
+        await tester.pump();
+        expect(find.text('Please enter some content'), findsNothing);
         await tester.tap(find.text('Send'));
         await _settle(tester);
         expect(find.text('Choose who to write to.'), findsOneWidget);

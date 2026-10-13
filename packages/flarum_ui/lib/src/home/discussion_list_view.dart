@@ -37,7 +37,7 @@ class DiscussionListView extends StatelessWidget {
       if (list.error != null) {
         return EmptyStateView.error(
           message: l10n.discussionsLoadFailed,
-          hint: describeFlarumError(list.error!),
+          hint: describeError(context, list.error!),
           onRetry: list.refresh,
         );
       }

@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 /// One entry of a Flarum JSON:API `errors[]` array.
 class FlarumApiError {
   const FlarumApiError({this.status, this.code, this.detail, this.pointer, this.parameter});
@@ -59,6 +61,13 @@ class FlarumApiException implements Exception {
   final Object? cause;
 
   bool get isNetworkError => statusCode == null;
+
+  /// No answer in time: [cause] is Dio's connect, send or receive timeout.
+  bool get isTimeout => switch (cause) {
+        DioException(type: DioExceptionType.connectionTimeout || DioExceptionType.sendTimeout || DioExceptionType.receiveTimeout) =>
+          true,
+        _ => false,
+      };
   bool get isUnauthorized => statusCode == 401;
   bool get isForbidden => statusCode == 403;
   bool get isNotFound => statusCode == 404;
@@ -91,6 +100,10 @@ class FlarumApiException implements Exception {
     }
     return null;
   }
+
+  /// Whether the forum said in words what was wrong (a validation message, say), rather than only a
+  /// code such as 1.x's `permission_denied`.
+  bool get hasDetail => errors.any((e) => e.detail?.isNotEmpty ?? false);
 
   /// Every reason the forum gave, one a line: 2.0 names each invalid field, 1.x the first rule
   /// that failed. [message] when it gave none.

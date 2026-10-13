@@ -127,8 +127,8 @@ messages.
 
 ## Milestone 5: moderation basics
 
-- **Discussion:** a shield on the thread's bar for whoever may do something there (a moderator, or
-  the author renaming for a while): Rename, Lock/Unlock (flarum/lock), Sticky/Unsticky
+- **Discussion:** a menu on the thread's bar for whoever may do something there: a shield for a
+  moderator, a plain ⋮ for an author who may rename it or delete it before anyone replies: Rename, Lock/Unlock (flarum/lock), Sticky/Unsticky
   (flarum/sticky), Delete/Restore (Flarum's soft delete, `isHidden`) and Delete forever once
   deleted. Each is a PATCH of the discussion (`title`, `isLocked`, `isSticky`, `isHidden`) or a
   DELETE; the thread is read again after, where it was opened (a rename, a lock or a pin leaves an
@@ -151,3 +151,46 @@ messages.
   bob's profile as the moderator sees them (state `moderator`), deletes a reply bob writes for it,
   and suspends bob indefinitely and lifts it (lifted again in a `finally`); bob's forum while
   suspended is state `suspended`.
+
+## Phone check (13 October 2026)
+
+The Pixel 4a check of aea1b6e, as bob on both forums, passed uploads, flags, ignoring, private
+discussions, messages (2.0) and the Phase 2 re-check fixes (tag chips open in the app; the badge
+equals the unread rows). Taking a photo and moderation weren't tried. Fixed after it:
+
+- **Send a message from a profile opened an empty conversation** where the reader already had one
+  with that person. flarum/messages can't list dialogs by person, so the page now looks for it in
+  the reader's list (`FlarumApi.dialogWith`, five pages at most) before showing anything; a first
+  message to someone found nowhere still lands in an older conversation, since the forum looks
+  for one too.
+- **Errors showed the exception** ("No response: DioException [connection error] … Failed host
+  lookup") offline. Every message to the reader now goes through `describeError`, discourse_ui's
+  wording in the reader's language: no connection, no answer in time, the forum's firewall (a 403
+  without Flarum's JSON errors), no permission (1.x's `permission_denied` has no words of its own),
+  not found, too many requests, the forum down; otherwise the forum's own message.
+- **Send on an empty title or text seemed to do nothing:** it said so in a snackbar for four
+  seconds, which the run didn't see. The empty field now says it underneath until written in.
+- **A photo from the gallery was called "1000000057.jpg"**, Android's photo picker naming it by its
+  media id, and that was its file name in the post and 1.x's alt text. Such photos are now named as
+  the camera names one just taken (`IMG_20261013_221203.jpg`, `_2` and on for the others picked with
+  it); files with names of their own keep them.
+- **bob saw the moderator's shield on his own discussions:** he may rename them, and delete one
+  nobody has replied to, as the web's discussion controls offer an author. It's a ⋮ now; the shield
+  is for whoever may lock, pin or delete for good.
+- **The "Add someone" search offered saved passwords** (Android's autofill): it's out of autofill.
+- **The resize notice was right:** the app sent 1,898,739 bytes ("1.8 MB"); fof/upload re-encodes
+  every JPEG it stores (quality 90), which made the stored copies 2,249,138 bytes. On 2.0, deleting
+  an upload leaves its `-thumb.webp` behind.
+
+Benchmark (thread 26838, profile): build max 70–71 ms (105–110 before the Phase 2 fix), build p99
+17.5–17.6 ms, but still 12–13 frames a run with build over 16.7 ms: each the first build of a post,
+not rebuilds any more. Profiling those builds (all of the thread's posts, in a test) found two
+costs of our own as large as each other: the post's text direction, worked out with a Unicode regex
+over every letter, and our 22 style selectors, which flutter_html matches through `package:html`,
+parsing each selector again for every element. The direction is now a scan of the text (the same
+answer on all 650 posts tried, 68 times faster), and the selectors are read once and applied by an
+extension before flutter_html's styling (`_SelectorStyles`; every post renders to the same tree as
+before, in light and dark). Each page of posts is also prepared on a worker isolate as it arrives
+(`FlarumHtml.warm`, which nothing called). What remains is flutter_html's own work, mostly its
+layout. To be measured on the phone again.
+

@@ -942,4 +942,28 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     );
     return '$user 님이 $title에서 $_temp0를 분리했습니다.';
   }
+
+  @override
+  String get errorNoConnection => '포럼에 연결할 수 없습니다. 연결을 확인하고 다시 시도하세요.';
+
+  @override
+  String get errorTimedOut => '포럼 응답이 너무 오래 걸립니다. 다시 시도하세요.';
+
+  @override
+  String get errorBlocked => '포럼의 방화벽이 앱을 차단했습니다. 나중에 다시 시도하거나 브라우저에서 포럼을 여세요.';
+
+  @override
+  String get errorNotFound => '존재하지 않거나 삭제되었습니다.';
+
+  @override
+  String get errorRateLimited => '너무 자주 시도하고 있습니다. 잠시 후 다시 시도하세요.';
+
+  @override
+  String get errorForumDown => '포럼이 지금 응답하지 않습니다. 나중에 다시 시도하세요.';
+
+  @override
+  String get errorNotAllowed => '그 작업을 할 권한이 없습니다.';
+
+  @override
+  String get errorUnknown => '문제가 발생했습니다. 다시 시도하세요.';
 }

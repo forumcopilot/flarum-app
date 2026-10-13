@@ -1576,6 +1576,54 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'{user} split {count, plural, =1{1 post} other{{count} posts}} off from {title}.'**
   String eventSplitFrom(String user, int count, String title);
+
+  /// Error: no response from the forum (offline, DNS, refused).
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the forum. Check your connection and try again.'**
+  String get errorNoConnection;
+
+  /// Error: the forum did not answer in time.
+  ///
+  /// In en, this message translates to:
+  /// **'The forum took too long to answer. Please try again.'**
+  String get errorTimedOut;
+
+  /// Error: a firewall's page answered instead of the forum (a 403 without the forum's own error).
+  ///
+  /// In en, this message translates to:
+  /// **'The forum\'s firewall blocked the app. Try again later, or open the forum in a browser.'**
+  String get errorBlocked;
+
+  /// Error: 404/410 without the forum saying more.
+  ///
+  /// In en, this message translates to:
+  /// **'This doesn\'t exist, or it was removed.'**
+  String get errorNotFound;
+
+  /// Error: 429, too many requests.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re doing that too often. Please wait a moment and try again.'**
+  String get errorRateLimited;
+
+  /// Error: 5xx, the forum is down or failing.
+  ///
+  /// In en, this message translates to:
+  /// **'The forum isn\'t responding right now. Please try again later.'**
+  String get errorForumDown;
+
+  /// Error: 401/403 from the forum without its own words (Flarum 1.x's permission_denied).
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have permission to do that.'**
+  String get errorNotAllowed;
+
+  /// Error: anything else, instead of the exception text.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errorUnknown;
 }
 
 class _FlarumLocalizationsDelegate

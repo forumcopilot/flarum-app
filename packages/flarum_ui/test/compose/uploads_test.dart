@@ -118,4 +118,16 @@ void main() {
       throwsA(isA<FlarumApiException>().having((e) => e.isValidationError, 'validation', isTrue)),
     );
   });
+
+  test("photos the picker names by their media id get a camera's name; others keep theirs", () async {
+    final picked = [
+      await file('1000000057.jpg', 10),
+      await file('PXL_20261001_101010.jpg', 10),
+      await file('1000000058.JPG', 10),
+    ];
+    final named = await nameLikeACamera(picked, DateTime(2026, 10, 13, 22, 12, 3));
+    expect([for (final f in named) f.name], ['IMG_20261013_221203.jpg', 'PXL_20261001_101010.jpg', 'IMG_20261013_221203_2.jpg']);
+    expect([for (final f in named) File(f.path).existsSync()], everyElement(isTrue));
+    expect(File(picked.first.path).existsSync(), isFalse, reason: 'moved, not copied');
+  });
 }

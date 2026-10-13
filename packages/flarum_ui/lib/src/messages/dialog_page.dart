@@ -12,8 +12,9 @@ import '../render/flarum_html.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// One conversation in flarum/messages (2.0): its messages, the newest at the bottom, and a field
-/// to answer in. Opened on a dialog, or with [to] for someone the reader is writing to first: the
-/// forum then finds the dialog it has with them, or starts one, with the first message.
+/// to answer in. Opened on a dialog, or with [to] for someone the reader writes to: the
+/// conversation they already have, found in their list, or else an empty one, which the first
+/// message starts.
 class DialogPage extends StatefulWidget {
   const DialogPage({super.key, required this.site, this.dialogId, this.to});
 
@@ -34,6 +35,9 @@ class _DialogPageState extends State<DialogPage> {
   late String? _dialogId = widget.dialogId;
   FlarumDialog? _dialog;
 
+  /// Looking for the conversation the reader already has with [DialogPage.to].
+  late bool _finding = _dialogId == null && widget.to != null;
+
   /// The newest first, as the list shows them from the bottom up.
   final _messages = <FlarumDialogMessage>[];
   bool _loading = false;
@@ -47,7 +51,43 @@ class _DialogPageState extends State<DialogPage> {
   @override
   void initState() {
     super.initState();
-    if (_dialogId != null) _load(reset: true);
+    if (_finding) {
+      _find();
+    } else if (_dialogId != null) {
+      _load(reset: true);
+    }
+  }
+
+  Future<void> _find() async {
+    try {
+      final dialog = await _forum.api.dialogWith(widget.to!.id);
+      if (!mounted) return;
+      setState(() {
+        _finding = false;
+        _dialog = dialog;
+        _dialogId = dialog?.id;
+      });
+      if (dialog != null) await _load(reset: true);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _finding = false;
+          _error = e;
+        });
+      }
+    }
+  }
+
+  void _retry() {
+    if (_dialogId != null) {
+      _load(reset: true);
+    } else if (widget.to != null) {
+      setState(() {
+        _finding = true;
+        _error = null;
+      });
+      _find();
+    }
   }
 
   @override
@@ -92,7 +132,7 @@ class _DialogPageState extends State<DialogPage> {
   Future<void> _send() async {
     final content = _text.text.trim();
     final to = widget.to;
-    if (content.isEmpty || _sending || (_dialogId == null && to == null)) return;
+    if (content.isEmpty || _sending || _finding || (_dialogId == null && to == null)) return;
     setState(() => _sending = true);
     try {
       final sent = await _forum.api.sendMessage(content, dialogId: _dialogId, userIds: [if (_dialogId == null) to!.id]);
@@ -125,7 +165,7 @@ class _DialogPageState extends State<DialogPage> {
     } catch (e) {
       if (!mounted) return;
       setState(() => _sending = false);
-      SnackbarHelper.showError(context, describeFlarumError(e));
+      SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -151,11 +191,11 @@ class _DialogPageState extends State<DialogPage> {
       if (_error != null) {
         return EmptyStateView.error(
           message: l10n.messagesLoadFailed,
-          hint: describeFlarumError(_error!),
-          onRetry: () => _load(reset: true),
+          hint: describeError(context, _error!),
+          onRetry: _retry,
         );
       }
-      if (_loading) return const Center(child: CircularProgressIndicator());
+      if (_loading || _finding) return const Center(child: CircularProgressIndicator());
       return const SizedBox.shrink();
     }
     return NotificationListener<ScrollNotification>(
@@ -209,7 +249,7 @@ class _DialogPageState extends State<DialogPage> {
                 ),
               ),
               IconButton(
-                onPressed: _sending ? null : _send,
+                onPressed: _sending || _finding ? null : _send,
                 tooltip: l10n.send,
                 icon: _sending
                     ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))

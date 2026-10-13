@@ -86,6 +86,8 @@ class _MentionPickerPageState extends State<MentionPickerPage> {
           autofocus: true,
           decoration: InputDecoration(hintText: l10n.searchUsers, border: InputBorder.none),
           textInputAction: TextInputAction.search,
+          // A name to look up, not a sign-in: no "Passwords" chip from Android's autofill.
+          autofillHints: null,
           onChanged: _changed,
           onSubmitted: (text) => _search(text.trim()),
         ),
@@ -94,7 +96,7 @@ class _MentionPickerPageState extends State<MentionPickerPage> {
         (_, FlarumApiException(isForbidden: true)) =>
           EmptyStateView(icon: Icons.person_search, message: l10n.memberSearchNotAllowed),
         (_, final Object error) => EmptyStateView.error(
-            message: describeFlarumError(error),
+            message: describeError(context, error),
             onRetry: () => _search(_query.text.trim()),
           ),
         _ when _loading => const Center(child: CircularProgressIndicator()),

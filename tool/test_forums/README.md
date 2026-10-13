@@ -76,7 +76,8 @@ FLARUM_TEST_PASSWORD=… FLARUM_ADMIN_USER=admin FLARUM_ADMIN_PASSWORD=… \
 It also adds a fof/terms policy for a few seconds (deleted after), and carol's private discussion
 with bob, which fof/byobu hides even from the admin: `FLARUM_DIR` lets the recorder delete it on the
 server (`sudo -u www-data php tool/test_forums/delete_discussions.php <dir> <id>…`); without it the
-command is printed.
+command is printed. On 2.0, fof/upload's delete leaves an image's `-thumb.webp` in
+`public/assets/files/<date>/`; remove those by hand when cleaning up.
 
 A write fixture is matched by its request's attributes (the texts in `WriteSamples`) as well as
 its method and path, so a reply that worked and one the throttle refused can both be replayed.

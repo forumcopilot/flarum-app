@@ -15,10 +15,42 @@ enum UploadSource { photos, camera, files }
 /// writer cancels.
 Future<List<XFile>> pickUploads(UploadSource source) async => switch (source) {
       // No imageQuality: any value makes image_picker re-encode a photo that may well fit.
-      UploadSource.photos => await FilePickerUtils.pickMultiImage(),
+      UploadSource.photos => await nameLikeACamera(await FilePickerUtils.pickMultiImage(), DateTime.now()),
       UploadSource.camera => [if (await FilePickerUtils.takePhoto() case final photo?) photo],
       UploadSource.files => await FilePickerUtils.pickFiles(),
     };
+
+/// [photos], each named by Android's photo picker after its media id ("1000000057.jpg") renamed
+/// the way a phone camera names a photo, as forum_kit names one just taken (IMG_20261013_221233.jpg,
+/// then _2, _3 for the others picked with it): the name is what a post shows for the image, and
+/// 1.x's alt text. Each goes into a directory of its own, next to where the picker copied it.
+/// Photos with names of their own keep them, and any that can't be moved stay as they are.
+@visibleForTesting
+Future<List<XFile>> nameLikeACamera(List<XFile> photos, DateTime now) async {
+  String two(int n) => '$n'.padLeft(2, '0');
+  final stamp = 'IMG_${now.year}${two(now.month)}${two(now.day)}_${two(now.hour)}${two(now.minute)}${two(now.second)}';
+  final renamed = <XFile>[];
+  var count = 0;
+  for (final photo in photos) {
+    final dot = photo.name.lastIndexOf('.');
+    final base = dot < 0 ? photo.name : photo.name.substring(0, dot);
+    if (!RegExp(r'^\d+$').hasMatch(base)) {
+      renamed.add(photo);
+      continue;
+    }
+    count++;
+    final name = '$stamp${count == 1 ? '' : '_$count'}${dot < 0 ? '' : photo.name.substring(dot).toLowerCase()}';
+    try {
+      final file = File(photo.path);
+      final dir = await Directory('${file.parent.path}${Platform.pathSeparator}picked_${now.microsecondsSinceEpoch}_$count')
+          .create();
+      renamed.add(XFile((await file.rename('${dir.path}${Platform.pathSeparator}$name')).path));
+    } on FileSystemException {
+      renamed.add(photo);
+    }
+  }
+  return renamed;
+}
 
 /// A photo shrunk to fit the forum's limit, to tell the writer what changed.
 typedef ResizedUpload = ({String name, int bytes, int limit, String dimensions});

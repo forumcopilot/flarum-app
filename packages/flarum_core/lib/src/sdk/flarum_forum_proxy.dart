@@ -195,5 +195,11 @@ class FlarumForumProxy implements IFCForumProxy {
   }
 }
 
-/// A failure as a short message for an `FC*Result`'s resultText.
-String describeFlarumError(Object error) => error is FlarumApiException ? error.reasons : '$error';
+/// A failure as a short message for an `FC*Result`'s resultText: the forum's reasons, or what kept
+/// it from answering. (flarum_ui says these in the reader's language.)
+String describeFlarumError(Object error) => switch (error) {
+      FlarumApiException(isTimeout: true) => 'The forum took too long to answer.',
+      FlarumApiException(isNetworkError: true) => "Couldn't reach the forum.",
+      FlarumApiException() => error.reasons,
+      _ => '$error',
+    };

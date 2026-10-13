@@ -978,4 +978,34 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
     );
     return '$user hat $_temp0 aus $title abgetrennt.';
   }
+
+  @override
+  String get errorNoConnection =>
+      'Das Forum ist nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.';
+
+  @override
+  String get errorTimedOut =>
+      'Das Forum hat zu lange nicht geantwortet. Bitte versuche es erneut.';
+
+  @override
+  String get errorBlocked =>
+      'Die Firewall des Forums hat die App blockiert. Versuche es später erneut oder öffne das Forum im Browser.';
+
+  @override
+  String get errorNotFound => 'Das existiert nicht oder wurde entfernt.';
+
+  @override
+  String get errorRateLimited =>
+      'Du tust das zu oft. Bitte warte einen Moment und versuche es erneut.';
+
+  @override
+  String get errorForumDown =>
+      'Das Forum antwortet gerade nicht. Bitte versuche es später erneut.';
+
+  @override
+  String get errorNotAllowed => 'Dazu hast du keine Berechtigung.';
+
+  @override
+  String get errorUnknown =>
+      'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
 }

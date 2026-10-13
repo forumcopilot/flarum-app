@@ -940,4 +940,28 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     );
     return '$user 从 $title 拆分出了$_temp0。';
   }
+
+  @override
+  String get errorNoConnection => '无法连接到论坛。请检查网络连接后重试。';
+
+  @override
+  String get errorTimedOut => '论坛响应超时，请重试。';
+
+  @override
+  String get errorBlocked => '论坛的防火墙拦截了本应用。请稍后重试，或在浏览器中打开论坛。';
+
+  @override
+  String get errorNotFound => '该内容不存在或已被删除。';
+
+  @override
+  String get errorRateLimited => '操作过于频繁，请稍候再试。';
+
+  @override
+  String get errorForumDown => '论坛暂时没有响应，请稍后再试。';
+
+  @override
+  String get errorNotAllowed => '你没有权限执行此操作。';
+
+  @override
+  String get errorUnknown => '出了点问题。请重试。';
 }

@@ -714,6 +714,22 @@ class FlarumApi {
     );
   }
 
+  /// The reader's dialog with user [userId] alone, if they have one: flarum/messages can't filter
+  /// dialogs by person, so this reads the reader's list, the latest first, up to [pages] pages (a
+  /// first message to them would find an older one on the forum anyway).
+  Future<FlarumDialog?> dialogWith(String userId, {int pages = 5}) async {
+    var offset = 0;
+    for (var i = 0; i < pages; i++) {
+      final page = await dialogs(offset: offset);
+      for (final dialog in page.items) {
+        if (dialog.users.length == 2 && dialog.users.any((user) => user.id == userId)) return dialog;
+      }
+      if (!page.hasMore) break;
+      offset += page.items.length;
+    }
+    return null;
+  }
+
   /// Dialog [id], with its people.
   Future<FlarumDialog> dialog(String id) async {
     final document = await client.get('/dialogs/$id', query: {'include': 'users'});

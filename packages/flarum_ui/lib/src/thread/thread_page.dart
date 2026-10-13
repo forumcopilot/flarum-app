@@ -64,7 +64,9 @@ class ThreadPage extends StatefulWidget {
 }
 
 class _ThreadPageState extends State<ThreadPage> {
-  late final ThreadModel _model = ThreadModel(FlarumForum.of(widget.site), widget.discussionId)..addListener(_changed);
+  late final ThreadModel _model =
+      ThreadModel(FlarumForum.of(widget.site), widget.discussionId, forumBaseUrl: widget.site.site.url)
+        ..addListener(_changed);
   late final IgnoredUsers _ignored = IgnoredUsers.of(widget.site)..addListener(_changed);
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
@@ -211,7 +213,7 @@ class _ThreadPageState extends State<ThreadPage> {
       if (mounted) _goTo(answer.number);
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(describeFlarumError(e))));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(describeError(context, e))));
     }
   }
 
@@ -251,7 +253,7 @@ class _ThreadPageState extends State<ThreadPage> {
       if (shown != null) _model.replacePost(reconcile(shown, saved));
     } catch (e) {
       _model.replacePost(before);
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -312,7 +314,7 @@ class _ThreadPageState extends State<ThreadPage> {
       await _forum.api.deletePost(post.id);
       if (mounted) _reload(at: post.number);
     } catch (e) {
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -357,7 +359,7 @@ class _ThreadPageState extends State<ThreadPage> {
       // Where it was opened: the forum's answer doesn't say where an event post went.
       if (mounted) _reload(at: _near ?? 1);
     } catch (e) {
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -387,7 +389,7 @@ class _ThreadPageState extends State<ThreadPage> {
       await send();
     } catch (e) {
       _model.updateDiscussion((_) => before);
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -474,7 +476,7 @@ class _ThreadPageState extends State<ThreadPage> {
       body: switch (_model) {
         ThreadModel(discussion: null, error: final error?) => EmptyStateView.error(
             message: l10n.threadLoadFailed,
-            hint: describeFlarumError(error),
+            hint: describeError(context, error),
             onRetry: () => _model.open(near: _near),
           ),
         ThreadModel(discussion: null) => const Center(child: CircularProgressIndicator()),
@@ -622,8 +624,9 @@ class _RenameDialogState extends State<_RenameDialog> {
       );
 }
 
-/// What a moderator may do to the discussion, as the web's discussion controls offer it (its author
-/// may rename it for a while, too).
+/// What a moderator may do to the discussion, as the web's discussion controls offer it. Its author
+/// may rename it too, and delete it while nobody has replied: for an author who isn't a moderator
+/// the menu is a plain ⋮, not the moderator's shield.
 class _ModerationMenu extends StatelessWidget {
   const _ModerationMenu({required this.discussion, required this.onSelected});
 
@@ -641,9 +644,10 @@ class _ModerationMenu extends StatelessWidget {
           child: Row(children: [Icon(icon), const SizedBox(width: DesignTokens.spacingM), Flexible(child: Text(label))]),
         );
     final d = discussion;
+    final moderator = d.canLock || d.canSticky || d.canDelete;
     return PopupMenuButton<_DiscussionAction>(
-      icon: const Icon(Icons.shield_outlined),
-      tooltip: l10n.moderate,
+      icon: Icon(moderator ? Icons.shield_outlined : Icons.more_vert),
+      tooltip: moderator ? l10n.moderate : MaterialLocalizations.of(context).showMenuTooltip,
       onSelected: onSelected,
       itemBuilder: (context) => [
         if (d.canRename) item(_DiscussionAction.rename, Icons.edit_outlined, l10n.renameDiscussion),

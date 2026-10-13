@@ -982,4 +982,33 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
     );
     return '$user отделил(а) $_temp0 из $title.';
   }
+
+  @override
+  String get errorNoConnection =>
+      'Не удалось подключиться к форуму. Проверьте соединение и повторите попытку.';
+
+  @override
+  String get errorTimedOut =>
+      'Форум слишком долго не отвечает. Повторите попытку.';
+
+  @override
+  String get errorBlocked =>
+      'Брандмауэр форума заблокировал приложение. Повторите попытку позже или откройте форум в браузере.';
+
+  @override
+  String get errorNotFound => 'Этого не существует, или это было удалено.';
+
+  @override
+  String get errorRateLimited =>
+      'Вы делаете это слишком часто. Подождите немного и повторите попытку.';
+
+  @override
+  String get errorForumDown =>
+      'Форум сейчас не отвечает. Повторите попытку позже.';
+
+  @override
+  String get errorNotAllowed => 'У вас нет прав на это действие.';
+
+  @override
+  String get errorUnknown => 'Что-то пошло не так. Повторите попытку.';
 }

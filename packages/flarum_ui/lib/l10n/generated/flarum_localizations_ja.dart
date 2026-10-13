@@ -942,4 +942,29 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
     );
     return '$userが$titleから$_temp0を分割しました。';
   }
+
+  @override
+  String get errorNoConnection => 'フォーラムに接続できませんでした。接続を確認して、もう一度お試しください。';
+
+  @override
+  String get errorTimedOut => 'フォーラムの応答に時間がかかりすぎています。もう一度お試しください。';
+
+  @override
+  String get errorBlocked =>
+      'フォーラムのファイアウォールによってアプリがブロックされました。しばらくしてから再度お試しいただくか、ブラウザでフォーラムを開いてください。';
+
+  @override
+  String get errorNotFound => '存在しないか、削除されています。';
+
+  @override
+  String get errorRateLimited => '操作の頻度が高すぎます。しばらく待ってからもう一度お試しください。';
+
+  @override
+  String get errorForumDown => 'フォーラムが現在応答していません。しばらくしてからもう一度お試しください。';
+
+  @override
+  String get errorNotAllowed => 'その操作を行う権限がありません。';
+
+  @override
+  String get errorUnknown => '問題が発生しました。もう一度お試しください。';
 }

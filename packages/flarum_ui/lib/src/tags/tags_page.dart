@@ -62,7 +62,7 @@ class _TagsPageState extends State<TagsPage> {
         (null, FlarumApiException(statusCode: 404)) => EmptyStateView(icon: Icons.sell_outlined, message: l10n.noTagsOnForum),
         (null, final Object error) => EmptyStateView.error(
             message: l10n.tagsLoadFailed,
-            hint: describeFlarumError(error),
+            hint: describeError(context, error),
             onRetry: () => _load(refresh: true),
           ),
         (null, _) => const Center(child: CircularProgressIndicator()),
@@ -178,7 +178,7 @@ class _TagPageState extends State<TagPage> {
     } catch (e) {
       if (!mounted) return;
       setState(() => _level = before);
-      SnackbarHelper.showError(context, describeFlarumError(e));
+      SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 

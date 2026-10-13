@@ -40,6 +40,14 @@ void main() {
     await api.markDialogRead(dialogId, messages.first.id);
   });
 
+  test('finds the reader\'s dialog with someone, if they have one', () async {
+    final fixtures = FixtureForum(FlarumVersion.v2);
+    expect((await fixtures.api().dialogWith(bobId))?.id, dialogId);
+    expect(await fixtures.api().dialogWith('999'), isNull);
+    fixtures.replies['GET /dialogs'] = {'data': <Object>[]};
+    expect(await fixtures.api().dialogWith(bobId), isNull);
+  });
+
   test('the reader\'s count of dialogs with something unread', () async {
     expect((await FixtureForum(FlarumVersion.v2, states: {'messages'}).api().forumInfo()).unreadDialogCount, 1);
     expect((await FixtureForum(FlarumVersion.v1).api().forumInfo()).unreadDialogCount, isNull, reason: 'no flarum/messages');

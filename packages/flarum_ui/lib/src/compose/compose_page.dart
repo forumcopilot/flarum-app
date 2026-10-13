@@ -78,6 +78,10 @@ class _ComposePageState extends State<ComposePage> {
   bool _isSubmitting = false;
   bool _isContentFieldFocused = false;
 
+  /// Send found the field empty: it says so under it until the reader writes in it.
+  bool _titleMissing = false;
+  bool _contentMissing = false;
+
   /// Members matching the `@name` being typed, offered above the toolbar.
   List<FlarumUser> _suggestions = const [];
   Timer? _suggestTimer;
@@ -108,6 +112,13 @@ class _ComposePageState extends State<ComposePage> {
       (widget.showTitleField && _titleController.text.isEmpty ? _titleFocusNode : _contentFocusNode).requestFocus();
     });
     _contentFocusNode.addListener(() => setState(() => _isContentFieldFocused = _contentFocusNode.hasFocus));
+    // Written in, by the reader or an upload's BBCode: no longer missing.
+    _titleController.addListener(() {
+      if (_titleMissing && _titleController.text.trim().isNotEmpty) setState(() => _titleMissing = false);
+    });
+    _contentController.addListener(() {
+      if (_contentMissing && _contentController.text.trim().isNotEmpty) setState(() => _contentMissing = false);
+    });
     _contentController.addListener(_contentChanged);
     _contentController.addListener(_dropUploadsTakenOutOfText);
   }
@@ -295,9 +306,8 @@ class _ComposePageState extends State<ComposePage> {
             l10n.imageTooLargeCouldNotResize(name, formatFileSize(bytes), formatFileSize(limit)),
           UploadTooLarge(:final name, :final bytes, :final limit) =>
             l10n.fileTooLargeForForum(name, formatFileSize(bytes), formatFileSize(limit)),
-          // fof/upload's reasons: a type the forum doesn't take, say.
-          FlarumApiException(:final reasons) => l10n.failedToUploadFile2(reasons),
-          _ => l10n.failedToUploadFile2('$error'),
+          // fof/upload's reasons (a type the forum doesn't take, say), or why it couldn't answer.
+          _ => l10n.failedToUploadFile2(describeError(context, error)),
         });
         continue;
       }
@@ -346,12 +356,14 @@ class _ComposePageState extends State<ComposePage> {
       _showNotice(l10n.pleaseWaitForAttachmentsToFinishUploading);
       return;
     }
-    if (widget.showTitleField && _titleController.text.trim().isEmpty) {
-      _showNotice(l10n.pleaseEnterTitle);
-      return;
-    }
-    if (_contentController.text.trim().isEmpty) {
-      _showNotice(l10n.pleaseEnterContent);
+    final titleMissing = widget.showTitleField && _titleController.text.trim().isEmpty;
+    final contentMissing = _contentController.text.trim().isEmpty;
+    if (titleMissing || contentMissing) {
+      setState(() {
+        _titleMissing = titleMissing;
+        _contentMissing = contentMissing;
+      });
+      (titleMissing ? _titleFocusNode : _contentFocusNode).requestFocus();
       return;
     }
     // The fields lock while sending; focus would hop to the next field still open.
@@ -369,8 +381,7 @@ class _ComposePageState extends State<ComposePage> {
         ComposeProblem(:final message) => message,
         FlarumApiException(isThrottled: true) => l10n.postingThrottled,
         // A 2.0 forum names each field it refused, 1.x the first rule.
-        FlarumApiException() => e.reasons,
-        _ => '$e',
+        _ => describeError(context, e),
       });
     }
   }
@@ -452,7 +463,11 @@ class _ComposePageState extends State<ComposePage> {
                           TextField(
                             controller: _titleController,
                             focusNode: _titleFocusNode,
-                            decoration: InputDecoration(labelText: l10n.title, hintText: l10n.composerTitleHint),
+                            decoration: InputDecoration(
+                              labelText: l10n.title,
+                              hintText: l10n.composerTitleHint,
+                              errorText: _titleMissing ? l10n.pleaseEnterTitle : null,
+                            ),
                             textCapitalization: TextCapitalization.sentences,
                             enabled: !_isSubmitting,
                           ),
@@ -476,6 +491,7 @@ class _ComposePageState extends State<ComposePage> {
                               hintText: l10n.composerContentHint,
                               alignLabelWithHint: true,
                               floatingLabelBehavior: FloatingLabelBehavior.always,
+                              errorText: _contentMissing ? l10n.pleaseEnterContent : null,
                             ),
                             enabled: !_isSubmitting,
                           ),

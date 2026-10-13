@@ -91,7 +91,7 @@ class _DialogsPageState extends State<DialogsPage> {
   Widget _body(FlarumLocalizations l10n) {
     if (_dialogs.isEmpty) {
       if (_error != null) {
-        return EmptyStateView.error(message: l10n.messagesLoadFailed, hint: describeFlarumError(_error!), onRetry: _refresh);
+        return EmptyStateView.error(message: l10n.messagesLoadFailed, hint: describeError(context, _error!), onRetry: _refresh);
       }
       if (_loading) return const Center(child: CircularProgressIndicator());
       return EmptyStateView.scrollable(icon: Icons.chat_bubble_outline, message: l10n.noMessages);

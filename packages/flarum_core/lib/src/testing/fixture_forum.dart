@@ -34,6 +34,10 @@ class FixtureForum {
   /// Every request the APIs from [api] have sent, in order.
   final requests = <RequestOptions>[];
 
+  /// Answers (200) given in place of the fixtures, by method and path (`GET /dialogs`): a reader
+  /// whose list is empty, say, where only a full one was recorded.
+  final replies = <String, Object>{};
+
   String discussionId(String name) => (seed['discussions'] as Map)[name] as String;
   String userId(String name) => (seed['users'] as Map)[name] as String;
   String tagId(String name) => (seed['tags'] as Map)[name] as String;
@@ -136,6 +140,11 @@ class _FixtureAdapter implements HttpClientAdapter {
   @override
   Future<ResponseBody> fetch(RequestOptions options, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
     forum.requests.add(options);
+    if (forum.replies['${options.method} ${options.path}'] case final body?) {
+      return ResponseBody.fromString(jsonEncode(body), 200, headers: {
+        Headers.contentTypeHeader: ['application/vnd.api+json'],
+      });
+    }
     // Where the same request was recorded more than once (a reaction, then the same reaction
     // again to take it back), each is served once, in file-name order, the last one after that.
     var matching = [

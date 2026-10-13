@@ -72,22 +72,68 @@ class FlarumContent extends StatelessWidget {
   /// The direction a post reads in, from its letters (markup and entities
   /// aside): right-to-left when most are in a right-to-left script (Arabic,
   /// Hebrew…), as the web lays such posts out. Null when it has no letters.
+  ///
+  /// It runs on every post's first build, so it scans the text once by hand:
+  /// a regex over each letter cost as much as all of flutter_html's styling.
   static TextDirection? directionOf(String html) {
-    final text = html.replaceAll(_markup, ' ');
     var rtl = 0;
     var letters = 0;
-    for (final letter in _letter.allMatches(text)) {
+    var i = 0;
+    while (i < html.length && letters < 2000) {
+      final unit = html.codeUnitAt(i);
+      if (unit == 0x3C) {
+        // <…>: markup.
+        final close = html.indexOf('>', i + 1);
+        i = close < 0 ? i + 1 : close + 1;
+        continue;
+      }
+      if (unit == 0x26) {
+        // &name; or &#123;: an entity.
+        var j = i + 1;
+        if (j < html.length && html.codeUnitAt(j) == 0x23) j++;
+        final word = j;
+        while (j < html.length && _isWordUnit(html.codeUnitAt(j))) {
+          j++;
+        }
+        if (j > word && j < html.length && html.codeUnitAt(j) == 0x3B) {
+          i = j + 1;
+          continue;
+        }
+        i++;
+        continue;
+      }
+      var rune = unit;
+      var width = 1;
+      if (unit >= 0xD800 && unit <= 0xDBFF && i + 1 < html.length) {
+        final low = html.codeUnitAt(i + 1);
+        if (low >= 0xDC00 && low <= 0xDFFF) {
+          rune = 0x10000 + ((unit - 0xD800) << 10) + (low - 0xDC00);
+          width = 2;
+        }
+      }
+      i += width;
+      if (!_isLetter(rune)) continue;
       letters++;
-      if (_rtlLetter.hasMatch(letter[0]!)) rtl++;
-      if (letters == 2000) break; // enough to tell
+      if ((rune >= 0x0590 && rune <= 0x08FF) || (rune >= 0xFB1D && rune <= 0xFDFF) || (rune >= 0xFE70 && rune <= 0xFEFF)) {
+        rtl++;
+      }
     }
     if (letters == 0) return null;
     return rtl * 2 > letters ? TextDirection.rtl : TextDirection.ltr;
   }
 
-  static final _markup = RegExp(r'<[^>]*>|&#?\w+;');
+  static bool _isWordUnit(int unit) =>
+      (unit >= 0x30 && unit <= 0x39) || (unit >= 0x41 && unit <= 0x5A) || (unit >= 0x61 && unit <= 0x7A) || unit == 0x5F;
+
+  /// Unicode's letters (`\p{L}`): ASCII by hand, the rest asked of the regex
+  /// once per character.
+  static bool _isLetter(int rune) {
+    if (rune < 0x80) return (rune >= 0x41 && rune <= 0x5A) || (rune >= 0x61 && rune <= 0x7A);
+    return _letters[rune] ??= _letter.hasMatch(String.fromCharCode(rune));
+  }
+
+  static final _letters = <int, bool>{};
   static final _letter = RegExp(r'\p{L}', unicode: true);
-  static final _rtlLetter = RegExp(r'[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]');
 
   /// Laid out in the post's own direction ([directionOf]), which can differ
   /// from the app's: list markers, alignment and punctuation follow it.
@@ -167,7 +213,6 @@ class FlarumContent extends StatelessWidget {
         // pages in the app, or else outside the app.
         openEmbed(resolved);
       },
-      style: _stylesFor(colorScheme, body, bodyColor, mutedColor, accent),
       // Relative URLs (img src, a href) resolve against the forum. An emoji
       // picture (`img.emoji`, from an extension) whose alt names a Unicode
       // emoji is drawn as the system glyph; Flarum itself stores emoji as
@@ -405,6 +450,8 @@ class FlarumContent extends StatelessWidget {
             );
           },
         ),
+        // Last, so nothing restyles an element after it.
+        _SelectorStyles(_stylesFor(colorScheme, body, bodyColor, mutedColor, accent)),
       ],
       ),
     );
@@ -837,6 +884,102 @@ Map<String, Style> _stylesFor(ColorScheme colorScheme, TextStyle body,
       verticalAlign: VerticalAlign.middle,
     ),
   });
+}
+
+/// The post's styles by CSS selector, applied as flutter_html's `style` map
+/// would be, but with each selector read once. flutter_html matches every
+/// element against every selector through `package:html`, which parses the
+/// selector again each time: with our 22 selectors that was as much of a
+/// post's first build as the rest of its styling. The selectors are the few
+/// shapes [_Selector] reads; an element's own `style` attribute is applied
+/// after these, where flutter_html applied the map last.
+class _SelectorStyles extends HtmlExtension {
+  _SelectorStyles(Map<String, Style> styles)
+      : _rules = [for (final MapEntry(:key, :value) in styles.entries) (_Selector.parse(key), value)];
+
+  final List<(_Selector, Style)> _rules;
+
+  @override
+  Set<String> get supportedTags => const {};
+
+  @override
+  bool matches(ExtensionContext context) =>
+      context.currentStep == CurrentStep.preStyling && context.node is dom.Element;
+
+  @override
+  void beforeStyle(ExtensionContext context) {
+    final element = context.node as dom.Element;
+    final styled = context.styledElement!;
+    for (final (selector, style) in _rules) {
+      if (selector.matches(element)) styled.style = styled.style.merge(style);
+    }
+  }
+}
+
+/// A CSS selector list in the shapes the post's styles use: `tag`,
+/// `tag.class`, `tag:last-child`, joined by descendant (` `) or child (`>`)
+/// combinators, several to a list (`a, b`). Read once, cached by its text.
+class _Selector {
+  _Selector._(this._alternatives);
+
+  factory _Selector.parse(String text) => _parsed.putIfAbsent(text, () {
+        final alternatives = <List<(_Compound, bool)>>[];
+        for (final complex in text.split(',')) {
+          final parts = <(_Compound, bool)>[];
+          var child = false;
+          for (final token in complex.trim().split(RegExp(r'\s+'))) {
+            if (token == '>') {
+              child = true;
+              continue;
+            }
+            parts.add((_Compound.parse(token), child));
+            child = false;
+          }
+          alternatives.add(parts);
+        }
+        return _Selector._(alternatives);
+      });
+
+  static final _parsed = <String, _Selector>{};
+
+  /// Each alternative's compounds, left to right, each with whether it is
+  /// its left neighbour's child (`>`) rather than any descendant.
+  final List<List<(_Compound, bool)>> _alternatives;
+
+  bool matches(dom.Element element) => _alternatives.any((parts) => _matchFrom(element, parts, parts.length - 1));
+
+  static bool _matchFrom(dom.Element element, List<(_Compound, bool)> parts, int i) {
+    final (compound, child) = parts[i];
+    if (!compound.matches(element)) return false;
+    if (i == 0) return true;
+    if (child) {
+      final parent = element.parent;
+      return parent != null && _matchFrom(parent, parts, i - 1);
+    }
+    for (var ancestor = element.parent; ancestor != null; ancestor = ancestor.parent) {
+      if (_matchFrom(ancestor, parts, i - 1)) return true;
+    }
+    return false;
+  }
+}
+
+class _Compound {
+  const _Compound(this.tag, this.className, this.lastChild);
+
+  factory _Compound.parse(String token) {
+    final match = RegExp(r'^([a-z][a-z0-9]*)(?:\.([\w-]+))?(:last-child)?$').firstMatch(token);
+    if (match == null) throw ArgumentError.value(token, 'selector', 'not a shape _Selector reads');
+    return _Compound(match[1]!, match[2], match[3] != null);
+  }
+
+  final String tag;
+  final String? className;
+  final bool lastChild;
+
+  bool matches(dom.Element element) =>
+      element.localName == tag &&
+      (className == null || element.classes.contains(className)) &&
+      (!lastChild || element.nextElementSibling == null);
 }
 
 /// An inline picture has no text baseline; this says so when asked "dry",

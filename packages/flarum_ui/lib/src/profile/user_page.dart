@@ -114,7 +114,7 @@ class _UserPageState extends State<UserPage> {
       final saved = await _forum.api.suspend(user.id, until, reason: reason, message: reason);
       if (mounted) setState(() => _user = saved);
     } catch (e) {
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -136,7 +136,7 @@ class _UserPageState extends State<UserPage> {
         body: _error != null
             ? EmptyStateView.error(
                 message: l10n.userLoadFailed,
-                hint: describeFlarumError(_error!),
+                hint: describeError(context, _error!),
                 onRetry: () {
                   setState(() => _error = null);
                   _load();

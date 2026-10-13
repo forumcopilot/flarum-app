@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
       await FlarumUserProxy.completeSignIn(widget.site, found.token, cookiePrefix: found.cookiePrefix);
       if (mounted) Navigator.of(context).pop(true);
     } catch (e) {
-      if (mounted) setState(() => _error = describeFlarumError(e));
+      if (mounted) setState(() => _error = describeError(context, e));
     }
   }
 

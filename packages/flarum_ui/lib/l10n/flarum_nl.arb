@@ -242,5 +242,13 @@
   "awaitingApproval": "Wacht op goedkeuring",
   "eventMerged": "{user} heeft {count, plural, =1{1 bericht} other{{count} berichten}} uit {titles} met deze discussie samengevoegd.",
   "eventSplitTo": "{user} heeft {count, plural, =1{1 bericht} other{{count} berichten}} afgesplitst naar {title}.",
-  "eventSplitFrom": "{user} heeft {count, plural, =1{1 bericht} other{{count} berichten}} afgesplitst van {title}."
+  "eventSplitFrom": "{user} heeft {count, plural, =1{1 bericht} other{{count} berichten}} afgesplitst van {title}.",
+  "errorNoConnection": "Het forum is niet bereikbaar. Controleer je verbinding en probeer het opnieuw.",
+  "errorTimedOut": "Het forum reageerde te traag. Probeer het opnieuw.",
+  "errorBlocked": "De firewall van het forum heeft de app geblokkeerd. Probeer het later opnieuw of open het forum in een browser.",
+  "errorNotFound": "Dit bestaat niet of is verwijderd.",
+  "errorRateLimited": "Je doet dat te vaak. Wacht even en probeer het opnieuw.",
+  "errorForumDown": "Het forum reageert momenteel niet. Probeer het later opnieuw.",
+  "errorNotAllowed": "Je hebt geen toestemming om dat te doen.",
+  "errorUnknown": "Er ging iets mis. Probeer het opnieuw."
 }

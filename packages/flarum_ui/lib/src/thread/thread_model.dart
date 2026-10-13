@@ -4,6 +4,8 @@ import 'dart:math' as math;
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/foundation.dart';
 
+import '../render/flarum_html.dart';
+
 /// A discussion as the thread page shows it: a window of its posts, loaded a
 /// page at a time either way, and how far the reader has read.
 ///
@@ -11,11 +13,16 @@ import 'package:flutter/foundation.dart';
 /// post sits, so the thread can open at any post (`page[near]`) and page
 /// back and forward by offset from there, on 1.8 and 2.0 alike.
 class ThreadModel extends ChangeNotifier {
-  ThreadModel(this.forum, this.discussionId, {this.pageSize = 20, this.readDelay = const Duration(seconds: 1)});
+  ThreadModel(this.forum, this.discussionId,
+      {this.pageSize = 20, this.readDelay = const Duration(seconds: 1), this.forumBaseUrl});
 
   final FlarumForum forum;
   final String discussionId;
   final int pageSize;
+
+  /// The forum's address as the posts are rendered against it: each page's HTML is then prepared
+  /// on a worker isolate as it arrives ([FlarumHtml.warm]).
+  final String? forumBaseUrl;
 
   /// How long reading stays still before it's reported to the forum.
   final Duration readDelay;
@@ -58,6 +65,7 @@ class ThreadModel extends ChangeNotifier {
       }
       this.discussion = discussion;
       start = first;
+      _warm(page.items);
       posts
         ..clear()
         ..addAll(page.items);
@@ -76,6 +84,7 @@ class ThreadModel extends ChangeNotifier {
     _notify();
     try {
       final page = await forum.api.posts(discussionId, offset: end, limit: pageSize);
+      _warm(page.items);
       posts.addAll(page.items);
     } catch (e) {
       pageError = e;
@@ -96,6 +105,7 @@ class ThreadModel extends ChangeNotifier {
     try {
       final offset = math.max(0, start - pageSize);
       final page = await forum.api.posts(discussionId, offset: offset, limit: start - offset);
+      _warm(page.items);
       posts.insertAll(0, page.items);
       start = offset;
       added = page.items.length;
@@ -106,6 +116,15 @@ class ThreadModel extends ChangeNotifier {
       _notify();
     }
     return added;
+  }
+
+  /// Prepares [page]'s HTML off the UI thread, so the frame that first shows a post finds it ready
+  /// (flutter_html's own work is then most of that frame). Not awaited: a post shown before its
+  /// page is ready prepares its own, as it would anyway.
+  void _warm(List<FlarumPost> page) {
+    final base = forumBaseUrl;
+    if (base == null) return;
+    FlarumHtml.warm([for (final post in page) if (post.contentHtml case final html?) html], forumBaseUrl: base).ignore();
   }
 
   /// The position of post [number] in [posts], or -1 if it isn't loaded.

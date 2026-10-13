@@ -56,7 +56,7 @@ class _FlagPostPageState extends State<FlagPostPage> {
     } catch (e) {
       if (!mounted) return;
       setState(() => _sending = false);
-      SnackbarHelper.showError(context, e is FlarumApiException ? e.reasons : '$e');
+      SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 

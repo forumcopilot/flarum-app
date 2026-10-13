@@ -974,4 +974,33 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
     );
     return '$user separó $_temp0 de $title.';
   }
+
+  @override
+  String get errorNoConnection =>
+      'No se pudo conectar con el foro. Comprueba tu conexión e inténtalo de nuevo.';
+
+  @override
+  String get errorTimedOut =>
+      'El foro tardó demasiado en responder. Inténtalo de nuevo.';
+
+  @override
+  String get errorBlocked =>
+      'El cortafuegos del foro bloqueó la aplicación. Inténtalo más tarde o abre el foro en un navegador.';
+
+  @override
+  String get errorNotFound => 'Esto no existe o se ha eliminado.';
+
+  @override
+  String get errorRateLimited =>
+      'Estás haciendo eso con demasiada frecuencia. Espera un momento e inténtalo de nuevo.';
+
+  @override
+  String get errorForumDown =>
+      'El foro no responde en este momento. Inténtalo más tarde.';
+
+  @override
+  String get errorNotAllowed => 'No tienes permiso para hacer eso.';
+
+  @override
+  String get errorUnknown => 'Algo salió mal. Inténtalo de nuevo.';
 }

@@ -242,5 +242,13 @@
   "awaitingApproval": "승인 대기 중",
   "eventMerged": "{user} 님이 {titles}의 {count, plural, other{게시물 {count}개}}를 이 토론으로 병합했습니다.",
   "eventSplitTo": "{user} 님이 {count, plural, other{게시물 {count}개}}를 {title}(으)로 분리했습니다.",
-  "eventSplitFrom": "{user} 님이 {title}에서 {count, plural, other{게시물 {count}개}}를 분리했습니다."
+  "eventSplitFrom": "{user} 님이 {title}에서 {count, plural, other{게시물 {count}개}}를 분리했습니다.",
+  "errorNoConnection": "포럼에 연결할 수 없습니다. 연결을 확인하고 다시 시도하세요.",
+  "errorTimedOut": "포럼 응답이 너무 오래 걸립니다. 다시 시도하세요.",
+  "errorBlocked": "포럼의 방화벽이 앱을 차단했습니다. 나중에 다시 시도하거나 브라우저에서 포럼을 여세요.",
+  "errorNotFound": "존재하지 않거나 삭제되었습니다.",
+  "errorRateLimited": "너무 자주 시도하고 있습니다. 잠시 후 다시 시도하세요.",
+  "errorForumDown": "포럼이 지금 응답하지 않습니다. 나중에 다시 시도하세요.",
+  "errorNotAllowed": "그 작업을 할 권한이 없습니다.",
+  "errorUnknown": "문제가 발생했습니다. 다시 시도하세요."
 }

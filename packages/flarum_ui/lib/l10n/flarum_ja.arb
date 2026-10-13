@@ -242,5 +242,13 @@
   "awaitingApproval": "承認待ち",
   "eventMerged": "{user}が{titles}から{count, plural, other{{count}件の投稿}}をこのディスカッションに統合しました。",
   "eventSplitTo": "{user}が{count, plural, other{{count}件の投稿}}を{title}に分割しました。",
-  "eventSplitFrom": "{user}が{title}から{count, plural, other{{count}件の投稿}}を分割しました。"
+  "eventSplitFrom": "{user}が{title}から{count, plural, other{{count}件の投稿}}を分割しました。",
+  "errorNoConnection": "フォーラムに接続できませんでした。接続を確認して、もう一度お試しください。",
+  "errorTimedOut": "フォーラムの応答に時間がかかりすぎています。もう一度お試しください。",
+  "errorBlocked": "フォーラムのファイアウォールによってアプリがブロックされました。しばらくしてから再度お試しいただくか、ブラウザでフォーラムを開いてください。",
+  "errorNotFound": "存在しないか、削除されています。",
+  "errorRateLimited": "操作の頻度が高すぎます。しばらく待ってからもう一度お試しください。",
+  "errorForumDown": "フォーラムが現在応答していません。しばらくしてからもう一度お試しください。",
+  "errorNotAllowed": "その操作を行う権限がありません。",
+  "errorUnknown": "問題が発生しました。もう一度お試しください。"
 }

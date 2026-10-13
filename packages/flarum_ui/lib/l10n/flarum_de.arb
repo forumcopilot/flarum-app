@@ -242,5 +242,13 @@
   "awaitingApproval": "Wartet auf Freigabe",
   "eventMerged": "{user} hat {count, plural, =1{1 Beitrag} other{{count} Beiträge}} aus {titles} hierher zusammengeführt.",
   "eventSplitTo": "{user} hat {count, plural, =1{1 Beitrag} other{{count} Beiträge}} nach {title} abgetrennt.",
-  "eventSplitFrom": "{user} hat {count, plural, =1{1 Beitrag} other{{count} Beiträge}} aus {title} abgetrennt."
+  "eventSplitFrom": "{user} hat {count, plural, =1{1 Beitrag} other{{count} Beiträge}} aus {title} abgetrennt.",
+  "errorNoConnection": "Das Forum ist nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.",
+  "errorTimedOut": "Das Forum hat zu lange nicht geantwortet. Bitte versuche es erneut.",
+  "errorBlocked": "Die Firewall des Forums hat die App blockiert. Versuche es später erneut oder öffne das Forum im Browser.",
+  "errorNotFound": "Das existiert nicht oder wurde entfernt.",
+  "errorRateLimited": "Du tust das zu oft. Bitte warte einen Moment und versuche es erneut.",
+  "errorForumDown": "Das Forum antwortet gerade nicht. Bitte versuche es später erneut.",
+  "errorNotAllowed": "Dazu hast du keine Berechtigung.",
+  "errorUnknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
 }

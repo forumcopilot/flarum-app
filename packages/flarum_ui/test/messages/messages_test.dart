@@ -72,7 +72,7 @@ void main() {
     expect(fixtures.requests.where((r) => r.method == 'PATCH' && r.path.startsWith('/dialogs/')), hasLength(1));
   });
 
-  testWidgets('a first message to someone starts the conversation', (tester) async {
+  testWidgets('opened on someone, it shows the conversation the reader already has with them', (tester) async {
     final fixtures = await signIn(tester);
     await tester.pumpWidget(_app(DialogPage(
       site: _site(),
@@ -80,10 +80,30 @@ void main() {
     )));
     await tester.pump();
     expect(find.text('bob'), findsOneWidget, reason: 'the title');
-    await tester.enterText(find.byType(TextField), WriteSamples.message);
-    await tester.tap(find.byTooltip('Send'));
     await _pumpUntil(tester, find.text(WriteSamples.messageReply));
     expect(find.text(WriteSamples.message), findsOneWidget);
+    expect(fixtures.requests.where((r) => r.method == 'POST'), isEmpty);
+    expect(fixtures.requests.where((r) => r.method == 'GET' && r.path == '/dialogs'), hasLength(1));
+  });
+
+  testWidgets('a first message to someone new starts the conversation', (tester) async {
+    final fixtures = await signIn(tester);
+    // carol has no conversations yet.
+    fixtures.replies['GET /dialogs'] = {'data': <Object>[]};
+    await tester.pumpWidget(_app(DialogPage(
+      site: _site(),
+      to: FlarumUser(id: bobId, username: 'bob', displayName: 'bob'),
+    )));
+    for (var i = 0; i < 20 && find.byType(CircularProgressIndicator).evaluate().isNotEmpty; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(find.text(WriteSamples.message), findsNothing);
+
+    await tester.enterText(find.byType(TextField), WriteSamples.message);
+    await tester.tap(find.byTooltip('Send'));
+    // The forum's answer names the conversation: all of it shows.
+    await _pumpUntil(tester, find.text(WriteSamples.messageReply));
     final sent = fixtures.requests.firstWhere((r) => r.method == 'POST').data as Map;
     expect(sent['data']['attributes']['users'], [
       {'id': bobId},

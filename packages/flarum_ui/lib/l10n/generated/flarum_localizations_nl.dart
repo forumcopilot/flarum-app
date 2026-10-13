@@ -973,4 +973,33 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
     );
     return '$user heeft $_temp0 afgesplitst van $title.';
   }
+
+  @override
+  String get errorNoConnection =>
+      'Het forum is niet bereikbaar. Controleer je verbinding en probeer het opnieuw.';
+
+  @override
+  String get errorTimedOut =>
+      'Het forum reageerde te traag. Probeer het opnieuw.';
+
+  @override
+  String get errorBlocked =>
+      'De firewall van het forum heeft de app geblokkeerd. Probeer het later opnieuw of open het forum in een browser.';
+
+  @override
+  String get errorNotFound => 'Dit bestaat niet of is verwijderd.';
+
+  @override
+  String get errorRateLimited =>
+      'Je doet dat te vaak. Wacht even en probeer het opnieuw.';
+
+  @override
+  String get errorForumDown =>
+      'Het forum reageert momenteel niet. Probeer het later opnieuw.';
+
+  @override
+  String get errorNotAllowed => 'Je hebt geen toestemming om dat te doen.';
+
+  @override
+  String get errorUnknown => 'Er ging iets mis. Probeer het opnieuw.';
 }

@@ -242,5 +242,13 @@
   "awaitingApproval": "Pendiente de aprobación",
   "eventMerged": "{user} fusionó {count, plural, =1{1 publicación} other{{count} publicaciones}} de {titles} en esta discusión.",
   "eventSplitTo": "{user} separó {count, plural, =1{1 publicación} other{{count} publicaciones}} a {title}.",
-  "eventSplitFrom": "{user} separó {count, plural, =1{1 publicación} other{{count} publicaciones}} de {title}."
+  "eventSplitFrom": "{user} separó {count, plural, =1{1 publicación} other{{count} publicaciones}} de {title}.",
+  "errorNoConnection": "No se pudo conectar con el foro. Comprueba tu conexión e inténtalo de nuevo.",
+  "errorTimedOut": "El foro tardó demasiado en responder. Inténtalo de nuevo.",
+  "errorBlocked": "El cortafuegos del foro bloqueó la aplicación. Inténtalo más tarde o abre el foro en un navegador.",
+  "errorNotFound": "Esto no existe o se ha eliminado.",
+  "errorRateLimited": "Estás haciendo eso con demasiada frecuencia. Espera un momento e inténtalo de nuevo.",
+  "errorForumDown": "El foro no responde en este momento. Inténtalo más tarde.",
+  "errorNotAllowed": "No tienes permiso para hacer eso.",
+  "errorUnknown": "Algo salió mal. Inténtalo de nuevo."
 }

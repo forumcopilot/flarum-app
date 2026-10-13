@@ -48,7 +48,7 @@ class _IgnoredUsersPageState extends State<IgnoredUsersPage> {
       await _ignored.setIgnored(user, false);
       if (mounted) setState(() => _users = [for (final u in _users!) if (u.id != user.id) u]);
     } catch (e) {
-      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 
@@ -62,7 +62,7 @@ class _IgnoredUsersPageState extends State<IgnoredUsersPage> {
       body: switch ((users, _error)) {
         (_, final error?) => EmptyStateView.error(
             message: l10n.ignoredUsers,
-            hint: describeFlarumError(error),
+            hint: describeError(context, error),
             onRetry: () {
               setState(() => _error = null);
               _load();

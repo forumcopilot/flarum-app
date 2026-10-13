@@ -111,7 +111,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
       if (_model.error != null) {
         return EmptyStateView.error(
           message: l10n.notificationsLoadFailed,
-          hint: describeFlarumError(_model.error!),
+          hint: describeError(context, _model.error!),
           onRetry: _refresh,
         );
       }

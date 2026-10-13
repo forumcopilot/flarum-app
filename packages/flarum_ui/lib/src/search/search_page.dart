@@ -99,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
     if (_loading) return const Center(child: CircularProgressIndicator());
     if (_error != null) {
       return EmptyStateView.error(
-        message: l10n.searchFailedWithError(describeFlarumError(_error!)),
+        message: l10n.searchFailedWithError(describeError(context, _error!)),
         onRetry: () {
           final query = _searched;
           _searched = '';

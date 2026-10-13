@@ -7,7 +7,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../l10n/flarum_l10n.dart';
 import 'forum_media.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
-import 'package:flarum_core/flarum_core.dart' show describeFlarumError;
 
 import 'file_kind.dart';
 import 'links.dart';
@@ -88,7 +87,7 @@ class _AttachmentFileCardState extends State<AttachmentFileCard> {
 
     void fail(Object error) {
       if (!mounted) return;
-      final reason = describeFlarumError(error);
+      final reason = describeError(context, error);
       messenger?.showSnackBar(SnackBar(
         content: Text(
           l10n.errorDownloading(widget.name, reason),

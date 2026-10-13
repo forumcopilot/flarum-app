@@ -71,7 +71,7 @@ class PostList extends StatelessWidget {
     final theme = Theme.of(context);
     if (model.items.isEmpty) {
       if (model.error != null) {
-        return EmptyStateView.error(message: failedMessage, hint: describeFlarumError(model.error!), onRetry: model.refresh);
+        return EmptyStateView.error(message: failedMessage, hint: describeError(context, model.error!), onRetry: model.refresh);
       }
       if (model.loading) return const Center(child: CircularProgressIndicator());
       return EmptyStateView(icon: Icons.chat_bubble_outline, message: emptyMessage);

@@ -261,14 +261,12 @@ class ForumMedia {
     } on DioException catch (e) {
       await folder.delete(recursive: true).catchError((_) => folder);
       if (CancelToken.isCancel(e)) rethrow;
-      final timedOut = e.type == DioExceptionType.connectionTimeout ||
-          e.type == DioExceptionType.receiveTimeout;
       throw FlarumApiException(
         e.response?.statusCode,
         const [],
         method: 'GET',
         path: e.requestOptions.uri.path,
-        cause: timedOut ? 'Timeout' : e.message,
+        cause: e,
       );
     } catch (_) {
       await folder.delete(recursive: true).catchError((_) => folder);

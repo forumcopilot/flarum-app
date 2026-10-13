@@ -242,5 +242,13 @@
   "awaitingApproval": "Aguardando aprovação",
   "eventMerged": "{user} mesclou {count, plural, =1{1 publicação} other{{count} publicações}} de {titles} nesta discussão.",
   "eventSplitTo": "{user} separou {count, plural, =1{1 publicação} other{{count} publicações}} para {title}.",
-  "eventSplitFrom": "{user} separou {count, plural, =1{1 publicação} other{{count} publicações}} de {title}."
+  "eventSplitFrom": "{user} separou {count, plural, =1{1 publicação} other{{count} publicações}} de {title}.",
+  "errorNoConnection": "Não foi possível acessar o fórum. Verifique a conexão e tente novamente.",
+  "errorTimedOut": "O fórum demorou demais para responder. Tente novamente.",
+  "errorBlocked": "O firewall do fórum bloqueou o aplicativo. Tente mais tarde ou abra o fórum em um navegador.",
+  "errorNotFound": "Isto não existe ou foi removido.",
+  "errorRateLimited": "Essa ação está sendo feita com muita frequência. Aguarde um momento e tente novamente.",
+  "errorForumDown": "O fórum não está respondendo no momento. Tente novamente mais tarde.",
+  "errorNotAllowed": "Você não tem permissão para fazer isso.",
+  "errorUnknown": "Algo deu errado. Tente novamente."
 }

@@ -43,7 +43,7 @@ class _TermsPageState extends State<TermsPage> {
     } catch (e) {
       if (!mounted) return;
       setState(() => _accepting = false);
-      SnackbarHelper.showError(context, describeFlarumError(e));
+      SnackbarHelper.showError(context, describeError(context, e));
     }
   }
 

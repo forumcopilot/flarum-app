@@ -111,9 +111,11 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   (flarum/suspend; the web's "indefinitely" is 2038-01-01). 2.0 rc.8 sends `isHidden` as null on a
   hidden post or discussion: read `hiddenAt` too.
 - flarum/messages (2.0): `/api/dialogs` and `/api/dialog-messages` (newest first); a first message
-  carries `attributes.users`, later ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}`
-  `lastReadMessageId`. No notifications, only the actor's `messageCount`. Dialogs can't be deleted
-  through the API (the recorder uses `tool/test_forums/delete_dialogs.php`).
+  carries `attributes.users` (and lands in the direct dialog the two already have, if any), later
+  ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}` `lastReadMessageId`. Dialogs
+  can't be filtered by person (only `unread`): `FlarumApi.dialogWith` reads the list. No
+  notifications, only the actor's `messageCount`. Dialogs can't be deleted through the API (the
+  recorder uses `tool/test_forums/delete_dialogs.php`).
 - Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
   source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made
   from its HTML. A second post within the posting throttle (10 s by default) is 429 `too_many_requests`,
@@ -139,6 +141,8 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   answers with each file's `bbcode`; 1.x leaves an image's alt as `{TEXT?}`. Only moderators may
   delete uploads by default (`canDelete`). The size limit isn't published: refusals name it (a 422
   or 400 saying "… 2048 kb"), or are a 413 from PHP or nginx (docs/phase-3-notes.md, Milestone 3).
+  It re-encodes the images it stores (JPEG at quality 90), so a stored copy can be bigger than the
+  file sent.
 - Reports (flarum/flags): `POST /api/flags` with `reason` (`off_topic`, `inappropriate`, `spam`, or
   null for "Other") and always `reasonDetail` (1.x takes neither as no reason at all). Ignoring
   (fof/ignore-users): `PATCH /api/users/{id}` with `ignored`; users carry `ignored` and

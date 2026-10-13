@@ -13,12 +13,16 @@ import '../widgets/flarum_avatar.dart';
 /// The reader's notifications: who did what, where, and when, unread ones
 /// highlighted. A tap marks one read and opens the post it's about.
 class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key, required this.site, this.onRead});
+  const NotificationsPage({super.key, required this.site, this.onRead, this.onUnreadShown});
 
   final SiteContext site;
 
   /// The forum marked one or all read: the unread count (the tab's badge) changed.
   final VoidCallback? onRead;
+
+  /// The list's unread rows ([NotificationsModel.unreadShown]) whenever they change; [settled] once
+  /// the forum agrees (the list loaded, or a read went through), for the badge to match it.
+  final void Function(int? unread, {required bool settled})? onUnreadShown;
 
   @override
   State<NotificationsPage> createState() => _NotificationsPageState();
@@ -31,8 +35,17 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   void initState() {
     super.initState();
-    if (_forum.isSignedIn) _model.refresh();
+    if (_forum.isSignedIn) _refresh();
   }
+
+  Future<void> _refresh() async {
+    await _model.refresh();
+    _settled();
+  }
+
+  int? _reported;
+
+  void _settled() => widget.onUnreadShown?.call(_model.unreadShown, settled: true);
 
   @override
   void dispose() {
@@ -43,11 +56,21 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 
   void _changed() {
-    if (mounted) setState(() {});
+    if (!mounted) return;
+    setState(() {});
+    final unread = _model.unreadShown;
+    if (unread != _reported) {
+      _reported = unread;
+      widget.onUnreadShown?.call(unread, settled: false);
+    }
   }
 
   Future<void> _open(FlarumNotification n) async {
-    _model.markRead(n).then((marked) => marked ? widget.onRead?.call() : null);
+    _model.markRead(n).then((marked) {
+      if (!marked) return;
+      widget.onRead?.call();
+      _settled();
+    });
     final discussion = n.discussionId;
     if (discussion == null) return;
     await ThreadPage.open(context, widget.site, discussion, near: n.openAt, title: n.discussionTitle);
@@ -57,7 +80,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final l10n = flarumL10n(context);
     final messenger = ScaffoldMessenger.of(context);
     final ok = await _model.markAllRead();
-    if (ok) widget.onRead?.call();
+    if (ok) {
+      widget.onRead?.call();
+      _settled();
+    }
     messenger.showSnackBar(
         SnackBar(content: Text(ok ? l10n.allNotificationsMarkedAsRead : l10n.failedToMarkNotificationsRead)));
   }
@@ -76,7 +102,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
       ),
       body: !signedIn
           ? EmptyStateView(icon: Icons.notifications_none, message: l10n.notificationsSignIn)
-          : RefreshIndicator(onRefresh: _model.refresh, child: _body(l10n)),
+          : RefreshIndicator(onRefresh: _refresh, child: _body(l10n)),
     );
   }
 
@@ -86,7 +112,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         return EmptyStateView.error(
           message: l10n.notificationsLoadFailed,
           hint: describeFlarumError(_model.error!),
-          onRetry: _model.refresh,
+          onRetry: _refresh,
         );
       }
       if (_model.loading) return const Center(child: CircularProgressIndicator());

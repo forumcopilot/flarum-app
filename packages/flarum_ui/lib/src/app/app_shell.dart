@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
@@ -56,7 +58,31 @@ class _AppShellState extends State<AppShell> {
     _forum.refresh().then((_) => mounted ? setState(() {}) : null, onError: (_) {});
   }
 
+  /// The Notifications list's unread rows, once it has loaded, and the forum's count when the two
+  /// last agreed: the forum lists two likes of a post as one notification but counts both, so the
+  /// badge goes by the list, plus whatever the forum has counted since.
+  int? _listUnread;
+  int? _forumAtSync;
+
+  void _unreadShown(int? unread, {required bool settled}) {
+    setState(() => _listUnread = unread);
+    if (!settled || unread == null || !_forum.isSignedIn) return;
+    _forum.refresh().then(
+      (info) => mounted ? setState(() => _forumAtSync = info.actor?.unreadNotificationCount ?? 0) : null,
+      onError: (_) {},
+    );
+  }
+
+  int _badge(int forumUnread) {
+    final list = _listUnread;
+    final atSync = _forumAtSync;
+    if (list == null || atSync == null) return forumUnread;
+    return list + math.max(0, forumUnread - atSync);
+  }
+
   void _signedInOrOut() => setState(() {
+        _listUnread = null;
+        _forumAtSync = null;
         _session++;
         _visited
           ..clear()
@@ -76,7 +102,7 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
-    final unread = _forum.isSignedIn ? (_forum.info?.actor?.unreadNotificationCount ?? 0) : 0;
+    final unread = _forum.isSignedIn ? _badge(_forum.info?.actor?.unreadNotificationCount ?? 0) : 0;
     Widget tab(int index, Widget Function() page) => _visited.contains(index) ? page() : const SizedBox.shrink();
     return Scaffold(
       body: IndexedStack(
@@ -87,7 +113,7 @@ class _AppShellState extends State<AppShell> {
           tab(2, () => NotificationsPage(
                 key: ValueKey(('notifications', _session)),
                 site: widget.site,
-                onRead: _refreshBadge,
+                onUnreadShown: _unreadShown,
               )),
           tab(3, () => AccountPage(
                 site: widget.site,

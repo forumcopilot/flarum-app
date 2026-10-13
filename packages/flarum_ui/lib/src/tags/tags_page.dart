@@ -145,6 +145,20 @@ class TagPage extends StatefulWidget {
   final SiteContext site;
   final FlarumTag tag;
 
+  /// Opens the tag a link names by its slug (`/t/{slug}`), found among the forum's tags. False when
+  /// the forum has no such tag, for the caller to open the link some other way.
+  static Future<bool> openBySlug(BuildContext context, SiteContext site, String slug) async {
+    final FlarumTag? tag;
+    try {
+      tag = (await FlarumForum.of(site).tags()).where((t) => t.slug.toLowerCase() == slug.toLowerCase()).firstOrNull;
+    } catch (_) {
+      return false;
+    }
+    if (tag == null || !context.mounted) return false;
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TagPage(site: site, tag: tag!)));
+    return true;
+  }
+
   @override
   State<TagPage> createState() => _TagPageState();
 }

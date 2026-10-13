@@ -1,0 +1,279 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "A question from the app",
+          "content": "How does the app choose a best answer?"
+        },
+        "relationships": {
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "45"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "55",
+      "links": {
+        "self": "/discussions/55"
+      },
+      "attributes": {
+        "title": "A question from the app",
+        "slug": "55-a-question-from-the-app",
+        "commentCount": 1,
+        "participantCount": 1,
+        "createdAt": "2026-10-13T18:02:40+00:00",
+        "lastPostedAt": "2026-10-13T18:02:40+00:00",
+        "lastPostNumber": 1,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": true,
+        "lastReadAt": "2026-10-13T18:02:40+00:00",
+        "lastReadPostNumber": 1,
+        "canTag": false,
+        "isApproved": true,
+        "subscription": null,
+        "isPrivateDiscussion": false,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "canMakePublic": false,
+        "canDownloadFiles": true,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectBestAnswer": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "298"
+            }
+          ]
+        },
+        "hideUser": {
+          "data": null
+        },
+        "bestAnswerPost": {
+          "data": null
+        },
+        "bestAnswerUser": {
+          "data": null
+        },
+        "recipientGroups": {
+          "data": []
+        },
+        "recipientUsers": {
+          "data": []
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "45"
+            }
+          ]
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "298"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "298"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "tags",
+        "id": "45",
+        "links": {
+          "self": "/tags/45"
+        },
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "icon": "fas fa-laptop",
+          "isHidden": false,
+          "isPrimary": true,
+          "discussionCount": 6,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "lastPostedAt": "2026-10-13T18:02:40+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        },
+        "relationships": {
+          "lastPostedDiscussion": {
+            "data": {
+              "type": "discussions",
+              "id": "55"
+            }
+          },
+          "parent": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "posts",
+        "id": "298",
+        "links": {
+          "self": "/posts/298"
+        },
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-13T18:02:40+00:00",
+          "contentType": "comment",
+          "content": "How does the app choose a best answer?",
+          "contentHtml": "<p>How does the app choose a best answer?</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": true,
+          "canDelete": false,
+          "canHide": true,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "55"
+            }
+          },
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "likes": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "email": "carol@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 1,
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T18:02:26+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

@@ -5,6 +5,9 @@ import 'package:dio/dio.dart';
 /// [names] is empty aren't kept.
 class FixtureRecorder extends Interceptor {
   final names = <String>[];
+
+  /// Fixtures to replay only for a request with the same whole `data` (see FixtureForum).
+  final matchData = <String>{};
   final recorded = <String, Map<String, Object?>>{};
 
   @override
@@ -22,8 +25,10 @@ class FixtureRecorder extends Interceptor {
 
   void _save(RequestOptions options, int? status, Object? body) {
     if (names.isEmpty) return;
-    recorded[names.removeAt(0)] = {
+    final name = names.removeAt(0);
+    recorded[name] = {
       'request': {
+        if (matchData.contains(name)) 'match': 'data',
         'method': options.method,
         'path': options.path,
         'query': options.queryParameters,

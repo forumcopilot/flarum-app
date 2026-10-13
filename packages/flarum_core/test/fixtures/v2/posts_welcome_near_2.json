@@ -6,7 +6,7 @@
       "filter[discussion]": "3",
       "page[near]": "2",
       "page[limit]": "20",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -57,6 +57,9 @@
           },
           "hiddenUser": {
             "data": null
+          },
+          "likes": {
+            "data": []
           },
           "mentionedBy": {
             "data": []
@@ -118,6 +121,18 @@
           },
           "hiddenUser": {
             "data": null
+          },
+          "likes": {
+            "data": [
+              {
+                "type": "users",
+                "id": "3"
+              },
+              {
+                "type": "users",
+                "id": "4"
+              }
+            ]
           },
           "mentionedBy": {
             "data": [
@@ -193,6 +208,14 @@
           "hiddenUser": {
             "data": null
           },
+          "likes": {
+            "data": [
+              {
+                "type": "users",
+                "id": "2"
+              }
+            ]
+          },
           "mentionedBy": {
             "data": []
           },
@@ -254,6 +277,9 @@
           "hiddenUser": {
             "data": null
           },
+          "likes": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -301,7 +327,7 @@
           "canEditUserRecipients": false,
           "canEditGroupRecipients": false,
           "canMakePublic": false,
-          "canDownloadFiles": false,
+          "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
           "canStartPoll": false,
@@ -369,7 +395,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-10T18:31:10+00:00",
+          "lastSeenAt": "2026-10-13T17:51:53+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -388,6 +414,51 @@
       },
       {
         "type": "users",
+        "id": "2",
+        "links": {
+          "self": "/users/2"
+        },
+        "attributes": {
+          "username": "alice",
+          "email": "alice@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "alice",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "alice",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 38,
+          "lastSeenAt": "2026-10-13T17:54:34+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 1,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "users",
         "id": "3",
         "links": {
           "self": "/users/3"
@@ -401,8 +472,8 @@
           "slug": "bob",
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
-          "commentCount": 23,
-          "lastSeenAt": "2026-10-09T18:24:42+00:00",
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T17:51:54+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -563,7 +634,7 @@
           "canEditUserRecipients": false,
           "canEditGroupRecipients": false,
           "canMakePublic": false,
-          "canDownloadFiles": false,
+          "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
           "canStartPoll": false,
@@ -617,51 +688,6 @@
       },
       {
         "type": "users",
-        "id": "2",
-        "links": {
-          "self": "/users/2"
-        },
-        "attributes": {
-          "username": "alice",
-          "email": "alice@flarumapp.local",
-          "isEmailConfirmed": true,
-          "displayName": "alice",
-          "avatarUrl": null,
-          "avatarSrcset": null,
-          "hasUploadedAvatar": false,
-          "slug": "alice",
-          "joinTime": "2026-10-08T17:53:46+00:00",
-          "discussionCount": 2,
-          "commentCount": 38,
-          "lastSeenAt": "2026-10-11T01:03:49+00:00",
-          "canEdit": false,
-          "canEditCredentials": false,
-          "canEditGroups": false,
-          "canDelete": false,
-          "newFlagCount": 0,
-          "canSuspend": false,
-          "suspendMessage": null,
-          "suspendedUntil": null,
-          "canModerateExports": true,
-          "canMentionGroups": false,
-          "blocksPd": false,
-          "ignored": false,
-          "canBeIgnored": false,
-          "bestAnswerCount": 0,
-          "canEditNickname": true,
-          "canSendAnyMessage": true,
-          "canDeleteOwnMessages": null,
-          "messageCount": 1,
-          "fof-upload-uploadCountCurrent": 3,
-          "fof-upload-uploadCountAll": 3,
-          "fofTermsPoliciesState": [],
-          "fofTermsPoliciesHasUpdate": false,
-          "fofTermsPoliciesMustAccept": false,
-          "draftCount": 0
-        }
-      },
-      {
-        "type": "users",
         "id": "1",
         "links": {
           "self": "/users/1"
@@ -676,7 +702,7 @@
           "joinTime": "2026-10-08T16:06:42+00:00",
           "discussionCount": 5,
           "commentCount": 6,
-          "lastSeenAt": "2026-10-10T18:30:32+00:00",
+          "lastSeenAt": "2026-10-13T17:51:58+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

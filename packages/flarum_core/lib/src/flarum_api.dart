@@ -64,12 +64,13 @@ class FlarumApi {
 
   /// A thread's posts with their authors and who replied to them, as the web
   /// loads them.
-  static const _postIncludes = 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion';
+  static const _postIncludes = 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes';
 
-  /// Includes from extensions a forum may not run: flarum/tags' `tags` and flarum/mentions'
-  /// `mentionedBy…`. A forum without the extension refuses the whole request (400
-  /// invalid_parameter), as the census found on real forums.
-  static bool _fromExtension(String include) => include == 'tags' || include.startsWith('mentionedBy');
+  /// Includes from extensions a forum may not run: flarum/tags' `tags`, flarum/mentions'
+  /// `mentionedBy…` and flarum/likes' `likes`. A forum without the extension refuses the whole
+  /// request (400 invalid_parameter), as the census found on real forums.
+  static bool _fromExtension(String include) =>
+      include == 'tags' || include == 'likes' || include.startsWith('mentionedBy');
 
   /// The extension includes this forum refused: left off from then on.
   final _refusedIncludes = <String>{};
@@ -184,6 +185,7 @@ class FlarumApi {
     bool following = false,
     bool unread = false,
     bool sticky = false,
+    bool bookmarked = false,
     String? author,
     DateTime? createdSince,
     String? query,
@@ -201,6 +203,7 @@ class FlarumApi {
       if (following) 'filter[subscription]': 'following',
       if (unread) 'filter[unread]': '1',
       if (sticky) 'filter[sticky]': '1',
+      if (bookmarked) 'filter[bookmarked]': '1',
       if (author != null) 'filter[author]': author,
       if (created != null) 'filter[created]': created,
       if (query != null) 'filter[q]': query,
@@ -208,17 +211,19 @@ class FlarumApi {
     // Once filter[q] is present, 1.x ignores every other filter key: its search
     // takes those conditions as gambits inside q. 2.0 is the reverse: it reads
     // only filter keys and treats gambits in q as search words.
-    final gambits = query != null && filters.length > 1 && await version() == FlarumVersion.v1;
+    // 1.x's bookmarked filter is a gambit only: the key alone lists everything.
+    final gambits = (query != null && filters.length > 1 || bookmarked) && await version() == FlarumVersion.v1;
     if (gambits) {
       filters
         ..clear()
         ..['filter[q]'] = [
-          query,
+          if (query != null) query,
           if (tagSlug != null) 'tag:$tagSlug',
           for (final slug in excludeTagSlugs) '-tag:$slug',
           if (following) 'is:following',
           if (unread) 'is:unread',
           if (sticky) 'is:sticky',
+          if (bookmarked) 'is:bookmarked',
           if (author != null) 'author:$author',
           if (created != null) 'created:$created',
         ].join(' ');
@@ -353,6 +358,92 @@ class FlarumApi {
       },
     });
     return FlarumPost.fromResource(document.single, document);
+  }
+
+  /// Likes post [id] for the reader, or takes the like back (flarum/likes).
+  Future<FlarumPost> likePost(String id, {required bool liked}) => _patchPost(id, {'isLiked': liked});
+
+  /// Reacts to post [id] with reaction [reactionId] (fof/reactions). A reader has one reaction a
+  /// post: another replaces theirs, and theirs again takes it back. (So does null on 2.0; 1.x
+  /// fails with 500 on it, so [unreactToPost] sends theirs again.)
+  Future<FlarumPost> reactToPost(String id, String reactionId) => _patchPost(id, {'reaction': reactionId});
+
+  /// Takes the reader's reaction [reactionId] to post [id] back.
+  Future<FlarumPost> unreactToPost(String id, String reactionId) => reactToPost(id, reactionId);
+
+  /// Bookmarks post [id] for the reader, or takes the bookmark off (fof/bookmarks).
+  Future<FlarumPost> bookmarkPost(String id, {required bool bookmarked}) => _patchPost(id, {'bookmarked': bookmarked});
+
+  Future<FlarumPost> _patchPost(String id, Map<String, Object?> attributes) async {
+    final document = await client.patch('/posts/$id', {
+      'data': {'type': 'posts', 'id': id, 'attributes': attributes},
+    });
+    return FlarumPost.fromResource(document.single, document);
+  }
+
+  /// Bookmarks discussion [id] for the reader, or takes the bookmark off (fof/bookmarks).
+  Future<FlarumDiscussion> bookmarkDiscussion(String id, {required bool bookmarked}) =>
+      _patchDiscussion(id, {'bookmarked': bookmarked});
+
+  /// The reader's [level] for discussion [id] (flarum/subscriptions): `follow` (told of every
+  /// reply), `ignore` (it leaves their lists), or null for neither.
+  Future<FlarumDiscussion> setSubscription(String id, String? level) => _patchDiscussion(id, {'subscription': level});
+
+  /// Chooses post [postId] as discussion [id]'s best answer (fof/best-answer), or none (null).
+  /// 1.x takes the post's id as an attribute, 0 for none; 2.0 a relationship, with empty
+  /// attributes beside it, without which rc.8 fails with 500.
+  Future<FlarumDiscussion> setBestAnswer(String id, String? postId) async {
+    if (await version() == FlarumVersion.v1) {
+      return _patchDiscussion(id, {'bestAnswerPostId': postId == null ? 0 : int.tryParse(postId) ?? postId});
+    }
+    final document = await client.patch('/discussions/$id', {
+      'data': {
+        'type': 'discussions',
+        'id': id,
+        'attributes': <String, Object?>{},
+        'relationships': {
+          'bestAnswerPost': {'data': postId == null ? null : {'type': 'posts', 'id': postId}},
+        },
+      },
+    });
+    return FlarumDiscussion.fromResource(document.single, document);
+  }
+
+  Future<FlarumDiscussion> _patchDiscussion(String id, Map<String, Object?> attributes) async {
+    final document = await client.patch('/discussions/$id', {
+      'data': {'type': 'discussions', 'id': id, 'attributes': attributes},
+    });
+    return FlarumDiscussion.fromResource(document.single, document);
+  }
+
+  /// The reader's [level] for tag [id] (fof/follow-tags): `follow` (new discussions), `lurk`
+  /// (every post), `ignore`, `hide`, or null for none. 1.x has its own route; 2.0 takes the tag's
+  /// attribute.
+  Future<void> setTagSubscription(String id, String? level) async {
+    if (await version() == FlarumVersion.v1) {
+      await client.post('/tags/$id/subscription', {
+        'data': {'subscription': level},
+      });
+    } else {
+      await client.patch('/tags/$id', {
+        'data': {
+          'type': 'tags',
+          'id': id,
+          'attributes': {'subscription': level},
+        },
+      });
+    }
+  }
+
+  /// The posts the reader bookmarked (fof/bookmarks), newest first.
+  Future<FlarumPage<FlarumPost>> bookmarkedPosts({int offset = 0, int limit = 20}) async {
+    final document = await client.get('/posts', query: {
+      'filter[bookmarked]': '1',
+      'sort': '-createdAt',
+      ..._page(offset, limit),
+      'include': 'user,discussion',
+    });
+    return _postPage(document, offset);
   }
 
   /// Records that the reader has read discussion [id] up to post [number].

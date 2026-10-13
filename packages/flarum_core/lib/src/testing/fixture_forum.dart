@@ -12,13 +12,17 @@ import '../../flarum_core.dart';
 class FixtureForum {
   FixtureForum(this.version, {String root = 'test/fixtures'})
       : _fixtures = [
-          for (final file in Directory('$root/${version.name}').listSync().whereType<File>())
+          for (final file in Directory('$root/${version.name}').listSync().whereType<File>().toList()
+            ..sort((a, b) => a.path.compareTo(b.path)))
             if (!file.path.endsWith('seed.json')) _Fixture(jsonDecode(file.readAsStringSync()) as Map<String, dynamic>),
         ],
         seed = jsonDecode(File('$root/${version.name}/seed.json').readAsStringSync()) as Map<String, dynamic>;
 
   final FlarumVersion version;
   final List<_Fixture> _fixtures;
+
+  /// The fixtures served so far, for requests recorded more than once.
+  final _served = <_Fixture>{};
 
   /// The ids the seed script created: `discussions`, `users`, `tags`.
   final Map<String, dynamic> seed;
@@ -55,6 +59,7 @@ class _Fixture {
         signedIn = json['request']['signedIn'] as bool,
         rememberCookie = json['request']['rememberCookie'] as bool? ?? false,
         attributes = _attributesOf(json['request']['body']),
+        data = json['request']['match'] == 'data' ? _dataOf(json['request']['body']) : null,
         status = json['status'] as int,
         body = json['body'];
 
@@ -67,6 +72,10 @@ class _Fixture {
   /// A write's `data.attributes` as recorded (a reply's text, a discussion's title): told apart by
   /// them, a reply that worked and one the throttle refused share a method and path.
   final Object? attributes;
+
+  /// The write's whole `data`, for fixtures recorded to match on it: 2.0's best answer (empty
+  /// attributes, the post in `relationships`) and 1.x's tag level (`data.subscription`).
+  final Object? data;
   final int status;
   final Object? body;
 
@@ -76,7 +85,11 @@ class _Fixture {
       options.headers.containsKey('Authorization') == signedIn &&
       '${options.headers['Cookie'] ?? ''}'.contains('_remember=') == rememberCookie &&
       _sameQuery(options.queryParameters, query) &&
-      (attributes == null || _canonical(_attributesOf(options.data)) == _canonical(attributes));
+      (data != null
+          ? _canonical(_dataOf(options.data)) == _canonical(data)
+          : attributes == null || _canonical(_attributesOf(options.data)) == _canonical(attributes));
+
+  static Object? _dataOf(Object? body) => body is Map ? body['data'] : null;
 
   static Object? _attributesOf(Object? body) {
     final data = body is Map ? body['data'] : null;
@@ -105,16 +118,19 @@ class _FixtureAdapter implements HttpClientAdapter {
   @override
   Future<ResponseBody> fetch(RequestOptions options, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
     forum.requests.add(options);
-    for (final fixture in forum._fixtures) {
-      if (fixture.matches(options)) {
-        return ResponseBody.fromString(
-          fixture.body == null ? '' : jsonEncode(fixture.body),
-          fixture.status,
-          headers: {
-            Headers.contentTypeHeader: ['application/vnd.api+json'],
-          },
-        );
-      }
+    // Where the same request was recorded more than once (a reaction, then the same reaction
+    // again to take it back), each is served once, in file-name order, the last one after that.
+    final matching = [for (final fixture in forum._fixtures) if (fixture.matches(options)) fixture];
+    final fixture = matching.where((f) => !forum._served.contains(f)).firstOrNull ?? matching.lastOrNull;
+    if (fixture != null) {
+      forum._served.add(fixture);
+      return ResponseBody.fromString(
+        fixture.body == null ? '' : jsonEncode(fixture.body),
+        fixture.status,
+        headers: {
+          Headers.contentTypeHeader: ['application/vnd.api+json'],
+        },
+      );
     }
     throw StateError('No ${forum.version.name} fixture for ${options.method} ${options.path} ${options.queryParameters}. '
         'If the request changed on purpose, re-record with tool/record_fixtures.dart.');

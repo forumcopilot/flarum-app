@@ -1,0 +1,165 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/posts/299",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "id": "299",
+        "attributes": {
+          "bookmarked": true
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "299",
+      "links": {
+        "self": "/posts/299"
+      },
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T18:02:40+00:00",
+        "contentType": "comment",
+        "content": "The one who asked chooses it.",
+        "contentHtml": "<p>The one who asked chooses it.</p>",
+        "renderFailed": null,
+        "editedAt": null,
+        "canEdit": true,
+        "canDelete": false,
+        "canHide": true,
+        "canFlag": false,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": false,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReaction": null,
+        "canStartPoll": false,
+        "bookmarked": true,
+        "canSelectAsBestAnswer": false,
+        "canLike": true,
+        "mentionedByCount": 0,
+        "likesCount": 0
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "3"
+          }
+        },
+        "hiddenUser": {
+          "data": null
+        },
+        "likes": {
+          "data": []
+        },
+        "editedUser": {
+          "data": null
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "55"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "discussions",
+        "id": "55",
+        "links": {
+          "self": "/discussions/55"
+        },
+        "attributes": {
+          "title": "A question from the app",
+          "slug": "55-a-question-from-the-app",
+          "commentCount": 2,
+          "participantCount": 2,
+          "createdAt": "2026-10-13T18:02:40+00:00",
+          "lastPostedAt": "2026-10-13T18:02:40+00:00",
+          "lastPostNumber": 2,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-13T18:02:40+00:00",
+          "lastReadPostNumber": 2,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": true,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "298"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "299"
+            }
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

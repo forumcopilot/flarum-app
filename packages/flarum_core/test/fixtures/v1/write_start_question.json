@@ -1,0 +1,186 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "A question from the app",
+          "content": "How does the app choose a best answer?"
+        },
+        "relationships": {
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "20"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "47",
+      "attributes": {
+        "title": "A question from the app",
+        "slug": "47-a-question-from-the-app",
+        "commentCount": 1,
+        "participantCount": 1,
+        "createdAt": "2026-10-13T18:02:17+00:00",
+        "lastPostedAt": "2026-10-13T18:02:17+00:00",
+        "lastPostNumber": 1,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": true,
+        "lastReadAt": "2026-10-13T18:02:17+00:00",
+        "lastReadPostNumber": 1,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "245"
+            }
+          ]
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "245"
+          }
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "245"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "20"
+            }
+          ]
+        },
+        "recipientUsers": {
+          "data": []
+        },
+        "recipientGroups": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "posts",
+        "id": "245",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-13T18:02:17+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>How does the app choose a best answer?</p>",
+          "renderFailed": false,
+          "content": "How does the app choose a best answer?",
+          "canEdit": true,
+          "canDelete": false,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": false,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 6,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-13T18:02:17+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

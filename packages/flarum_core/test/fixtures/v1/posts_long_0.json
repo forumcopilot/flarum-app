@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "50",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -15,8 +15,8 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=50&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion",
-      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=50&page%5Blimit%5D=50&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Blimit%5D=50&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes",
+      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&sort=number&page%5Boffset%5D=50&page%5Blimit%5D=50&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes"
     },
     "data": [
       {
@@ -66,6 +66,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -118,6 +121,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -168,6 +174,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -220,6 +229,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -270,6 +282,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -322,6 +337,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -372,6 +390,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -424,6 +445,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -474,6 +498,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -526,6 +553,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -576,6 +606,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -628,6 +661,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -678,6 +714,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -730,6 +769,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -780,6 +822,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -832,6 +877,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -882,6 +930,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -934,6 +985,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -984,6 +1038,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1036,6 +1093,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1086,6 +1146,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1138,6 +1201,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1188,6 +1254,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1240,6 +1309,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1290,6 +1362,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1342,6 +1417,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1392,6 +1470,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1444,6 +1525,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1494,6 +1578,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1546,6 +1633,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1596,6 +1686,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1648,6 +1741,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1698,6 +1794,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1750,6 +1849,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1800,6 +1902,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1852,6 +1957,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -1902,6 +2010,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -1954,6 +2065,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2004,6 +2118,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2056,6 +2173,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2106,6 +2226,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2158,6 +2281,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2208,6 +2334,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2260,6 +2389,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2310,6 +2442,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2362,6 +2497,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2412,6 +2550,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2464,6 +2605,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       },
@@ -2514,6 +2658,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -2566,6 +2713,9 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": []
           }
         }
       }
@@ -2581,12 +2731,12 @@
           "slug": "bob",
           "joinTime": "2026-10-08T17:52:27+00:00",
           "discussionCount": 2,
-          "commentCount": 23,
+          "commentCount": 24,
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-09T18:24:39+00:00",
+          "lastSeenAt": "2026-10-13T17:51:46+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -2613,7 +2763,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-10T18:30:56+00:00",
+          "lastSeenAt": "2026-10-13T17:51:44+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -2640,7 +2790,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-11T01:03:34+00:00",
+          "lastSeenAt": "2026-10-13T17:54:21+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,

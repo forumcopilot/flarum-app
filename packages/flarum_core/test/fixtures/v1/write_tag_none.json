@@ -1,0 +1,42 @@
+{
+  "request": {
+    "match": "data",
+    "method": "POST",
+    "path": "/tags/18/subscription",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "subscription": null
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "tags",
+      "id": "18",
+      "attributes": {
+        "name": "Cycling",
+        "description": "Commutes, routes and keeping the bike running.",
+        "slug": "cycling",
+        "color": "#2980b9",
+        "backgroundUrl": null,
+        "backgroundMode": null,
+        "icon": "fas fa-bicycle",
+        "discussionCount": 3,
+        "position": 7,
+        "defaultSort": null,
+        "isChild": false,
+        "isHidden": false,
+        "lastPostedAt": "2026-10-01T22:00:00+00:00",
+        "canStartDiscussion": true,
+        "canAddToDiscussion": true,
+        "subscription": null,
+        "isQnA": false,
+        "reminders": false
+      }
+    }
+  }
+}

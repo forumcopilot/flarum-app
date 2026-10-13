@@ -142,21 +142,48 @@ class FlarumSubscriptionProxy implements IFCSubscriptionProxy {
   static const _later = 'Not available yet';
   static const _signIn = 'Sign in to see what you follow';
 
+  /// Follows a tag (fof/follow-tags): its new discussions. Flarum has no email modes, so
+  /// [subscribeMode] doesn't change the level.
   @override
-  Future<FCSubscribeForumResult> subscribeForumAsync(String forumId, int subscribeMode) async =>
-      FCSubscribeForumResult(result: false, resultText: _later);
+  Future<FCSubscribeForumResult> subscribeForumAsync(String forumId, int subscribeMode) async {
+    try {
+      await _forum.api.setTagSubscription(forumId, 'follow');
+      return FCSubscribeForumResult(result: true, resultText: '');
+    } catch (e) {
+      return FCSubscribeForumResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
-  Future<FCUnsubscribeForumResult> unsubscribeForumAsync(String forumId) async =>
-      FCUnsubscribeForumResult(result: false, resultText: _later);
+  Future<FCUnsubscribeForumResult> unsubscribeForumAsync(String forumId) async {
+    try {
+      await _forum.api.setTagSubscription(forumId, null);
+      return FCUnsubscribeForumResult(result: true, resultText: '');
+    } catch (e) {
+      return FCUnsubscribeForumResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
+
+  /// Follows a discussion (flarum/subscriptions): told of every reply.
+  @override
+  Future<FCSubscribeTopicResult> subscribeTopicAsync(String topicId, int subscribeMode) async {
+    try {
+      await _forum.api.setSubscription(topicId, 'follow');
+      return FCSubscribeTopicResult(result: true, resultText: '');
+    } catch (e) {
+      return FCSubscribeTopicResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
-  Future<FCSubscribeTopicResult> subscribeTopicAsync(String topicId, int subscribeMode) async =>
-      FCSubscribeTopicResult(result: false, resultText: _later);
-
-  @override
-  Future<FCUnsubscribeTopicResult> unsubscribeTopicAsync(String topicId) async =>
-      FCUnsubscribeTopicResult(result: false, resultText: _later);
+  Future<FCUnsubscribeTopicResult> unsubscribeTopicAsync(String topicId) async {
+    try {
+      await _forum.api.setSubscription(topicId, null);
+      return FCUnsubscribeTopicResult(result: true, resultText: '');
+    } catch (e) {
+      return FCUnsubscribeTopicResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
   Future<FCNotificationLevelResult> setTopicNotificationLevelAsync(String topicId, FCNotificationLevel level) async =>

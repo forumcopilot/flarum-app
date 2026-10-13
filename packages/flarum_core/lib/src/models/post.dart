@@ -29,6 +29,10 @@ class FlarumPost {
     this.mentionedByCount = 0,
     this.canSelectAsBestAnswer = false,
     this.mentionedBy = const [],
+    this.likedBy = const [],
+    this.canReact = false,
+    this.reactionCounts = const {},
+    this.userReactionId,
   });
 
   /// [discussion] stands in for the post's own `discussion` relationship when a
@@ -63,8 +67,58 @@ class FlarumPost {
       mentionedBy: [
         for (final ref in resource.toMany('mentionedBy')) FlarumPostReply.from(ref, document),
       ],
+      likedBy: [
+        for (final user in document.findAll(resource.toMany('likes'))) FlarumUser.fromResource(user),
+      ],
+      canReact: a.boolean('canReact') ?? false,
+      reactionCounts: {
+        if (a['reactionCounts'] case final Map<String, dynamic> counts)
+          for (final MapEntry(:key, :value) in counts.entries)
+            if (value is num && value > 0) key: value.toInt(),
+      },
+      // 2.0 sends the reaction's id as userReaction; 1.x sends the id as userReactionIdentifier.
+      userReactionId: (a['userReaction'] ?? a['userReactionIdentifier'])?.toString(),
     );
   }
+
+  /// This post after a like, a reaction or a bookmark, the rest as it was (its replies stay, which
+  /// the forum's answer to the change leaves out).
+  FlarumPost copyWith({
+    int? likesCount,
+    List<FlarumUser>? likedBy,
+    Map<String, int>? reactionCounts,
+    String? Function()? userReactionId,
+    bool? bookmarked,
+  }) =>
+      FlarumPost(
+        id: id,
+        number: number,
+        contentType: contentType,
+        contentHtml: contentHtml,
+        content: content,
+        createdAt: createdAt,
+        editedAt: editedAt,
+        isHidden: isHidden,
+        discussionId: discussionId,
+        discussionTitle: discussionTitle,
+        author: author,
+        canEdit: canEdit,
+        canDelete: canDelete,
+        canHide: canHide,
+        canFlag: canFlag,
+        canLike: canLike,
+        likesCount: likesCount ?? this.likesCount,
+        isApproved: isApproved,
+        canApprove: canApprove,
+        bookmarked: bookmarked ?? this.bookmarked,
+        mentionedByCount: mentionedByCount,
+        canSelectAsBestAnswer: canSelectAsBestAnswer,
+        mentionedBy: mentionedBy,
+        likedBy: likedBy ?? this.likedBy,
+        canReact: canReact,
+        reactionCounts: reactionCounts ?? this.reactionCounts,
+        userReactionId: userReactionId == null ? this.userReactionId : userReactionId(),
+      );
 
   final String id;
 
@@ -117,6 +171,19 @@ class FlarumPost {
   /// number is [mentionedByCount].
   final List<FlarumPostReply> mentionedBy;
   final bool canSelectAsBestAnswer;
+
+  /// Who liked it, when the request included `likes`: up to four, the reader first if they did
+  /// (flarum/likes puts them there). The full number is [likesCount].
+  final List<FlarumUser> likedBy;
+
+  /// fof/reactions: whether the reader may react, how many reacted with each reaction (by its id,
+  /// none listed at 0), and the reader's own reaction's id.
+  final bool canReact;
+  final Map<String, int> reactionCounts;
+  final String? userReactionId;
+
+  /// Whether the reader ([readerId]) liked it.
+  bool isLikedBy(String? readerId) => readerId != null && likedBy.any((user) => user.id == readerId);
 
   bool get isComment => contentType == 'comment';
 }

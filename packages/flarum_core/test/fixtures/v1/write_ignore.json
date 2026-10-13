@@ -1,0 +1,57 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/discussions/47",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "id": "47",
+        "attributes": {
+          "subscription": "ignore"
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "47",
+      "attributes": {
+        "title": "A question from the app",
+        "slug": "47-a-question-from-the-app",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-13T18:02:17+00:00",
+        "lastPostedAt": "2026-10-13T18:02:17+00:00",
+        "lastPostNumber": 2,
+        "canReply": true,
+        "canRename": false,
+        "canDelete": false,
+        "canHide": false,
+        "lastReadAt": "2026-10-13T18:02:17+00:00",
+        "lastReadPostNumber": 2,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": "ignore",
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      }
+    }
+  }
+}

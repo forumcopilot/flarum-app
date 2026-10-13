@@ -1,0 +1,79 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/posts/246",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "id": "246",
+        "attributes": {
+          "reaction": "5"
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "246",
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T18:02:17+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>The one who asked chooses it.</p>",
+        "renderFailed": false,
+        "canEdit": false,
+        "canDelete": false,
+        "canHide": false,
+        "mentionedByCount": 0,
+        "canFlag": true,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": true,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1,
+          "6": 0
+        },
+        "userReactionIdentifier": 5,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": true,
+        "canLike": true,
+        "likesCount": 0
+      },
+      "relationships": {
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "47"
+          }
+        },
+        "likes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "discussions",
+        "id": "47",
+        "attributes": {
+          "title": "A question from the app",
+          "slug": "47-a-question-from-the-app",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      }
+    ]
+  }
+}

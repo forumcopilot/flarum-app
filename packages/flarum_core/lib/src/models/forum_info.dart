@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'reaction.dart';
 import 'user.dart';
 
 /// The Flarum major version a forum runs.
@@ -49,6 +50,7 @@ class FlarumForumInfo {
     this.faviconUrl,
     this.allowSignUp = false,
     this.tagRules,
+    this.reactions = const [],
     this.actor,
     this.actorAttributes = const {},
   });
@@ -80,6 +82,10 @@ class FlarumForumInfo {
               maxSecondary: a.integer('maxSecondaryTags') ?? 0,
               canBypass: a.boolean('canBypassTagCounts') ?? false,
             ),
+      reactions: [
+        for (final reaction in document.findAll(forum.toMany('reactions')))
+          if (FlarumReaction.fromResource(reaction) case final r when r.enabled) r,
+      ],
       actor: actor == null ? null : FlarumUser.fromResource(actor),
       actorAttributes: actor?.attributes ?? const {},
       attributes: a,
@@ -105,6 +111,9 @@ class FlarumForumInfo {
 
   /// Null when flarum/tags is off.
   final FlarumTagRules? tagRules;
+
+  /// The reactions the forum offers (fof/reactions), in its order; empty without it.
+  final List<FlarumReaction> reactions;
 
   /// The signed-in reader; null for guests.
   final FlarumUser? actor;

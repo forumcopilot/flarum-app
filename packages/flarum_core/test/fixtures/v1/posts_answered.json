@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -15,7 +15,7 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=33&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=33&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes"
     },
     "data": [
       {
@@ -65,6 +65,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -117,6 +120,18 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": [
+              {
+                "type": "users",
+                "id": "13"
+              },
+              {
+                "type": "users",
+                "id": "20"
+              }
+            ]
           }
         }
       },
@@ -168,6 +183,14 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": [
+              {
+                "type": "users",
+                "id": "20"
+              }
+            ]
           }
         }
       },
@@ -219,6 +242,18 @@
           },
           "mentionedBy": {
             "data": []
+          },
+          "likes": {
+            "data": [
+              {
+                "type": "users",
+                "id": "13"
+              },
+              {
+                "type": "users",
+                "id": "16"
+              }
+            ]
           }
         }
       },
@@ -270,6 +305,9 @@
             }
           },
           "mentionedBy": {
+            "data": []
+          },
+          "likes": {
             "data": []
           }
         }
@@ -372,7 +410,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-11T01:49:18+00:00",
+          "lastSeenAt": "2026-10-13T17:51:50+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,

@@ -2,6 +2,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/factory/site_proxy_factory.dart';
 import 'package:forumcopilot_sdk/interfaces/interfaces.dart';
 
+import 'flarum_bookmark_proxy.dart';
 import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
 import 'flarum_post_proxy.dart';
@@ -51,6 +52,9 @@ class FlarumProxyFactory extends SiteProxyFactory {
   IFCAttachmentProxy createAttachmentProxy(SiteContext context) => _notYet('attachment');
   @override
   IFCTagProxy createTagProxy(SiteContext context) => FlarumTagProxy(context);
+
+  @override
+  IFCBookmarkProxy createBookmarkProxy(SiteContext context) => FlarumBookmarkProxy(context);
 
   static Never _notYet(String proxy) => throw UnimplementedError('Flarum $proxy proxy is not implemented yet');
 }

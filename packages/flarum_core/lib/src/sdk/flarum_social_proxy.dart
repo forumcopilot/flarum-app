@@ -79,11 +79,24 @@ class FlarumSocialProxy implements IFCSocialProxy {
   static const _signIn = 'Sign in to see your notifications';
 
   @override
-  Future<FCLikePostResult> likePostAsync(String postId, {int reactionId = 1}) async =>
-      FCLikePostResult(result: false, resultText: _later);
+  Future<FCLikePostResult> likePostAsync(String postId, {int reactionId = 1}) async {
+    try {
+      final post = await _forum.api.likePost(postId, liked: true);
+      return FCLikePostResult(result: true, resultText: '', isLiked: true, likeCount: post.likesCount);
+    } catch (e) {
+      return FCLikePostResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
-  Future<FCUnlikePostResult> unlikePostAsync(String postId) async => FCUnlikePostResult(result: false, resultText: _later);
+  Future<FCUnlikePostResult> unlikePostAsync(String postId) async {
+    try {
+      final post = await _forum.api.likePost(postId, liked: false);
+      return FCUnlikePostResult(result: true, resultText: '', isLiked: false, likeCount: post.likesCount);
+    } catch (e) {
+      return FCUnlikePostResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   @override
   Future<FCLikePostResult> likeConversationMessageAsync(String messageId, {int reactionId = 1}) async =>

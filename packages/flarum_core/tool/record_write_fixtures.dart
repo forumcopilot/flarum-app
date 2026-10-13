@@ -49,7 +49,10 @@ Future<void> main(List<String> args) async {
     }
   }
 
-  final version = (await carol.forumInfo()).version;
+  final info = await carol.forumInfo();
+  final version = info.version;
+  // Known now, so that no later call asks for it under a fixture's name.
+  await bob.forumInfo();
   final general = (await carol.tags()).firstWhere((t) => t.slug == 'general').id;
   // The refusals that come before any post: a post would set off the throttle for what follows.
   await record('write_start_discussion_no_tags', () => carol.startDiscussion(WriteSamples.title, WriteSamples.noTagsContent));
@@ -64,6 +67,43 @@ Future<void> main(List<String> args) async {
     await record('write_edit_post_not_theirs', () => carol.editPost(reply.id, WriteSamples.editByOther));
   } finally {
     await admin.client.delete('/discussions/${discussion.id}');
+  }
+
+  // Milestone 2's actions, in a Q&A discussion (best answers need fof/best-answer's Q&A tag).
+  final tags = await carol.tags();
+  String tagId(String slug) => tags.firstWhere((t) => t.slug == slug).id;
+  final reaction = info.reactions.firstWhere((r) => r.identifier == 'heart', orElse: () => info.reactions.first);
+  // Past carol's and bob's posting throttle.
+  await Future<void>.delayed(const Duration(seconds: 11));
+  final question = await record('write_start_question',
+      () => carol.startDiscussion(WriteSamples.questionTitle, WriteSamples.question, tagIds: [tagId('tech-help')]));
+  if (question == null) throw StateError('The question was not started');
+  try {
+    final answer = await record('write_answer', () => bob.reply(question.id, WriteSamples.answer));
+    if (answer == null) throw StateError('The answer was not posted');
+    // The SDK's reaction toggle and best answer read the post first: before and after a reaction.
+    await record('write_answer_read', () => carol.post(answer.id));
+    await record('write_like', () => carol.likePost(answer.id, liked: true));
+    await record('write_unlike', () => carol.likePost(answer.id, liked: false));
+    await record('write_react', () => carol.reactToPost(answer.id, reaction.id));
+    await record('write_answer_read_reacted', () => carol.post(answer.id));
+    await record('write_unreact', () => carol.unreactToPost(answer.id, reaction.id));
+    recorder.matchData.addAll(['write_best_answer', 'write_best_answer_none', 'write_tag_follow', 'write_tag_none']);
+    await record('write_best_answer', () => carol.setBestAnswer(question.id, answer.id));
+    await record('write_best_answer_none', () => carol.setBestAnswer(question.id, null));
+    await record('write_follow', () => bob.setSubscription(question.id, 'follow'));
+    await record('write_ignore', () => bob.setSubscription(question.id, 'ignore'));
+    await record('write_unfollow', () => bob.setSubscription(question.id, null));
+    await record('write_bookmark_post', () => bob.bookmarkPost(answer.id, bookmarked: true));
+    await record('write_bookmark_discussion', () => bob.bookmarkDiscussion(question.id, bookmarked: true));
+    await record('write_bookmarked_discussions', () => bob.discussions(bookmarked: true));
+    await record('write_bookmarked_posts', () => bob.bookmarkedPosts());
+    await record('write_unbookmark_post', () => bob.bookmarkPost(answer.id, bookmarked: false));
+    await record('write_unbookmark_discussion', () => bob.bookmarkDiscussion(question.id, bookmarked: false));
+    await record('write_tag_follow', () => bob.setTagSubscription(tagId('cycling'), 'follow'));
+    await record('write_tag_none', () => bob.setTagSubscription(tagId('cycling'), null));
+  } finally {
+    await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {
       await api.logOut();
     }

@@ -6,7 +6,7 @@
       "filter[discussion]": "6",
       "page[near]": "30",
       "page[limit]": "5",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -57,6 +57,9 @@
           },
           "hiddenUser": {
             "data": null
+          },
+          "likes": {
+            "data": []
           },
           "mentionedBy": {
             "data": []
@@ -119,6 +122,9 @@
           "hiddenUser": {
             "data": null
           },
+          "likes": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -179,6 +185,9 @@
           },
           "hiddenUser": {
             "data": null
+          },
+          "likes": {
+            "data": []
           },
           "mentionedBy": {
             "data": []
@@ -241,6 +250,9 @@
           "hiddenUser": {
             "data": null
           },
+          "likes": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -302,6 +314,9 @@
           "hiddenUser": {
             "data": null
           },
+          "likes": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -339,8 +354,8 @@
           "canRename": false,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-08T17:54:03+00:00",
-          "lastReadPostNumber": 20,
+          "lastReadAt": "2026-10-11T04:41:00+00:00",
+          "lastReadPostNumber": 60,
           "canTag": false,
           "isApproved": true,
           "subscription": null,
@@ -349,7 +364,7 @@
           "canEditUserRecipients": false,
           "canEditGroupRecipients": false,
           "canMakePublic": false,
-          "canDownloadFiles": false,
+          "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
           "canStartPoll": false,
@@ -417,7 +432,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-10T18:31:10+00:00",
+          "lastSeenAt": "2026-10-13T17:51:53+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -449,8 +464,8 @@
           "slug": "bob",
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
-          "commentCount": 23,
-          "lastSeenAt": "2026-10-09T18:24:42+00:00",
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T17:51:54+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -485,7 +500,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-11T01:03:49+00:00",
+          "lastSeenAt": "2026-10-13T17:54:34+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -521,10 +536,10 @@
       }
     },
     "links": {
-      "first": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5",
-      "prev": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=22",
-      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=55",
-      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=32"
+      "first": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Bnear%5D=30&page%5Blimit%5D=5",
+      "prev": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=22",
+      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=55",
+      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=32"
     },
     "jsonapi": {
       "version": "1.1"

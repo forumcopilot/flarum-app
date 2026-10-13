@@ -2,6 +2,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/interfaces/i_fc_post_proxy.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_poll.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_post.dart';
+import 'package:forumcopilot_sdk/models/entities/fc_post_reaction.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_post_vote.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_topic.dart';
 import 'package:forumcopilot_sdk/models/results/fc_post_result.dart';
@@ -203,21 +204,62 @@ class FlarumPostProxy implements IFCPostProxy {
   @override
   Future<FCPoll?> votePollAsync(String topicId, List<String> responseIds) async => null;
 
+  /// Chooses [postId] as its discussion's best answer (fof/best-answer).
   @override
-  Future<FCAcceptAnswerResult> acceptAnswerAsync(String postId) async =>
-      FCAcceptAnswerResult(result: false, resultText: _later);
+  Future<FCAcceptAnswerResult> acceptAnswerAsync(String postId) => _bestAnswer(postId, choose: true);
 
   @override
-  Future<FCAcceptAnswerResult> unacceptAnswerAsync(String postId) async =>
-      FCAcceptAnswerResult(result: false, resultText: _later);
+  Future<FCAcceptAnswerResult> unacceptAnswerAsync(String postId) => _bestAnswer(postId, choose: false);
 
-  @override
-  Future<FCToggleReactionResult> toggleReactionAsync(String postId, String reactionId) async =>
-      FCToggleReactionResult(result: false, resultText: _later);
+  Future<FCAcceptAnswerResult> _bestAnswer(String postId, {required bool choose}) async {
+    try {
+      final discussionId = (await _forum.api.post(postId)).discussionId;
+      if (discussionId == null) throw StateError('Post $postId has no discussion');
+      await _forum.api.setBestAnswer(discussionId, choose ? postId : null);
+      return FCAcceptAnswerResult(result: true, resultText: '');
+    } catch (e) {
+      return FCAcceptAnswerResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
+  /// Reacts to [postId] with the reaction named [reactionId] (its shortcode, as the SDK names
+  /// reactions), or takes it back when it's already the reader's (fof/reactions).
   @override
-  Future<FCAvailableReactionsResult> getAvailableReactionsAsync() async =>
-      FCAvailableReactionsResult(result: false, resultText: _later);
+  Future<FCToggleReactionResult> toggleReactionAsync(String postId, String reactionId) async {
+    try {
+      final reactions = (await _forum.current()).reactions;
+      final reaction = reactions.where((r) => r.identifier == reactionId || r.id == reactionId).firstOrNull;
+      if (reaction == null) return FCToggleReactionResult(result: false, resultText: 'No reaction $reactionId');
+      final post = await _forum.api.post(postId);
+      final updated = post.userReactionId == reaction.id
+          ? await _forum.api.unreactToPost(postId, reaction.id)
+          : await _forum.api.reactToPost(postId, reaction.id);
+      return FCToggleReactionResult(result: true, resultText: '', reactions: [
+        for (final r in reactions)
+          if ((updated.reactionCounts[r.id] ?? 0) > 0)
+            FCPostReaction(
+              id: r.identifier,
+              type: r.type,
+              count: updated.reactionCounts[r.id]!,
+              viewerReacted: updated.userReactionId == r.id,
+              canUndo: true,
+            ),
+      ]);
+    } catch (e) {
+      return FCToggleReactionResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
+
+  /// The forum's reactions by shortcode (fof/reactions).
+  @override
+  Future<FCAvailableReactionsResult> getAvailableReactionsAsync() async {
+    try {
+      final reactions = (await _forum.current()).reactions;
+      return FCAvailableReactionsResult(result: true, resultText: '', reactions: [for (final r in reactions) r.identifier]);
+    } catch (e) {
+      return FCAvailableReactionsResult(result: false, resultText: describeFlarumError(e));
+    }
+  }
 
   /// Flarum has no post votes (that would be fof/gamification).
   @override

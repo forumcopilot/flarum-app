@@ -1,0 +1,150 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/posts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "attributes": {
+          "content": "The one who asked chooses it."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "47"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "246",
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T18:02:17+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>The one who asked chooses it.</p>",
+        "renderFailed": false,
+        "content": "The one who asked chooses it.",
+        "canEdit": true,
+        "canDelete": false,
+        "canHide": true,
+        "mentionedByCount": 0,
+        "canFlag": false,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": false,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReactionIdentifier": null,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": false,
+        "canLike": true,
+        "likesCount": 0
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "47"
+          }
+        },
+        "polls": {
+          "data": []
+        },
+        "likes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 2,
+          "commentCount": 24,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-13T18:02:03+00:00",
+          "isEmailConfirmed": true,
+          "email": "bob@flarumapp.local",
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "47",
+        "attributes": {
+          "title": "A question from the app",
+          "slug": "47-a-question-from-the-app",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        },
+        "relationships": {
+          "posts": {
+            "data": [
+              {
+                "type": "posts",
+                "id": "245"
+              },
+              {
+                "type": "posts",
+                "id": "246"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -8,4 +8,7 @@ abstract final class WriteSamples {
   static const throttledReply = 'A second reply, straight after the first.';
   static const edit = 'The reply, edited.';
   static const editByOther = "An edit by someone whose post it isn't.";
+  static const questionTitle = 'A question from the app';
+  static const question = 'How does the app choose a best answer?';
+  static const answer = 'The one who asked chooses it.';
 }

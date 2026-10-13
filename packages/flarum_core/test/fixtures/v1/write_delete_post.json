@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/posts/315",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 204,
+  "body": null
+}

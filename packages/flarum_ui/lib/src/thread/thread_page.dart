@@ -281,6 +281,81 @@ class _ThreadPageState extends State<ThreadPage> {
     );
   }
 
+  // ---- Moderation. ----
+
+  /// Deletes [post] the way Flarum's Delete does, hiding it, or restores it.
+  void _hidePost(FlarumPost post) => _changePost(
+        post,
+        (p) => p.copyWith(isHidden: !p.isHidden),
+        () => _forum.api.setPostHidden(post.id, !post.isHidden),
+        (shown, saved) => shown.copyWith(isHidden: saved.isHidden),
+      );
+
+  void _approvePost(FlarumPost post) => _changePost(
+        post,
+        (p) => p.copyWith(isApproved: true),
+        () => _forum.api.approvePost(post.id),
+        (shown, saved) => shown.copyWith(isApproved: saved.isApproved),
+      );
+
+  Future<void> _deletePostForever(FlarumPost post) async {
+    if (!await _sure(flarumL10n(context).deleteForeverConfirm)) return;
+    try {
+      await _forum.api.deletePost(post.id);
+      if (mounted) _reload(at: post.number);
+    } catch (e) {
+      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
+
+  Future<bool> _sure(String question) async =>
+      await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(question),
+          actions: [
+            TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(kitL10n(context).cancel)),
+            TextButton(onPressed: () => Navigator.of(context).pop(true), child: Text(flarumL10n(context).deleteForever)),
+          ],
+        ),
+      ) ??
+      false;
+
+  /// A moderator's change to the discussion, after which the thread is read again (a rename, a lock
+  /// or a pin leaves an event post at its end); Delete forever closes it.
+  Future<void> _moderate(_DiscussionAction action) async {
+    final discussion = _model.discussion;
+    if (discussion == null) return;
+    final api = _forum.api;
+    final id = discussion.id;
+    try {
+      switch (action) {
+        case _DiscussionAction.rename:
+          final title = await _askTitle(discussion.title);
+          if (title == null || title == discussion.title) return;
+          await api.renameDiscussion(id, title);
+        case _DiscussionAction.lock || _DiscussionAction.unlock:
+          await api.setLocked(id, action == _DiscussionAction.lock);
+        case _DiscussionAction.stick || _DiscussionAction.unstick:
+          await api.setSticky(id, action == _DiscussionAction.stick);
+        case _DiscussionAction.hide || _DiscussionAction.restore:
+          await api.setDiscussionHidden(id, action == _DiscussionAction.hide);
+        case _DiscussionAction.deleteForever:
+          if (!await _sure(flarumL10n(context).deleteForeverConfirm)) return;
+          await api.deleteDiscussion(id);
+          if (mounted) Navigator.of(context).pop();
+          return;
+      }
+      // Where it was opened: the forum's answer doesn't say where an event post went.
+      if (mounted) _reload(at: _near ?? 1);
+    } catch (e) {
+      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
+
+  Future<String?> _askTitle(String title) =>
+      showDialog<String>(context: context, builder: (_) => _RenameDialog(title: title));
+
   Future<void> _flag(FlarumPost post) async {
     if (await FlagPostPage.open(context, widget.site, post) && mounted) {
       SnackbarHelper.showInfo(context, flarumL10n(context).flagSent);
@@ -377,6 +452,8 @@ class _ThreadPageState extends State<ThreadPage> {
               onPressed: _bookmarkDiscussion,
             ),
           if (_signedIn && discussion != null) _FollowMenu(level: discussion.subscription, onChanged: _setSubscription),
+          if (discussion != null && _ModerationMenu.offersAny(discussion))
+            _ModerationMenu(discussion: discussion, onSelected: _moderate),
         ],
       ),
       floatingActionButton: _canReply
@@ -472,6 +549,9 @@ class _ThreadPageState extends State<ThreadPage> {
         onFlag: post.canFlag ? () => _flag(post) : null,
         authorIgnored: _ignored.isIgnored(post.author),
         onIgnore: _ignored.canIgnore(post.author) ? () => toggleIgnore(context, widget.site, post.author!) : null,
+        onHide: post.canHide ? () => _hidePost(post) : null,
+        onDeleteForever: post.canDelete && post.isHidden ? () => _deletePostForever(post) : null,
+        onApprove: post.canApprove && !post.isApproved ? () => _approvePost(post) : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.
@@ -499,6 +579,84 @@ class _Spinner extends StatelessWidget {
 }
 
 /// How the reader follows the discussion (flarum/subscriptions), as the web's menu offers it.
+enum _DiscussionAction { rename, lock, unlock, stick, unstick, hide, restore, deleteForever }
+
+/// Asks for a discussion's new title; pops it, or null.
+class _RenameDialog extends StatefulWidget {
+  const _RenameDialog({required this.title});
+
+  final String title;
+
+  @override
+  State<_RenameDialog> createState() => _RenameDialogState();
+}
+
+class _RenameDialogState extends State<_RenameDialog> {
+  late final _field = TextEditingController(text: widget.title);
+
+  @override
+  void dispose() {
+    _field.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: Text(flarumL10n(context).renameDiscussion),
+        content: TextField(controller: _field, autofocus: true, textCapitalization: TextCapitalization.sentences),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(kitL10n(context).cancel)),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(_field.text.trim().isEmpty ? null : _field.text.trim()),
+            child: Text(flarumL10n(context).save),
+          ),
+        ],
+      );
+}
+
+/// What a moderator may do to the discussion, as the web's discussion controls offer it (its author
+/// may rename it for a while, too).
+class _ModerationMenu extends StatelessWidget {
+  const _ModerationMenu({required this.discussion, required this.onSelected});
+
+  final FlarumDiscussion discussion;
+  final void Function(_DiscussionAction action) onSelected;
+
+  static bool offersAny(FlarumDiscussion d) => d.canRename || d.canLock || d.canSticky || d.canHide || d.canDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final kit = kitL10n(context);
+    PopupMenuItem<_DiscussionAction> item(_DiscussionAction action, IconData icon, String label) => PopupMenuItem(
+          value: action,
+          child: Row(children: [Icon(icon), const SizedBox(width: DesignTokens.spacingM), Flexible(child: Text(label))]),
+        );
+    final d = discussion;
+    return PopupMenuButton<_DiscussionAction>(
+      icon: const Icon(Icons.shield_outlined),
+      tooltip: l10n.moderate,
+      onSelected: onSelected,
+      itemBuilder: (context) => [
+        if (d.canRename) item(_DiscussionAction.rename, Icons.edit_outlined, l10n.renameDiscussion),
+        if (d.canLock)
+          d.isLocked
+              ? item(_DiscussionAction.unlock, Icons.lock_open, l10n.unlockDiscussion)
+              : item(_DiscussionAction.lock, Icons.lock_outline, l10n.lockDiscussion),
+        if (d.canSticky)
+          d.isSticky
+              ? item(_DiscussionAction.unstick, Icons.push_pin_outlined, l10n.unstickDiscussion)
+              : item(_DiscussionAction.stick, Icons.push_pin, l10n.stickDiscussion),
+        if (d.canHide)
+          d.isHidden
+              ? item(_DiscussionAction.restore, Icons.restore, l10n.restore)
+              : item(_DiscussionAction.hide, Icons.delete_outline, kit.delete),
+        if (d.canDelete && d.isHidden) item(_DiscussionAction.deleteForever, Icons.delete_forever_outlined, l10n.deleteForever),
+      ],
+    );
+  }
+}
+
 class _FollowMenu extends StatelessWidget {
   const _FollowMenu({required this.level, required this.onChanged});
 

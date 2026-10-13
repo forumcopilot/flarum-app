@@ -214,6 +214,47 @@ Future<void> main(List<String> args) async {
         if (reply != null) await record('write_dialog_read', () => carol.markDialogRead(dialogId, reply.id));
       }
     }
+
+    // Milestone 5: moderation, as the admin, on carol's question and bob's answer.
+    final mod = member(recorder);
+    await mod.logIn(adminUser, adminPassword);
+    await mod.forumInfo();
+    try {
+      await record('write_lock', () => mod.setLocked(question.id, true));
+      await record('write_unlock', () => mod.setLocked(question.id, false));
+      await record('write_stick', () => mod.setSticky(question.id, true));
+      await record('write_unstick', () => mod.setSticky(question.id, false));
+      await record('write_rename', () => mod.renameDiscussion(question.id, WriteSamples.renamedTitle));
+      await record('write_hide_post', () => mod.setPostHidden(answer.id, true));
+      await record('write_restore_post', () => mod.setPostHidden(answer.id, false));
+      await record('write_hide_discussion', () => mod.setDiscussionHidden(question.id, true));
+      await record('write_restore_discussion', () => mod.setDiscussionHidden(question.id, false));
+      // The thread as the moderator reads it, with the events those left.
+      recorder.states.addAll({
+        for (final name in ['write_forum_moderator', 'write_question_with_post_ids_moderator', 'write_question_posts_moderator'])
+          name: 'moderator',
+      });
+      await record('write_forum_moderator', () => mod.forumInfo());
+      await record('write_question_with_post_ids_moderator', () => mod.discussion(question.id, withPostIds: true));
+      await record('write_question_posts_moderator', () => mod.posts(question.id));
+      // bob's profile as the moderator sees it: they may suspend him.
+      recorder.states['write_user_bob_moderator'] = 'moderator';
+      await record('write_user_bob_moderator', () => mod.userBySlug('bob'));
+      // A reply deleted for good, past bob's posting throttle.
+      await Future<void>.delayed(const Duration(seconds: 11));
+      final extra = await record('write_reply_to_delete', () => bob.reply(question.id, WriteSamples.replyToDelete));
+      if (extra != null) await record('write_delete_post', () => mod.deletePost(extra.id));
+      // bob suspended "indefinitely", as the web does it (until 2038), and at once let back.
+      await record('write_suspend', () => mod.suspend(bobId, FlarumUser.indefiniteSuspension,
+          reason: WriteSamples.suspendReason, message: WriteSamples.suspendReason));
+      recorder.states['write_forum_suspended'] = 'suspended';
+      await record('write_forum_suspended', () => bob.forumInfo());
+      await record('write_unsuspend', () => mod.suspend(bobId, null));
+    } finally {
+      // Never leave bob suspended.
+      await admin.suspend(bobId, null);
+      await mod.logOut();
+    }
   } finally {
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {

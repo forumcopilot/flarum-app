@@ -1,0 +1,240 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/posts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "attributes": {
+          "content": "This reply will be deleted."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "82"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "368",
+      "links": {
+        "self": "/posts/368"
+      },
+      "attributes": {
+        "number": 4,
+        "createdAt": "2026-10-13T20:12:42+00:00",
+        "contentType": "comment",
+        "content": "This reply will be deleted.",
+        "contentHtml": "<p>This reply will be deleted.</p>",
+        "renderFailed": null,
+        "editedAt": null,
+        "canEdit": true,
+        "canDelete": false,
+        "canHide": true,
+        "canFlag": false,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": false,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReaction": null,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": false,
+        "canLike": true,
+        "mentionedByCount": 0,
+        "likesCount": 0
+      },
+      "relationships": {
+        "editedUser": {
+          "data": null
+        },
+        "hiddenUser": {
+          "data": null
+        },
+        "likes": {
+          "data": []
+        },
+        "polls": {
+          "data": []
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "82"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "3"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "discussions",
+        "id": "82",
+        "links": {
+          "self": "/discussions/82"
+        },
+        "attributes": {
+          "title": "A question from the app, renamed",
+          "slug": "82-a-question-from-the-app-renamed",
+          "commentCount": 3,
+          "participantCount": 2,
+          "createdAt": "2026-10-13T20:12:13+00:00",
+          "lastPostedAt": "2026-10-13T20:12:42+00:00",
+          "lastPostNumber": 4,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "lastReadAt": "2026-10-13T20:12:43+00:00",
+          "lastReadPostNumber": 4,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": true,
+          "canSeeReactions": false,
+          "hasPoll": false,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "360"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "368"
+            }
+          },
+          "posts": {
+            "data": [
+              {
+                "type": "posts",
+                "id": "360"
+              },
+              {
+                "type": "posts",
+                "id": "361"
+              },
+              {
+                "type": "posts",
+                "id": "367"
+              },
+              {
+                "type": "posts",
+                "id": "368"
+              }
+            ]
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "email": "bob@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 26,
+          "lastSeenAt": "2026-10-13T20:11:58+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

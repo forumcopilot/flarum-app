@@ -106,6 +106,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   deletes its own with `tool/test_forums/delete_discussions.php`). One is started with
   `relationships.recipientUsers` and no tags; members may have one other person in it and may not
   change who's in it. Listing: 1.x only the `is:private` gambit, 2.0 `filter[private]`.
+- Moderation: PATCH a discussion's `title`, `isLocked`, `isSticky`, `isHidden`, a post's `isHidden` or
+  `isApproved` (flarum/approval), a user's `suspendedUntil`/`suspendReason`/`suspendMessage`
+  (flarum/suspend; the web's "indefinitely" is 2038-01-01). 2.0 rc.8 sends `isHidden` as null on a
+  hidden post or discussion: read `hiddenAt` too.
 - flarum/messages (2.0): `/api/dialogs` and `/api/dialog-messages` (newest first); a first message
   carries `attributes.users`, later ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}`
   `lastReadMessageId`. No notifications, only the actor's `messageCount`. Dialogs can't be deleted

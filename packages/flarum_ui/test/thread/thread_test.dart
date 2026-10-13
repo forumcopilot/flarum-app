@@ -220,6 +220,20 @@ void main() {
             .$2,
         'Alice changed who is in this private discussion.');
     expect(EventPostNotice.describe(event('discussionMerged', null), l10n).$2, 'Alice changed the discussion.');
+    // fof/merge-discussions and fof/split, as their published source writes them.
+    expect(
+        EventPostNotice.describe(event('discussionMerged', {'count': 3, 'titles': ['One', 'Two']}), l10n).$2,
+        'Alice merged 3 posts from “One”, “Two” into this discussion.');
+    expect(
+        EventPostNotice.describe(
+                event('discussionSplit', {'title': 'Elsewhere', 'count': 1, 'url': 'https://f/d/9', 'toNew': true}), l10n)
+            .$2,
+        'Alice split 1 post off to “Elsewhere”.');
+    expect(
+        EventPostNotice.describe(
+                event('discussionSplit', {'title': 'Origin', 'count': 2, 'url': 'https://f/d/8', 'toNew': false}), l10n)
+            .$2,
+        'Alice split 2 posts off from “Origin”.');
     final tags = {
       '1': const FlarumTag(id: '1', name: 'General', slug: 'general', isPrimary: true),
       '3': const FlarumTag(id: '3', name: 'Support', slug: 'support', isPrimary: true),

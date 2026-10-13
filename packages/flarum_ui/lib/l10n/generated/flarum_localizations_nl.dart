@@ -887,4 +887,90 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'De berichten konden niet worden geladen.';
+
+  @override
+  String get moderate => 'Modereren';
+
+  @override
+  String get renameDiscussion => 'Hernoemen';
+
+  @override
+  String get lockDiscussion => 'Vergrendelen';
+
+  @override
+  String get unlockDiscussion => 'Ontgrendelen';
+
+  @override
+  String get stickDiscussion => 'Vastzetten';
+
+  @override
+  String get unstickDiscussion => 'Losmaken';
+
+  @override
+  String get restore => 'Herstellen';
+
+  @override
+  String get deleteForever => 'Definitief verwijderen';
+
+  @override
+  String get deleteForeverConfirm =>
+      'Definitief verwijderen? Dit kan niet ongedaan worden gemaakt.';
+
+  @override
+  String get approve => 'Goedkeuren';
+
+  @override
+  String get unsuspend => 'Schorsing opheffen';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Geschorst tot $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Voor onbepaalde tijd geschorst';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'Je bent geschorst tot $date.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'Je bent geschorst.';
+
+  @override
+  String get awaitingApproval => 'Wacht op goedkeuring';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count berichten',
+      one: '1 bericht',
+    );
+    return '$user heeft $_temp0 uit $titles met deze discussie samengevoegd.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count berichten',
+      one: '1 bericht',
+    );
+    return '$user heeft $_temp0 afgesplitst naar $title.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count berichten',
+      one: '1 bericht',
+    );
+    return '$user heeft $_temp0 afgesplitst van $title.';
+  }
 }

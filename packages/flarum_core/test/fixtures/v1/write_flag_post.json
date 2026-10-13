@@ -16,7 +16,7 @@
           "post": {
             "data": {
               "type": "posts",
-              "id": "290"
+              "id": "308"
             }
           }
         }
@@ -27,18 +27,18 @@
   "body": {
     "data": {
       "type": "flags",
-      "id": "6",
+      "id": "8",
       "attributes": {
         "type": "user",
         "reason": "off_topic",
         "reasonDetail": "Reported by the app tests.",
-        "createdAt": "2026-10-13T19:50:50+00:00"
+        "createdAt": "2026-10-13T20:11:24+00:00"
       },
       "relationships": {
         "post": {
           "data": {
             "type": "posts",
-            "id": "290"
+            "id": "308"
           }
         },
         "user": {
@@ -52,10 +52,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "290",
+        "id": "308",
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T19:50:48+00:00",
+          "createdAt": "2026-10-13T20:11:22+00:00",
           "contentType": "comment",
           "contentHtml": "<p>The one who asked chooses it.</p>",
           "renderFailed": false,

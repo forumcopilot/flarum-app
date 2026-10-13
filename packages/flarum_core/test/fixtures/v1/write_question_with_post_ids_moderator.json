@@ -1,0 +1,244 @@
+{
+  "request": {
+    "state": "moderator",
+    "method": "GET",
+    "path": "/discussions/74",
+    "query": {
+      "include": "user,lastPostedUser,tags,posts"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "74",
+      "attributes": {
+        "title": "A question from the app, renamed",
+        "slug": "74-a-question-from-the-app-renamed",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-13T20:11:21+00:00",
+        "lastPostedAt": "2026-10-13T20:11:22+00:00",
+        "lastPostNumber": 2,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": true,
+        "canHide": true,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": true,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": true,
+        "canEditGroupRecipients": true,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": true,
+        "hasPoll": false,
+        "canStartPoll": true,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": true,
+        "isLocked": false,
+        "canLock": true
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "20"
+            }
+          ]
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "307"
+            },
+            {
+              "type": "posts",
+              "id": "308"
+            },
+            {
+              "type": "posts",
+              "id": "314"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol",
+          "anonymized": false
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "anonymized": false
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 6,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-13T20:11:22+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "isRestricted": false,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      },
+      {
+        "type": "posts",
+        "id": "307",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-13T20:11:21+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>How does the app choose a best answer?</p>",
+          "renderFailed": false,
+          "content": "How does the app choose a best answer?",
+          "ipAddress": "127.0.0.1",
+          "canEdit": true,
+          "canDelete": true,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": true,
+          "canReact": true,
+          "canDeletePostReactions": true,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": true,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": true,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "308",
+        "attributes": {
+          "number": 2,
+          "createdAt": "2026-10-13T20:11:22+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>The one who asked chooses it.</p>",
+          "renderFailed": false,
+          "content": "The one who asked chooses it.",
+          "ipAddress": "127.0.0.1",
+          "canEdit": true,
+          "canDelete": true,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": true,
+          "canReact": true,
+          "canDeletePostReactions": true,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": true,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": true,
+          "canLike": true,
+          "likesCount": 0
+        }
+      },
+      {
+        "type": "posts",
+        "id": "314",
+        "attributes": {
+          "number": 3,
+          "createdAt": "2026-10-13T20:11:38+00:00",
+          "contentType": "discussionRenamed",
+          "content": [
+            "A question from the app",
+            "A question from the app, renamed"
+          ],
+          "canEdit": true,
+          "canDelete": true,
+          "canHide": true,
+          "mentionedByCount": 0,
+          "canFlag": false,
+          "isApproved": true,
+          "canApprove": true,
+          "canReact": false,
+          "canDeletePostReactions": true,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": true,
+          "canLike": true,
+          "likesCount": 0
+        }
+      }
+    ]
+  }
+}

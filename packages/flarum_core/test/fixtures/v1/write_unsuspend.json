@@ -1,0 +1,62 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/users/6",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "suspendedUntil": null
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "6",
+      "attributes": {
+        "username": "bob",
+        "displayName": "bob",
+        "avatarUrl": null,
+        "slug": "bob",
+        "joinTime": "2026-10-08T17:52:27+00:00",
+        "discussionCount": 2,
+        "commentCount": 25,
+        "canEdit": true,
+        "canEditCredentials": true,
+        "canEditGroups": true,
+        "canDelete": true,
+        "lastSeenAt": "2026-10-13T20:11:06+00:00",
+        "isEmailConfirmed": true,
+        "email": "bob@flarumapp.local",
+        "anonymized": false,
+        "suspendReason": null,
+        "suspendMessage": null,
+        "suspendedUntil": null,
+        "canSuspend": true,
+        "canModerateExports": true,
+        "blocksPd": false,
+        "fof-upload-uploadCountCurrent": null,
+        "fof-upload-uploadCountAll": null,
+        "fofTermsPoliciesState": [],
+        "fofTermsPoliciesHasUpdate": false,
+        "fofTermsPoliciesMustAccept": false,
+        "ignored": false,
+        "canBeIgnored": true,
+        "bestAnswerCount": 0,
+        "canEditNickname": true
+      },
+      "relationships": {
+        "groups": {
+          "data": []
+        }
+      }
+    }
+  }
+}

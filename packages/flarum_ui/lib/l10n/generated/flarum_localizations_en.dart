@@ -883,4 +883,90 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'Couldn\'t load the messages.';
+
+  @override
+  String get moderate => 'Moderate';
+
+  @override
+  String get renameDiscussion => 'Rename';
+
+  @override
+  String get lockDiscussion => 'Lock';
+
+  @override
+  String get unlockDiscussion => 'Unlock';
+
+  @override
+  String get stickDiscussion => 'Sticky';
+
+  @override
+  String get unstickDiscussion => 'Unsticky';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get deleteForever => 'Delete forever';
+
+  @override
+  String get deleteForeverConfirm =>
+      'Delete this for good? It can\'t be undone.';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get unsuspend => 'Unsuspend';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Suspended until $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Suspended indefinitely';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'You\'re suspended until $date.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'You\'re suspended.';
+
+  @override
+  String get awaitingApproval => 'Awaiting approval';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count posts',
+      one: '1 post',
+    );
+    return '$user merged $_temp0 from $titles into this discussion.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count posts',
+      one: '1 post',
+    );
+    return '$user split $_temp0 off to $title.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count posts',
+      one: '1 post',
+    );
+    return '$user split $_temp0 off from $title.';
+  }
 }

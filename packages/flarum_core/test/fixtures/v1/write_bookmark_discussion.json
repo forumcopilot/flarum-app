@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/discussions/68",
+    "path": "/discussions/74",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",
-        "id": "68",
+        "id": "74",
         "attributes": {
           "bookmarked": true
         }
@@ -19,20 +19,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "68",
+      "id": "74",
       "attributes": {
         "title": "A question from the app",
-        "slug": "68-a-question-from-the-app",
+        "slug": "74-a-question-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T19:50:48+00:00",
-        "lastPostedAt": "2026-10-13T19:50:48+00:00",
+        "createdAt": "2026-10-13T20:11:21+00:00",
+        "lastPostedAt": "2026-10-13T20:11:22+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": false,
         "canDelete": false,
         "canHide": false,
-        "lastReadAt": "2026-10-13T19:50:48+00:00",
+        "lastReadAt": "2026-10-13T20:11:22+00:00",
         "lastReadPostNumber": 2,
         "isApproved": true,
         "hasBestAnswer": false,

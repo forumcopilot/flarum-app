@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "path": "/fof/terms/policies/6/accept",
+    "path": "/fof/terms/policies/8/accept",
     "query": {},
     "signedIn": true,
     "rememberCookie": false

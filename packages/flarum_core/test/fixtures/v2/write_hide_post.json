@@ -1,0 +1,169 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/posts/361",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "id": "361",
+        "attributes": {
+          "isHidden": true
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "361",
+      "links": {
+        "self": "/posts/361"
+      },
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T20:12:13+00:00",
+        "contentType": "comment",
+        "content": "The one who asked chooses it.",
+        "contentHtml": "<p>The one who asked chooses it.</p>",
+        "renderFailed": null,
+        "ipAddress": "127.0.0.1",
+        "editedAt": null,
+        "isHidden": null,
+        "hiddenAt": "2026-10-13T20:12:31+00:00",
+        "canEdit": true,
+        "canDelete": true,
+        "canHide": true,
+        "canFlag": true,
+        "isApproved": true,
+        "canApprove": true,
+        "canReact": true,
+        "canDeletePostReactions": true,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReaction": null,
+        "canStartPoll": true,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": true,
+        "canLike": true,
+        "mentionedByCount": 0,
+        "likesCount": 0
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "3"
+          }
+        },
+        "hiddenUser": {
+          "data": {
+            "type": "users",
+            "id": "1"
+          }
+        },
+        "likes": {
+          "data": []
+        },
+        "editedUser": {
+          "data": null
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "82"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "discussions",
+        "id": "82",
+        "links": {
+          "self": "/discussions/82"
+        },
+        "attributes": {
+          "title": "A question from the app, renamed",
+          "slug": "82-a-question-from-the-app-renamed",
+          "commentCount": 1,
+          "participantCount": 2,
+          "createdAt": "2026-10-13T20:12:13+00:00",
+          "lastPostedAt": "2026-10-13T20:12:13+00:00",
+          "lastPostNumber": 1,
+          "canReply": true,
+          "canRename": true,
+          "canDelete": true,
+          "canHide": true,
+          "canTag": true,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": true,
+          "canEditGroupRecipients": true,
+          "canMakePublic": false,
+          "canDownloadFiles": true,
+          "canSeeReactions": true,
+          "hasPoll": false,
+          "canStartPoll": true,
+          "bookmarked": false,
+          "canSelectBestAnswer": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": true,
+          "isLocked": false,
+          "canLock": true
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "360"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "360"
+            }
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

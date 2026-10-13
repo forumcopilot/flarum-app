@@ -891,4 +891,95 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'Не удалось загрузить сообщения.';
+
+  @override
+  String get moderate => 'Модерация';
+
+  @override
+  String get renameDiscussion => 'Переименовать';
+
+  @override
+  String get lockDiscussion => 'Закрыть';
+
+  @override
+  String get unlockDiscussion => 'Открыть';
+
+  @override
+  String get stickDiscussion => 'Закрепить';
+
+  @override
+  String get unstickDiscussion => 'Открепить';
+
+  @override
+  String get restore => 'Восстановить';
+
+  @override
+  String get deleteForever => 'Удалить навсегда';
+
+  @override
+  String get deleteForeverConfirm => 'Удалить навсегда? Это нельзя отменить.';
+
+  @override
+  String get approve => 'Одобрить';
+
+  @override
+  String get unsuspend => 'Снять блокировку';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Заблокирован до $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Заблокирован бессрочно';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'Вы заблокированы до $date.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'Вы заблокированы.';
+
+  @override
+  String get awaitingApproval => 'Ожидает одобрения';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сообщения',
+      many: '$count сообщений',
+      few: '$count сообщения',
+      one: '$count сообщение',
+    );
+    return '$user объединил(а) $_temp0 из $titles с этим обсуждением.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сообщения',
+      many: '$count сообщений',
+      few: '$count сообщения',
+      one: '$count сообщение',
+    );
+    return '$user перенёс(ла) $_temp0 в $title.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сообщения',
+      many: '$count сообщений',
+      few: '$count сообщения',
+      one: '$count сообщение',
+    );
+    return '$user отделил(а) $_temp0 из $title.';
+  }
 }

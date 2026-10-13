@@ -860,4 +860,86 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => '메시지를 불러오지 못했습니다.';
+
+  @override
+  String get moderate => '관리';
+
+  @override
+  String get renameDiscussion => '이름 바꾸기';
+
+  @override
+  String get lockDiscussion => '잠금';
+
+  @override
+  String get unlockDiscussion => '잠금 해제';
+
+  @override
+  String get stickDiscussion => '고정';
+
+  @override
+  String get unstickDiscussion => '고정 해제';
+
+  @override
+  String get restore => '복원';
+
+  @override
+  String get deleteForever => '영구 삭제';
+
+  @override
+  String get deleteForeverConfirm => '영구 삭제할까요? 되돌릴 수 없습니다.';
+
+  @override
+  String get approve => '승인';
+
+  @override
+  String get unsuspend => '정지 해제';
+
+  @override
+  String suspendedUntil(String date) {
+    return '$date까지 정지됨';
+  }
+
+  @override
+  String get suspendedIndefinitely => '무기한 정지됨';
+
+  @override
+  String youAreSuspended(String date) {
+    return '$date까지 이용이 정지되었습니다.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => '이용이 정지되었습니다.';
+
+  @override
+  String get awaitingApproval => '승인 대기 중';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '게시물 $count개',
+    );
+    return '$user 님이 $titles의 $_temp0를 이 토론으로 병합했습니다.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '게시물 $count개',
+    );
+    return '$user 님이 $_temp0를 $title(으)로 분리했습니다.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '게시물 $count개',
+    );
+    return '$user 님이 $title에서 $_temp0를 분리했습니다.';
+  }
 }

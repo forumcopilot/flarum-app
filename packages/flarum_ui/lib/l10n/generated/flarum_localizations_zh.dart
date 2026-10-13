@@ -858,4 +858,86 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => '无法加载私信。';
+
+  @override
+  String get moderate => '管理';
+
+  @override
+  String get renameDiscussion => '重命名';
+
+  @override
+  String get lockDiscussion => '锁定';
+
+  @override
+  String get unlockDiscussion => '解锁';
+
+  @override
+  String get stickDiscussion => '置顶';
+
+  @override
+  String get unstickDiscussion => '取消置顶';
+
+  @override
+  String get restore => '恢复';
+
+  @override
+  String get deleteForever => '永久删除';
+
+  @override
+  String get deleteForeverConfirm => '确定永久删除吗？此操作无法撤销。';
+
+  @override
+  String get approve => '批准';
+
+  @override
+  String get unsuspend => '解除封禁';
+
+  @override
+  String suspendedUntil(String date) {
+    return '封禁至 $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => '永久封禁';
+
+  @override
+  String youAreSuspended(String date) {
+    return '你已被封禁至 $date。';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => '你已被封禁。';
+
+  @override
+  String get awaitingApproval => '等待审核';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个帖子',
+    );
+    return '$user 将 $titles 中的$_temp0合并到了此讨论。';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个帖子',
+    );
+    return '$user 将$_temp0拆分到了 $title。';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个帖子',
+    );
+    return '$user 从 $title 拆分出了$_temp0。';
+  }
 }

@@ -885,4 +885,90 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'Não foi possível carregar as mensagens.';
+
+  @override
+  String get moderate => 'Moderar';
+
+  @override
+  String get renameDiscussion => 'Renomear';
+
+  @override
+  String get lockDiscussion => 'Bloquear';
+
+  @override
+  String get unlockDiscussion => 'Desbloquear';
+
+  @override
+  String get stickDiscussion => 'Fixar';
+
+  @override
+  String get unstickDiscussion => 'Desafixar';
+
+  @override
+  String get restore => 'Restaurar';
+
+  @override
+  String get deleteForever => 'Excluir para sempre';
+
+  @override
+  String get deleteForeverConfirm =>
+      'Excluir isto para sempre? Não dá para desfazer.';
+
+  @override
+  String get approve => 'Aprovar';
+
+  @override
+  String get unsuspend => 'Remover suspensão';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Suspenso até $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Suspenso por tempo indeterminado';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'Você está suspenso até $date.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'Você está suspenso.';
+
+  @override
+  String get awaitingApproval => 'Aguardando aprovação';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count publicações',
+      one: '1 publicação',
+    );
+    return '$user mesclou $_temp0 de $titles nesta discussão.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count publicações',
+      one: '1 publicação',
+    );
+    return '$user separou $_temp0 para $title.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count publicações',
+      one: '1 publicação',
+    );
+    return '$user separou $_temp0 de $title.';
+  }
 }

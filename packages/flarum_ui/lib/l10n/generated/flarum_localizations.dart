@@ -1462,6 +1462,120 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load the messages.'**
   String get messagesLoadFailed;
+
+  /// Tooltip of the moderators' menu on a discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get moderate;
+
+  /// Moderator menu: rename the discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get renameDiscussion;
+
+  /// Moderator menu: lock the discussion (flarum/lock)
+  ///
+  /// In en, this message translates to:
+  /// **'Lock'**
+  String get lockDiscussion;
+
+  /// Moderator menu: unlock it
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get unlockDiscussion;
+
+  /// Moderator menu: pin the discussion to the top (flarum/sticky, the web says Sticky)
+  ///
+  /// In en, this message translates to:
+  /// **'Sticky'**
+  String get stickDiscussion;
+
+  /// Moderator menu: unpin it (the web says Unsticky)
+  ///
+  /// In en, this message translates to:
+  /// **'Unsticky'**
+  String get unstickDiscussion;
+
+  /// Brings back a deleted (hidden) post or discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
+  /// Deletes a post or discussion permanently
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get deleteForever;
+
+  /// Confirmation before deleting permanently
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this for good? It can\'t be undone.'**
+  String get deleteForeverConfirm;
+
+  /// Approves a post held for approval (flarum/approval)
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// Profile menu: lift a suspension (flarum/suspend)
+  ///
+  /// In en, this message translates to:
+  /// **'Unsuspend'**
+  String get unsuspend;
+
+  /// Profile: a suspended member, until a date
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended until {date}'**
+  String suspendedUntil(String date);
+
+  /// Profile: a member suspended with no end
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended indefinitely'**
+  String get suspendedIndefinitely;
+
+  /// Strip above the tabs for a suspended reader, until a date
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re suspended until {date}.'**
+  String youAreSuspended(String date);
+
+  /// Strip above the tabs for a reader suspended with no end
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re suspended.'**
+  String get youAreSuspendedIndefinitely;
+
+  /// Label on a post held for a moderator's approval
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting approval'**
+  String get awaitingApproval;
+
+  /// Event post (fof/merge-discussions): posts from other discussions merged into this one; titles is their titles, e.g. '“A”, “B”'
+  ///
+  /// In en, this message translates to:
+  /// **'{user} merged {count, plural, =1{1 post} other{{count} posts}} from {titles} into this discussion.'**
+  String eventMerged(String user, int count, String titles);
+
+  /// Event post (fof/split), in the discussion posts were split from: title is the new discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} split {count, plural, =1{1 post} other{{count} posts}} off to {title}.'**
+  String eventSplitTo(String user, int count, String title);
+
+  /// Event post (fof/split), in the new discussion: title is the one its posts came from
+  ///
+  /// In en, this message translates to:
+  /// **'{user} split {count, plural, =1{1 post} other{{count} posts}} off from {title}.'**
+  String eventSplitFrom(String user, int count, String title);
 }
 
 class _FlarumLocalizationsDelegate

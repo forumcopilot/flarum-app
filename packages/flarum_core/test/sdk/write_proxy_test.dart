@@ -166,6 +166,32 @@ void main() {
         expect(invite.result, isFalse);
       });
 
+      test('the moderation proxy locks, pins, renames, hides and restores, and suspends', () async {
+        final mod = FlarumModerationProxy(testSite());
+        final questionId = pathId('write_lock', 2);
+        final answerId = pathId('write_hide_post', 2);
+        final bobId = pathId('write_suspend', 2);
+        for (final result in [
+          await mod.closeTopicAsync(questionId),
+          await mod.uncloseTopicAsync(questionId),
+          await mod.stickTopicAsync(questionId),
+          await mod.unstickTopicAsync(questionId),
+          await mod.renameTopicAsync(questionId, WriteSamples.renamedTitle),
+          await mod.deletePostAsync(answerId, 1, ''),
+          await mod.undeletePostAsync(answerId, ''),
+          await mod.deleteTopicAsync(questionId, 1, ''),
+          await mod.undeleteTopicAsync(questionId, ''),
+          await mod.deletePostAsync(pathId('write_delete_post', 2), 2, ''),
+          await mod.unbanUserAsync(bobId),
+        ]) {
+          expect(result.result, isTrue, reason: result.resultText);
+        }
+        // bob, suspended as the web does it "indefinitely" (until 2038), by username.
+        FixtureForum(version, states: {'moderator'}).forum();
+        final banned = await FlarumModerationProxy(testSite()).banUserAsync('bob', WriteSamples.suspendReason, 0, 0, 0);
+        expect(banned.result, isTrue, reason: banned.resultText);
+      });
+
       test('replyPostAsync passes the throttle\'s refusal on', () async {
         final reply = await FlarumPostProxy(testSite()).replyPostAsync('', '1', '', WriteSamples.throttledReply, null, null, true);
         expect(reply.result, isFalse);

@@ -1,0 +1,83 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/posts/308",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "id": "308",
+        "attributes": {
+          "isHidden": true
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "308",
+      "attributes": {
+        "number": 2,
+        "createdAt": "2026-10-13T20:11:22+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>The one who asked chooses it.</p>",
+        "renderFailed": false,
+        "content": "The one who asked chooses it.",
+        "ipAddress": "127.0.0.1",
+        "isHidden": true,
+        "hiddenAt": "2026-10-13T20:11:38+00:00",
+        "canEdit": true,
+        "canDelete": true,
+        "canHide": true,
+        "mentionedByCount": 0,
+        "canFlag": true,
+        "isApproved": true,
+        "canApprove": true,
+        "canReact": true,
+        "canDeletePostReactions": true,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReactionIdentifier": null,
+        "canStartPoll": true,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": true,
+        "canLike": true,
+        "likesCount": 0
+      },
+      "relationships": {
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "74"
+          }
+        },
+        "likes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "discussions",
+        "id": "74",
+        "attributes": {
+          "title": "A question from the app, renamed",
+          "slug": "74-a-question-from-the-app-renamed",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      }
+    ]
+  }
+}

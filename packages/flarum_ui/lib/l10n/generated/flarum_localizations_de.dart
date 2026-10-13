@@ -892,4 +892,90 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   @override
   String get messagesLoadFailed =>
       'Die Nachrichten konnten nicht geladen werden.';
+
+  @override
+  String get moderate => 'Moderieren';
+
+  @override
+  String get renameDiscussion => 'Umbenennen';
+
+  @override
+  String get lockDiscussion => 'Sperren';
+
+  @override
+  String get unlockDiscussion => 'Entsperren';
+
+  @override
+  String get stickDiscussion => 'Anheften';
+
+  @override
+  String get unstickDiscussion => 'Lösen';
+
+  @override
+  String get restore => 'Wiederherstellen';
+
+  @override
+  String get deleteForever => 'Endgültig löschen';
+
+  @override
+  String get deleteForeverConfirm =>
+      'Endgültig löschen? Das lässt sich nicht rückgängig machen.';
+
+  @override
+  String get approve => 'Freigeben';
+
+  @override
+  String get unsuspend => 'Sperre aufheben';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Gesperrt bis $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Unbefristet gesperrt';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'Du bist bis $date gesperrt.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'Du bist gesperrt.';
+
+  @override
+  String get awaitingApproval => 'Wartet auf Freigabe';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Beiträge',
+      one: '1 Beitrag',
+    );
+    return '$user hat $_temp0 aus $titles hierher zusammengeführt.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Beiträge',
+      one: '1 Beitrag',
+    );
+    return '$user hat $_temp0 nach $title abgetrennt.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Beiträge',
+      one: '1 Beitrag',
+    );
+    return '$user hat $_temp0 aus $title abgetrennt.';
+  }
 }

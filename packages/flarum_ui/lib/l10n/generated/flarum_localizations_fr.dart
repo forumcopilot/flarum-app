@@ -888,4 +888,90 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'Impossible de charger les messages.';
+
+  @override
+  String get moderate => 'Modérer';
+
+  @override
+  String get renameDiscussion => 'Renommer';
+
+  @override
+  String get lockDiscussion => 'Verrouiller';
+
+  @override
+  String get unlockDiscussion => 'Déverrouiller';
+
+  @override
+  String get stickDiscussion => 'Épingler';
+
+  @override
+  String get unstickDiscussion => 'Désépingler';
+
+  @override
+  String get restore => 'Restaurer';
+
+  @override
+  String get deleteForever => 'Supprimer définitivement';
+
+  @override
+  String get deleteForeverConfirm =>
+      'Supprimer définitivement ? Impossible de revenir en arrière.';
+
+  @override
+  String get approve => 'Approuver';
+
+  @override
+  String get unsuspend => 'Lever la suspension';
+
+  @override
+  String suspendedUntil(String date) {
+    return 'Suspendu jusqu’au $date';
+  }
+
+  @override
+  String get suspendedIndefinitely => 'Suspendu indéfiniment';
+
+  @override
+  String youAreSuspended(String date) {
+    return 'Vous êtes suspendu jusqu’au $date.';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => 'Vous êtes suspendu.';
+
+  @override
+  String get awaitingApproval => 'En attente d’approbation';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+    );
+    return '$user a fusionné $_temp0 de $titles dans cette discussion.';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+    );
+    return '$user a déplacé $_temp0 vers $title.';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count messages',
+      one: '1 message',
+    );
+    return '$user a séparé $_temp0 de $title.';
+  }
 }

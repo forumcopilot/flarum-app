@@ -654,6 +654,49 @@ class FlarumApi {
     await client.postEmpty('${await _policiesPath()}/$id/accept');
   }
 
+  // ---- Moderation. Each answers 403 for a reader without the permission (the model's `can…`). ----
+
+  /// Locks discussion [id] (flarum/lock), or unlocks it: only moderators may reply while it's locked.
+  Future<FlarumDiscussion> setLocked(String id, bool locked) => _patchDiscussion(id, {'isLocked': locked});
+
+  /// Pins discussion [id] to the top of its lists (flarum/sticky), or unpins it.
+  Future<FlarumDiscussion> setSticky(String id, bool sticky) => _patchDiscussion(id, {'isSticky': sticky});
+
+  /// Renames discussion [id]: its author may too, for a while after starting it (by default).
+  Future<FlarumDiscussion> renameDiscussion(String id, String title) => _patchDiscussion(id, {'title': title});
+
+  /// Hides discussion [id] from everyone but moderators (and restores it): Flarum's soft delete.
+  Future<FlarumDiscussion> setDiscussionHidden(String id, bool hidden) => _patchDiscussion(id, {'isHidden': hidden});
+
+  /// Deletes discussion [id] for good, its posts with it.
+  Future<void> deleteDiscussion(String id) => client.delete('/discussions/$id');
+
+  /// Hides post [id] (and restores it): its author may hide their own until someone replies.
+  Future<FlarumPost> setPostHidden(String id, bool hidden) => _patchPost(id, {'isHidden': hidden});
+
+  /// Deletes post [id] for good.
+  Future<void> deletePost(String id) => client.delete('/posts/$id');
+
+  /// Approves post [id], held for approval (flarum/approval); a discussion's first post approves
+  /// the discussion too.
+  Future<FlarumPost> approvePost(String id) => _patchPost(id, {'isApproved': true});
+
+  /// Suspends user [id] (flarum/suspend) until [until], or lifts it (null): they keep only a guest's
+  /// permissions until then. [message] is shown to them, [reason] to moderators.
+  Future<FlarumUser> suspend(String id, DateTime? until, {String? reason, String? message}) async {
+    final document = await client.patch('/users/$id', {
+      'data': {
+        'type': 'users',
+        'id': id,
+        'attributes': {
+          'suspendedUntil': until?.toUtc().toIso8601String(),
+          if (until != null) ...{'suspendReason': reason, 'suspendMessage': message},
+        },
+      },
+    });
+    return FlarumUser.fromResource(document.single);
+  }
+
   // ---- flarum/messages (2.0's direct messages). ----
 
   /// The reader's dialogs, the latest first, with their people and last message.

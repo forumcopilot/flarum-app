@@ -15,7 +15,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "77"
+              "id": "83"
             }
           }
         }
@@ -26,13 +26,13 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "346",
+      "id": "364",
       "links": {
-        "self": "/posts/346"
+        "self": "/posts/364"
       },
       "attributes": {
         "number": 3,
-        "createdAt": "2026-10-13T19:51:39+00:00",
+        "createdAt": "2026-10-13T20:12:28+00:00",
         "contentType": "comment",
         "content": "Read you, carol.",
         "contentHtml": "<p>Read you, carol.</p>",
@@ -78,7 +78,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "77"
+            "id": "83"
           }
         },
         "user": {
@@ -92,23 +92,23 @@
     "included": [
       {
         "type": "discussions",
-        "id": "77",
+        "id": "83",
         "links": {
-          "self": "/discussions/77"
+          "self": "/discussions/83"
         },
         "attributes": {
           "title": "A private word from the app",
-          "slug": "77-a-private-word-from-the-app",
+          "slug": "83-a-private-word-from-the-app",
           "commentCount": 2,
           "participantCount": 2,
-          "createdAt": "2026-10-13T19:51:39+00:00",
-          "lastPostedAt": "2026-10-13T19:51:39+00:00",
+          "createdAt": "2026-10-13T20:12:28+00:00",
+          "lastPostedAt": "2026-10-13T20:12:28+00:00",
           "lastPostNumber": 3,
           "canReply": true,
           "canRename": false,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-13T19:51:40+00:00",
+          "lastReadAt": "2026-10-13T20:12:28+00:00",
           "lastReadPostNumber": 3,
           "canTag": false,
           "isApproved": true,
@@ -141,28 +141,28 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "344"
+              "id": "362"
             }
           },
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "346"
+              "id": "364"
             }
           },
           "posts": {
             "data": [
               {
                 "type": "posts",
-                "id": "344"
+                "id": "362"
               },
               {
                 "type": "posts",
-                "id": "345"
+                "id": "363"
               },
               {
                 "type": "posts",
-                "id": "346"
+                "id": "364"
               }
             ]
           },
@@ -201,7 +201,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 25,
-          "lastSeenAt": "2026-10-13T19:49:09+00:00",
+          "lastSeenAt": "2026-10-13T20:11:58+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

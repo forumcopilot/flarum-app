@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/discussions/69",
+    "path": "/discussions/75",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",
-        "id": "69",
+        "id": "75",
         "attributes": {},
         "relationships": {
           "recipientUsers": {

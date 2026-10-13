@@ -1,0 +1,158 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/posts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "attributes": {
+          "content": "This reply will be deleted."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "74"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "posts",
+      "id": "315",
+      "attributes": {
+        "number": 4,
+        "createdAt": "2026-10-13T20:11:50+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>This reply will be deleted.</p>",
+        "renderFailed": false,
+        "content": "This reply will be deleted.",
+        "canEdit": true,
+        "canDelete": false,
+        "canHide": true,
+        "mentionedByCount": 0,
+        "canFlag": false,
+        "isApproved": true,
+        "canApprove": false,
+        "canReact": false,
+        "canDeletePostReactions": false,
+        "reactionCounts": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "userReactionIdentifier": null,
+        "canStartPoll": false,
+        "bookmarked": false,
+        "canSelectAsBestAnswer": false,
+        "canLike": true,
+        "likesCount": 0
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "discussion": {
+          "data": {
+            "type": "discussions",
+            "id": "74"
+          }
+        },
+        "polls": {
+          "data": []
+        },
+        "likes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 2,
+          "commentCount": 26,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-13T20:11:06+00:00",
+          "isEmailConfirmed": true,
+          "email": "bob@flarumapp.local",
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "74",
+        "attributes": {
+          "title": "A question from the app, renamed",
+          "slug": "74-a-question-from-the-app-renamed",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        },
+        "relationships": {
+          "posts": {
+            "data": [
+              {
+                "type": "posts",
+                "id": "307"
+              },
+              {
+                "type": "posts",
+                "id": "308"
+              },
+              {
+                "type": "posts",
+                "id": "314"
+              },
+              {
+                "type": "posts",
+                "id": "315"
+              }
+            ]
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

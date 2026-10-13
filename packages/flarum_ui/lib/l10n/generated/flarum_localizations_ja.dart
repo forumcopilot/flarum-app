@@ -860,4 +860,86 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get messagesLoadFailed => 'メッセージを読み込めませんでした。';
+
+  @override
+  String get moderate => 'モデレート';
+
+  @override
+  String get renameDiscussion => '名前を変更';
+
+  @override
+  String get lockDiscussion => 'ロック';
+
+  @override
+  String get unlockDiscussion => 'ロック解除';
+
+  @override
+  String get stickDiscussion => '固定';
+
+  @override
+  String get unstickDiscussion => '固定を解除';
+
+  @override
+  String get restore => '復元';
+
+  @override
+  String get deleteForever => '完全に削除';
+
+  @override
+  String get deleteForeverConfirm => '完全に削除しますか？元に戻せません。';
+
+  @override
+  String get approve => '承認';
+
+  @override
+  String get unsuspend => '停止を解除';
+
+  @override
+  String suspendedUntil(String date) {
+    return '$dateまで停止中';
+  }
+
+  @override
+  String get suspendedIndefinitely => '無期限で停止中';
+
+  @override
+  String youAreSuspended(String date) {
+    return '$dateまで利用停止中です。';
+  }
+
+  @override
+  String get youAreSuspendedIndefinitely => '利用停止中です。';
+
+  @override
+  String get awaitingApproval => '承認待ち';
+
+  @override
+  String eventMerged(String user, int count, String titles) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count件の投稿',
+    );
+    return '$userが$titlesから$_temp0をこのディスカッションに統合しました。';
+  }
+
+  @override
+  String eventSplitTo(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count件の投稿',
+    );
+    return '$userが$_temp0を$titleに分割しました。';
+  }
+
+  @override
+  String eventSplitFrom(String user, int count, String title) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count件の投稿',
+    );
+    return '$userが$titleから$_temp0を分割しました。';
+  }
 }

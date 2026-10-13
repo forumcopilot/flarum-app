@@ -70,7 +70,8 @@ class FlarumDiscussion {
       canLock: a.boolean('canLock') ?? false,
       canSticky: a.boolean('canSticky') ?? false,
       isApproved: a.boolean('isApproved') ?? true,
-      isHidden: a.boolean('isHidden') ?? false,
+      // 2.0 rc.8 sends isHidden as null, hidden or not: hiddenAt says it.
+      isHidden: a.boolean('isHidden') ?? a.date('hiddenAt') != null,
       isPrivate: a.boolean('isPrivateDiscussion') ?? false,
       recipients: [for (final user in document.findAll(resource.toMany('recipientUsers'))) FlarumUser.fromResource(user)],
       // 1.x says it for the discussion as a whole; the people in it are what the app changes.

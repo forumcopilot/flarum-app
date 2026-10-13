@@ -49,7 +49,8 @@ class FlarumPost {
       content: a['content'],
       createdAt: a.date('createdAt'),
       editedAt: a.date('editedAt'),
-      isHidden: a.boolean('isHidden') ?? false,
+      // 2.0 rc.8 sends isHidden as null, hidden or not: hiddenAt says it.
+      isHidden: a.boolean('isHidden') ?? a.date('hiddenAt') != null,
       discussionId: resource.toOne('discussion')?.id ?? discussion?.id,
       discussionTitle: discussion?.attributes.string('title'),
       author: author == null ? null : FlarumUser.fromResource(author),
@@ -81,10 +82,13 @@ class FlarumPost {
     );
   }
 
-  /// This post after a like, a reaction, a bookmark or its author ignored, the rest as it was (its replies stay, which
+  /// This post after a like, a reaction, a bookmark, its author ignored, or a moderator's hiding or
+  /// approving it, the rest as it was (its replies stay, which
   /// the forum's answer to the change leaves out).
   FlarumPost copyWith({
     FlarumUser? author,
+    bool? isHidden,
+    bool? isApproved,
     int? likesCount,
     List<FlarumUser>? likedBy,
     Map<String, int>? reactionCounts,
@@ -99,7 +103,7 @@ class FlarumPost {
         content: content,
         createdAt: createdAt,
         editedAt: editedAt,
-        isHidden: isHidden,
+        isHidden: isHidden ?? this.isHidden,
         discussionId: discussionId,
         discussionTitle: discussionTitle,
         author: author ?? this.author,
@@ -109,7 +113,7 @@ class FlarumPost {
         canFlag: canFlag,
         canLike: canLike,
         likesCount: likesCount ?? this.likesCount,
-        isApproved: isApproved,
+        isApproved: isApproved ?? this.isApproved,
         canApprove: canApprove,
         bookmarked: bookmarked ?? this.bookmarked,
         mentionedByCount: mentionedByCount,

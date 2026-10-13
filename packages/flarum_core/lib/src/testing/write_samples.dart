@@ -29,6 +29,12 @@ abstract final class WriteSamples {
   static const message = 'A direct message from the app.';
   static const messageReply = 'Got it, thanks.';
 
+  /// Moderation (Milestone 5): the question's new title, a reply deleted for good, and why bob is
+  /// suspended for a moment.
+  static const renamedTitle = 'A question from the app, renamed';
+  static const replyToDelete = 'This reply will be deleted.';
+  static const suspendReason = 'Suspended by the app tests.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

@@ -37,7 +37,10 @@ class PostTile extends StatelessWidget {
       this.onChooseBestAnswer,
       this.onFlag,
       this.authorIgnored = false,
-      this.onIgnore});
+      this.onIgnore,
+      this.onHide,
+      this.onDeleteForever,
+      this.onApprove});
 
   final SiteContext site;
   final FlarumPost post;
@@ -85,6 +88,12 @@ class PostTile extends StatelessWidget {
   /// Ignore the author, or stop ([authorIgnored]).
   final VoidCallback? onIgnore;
 
+  /// A moderator's (or the author's) Delete, which hides the post, and Restore; Delete forever, for
+  /// a hidden post; Approve, for one held for approval (flarum/approval).
+  final VoidCallback? onHide;
+  final VoidCallback? onDeleteForever;
+  final VoidCallback? onApprove;
+
   bool get _hasMenu =>
       onReply != null ||
       onQuote != null ||
@@ -92,7 +101,10 @@ class PostTile extends StatelessWidget {
       onBookmark != null ||
       onChooseBestAnswer != null ||
       onFlag != null ||
-      onIgnore != null;
+      onIgnore != null ||
+      onHide != null ||
+      onDeleteForever != null ||
+      onApprove != null;
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +169,11 @@ class PostTile extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: DesignTokens.spacingS),
               child: _BestAnswerLabel(text: l10n.bestAnswer),
             ),
+          if (!post.isApproved)
+            Padding(
+              padding: const EdgeInsets.only(bottom: DesignTokens.spacingS),
+              child: _Count(icon: Icons.hourglass_empty, label: l10n.awaitingApproval),
+            ),
           if (post.isHidden)
             Text(l10n.postHidden,
                 style: theme.textTheme.bodyMedium
@@ -218,6 +235,17 @@ extension on PostTile {
                 ? _MenuRow(Icons.highlight_off, l10n.removeBestAnswer)
                 : _MenuRow(Icons.check_circle_outline, l10n.chooseBestAnswer),
           ),
+        if (onApprove case final approve?)
+          PopupMenuItem(value: approve, child: _MenuRow(Icons.check, l10n.approve)),
+        if (onHide case final hide?)
+          PopupMenuItem(
+            value: hide,
+            child: post.isHidden
+                ? _MenuRow(Icons.restore, l10n.restore)
+                : _MenuRow(Icons.delete_outline, kit.delete),
+          ),
+        if (onDeleteForever case final delete?)
+          PopupMenuItem(value: delete, child: _MenuRow(Icons.delete_forever_outlined, l10n.deleteForever)),
         if (onFlag != null || onIgnore != null) const PopupMenuDivider(),
         if (onFlag case final flag?) PopupMenuItem(value: flag, child: _MenuRow(Icons.flag_outlined, l10n.flagAction)),
         if (onIgnore case final ignore?)
@@ -541,6 +569,22 @@ class EventPostNotice extends StatelessWidget {
           if (removed.isNotEmpty) return (Icons.sell_outlined, l10n.eventTagsRemoved(user, removed));
         }
         return (Icons.sell_outlined, l10n.eventTagged(user));
+      case 'discussionMerged':
+        // fof/merge-discussions: {count, titles}.
+        if (content is Map && content['count'] is int) {
+          final titles = [for (final title in (content['titles'] as List? ?? const [])) '“$title”'].join(', ');
+          return (Icons.call_merge, l10n.eventMerged(user, content['count'] as int, titles));
+        }
+      case 'discussionSplit':
+        // fof/split: {title, count, url, toNew}: in the old discussion toNew, in the new one not.
+        if (content is Map && content['count'] is int) {
+          final title = '“${content['title'] ?? ''}”';
+          final count = content['count'] as int;
+          return (
+            Icons.call_split,
+            content['toNew'] == true ? l10n.eventSplitTo(user, count, title) : l10n.eventSplitFrom(user, count, title),
+          );
+        }
       case 'recipientsModified':
         // fof/byobu: {new: {users, groups}, old: {users, groups}}, ids only.
         return (Icons.group_outlined, l10n.eventRecipientsChanged(user));

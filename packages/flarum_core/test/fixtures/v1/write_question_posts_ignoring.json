@@ -4,7 +4,7 @@
     "method": "GET",
     "path": "/posts",
     "query": {
-      "filter[discussion]": "68",
+      "filter[discussion]": "74",
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
@@ -16,15 +16,15 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=68&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=74&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes"
     },
     "data": [
       {
         "type": "posts",
-        "id": "289",
+        "id": "307",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T19:50:48+00:00",
+          "createdAt": "2026-10-13T20:11:21+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": false,
@@ -62,7 +62,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "68"
+              "id": "74"
             }
           },
           "mentionedBy": {
@@ -75,10 +75,10 @@
       },
       {
         "type": "posts",
-        "id": "290",
+        "id": "308",
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T19:50:48+00:00",
+          "createdAt": "2026-10-13T20:11:22+00:00",
           "contentType": "comment",
           "contentHtml": "<p>The one who asked chooses it.</p>",
           "renderFailed": false,
@@ -116,7 +116,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "68"
+              "id": "74"
             }
           },
           "mentionedBy": {
@@ -144,7 +144,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T19:50:33+00:00",
+          "lastSeenAt": "2026-10-13T20:11:05+00:00",
           "isEmailConfirmed": true,
           "email": "carol@flarumapp.local",
           "suspendMessage": null,
@@ -178,7 +178,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T19:50:33+00:00",
+          "lastSeenAt": "2026-10-13T20:11:06+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -192,10 +192,10 @@
       },
       {
         "type": "discussions",
-        "id": "68",
+        "id": "74",
         "attributes": {
           "title": "A question from the app",
-          "slug": "68-a-question-from-the-app",
+          "slug": "74-a-question-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null

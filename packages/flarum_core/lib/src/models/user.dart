@@ -21,6 +21,10 @@ class FlarumUser {
     this.ignored,
     this.canBeIgnored,
     this.blocksPd = false,
+    this.suspendedUntil,
+    this.suspendMessage,
+    this.suspendReason,
+    this.canSuspend = false,
   });
 
   factory FlarumUser.fromResource(JsonApiResource resource) {
@@ -42,6 +46,10 @@ class FlarumUser {
       ignored: a.boolean('ignored'),
       canBeIgnored: a.boolean('canBeIgnored'),
       blocksPd: a.boolean('blocksPd') ?? false,
+      suspendedUntil: a.date('suspendedUntil'),
+      suspendMessage: a.nonEmptyString('suspendMessage'),
+      suspendReason: a.nonEmptyString('suspendReason'),
+      canSuspend: a.boolean('canSuspend') ?? false,
     );
   }
 
@@ -62,6 +70,10 @@ class FlarumUser {
         ignored: ignored ?? this.ignored,
         canBeIgnored: canBeIgnored,
         blocksPd: blocksPd,
+        suspendedUntil: suspendedUntil,
+        suspendMessage: suspendMessage,
+        suspendReason: suspendReason,
+        canSuspend: canSuspend,
       );
 
   final String id;
@@ -96,4 +108,22 @@ class FlarumUser {
 
   /// The user takes no private discussions (fof/byobu's setting on their account).
   final bool blocksPd;
+
+  /// Until when the user is suspended (flarum/suspend): shown to them and to moderators. Flarum's
+  /// web suspends "indefinitely" until 2038 ([isSuspendedIndefinitely]).
+  final DateTime? suspendedUntil;
+
+  /// What the suspension says to the user; [suspendReason] is for moderators only.
+  final String? suspendMessage;
+  final String? suspendReason;
+
+  /// Whether the reader may suspend the user.
+  final bool canSuspend;
+
+  bool get isSuspended => suspendedUntil?.isAfter(DateTime.now()) ?? false;
+
+  bool get isSuspendedIndefinitely => !(suspendedUntil?.isBefore(indefiniteSuspension) ?? true);
+
+  /// The date Flarum's web suspends someone "indefinitely" until.
+  static final indefiniteSuspension = DateTime.utc(2038);
 }

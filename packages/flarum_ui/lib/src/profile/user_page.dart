@@ -1,8 +1,11 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/l10n/kit_l10n.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
+import 'package:forum_kit/views/widgets/suspend_user_page.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:intl/intl.dart';
 
@@ -94,6 +97,27 @@ class _UserPageState extends State<UserPage> {
   bool _canWriteTo(FlarumUser user) =>
       canStartPrivateDiscussion(_forum) && user.id != _forum.info?.actor?.id && !user.blocksPd;
 
+  /// Suspends [user] (flarum/suspend) with forum_kit's Suspend User page, or lifts their suspension.
+  /// The reason chosen is what they're told, and what moderators see.
+  Future<void> _suspend(FlarumUser user) async {
+    DateTime? until;
+    String? reason;
+    if (!user.isSuspended) {
+      final choice = await showSuspendUserPage(context);
+      if (choice == null) return;
+      until = choice.expires == 0
+          ? FlarumUser.indefiniteSuspension
+          : DateTime.fromMillisecondsSinceEpoch(choice.expires * 1000, isUtc: true);
+      reason = choice.reason;
+    }
+    try {
+      final saved = await _forum.api.suspend(user.id, until, reason: reason, message: reason);
+      if (mounted) setState(() => _user = saved);
+    } catch (e) {
+      if (mounted) SnackbarHelper.showError(context, describeFlarumError(e));
+    }
+  }
+
   /// Whether the reader may send [user] a direct message (flarum/messages, 2.0).
   bool _canMessage(FlarumUser user) => canSendMessages(_forum) && user.id != _forum.info?.actor?.id;
 
@@ -127,7 +151,7 @@ class _UserPageState extends State<UserPage> {
         appBar: AppBar(
           title: Text(user.displayName),
           actions: [
-            if (_ignored.canIgnore(user) || _canWriteTo(user) || _canMessage(user))
+            if (_ignored.canIgnore(user) || _canWriteTo(user) || _canMessage(user) || user.canSuspend)
               PopupMenuButton<VoidCallback>(
                 tooltip: MaterialLocalizations.of(context).showMenuTooltip,
                 onSelected: (action) => action(),
@@ -139,6 +163,11 @@ class _UserPageState extends State<UserPage> {
                     ),
                   if (_canWriteTo(user))
                     PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
+                  if (user.canSuspend)
+                    PopupMenuItem(
+                      value: () => _suspend(user),
+                      child: Text(user.isSuspended ? l10n.unsuspend : kitL10n(context).suspendUser),
+                    ),
                   if (_ignored.canIgnore(user))
                     PopupMenuItem(
                       value: () => toggleIgnore(context, widget.site, user),
@@ -203,6 +232,14 @@ class _UserHeader extends StatelessWidget {
                 if (user.discussionCount != null && user.commentCount != null)
                   Text(l10n.userStats(user.discussionCount!, user.commentCount!),
                       style: theme.textTheme.bodySmall?.copyWith(color: muted)),
+                // Shown to them and to moderators (flarum/suspend).
+                if (user.isSuspended)
+                  Text(
+                    user.isSuspendedIndefinitely
+                        ? l10n.suspendedIndefinitely
+                        : l10n.suspendedUntil(DateFormat.yMMMd(locale).format(user.suspendedUntil!.toLocal())),
+                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error),
+                  ),
               ],
             ),
           ),

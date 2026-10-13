@@ -5,6 +5,7 @@ library;
 export 'api.dart';
 export 'src/sdk/flarum_attachment_proxy.dart';
 export 'src/sdk/flarum_bookmark_proxy.dart';
+export 'src/sdk/flarum_moderation_proxy.dart';
 export 'src/sdk/flarum_private_conversation_proxy.dart';
 export 'src/sdk/flarum_config_proxy.dart';
 export 'src/sdk/flarum_extensions.dart';

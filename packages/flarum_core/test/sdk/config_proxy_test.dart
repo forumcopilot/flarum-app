@@ -75,6 +75,10 @@ void main() {
     expect(SiteProxyFactory.getSearchProxy(), isA<FlarumSearchProxy>());
     expect(SiteProxyFactory.getSubscriptionProxy(), isA<FlarumSubscriptionProxy>());
     expect(SiteProxyFactory.getTagProxy(), isA<FlarumTagProxy>());
-    expect(SiteProxyFactory.getModerationProxy, throwsUnimplementedError);
+    expect(SiteProxyFactory.getModerationProxy(), isA<FlarumModerationProxy>());
+    expect(SiteProxyFactory.getPrivateConversationProxy(), isA<FlarumPrivateConversationProxy>());
+    expect(SiteProxyFactory.getAttachmentProxy(), isA<FlarumAttachmentProxy>());
+    // XenForo's inbox and sent box: Flarum's are conversations.
+    expect(SiteProxyFactory.getPrivateMessageProxy, throwsUnimplementedError);
   });
 }

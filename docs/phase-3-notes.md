@@ -124,3 +124,30 @@ messages.
   ignore him (and herself, 403). The admin then adds a policy for as long as it takes carol to be
   refused a reply and accept it, and deletes it. The fixtures recorded while she ignores him carry a state,
   `ignoring`, that `FixtureForum(states:)` serves in place of the same requests' plain fixtures.
+
+## Milestone 5: moderation basics
+
+- **Discussion:** a shield on the thread's bar for whoever may do something there (a moderator, or
+  the author renaming for a while): Rename, Lock/Unlock (flarum/lock), Sticky/Unsticky
+  (flarum/sticky), Delete/Restore (Flarum's soft delete, `isHidden`) and Delete forever once
+  deleted. Each is a PATCH of the discussion (`title`, `isLocked`, `isSticky`, `isHidden`) or a
+  DELETE; the thread is read again after, where it was opened (a rename, a lock or a pin leaves an
+  event post; Flarum drops a lock and an unlock in a row).
+- **Post:** Delete/Restore (`canHide`: moderators, and the author until someone replies), Delete
+  forever for a deleted one, Approve for one held for approval (flarum/approval), which shows
+  "Awaiting approval". Approval isn't recorded: every member on the test forums posts without it.
+- **Suspension (flarum/suspend):** a moderator's profile menu has Suspend User (forum_kit's page;
+  "forever" is the web's until 2038-01-01) and Unsuspend; the reason chosen is both
+  `suspendReason` (moderators) and `suspendMessage` (them). Profiles show "Suspended until" to
+  moderators and to the person; a suspended reader gets a strip above the tabs with the message.
+- **Found on 2.0 rc.8:** a hidden post's or discussion's `isHidden` comes back null; only
+  `hiddenAt` says it's hidden, so the models read either.
+- **Event posts:** fof/merge-discussions' `discussionMerged` ({count, titles}) and fof/split's
+  `discussionSplit` ({title, count, url, toNew}) are described from their published source; neither
+  runs on the test forums.
+- **SDK:** the moderation proxy sits on these (close is lock, ban is suspend, delete mode 1 hides
+  and 2 deletes); the moderation lists, moving and merging, and spam tools answer `result: false`.
+- **Tests:** the write recorder signs in a recorded admin for the actions, records the thread and
+  bob's profile as the moderator sees them (state `moderator`), deletes a reply bob writes for it,
+  and suspends bob indefinitely and lifts it (lifted again in a `finally`); bob's forum while
+  suspended is state `suspended`.

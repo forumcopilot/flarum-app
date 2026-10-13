@@ -1,0 +1,115 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/discussions/82",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "id": "82",
+        "attributes": {
+          "isLocked": true
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "82",
+      "links": {
+        "self": "/discussions/82"
+      },
+      "attributes": {
+        "title": "A question from the app",
+        "slug": "82-a-question-from-the-app",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-13T20:12:13+00:00",
+        "lastPostedAt": "2026-10-13T20:12:13+00:00",
+        "lastPostNumber": 2,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": true,
+        "canHide": true,
+        "canTag": true,
+        "isApproved": true,
+        "subscription": null,
+        "isPrivateDiscussion": false,
+        "canEditRecipients": false,
+        "canEditUserRecipients": true,
+        "canEditGroupRecipients": true,
+        "canMakePublic": false,
+        "canDownloadFiles": true,
+        "canSeeReactions": true,
+        "hasPoll": false,
+        "canStartPoll": true,
+        "bookmarked": false,
+        "canSelectBestAnswer": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "isSticky": false,
+        "canSticky": true,
+        "isLocked": true,
+        "canLock": true
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "firstPost": {
+          "data": {
+            "type": "posts",
+            "id": "360"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "3"
+          }
+        },
+        "lastPost": {
+          "data": {
+            "type": "posts",
+            "id": "361"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "type": "posts",
+              "id": "360"
+            },
+            {
+              "type": "posts",
+              "id": "361"
+            },
+            {
+              "type": "posts",
+              "id": "365"
+            }
+          ]
+        },
+        "hideUser": {
+          "data": null
+        },
+        "bestAnswerPost": {
+          "data": null
+        },
+        "bestAnswerUser": {
+          "data": null
+        }
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

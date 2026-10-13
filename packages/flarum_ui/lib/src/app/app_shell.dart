@@ -7,6 +7,7 @@ import '../../l10n/flarum_l10n.dart';
 import '../account/account_page.dart';
 import '../home/home_page.dart';
 import '../notifications/notifications_page.dart';
+import '../safety/suspended_strip.dart';
 import '../safety/terms_page.dart';
 import '../tags/tags_page.dart';
 import '../../config/app_forum_config.dart';
@@ -99,6 +100,8 @@ class _AppShellState extends State<AppShell> {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (_forum.isSignedIn && (_forum.info?.actor?.isSuspended ?? false))
+            SuspendedStrip(reader: _forum.info!.actor!),
           if (_forum.isSignedIn && (_forum.info?.policiesToAccept.isNotEmpty ?? false))
             TermsStrip(onReview: _reviewTerms),
           NavigationBar(

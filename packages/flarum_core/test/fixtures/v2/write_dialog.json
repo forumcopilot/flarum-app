@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "path": "/dialogs/3",
+    "path": "/dialogs/5",
     "query": {
       "include": "users"
     },
@@ -12,31 +12,31 @@
   "body": {
     "data": {
       "type": "dialogs",
-      "id": "3",
+      "id": "5",
       "links": {
-        "self": "/dialogs/3"
+        "self": "/dialogs/5"
       },
       "attributes": {
         "title": "Messaging bob",
         "type": "direct",
-        "lastMessageAt": "2026-10-13T19:51:40+00:00",
-        "createdAt": "2026-10-13T19:51:40+00:00",
-        "lastReadAt": "2026-10-13T19:51:40+00:00",
-        "lastMessageId": 7,
-        "lastReadMessageId": 6,
+        "lastMessageAt": "2026-10-13T20:12:29+00:00",
+        "createdAt": "2026-10-13T20:12:29+00:00",
+        "lastReadAt": "2026-10-13T20:12:29+00:00",
+        "lastMessageId": 11,
+        "lastReadMessageId": 10,
         "unreadCount": 1
       },
       "relationships": {
         "firstMessage": {
           "data": {
             "type": "dialog-messages",
-            "id": "6"
+            "id": "10"
           }
         },
         "lastMessage": {
           "data": {
             "type": "dialog-messages",
-            "id": "7"
+            "id": "11"
           }
         },
         "lastMessageUser": {
@@ -76,7 +76,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 25,
-          "lastSeenAt": "2026-10-13T19:49:09+00:00",
+          "lastSeenAt": "2026-10-13T20:11:58+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -111,7 +111,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 25,
-          "lastSeenAt": "2026-10-13T19:48:54+00:00",
+          "lastSeenAt": "2026-10-13T20:11:58+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

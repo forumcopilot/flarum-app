@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof/terms/policies/3/accept",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "7",
+      "attributes": {
+        "username": "carol",
+        "displayName": "carol",
+        "avatarUrl": null,
+        "slug": "carol"
+      }
+    }
+  }
+}

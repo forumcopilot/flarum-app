@@ -595,6 +595,15 @@ class FlarumApi {
     return FlarumUser.fromResource(document.single);
   }
 
+  /// fof/terms' policies: 1.x has its own routes, 2.0 an API resource.
+  Future<String> _policiesPath() async => await version() == FlarumVersion.v2 ? '/fof-terms-policies' : '/fof/terms/policies';
+
+  /// Accepts policy [id] (fof/terms) for the reader, which gives them back their permissions once
+  /// they've accepted every one they must. Forum info read before this is out of date.
+  Future<void> acceptPolicy(String id) async {
+    await client.postEmpty('${await _policiesPath()}/$id/accept');
+  }
+
   /// Marks every discussion read for the reader [userId]: Flarum records the
   /// time, and treats anything older as read. There's no per-tag version.
   Future<void> markAllAsRead(String userId) async {

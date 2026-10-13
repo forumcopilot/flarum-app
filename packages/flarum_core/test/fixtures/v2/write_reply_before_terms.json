@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/posts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "posts",
+        "attributes": {
+          "content": "Posted before accepting the terms."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "67"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "validation_error",
+        "title": "Forbidden",
+        "detail": ""
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'policy.dart';
 import 'reaction.dart';
 import 'user.dart';
 
@@ -55,6 +56,7 @@ class FlarumForumInfo {
     this.actor,
     this.actorAttributes = const {},
     this.ignoredUsers,
+    this.policies = const [],
   });
 
   factory FlarumForumInfo.fromDocument(JsonApiDocument document) {
@@ -95,6 +97,7 @@ class FlarumForumInfo {
       ignoredUsers: actor == null || !actor.relationships.containsKey('ignoredUsers')
           ? null
           : [for (final user in document.findAll(actor.toMany('ignoredUsers'))) FlarumUser.fromResource(user)],
+      policies: [for (final policy in document.findAll(forum.toMany('fofTermsPolicies'))) FlarumPolicy.fromResource(policy)],
       attributes: a,
     );
   }
@@ -126,6 +129,23 @@ class FlarumForumInfo {
   final List<FlarumReaction> reactions;
 
   /// The signed-in reader; null for guests.
+  /// The forum's policies (fof/terms), for every reader.
+  final List<FlarumPolicy> policies;
+
+  /// Where the signed-in reader stands with each policy, by its id.
+  Map<String, FlarumPolicyState> get policyStates => {
+        if (actorAttributes['fofTermsPoliciesState'] case final Map<String, dynamic> states)
+          for (final MapEntry(:key, :value) in states.entries)
+            if (value is Map<String, dynamic>) key: FlarumPolicyState.fromJson(value),
+      };
+
+  /// The policies the reader must accept before they may post again: until they do, the forum
+  /// gives them a guest's permissions.
+  List<FlarumPolicy> get policiesToAccept => [
+        for (final policy in policies)
+          if (policyStates[policy.id]?.mustAccept ?? false) policy,
+      ];
+
   /// The users the reader ignores (fof/ignore-users). Null without the extension, or for a guest.
   final List<FlarumUser>? ignoredUsers;
 

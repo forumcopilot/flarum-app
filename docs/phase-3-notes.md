@@ -88,6 +88,16 @@ messages.
   `PATCH /api/users/{id}` with `ignored`; each post's author carries `ignored` and `canBeIgnored`,
   and the forum's `GET /api` includes `actor.ignoredUsers`. On a forum without the extension, or
   for a guest, the app keeps the list on the phone (App Store guideline 1.2 asks for a way to block).
+- **Terms (fof/terms):** while the reader has a policy to accept (not optional, and updated since
+  they last accepted it), the forum gives them a guest's permissions, so a write isn't where to
+  catch it: a strip above the tabs says so, and its page lists the policies (each with its link) and
+  accepts them. Accepting reloads the tabs with the reader's permissions back. The forum's info
+  includes `fofTermsPolicies`; the reader's account carries `fofTermsPoliciesState` (per policy:
+  `must_accept`, `has_update`, `accepted_at`, `is_accepted`). Accepting is
+  `POST /api/fof/terms/policies/{id}/accept` on 1.x and `/api/fof-terms-policies/{id}/accept` on 2.0;
+  1.x sends a policy's columns (`update_message`), 2.0 camelCase. A post meanwhile is refused as a
+  guest's would be (403), after the posting throttle (429).
 - **Tests:** the write recorder has carol flag bob's answer (and once without a reason, 422) and
-  ignore him (and herself, 403). The fixtures recorded while she ignores him carry a state,
+  ignore him (and herself, 403). The admin then adds a policy for as long as it takes carol to be
+  refused a reply and accept it, and deletes it. The fixtures recorded while she ignores him carry a state,
   `ignoring`, that `FixtureForum(states:)` serves in place of the same requests' plain fixtures.

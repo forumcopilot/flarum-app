@@ -29,20 +29,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "54",
+      "id": "58",
       "attributes": {
         "title": "Written from the app",
-        "slug": "54-written-from-the-app",
+        "slug": "58-written-from-the-app",
         "commentCount": 1,
         "participantCount": 1,
-        "createdAt": "2026-10-13T18:59:00+00:00",
-        "lastPostedAt": "2026-10-13T18:59:00+00:00",
+        "createdAt": "2026-10-13T19:19:32+00:00",
+        "lastPostedAt": "2026-10-13T19:19:32+00:00",
         "lastPostNumber": 1,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": true,
-        "lastReadAt": "2026-10-13T18:59:01+00:00",
+        "lastReadAt": "2026-10-13T19:19:32+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -67,7 +67,7 @@
           "data": [
             {
               "type": "posts",
-              "id": "259"
+              "id": "267"
             }
           ]
         },
@@ -86,13 +86,13 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "259"
+            "id": "267"
           }
         },
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "259"
+            "id": "267"
           }
         },
         "tags": {
@@ -114,10 +114,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "259",
+        "id": "267",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T18:59:00+00:00",
+          "createdAt": "2026-10-13T19:19:32+00:00",
           "contentType": "comment",
           "contentHtml": "<p>A discussion started by the composer tests.</p>",
           "renderFailed": false,
@@ -173,7 +173,7 @@
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-13T18:59:00+00:00",
+          "lastPostedAt": "2026-10-13T19:19:32+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

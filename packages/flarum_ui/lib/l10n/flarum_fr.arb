@@ -203,5 +203,12 @@
   "ignoredUserPost": "Un message de {name}, que vous ignorez.",
   "showPost": "Afficher le message",
   "ignoredOnThisPhone": "Ce forum ne tient pas de liste d’utilisateurs ignorés : l’app garde la vôtre sur ce téléphone.",
-  "stopIgnoring": "Ne plus ignorer"
+  "stopIgnoring": "Ne plus ignorer",
+  "termsBanner": "Acceptez les conditions mises à jour de ce forum pour publier à nouveau.",
+  "termsReview": "Consulter",
+  "termsTitle": "Conditions mises à jour",
+  "termsIntro": "Avant de publier à nouveau, acceptez les règles mises à jour du forum.",
+  "readPolicy": "Lire",
+  "acceptTerms": "Accepter",
+  "termsAccepted": "Merci. Vous pouvez de nouveau publier."
 }

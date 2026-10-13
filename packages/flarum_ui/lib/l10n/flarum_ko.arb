@@ -203,5 +203,12 @@
   "ignoredUserPost": "무시 중인 {name} 님의 게시물입니다.",
   "showPost": "게시물 보기",
   "ignoredOnThisPhone": "이 포럼에는 무시 목록이 없어 앱이 이 기기에 목록을 저장합니다.",
-  "stopIgnoring": "무시 해제"
+  "stopIgnoring": "무시 해제",
+  "termsBanner": "다시 글을 쓰려면 이 포럼의 변경된 약관에 동의하세요.",
+  "termsReview": "검토",
+  "termsTitle": "변경된 약관",
+  "termsIntro": "다시 글을 쓰기 전에 포럼의 변경된 정책에 동의해 주세요.",
+  "readPolicy": "읽기",
+  "acceptTerms": "동의",
+  "termsAccepted": "감사합니다. 이제 다시 글을 쓸 수 있습니다."
 }

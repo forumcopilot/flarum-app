@@ -203,5 +203,12 @@
   "ignoredUserPost": "Een bericht van {name}, die je negeert.",
   "showPost": "Bericht tonen",
   "ignoredOnThisPhone": "Dit forum houdt geen lijst van genegeerde gebruikers bij, dus de app bewaart de jouwe op deze telefoon.",
-  "stopIgnoring": "Niet meer negeren"
+  "stopIgnoring": "Niet meer negeren",
+  "termsBanner": "Accepteer de bijgewerkte voorwaarden van dit forum om weer te kunnen posten.",
+  "termsReview": "Bekijken",
+  "termsTitle": "Bijgewerkte voorwaarden",
+  "termsIntro": "Accepteer het bijgewerkte beleid van het forum voordat je weer post.",
+  "readPolicy": "Lezen",
+  "acceptTerms": "Accepteren",
+  "termsAccepted": "Bedankt. Je kunt weer posten."
 }

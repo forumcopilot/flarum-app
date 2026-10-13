@@ -820,4 +820,27 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => 'Deixar de ignorar';
+
+  @override
+  String get termsBanner =>
+      'Aceite os termos atualizados deste fórum para voltar a publicar.';
+
+  @override
+  String get termsReview => 'Revisar';
+
+  @override
+  String get termsTitle => 'Termos atualizados';
+
+  @override
+  String get termsIntro =>
+      'Antes de publicar de novo, aceite as políticas atualizadas do fórum.';
+
+  @override
+  String get readPolicy => 'Ler';
+
+  @override
+  String get acceptTerms => 'Aceitar';
+
+  @override
+  String get termsAccepted => 'Obrigado. Você já pode publicar de novo.';
 }

@@ -203,5 +203,12 @@
   "ignoredUserPost": "無視している{name}の投稿です。",
   "showPost": "投稿を表示",
   "ignoredOnThisPhone": "このフォーラムには無視リストがないため、アプリがこの端末に保存します。",
-  "stopIgnoring": "無視をやめる"
+  "stopIgnoring": "無視をやめる",
+  "termsBanner": "投稿を再開するには、このフォーラムの更新された規約に同意してください。",
+  "termsReview": "確認",
+  "termsTitle": "規約の更新",
+  "termsIntro": "再び投稿する前に、フォーラムの更新されたポリシーに同意してください。",
+  "readPolicy": "読む",
+  "acceptTerms": "同意する",
+  "termsAccepted": "ありがとうございます。再び投稿できます。"
 }

@@ -796,4 +796,25 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => '取消忽略';
+
+  @override
+  String get termsBanner => '接受此论坛更新后的条款即可继续发帖。';
+
+  @override
+  String get termsReview => '查看';
+
+  @override
+  String get termsTitle => '条款已更新';
+
+  @override
+  String get termsIntro => '继续发帖前，请接受论坛更新后的政策。';
+
+  @override
+  String get readPolicy => '阅读';
+
+  @override
+  String get acceptTerms => '接受';
+
+  @override
+  String get termsAccepted => '谢谢，你现在可以继续发帖了。';
 }

@@ -56,6 +56,29 @@ void main() {
         expect((await api.user(bobId)).ignored, isTrue);
       });
 
+      test('a policy the reader must accept: the forum names it, holds up their posts, and takes the acceptance',
+          () async {
+        final api = FixtureForum(version, states: {'terms'}).api();
+        final info = await api.forumInfo();
+        final policy = info.policies.single;
+        expect((policy.name, policy.url, policy.updateMessage, policy.optional),
+            (WriteSamples.policyName, WriteSamples.policyUrl, WriteSamples.policyUpdate, false));
+        expect(info.policiesToAccept.single.id, policy.id);
+        expect((await refusal(api.reply(questionId, WriteSamples.termsReply))).isForbidden, isTrue,
+            reason: 'a guest\'s permissions until then');
+
+        await api.acceptPolicy(policy.id);
+        final after = await api.forumInfo();
+        expect(after.policiesToAccept, isEmpty);
+        expect(after.policyStates[policy.id]?.isAccepted, isTrue);
+      });
+
+      test('without policies there is nothing to accept', () async {
+        final info = await FixtureForum(version).api().forumInfo();
+        expect(info.policies, isEmpty);
+        expect(info.policiesToAccept, isEmpty);
+      });
+
       test('a reader who ignores no one gets an empty list; a guest, none', () async {
         expect((await FixtureForum(version).api().forumInfo()).ignoredUsers, isEmpty);
         expect((await FixtureForum(version).api(signedIn: false).forumInfo()).ignoredUsers, isNull, reason: 'a guest');

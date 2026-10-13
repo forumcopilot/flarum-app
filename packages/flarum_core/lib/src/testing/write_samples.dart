@@ -14,6 +14,12 @@ abstract final class WriteSamples {
   /// What a report says about the post (Milestone 4).
   static const flagDetail = 'Reported by the app tests.';
 
+  /// The policy the recorder has the admin add for a while (fof/terms), and the reply it holds up.
+  static const policyName = 'App test terms';
+  static const policyUrl = 'https://example.com/terms';
+  static const policyUpdate = 'Recorded by the app tests.';
+  static const termsReply = 'Posted before accepting the terms.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

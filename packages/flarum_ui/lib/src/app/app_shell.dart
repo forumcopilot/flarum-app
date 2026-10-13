@@ -1,11 +1,13 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../account/account_page.dart';
 import '../home/home_page.dart';
 import '../notifications/notifications_page.dart';
+import '../safety/terms_page.dart';
 import '../tags/tags_page.dart';
 import '../../config/app_forum_config.dart';
 import 'appearance.dart';
@@ -62,6 +64,14 @@ class _AppShellState extends State<AppShell> {
 
   static const _notificationsTab = 2;
 
+  /// The forum's updated policies (fof/terms): once they're accepted, the lists reload with the
+  /// reader's permissions back.
+  Future<void> _reviewTerms() async {
+    if (!await TermsPage.open(context, widget.site) || !mounted) return;
+    SnackbarHelper.showInfo(context, flarumL10n(context).termsAccepted);
+    _signedInOrOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
@@ -86,20 +96,31 @@ class _AppShellState extends State<AppShell> {
               )),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _tab,
-        onDestinationSelected: _select,
-        destinations: [
-          NavigationDestination(icon: const Icon(Icons.forum_outlined), selectedIcon: const Icon(Icons.forum), label: l10n.home),
-          NavigationDestination(icon: const Icon(Icons.sell_outlined), selectedIcon: const Icon(Icons.sell), label: l10n.tags),
-          NavigationDestination(
-              icon: Badge(isLabelVisible: unread > 0, label: Text('$unread'), child: const Icon(Icons.notifications_none)),
-              selectedIcon: Badge(isLabelVisible: unread > 0, label: Text('$unread'), child: const Icon(Icons.notifications)),
-              label: l10n.notifications),
-          NavigationDestination(
-              icon: const Icon(Icons.account_circle_outlined),
-              selectedIcon: const Icon(Icons.account_circle),
-              label: l10n.account),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (_forum.isSignedIn && (_forum.info?.policiesToAccept.isNotEmpty ?? false))
+            TermsStrip(onReview: _reviewTerms),
+          NavigationBar(
+            selectedIndex: _tab,
+            onDestinationSelected: _select,
+            destinations: [
+              NavigationDestination(
+                  icon: const Icon(Icons.forum_outlined), selectedIcon: const Icon(Icons.forum), label: l10n.home),
+              NavigationDestination(
+                  icon: const Icon(Icons.sell_outlined), selectedIcon: const Icon(Icons.sell), label: l10n.tags),
+              NavigationDestination(
+                  icon: Badge(
+                      isLabelVisible: unread > 0, label: Text('$unread'), child: const Icon(Icons.notifications_none)),
+                  selectedIcon:
+                      Badge(isLabelVisible: unread > 0, label: Text('$unread'), child: const Icon(Icons.notifications)),
+                  label: l10n.notifications),
+              NavigationDestination(
+                  icon: const Icon(Icons.account_circle_outlined),
+                  selectedIcon: const Icon(Icons.account_circle),
+                  label: l10n.account),
+            ],
+          ),
         ],
       ),
     );

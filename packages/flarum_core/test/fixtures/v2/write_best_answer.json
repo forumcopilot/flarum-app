@@ -2,20 +2,20 @@
   "request": {
     "match": "data",
     "method": "PATCH",
-    "path": "/discussions/63",
+    "path": "/discussions/67",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",
-        "id": "63",
+        "id": "67",
         "attributes": {},
         "relationships": {
           "bestAnswerPost": {
             "data": {
               "type": "posts",
-              "id": "315"
+              "id": "323"
             }
           }
         }
@@ -26,23 +26,23 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "63",
+      "id": "67",
       "links": {
-        "self": "/discussions/63"
+        "self": "/discussions/67"
       },
       "attributes": {
         "title": "A question from the app",
-        "slug": "63-a-question-from-the-app",
+        "slug": "67-a-question-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T18:59:40+00:00",
-        "lastPostedAt": "2026-10-13T18:59:40+00:00",
+        "createdAt": "2026-10-13T19:20:17+00:00",
+        "lastPostedAt": "2026-10-13T19:20:17+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": false,
-        "lastReadAt": "2026-10-13T18:59:40+00:00",
+        "lastReadAt": "2026-10-13T19:20:17+00:00",
         "lastReadPostNumber": 1,
         "canTag": false,
         "isApproved": true,
@@ -58,8 +58,8 @@
         "canStartPoll": false,
         "bookmarked": false,
         "canSelectBestAnswer": true,
-        "hasBestAnswer": 315,
-        "bestAnswerSetAt": "2026-10-13T18:59:42+00:00",
+        "hasBestAnswer": 323,
+        "bestAnswerSetAt": "2026-10-13T19:20:19+00:00",
         "isSticky": false,
         "canSticky": false,
         "isLocked": false,
@@ -75,7 +75,7 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "314"
+            "id": "322"
           }
         },
         "lastPostedUser": {
@@ -87,18 +87,18 @@
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "315"
+            "id": "323"
           }
         },
         "posts": {
           "data": [
             {
               "type": "posts",
-              "id": "314"
+              "id": "322"
             },
             {
               "type": "posts",
-              "id": "315"
+              "id": "323"
             }
           ]
         },
@@ -108,7 +108,7 @@
         "bestAnswerPost": {
           "data": {
             "type": "posts",
-            "id": "315"
+            "id": "323"
           }
         },
         "bestAnswerUser": {

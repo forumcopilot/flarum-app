@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof-terms-policies/3/accept",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "4",
+      "links": {
+        "self": "/users/4"
+      },
+      "attributes": {
+        "username": "carol",
+        "email": "carol@flarumapp.local",
+        "isEmailConfirmed": true,
+        "displayName": "carol",
+        "avatarUrl": null,
+        "avatarSrcset": null,
+        "hasUploadedAvatar": false,
+        "slug": "carol",
+        "joinTime": "2026-10-08T17:53:47+00:00",
+        "discussionCount": 1,
+        "commentCount": 24,
+        "lastSeenAt": "2026-10-13T19:20:20+00:00",
+        "canEdit": false,
+        "canEditCredentials": false,
+        "canEditGroups": false,
+        "canDelete": false,
+        "newFlagCount": 0,
+        "canSuspend": false,
+        "suspendMessage": null,
+        "suspendedUntil": null,
+        "canModerateExports": true,
+        "canMentionGroups": false,
+        "blocksPd": false,
+        "ignored": false,
+        "canBeIgnored": false,
+        "bestAnswerCount": 0,
+        "canEditNickname": true,
+        "canSendAnyMessage": true,
+        "canDeleteOwnMessages": null,
+        "messageCount": 0,
+        "fof-upload-uploadCountCurrent": 0,
+        "fof-upload-uploadCountAll": 0,
+        "fofTermsPoliciesState": {
+          "3": {
+            "accepted_at": "2026-10-13T19:20:31+00:00",
+            "has_update": false,
+            "must_accept": false,
+            "is_accepted": 1
+          }
+        },
+        "fofTermsPoliciesHasUpdate": false,
+        "fofTermsPoliciesMustAccept": false,
+        "draftCount": 0
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

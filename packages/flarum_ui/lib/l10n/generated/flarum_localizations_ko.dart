@@ -798,4 +798,25 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => '무시 해제';
+
+  @override
+  String get termsBanner => '다시 글을 쓰려면 이 포럼의 변경된 약관에 동의하세요.';
+
+  @override
+  String get termsReview => '검토';
+
+  @override
+  String get termsTitle => '변경된 약관';
+
+  @override
+  String get termsIntro => '다시 글을 쓰기 전에 포럼의 변경된 정책에 동의해 주세요.';
+
+  @override
+  String get readPolicy => '읽기';
+
+  @override
+  String get acceptTerms => '동의';
+
+  @override
+  String get termsAccepted => '감사합니다. 이제 다시 글을 쓸 수 있습니다.';
 }

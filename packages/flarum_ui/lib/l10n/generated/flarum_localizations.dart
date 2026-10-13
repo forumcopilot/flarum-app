@@ -1342,6 +1342,48 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Stop ignoring'**
   String get stopIgnoring;
+
+  /// Strip above the tab bar while the reader must accept new policies (fof/terms); until then the forum lets them only read
+  ///
+  /// In en, this message translates to:
+  /// **'Accept this forum\'s updated terms to post again.'**
+  String get termsBanner;
+
+  /// Button on that strip: opens the policies
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get termsReview;
+
+  /// Title of the page with the policies to accept
+  ///
+  /// In en, this message translates to:
+  /// **'Updated terms'**
+  String get termsTitle;
+
+  /// Top of that page
+  ///
+  /// In en, this message translates to:
+  /// **'Before you post again, accept the forum\'s updated policies.'**
+  String get termsIntro;
+
+  /// Opens a policy's text on the forum's site
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get readPolicy;
+
+  /// Accepts the policies
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get acceptTerms;
+
+  /// Shown once the policies are accepted
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you. You can post again.'**
+  String get termsAccepted;
 }
 
 class _FlarumLocalizationsDelegate

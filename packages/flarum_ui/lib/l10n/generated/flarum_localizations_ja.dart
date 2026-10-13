@@ -798,4 +798,25 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => '無視をやめる';
+
+  @override
+  String get termsBanner => '投稿を再開するには、このフォーラムの更新された規約に同意してください。';
+
+  @override
+  String get termsReview => '確認';
+
+  @override
+  String get termsTitle => '規約の更新';
+
+  @override
+  String get termsIntro => '再び投稿する前に、フォーラムの更新されたポリシーに同意してください。';
+
+  @override
+  String get readPolicy => '読む';
+
+  @override
+  String get acceptTerms => '同意する';
+
+  @override
+  String get termsAccepted => 'ありがとうございます。再び投稿できます。';
 }

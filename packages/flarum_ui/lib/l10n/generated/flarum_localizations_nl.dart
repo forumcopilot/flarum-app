@@ -822,4 +822,27 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => 'Niet meer negeren';
+
+  @override
+  String get termsBanner =>
+      'Accepteer de bijgewerkte voorwaarden van dit forum om weer te kunnen posten.';
+
+  @override
+  String get termsReview => 'Bekijken';
+
+  @override
+  String get termsTitle => 'Bijgewerkte voorwaarden';
+
+  @override
+  String get termsIntro =>
+      'Accepteer het bijgewerkte beleid van het forum voordat je weer post.';
+
+  @override
+  String get readPolicy => 'Lezen';
+
+  @override
+  String get acceptTerms => 'Accepteren';
+
+  @override
+  String get termsAccepted => 'Bedankt. Je kunt weer posten.';
 }

@@ -140,6 +140,33 @@ Future<void> main(List<String> args) async {
     await record('write_question_posts_ignoring', () => carol.posts(question.id));
     await record('write_user_ignored', () => carol.user(bobId));
     await record('write_unignore_user', () => carol.setIgnored(bobId, false));
+
+    // fof/terms: the admin adds a policy, which carol must accept before she may post again; it's
+    // deleted after, so the members' permissions are as they were.
+    final policies = version == FlarumVersion.v2 ? '/fof-terms-policies' : '/fof/terms/policies';
+    // Past carol's posting throttle, which the forum checks before her permissions.
+    await Future<void>.delayed(const Duration(seconds: 11));
+    final policy = (await admin.client.post(policies, {
+      'data': {
+        'type': 'fof-terms-policies',
+        'attributes': {
+          'name': WriteSamples.policyName,
+          'url': WriteSamples.policyUrl,
+          version == FlarumVersion.v2 ? 'updateMessage' : 'update_message': WriteSamples.policyUpdate,
+        },
+      },
+    }))
+        .single
+        .id;
+    try {
+      recorder.states.addAll({'write_forum_terms': 'terms', 'write_forum_terms_accepted': 'terms'});
+      await record('write_forum_terms', () => carol.forumInfo());
+      await record('write_reply_before_terms', () => carol.reply(question.id, WriteSamples.termsReply));
+      await record('write_accept_terms', () => carol.acceptPolicy(policy));
+      await record('write_forum_terms_accepted', () => carol.forumInfo());
+    } finally {
+      await admin.client.delete('$policies/$policy');
+    }
   } finally {
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {

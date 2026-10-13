@@ -203,5 +203,12 @@
   "ignoredUserPost": "你已忽略的 {name} 的帖子。",
   "showPost": "显示帖子",
   "ignoredOnThisPhone": "此论坛没有忽略列表，因此应用会将你的列表保存在此手机上。",
-  "stopIgnoring": "取消忽略"
+  "stopIgnoring": "取消忽略",
+  "termsBanner": "接受此论坛更新后的条款即可继续发帖。",
+  "termsReview": "查看",
+  "termsTitle": "条款已更新",
+  "termsIntro": "继续发帖前，请接受论坛更新后的政策。",
+  "readPolicy": "阅读",
+  "acceptTerms": "接受",
+  "termsAccepted": "谢谢，你现在可以继续发帖了。"
 }

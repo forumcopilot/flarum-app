@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "path": "/discussions/55",
+    "path": "/discussions/59",
     "query": {
       "include": "user,lastPostedUser,tags,posts"
     },
@@ -12,20 +12,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "55",
+      "id": "59",
       "attributes": {
         "title": "A question from the app",
-        "slug": "55-a-question-from-the-app",
+        "slug": "59-a-question-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T18:59:14+00:00",
-        "lastPostedAt": "2026-10-13T18:59:14+00:00",
+        "createdAt": "2026-10-13T19:19:44+00:00",
+        "lastPostedAt": "2026-10-13T19:19:44+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": false,
-        "lastReadAt": "2026-10-13T18:59:14+00:00",
+        "lastReadAt": "2026-10-13T19:19:44+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -70,11 +70,11 @@
           "data": [
             {
               "type": "posts",
-              "id": "261"
+              "id": "269"
             },
             {
               "type": "posts",
-              "id": "262"
+              "id": "270"
             }
           ]
         }
@@ -117,7 +117,7 @@
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-13T18:59:14+00:00",
+          "lastPostedAt": "2026-10-13T19:19:44+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -127,10 +127,10 @@
       },
       {
         "type": "posts",
-        "id": "261",
+        "id": "269",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T18:59:14+00:00",
+          "createdAt": "2026-10-13T19:19:44+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": false,
@@ -161,10 +161,10 @@
       },
       {
         "type": "posts",
-        "id": "262",
+        "id": "270",
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T18:59:14+00:00",
+          "createdAt": "2026-10-13T19:19:44+00:00",
           "contentType": "comment",
           "contentHtml": "<p>The one who asked chooses it.</p>",
           "renderFailed": false,

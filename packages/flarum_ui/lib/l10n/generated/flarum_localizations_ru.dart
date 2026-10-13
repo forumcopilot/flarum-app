@@ -826,4 +826,27 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get stopIgnoring => 'Не игнорировать';
+
+  @override
+  String get termsBanner =>
+      'Примите обновлённые условия форума, чтобы снова публиковать сообщения.';
+
+  @override
+  String get termsReview => 'Просмотреть';
+
+  @override
+  String get termsTitle => 'Обновлённые условия';
+
+  @override
+  String get termsIntro =>
+      'Прежде чем снова публиковать, примите обновлённые правила форума.';
+
+  @override
+  String get readPolicy => 'Читать';
+
+  @override
+  String get acceptTerms => 'Принять';
+
+  @override
+  String get termsAccepted => 'Спасибо. Теперь вы снова можете публиковать.';
 }

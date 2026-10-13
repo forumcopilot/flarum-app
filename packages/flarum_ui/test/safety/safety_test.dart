@@ -7,6 +7,7 @@ import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flarum_ui/src/safety/flag_post_page.dart';
 import 'package:flarum_ui/src/safety/ignored_users.dart';
 import 'package:flarum_ui/src/safety/ignored_users_page.dart';
+import 'package:flarum_ui/src/safety/terms_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
@@ -128,6 +129,27 @@ void main() {
         await _settle(tester);
         expect(find.text('A post by bob, whom you ignore.'), findsNothing);
         expect(find.text(WriteSamples.answer), findsOneWidget);
+        await _close(tester);
+      });
+
+      testWidgets('a policy to accept shows above the tabs until the reader accepts it', (tester) async {
+        final fixtures = FixtureForum(version, root: _fixtures, states: {'terms'});
+        await tester.runAsync(fixtures.forum().refresh);
+        await tester.pumpWidget(_app(AppShell(site: _site(), appearance: Appearance.unsaved())));
+        await _settle(tester);
+        expect(find.text("Accept this forum's updated terms to post again."), findsOneWidget);
+
+        await tester.tap(find.text('Review'));
+        await _settle(tester);
+        expect(find.byType(TermsPage), findsOneWidget);
+        expect(find.text(WriteSamples.policyName), findsOneWidget);
+        expect(find.text(WriteSamples.policyUpdate), findsOneWidget);
+        await tester.tap(find.text('Accept'));
+        await _settle(tester);
+        expect(find.byType(TermsPage), findsNothing);
+        expect(find.text('Thank you. You can post again.'), findsOneWidget);
+        expect(find.byType(TermsStrip), findsNothing);
+        expect(fixtures.requests.where((r) => r.method == 'POST' && r.path.endsWith('/accept')), hasLength(1));
         await _close(tester);
       });
 

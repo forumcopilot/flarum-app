@@ -131,7 +131,9 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Reports (flarum/flags): `POST /api/flags` with `reason` (`off_topic`, `inappropriate`, `spam`, or
   null for "Other") and always `reasonDetail` (1.x takes neither as no reason at all). Ignoring
   (fof/ignore-users): `PATCH /api/users/{id}` with `ignored`; users carry `ignored` and
-  `canBeIgnored`, and `GET /api` includes `actor.ignoredUsers`.
+  `canBeIgnored`, and `GET /api` includes `actor.ignoredUsers`. fof/terms gives a member with a
+  policy to accept a guest's permissions; accepting is `POST /api/fof/terms/policies/{id}/accept`
+  (1.x) or `/api/fof-terms-policies/{id}/accept` (2.0).
 - The unread notification count (`GET /api` actor) is cached for 5 minutes and not cleared when a
   notification is deleted (a like withdrawn), so it can exceed what the list shows until then.
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the

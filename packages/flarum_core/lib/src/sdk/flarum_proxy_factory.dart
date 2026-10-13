@@ -2,6 +2,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/factory/site_proxy_factory.dart';
 import 'package:forumcopilot_sdk/interfaces/interfaces.dart';
 
+import 'flarum_attachment_proxy.dart';
 import 'flarum_bookmark_proxy.dart';
 import 'flarum_config_proxy.dart';
 import 'flarum_forum_proxy.dart';
@@ -49,7 +50,7 @@ class FlarumProxyFactory extends SiteProxyFactory {
   @override
   IFCPrivateMessageProxy createPrivateMessageProxy(SiteContext context) => _notYet('private message');
   @override
-  IFCAttachmentProxy createAttachmentProxy(SiteContext context) => _notYet('attachment');
+  IFCAttachmentProxy createAttachmentProxy(SiteContext context) => FlarumAttachmentProxy(context);
   @override
   IFCTagProxy createTagProxy(SiteContext context) => FlarumTagProxy(context);
 

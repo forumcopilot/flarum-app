@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof/upload",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "files": [
+        "composer-test.txt"
+      ]
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "files",
+        "id": "17",
+        "attributes": {
+          "baseName": "composer-test.txt",
+          "path": "2026-10-13/1791916306-420730-composer-test.txt",
+          "url": "https://flarum18.betterdiscourse.app/assets/files/2026-10-13/1791916306-420730-composer-test.txt",
+          "type": "text/plain",
+          "size": 32,
+          "humanSize": "32B",
+          "createdAt": null,
+          "uuid": "7bd1569d-0b06-4af1-bf4d-7f6b5b106373",
+          "tag": "file",
+          "hidden": false,
+          "bbcode": "[upl-file uuid=7bd1569d-0b06-4af1-bf4d-7f6b5b106373 size=32B]composer-test.txt[/upl-file]",
+          "shared": false,
+          "canViewInfo": false,
+          "canHide": true,
+          "canDelete": false
+        }
+      }
+    ]
+  }
+}

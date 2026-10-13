@@ -6,6 +6,7 @@ import 'package:forumcopilot_sdk/models/results/fc_topic_result.dart';
 import '../flarum_api.dart';
 import '../models/discussion.dart';
 import '../models/tag.dart';
+import 'flarum_attachment_proxy.dart';
 import 'flarum_forum.dart';
 import 'flarum_forum_proxy.dart' show describeFlarumError;
 import 'flarum_post_proxy.dart' show plainText;
@@ -171,7 +172,8 @@ class FlarumTopicProxy implements IFCTopicProxy {
         for (final name in named)
           ...all.where((t) => t.slug == name || t.name.toLowerCase() == name.toLowerCase()).map((t) => t.id),
       }.toList();
-      final discussion = await _forum.api.startDiscussion(subject, textBody, tagIds: tagIds);
+      final discussion =
+          await _forum.api.startDiscussion(subject, FlarumAttachmentProxy.withAttachments(textBody, attachmentIds), tagIds: tagIds);
       // 1: started, but held for a moderator's approval.
       return FCNewTopicResult(result: true, resultText: '', topicId: discussion.id, state: discussion.isApproved ? 0 : 1);
     } catch (e) {

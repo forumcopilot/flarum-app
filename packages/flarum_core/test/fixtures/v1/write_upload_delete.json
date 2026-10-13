@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/fof/upload/delete/7bd1569d-0b06-4af1-bf4d-7f6b5b106373",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "permission_denied"
+      }
+    ]
+  }
+}

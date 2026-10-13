@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart' show MultipartFile;
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -61,6 +64,38 @@ void main() {
         expect(edited.editedAt, isNotNull);
 
         final e = await refusal(api.editPost(post.id, WriteSamples.editByOther));
+        expect(e.isForbidden, isTrue);
+      });
+
+      test('uploads an image and a file, each with the BBCode that shows it', () async {
+        final image = (await api.upload([
+          MultipartFile.fromBytes(base64Decode(WriteSamples.uploadImageBase64), filename: WriteSamples.uploadImageName),
+        ]))
+            .single;
+        expect(image.baseName, WriteSamples.uploadImageName);
+        expect(image.type, 'image/png');
+        expect(image.size, 69);
+        expect(image.url, endsWith(WriteSamples.uploadImageName));
+        expect(image.bbcode, startsWith('[upl-image-preview uuid=${image.uuid} url=${image.url} alt'));
+        expect(image.bbcode, isNot(contains('{TEXT?}')), reason: "1.x's placeholder is filled in");
+        expect(image.canDelete, isFalse, reason: 'fof/upload lets only moderators delete by default');
+
+        final file = (await api.upload([
+          MultipartFile.fromString(WriteSamples.uploadFileText, filename: WriteSamples.uploadFileName),
+        ]))
+            .single;
+        expect(file.type, 'text/plain');
+        expect(file.bbcode, '[upl-file uuid=${file.uuid} size=32B]${WriteSamples.uploadFileName}[/upl-file]');
+      });
+
+      test('a member may not delete an upload', () async {
+        await api.upload([
+          MultipartFile.fromBytes(base64Decode(WriteSamples.uploadImageBase64), filename: WriteSamples.uploadImageName),
+        ]);
+        final file = (await api
+                .upload([MultipartFile.fromString(WriteSamples.uploadFileText, filename: WriteSamples.uploadFileName)]))
+            .single;
+        final e = await refusal(api.deleteUpload(file.uuid));
         expect(e.isForbidden, isTrue);
       });
     });

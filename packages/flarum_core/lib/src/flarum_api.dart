@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart' show MultipartFile;
+
 import 'attributes.dart';
 import 'flarum_client.dart';
 import 'flarum_exception.dart';
@@ -7,6 +9,7 @@ import 'models/forum_info.dart';
 import 'models/notification.dart';
 import 'models/post.dart';
 import 'models/tag.dart';
+import 'models/upload.dart';
 import 'models/user.dart';
 
 /// How to order a discussion list. These are the forum home's views.
@@ -445,6 +448,21 @@ class FlarumApi {
     });
     return _postPage(document, offset);
   }
+
+  /// Uploads [files] through fof/upload, each with the name it should keep; the uploads, each with
+  /// the BBCode that puts it in a post. The forum's size limit (2 MB by default) is the server's to
+  /// enforce: it refuses a larger file.
+  Future<List<FlarumUpload>> upload(List<MultipartFile> files) async {
+    final document = await client.postFiles('/fof/upload', 'files[]', files);
+    return [for (final resource in document.data) FlarumUpload.fromResource(resource)];
+  }
+
+  /// The file at [path], to [upload] as [name].
+  static Future<MultipartFile> fileAt(String path, {required String name}) =>
+      MultipartFile.fromFile(path, filename: name);
+
+  /// Deletes upload [uuid] (fof/upload): one the writer took back out of their post.
+  Future<void> deleteUpload(String uuid) => client.delete('/fof/upload/delete/$uuid');
 
   /// Records that the reader has read discussion [id] up to post [number].
   /// Flarum keeps one high-water mark per discussion and never lowers it.

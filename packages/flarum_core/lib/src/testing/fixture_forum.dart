@@ -60,6 +60,10 @@ class _Fixture {
         rememberCookie = json['request']['rememberCookie'] as bool? ?? false,
         attributes = _attributesOf(json['request']['body']),
         data = json['request']['match'] == 'data' ? _dataOf(json['request']['body']) : null,
+        files = switch (json['request']['body']) {
+          {'files': final List<dynamic> names} => names.cast<String>(),
+          _ => null,
+        },
         status = json['status'] as int,
         body = json['body'];
 
@@ -76,6 +80,9 @@ class _Fixture {
   /// The write's whole `data`, for fixtures recorded to match on it: 2.0's best answer (empty
   /// attributes, the post in `relationships`) and 1.x's tag level (`data.subscription`).
   final Object? data;
+
+  /// An upload's file names: two uploads to the same route are told apart by them.
+  final List<String>? files;
   final int status;
   final Object? body;
 
@@ -85,9 +92,12 @@ class _Fixture {
       options.headers.containsKey('Authorization') == signedIn &&
       '${options.headers['Cookie'] ?? ''}'.contains('_remember=') == rememberCookie &&
       _sameQuery(options.queryParameters, query) &&
-      (data != null
-          ? _canonical(_dataOf(options.data)) == _canonical(data)
-          : attributes == null || _canonical(_attributesOf(options.data)) == _canonical(attributes));
+      (files != null
+          ? options.data is FormData &&
+              _canonical([for (final f in (options.data as FormData).files) f.value.filename]) == _canonical(files)
+          : data != null
+              ? _canonical(_dataOf(options.data)) == _canonical(data)
+              : attributes == null || _canonical(_attributesOf(options.data)) == _canonical(attributes));
 
   static Object? _dataOf(Object? body) => body is Map ? body['data'] : null;
 

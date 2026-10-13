@@ -11,4 +11,11 @@ abstract final class WriteSamples {
   static const questionTitle = 'A question from the app';
   static const question = 'How does the app choose a best answer?';
   static const answer = 'The one who asked chooses it.';
+  static const uploadImageName = 'composer-test.png';
+  static const uploadFileName = 'composer-test.txt';
+  static const uploadFileText = 'Uploaded by the composer tests.\n';
+
+  /// A one-pixel PNG, base64.
+  static const uploadImageBase64 =
+      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGM4YWQEAALyAS2saifrAAAAAElFTkSuQmCC';
 }

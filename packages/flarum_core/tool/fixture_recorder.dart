@@ -34,7 +34,11 @@ class FixtureRecorder extends Interceptor {
         'query': options.queryParameters,
         'signedIn': options.headers.containsKey('Authorization'),
         'rememberCookie': '${options.headers['Cookie'] ?? ''}'.contains('_remember='),
-        if (options.data != null) 'body': options.data,
+        // A multipart upload is kept as the names of its files: the form itself isn't JSON.
+        if (options.data case final FormData form)
+          'body': {'files': [for (final f in form.files) f.value.filename]}
+        else if (options.data != null)
+          'body': options.data,
       },
       'status': status,
       'body': body,

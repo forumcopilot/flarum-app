@@ -11,6 +11,7 @@ import 'package:forumcopilot_sdk/models/results/fc_reaction_result.dart';
 import '../flarum_api.dart';
 import '../models/discussion.dart';
 import '../models/post.dart';
+import 'flarum_attachment_proxy.dart';
 import 'flarum_forum.dart';
 import 'flarum_forum_proxy.dart' show describeFlarumError;
 import 'flarum_topic_proxy.dart';
@@ -171,7 +172,7 @@ class FlarumPostProxy implements IFCPostProxy {
   Future<FCReplyPostResult> replyPostAsync(String forumId, String topicId, String subject, String textBody,
       List<String>? attachmentIds, String? groupId, bool returnHtml) async {
     try {
-      final post = await _forum.api.reply(topicId, textBody);
+      final post = await _forum.api.reply(topicId, FlarumAttachmentProxy.withAttachments(textBody, attachmentIds));
       return FCReplyPostResult(
         result: true,
         resultText: '',

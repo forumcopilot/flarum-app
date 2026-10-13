@@ -1,0 +1,102 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof/upload",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "files": [
+        "composer-test.txt"
+      ]
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "files",
+        "id": "20",
+        "links": {
+          "self": "/files/20"
+        },
+        "attributes": {
+          "baseName": "composer-test.txt",
+          "path": "2026-10-13/1791916327-489180-composer-test.txt",
+          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-489180-composer-test.txt",
+          "type": "text/plain",
+          "size": 32,
+          "humanSize": "32B",
+          "createdAt": null,
+          "uuid": "ac5f0f08-c533-40bd-8dbc-9df56b3d9067",
+          "tag": "file",
+          "hidden": false,
+          "bbcode": "[upl-file uuid=ac5f0f08-c533-40bd-8dbc-9df56b3d9067 size=32B]composer-test.txt[/upl-file]",
+          "shared": false,
+          "isPrivateShared": false,
+          "canViewInfo": false,
+          "canHide": true,
+          "canDelete": false
+        },
+        "relationships": {
+          "actor": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "email": "bob@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T18:32:06+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 2,
+          "fof-upload-uploadCountAll": 2,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

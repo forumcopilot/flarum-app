@@ -69,6 +69,27 @@ Future<void> main(List<String> args) async {
     await admin.client.delete('/discussions/${discussion.id}');
   }
 
+  // Milestone 3's uploads (fof/upload): an image and a file, then the writer deletes one.
+  final image = await record(
+      'write_upload_image',
+      () async => (await bob.upload([
+            MultipartFile.fromBytes(base64Decode(WriteSamples.uploadImageBase64),
+                filename: WriteSamples.uploadImageName),
+          ]))
+              .single);
+  final file = await record(
+      'write_upload_file',
+      () async => (await bob.upload([
+            MultipartFile.fromBytes(utf8.encode(WriteSamples.uploadFileText), filename: WriteSamples.uploadFileName),
+          ]))
+              .single);
+  // Members may not delete their uploads by default (fof-upload.deleteUserUploads is moderators'):
+  // the refusal is recorded, and the admin deletes both.
+  if (file != null) await record('write_upload_delete', () => bob.deleteUpload(file.uuid));
+  for (final upload in [image, file].nonNulls) {
+    await admin.deleteUpload(upload.uuid);
+  }
+
   // Milestone 2's actions, in a Q&A discussion (best answers need fof/best-answer's Q&A tag).
   final tags = await carol.tags();
   String tagId(String slug) => tags.firstWhere((t) => t.slug == slug).id;

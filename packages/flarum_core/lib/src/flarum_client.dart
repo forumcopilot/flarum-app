@@ -53,6 +53,15 @@ class FlarumClient {
 
   Future<void> delete(String path) => _send('DELETE', path);
 
+  /// POSTs [files] as multipart form data under [field] (fof/upload's `files[]`).
+  Future<JsonApiDocument> postFiles(String path, String field, List<MultipartFile> files) async {
+    final form = FormData();
+    for (final file in files) {
+      form.files.add(MapEntry(field, file));
+    }
+    return _document(await _send('POST', path, form: form));
+  }
+
   /// POSTs with no body, for actions such as `/notifications/read`.
   Future<void> postEmpty(String path) => _send('POST', path);
 
@@ -83,6 +92,7 @@ class FlarumClient {
     String path, {
     Map<String, String> query = const {},
     Map<String, dynamic>? body,
+    FormData? form,
     bool jsonApi = true,
     bool rememberCookie = false,
   }) async {
@@ -93,10 +103,11 @@ class FlarumClient {
     try {
       return await _dio.request<Object?>(
         path,
-        data: body,
+        data: form ?? body,
         queryParameters: query,
         options: Options(
           method: method,
+          // Dio sets a form's own multipart type, boundary and all.
           contentType: body == null ? null : (jsonApi ? 'application/vnd.api+json' : 'application/json'),
           headers: headers,
         ),

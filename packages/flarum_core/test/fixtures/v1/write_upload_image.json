@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof/upload",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "files": [
+        "composer-test.png"
+      ]
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "files",
+        "id": "16",
+        "attributes": {
+          "baseName": "composer-test.png",
+          "path": "2026-10-13/1791916306-367331-composer-test.png",
+          "url": "https://flarum18.betterdiscourse.app/assets/files/2026-10-13/1791916306-367331-composer-test.png",
+          "type": "image/png",
+          "size": 69,
+          "humanSize": "69B",
+          "createdAt": null,
+          "uuid": "e8280872-d5f0-42e2-a731-24c95a7d5e68",
+          "tag": "image-preview",
+          "hidden": false,
+          "bbcode": "[upl-image-preview uuid=e8280872-d5f0-42e2-a731-24c95a7d5e68 url=https://flarum18.betterdiscourse.app/assets/files/2026-10-13/1791916306-367331-composer-test.png alt={TEXT?}]",
+          "shared": false,
+          "canViewInfo": false,
+          "canHide": true,
+          "canDelete": false
+        }
+      }
+    ]
+  }
+}

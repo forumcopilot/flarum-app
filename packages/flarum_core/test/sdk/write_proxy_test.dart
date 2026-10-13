@@ -100,6 +100,29 @@ void main() {
         expect((removed.result, removed.isBookmarked), (true, false));
       });
 
+      test('uploadAttachmentAsync uploads, and a reply given its id carries its BBCode', () async {
+        final proxy = FlarumAttachmentProxy(testSite());
+        final image = await proxy.uploadAttachmentAsync(
+            'image', '', '', WriteSamples.uploadImageName, base64Decode(WriteSamples.uploadImageBase64));
+        expect(image.result, isTrue, reason: image.resultText);
+        expect((image.fileName, image.fileSize), (WriteSamples.uploadImageName, 69));
+        expect(image.url, endsWith(WriteSamples.uploadImageName));
+
+        final text = FlarumAttachmentProxy.withAttachments(WriteSamples.reply, [image.attachmentId!]);
+        expect(text, startsWith('${WriteSamples.reply}\n\n[upl-image-preview uuid=${image.attachmentId} '));
+        expect(FlarumAttachmentProxy.withAttachments(text, [image.attachmentId!]), text, reason: 'already in the text');
+      });
+
+      test('removeAttachmentAsync passes the forum\'s refusal on', () async {
+        final proxy = FlarumAttachmentProxy(testSite());
+        await proxy.uploadAttachmentAsync('image', '', '', WriteSamples.uploadImageName, base64Decode(WriteSamples.uploadImageBase64));
+        final file =
+            await proxy.uploadAttachmentAsync('file', '', '', WriteSamples.uploadFileName, utf8.encode(WriteSamples.uploadFileText));
+        final removed = await proxy.removeAttachmentAsync(file.attachmentId!, '', '', '');
+        expect(removed.result, isFalse);
+        expect(removed.resultText, isNotEmpty);
+      });
+
       test('replyPostAsync passes the throttle\'s refusal on', () async {
         final reply = await FlarumPostProxy(testSite()).replyPostAsync('', '1', '', WriteSamples.throttledReply, null, null, true);
         expect(reply.result, isFalse);

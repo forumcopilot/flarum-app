@@ -1,0 +1,102 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/fof/upload",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "files": [
+        "composer-test.png"
+      ]
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "files",
+        "id": "19",
+        "links": {
+          "self": "/files/19"
+        },
+        "attributes": {
+          "baseName": "composer-test.png",
+          "path": "2026-10-13/1791916327-408037-composer-test.png",
+          "url": "https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test.png",
+          "type": "image/png",
+          "size": 69,
+          "humanSize": "69B",
+          "createdAt": null,
+          "uuid": "c288d759-56ae-4e31-b058-b44f1060ec3d",
+          "tag": "image-preview",
+          "hidden": false,
+          "bbcode": "[upl-image-preview uuid=c288d759-56ae-4e31-b058-b44f1060ec3d url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test.png alt=composer-test.png thumbnail_url=https://flarum20.betterdiscourse.app/assets/files/2026-10-13/1791916327-408037-composer-test-thumb.webp]",
+          "shared": false,
+          "isPrivateShared": false,
+          "canViewInfo": false,
+          "canHide": true,
+          "canDelete": false
+        },
+        "relationships": {
+          "actor": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "email": "bob@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 24,
+          "lastSeenAt": "2026-10-13T18:32:06+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 1,
+          "fof-upload-uploadCountAll": 1,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

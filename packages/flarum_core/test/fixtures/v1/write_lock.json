@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/discussions/74",
+    "path": "/discussions/86",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",
-        "id": "74",
+        "id": "86",
         "attributes": {
           "isLocked": true
         }
@@ -19,14 +19,14 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "74",
+      "id": "86",
       "attributes": {
         "title": "A question from the app",
-        "slug": "74-a-question-from-the-app",
+        "slug": "86-a-question-from-the-app",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T20:11:21+00:00",
-        "lastPostedAt": "2026-10-13T20:11:22+00:00",
+        "createdAt": "2026-10-14T01:21:18+00:00",
+        "lastPostedAt": "2026-10-14T01:21:19+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": true,
@@ -55,15 +55,15 @@
           "data": [
             {
               "type": "posts",
-              "id": "307"
+              "id": "340"
             },
             {
               "type": "posts",
-              "id": "308"
+              "id": "341"
             },
             {
               "type": "posts",
-              "id": "312"
+              "id": "345"
             }
           ]
         }
@@ -72,10 +72,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "312",
+        "id": "345",
         "attributes": {
           "number": 3,
-          "createdAt": "2026-10-13T20:11:38+00:00",
+          "createdAt": "2026-10-14T01:21:35+00:00",
           "contentType": "discussionLocked",
           "content": {
             "locked": true
@@ -108,7 +108,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "74"
+              "id": "86"
             }
           },
           "user": {
@@ -134,7 +134,7 @@
           "canEditCredentials": true,
           "canEditGroups": true,
           "canDelete": true,
-          "lastSeenAt": "2026-10-13T20:11:09+00:00",
+          "lastSeenAt": "2026-10-14T01:21:06+00:00",
           "isEmailConfirmed": true,
           "email": "admin@flarumapp.local",
           "anonymized": false,

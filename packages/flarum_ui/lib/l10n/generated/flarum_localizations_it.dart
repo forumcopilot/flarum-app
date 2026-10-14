@@ -1003,4 +1003,150 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Qualcosa è andato storto. Riprova.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count voti',
+      one: '1 voto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Scegline fino a $count',
+      one: 'Scegline 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'La votazione è chiusa';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Chiude il $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting => 'Vedrai i risultati dopo aver votato.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Vedrai i risultati alla chiusura della votazione.';
+
+  @override
+  String get pollVote => 'Vota';
+
+  @override
+  String get pollRemoveVote => 'Ritira il mio voto';
+
+  @override
+  String get pollSeeVoters => 'Vedi chi ha votato';
+
+  @override
+  String get pollNoVotes => 'Ancora nessun voto.';
+
+  @override
+  String get poll => 'Sondaggio';
+
+  @override
+  String get pollNeedsQuestion => 'Scrivi la domanda.';
+
+  @override
+  String get pollNeedsAnswers => 'Indica almeno due risposte.';
+
+  @override
+  String get pollEndInPast => 'Scegli una chiusura nel futuro.';
+
+  @override
+  String get pollQuestion => 'Domanda';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Risposta $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Rimuovi questa risposta';
+
+  @override
+  String get pollAddAnswer => 'Aggiungi una risposta';
+
+  @override
+  String get pollMultipleChoice => 'Si può scegliere più di una risposta';
+
+  @override
+  String get pollChoicesAllowed => 'Risposte consentite';
+
+  @override
+  String get pollAnyNumber => 'Senza limite';
+
+  @override
+  String get pollPublic => 'Mostra chi ha votato cosa';
+
+  @override
+  String get pollAllowChangeVote => 'Si può cambiare il voto';
+
+  @override
+  String get pollCloses => 'Chiusura della votazione';
+
+  @override
+  String get pollNeverCloses => 'Mai';
+
+  @override
+  String get pollHideVotes => 'Nascondi i risultati fino alla chiusura';
+
+  @override
+  String get pollHideVotesNeedsEnd =>
+      'Prima scegli quando chiude la votazione.';
+
+  @override
+  String get addPoll => 'Aggiungi un sondaggio';
+
+  @override
+  String get editPoll => 'Modifica il sondaggio';
+
+  @override
+  String get removePoll => 'Rimuovi il sondaggio';
+
+  @override
+  String get draftSaved => 'Bozza salvata.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Bozza salvata, senza il sondaggio: le bozze non conservano i sondaggi.';
+
+  @override
+  String get draftNeedsText => 'Scrivi qualcosa per salvarlo come bozza.';
+
+  @override
+  String get drafts => 'Bozze';
+
+  @override
+  String get draftsLoadFailed => 'Impossibile caricare le tue bozze';
+
+  @override
+  String get noDrafts =>
+      'Nessuna bozza. Chiudi un messaggio che stai scrivendo e scegli «Salva bozza» per conservarlo qui.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Risposta a $title';
+  }
+
+  @override
+  String get draftUntitled => 'Discussione senza titolo';
+
+  @override
+  String get deleteDraftQuestion => 'Eliminare questa bozza?';
+
+  @override
+  String get deleteDraft => 'Elimina bozza';
 }

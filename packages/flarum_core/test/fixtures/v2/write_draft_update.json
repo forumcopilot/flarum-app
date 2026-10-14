@@ -1,0 +1,64 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/drafts/4",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "drafts",
+        "id": "4",
+        "attributes": {
+          "content": "A reply saved for later, and changed.",
+          "relationships": {
+            "discussion": {
+              "data": {
+                "type": "discussions",
+                "id": "94"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "drafts",
+      "id": "4",
+      "links": {
+        "self": "/drafts/4"
+      },
+      "attributes": {
+        "title": null,
+        "content": "A reply saved for later, and changed.",
+        "updatedAt": "2026-10-14T01:23:44+00:00",
+        "extra": null,
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "94"
+            }
+          }
+        },
+        "scheduledFor": null,
+        "scheduledValidationError": null,
+        "clearValidationError": null
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        }
+      }
+    },
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

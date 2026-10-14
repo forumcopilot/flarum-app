@@ -217,6 +217,13 @@ class _ThreadPageState extends State<ThreadPage> {
     }
   }
 
+  /// Puts [poll], as the reader's vote left it, in its post.
+  void _pollChanged(String postId, FlarumPoll poll) {
+    final post = _model.postById(postId);
+    if (post == null) return;
+    _model.replacePost(post.copyWith(polls: [for (final p in post.polls) p.id == poll.id ? poll : p]));
+  }
+
   /// Whether the reader may reply here: signed in, and the discussion lets them.
   bool get _canReply => FlarumForum.of(widget.site).isSignedIn && (_model.discussion?.canReply ?? false);
 
@@ -562,6 +569,7 @@ class _ThreadPageState extends State<ThreadPage> {
         onHide: post.canHide ? () => _hidePost(post) : null,
         onDeleteForever: post.canDelete && post.isHidden ? () => _deletePostForever(post) : null,
         onApprove: post.canApprove && !post.isApproved ? () => _approvePost(post) : null,
+        onPollChanged: _signedIn ? (poll) => _pollChanged(post.id, poll) : null,
       );
     }
     // The end: more to come, a page that failed, or the thread's end.

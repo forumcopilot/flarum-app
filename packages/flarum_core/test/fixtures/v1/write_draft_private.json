@@ -1,0 +1,73 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/drafts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "drafts",
+        "attributes": {
+          "title": "A private word saved for later",
+          "content": "For bob, when it is ready."
+        },
+        "relationships": {
+          "recipientUsers": {
+            "data": [
+              {
+                "type": "users",
+                "id": "6"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "drafts",
+      "id": "6",
+      "attributes": {
+        "title": "A private word saved for later",
+        "content": "For bob, when it is ready.",
+        "relationships": {
+          "recipientUsers": {
+            "data": [
+              {
+                "type": "users",
+                "id": "6"
+              }
+            ]
+          }
+        },
+        "extra": null,
+        "scheduledValidationError": null,
+        "scheduledFor": null,
+        "updatedAt": "2026-10-14T01:22:12+00:00"
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      }
+    ]
+  }
+}

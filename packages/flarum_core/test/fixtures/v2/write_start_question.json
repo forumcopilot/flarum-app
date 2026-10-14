@@ -29,23 +29,23 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "82",
+      "id": "94",
       "links": {
-        "self": "/discussions/82"
+        "self": "/discussions/94"
       },
       "attributes": {
         "title": "A question from the app",
-        "slug": "82-a-question-from-the-app",
+        "slug": "94-a-question-from-the-app",
         "commentCount": 1,
         "participantCount": 1,
-        "createdAt": "2026-10-13T20:12:13+00:00",
-        "lastPostedAt": "2026-10-13T20:12:13+00:00",
+        "createdAt": "2026-10-14T01:22:36+00:00",
+        "lastPostedAt": "2026-10-14T01:22:36+00:00",
         "lastPostNumber": 1,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": true,
-        "lastReadAt": "2026-10-13T20:12:13+00:00",
+        "lastReadAt": "2026-10-14T01:22:36+00:00",
         "lastReadPostNumber": 1,
         "canTag": false,
         "isApproved": true,
@@ -58,7 +58,7 @@
         "canDownloadFiles": true,
         "canSeeReactions": false,
         "hasPoll": false,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectBestAnswer": true,
         "hasBestAnswer": false,
@@ -73,7 +73,7 @@
           "data": [
             {
               "type": "posts",
-              "id": "360"
+              "id": "393"
             }
           ]
         },
@@ -103,7 +103,7 @@
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "360"
+            "id": "393"
           }
         },
         "lastPostedUser": {
@@ -115,7 +115,7 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "360"
+            "id": "393"
           }
         },
         "user": {
@@ -145,7 +145,7 @@
           "position": 9,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-13T20:12:13+00:00",
+          "lastPostedAt": "2026-10-14T01:22:36+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -156,7 +156,7 @@
           "lastPostedDiscussion": {
             "data": {
               "type": "discussions",
-              "id": "82"
+              "id": "94"
             }
           },
           "parent": {
@@ -166,13 +166,13 @@
       },
       {
         "type": "posts",
-        "id": "360",
+        "id": "393",
         "links": {
-          "self": "/posts/360"
+          "self": "/posts/393"
         },
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T20:12:13+00:00",
+          "createdAt": "2026-10-14T01:22:36+00:00",
           "contentType": "comment",
           "content": "How does the app choose a best answer?",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
@@ -195,7 +195,7 @@
             "6": 0
           },
           "userReaction": null,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectAsBestAnswer": false,
           "canLike": true,
@@ -212,7 +212,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "82"
+              "id": "94"
             }
           },
           "editedUser": {
@@ -244,7 +244,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T20:11:58+00:00",
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

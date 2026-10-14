@@ -1008,4 +1008,151 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   @override
   String get errorUnknown =>
       'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Stimmen',
+      one: '1 Stimme',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Wähle bis zu $count',
+      one: 'Wähle 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'Die Abstimmung ist beendet';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Endet am $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting =>
+      'Die Ergebnisse siehst du, sobald du abgestimmt hast.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Die Ergebnisse siehst du, wenn die Abstimmung endet.';
+
+  @override
+  String get pollVote => 'Abstimmen';
+
+  @override
+  String get pollRemoveVote => 'Stimme zurückziehen';
+
+  @override
+  String get pollSeeVoters => 'Wer hat abgestimmt?';
+
+  @override
+  String get pollNoVotes => 'Noch keine Stimmen.';
+
+  @override
+  String get poll => 'Umfrage';
+
+  @override
+  String get pollNeedsQuestion => 'Schreib die Frage.';
+
+  @override
+  String get pollNeedsAnswers => 'Gib mindestens zwei Antworten an.';
+
+  @override
+  String get pollEndInPast => 'Wähle ein Ende in der Zukunft.';
+
+  @override
+  String get pollQuestion => 'Frage';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Antwort $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Diese Antwort entfernen';
+
+  @override
+  String get pollAddAnswer => 'Antwort hinzufügen';
+
+  @override
+  String get pollMultipleChoice => 'Mehrere Antworten erlauben';
+
+  @override
+  String get pollChoicesAllowed => 'Erlaubte Antworten';
+
+  @override
+  String get pollAnyNumber => 'Beliebig viele';
+
+  @override
+  String get pollPublic => 'Zeigen, wer wofür gestimmt hat';
+
+  @override
+  String get pollAllowChangeVote => 'Stimme ändern erlauben';
+
+  @override
+  String get pollCloses => 'Abstimmung endet';
+
+  @override
+  String get pollNeverCloses => 'Nie';
+
+  @override
+  String get pollHideVotes => 'Ergebnisse bis zum Ende verbergen';
+
+  @override
+  String get pollHideVotesNeedsEnd =>
+      'Wähle zuerst, wann die Abstimmung endet.';
+
+  @override
+  String get addPoll => 'Umfrage hinzufügen';
+
+  @override
+  String get editPoll => 'Umfrage bearbeiten';
+
+  @override
+  String get removePoll => 'Umfrage entfernen';
+
+  @override
+  String get draftSaved => 'Entwurf gespeichert.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Entwurf gespeichert, ohne die Umfrage: Entwürfe speichern keine Umfragen.';
+
+  @override
+  String get draftNeedsText => 'Schreib etwas, um es als Entwurf zu speichern.';
+
+  @override
+  String get drafts => 'Entwürfe';
+
+  @override
+  String get draftsLoadFailed => 'Deine Entwürfe konnten nicht geladen werden';
+
+  @override
+  String get noDrafts =>
+      'Keine Entwürfe. Schließe einen Beitrag, den du schreibst, und wähle „Entwurf speichern“, um ihn hier aufzubewahren.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Antwort auf $title';
+  }
+
+  @override
+  String get draftUntitled => 'Diskussion ohne Titel';
+
+  @override
+  String get deleteDraftQuestion => 'Diesen Entwurf löschen?';
+
+  @override
+  String get deleteDraft => 'Entwurf löschen';
 }

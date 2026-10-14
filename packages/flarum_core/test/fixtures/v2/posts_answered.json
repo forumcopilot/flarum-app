@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -60,6 +60,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -135,6 +138,9 @@
               }
             ]
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -203,6 +209,9 @@
                 "id": "45"
               }
             ]
+          },
+          "polls": {
+            "data": []
           },
           "mentionedBy": {
             "data": []
@@ -277,6 +286,9 @@
               }
             ]
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -342,6 +354,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -392,7 +407,7 @@
           "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectBestAnswer": false,
           "hasBestAnswer": 261,
@@ -463,7 +478,7 @@
           "joinTime": "2026-10-08T16:06:42+00:00",
           "discussionCount": 5,
           "commentCount": 6,
-          "lastSeenAt": "2026-10-13T17:51:58+00:00",
+          "lastSeenAt": "2026-10-14T01:07:55+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

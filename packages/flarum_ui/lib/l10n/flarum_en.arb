@@ -1439,5 +1439,190 @@
   "errorUnknown": "Something went wrong. Please try again.",
   "@errorUnknown": {
     "description": "Error: anything else, instead of the exception text."
+  },
+  "pollVotes": "{count, plural, =1{1 vote} other{{count} votes}}",
+  "@pollVotes": {
+    "description": "Under a poll: how many votes it has, when the reader may see the results.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pollChooseUpTo": "{count, plural, =1{Choose 1} other{Choose up to {count}}}",
+  "@pollChooseUpTo": {
+    "description": "Under a poll where several answers may be chosen: how many.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pollEnded": "Voting has closed",
+  "@pollEnded": {
+    "description": "Under a poll whose voting has closed."
+  },
+  "pollEndsOn": "Closes {date}",
+  "@pollEndsOn": {
+    "description": "Under a poll: when voting closes (a date and time).",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "pollResultsAfterVoting": "The results show once you vote.",
+  "@pollResultsAfterVoting": {
+    "description": "Under a poll whose results the reader sees only once they have voted."
+  },
+  "pollResultsWhenClosed": "The results show when voting closes.",
+  "@pollResultsWhenClosed": {
+    "description": "Under a poll whose results stay hidden until voting closes, after the reader voted."
+  },
+  "pollVote": "Vote",
+  "@pollVote": {
+    "description": "Button: sends the answers chosen in a multiple-choice poll."
+  },
+  "pollRemoveVote": "Take back my vote",
+  "@pollRemoveVote": {
+    "description": "Button under a poll the reader voted in: takes their vote back."
+  },
+  "pollSeeVoters": "See who voted",
+  "@pollSeeVoters": {
+    "description": "Button under a public poll: lists who voted for what."
+  },
+  "pollNoVotes": "No votes yet.",
+  "@pollNoVotes": {
+    "description": "The voters sheet of a poll nobody has voted in."
+  },
+  "poll": "Poll",
+  "@poll": {
+    "description": "The poll editor's title."
+  },
+  "pollNeedsQuestion": "Write the question.",
+  "@pollNeedsQuestion": {
+    "description": "Poll editor: Done with no question."
+  },
+  "pollNeedsAnswers": "Give at least two answers.",
+  "@pollNeedsAnswers": {
+    "description": "Poll editor: Done with fewer than two answers."
+  },
+  "pollEndInPast": "Choose a closing time in the future.",
+  "@pollEndInPast": {
+    "description": "Poll editor: the closing time chosen has passed."
+  },
+  "pollQuestion": "Question",
+  "@pollQuestion": {
+    "description": "Poll editor: the question field's label."
+  },
+  "pollAnswer": "Answer {number}",
+  "@pollAnswer": {
+    "description": "Poll editor: an answer field's label, numbered from 1.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "pollRemoveAnswer": "Remove this answer",
+  "@pollRemoveAnswer": {
+    "description": "Poll editor: tooltip of the button that removes an answer."
+  },
+  "pollAddAnswer": "Add an answer",
+  "@pollAddAnswer": {
+    "description": "Poll editor: adds another answer field."
+  },
+  "pollMultipleChoice": "Voters may choose more than one",
+  "@pollMultipleChoice": {
+    "description": "Poll editor switch: voters may choose several answers."
+  },
+  "pollChoicesAllowed": "Choices allowed",
+  "@pollChoicesAllowed": {
+    "description": "Poll editor: how many answers a voter may choose, in a multiple-choice poll."
+  },
+  "pollAnyNumber": "Any number",
+  "@pollAnyNumber": {
+    "description": "Poll editor: no limit on how many answers a voter may choose."
+  },
+  "pollPublic": "Show who voted for what",
+  "@pollPublic": {
+    "description": "Poll editor switch: who voted for which answer is shown."
+  },
+  "pollAllowChangeVote": "Voters may change their vote",
+  "@pollAllowChangeVote": {
+    "description": "Poll editor switch: voters may change their vote."
+  },
+  "pollCloses": "Voting closes",
+  "@pollCloses": {
+    "description": "Poll editor: when voting closes."
+  },
+  "pollNeverCloses": "Never",
+  "@pollNeverCloses": {
+    "description": "Poll editor: voting never closes."
+  },
+  "pollHideVotes": "Hide the results until voting closes",
+  "@pollHideVotes": {
+    "description": "Poll editor switch: results stay hidden until voting closes."
+  },
+  "pollHideVotesNeedsEnd": "Choose when voting closes first.",
+  "@pollHideVotesNeedsEnd": {
+    "description": "Poll editor: why hiding the results is off (it needs a closing time)."
+  },
+  "addPoll": "Add a poll",
+  "@addPoll": {
+    "description": "New discussion composer: adds a poll (fof/polls)."
+  },
+  "editPoll": "Edit the poll",
+  "@editPoll": {
+    "description": "New discussion composer: tooltip of the poll's chip."
+  },
+  "removePoll": "Remove the poll",
+  "@removePoll": {
+    "description": "New discussion composer: removes the poll."
+  },
+  "draftSaved": "Draft saved.",
+  "@draftSaved": {
+    "description": "After Save draft when closing the composer."
+  },
+  "draftSavedWithoutPoll": "Draft saved, without the poll: drafts don't keep polls.",
+  "@draftSavedWithoutPoll": {
+    "description": "After Save draft for a new discussion with a poll: fof/drafts has nowhere to keep it."
+  },
+  "draftNeedsText": "Write something to save it as a draft.",
+  "@draftNeedsText": {
+    "description": "Save draft with no text: the forum refuses an empty draft."
+  },
+  "drafts": "Drafts",
+  "@drafts": {
+    "description": "The reader's drafts (fof/drafts): the Account entry and the page's title."
+  },
+  "draftsLoadFailed": "Couldn't load your drafts",
+  "@draftsLoadFailed": {
+    "description": "The drafts page couldn't load."
+  },
+  "noDrafts": "No drafts. Close a post you're writing and choose Save draft to keep it here.",
+  "@noDrafts": {
+    "description": "The drafts page with none. The quoted button is the composer's close prompt's Save draft."
+  },
+  "draftReplyTo": "Reply to {title}",
+  "@draftReplyTo": {
+    "description": "A reply draft in the drafts list: the discussion it replies to.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "draftUntitled": "Untitled discussion",
+  "@draftUntitled": {
+    "description": "A new-discussion draft without a title, in the drafts list."
+  },
+  "deleteDraftQuestion": "Delete this draft?",
+  "@deleteDraftQuestion": {
+    "description": "Asked before deleting a draft."
+  },
+  "deleteDraft": "Delete draft",
+  "@deleteDraft": {
+    "description": "Deletes a draft from the drafts list."
   }
 }

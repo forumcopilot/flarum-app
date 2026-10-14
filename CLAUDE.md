@@ -143,6 +143,19 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   or 400 saying "… 2048 kb"), or are a 413 from PHP or nginx (docs/phase-3-notes.md, Milestone 3).
   It re-encodes the images it stores (JPEG at quality 90), so a stored copy can be bigger than the
   file sent.
+- fof/polls: a poll belongs to a post (a new discussion's is its first post's); a thread's posts
+  bring theirs only when the request names `polls,polls.options,polls.myVotes,polls.myVotes.option`
+  (fof/polls' defaults apply only to a request naming no includes). Routes: 1.x `/api/fof/polls`,
+  2.0 `/api/polls`; voting is `PATCH …/{id}/votes` `{"data":{"optionIds":[…]}}`, the whole choice
+  (`[]` takes it back; a repeated id is counted twice). A new discussion's poll is its `poll`
+  attribute. `voteCount` is absent (2.0) or null (1.x) while the reader may not see the results.
+  1.x stores `maxVotes` as 0 whatever is sent.
+- fof/drafts: `GET/POST /api/drafts`, `PATCH`/`DELETE /api/drafts/{id}`. What a draft is for
+  (discussion, tags, recipientUsers) is JSON:API's `relationships` on 1.x but an attribute named
+  `relationships` on 2.0 (required on create). 2.0 pages and sorts (`-updatedAt`), 1.x sends all,
+  unsorted. Nothing on the forum deletes a posted draft: the client does.
+- A forum without an extension refuses its includes with 400 and names none (1.x) or only the first
+  (2.0): `FlarumApi` tries each extension's includes alone, once per forum.
 - Reports (flarum/flags): `POST /api/flags` with `reason` (`off_topic`, `inappropriate`, `spam`, or
   null for "Other") and always `reasonDetail` (1.x takes neither as no reason at all). Ignoring
   (fof/ignore-users): `PATCH /api/users/{id}` with `ignored`; users carry `ignored` and

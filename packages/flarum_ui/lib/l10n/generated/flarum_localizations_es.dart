@@ -1003,4 +1003,150 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Algo salió mal. Inténtalo de nuevo.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count votos',
+      one: '1 voto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Elige hasta $count',
+      one: 'Elige 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'La votación ha terminado';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Termina el $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting => 'Verás los resultados cuando votes.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Verás los resultados cuando termine la votación.';
+
+  @override
+  String get pollVote => 'Votar';
+
+  @override
+  String get pollRemoveVote => 'Retirar mi voto';
+
+  @override
+  String get pollSeeVoters => 'Ver quién votó';
+
+  @override
+  String get pollNoVotes => 'Aún no hay votos.';
+
+  @override
+  String get poll => 'Encuesta';
+
+  @override
+  String get pollNeedsQuestion => 'Escribe la pregunta.';
+
+  @override
+  String get pollNeedsAnswers => 'Indica al menos dos respuestas.';
+
+  @override
+  String get pollEndInPast => 'Elige un cierre en el futuro.';
+
+  @override
+  String get pollQuestion => 'Pregunta';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Respuesta $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Quitar esta respuesta';
+
+  @override
+  String get pollAddAnswer => 'Añadir una respuesta';
+
+  @override
+  String get pollMultipleChoice => 'Se puede elegir más de una';
+
+  @override
+  String get pollChoicesAllowed => 'Respuestas permitidas';
+
+  @override
+  String get pollAnyNumber => 'Sin límite';
+
+  @override
+  String get pollPublic => 'Mostrar quién votó qué';
+
+  @override
+  String get pollAllowChangeVote => 'Se puede cambiar el voto';
+
+  @override
+  String get pollCloses => 'La votación termina';
+
+  @override
+  String get pollNeverCloses => 'Nunca';
+
+  @override
+  String get pollHideVotes => 'Ocultar los resultados hasta que termine';
+
+  @override
+  String get pollHideVotesNeedsEnd =>
+      'Primero elige cuándo termina la votación.';
+
+  @override
+  String get addPoll => 'Añadir una encuesta';
+
+  @override
+  String get editPoll => 'Editar la encuesta';
+
+  @override
+  String get removePoll => 'Quitar la encuesta';
+
+  @override
+  String get draftSaved => 'Borrador guardado.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Borrador guardado, sin la encuesta: los borradores no guardan encuestas.';
+
+  @override
+  String get draftNeedsText => 'Escribe algo para guardarlo como borrador.';
+
+  @override
+  String get drafts => 'Borradores';
+
+  @override
+  String get draftsLoadFailed => 'No se pudieron cargar tus borradores';
+
+  @override
+  String get noDrafts =>
+      'No hay borradores. Cierra un mensaje que estés escribiendo y elige «Guardar borrador» para guardarlo aquí.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Respuesta a $title';
+  }
+
+  @override
+  String get draftUntitled => 'Discusión sin título';
+
+  @override
+  String get deleteDraftQuestion => '¿Eliminar este borrador?';
+
+  @override
+  String get deleteDraft => 'Eliminar borrador';
 }

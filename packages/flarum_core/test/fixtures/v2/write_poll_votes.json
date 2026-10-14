@@ -1,0 +1,171 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/polls/3",
+    "query": {
+      "include": "votes,votes.user,votes.option"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "polls",
+      "id": "3",
+      "links": {
+        "self": "/polls/3"
+      },
+      "attributes": {
+        "question": "Phone or tablet?",
+        "subtitle": "",
+        "hasEnded": false,
+        "allowMultipleVotes": false,
+        "maxVotes": 0,
+        "endDate": null,
+        "createdAt": "2026-10-14T01:23:29+00:00",
+        "updatedAt": "2026-10-14T01:23:30+00:00",
+        "canVote": true,
+        "canEdit": false,
+        "canDelete": false,
+        "canSeeVoters": true,
+        "canChangeVote": true,
+        "isGlobal": false,
+        "image": null,
+        "imageUrl": null,
+        "imageSrcset": null,
+        "imageAlt": null,
+        "publicPoll": true,
+        "voteCount": 1,
+        "isDraft": false,
+        "publishedAt": "2026-10-14T01:23:29+00:00",
+        "scheduledPublishAt": null,
+        "canPublish": false,
+        "canUnpublish": false
+      },
+      "relationships": {
+        "post": {
+          "data": {
+            "type": "posts",
+            "id": "402"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "pollGroup": {
+          "data": null
+        },
+        "votes": {
+          "data": [
+            {
+              "type": "poll_votes",
+              "id": "6"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "poll_votes",
+        "id": "6",
+        "links": {
+          "self": "/poll_votes/6"
+        },
+        "attributes": {
+          "pollId": 3,
+          "optionId": 8,
+          "createdAt": "2026-10-14T01:23:31+00:00",
+          "updatedAt": "2026-10-14T01:23:31+00:00"
+        },
+        "relationships": {
+          "poll": {
+            "data": {
+              "type": "polls",
+              "id": "3"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "option": {
+            "data": {
+              "type": "poll_options",
+              "id": "8"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "email": "bob@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 2,
+          "commentCount": 25,
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 0
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "8",
+        "links": {
+          "self": "/poll_options/8"
+        },
+        "attributes": {
+          "answer": "Tablet",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:29+00:00",
+          "updatedAt": "2026-10-14T01:23:31+00:00",
+          "voteCount": 1
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

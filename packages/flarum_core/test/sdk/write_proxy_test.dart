@@ -192,6 +192,40 @@ void main() {
         expect(banned.result, isTrue, reason: banned.resultText);
       });
 
+      String recordedId(String name) =>
+          ((jsonDecode(File('test/fixtures/${version.name}/$name.json').readAsStringSync()) as Map)['body']['data']
+              as Map)['id'] as String;
+
+      test('votePollAsync votes in the discussion\'s poll, and its results show', () async {
+        final topicId = recordedId('write_poll_discussion');
+        final options = (await fixtures.api().posts(topicId)).items.first.polls.single.options;
+        final poll = await FlarumPostProxy(testSite()).votePollAsync(topicId, [options.first.id]);
+        expect(poll, isNotNull);
+        expect((poll!.question, poll.hasVoted, poll.canViewResults, poll.maxVotes, poll.publicVotes),
+            (WriteSamples.pollQuestion, true, true, 1, true));
+        expect([for (final response in poll.responses) response.viewerVotedFor], [true, false, false]);
+        expect(poll.responses.first.voteCount, 1);
+      });
+
+      test('the draft proxy lists drafts by kind, loads, saves and deletes the latest of one', () async {
+        final questionId = recordedId('write_start_question');
+        final proxy = FlarumDraftProxy(testSite());
+        final drafts = await proxy.getMyDraftsAsync();
+        expect(drafts.result, isTrue, reason: drafts.resultText);
+        expect([for (final draft in drafts.items) draft.draftKey], ['new_private_message', 'new_topic', 'topic_$questionId']);
+        expect(drafts.items.last.topicId, int.parse(questionId));
+        expect((drafts.items[1].topicTitle, drafts.items[1].reply), (WriteSamples.draftTitle, WriteSamples.draftContent));
+
+        final loaded = await proxy.loadDraftAsync('topic_$questionId');
+        expect(loaded.draft?.reply, WriteSamples.draftReply);
+        final saved = await proxy.saveDraftAsync(draftKey: 'topic_$questionId', data: {'reply': WriteSamples.draftReplyEdited});
+        expect(saved.result, isTrue, reason: saved.resultText);
+        expect(fixtures.requests.last.method, 'PATCH', reason: 'the draft it had');
+        final deleted = await proxy.deleteDraftAsync('topic_$questionId');
+        expect(deleted.result, isTrue, reason: deleted.resultText);
+        expect(fixtures.requests.last.method, 'DELETE');
+      });
+
       test('replyPostAsync passes the throttle\'s refusal on', () async {
         final reply = await FlarumPostProxy(testSite()).replyPostAsync('', '1', '', WriteSamples.throttledReply, null, null, true);
         expect(reply.result, isFalse);

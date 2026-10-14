@@ -964,4 +964,144 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get errorUnknown => '出了点问题。请重试。';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 票',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '最多选择 $count 项',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => '投票已结束';
+
+  @override
+  String pollEndsOn(String date) {
+    return '$date 结束';
+  }
+
+  @override
+  String get pollResultsAfterVoting => '投票后即可查看结果。';
+
+  @override
+  String get pollResultsWhenClosed => '投票结束后即可查看结果。';
+
+  @override
+  String get pollVote => '投票';
+
+  @override
+  String get pollRemoveVote => '撤回我的投票';
+
+  @override
+  String get pollSeeVoters => '查看投票者';
+
+  @override
+  String get pollNoVotes => '还没有人投票。';
+
+  @override
+  String get poll => '投票';
+
+  @override
+  String get pollNeedsQuestion => '请填写问题。';
+
+  @override
+  String get pollNeedsAnswers => '请至少填写两个选项。';
+
+  @override
+  String get pollEndInPast => '请选择未来的结束时间。';
+
+  @override
+  String get pollQuestion => '问题';
+
+  @override
+  String pollAnswer(int number) {
+    return '选项 $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => '删除此选项';
+
+  @override
+  String get pollAddAnswer => '添加选项';
+
+  @override
+  String get pollMultipleChoice => '允许多选';
+
+  @override
+  String get pollChoicesAllowed => '可选数量';
+
+  @override
+  String get pollAnyNumber => '不限';
+
+  @override
+  String get pollPublic => '公开谁投了什么';
+
+  @override
+  String get pollAllowChangeVote => '允许修改投票';
+
+  @override
+  String get pollCloses => '投票结束时间';
+
+  @override
+  String get pollNeverCloses => '从不';
+
+  @override
+  String get pollHideVotes => '结束前隐藏结果';
+
+  @override
+  String get pollHideVotesNeedsEnd => '请先选择投票结束时间。';
+
+  @override
+  String get addPoll => '添加投票';
+
+  @override
+  String get editPoll => '编辑投票';
+
+  @override
+  String get removePoll => '移除投票';
+
+  @override
+  String get draftSaved => '草稿已保存。';
+
+  @override
+  String get draftSavedWithoutPoll => '草稿已保存，但不含投票：草稿无法保存投票。';
+
+  @override
+  String get draftNeedsText => '请先写点内容再保存草稿。';
+
+  @override
+  String get drafts => '草稿';
+
+  @override
+  String get draftsLoadFailed => '无法加载你的草稿';
+
+  @override
+  String get noDrafts => '没有草稿。关闭正在写的帖子时选择“保存草稿”，即可保存在这里。';
+
+  @override
+  String draftReplyTo(String title) {
+    return '回复“$title”';
+  }
+
+  @override
+  String get draftUntitled => '无标题讨论';
+
+  @override
+  String get deleteDraftQuestion => '删除这份草稿？';
+
+  @override
+  String get deleteDraft => '删除草稿';
 }

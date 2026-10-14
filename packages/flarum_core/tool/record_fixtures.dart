@@ -6,6 +6,10 @@
 //
 //   FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json
 //
+// With ONLY set to a pattern (ONLY='^posts_'), only the fixtures whose names match it are
+// recorded again, and the others kept: they depend on alice's state as the seed left it, which
+// phone runs change (see tool/test_forums/README.md).
+//
 // The fixture folder (v1 or v2) is chosen from the forum's detected version.
 // Each fixture holds the request as FlarumApi sent it, the status and the body.
 // The log-in responses are not recorded: they contain tokens.
@@ -33,8 +37,14 @@ Future<void> main(List<String> args) async {
   final guest = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
   final api = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
 
+  final only = switch (Platform.environment['ONLY']) {
+    final pattern? => RegExp(pattern),
+    null => null,
+  };
+
   /// Records the responses [call] gets, one fixture per name, in order.
   Future<void> recordAll(List<String> names, Future<Object?> Function() call) async {
+    if (only != null && !names.every(only.hasMatch)) return;
     recorder.names.addAll(names);
     try {
       await call();

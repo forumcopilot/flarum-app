@@ -1,0 +1,49 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/drafts/4",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "drafts",
+        "id": "4",
+        "attributes": {
+          "content": "A reply saved for later, and changed."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "86"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "drafts",
+      "id": "4",
+      "attributes": {
+        "title": null,
+        "content": "A reply saved for later, and changed.",
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "86"
+            }
+          }
+        },
+        "extra": null,
+        "scheduledValidationError": null,
+        "scheduledFor": null,
+        "updatedAt": "2026-10-14T01:22:12+00:00"
+      }
+    }
+  }
+}

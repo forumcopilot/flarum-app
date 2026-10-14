@@ -6,8 +6,10 @@ import 'flarum_exception.dart';
 import 'json_api.dart';
 import 'models/dialog.dart';
 import 'models/discussion.dart';
+import 'models/draft.dart';
 import 'models/forum_info.dart';
 import 'models/notification.dart';
+import 'models/poll.dart';
 import 'models/post.dart';
 import 'models/tag.dart';
 import 'models/upload.dart';
@@ -66,22 +68,35 @@ class FlarumApi {
 
   static const _discussionIncludes = 'user,lastPostedUser,tags';
 
-  /// A thread's posts with their authors and who replied to them, as the web
-  /// loads them.
-  static const _postIncludes = 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes';
+  /// A thread's posts with their authors, who replied to them and their polls with the reader's
+  /// votes, as the web loads them. (fof/polls includes its own by default, but only when the
+  /// request names none.)
+  static const _postIncludes =
+      'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option';
 
-  /// Includes from extensions a forum may not run: flarum/tags' `tags`, flarum/mentions'
-  /// `mentionedBy…` and flarum/likes' `likes`. A forum without the extension refuses the whole
-  /// request (400 invalid_parameter), as the census found on real forums.
-  static bool _fromExtension(String include) =>
-      include == 'tags' || include == 'likes' || include.startsWith('mentionedBy') || include == 'recipientUsers';
+  /// The extension an include comes from, for those a forum may not run: flarum/tags' `tags`,
+  /// flarum/mentions' `mentionedBy…`, flarum/likes' `likes`, fof/byobu's `recipientUsers` and
+  /// fof/polls' `polls…`; null for core's. A forum without the extension refuses the whole request
+  /// (400 invalid_parameter), as the census found on real forums.
+  static String? _extensionOf(String include) => switch (include) {
+        'tags' => 'tags',
+        'likes' => 'likes',
+        'recipientUsers' => 'byobu',
+        _ when include.startsWith('mentionedBy') => 'mentions',
+        _ when include == 'polls' || include.startsWith('polls.') => 'polls',
+        _ => null,
+      };
+
+  static bool _fromExtension(String include) => _extensionOf(include) != null;
 
   /// The extension includes this forum refused: left off from then on.
   final _refusedIncludes = <String>{};
 
   /// GET [path] with [query]'s includes; when the forum refuses ones from an extension it doesn't
   /// run ([_fromExtension]), sent again without them. Only when that works are they given up, so
-  /// a request refused for another reason fails as it was.
+  /// a request refused for another reason fails as it was. With more than one extension's
+  /// includes, each is tried on its own, once, to give up only those the forum refuses (neither
+  /// version's 400 says which: 1.x names none, 2.0 the first).
   Future<JsonApiDocument> _getIncluding(String path, {required Map<String, String> query}) async {
     final wanted = [
       for (final include in (query['include'] ?? '').split(','))
@@ -97,14 +112,34 @@ class FlarumApi {
     } on FlarumApiException catch (e, stack) {
       final optional = wanted.where(_fromExtension).toList();
       if (e.statusCode != 400 || optional.isEmpty) rethrow;
-      final JsonApiDocument document;
+      final core = [...wanted.where((i) => !_fromExtension(i))];
       try {
-        document = await client.get(path, query: including([...wanted.where((i) => !_fromExtension(i))]));
+        var document = await client.get(path, query: including(core));
+        final groups = <String, List<String>>{};
+        for (final include in optional) {
+          (groups[_extensionOf(include)!] ??= []).add(include);
+        }
+        if (groups.length == 1) {
+          _refusedIncludes.addAll(optional);
+          return document;
+        }
+        final accepted = <List<String>>[];
+        for (final group in groups.values) {
+          try {
+            final answer = await client.get(path, query: including([...core, ...group]));
+            accepted.add(group);
+            document = answer;
+          } on FlarumApiException catch (refused) {
+            if (refused.statusCode != 400) rethrow;
+            _refusedIncludes.addAll(group);
+          }
+        }
+        // None or one accepted: the answer is in hand; more, and they're asked for together.
+        if (accepted.length > 1) document = await client.get(path, query: including([...core, ...accepted.expand((g) => g)]));
+        return document;
       } catch (_) {
         Error.throwWithStackTrace(e, stack);
       }
-      _refusedIncludes.addAll(optional);
-      return document;
     }
   }
 
@@ -341,11 +376,14 @@ class FlarumApi {
   /// Starts a discussion: its [title], its first post's [content], and with flarum/tags the tags
   /// [tagIds], as many as the forum's tag rules ask. A refusal (422) names what was wrong: 1.x the
   /// first rule that failed, 2.0 every field.
-  Future<FlarumDiscussion> startDiscussion(String title, String content, {List<String> tagIds = const []}) async {
+  Future<FlarumDiscussion> startDiscussion(String title, String content,
+      {List<String> tagIds = const [], FlarumNewPoll? poll}) async {
     final document = await client.post('/discussions', {
       'data': {
         'type': 'discussions',
-        'attributes': {'title': title, 'content': content},
+        // fof/polls puts the poll on the first post; a poll it refuses refuses the discussion
+        // (422, pointing at the poll's field).
+        'attributes': {'title': title, 'content': content, if (poll != null) 'poll': poll.toJson()},
         if (tagIds.isNotEmpty)
           'relationships': {
             'tags': {
@@ -646,6 +684,99 @@ class FlarumApi {
   }
 
   /// fof/terms' policies: 1.x has its own routes, 2.0 an API resource.
+  // ---- fof/drafts: the reader's own, saved with `canSaveDrafts`. Nothing on the forum deletes one
+  // once it's posted: the writer's app does. ----
+
+  /// The reader's drafts, the latest first. 2.0 pages them; 1.x sends them all, in no order.
+  Future<FlarumPage<FlarumDraft>> drafts({int offset = 0, int limit = 20}) async {
+    if (await version() == FlarumVersion.v2) {
+      final document = await client.get('/drafts', query: {'sort': '-updatedAt', ..._page(offset, limit)});
+      return FlarumPage(
+        [for (final resource in document.data) FlarumDraft.fromResource(resource)],
+        offset: offset,
+        hasMore: document.hasNext,
+        total: _total(document),
+      );
+    }
+    final document = await client.get('/drafts');
+    final epoch = DateTime.utc(1970);
+    // Saved within the same second, the later has the higher id.
+    final all = [for (final resource in document.data) FlarumDraft.fromResource(resource)]
+      ..sort((a, b) => switch ((b.updatedAt ?? epoch).compareTo(a.updatedAt ?? epoch)) {
+            0 => (int.tryParse(b.id) ?? 0).compareTo(int.tryParse(a.id) ?? 0),
+            final order => order,
+          });
+    return FlarumPage(all, offset: 0, hasMore: false, total: all.length);
+  }
+
+  /// Saves a draft, or draft [id] again: a reply to [discussionId], or a new discussion with its
+  /// [title] and [tagIds], or a private one with [recipientIds]. [content] mustn't be empty (2.0
+  /// refuses it). On 1.x a saved draft's title and text can't be emptied, only changed.
+  Future<FlarumDraft> saveDraft({
+    String? id,
+    String? title,
+    required String content,
+    String? discussionId,
+    List<String> tagIds = const [],
+    List<String> recipientIds = const [],
+  }) async {
+    final relationships =
+        FlarumDraft.relationshipsFor(discussionId: discussionId, tagIds: tagIds, recipientIds: recipientIds);
+    final v2 = await version() == FlarumVersion.v2;
+    final body = {
+      'data': {
+        'type': 'drafts',
+        if (id != null) 'id': id,
+        'attributes': {
+          if (title != null && title.isNotEmpty) 'title': title,
+          'content': content,
+          // 2.0 keeps them as an attribute, and needs one on create, empty or not.
+          if (v2) 'relationships': relationships,
+        },
+        // 1.x takes them as JSON:API's own (and leaves a draft's as they were when there are none).
+        if (!v2 && relationships.isNotEmpty) 'relationships': relationships,
+      },
+    };
+    final document = id == null ? await client.post('/drafts', body) : await client.patch('/drafts/$id', body);
+    return FlarumDraft.fromResource(document.single);
+  }
+
+  /// Deletes draft [id]: the writer posted it, or threw it away.
+  Future<void> deleteDraft(String id) => client.delete('/drafts/$id');
+
+  // ---- fof/polls: polls belong to posts, and a thread's posts come with theirs. ----
+
+  /// fof/polls' routes: `/fof/polls` on 1.x, `/polls` on 2.0.
+  Future<String> _pollsPath() async => await version() == FlarumVersion.v2 ? '/polls' : '/fof/polls';
+
+  /// Votes in poll [id] for [optionIds], the reader's whole choice: an empty list takes their vote
+  /// back, another set changes it (`canChangeVote`). Each id once: the forum would count a
+  /// repeated one twice. The poll as it stands after, with the reader's votes and, once they've
+  /// voted, its results.
+  Future<FlarumPoll> votePoll(String id, List<String> optionIds) async {
+    final document = await client.patch('${await _pollsPath()}/$id/votes', {
+      'data': {'optionIds': optionIds.toSet().toList()},
+    });
+    return FlarumPoll.fromResource(document.single, document);
+  }
+
+  /// Who voted for what in poll [id], for a reader who may see it (`canSeeVoters`: a public poll
+  /// whose results they see).
+  Future<List<FlarumPollVote>> pollVotes(String id) async {
+    final document = await client.get('${await _pollsPath()}/$id', query: {'include': 'votes,votes.user,votes.option'});
+    return [
+      for (final vote in document.findAll(document.single.toMany('votes')))
+        if (vote.toOne('option')?.id ?? vote.attributes.string('optionId') case final optionId?)
+          FlarumPollVote(
+            optionId: optionId,
+            user: switch (document.find(vote.toOne('user'))) {
+              final user? => FlarumUser.fromResource(user),
+              null => null,
+            },
+          ),
+    ];
+  }
+
   Future<String> _policiesPath() async => await version() == FlarumVersion.v2 ? '/fof-terms-policies' : '/fof/terms/policies';
 
   /// Accepts policy [id] (fof/terms) for the reader, which gives them back their permissions once

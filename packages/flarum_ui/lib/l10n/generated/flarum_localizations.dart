@@ -1624,6 +1624,246 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get errorUnknown;
+
+  /// Under a poll: how many votes it has, when the reader may see the results.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 vote} other{{count} votes}}'**
+  String pollVotes(int count);
+
+  /// Under a poll where several answers may be chosen: how many.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Choose 1} other{Choose up to {count}}}'**
+  String pollChooseUpTo(int count);
+
+  /// Under a poll whose voting has closed.
+  ///
+  /// In en, this message translates to:
+  /// **'Voting has closed'**
+  String get pollEnded;
+
+  /// Under a poll: when voting closes (a date and time).
+  ///
+  /// In en, this message translates to:
+  /// **'Closes {date}'**
+  String pollEndsOn(String date);
+
+  /// Under a poll whose results the reader sees only once they have voted.
+  ///
+  /// In en, this message translates to:
+  /// **'The results show once you vote.'**
+  String get pollResultsAfterVoting;
+
+  /// Under a poll whose results stay hidden until voting closes, after the reader voted.
+  ///
+  /// In en, this message translates to:
+  /// **'The results show when voting closes.'**
+  String get pollResultsWhenClosed;
+
+  /// Button: sends the answers chosen in a multiple-choice poll.
+  ///
+  /// In en, this message translates to:
+  /// **'Vote'**
+  String get pollVote;
+
+  /// Button under a poll the reader voted in: takes their vote back.
+  ///
+  /// In en, this message translates to:
+  /// **'Take back my vote'**
+  String get pollRemoveVote;
+
+  /// Button under a public poll: lists who voted for what.
+  ///
+  /// In en, this message translates to:
+  /// **'See who voted'**
+  String get pollSeeVoters;
+
+  /// The voters sheet of a poll nobody has voted in.
+  ///
+  /// In en, this message translates to:
+  /// **'No votes yet.'**
+  String get pollNoVotes;
+
+  /// The poll editor's title.
+  ///
+  /// In en, this message translates to:
+  /// **'Poll'**
+  String get poll;
+
+  /// Poll editor: Done with no question.
+  ///
+  /// In en, this message translates to:
+  /// **'Write the question.'**
+  String get pollNeedsQuestion;
+
+  /// Poll editor: Done with fewer than two answers.
+  ///
+  /// In en, this message translates to:
+  /// **'Give at least two answers.'**
+  String get pollNeedsAnswers;
+
+  /// Poll editor: the closing time chosen has passed.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a closing time in the future.'**
+  String get pollEndInPast;
+
+  /// Poll editor: the question field's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get pollQuestion;
+
+  /// Poll editor: an answer field's label, numbered from 1.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer {number}'**
+  String pollAnswer(int number);
+
+  /// Poll editor: tooltip of the button that removes an answer.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this answer'**
+  String get pollRemoveAnswer;
+
+  /// Poll editor: adds another answer field.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an answer'**
+  String get pollAddAnswer;
+
+  /// Poll editor switch: voters may choose several answers.
+  ///
+  /// In en, this message translates to:
+  /// **'Voters may choose more than one'**
+  String get pollMultipleChoice;
+
+  /// Poll editor: how many answers a voter may choose, in a multiple-choice poll.
+  ///
+  /// In en, this message translates to:
+  /// **'Choices allowed'**
+  String get pollChoicesAllowed;
+
+  /// Poll editor: no limit on how many answers a voter may choose.
+  ///
+  /// In en, this message translates to:
+  /// **'Any number'**
+  String get pollAnyNumber;
+
+  /// Poll editor switch: who voted for which answer is shown.
+  ///
+  /// In en, this message translates to:
+  /// **'Show who voted for what'**
+  String get pollPublic;
+
+  /// Poll editor switch: voters may change their vote.
+  ///
+  /// In en, this message translates to:
+  /// **'Voters may change their vote'**
+  String get pollAllowChangeVote;
+
+  /// Poll editor: when voting closes.
+  ///
+  /// In en, this message translates to:
+  /// **'Voting closes'**
+  String get pollCloses;
+
+  /// Poll editor: voting never closes.
+  ///
+  /// In en, this message translates to:
+  /// **'Never'**
+  String get pollNeverCloses;
+
+  /// Poll editor switch: results stay hidden until voting closes.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide the results until voting closes'**
+  String get pollHideVotes;
+
+  /// Poll editor: why hiding the results is off (it needs a closing time).
+  ///
+  /// In en, this message translates to:
+  /// **'Choose when voting closes first.'**
+  String get pollHideVotesNeedsEnd;
+
+  /// New discussion composer: adds a poll (fof/polls).
+  ///
+  /// In en, this message translates to:
+  /// **'Add a poll'**
+  String get addPoll;
+
+  /// New discussion composer: tooltip of the poll's chip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit the poll'**
+  String get editPoll;
+
+  /// New discussion composer: removes the poll.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the poll'**
+  String get removePoll;
+
+  /// After Save draft when closing the composer.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft saved.'**
+  String get draftSaved;
+
+  /// After Save draft for a new discussion with a poll: fof/drafts has nowhere to keep it.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft saved, without the poll: drafts don\'t keep polls.'**
+  String get draftSavedWithoutPoll;
+
+  /// Save draft with no text: the forum refuses an empty draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Write something to save it as a draft.'**
+  String get draftNeedsText;
+
+  /// The reader's drafts (fof/drafts): the Account entry and the page's title.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts'**
+  String get drafts;
+
+  /// The drafts page couldn't load.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your drafts'**
+  String get draftsLoadFailed;
+
+  /// The drafts page with none. The quoted button is the composer's close prompt's Save draft.
+  ///
+  /// In en, this message translates to:
+  /// **'No drafts. Close a post you\'re writing and choose Save draft to keep it here.'**
+  String get noDrafts;
+
+  /// A reply draft in the drafts list: the discussion it replies to.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply to {title}'**
+  String draftReplyTo(String title);
+
+  /// A new-discussion draft without a title, in the drafts list.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled discussion'**
+  String get draftUntitled;
+
+  /// Asked before deleting a draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this draft?'**
+  String get deleteDraftQuestion;
+
+  /// Deletes a draft from the drafts list.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete draft'**
+  String get deleteDraft;
 }
 
 class _FlarumLocalizationsDelegate

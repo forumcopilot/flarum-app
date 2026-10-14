@@ -2,8 +2,8 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// A forum without flarum/mentions or flarum/tags refuses a request that includes their
-/// relationships (400 invalid_parameter), as some census forums do.
+/// A forum without flarum/mentions, flarum/tags or fof/polls refuses a request that includes their
+/// relationships (400 invalid_parameter), as some census forums do, without saying which.
 void main() {
   const refused = (400, {
     'errors': [
@@ -18,15 +18,31 @@ void main() {
   FlarumApi api(ScriptedAdapter adapter) => FlarumApi(FlarumClient(FixtureForum.baseUrl, dio: adapter.dio()));
   String? include(ScriptedAdapter adapter, int i) => adapter.requests[i].queryParameters['include'] as String?;
 
-  test('posts without flarum/mentions: sent again without mentionedBy, which stays off', () async {
-    final adapter = ScriptedAdapter([refused, noPosts, noPosts]);
+  const pollIncludes = 'polls,polls.options,polls.myVotes,polls.myVotes.option';
+
+  test('posts without flarum/mentions: each extension tried once, and only mentionedBy stays off', () async {
+    // Refused; without any extension's; mentions alone, refused; likes alone; polls alone; both.
+    final adapter = ScriptedAdapter([refused, noPosts, refused, noPosts, noPosts, noPosts, noPosts]);
     final forum = api(adapter);
     await forum.posts('1');
     expect(include(adapter, 0), contains('mentionedBy'));
     expect(include(adapter, 1), 'user,discussion');
+    expect(include(adapter, 2), 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion');
+    expect(include(adapter, 3), 'user,discussion,likes');
+    expect(include(adapter, 4), 'user,discussion,$pollIncludes');
+    expect(include(adapter, 5), 'user,discussion,likes,$pollIncludes');
     await forum.postsNear('1', 5);
-    expect(include(adapter, 2), 'user,discussion', reason: 'no second refusal');
-    expect(adapter.requests, hasLength(3));
+    expect(include(adapter, 6), 'user,discussion,likes,$pollIncludes', reason: 'no second refusal');
+    expect(adapter.requests, hasLength(7));
+  });
+
+  test('posts without fof/polls or flarum/likes: one extension accepted is the answer already', () async {
+    final adapter = ScriptedAdapter([refused, noPosts, noPosts, refused, refused, noPosts]);
+    final forum = api(adapter);
+    await forum.posts('1');
+    expect(adapter.requests, hasLength(5));
+    await forum.posts('1');
+    expect(include(adapter, 5), 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion');
   });
 
   test('discussions without flarum/tags: sent again without tags', () async {

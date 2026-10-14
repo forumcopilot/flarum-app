@@ -7,7 +7,7 @@
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "50",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -60,6 +60,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -126,6 +129,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -188,6 +194,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -254,6 +263,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -316,6 +328,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -382,6 +397,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -444,6 +462,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -510,6 +531,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -572,6 +596,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -638,6 +665,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -700,6 +730,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -766,6 +799,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -828,6 +864,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -894,6 +933,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -956,6 +998,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1022,6 +1067,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1084,6 +1132,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1150,6 +1201,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1212,6 +1266,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1278,6 +1335,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1340,6 +1400,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1406,6 +1469,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1468,6 +1534,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1534,6 +1603,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1596,6 +1668,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1662,6 +1737,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1724,6 +1802,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1790,6 +1871,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1852,6 +1936,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -1918,6 +2005,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -1980,6 +2070,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2046,6 +2139,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2108,6 +2204,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2174,6 +2273,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2236,6 +2338,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2302,6 +2407,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2364,6 +2472,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2430,6 +2541,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2492,6 +2606,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2558,6 +2675,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2620,6 +2740,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2686,6 +2809,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2748,6 +2874,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2814,6 +2943,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -2876,6 +3008,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -2942,6 +3077,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -3004,6 +3142,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -3070,6 +3211,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -3132,6 +3276,9 @@
             "data": null
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           },
           "mentionedBy": {
@@ -3198,6 +3345,9 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
@@ -3248,7 +3398,7 @@
           "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectBestAnswer": false,
           "hasBestAnswer": false,
@@ -3313,7 +3463,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 0,
           "commentCount": 23,
-          "lastSeenAt": "2026-10-13T17:51:53+00:00",
+          "lastSeenAt": "2026-10-14T01:07:51+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -3345,8 +3495,8 @@
           "slug": "bob",
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
-          "commentCount": 24,
-          "lastSeenAt": "2026-10-13T17:51:54+00:00",
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-14T01:07:52+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -3381,7 +3531,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 38,
-          "lastSeenAt": "2026-10-13T17:54:34+00:00",
+          "lastSeenAt": "2026-10-14T01:09:10+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -3417,8 +3567,8 @@
       }
     },
     "links": {
-      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Boffset%5D=50&page%5Blimit%5D=50&sort=number",
-      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes&page%5Boffset%5D=50&page%5Blimit%5D=50&sort=number"
+      "last": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option&page%5Boffset%5D=50&page%5Blimit%5D=50&sort=number",
+      "next": "http://127.0.0.1:8082/posts?filter%5Bdiscussion%5D=6&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option&page%5Boffset%5D=50&page%5Blimit%5D=50&sort=number"
     },
     "jsonapi": {
       "version": "1.1"

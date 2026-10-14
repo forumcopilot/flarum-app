@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import '../attributes.dart';
 import '../json_api.dart';
 import 'policy.dart';
@@ -141,6 +143,12 @@ class FlarumForumInfo {
 
   /// The reader's dialogs with messages they haven't read (flarum/messages, 2.0). Null without it.
   int? get unreadDialogCount => actorAttributes.integer('messageCount');
+
+  /// The reader's saved drafts (fof/drafts). Null without it.
+  int? get draftCount => actorAttributes.integer('draftCount');
+
+  /// The most answers a poll may have (fof/polls; the web's form allows at least two).
+  int get pollMaxOptions => math.max(2, attributes.integer('pollMaxOptions') ?? 10);
 
   /// The policies the reader must accept before they may post again: until they do, the forum
   /// gives them a guest's permissions.

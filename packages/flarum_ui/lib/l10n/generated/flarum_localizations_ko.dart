@@ -966,4 +966,145 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get errorUnknown => '문제가 발생했습니다. 다시 시도하세요.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count표',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '최대 $count개까지 선택',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => '투표가 마감되었습니다';
+
+  @override
+  String pollEndsOn(String date) {
+    return '$date 마감';
+  }
+
+  @override
+  String get pollResultsAfterVoting => '투표하면 결과를 볼 수 있습니다.';
+
+  @override
+  String get pollResultsWhenClosed => '투표가 마감되면 결과를 볼 수 있습니다.';
+
+  @override
+  String get pollVote => '투표하기';
+
+  @override
+  String get pollRemoveVote => '내 투표 취소';
+
+  @override
+  String get pollSeeVoters => '투표한 사람 보기';
+
+  @override
+  String get pollNoVotes => '아직 투표가 없습니다.';
+
+  @override
+  String get poll => '투표';
+
+  @override
+  String get pollNeedsQuestion => '질문을 입력하세요.';
+
+  @override
+  String get pollNeedsAnswers => '답변을 두 개 이상 입력하세요.';
+
+  @override
+  String get pollEndInPast => '마감 시간은 미래로 선택하세요.';
+
+  @override
+  String get pollQuestion => '질문';
+
+  @override
+  String pollAnswer(int number) {
+    return '답변 $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => '이 답변 삭제';
+
+  @override
+  String get pollAddAnswer => '답변 추가';
+
+  @override
+  String get pollMultipleChoice => '여러 개 선택 허용';
+
+  @override
+  String get pollChoicesAllowed => '선택 가능 개수';
+
+  @override
+  String get pollAnyNumber => '제한 없음';
+
+  @override
+  String get pollPublic => '누가 무엇에 투표했는지 표시';
+
+  @override
+  String get pollAllowChangeVote => '투표 변경 허용';
+
+  @override
+  String get pollCloses => '투표 마감';
+
+  @override
+  String get pollNeverCloses => '없음';
+
+  @override
+  String get pollHideVotes => '마감 전까지 결과 숨기기';
+
+  @override
+  String get pollHideVotesNeedsEnd => '먼저 마감 시간을 선택하세요.';
+
+  @override
+  String get addPoll => '투표 추가';
+
+  @override
+  String get editPoll => '투표 편집';
+
+  @override
+  String get removePoll => '투표 삭제';
+
+  @override
+  String get draftSaved => '임시글을 저장했습니다.';
+
+  @override
+  String get draftSavedWithoutPoll => '투표 없이 임시글을 저장했습니다. 임시글에는 투표가 저장되지 않습니다.';
+
+  @override
+  String get draftNeedsText => '임시글로 저장하려면 내용을 입력하세요.';
+
+  @override
+  String get drafts => '임시글';
+
+  @override
+  String get draftsLoadFailed => '임시글을 불러오지 못했습니다';
+
+  @override
+  String get noDrafts =>
+      '임시글이 없습니다. 작성 중인 글을 닫을 때 \'임시 저장\'을(를) 선택하면 여기에 보관됩니다.';
+
+  @override
+  String draftReplyTo(String title) {
+    return '\'$title\'에 대한 답글';
+  }
+
+  @override
+  String get draftUntitled => '제목 없는 토론';
+
+  @override
+  String get deleteDraftQuestion => '이 임시글을 삭제할까요?';
+
+  @override
+  String get deleteDraft => '임시글 삭제';
 }

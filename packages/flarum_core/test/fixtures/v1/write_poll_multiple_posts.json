@@ -1,0 +1,208 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[discussion]": "90",
+      "sort": "number",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=90&sort=number&page%5Blimit%5D=20&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option"
+    },
+    "data": [
+      {
+        "type": "posts",
+        "id": "350",
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Which do you read on?</p>",
+          "renderFailed": false,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "mentionedByCount": 0,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReactionIdentifier": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "likesCount": 0
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "90"
+            }
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "likes": {
+            "data": []
+          },
+          "polls": {
+            "data": [
+              {
+                "type": "polls",
+                "id": "4"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:52:27+00:00",
+          "discussionCount": 3,
+          "commentCount": 27,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-14T01:21:01+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "90",
+        "attributes": {
+          "title": "A multiple-choice poll from the app",
+          "slug": "90-a-multiple-choice-poll-from-the-app",
+          "isApproved": true,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null
+        }
+      },
+      {
+        "type": "polls",
+        "id": "4",
+        "attributes": {
+          "question": "Which do you use?",
+          "subtitle": "",
+          "hasEnded": false,
+          "allowMultipleVotes": true,
+          "maxVotes": 0,
+          "endDate": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:11+00:00",
+          "canVote": true,
+          "canEdit": false,
+          "canDelete": false,
+          "canSeeVoters": false,
+          "canChangeVote": true,
+          "isGlobal": false,
+          "image": null,
+          "imageUrl": null,
+          "imageAlt": null,
+          "publicPoll": false,
+          "publishedAt": "2026-10-14T01:22:11+00:00",
+          "scheduledPublishAt": null,
+          "isDraft": false,
+          "canPublish": false,
+          "canUnpublish": false
+        },
+        "relationships": {
+          "options": {
+            "data": [
+              {
+                "type": "poll_options",
+                "id": "10"
+              },
+              {
+                "type": "poll_options",
+                "id": "11"
+              },
+              {
+                "type": "poll_options",
+                "id": "12"
+              }
+            ]
+          },
+          "myVotes": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "10",
+        "attributes": {
+          "answer": "Android",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:11+00:00",
+          "voteCount": null
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "11",
+        "attributes": {
+          "answer": "iOS",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:11+00:00",
+          "voteCount": null
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "12",
+        "attributes": {
+          "answer": "Desktop",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:11+00:00",
+          "voteCount": null
+        }
+      }
+    ]
+  }
+}

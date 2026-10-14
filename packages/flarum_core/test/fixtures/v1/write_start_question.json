@@ -29,20 +29,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "74",
+      "id": "86",
       "attributes": {
         "title": "A question from the app",
-        "slug": "74-a-question-from-the-app",
+        "slug": "86-a-question-from-the-app",
         "commentCount": 1,
         "participantCount": 1,
-        "createdAt": "2026-10-13T20:11:21+00:00",
-        "lastPostedAt": "2026-10-13T20:11:21+00:00",
+        "createdAt": "2026-10-14T01:21:18+00:00",
+        "lastPostedAt": "2026-10-14T01:21:18+00:00",
         "lastPostNumber": 1,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": true,
-        "lastReadAt": "2026-10-13T20:11:21+00:00",
+        "lastReadAt": "2026-10-14T01:21:18+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -55,7 +55,7 @@
         "isPrivateDiscussion": false,
         "canSeeReactions": false,
         "hasPoll": false,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "isSticky": false,
         "canSticky": false,
@@ -67,7 +67,7 @@
           "data": [
             {
               "type": "posts",
-              "id": "307"
+              "id": "340"
             }
           ]
         },
@@ -86,13 +86,13 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "307"
+            "id": "340"
           }
         },
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "307"
+            "id": "340"
           }
         },
         "tags": {
@@ -114,10 +114,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "307",
+        "id": "340",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T20:11:21+00:00",
+          "createdAt": "2026-10-14T01:21:18+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": false,
@@ -140,7 +140,7 @@
             "6": 0
           },
           "userReactionIdentifier": null,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectAsBestAnswer": false,
           "canLike": true,
@@ -173,7 +173,7 @@
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-13T20:11:21+00:00",
+          "lastPostedAt": "2026-10-14T01:21:18+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

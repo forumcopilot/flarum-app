@@ -1,0 +1,65 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/discussions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": "A poll from the app",
+          "content": "Which do you read on?",
+          "poll": {
+            "question": "Phone or tablet?",
+            "subtitle": "",
+            "endDate": "2026-10-13T01:21:59.292028Z",
+            "publicPoll": false,
+            "hideVotes": false,
+            "allowChangeVote": true,
+            "allowMultipleVotes": false,
+            "maxVotes": 0,
+            "options": [
+              {
+                "answer": "Phone",
+                "imageUrl": null
+              },
+              {
+                "answer": "Tablet",
+                "imageUrl": null
+              },
+              {
+                "answer": "Both",
+                "imageUrl": null
+              }
+            ]
+          }
+        },
+        "relationships": {
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": "1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "detail": "The end date must be a date after now.",
+        "source": {
+          "pointer": "/data/attributes/endDate"
+        }
+      }
+    ]
+  }
+}

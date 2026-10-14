@@ -1,0 +1,101 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/fof/polls/3",
+    "query": {
+      "include": "votes,votes.user,votes.option"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "polls",
+      "id": "3",
+      "attributes": {
+        "question": "Phone or tablet?",
+        "subtitle": "",
+        "hasEnded": false,
+        "allowMultipleVotes": false,
+        "maxVotes": 0,
+        "endDate": null,
+        "createdAt": "2026-10-14T01:21:59+00:00",
+        "updatedAt": "2026-10-14T01:22:00+00:00",
+        "canVote": true,
+        "canEdit": false,
+        "canDelete": false,
+        "canSeeVoters": true,
+        "canChangeVote": true,
+        "isGlobal": false,
+        "image": null,
+        "imageUrl": null,
+        "imageAlt": null,
+        "publicPoll": true,
+        "voteCount": 1,
+        "publishedAt": "2026-10-14T01:21:59+00:00",
+        "scheduledPublishAt": null,
+        "isDraft": false,
+        "canPublish": false,
+        "canUnpublish": false
+      },
+      "relationships": {
+        "votes": {
+          "data": [
+            {
+              "type": "poll_votes",
+              "id": "6"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "poll_votes",
+        "id": "6",
+        "attributes": {
+          "pollId": 3,
+          "optionId": 8,
+          "createdAt": "2026-10-14T01:22:00+00:00",
+          "updatedAt": "2026-10-14T01:22:00+00:00"
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          },
+          "option": {
+            "data": {
+              "type": "poll_options",
+              "id": "8"
+            }
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "8",
+        "attributes": {
+          "answer": "Tablet",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:21:59+00:00",
+          "updatedAt": "2026-10-14T01:22:00+00:00",
+          "voteCount": 1
+        }
+      }
+    ]
+  }
+}

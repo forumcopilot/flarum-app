@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/posts/361",
+    "path": "/posts/394",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "posts",
-        "id": "361",
+        "id": "394",
         "attributes": {
           "bookmarked": false
         }
@@ -19,13 +19,13 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "361",
+      "id": "394",
       "links": {
-        "self": "/posts/361"
+        "self": "/posts/394"
       },
       "attributes": {
         "number": 2,
-        "createdAt": "2026-10-13T20:12:13+00:00",
+        "createdAt": "2026-10-14T01:22:36+00:00",
         "contentType": "comment",
         "content": "The one who asked chooses it.",
         "contentHtml": "<p>The one who asked chooses it.</p>",
@@ -48,7 +48,7 @@
           "6": 0
         },
         "userReaction": null,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectAsBestAnswer": false,
         "canLike": true,
@@ -74,7 +74,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "82"
+            "id": "94"
           }
         }
       }
@@ -82,23 +82,23 @@
     "included": [
       {
         "type": "discussions",
-        "id": "82",
+        "id": "94",
         "links": {
-          "self": "/discussions/82"
+          "self": "/discussions/94"
         },
         "attributes": {
           "title": "A question from the app",
-          "slug": "82-a-question-from-the-app",
+          "slug": "94-a-question-from-the-app",
           "commentCount": 2,
           "participantCount": 2,
-          "createdAt": "2026-10-13T20:12:13+00:00",
-          "lastPostedAt": "2026-10-13T20:12:13+00:00",
+          "createdAt": "2026-10-14T01:22:36+00:00",
+          "lastPostedAt": "2026-10-14T01:22:36+00:00",
           "lastPostNumber": 2,
           "canReply": true,
           "canRename": false,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-13T20:12:13+00:00",
+          "lastReadAt": "2026-10-14T01:22:36+00:00",
           "lastReadPostNumber": 2,
           "canTag": false,
           "isApproved": true,
@@ -111,7 +111,7 @@
           "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": true,
           "canSelectBestAnswer": false,
           "hasBestAnswer": false,
@@ -131,7 +131,7 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "360"
+              "id": "393"
             }
           },
           "lastPostedUser": {
@@ -143,7 +143,7 @@
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "361"
+              "id": "394"
             }
           },
           "hideUser": {

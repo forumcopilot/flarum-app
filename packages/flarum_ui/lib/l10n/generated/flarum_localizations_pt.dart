@@ -1000,4 +1000,151 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Algo deu errado. Tente novamente.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count votos',
+      one: '1 voto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Escolha até $count',
+      one: 'Escolha 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'A votação foi encerrada';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Encerra em $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting =>
+      'Você verá os resultados depois de votar.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Você verá os resultados quando a votação encerrar.';
+
+  @override
+  String get pollVote => 'Votar';
+
+  @override
+  String get pollRemoveVote => 'Retirar meu voto';
+
+  @override
+  String get pollSeeVoters => 'Ver quem votou';
+
+  @override
+  String get pollNoVotes => 'Ainda não há votos.';
+
+  @override
+  String get poll => 'Enquete';
+
+  @override
+  String get pollNeedsQuestion => 'Escreva a pergunta.';
+
+  @override
+  String get pollNeedsAnswers => 'Informe pelo menos duas respostas.';
+
+  @override
+  String get pollEndInPast => 'Escolha um encerramento no futuro.';
+
+  @override
+  String get pollQuestion => 'Pergunta';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Resposta $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Remover esta resposta';
+
+  @override
+  String get pollAddAnswer => 'Adicionar uma resposta';
+
+  @override
+  String get pollMultipleChoice => 'Permitir mais de uma escolha';
+
+  @override
+  String get pollChoicesAllowed => 'Escolhas permitidas';
+
+  @override
+  String get pollAnyNumber => 'Sem limite';
+
+  @override
+  String get pollPublic => 'Mostrar quem votou em quê';
+
+  @override
+  String get pollAllowChangeVote => 'Permitir mudar o voto';
+
+  @override
+  String get pollCloses => 'A votação encerra';
+
+  @override
+  String get pollNeverCloses => 'Nunca';
+
+  @override
+  String get pollHideVotes => 'Ocultar os resultados até o encerramento';
+
+  @override
+  String get pollHideVotesNeedsEnd =>
+      'Escolha primeiro quando a votação encerra.';
+
+  @override
+  String get addPoll => 'Adicionar uma enquete';
+
+  @override
+  String get editPoll => 'Editar a enquete';
+
+  @override
+  String get removePoll => 'Remover a enquete';
+
+  @override
+  String get draftSaved => 'Rascunho salvo.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Rascunho salvo, sem a enquete: rascunhos não guardam enquetes.';
+
+  @override
+  String get draftNeedsText => 'Escreva algo para salvar como rascunho.';
+
+  @override
+  String get drafts => 'Rascunhos';
+
+  @override
+  String get draftsLoadFailed => 'Não foi possível carregar seus rascunhos';
+
+  @override
+  String get noDrafts =>
+      'Nenhum rascunho. Feche uma publicação que você está escrevendo e escolha “Salvar rascunho” para guardá-la aqui.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Resposta a $title';
+  }
+
+  @override
+  String get draftUntitled => 'Discussão sem título';
+
+  @override
+  String get deleteDraftQuestion => 'Excluir este rascunho?';
+
+  @override
+  String get deleteDraft => 'Excluir rascunho';
 }

@@ -1,0 +1,327 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/posts",
+    "query": {
+      "filter[discussion]": "98",
+      "sort": "number",
+      "page[offset]": "0",
+      "page[limit]": "20",
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "posts",
+        "id": "403",
+        "links": {
+          "self": "/posts/403"
+        },
+        "attributes": {
+          "number": 1,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "contentType": "comment",
+          "contentHtml": "<p>Which do you read on?</p>",
+          "renderFailed": null,
+          "editedAt": null,
+          "canEdit": false,
+          "canDelete": false,
+          "canHide": false,
+          "canFlag": true,
+          "isApproved": true,
+          "canApprove": false,
+          "canReact": true,
+          "canDeletePostReactions": false,
+          "reactionCounts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0
+          },
+          "userReaction": null,
+          "canStartPoll": false,
+          "bookmarked": false,
+          "canSelectAsBestAnswer": false,
+          "canLike": true,
+          "mentionedByCount": 0,
+          "likesCount": 0
+        },
+        "relationships": {
+          "editedUser": {
+            "data": null
+          },
+          "hiddenUser": {
+            "data": null
+          },
+          "likes": {
+            "data": []
+          },
+          "polls": {
+            "data": [
+              {
+                "type": "polls",
+                "id": "4"
+              }
+            ]
+          },
+          "mentionedBy": {
+            "data": []
+          },
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "98"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "polls",
+        "id": "4",
+        "links": {
+          "self": "/polls/4"
+        },
+        "attributes": {
+          "question": "Which do you use?",
+          "subtitle": "",
+          "hasEnded": false,
+          "allowMultipleVotes": true,
+          "maxVotes": 2,
+          "endDate": null,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "updatedAt": "2026-10-14T01:23:42+00:00",
+          "canVote": true,
+          "canEdit": false,
+          "canDelete": false,
+          "canSeeVoters": false,
+          "canChangeVote": true,
+          "isGlobal": false,
+          "image": null,
+          "imageUrl": null,
+          "imageSrcset": null,
+          "imageAlt": null,
+          "publicPoll": false,
+          "isDraft": false,
+          "publishedAt": "2026-10-14T01:23:42+00:00",
+          "scheduledPublishAt": null,
+          "canPublish": false,
+          "canUnpublish": false
+        },
+        "relationships": {
+          "myVotes": {
+            "data": []
+          },
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "403"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "pollGroup": {
+            "data": null
+          },
+          "options": {
+            "data": [
+              {
+                "type": "poll_options",
+                "id": "10"
+              },
+              {
+                "type": "poll_options",
+                "id": "11"
+              },
+              {
+                "type": "poll_options",
+                "id": "12"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "10",
+        "links": {
+          "self": "/poll_options/10"
+        },
+        "attributes": {
+          "answer": "Android",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "updatedAt": "2026-10-14T01:23:42+00:00"
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "11",
+        "links": {
+          "self": "/poll_options/11"
+        },
+        "attributes": {
+          "answer": "iOS",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "updatedAt": "2026-10-14T01:23:42+00:00"
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "12",
+        "links": {
+          "self": "/poll_options/12"
+        },
+        "attributes": {
+          "answer": "Desktop",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "updatedAt": "2026-10-14T01:23:42+00:00"
+        }
+      },
+      {
+        "type": "discussions",
+        "id": "98",
+        "links": {
+          "self": "/discussions/98"
+        },
+        "attributes": {
+          "title": "A multiple-choice poll from the app",
+          "slug": "98-a-multiple-choice-poll-from-the-app",
+          "commentCount": 1,
+          "participantCount": 1,
+          "createdAt": "2026-10-14T01:23:42+00:00",
+          "lastPostedAt": "2026-10-14T01:23:42+00:00",
+          "lastPostNumber": 1,
+          "canReply": true,
+          "canRename": false,
+          "canDelete": false,
+          "canHide": false,
+          "canTag": false,
+          "isApproved": true,
+          "subscription": null,
+          "isPrivateDiscussion": false,
+          "canEditRecipients": false,
+          "canEditUserRecipients": false,
+          "canEditGroupRecipients": false,
+          "canMakePublic": false,
+          "canDownloadFiles": true,
+          "canSeeReactions": false,
+          "hasPoll": true,
+          "canStartPoll": true,
+          "bookmarked": false,
+          "canSelectBestAnswer": false,
+          "hasBestAnswer": false,
+          "bestAnswerSetAt": null,
+          "isSticky": false,
+          "canSticky": false,
+          "isLocked": false,
+          "canLock": false
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "firstPost": {
+            "data": {
+              "type": "posts",
+              "id": "403"
+            }
+          },
+          "lastPostedUser": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "lastPost": {
+            "data": {
+              "type": "posts",
+              "id": "403"
+            }
+          },
+          "mostRelevantPost": {
+            "data": null
+          },
+          "hideUser": {
+            "data": null
+          },
+          "bestAnswerPost": {
+            "data": null
+          },
+          "bestAnswerUser": {
+            "data": null
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 3,
+          "commentCount": 27,
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 1,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

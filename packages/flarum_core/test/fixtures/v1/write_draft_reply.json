@@ -1,0 +1,68 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/drafts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "drafts",
+        "attributes": {
+          "content": "A reply saved for later."
+        },
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "86"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "drafts",
+      "id": "4",
+      "attributes": {
+        "title": null,
+        "content": "A reply saved for later.",
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "86"
+            }
+          }
+        },
+        "extra": null,
+        "scheduledValidationError": null,
+        "scheduledFor": null,
+        "updatedAt": "2026-10-14T01:22:12+00:00"
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      }
+    ]
+  }
+}

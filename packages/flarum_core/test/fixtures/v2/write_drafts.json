@@ -1,0 +1,130 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/drafts",
+    "query": {
+      "sort": "-updatedAt",
+      "page[offset]": "0",
+      "page[limit]": "20"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "drafts",
+        "id": "6",
+        "links": {
+          "self": "/drafts/6"
+        },
+        "attributes": {
+          "title": "A private word saved for later",
+          "content": "For bob, when it is ready.",
+          "updatedAt": "2026-10-14T01:23:43+00:00",
+          "extra": null,
+          "relationships": {
+            "recipientUsers": {
+              "data": [
+                {
+                  "type": "users",
+                  "id": "3"
+                }
+              ]
+            }
+          },
+          "scheduledFor": null,
+          "scheduledValidationError": null,
+          "clearValidationError": null
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      },
+      {
+        "type": "drafts",
+        "id": "5",
+        "links": {
+          "self": "/drafts/5"
+        },
+        "attributes": {
+          "title": "A discussion saved for later",
+          "content": "Not ready to post yet.",
+          "updatedAt": "2026-10-14T01:23:43+00:00",
+          "extra": null,
+          "relationships": {
+            "tags": {
+              "data": [
+                {
+                  "type": "tags",
+                  "id": "1"
+                }
+              ]
+            }
+          },
+          "scheduledFor": null,
+          "scheduledValidationError": null,
+          "clearValidationError": null
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      },
+      {
+        "type": "drafts",
+        "id": "4",
+        "links": {
+          "self": "/drafts/4"
+        },
+        "attributes": {
+          "title": null,
+          "content": "A reply saved for later.",
+          "updatedAt": "2026-10-14T01:23:43+00:00",
+          "extra": null,
+          "relationships": {
+            "discussion": {
+              "data": {
+                "type": "discussions",
+                "id": "94"
+              }
+            }
+          },
+          "scheduledFor": null,
+          "scheduledValidationError": null,
+          "clearValidationError": null
+        },
+        "relationships": {
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          }
+        }
+      }
+    ],
+    "included": [],
+    "meta": {
+      "page": {
+        "total": 3,
+        "offset": 0,
+        "limit": 20
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

@@ -30,20 +30,20 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "75",
+      "id": "87",
       "attributes": {
         "title": "A private word from the app",
-        "slug": "75-a-private-word-from-the-app",
+        "slug": "87-a-private-word-from-the-app",
         "commentCount": 1,
         "participantCount": 1,
-        "createdAt": "2026-10-13T20:11:36+00:00",
-        "lastPostedAt": "2026-10-13T20:11:36+00:00",
+        "createdAt": "2026-10-14T01:21:33+00:00",
+        "lastPostedAt": "2026-10-14T01:21:33+00:00",
         "lastPostNumber": 1,
         "canReply": true,
         "canRename": true,
         "canDelete": false,
         "canHide": true,
-        "lastReadAt": "2026-10-13T20:11:36+00:00",
+        "lastReadAt": "2026-10-14T01:21:34+00:00",
         "lastReadPostNumber": 1,
         "isApproved": true,
         "hasBestAnswer": false,
@@ -57,7 +57,7 @@
         "isPrivateDiscussion": true,
         "canSeeReactions": false,
         "hasPoll": false,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "isSticky": false,
         "canSticky": false,
@@ -69,11 +69,11 @@
           "data": [
             {
               "type": "posts",
-              "id": "309"
+              "id": "342"
             },
             {
               "type": "posts",
-              "id": "310"
+              "id": "343"
             }
           ]
         },
@@ -92,13 +92,13 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "309"
+            "id": "342"
           }
         },
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "309"
+            "id": "342"
           }
         },
         "tags": {
@@ -124,10 +124,10 @@
     "included": [
       {
         "type": "posts",
-        "id": "309",
+        "id": "342",
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T20:11:36+00:00",
+          "createdAt": "2026-10-14T01:21:33+00:00",
           "contentType": "comment",
           "contentHtml": "<p>Only bob and I can read this.</p>",
           "renderFailed": false,
@@ -150,7 +150,7 @@
             "6": 0
           },
           "userReactionIdentifier": null,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectAsBestAnswer": false,
           "canLike": true,
@@ -159,10 +159,10 @@
       },
       {
         "type": "posts",
-        "id": "310",
+        "id": "343",
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T20:11:36+00:00",
+          "createdAt": "2026-10-14T01:21:33+00:00",
           "contentType": "recipientsModified",
           "content": {
             "new": {

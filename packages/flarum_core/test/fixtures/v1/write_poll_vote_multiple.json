@@ -1,0 +1,151 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/fof/polls/4/votes",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "optionIds": [
+          "10",
+          "11"
+        ]
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "polls",
+      "id": "4",
+      "attributes": {
+        "question": "Which do you use?",
+        "subtitle": "",
+        "hasEnded": false,
+        "allowMultipleVotes": true,
+        "maxVotes": 0,
+        "endDate": null,
+        "createdAt": "2026-10-14T01:22:11+00:00",
+        "updatedAt": "2026-10-14T01:22:12+00:00",
+        "canVote": true,
+        "canEdit": false,
+        "canDelete": false,
+        "canSeeVoters": false,
+        "canChangeVote": true,
+        "isGlobal": false,
+        "image": null,
+        "imageUrl": null,
+        "imageAlt": null,
+        "publicPoll": false,
+        "voteCount": 2,
+        "publishedAt": "2026-10-14T01:22:11+00:00",
+        "scheduledPublishAt": null,
+        "isDraft": false,
+        "canPublish": false,
+        "canUnpublish": false
+      },
+      "relationships": {
+        "options": {
+          "data": [
+            {
+              "type": "poll_options",
+              "id": "10"
+            },
+            {
+              "type": "poll_options",
+              "id": "11"
+            },
+            {
+              "type": "poll_options",
+              "id": "12"
+            }
+          ]
+        },
+        "myVotes": {
+          "data": [
+            {
+              "type": "poll_votes",
+              "id": "7"
+            },
+            {
+              "type": "poll_votes",
+              "id": "8"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "poll_options",
+        "id": "10",
+        "attributes": {
+          "answer": "Android",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:12+00:00",
+          "voteCount": 1
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "11",
+        "attributes": {
+          "answer": "iOS",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:12+00:00",
+          "voteCount": 1
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "12",
+        "attributes": {
+          "answer": "Desktop",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:22:11+00:00",
+          "updatedAt": "2026-10-14T01:22:11+00:00",
+          "voteCount": 0
+        }
+      },
+      {
+        "type": "poll_votes",
+        "id": "7",
+        "attributes": {
+          "pollId": 4,
+          "optionId": 10,
+          "createdAt": "2026-10-14T01:22:12+00:00",
+          "updatedAt": "2026-10-14T01:22:12+00:00"
+        },
+        "relationships": {
+          "option": {
+            "data": {
+              "type": "poll_options",
+              "id": "10"
+            }
+          }
+        }
+      },
+      {
+        "type": "poll_votes",
+        "id": "8",
+        "attributes": {
+          "pollId": 4,
+          "optionId": 11,
+          "createdAt": "2026-10-14T01:22:12+00:00",
+          "updatedAt": "2026-10-14T01:22:12+00:00"
+        },
+        "relationships": {
+          "option": {
+            "data": {
+              "type": "poll_options",
+              "id": "11"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

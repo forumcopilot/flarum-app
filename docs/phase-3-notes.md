@@ -69,6 +69,57 @@ is on branch `phase-3`, started 13 October 2026 from `phase-2` at 39fbc95.
   and has the admin delete both; `FixtureForum` matches an upload by its files' names. The shrink
   and retry is tested with scripted refusals.
 
+### Drafts and polls (14 October 2026)
+
+Tung approved the two member permissions on 14 October; on both test forums members may now start
+polls (`discussion.polls.start`), vote (`discussion.polls.vote`), change their vote
+(`polls.changeVote`) and save drafts (`user.saveDrafts`, which moderators had).
+
+- **Polls (fof/polls 2.3.5 on 1.8, 3.0.0-rc.4 on 2.0).** A poll belongs to a post: a new
+  discussion's is on its first post (the web lets a reply have one too). A thread's posts bring
+  theirs (`polls,polls.options,polls.myVotes,polls.myVotes.option`: fof/polls adds them by default,
+  but only to a request that names no includes). The card under the post shows the question and
+  the answers; the results (bars and percentages) show once the reader may see them: after voting,
+  for members, who don't have "view results without voting". Voting is the web's: in a
+  single-choice poll a tap votes, a tap on another answer changes it, on the reader's own takes it
+  back; in a multiple-choice one each tap counts at once where votes can be changed, otherwise the
+  reader chooses and then taps Vote. A public poll lists who voted for what. Voting is `PATCH
+  …/polls/{id}/votes` (`/api/fof/polls` on 1.x, `/api/polls` on 2.0) with the reader's whole
+  choice as `optionIds` (none takes the vote back), each id once: the forum would count one sent
+  twice.
+- **Starting one.** Start a discussion offers Add a poll where the reader may (`canStartPolls`): the
+  question, two answers or more (up to the forum's `pollMaxOptions`), multiple choice (with how
+  many on 2.0: 1.x keeps "any number" whatever it's sent), public votes, changing votes, a closing
+  time and hiding the results until then. It goes with the discussion as its `poll` attribute; a
+  poll fof/polls refuses (a closing time past) refuses the discussion with a 422 naming the field.
+  The forum doesn't check the number of answers: the app does, as the web's form.
+- **Drafts (fof/drafts 1.2.14, 2.0.0).** Closing a composer with something written offers Save draft
+  (forum_kit's prompt) where the reader may (`canSaveDrafts`): a reply keeps its discussion, a new
+  discussion its title and tags, a private one its people. Account → Drafts lists them, the latest
+  first (with a count), and opens each in its composer; posting it deletes the draft, as the web
+  does (nothing on the forum does). Drafts aren't autosaved: the web saves them only on request too
+  unless the writer turns autosave on. A draft has no place for a poll (2.0 refuses an unknown
+  `poll`, 1.x keeps it in a 255-character column): a new discussion's poll isn't kept, and saving
+  says so.
+- **Version differences in drafts:** 1.x takes what a draft is for as JSON:API's own
+  `relationships`, 2.0 as an attribute named `relationships` (and needs one on create, `{}` if
+  nothing); 2.0 pages and sorts the list, 1.x sends all of it unsorted; on 1.x a saved draft's
+  title and text can't be emptied, only changed. 2.0 refuses a draft without text (the app asks
+  for some first).
+- **Includes:** a forum without fof/polls refuses a request naming `polls…` (400, without saying
+  which include: 1.x names none, 2.0 the first). The API now tries each extension's includes alone,
+  once per forum, and gives up only those refused, so a forum without polls keeps its mentions and
+  likes.
+- **SDK:** `votePollAsync` votes in the discussion's poll that has the options given; `FCPost.polls`
+  and the thread's `poll` (its first post's) carry them. `FlarumDraftProxy` maps fof/drafts to the
+  SDK's keys: `topic_<id>` for a reply, `new_topic`, `new_private_message`, each the latest of its
+  kind.
+- **Tests:** the write recorder has carol start a discussion with a poll (after one refused for
+  closing in the past) and a multiple-choice one; bob votes, changes his vote, sees who voted and
+  takes it back. carol saves three drafts, lists them, changes one and deletes them. The read
+  recorder now records only the fixtures named by `ONLY` when it's set: the thread's posts were
+  re-recorded with the poll includes (`ONLY='^posts_'`), keeping alice's other fixtures as they were.
+
 ## Milestone 4: safety and private discussions
 
 Drafts and polls (Milestone 3) wait for Tung's answer on member permissions: members on the test

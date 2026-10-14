@@ -9,6 +9,7 @@ import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../polls/poll_card.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
 import '../widgets/flarum_avatar.dart';
@@ -40,7 +41,8 @@ class PostTile extends StatelessWidget {
       this.onIgnore,
       this.onHide,
       this.onDeleteForever,
-      this.onApprove});
+      this.onApprove,
+      this.onPollChanged});
 
   final SiteContext site;
   final FlarumPost post;
@@ -93,6 +95,9 @@ class PostTile extends StatelessWidget {
   final VoidCallback? onHide;
   final VoidCallback? onDeleteForever;
   final VoidCallback? onApprove;
+
+  /// The post's poll after the reader voted in it (fof/polls); null where the reader can't vote.
+  final ValueChanged<FlarumPoll>? onPollChanged;
 
   bool get _hasMenu =>
       onReply != null ||
@@ -178,8 +183,10 @@ class PostTile extends StatelessWidget {
             Text(l10n.postHidden,
                 style: theme.textTheme.bodyMedium
                     ?.copyWith(fontStyle: FontStyle.italic, color: colorScheme.onSurfaceVariant))
-          else
+          else ...[
             _PostBody(site: site, html: post.contentHtml ?? '', callbacks: callbacks),
+            for (final poll in post.polls) PollCard(key: ValueKey('poll-${poll.id}'), site: site, poll: poll, onChanged: onPollChanged),
+          ],
           if (onGoToBestAnswer != null)
             Padding(
               padding: const EdgeInsets.only(top: DesignTokens.spacingS),

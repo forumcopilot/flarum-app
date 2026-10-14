@@ -998,4 +998,148 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Something went wrong. Please try again.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count votes',
+      one: '1 vote',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Choose up to $count',
+      one: 'Choose 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'Voting has closed';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Closes $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting => 'The results show once you vote.';
+
+  @override
+  String get pollResultsWhenClosed => 'The results show when voting closes.';
+
+  @override
+  String get pollVote => 'Vote';
+
+  @override
+  String get pollRemoveVote => 'Take back my vote';
+
+  @override
+  String get pollSeeVoters => 'See who voted';
+
+  @override
+  String get pollNoVotes => 'No votes yet.';
+
+  @override
+  String get poll => 'Poll';
+
+  @override
+  String get pollNeedsQuestion => 'Write the question.';
+
+  @override
+  String get pollNeedsAnswers => 'Give at least two answers.';
+
+  @override
+  String get pollEndInPast => 'Choose a closing time in the future.';
+
+  @override
+  String get pollQuestion => 'Question';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Answer $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Remove this answer';
+
+  @override
+  String get pollAddAnswer => 'Add an answer';
+
+  @override
+  String get pollMultipleChoice => 'Voters may choose more than one';
+
+  @override
+  String get pollChoicesAllowed => 'Choices allowed';
+
+  @override
+  String get pollAnyNumber => 'Any number';
+
+  @override
+  String get pollPublic => 'Show who voted for what';
+
+  @override
+  String get pollAllowChangeVote => 'Voters may change their vote';
+
+  @override
+  String get pollCloses => 'Voting closes';
+
+  @override
+  String get pollNeverCloses => 'Never';
+
+  @override
+  String get pollHideVotes => 'Hide the results until voting closes';
+
+  @override
+  String get pollHideVotesNeedsEnd => 'Choose when voting closes first.';
+
+  @override
+  String get addPoll => 'Add a poll';
+
+  @override
+  String get editPoll => 'Edit the poll';
+
+  @override
+  String get removePoll => 'Remove the poll';
+
+  @override
+  String get draftSaved => 'Draft saved.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Draft saved, without the poll: drafts don\'t keep polls.';
+
+  @override
+  String get draftNeedsText => 'Write something to save it as a draft.';
+
+  @override
+  String get drafts => 'Drafts';
+
+  @override
+  String get draftsLoadFailed => 'Couldn\'t load your drafts';
+
+  @override
+  String get noDrafts =>
+      'No drafts. Close a post you\'re writing and choose Save draft to keep it here.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Reply to $title';
+  }
+
+  @override
+  String get draftUntitled => 'Untitled discussion';
+
+  @override
+  String get deleteDraftQuestion => 'Delete this draft?';
+
+  @override
+  String get deleteDraft => 'Delete draft';
 }

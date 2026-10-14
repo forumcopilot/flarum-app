@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/discussions/82",
+    "path": "/discussions/94",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "discussions",
-        "id": "82",
+        "id": "94",
         "attributes": {
           "isHidden": true
         }
@@ -19,24 +19,24 @@
   "body": {
     "data": {
       "type": "discussions",
-      "id": "82",
+      "id": "94",
       "links": {
-        "self": "/discussions/82"
+        "self": "/discussions/94"
       },
       "attributes": {
         "title": "A question from the app, renamed",
-        "slug": "82-a-question-from-the-app-renamed",
+        "slug": "94-a-question-from-the-app-renamed",
         "commentCount": 2,
         "participantCount": 2,
-        "createdAt": "2026-10-13T20:12:13+00:00",
-        "lastPostedAt": "2026-10-13T20:12:13+00:00",
+        "createdAt": "2026-10-14T01:22:36+00:00",
+        "lastPostedAt": "2026-10-14T01:22:36+00:00",
         "lastPostNumber": 2,
         "canReply": true,
         "canRename": true,
         "canDelete": true,
         "canHide": true,
         "isHidden": null,
-        "hiddenAt": "2026-10-13T20:12:31+00:00",
+        "hiddenAt": "2026-10-14T01:23:04+00:00",
         "canTag": true,
         "isApproved": true,
         "subscription": null,
@@ -68,7 +68,7 @@
         "firstPost": {
           "data": {
             "type": "posts",
-            "id": "360"
+            "id": "393"
           }
         },
         "lastPostedUser": {
@@ -80,22 +80,22 @@
         "lastPost": {
           "data": {
             "type": "posts",
-            "id": "361"
+            "id": "394"
           }
         },
         "posts": {
           "data": [
             {
               "type": "posts",
-              "id": "360"
+              "id": "393"
             },
             {
               "type": "posts",
-              "id": "361"
+              "id": "394"
             },
             {
               "type": "posts",
-              "id": "367"
+              "id": "400"
             }
           ]
         },

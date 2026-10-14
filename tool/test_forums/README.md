@@ -65,6 +65,13 @@ check her state, or record only the fixtures you need and keep the others.
 FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json
 ```
 
+With `ONLY` set to a pattern (`ONLY='^posts_'`), the recorder records only the fixtures whose names
+match it and keeps the rest, which depend on alice's state as the seed left it.
+
+Since 14 October 2026 members may also start polls, vote and change their vote (fof/polls) and save
+drafts (fof/drafts) on both forums, as Tung approved for Phase 3; the write recorder's polls and
+drafts are deleted at its end (the polls go with their discussions).
+
 The composer's writes have their own recorder, which posts as carol and bob (leaving alice as
 seeded) in a discussion an admin deletes afterwards:
 

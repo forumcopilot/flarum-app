@@ -8,6 +8,7 @@ export 'src/sdk/flarum_bookmark_proxy.dart';
 export 'src/sdk/flarum_moderation_proxy.dart';
 export 'src/sdk/flarum_private_conversation_proxy.dart';
 export 'src/sdk/flarum_config_proxy.dart';
+export 'src/sdk/flarum_draft_proxy.dart';
 export 'src/sdk/flarum_extensions.dart';
 export 'src/sdk/flarum_forum.dart';
 export 'src/sdk/flarum_proxy_factory.dart';

@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'poll.dart';
 import 'user.dart';
 
 /// A post. Comments carry rendered [contentHtml]; event posts (a discussion
@@ -33,6 +34,7 @@ class FlarumPost {
     this.canReact = false,
     this.reactionCounts = const {},
     this.userReactionId,
+    this.polls = const [],
   });
 
   /// [discussion] stands in for the post's own `discussion` relationship when a
@@ -79,11 +81,14 @@ class FlarumPost {
       },
       // 2.0 sends the reaction's id as userReaction; 1.x sends the id as userReactionIdentifier.
       userReactionId: (a['userReaction'] ?? a['userReactionIdentifier'])?.toString(),
+      polls: [
+        for (final poll in document.findAll(resource.toMany('polls'))) FlarumPoll.fromResource(poll, document),
+      ],
     );
   }
 
-  /// This post after a like, a reaction, a bookmark, its author ignored, or a moderator's hiding or
-  /// approving it, the rest as it was (its replies stay, which
+  /// This post after a like, a reaction, a bookmark, a vote, its author ignored, or a moderator's
+  /// hiding or approving it, the rest as it was (its replies stay, which
   /// the forum's answer to the change leaves out).
   FlarumPost copyWith({
     FlarumUser? author,
@@ -94,6 +99,7 @@ class FlarumPost {
     Map<String, int>? reactionCounts,
     String? Function()? userReactionId,
     bool? bookmarked,
+    List<FlarumPoll>? polls,
   }) =>
       FlarumPost(
         id: id,
@@ -123,6 +129,7 @@ class FlarumPost {
         canReact: canReact,
         reactionCounts: reactionCounts ?? this.reactionCounts,
         userReactionId: userReactionId == null ? this.userReactionId : userReactionId(),
+        polls: polls ?? this.polls,
       );
 
   final String id;
@@ -186,6 +193,9 @@ class FlarumPost {
   final bool canReact;
   final Map<String, int> reactionCounts;
   final String? userReactionId;
+
+  /// Its polls (fof/polls), with the reader's votes: a new discussion's poll is on its first post.
+  final List<FlarumPoll> polls;
 
   /// Whether the reader ([readerId]) liked it.
   bool isLikedBy(String? readerId) => readerId != null && likedBy.any((user) => user.id == readerId);

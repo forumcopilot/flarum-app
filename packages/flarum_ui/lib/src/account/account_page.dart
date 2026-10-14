@@ -9,6 +9,8 @@ import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
+import '../compose/composers.dart' show canSaveDrafts;
+import '../drafts/drafts_page.dart';
 import '../messages/dialogs_page.dart';
 import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
@@ -109,6 +111,28 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 onTap: () async {
                   await DialogsPage.open(context, widget.site);
+                  if (mounted) setState(() {});
+                },
+              ),
+            if (canSaveDrafts(_forum))
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.edit_note),
+                title: Text(l10n.drafts),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if ((_forum.info?.draftCount ?? 0) > 0)
+                      Badge(
+                        label: Text('${_forum.info!.draftCount}'),
+                        backgroundColor: theme.colorScheme.secondaryContainer,
+                        textColor: theme.colorScheme.onSecondaryContainer,
+                      ),
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
+                onTap: () async {
+                  await DraftsPage.open(context, widget.site);
                   if (mounted) setState(() {});
                 },
               ),

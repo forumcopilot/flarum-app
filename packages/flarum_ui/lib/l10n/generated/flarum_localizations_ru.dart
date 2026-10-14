@@ -1011,4 +1011,153 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Что-то пошло не так. Повторите попытку.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count голоса',
+      many: '$count голосов',
+      few: '$count голоса',
+      one: '$count голос',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Выберите до $count',
+      one: 'Выберите 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'Голосование завершено';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Завершится $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting =>
+      'Результаты будут видны после того, как вы проголосуете.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Результаты будут видны, когда голосование завершится.';
+
+  @override
+  String get pollVote => 'Проголосовать';
+
+  @override
+  String get pollRemoveVote => 'Отозвать мой голос';
+
+  @override
+  String get pollSeeVoters => 'Кто голосовал';
+
+  @override
+  String get pollNoVotes => 'Голосов пока нет.';
+
+  @override
+  String get poll => 'Опрос';
+
+  @override
+  String get pollNeedsQuestion => 'Напишите вопрос.';
+
+  @override
+  String get pollNeedsAnswers => 'Укажите хотя бы два ответа.';
+
+  @override
+  String get pollEndInPast => 'Выберите время завершения в будущем.';
+
+  @override
+  String get pollQuestion => 'Вопрос';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Ответ $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Удалить этот ответ';
+
+  @override
+  String get pollAddAnswer => 'Добавить ответ';
+
+  @override
+  String get pollMultipleChoice => 'Можно выбрать несколько ответов';
+
+  @override
+  String get pollChoicesAllowed => 'Сколько можно выбрать';
+
+  @override
+  String get pollAnyNumber => 'Сколько угодно';
+
+  @override
+  String get pollPublic => 'Показывать, кто за что голосовал';
+
+  @override
+  String get pollAllowChangeVote => 'Можно изменить свой голос';
+
+  @override
+  String get pollCloses => 'Голосование завершится';
+
+  @override
+  String get pollNeverCloses => 'Никогда';
+
+  @override
+  String get pollHideVotes => 'Скрывать результаты до завершения';
+
+  @override
+  String get pollHideVotesNeedsEnd =>
+      'Сначала выберите, когда голосование завершится.';
+
+  @override
+  String get addPoll => 'Добавить опрос';
+
+  @override
+  String get editPoll => 'Изменить опрос';
+
+  @override
+  String get removePoll => 'Убрать опрос';
+
+  @override
+  String get draftSaved => 'Черновик сохранён.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Черновик сохранён без опроса: черновики не хранят опросы.';
+
+  @override
+  String get draftNeedsText => 'Напишите что-нибудь, чтобы сохранить черновик.';
+
+  @override
+  String get drafts => 'Черновики';
+
+  @override
+  String get draftsLoadFailed => 'Не удалось загрузить ваши черновики';
+
+  @override
+  String get noDrafts =>
+      'Черновиков нет. Закройте сообщение, которое пишете, и выберите «Сохранить черновик», чтобы сохранить его здесь.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Ответ в «$title»';
+  }
+
+  @override
+  String get draftUntitled => 'Обсуждение без названия';
+
+  @override
+  String get deleteDraftQuestion => 'Удалить этот черновик?';
+
+  @override
+  String get deleteDraft => 'Удалить черновик';
 }

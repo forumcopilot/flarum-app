@@ -10,6 +10,7 @@ import 'package:forumcopilot_sdk/models/results/fc_reaction_result.dart';
 
 import '../flarum_api.dart';
 import '../models/discussion.dart';
+import '../models/poll.dart';
 import '../models/post.dart';
 import 'flarum_attachment_proxy.dart';
 import 'flarum_forum.dart';
@@ -209,8 +210,24 @@ class FlarumPostProxy implements IFCPostProxy {
     }
   }
 
+  /// Votes in the poll of discussion [topicId] that has the options [responseIds] (its first
+  /// post's, which a new discussion's poll is on): [responseIds] is the reader's whole choice, and
+  /// none takes their vote back. Null when it fails.
   @override
-  Future<FCPoll?> votePollAsync(String topicId, List<String> responseIds) async => null;
+  Future<FCPoll?> votePollAsync(String topicId, List<String> responseIds) async {
+    try {
+      final first = (await _forum.api.posts(topicId)).items.firstOrNull;
+      final polls = first?.polls ?? const <FlarumPoll>[];
+      final poll = polls
+              .where((poll) => responseIds.every((id) => poll.options.any((option) => option.id == id)))
+              .firstOrNull ??
+          polls.firstOrNull;
+      if (first == null || poll == null) return null;
+      return toPoll(await _forum.api.votePoll(poll.id, responseIds), topicId: topicId, postId: first.id);
+    } catch (_) {
+      return null;
+    }
+  }
 
   /// Chooses [postId] as its discussion's best answer (fof/best-answer).
   @override
@@ -331,6 +348,7 @@ class FlarumPostProxy implements IFCPostProxy {
         isApproved: topic.isApproved,
         isDeleted: topic.isDeleted,
         hasPoll: topic.hasPoll,
+        poll: posts.where((post) => post.postNumber == 1).firstOrNull?.polls.firstOrNull,
         unreadCount: topic.unreadCount,
         tags: topic.tags,
         isSolved: topic.isSolved,
@@ -366,6 +384,35 @@ class FlarumPostProxy implements IFCPostProxy {
         canAcceptAnswer: post.canSelectAsBestAnswer,
         actionCode: post.isComment ? null : post.contentType,
         isModeratorAction: !post.isComment,
+        polls: [for (final poll in post.polls) toPoll(poll, topicId: topicId, postId: post.id)],
+      );
+
+  /// [poll] as the SDK's: its vote count stands for the voters' (the same in a single-choice
+  /// poll), and its options' counts are null while the reader may not see them.
+  static FCPoll toPoll(FlarumPoll poll, {required String topicId, String? postId}) => FCPoll(
+        pollId: poll.id,
+        topicId: topicId,
+        question: poll.question,
+        responses: [
+          for (final option in poll.options)
+            FCPollResponse(
+              id: option.id,
+              text: option.answer,
+              voteCount: option.voteCount,
+              viewerVotedFor: poll.myVotes.contains(option.id),
+            ),
+        ],
+        voterCount: poll.voteCount,
+        maxVotes: poll.allowMultipleVotes ? poll.maxVotes : 1,
+        changeVote: poll.canChangeVote,
+        publicVotes: poll.publicPoll,
+        viewResultsUnvoted: poll.showsResults && !poll.hasVoted,
+        closeDate: poll.endDate?.millisecondsSinceEpoch ?? 0,
+        isClosed: poll.hasEnded,
+        canVote: poll.canVote,
+        hasVoted: poll.hasVoted,
+        canViewResults: poll.showsResults,
+        postId: postId,
       );
 
   static final _epoch = DateTime.fromMillisecondsSinceEpoch(0);

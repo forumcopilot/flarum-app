@@ -46,6 +46,9 @@ Future<void> main(List<String> args) async {
   final privateIds = <String>[];
   final dialogIds = <String>[];
 
+  /// The discussions carol starts with polls, which the admin deletes at the end.
+  final pollDiscussionIds = <String>[];
+
   /// Records the response [call] gets as fixture [name], refusals included; returns its value.
   Future<T?> record<T>(String name, Future<T> Function() call) async {
     recorder.names.add(name);
@@ -255,7 +258,76 @@ Future<void> main(List<String> args) async {
       await admin.suspend(bobId, null);
       await mod.logOut();
     }
+
+    // fof/polls: carol starts a discussion with a poll, after one the forum refuses (closing in the
+    // past); bob votes, changes his vote, sees who voted (it's public) and takes his vote back.
+    await Future<void>.delayed(const Duration(seconds: 11));
+    await record('write_poll_invalid', () => carol.startDiscussion(WriteSamples.pollTitle, WriteSamples.pollContent,
+        tagIds: [general],
+        poll: FlarumNewPoll(
+            question: WriteSamples.pollQuestion,
+            options: WriteSamples.pollOptions,
+            endDate: DateTime.now().subtract(const Duration(days: 1)))));
+    final polled = await record('write_poll_discussion', () => carol.startDiscussion(WriteSamples.pollTitle, WriteSamples.pollContent,
+        tagIds: [general],
+        poll: const FlarumNewPoll(question: WriteSamples.pollQuestion, options: WriteSamples.pollOptions, publicPoll: true)));
+    if (polled == null) throw StateError('The poll was not started');
+    pollDiscussionIds.add(polled.id);
+    // The thread as bob opens it: the discussion with its post ids, then its posts.
+    await record('write_poll_with_post_ids', () => bob.discussion(polled.id, withPostIds: true));
+    final poll = (await record('write_poll_posts', () => bob.posts(polled.id)))?.items.first.polls.firstOrNull;
+    if (poll == null) throw StateError('The poll did not come with its post');
+    final [first, second, ...] = [for (final option in poll.options) option.id];
+    recorder.matchData.addAll(['write_poll_vote', 'write_poll_vote_change', 'write_poll_unvote']);
+    await record('write_poll_vote', () => bob.votePoll(poll.id, [first]));
+    await record('write_poll_vote_change', () => bob.votePoll(poll.id, [second]));
+    await record('write_poll_votes', () => bob.pollVotes(poll.id));
+    recorder.states['write_poll_posts_voted'] = 'voted';
+    await record('write_poll_posts_voted', () => bob.posts(polled.id));
+    await record('write_poll_unvote', () => bob.votePoll(poll.id, []));
+    // Several choices, at most two (1.x keeps "any number" whatever it's sent).
+    await Future<void>.delayed(const Duration(seconds: 11));
+    final multiple = await record('write_poll_multiple_discussion', () => carol.startDiscussion(
+        WriteSamples.multiplePollTitle, WriteSamples.pollContent,
+        tagIds: [general],
+        poll: const FlarumNewPoll(
+            question: WriteSamples.multiplePollQuestion,
+            options: WriteSamples.multiplePollOptions,
+            allowMultipleVotes: true,
+            maxVotes: 2)));
+    if (multiple != null) {
+      pollDiscussionIds.add(multiple.id);
+      final choices = (await record('write_poll_multiple_posts', () => bob.posts(multiple.id)))?.items.first.polls.firstOrNull;
+      if (choices != null) {
+        await record('write_poll_vote_multiple',
+            () => bob.votePoll(choices.id, [for (final option in choices.options.take(2)) option.id]));
+      }
+    }
+
+    // fof/drafts: carol saves a reply, a new discussion and a private one for later, lists them,
+    // changes the reply, and deletes them.
+    final replyDraft = await record('write_draft_reply',
+        () => carol.saveDraft(content: WriteSamples.draftReply, discussionId: question.id));
+    final discussionDraft = await record('write_draft_discussion',
+        () => carol.saveDraft(title: WriteSamples.draftTitle, content: WriteSamples.draftContent, tagIds: [general]));
+    final privateDraft = await record('write_draft_private', () => carol.saveDraft(
+        title: WriteSamples.draftPrivateTitle, content: WriteSamples.draftPrivateContent, recipientIds: [bobId]));
+    await record('write_drafts', () => carol.drafts());
+    // A reply draft names only its discussion: the app reads it for its title, and to resume it.
+    await record('write_question', () => carol.discussion(question.id));
+    recorder.states['write_forum_drafts'] = 'drafts';
+    await record('write_forum_drafts', () => carol.forumInfo());
+    if (replyDraft != null) {
+      await record('write_draft_update', () => carol.saveDraft(
+          id: replyDraft.id, content: WriteSamples.draftReplyEdited, discussionId: question.id));
+    }
+    for (final (name, draft) in [('reply', replyDraft), ('discussion', discussionDraft), ('private', privateDraft)]) {
+      if (draft != null) await record('write_draft_delete_$name', () => carol.deleteDraft(draft.id));
+    }
   } finally {
+    for (final id in pollDiscussionIds) {
+      await admin.client.delete('/discussions/$id');
+    }
     await admin.client.delete('/discussions/${question.id}');
     for (final api in [carol, bob, admin]) {
       await api.logOut();

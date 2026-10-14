@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/interfaces/interfaces.dart';
 import 'flarum_attachment_proxy.dart';
 import 'flarum_bookmark_proxy.dart';
 import 'flarum_config_proxy.dart';
+import 'flarum_draft_proxy.dart';
 import 'flarum_forum_proxy.dart';
 import 'flarum_moderation_proxy.dart';
 import 'flarum_private_conversation_proxy.dart';
@@ -58,6 +59,9 @@ class FlarumProxyFactory extends SiteProxyFactory {
 
   @override
   IFCBookmarkProxy createBookmarkProxy(SiteContext context) => FlarumBookmarkProxy(context);
+
+  @override
+  IFCDraftProxy createDraftProxy(SiteContext context) => FlarumDraftProxy(context);
 
   static Never _notYet(String proxy) => throw UnimplementedError('Flarum $proxy proxy is not implemented yet');
 }

@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/posts/306",
+    "path": "/posts/339",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "posts",
-        "id": "306",
+        "id": "339",
         "attributes": {
           "content": "An edit by someone whose post it isn't."
         }

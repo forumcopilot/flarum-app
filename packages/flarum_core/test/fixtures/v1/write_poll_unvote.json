@@ -1,0 +1,103 @@
+{
+  "request": {
+    "match": "data",
+    "method": "PATCH",
+    "path": "/fof/polls/3/votes",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "optionIds": []
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "polls",
+      "id": "3",
+      "attributes": {
+        "question": "Phone or tablet?",
+        "subtitle": "",
+        "hasEnded": false,
+        "allowMultipleVotes": false,
+        "maxVotes": 0,
+        "endDate": null,
+        "createdAt": "2026-10-14T01:21:59+00:00",
+        "updatedAt": "2026-10-14T01:22:00+00:00",
+        "canVote": true,
+        "canEdit": false,
+        "canDelete": false,
+        "canSeeVoters": false,
+        "canChangeVote": true,
+        "isGlobal": false,
+        "image": null,
+        "imageUrl": null,
+        "imageAlt": null,
+        "publicPoll": true,
+        "publishedAt": "2026-10-14T01:21:59+00:00",
+        "scheduledPublishAt": null,
+        "isDraft": false,
+        "canPublish": false,
+        "canUnpublish": false
+      },
+      "relationships": {
+        "options": {
+          "data": [
+            {
+              "type": "poll_options",
+              "id": "7"
+            },
+            {
+              "type": "poll_options",
+              "id": "8"
+            },
+            {
+              "type": "poll_options",
+              "id": "9"
+            }
+          ]
+        },
+        "myVotes": {
+          "data": []
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "poll_options",
+        "id": "7",
+        "attributes": {
+          "answer": "Phone",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:21:59+00:00",
+          "updatedAt": "2026-10-14T01:22:00+00:00",
+          "voteCount": null
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "8",
+        "attributes": {
+          "answer": "Tablet",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:21:59+00:00",
+          "updatedAt": "2026-10-14T01:22:00+00:00",
+          "voteCount": null
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "9",
+        "attributes": {
+          "answer": "Both",
+          "imageUrl": null,
+          "createdAt": "2026-10-14T01:21:59+00:00",
+          "updatedAt": "2026-10-14T01:21:59+00:00",
+          "voteCount": null
+        }
+      }
+    ]
+  }
+}

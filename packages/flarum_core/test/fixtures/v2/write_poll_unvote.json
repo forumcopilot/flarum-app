@@ -1,0 +1,134 @@
+{
+  "request": {
+    "match": "data",
+    "method": "PATCH",
+    "path": "/polls/3/votes",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "optionIds": []
+      }
+    }
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "polls",
+      "id": "3",
+      "links": {
+        "self": "/polls/3"
+      },
+      "attributes": {
+        "question": "Phone or tablet?",
+        "subtitle": "",
+        "hasEnded": false,
+        "allowMultipleVotes": false,
+        "maxVotes": 0,
+        "endDate": null,
+        "createdAt": "2026-10-14T01:23:29+00:00",
+        "updatedAt": "2026-10-14T01:23:31+00:00",
+        "canVote": true,
+        "canEdit": false,
+        "canDelete": false,
+        "canSeeVoters": false,
+        "canChangeVote": true,
+        "isGlobal": false,
+        "image": null,
+        "imageUrl": null,
+        "imageSrcset": null,
+        "imageAlt": null,
+        "publicPoll": true,
+        "isDraft": false,
+        "publishedAt": "2026-10-14T01:23:29+00:00",
+        "scheduledPublishAt": null,
+        "canPublish": false,
+        "canUnpublish": false
+      },
+      "relationships": {
+        "myVotes": {
+          "data": []
+        },
+        "post": {
+          "data": {
+            "type": "posts",
+            "id": "402"
+          }
+        },
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        },
+        "pollGroup": {
+          "data": null
+        },
+        "options": {
+          "data": [
+            {
+              "type": "poll_options",
+              "id": "7"
+            },
+            {
+              "type": "poll_options",
+              "id": "8"
+            },
+            {
+              "type": "poll_options",
+              "id": "9"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "poll_options",
+        "id": "7",
+        "links": {
+          "self": "/poll_options/7"
+        },
+        "attributes": {
+          "answer": "Phone",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:29+00:00",
+          "updatedAt": "2026-10-14T01:23:31+00:00"
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "8",
+        "links": {
+          "self": "/poll_options/8"
+        },
+        "attributes": {
+          "answer": "Tablet",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:29+00:00",
+          "updatedAt": "2026-10-14T01:23:31+00:00"
+        }
+      },
+      {
+        "type": "poll_options",
+        "id": "9",
+        "links": {
+          "self": "/poll_options/9"
+        },
+        "attributes": {
+          "answer": "Both",
+          "imageUrl": null,
+          "imageSrcset": null,
+          "createdAt": "2026-10-14T01:23:29+00:00",
+          "updatedAt": "2026-10-14T01:23:29+00:00"
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

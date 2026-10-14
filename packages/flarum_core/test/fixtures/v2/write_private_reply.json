@@ -15,7 +15,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "83"
+              "id": "95"
             }
           }
         }
@@ -26,13 +26,13 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "364",
+      "id": "397",
       "links": {
-        "self": "/posts/364"
+        "self": "/posts/397"
       },
       "attributes": {
         "number": 3,
-        "createdAt": "2026-10-13T20:12:28+00:00",
+        "createdAt": "2026-10-14T01:22:58+00:00",
         "contentType": "comment",
         "content": "Read you, carol.",
         "contentHtml": "<p>Read you, carol.</p>",
@@ -55,7 +55,7 @@
           "6": 0
         },
         "userReaction": null,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectAsBestAnswer": false,
         "canLike": true,
@@ -78,7 +78,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "83"
+            "id": "95"
           }
         },
         "user": {
@@ -92,23 +92,23 @@
     "included": [
       {
         "type": "discussions",
-        "id": "83",
+        "id": "95",
         "links": {
-          "self": "/discussions/83"
+          "self": "/discussions/95"
         },
         "attributes": {
           "title": "A private word from the app",
-          "slug": "83-a-private-word-from-the-app",
+          "slug": "95-a-private-word-from-the-app",
           "commentCount": 2,
           "participantCount": 2,
-          "createdAt": "2026-10-13T20:12:28+00:00",
-          "lastPostedAt": "2026-10-13T20:12:28+00:00",
+          "createdAt": "2026-10-14T01:22:56+00:00",
+          "lastPostedAt": "2026-10-14T01:22:58+00:00",
           "lastPostNumber": 3,
           "canReply": true,
           "canRename": false,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-13T20:12:28+00:00",
+          "lastReadAt": "2026-10-14T01:22:58+00:00",
           "lastReadPostNumber": 3,
           "canTag": false,
           "isApproved": true,
@@ -121,7 +121,7 @@
           "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectBestAnswer": false,
           "hasBestAnswer": false,
@@ -141,28 +141,28 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "362"
+              "id": "395"
             }
           },
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "364"
+              "id": "397"
             }
           },
           "posts": {
             "data": [
               {
                 "type": "posts",
-                "id": "362"
+                "id": "395"
               },
               {
                 "type": "posts",
-                "id": "363"
+                "id": "396"
               },
               {
                 "type": "posts",
-                "id": "364"
+                "id": "397"
               }
             ]
           },
@@ -201,7 +201,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 25,
-          "lastSeenAt": "2026-10-13T20:11:58+00:00",
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

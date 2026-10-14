@@ -15,7 +15,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "75"
+              "id": "87"
             }
           }
         }
@@ -26,10 +26,10 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "311",
+      "id": "344",
       "attributes": {
         "number": 3,
-        "createdAt": "2026-10-13T20:11:37+00:00",
+        "createdAt": "2026-10-14T01:21:34+00:00",
         "contentType": "comment",
         "contentHtml": "<p>Read you, carol.</p>",
         "renderFailed": false,
@@ -52,7 +52,7 @@
           "6": 0
         },
         "userReactionIdentifier": null,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectAsBestAnswer": false,
         "canLike": true,
@@ -68,7 +68,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "75"
+            "id": "87"
           }
         },
         "polls": {
@@ -95,7 +95,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T20:11:06+00:00",
+          "lastSeenAt": "2026-10-14T01:21:03+00:00",
           "isEmailConfirmed": true,
           "email": "bob@flarumapp.local",
           "suspendMessage": null,
@@ -116,10 +116,10 @@
       },
       {
         "type": "discussions",
-        "id": "75",
+        "id": "87",
         "attributes": {
           "title": "A private word from the app",
-          "slug": "75-a-private-word-from-the-app",
+          "slug": "87-a-private-word-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null
@@ -129,15 +129,15 @@
             "data": [
               {
                 "type": "posts",
-                "id": "309"
+                "id": "342"
               },
               {
                 "type": "posts",
-                "id": "310"
+                "id": "343"
               },
               {
                 "type": "posts",
-                "id": "311"
+                "id": "344"
               }
             ]
           },

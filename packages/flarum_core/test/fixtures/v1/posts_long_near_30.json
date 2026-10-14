@@ -6,7 +6,7 @@
       "filter[discussion]": "8",
       "page[near]": "30",
       "page[limit]": "5",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -14,9 +14,9 @@
   "status": 200,
   "body": {
     "links": {
-      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes",
-      "prev": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=21.5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes",
-      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=31.5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes"
+      "first": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option",
+      "prev": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=21.5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option",
+      "next": "https://flarum18.betterdiscourse.app/api/posts?filter%5Bdiscussion%5D=8&page%5Bnear%5D=30&page%5Blimit%5D=5&page%5Boffset%5D=31.5&include=user%2Cdiscussion%2CmentionedBy%2CmentionedBy.user%2CmentionedBy.discussion%2Clikes%2Cpolls%2Cpolls.options%2Cpolls.myVotes%2Cpolls.myVotes.option"
     },
     "data": [
       {
@@ -69,6 +69,9 @@
             "data": []
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           }
         }
@@ -124,6 +127,9 @@
           },
           "likes": {
             "data": []
+          },
+          "polls": {
+            "data": []
           }
         }
       },
@@ -177,6 +183,9 @@
             "data": []
           },
           "likes": {
+            "data": []
+          },
+          "polls": {
             "data": []
           }
         }
@@ -232,6 +241,9 @@
           },
           "likes": {
             "data": []
+          },
+          "polls": {
+            "data": []
           }
         }
       },
@@ -286,6 +298,9 @@
           },
           "likes": {
             "data": []
+          },
+          "polls": {
+            "data": []
           }
         }
       }
@@ -306,7 +321,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T17:54:21+00:00",
+          "lastSeenAt": "2026-10-14T01:07:37+00:00",
           "isEmailConfirmed": true,
           "email": "alice@flarumapp.local",
           "suspendMessage": null,
@@ -335,12 +350,12 @@
           "slug": "bob",
           "joinTime": "2026-10-08T17:52:27+00:00",
           "discussionCount": 2,
-          "commentCount": 24,
+          "commentCount": 23,
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T17:51:46+00:00",
+          "lastSeenAt": "2026-10-14T01:06:11+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,
@@ -367,7 +382,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T17:51:44+00:00",
+          "lastSeenAt": "2026-10-14T01:06:11+00:00",
           "canSuspend": false,
           "canModerateExports": false,
           "blocksPd": false,

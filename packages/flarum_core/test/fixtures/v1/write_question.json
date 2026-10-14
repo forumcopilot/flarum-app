@@ -1,0 +1,118 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/discussions/86",
+    "query": {
+      "include": "user,lastPostedUser,tags"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "discussions",
+      "id": "86",
+      "attributes": {
+        "title": "A question from the app, renamed",
+        "slug": "86-a-question-from-the-app-renamed",
+        "commentCount": 2,
+        "participantCount": 2,
+        "createdAt": "2026-10-14T01:21:18+00:00",
+        "lastPostedAt": "2026-10-14T01:21:19+00:00",
+        "lastPostNumber": 2,
+        "canReply": true,
+        "canRename": true,
+        "canDelete": false,
+        "canHide": false,
+        "lastReadAt": "2026-10-14T01:21:18+00:00",
+        "lastReadPostNumber": 1,
+        "isApproved": true,
+        "hasBestAnswer": false,
+        "bestAnswerSetAt": null,
+        "canTag": false,
+        "subscription": null,
+        "canEditRecipients": false,
+        "canEditUserRecipients": false,
+        "canEditGroupRecipients": false,
+        "isPrivateDiscussion": false,
+        "canSeeReactions": false,
+        "hasPoll": false,
+        "canStartPoll": true,
+        "bookmarked": false,
+        "isSticky": false,
+        "canSticky": false,
+        "isLocked": false,
+        "canLock": false
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "7"
+          }
+        },
+        "lastPostedUser": {
+          "data": {
+            "type": "users",
+            "id": "6"
+          }
+        },
+        "tags": {
+          "data": [
+            {
+              "type": "tags",
+              "id": "20"
+            }
+          ]
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol"
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob"
+        }
+      },
+      {
+        "type": "tags",
+        "id": "20",
+        "attributes": {
+          "name": "Tech Help",
+          "description": "Ask a question; the answer that solved it gets marked.",
+          "slug": "tech-help",
+          "color": "#16a085",
+          "backgroundUrl": null,
+          "backgroundMode": null,
+          "icon": "fas fa-laptop",
+          "discussionCount": 6,
+          "position": 9,
+          "defaultSort": null,
+          "isChild": false,
+          "isHidden": false,
+          "lastPostedAt": "2026-10-14T01:21:19+00:00",
+          "canStartDiscussion": true,
+          "canAddToDiscussion": true,
+          "subscription": null,
+          "isQnA": true,
+          "reminders": false
+        }
+      }
+    ]
+  }
+}

@@ -15,7 +15,7 @@
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "74"
+              "id": "86"
             }
           }
         }
@@ -26,10 +26,10 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "315",
+      "id": "348",
       "attributes": {
         "number": 4,
-        "createdAt": "2026-10-13T20:11:50+00:00",
+        "createdAt": "2026-10-14T01:21:47+00:00",
         "contentType": "comment",
         "contentHtml": "<p>This reply will be deleted.</p>",
         "renderFailed": false,
@@ -52,7 +52,7 @@
           "6": 0
         },
         "userReactionIdentifier": null,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectAsBestAnswer": false,
         "canLike": true,
@@ -68,7 +68,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "74"
+            "id": "86"
           }
         },
         "polls": {
@@ -95,7 +95,7 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-13T20:11:06+00:00",
+          "lastSeenAt": "2026-10-14T01:21:03+00:00",
           "isEmailConfirmed": true,
           "email": "bob@flarumapp.local",
           "suspendMessage": null,
@@ -116,10 +116,10 @@
       },
       {
         "type": "discussions",
-        "id": "74",
+        "id": "86",
         "attributes": {
           "title": "A question from the app, renamed",
-          "slug": "74-a-question-from-the-app-renamed",
+          "slug": "86-a-question-from-the-app-renamed",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null
@@ -129,19 +129,19 @@
             "data": [
               {
                 "type": "posts",
-                "id": "307"
+                "id": "340"
               },
               {
                 "type": "posts",
-                "id": "308"
+                "id": "341"
               },
               {
                 "type": "posts",
-                "id": "314"
+                "id": "347"
               },
               {
                 "type": "posts",
-                "id": "315"
+                "id": "348"
               }
             ]
           },

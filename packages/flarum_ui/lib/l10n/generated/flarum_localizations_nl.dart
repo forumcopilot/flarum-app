@@ -1002,4 +1002,150 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get errorUnknown => 'Er ging iets mis. Probeer het opnieuw.';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stemmen',
+      one: '1 stem',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Kies er maximaal $count',
+      one: 'Kies 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => 'De stemming is gesloten';
+
+  @override
+  String pollEndsOn(String date) {
+    return 'Sluit op $date';
+  }
+
+  @override
+  String get pollResultsAfterVoting =>
+      'Je ziet de uitslag zodra je hebt gestemd.';
+
+  @override
+  String get pollResultsWhenClosed =>
+      'Je ziet de uitslag als de stemming sluit.';
+
+  @override
+  String get pollVote => 'Stemmen';
+
+  @override
+  String get pollRemoveVote => 'Mijn stem intrekken';
+
+  @override
+  String get pollSeeVoters => 'Zien wie er stemde';
+
+  @override
+  String get pollNoVotes => 'Nog geen stemmen.';
+
+  @override
+  String get poll => 'Peiling';
+
+  @override
+  String get pollNeedsQuestion => 'Schrijf de vraag.';
+
+  @override
+  String get pollNeedsAnswers => 'Geef minstens twee antwoorden.';
+
+  @override
+  String get pollEndInPast => 'Kies een sluitingstijd in de toekomst.';
+
+  @override
+  String get pollQuestion => 'Vraag';
+
+  @override
+  String pollAnswer(int number) {
+    return 'Antwoord $number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'Dit antwoord verwijderen';
+
+  @override
+  String get pollAddAnswer => 'Antwoord toevoegen';
+
+  @override
+  String get pollMultipleChoice => 'Meer dan één antwoord toestaan';
+
+  @override
+  String get pollChoicesAllowed => 'Toegestane antwoorden';
+
+  @override
+  String get pollAnyNumber => 'Onbeperkt';
+
+  @override
+  String get pollPublic => 'Tonen wie wat stemde';
+
+  @override
+  String get pollAllowChangeVote => 'Stem wijzigen toestaan';
+
+  @override
+  String get pollCloses => 'Stemming sluit';
+
+  @override
+  String get pollNeverCloses => 'Nooit';
+
+  @override
+  String get pollHideVotes => 'Uitslag verbergen tot de stemming sluit';
+
+  @override
+  String get pollHideVotesNeedsEnd => 'Kies eerst wanneer de stemming sluit.';
+
+  @override
+  String get addPoll => 'Peiling toevoegen';
+
+  @override
+  String get editPoll => 'Peiling bewerken';
+
+  @override
+  String get removePoll => 'Peiling verwijderen';
+
+  @override
+  String get draftSaved => 'Concept opgeslagen.';
+
+  @override
+  String get draftSavedWithoutPoll =>
+      'Concept opgeslagen, zonder de peiling: concepten bewaren geen peilingen.';
+
+  @override
+  String get draftNeedsText => 'Schrijf iets om het als concept op te slaan.';
+
+  @override
+  String get drafts => 'Concepten';
+
+  @override
+  String get draftsLoadFailed => 'Je concepten konden niet worden geladen';
+
+  @override
+  String get noDrafts =>
+      'Geen concepten. Sluit een bericht dat je schrijft en kies ‘Concept opslaan’ om het hier te bewaren.';
+
+  @override
+  String draftReplyTo(String title) {
+    return 'Antwoord op $title';
+  }
+
+  @override
+  String get draftUntitled => 'Discussie zonder titel';
+
+  @override
+  String get deleteDraftQuestion => 'Dit concept verwijderen?';
+
+  @override
+  String get deleteDraft => 'Concept verwijderen';
 }

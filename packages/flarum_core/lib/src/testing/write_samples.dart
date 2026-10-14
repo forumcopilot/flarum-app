@@ -35,6 +35,24 @@ abstract final class WriteSamples {
   static const replyToDelete = 'This reply will be deleted.';
   static const suspendReason = 'Suspended by the app tests.';
 
+  /// fof/polls: carol's discussion with a poll, the one she gets wrong first (it closes in the
+  /// past), and her multiple-choice one.
+  static const pollTitle = 'A poll from the app';
+  static const pollContent = 'Which do you read on?';
+  static const pollQuestion = 'Phone or tablet?';
+  static const pollOptions = ['Phone', 'Tablet', 'Both'];
+  static const multiplePollTitle = 'A multiple-choice poll from the app';
+  static const multiplePollQuestion = 'Which do you use?';
+  static const multiplePollOptions = ['Android', 'iOS', 'Desktop'];
+
+  /// fof/drafts: carol's reply draft (then changed), a new discussion's and a private one's.
+  static const draftReply = 'A reply saved for later.';
+  static const draftReplyEdited = 'A reply saved for later, and changed.';
+  static const draftTitle = 'A discussion saved for later';
+  static const draftContent = 'Not ready to post yet.';
+  static const draftPrivateTitle = 'A private word saved for later';
+  static const draftPrivateContent = 'For bob, when it is ready.';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

@@ -3,11 +3,11 @@
     "method": "GET",
     "path": "/posts",
     "query": {
-      "filter[discussion]": "82",
+      "filter[discussion]": "94",
       "sort": "number",
       "page[offset]": "0",
       "page[limit]": "20",
-      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes"
+      "include": "user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option"
     },
     "signedIn": true,
     "rememberCookie": false
@@ -17,13 +17,13 @@
     "data": [
       {
         "type": "posts",
-        "id": "360",
+        "id": "393",
         "links": {
-          "self": "/posts/360"
+          "self": "/posts/393"
         },
         "attributes": {
           "number": 1,
-          "createdAt": "2026-10-13T20:12:13+00:00",
+          "createdAt": "2026-10-14T01:22:36+00:00",
           "contentType": "comment",
           "contentHtml": "<p>How does the app choose a best answer?</p>",
           "renderFailed": null,
@@ -62,13 +62,16 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "82"
+              "id": "94"
             }
           },
           "user": {
@@ -81,13 +84,13 @@
       },
       {
         "type": "posts",
-        "id": "361",
+        "id": "394",
         "links": {
-          "self": "/posts/361"
+          "self": "/posts/394"
         },
         "attributes": {
           "number": 2,
-          "createdAt": "2026-10-13T20:12:13+00:00",
+          "createdAt": "2026-10-14T01:22:36+00:00",
           "contentType": "comment",
           "contentHtml": "<p>The one who asked chooses it.</p>",
           "renderFailed": null,
@@ -126,13 +129,16 @@
           "likes": {
             "data": []
           },
+          "polls": {
+            "data": []
+          },
           "mentionedBy": {
             "data": []
           },
           "discussion": {
             "data": {
               "type": "discussions",
-              "id": "82"
+              "id": "94"
             }
           },
           "user": {
@@ -147,23 +153,23 @@
     "included": [
       {
         "type": "discussions",
-        "id": "82",
+        "id": "94",
         "links": {
-          "self": "/discussions/82"
+          "self": "/discussions/94"
         },
         "attributes": {
           "title": "A question from the app",
-          "slug": "82-a-question-from-the-app",
+          "slug": "94-a-question-from-the-app",
           "commentCount": 2,
           "participantCount": 2,
-          "createdAt": "2026-10-13T20:12:13+00:00",
-          "lastPostedAt": "2026-10-13T20:12:13+00:00",
+          "createdAt": "2026-10-14T01:22:36+00:00",
+          "lastPostedAt": "2026-10-14T01:22:36+00:00",
           "lastPostNumber": 2,
           "canReply": true,
           "canRename": true,
           "canDelete": false,
           "canHide": false,
-          "lastReadAt": "2026-10-13T20:12:13+00:00",
+          "lastReadAt": "2026-10-14T01:22:36+00:00",
           "lastReadPostNumber": 1,
           "canTag": false,
           "isApproved": true,
@@ -176,7 +182,7 @@
           "canDownloadFiles": true,
           "canSeeReactions": false,
           "hasPoll": false,
-          "canStartPoll": false,
+          "canStartPoll": true,
           "bookmarked": false,
           "canSelectBestAnswer": true,
           "hasBestAnswer": false,
@@ -196,7 +202,7 @@
           "firstPost": {
             "data": {
               "type": "posts",
-              "id": "360"
+              "id": "393"
             }
           },
           "lastPostedUser": {
@@ -208,7 +214,7 @@
           "lastPost": {
             "data": {
               "type": "posts",
-              "id": "361"
+              "id": "394"
             }
           },
           "mostRelevantPost": {
@@ -241,7 +247,7 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 2,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T20:11:58+00:00",
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,
@@ -276,7 +282,7 @@
           "joinTime": "2026-10-08T17:53:47+00:00",
           "discussionCount": 1,
           "commentCount": 24,
-          "lastSeenAt": "2026-10-13T20:11:58+00:00",
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
           "canEdit": false,
           "canEditCredentials": false,
           "canEditGroups": false,

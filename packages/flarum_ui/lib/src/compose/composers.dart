@@ -6,6 +6,7 @@ import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../polls/poll_editor_page.dart';
 import '../tags/tag_label.dart';
 import 'compose_page.dart';
 import '../widgets/flarum_avatar.dart';
@@ -14,9 +15,9 @@ import 'mention_picker_page.dart';
 import 'tag_picker_page.dart';
 
 /// Opens the composer for a reply in [discussion], starting from [initialContent] (a quote, a
-/// reply to a post). The reply once posted, or null.
+/// reply to a post), or from [draft]. The reply once posted, or null.
 Future<FlarumPost?> composeReply(BuildContext context, SiteContext site, FlarumDiscussion discussion,
-    {String? initialContent}) {
+    {String? initialContent, FlarumDraft? draft}) {
   final forum = FlarumForum.of(site);
   return Navigator.of(context).push(MaterialPageRoute<FlarumPost>(
     fullscreenDialog: true,
@@ -24,10 +25,61 @@ Future<FlarumPost?> composeReply(BuildContext context, SiteContext site, FlarumD
       site: site,
       title: kitL10n(context).reply,
       topicTitle: discussion.title,
-      initialContent: initialContent,
-      onSubmit: (_, content) => forum.api.reply(discussion.id, content),
+      initialContent: draft?.content ?? initialContent,
+      onSubmit: (_, content) async {
+        final post = await forum.api.reply(discussion.id, content);
+        _posted(forum, draft);
+        return post;
+      },
+      onSaveDraft: canSaveDrafts(forum)
+          ? (_, content) => _saveDraft(
+              context, forum, () => forum.api.saveDraft(id: draft?.id, content: content, discussionId: discussion.id))
+          : null,
     ),
   ));
+}
+
+/// Whether the reader may keep drafts (fof/drafts).
+bool canSaveDrafts(FlarumForum forum) => forum.isSignedIn && (forum.info?.can('canSaveDrafts') ?? false);
+
+/// Opens [draft] in the composer it was written in. What it posted (a reply or a discussion), or
+/// null. Throws when a reply's discussion can't be read.
+Future<Object?> resumeDraft(BuildContext context, SiteContext site, FlarumDraft draft) async {
+  if (draft.discussionId case final id?) {
+    final discussion = await FlarumForum.of(site).api.discussion(id);
+    if (!context.mounted) return null;
+    return composeReply(context, site, discussion, draft: draft);
+  }
+  return Navigator.of(context).push(MaterialPageRoute<FlarumDiscussion>(
+    fullscreenDialog: true,
+    builder: (_) => draft.isPrivateDiscussion
+        ? _NewPrivateDiscussionPage(site: site, draft: draft)
+        : _NewDiscussionPage(site: site, draft: draft),
+  ));
+}
+
+/// Saves a draft with [save], says so, and has the reader's draft count read again.
+Future<void> _saveDraft(BuildContext context, FlarumForum forum, Future<FlarumDraft> Function() save,
+    {bool withoutPoll = false}) async {
+  await save();
+  forum.refresh().ignore();
+  if (context.mounted) {
+    final l10n = flarumL10n(context);
+    SnackbarHelper.showInfo(context, withoutPoll ? l10n.draftSavedWithoutPoll : l10n.draftSaved);
+  }
+}
+
+/// What [draft] held is posted: nothing on the forum deletes it.
+void _posted(FlarumForum forum, FlarumDraft? draft) {
+  if (draft == null) return;
+  () async {
+    try {
+      await forum.api.deleteDraft(draft.id);
+      await forum.refresh();
+    } catch (_) {
+      // It stays in the reader's drafts, to delete by hand.
+    }
+  }();
 }
 
 /// Opens the composer on [post]'s source, to edit it. The post as saved, or null. Flarum sends
@@ -87,12 +139,16 @@ String quoteOf(FlarumPost post, FlarumLocalizations l10n) {
   return FlarumMarkup.quote(post.author?.displayName ?? l10n.someone, post.id, text);
 }
 
-/// The new-discussion composer: the title, the text, and the tags the forum's rules ask for.
+/// The new-discussion composer: the title, the text, the tags the forum's rules ask for, and a
+/// poll where the reader may start one (fof/polls).
 class _NewDiscussionPage extends StatefulWidget {
-  const _NewDiscussionPage({required this.site, this.tag});
+  const _NewDiscussionPage({required this.site, this.tag, this.draft});
 
   final SiteContext site;
   final FlarumTag? tag;
+
+  /// The draft it resumes.
+  final FlarumDraft? draft;
 
   @override
   State<_NewDiscussionPage> createState() => _NewDiscussionPageState();
@@ -105,8 +161,12 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
     if (widget.tag case final tag?) tag,
   ];
 
+  FlarumNewPoll? _poll;
+
   /// Without flarum/tags the forum has no tags to choose.
   bool get _usesTags => _forum.info?.tagRules != null;
+
+  bool get _canStartPolls => _forum.info?.can('canStartPolls') ?? false;
 
   @override
   void initState() {
@@ -116,6 +176,10 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
         if (!mounted) return;
         setState(() {
           _tags = tags;
+          if (widget.draft case final draft?) {
+            _chosen = [...tags.where((t) => draft.tagIds.contains(t.id))];
+            return;
+          }
           // A child tag goes with its parent.
           final parent = widget.tag?.parentId;
           if (parent != null) _chosen = [...tags.where((t) => t.id == parent), ..._chosen];
@@ -131,35 +195,81 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
     if (chosen != null && mounted) setState(() => _chosen = chosen);
   }
 
+  Future<void> _editPoll() async {
+    final poll = await PollEditorPage.open(
+      context,
+      maxOptions: _forum.info?.pollMaxOptions ?? 10,
+      poll: _poll,
+      limitsChoices: _forum.info?.version == FlarumVersion.v2,
+    );
+    if (poll != null && mounted) setState(() => _poll = poll);
+  }
+
   Future<FlarumDiscussion> _start(String title, String content) async {
     final problem = _usesTags ? tagRuleProblem(_chosen, _forum.info?.tagRules, flarumL10n(context)) : null;
     if (problem != null) throw ComposeProblem(problem);
-    return _forum.api.startDiscussion(title, content, tagIds: [for (final tag in _chosen) tag.id]);
+    final discussion =
+        await _forum.api.startDiscussion(title, content, tagIds: [for (final tag in _chosen) tag.id], poll: _poll);
+    _posted(_forum, widget.draft);
+    return discussion;
   }
+
+  /// A draft keeps the title, text and tags; fof/drafts has no place for a poll.
+  Future<void> _saveAsDraft(String title, String content) => _saveDraft(
+        context,
+        _forum,
+        () => _forum.api.saveDraft(
+            id: widget.draft?.id, title: title, content: content, tagIds: [for (final tag in _chosen) tag.id]),
+        withoutPoll: _poll != null,
+      );
 
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
+    final poll = _poll;
     return ComposePage(
       site: widget.site,
       title: l10n.startDiscussion,
       showTitleField: true,
-      header: _usesTags
+      initialTitle: widget.draft?.title,
+      initialContent: widget.draft?.content,
+      header: _usesTags || _canStartPolls
           ? Wrap(
               spacing: DesignTokens.spacingS,
               runSpacing: DesignTokens.spacingXS,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                for (final tag in tagsInWebOrder(_chosen)) TagLabel(tag: tag),
-                ActionChip(
-                  avatar: const Icon(Icons.sell_outlined, size: 18),
-                  label: Text(l10n.chooseTags),
-                  onPressed: _tags == null ? null : _chooseTags,
-                ),
+                if (_usesTags) ...[
+                  for (final tag in tagsInWebOrder(_chosen)) TagLabel(tag: tag),
+                  ActionChip(
+                    avatar: const Icon(Icons.sell_outlined, size: 18),
+                    label: Text(l10n.chooseTags),
+                    onPressed: _tags == null ? null : _chooseTags,
+                  ),
+                ],
+                if (_canStartPolls)
+                  poll == null
+                      ? ActionChip(
+                          avatar: const Icon(Icons.poll_outlined, size: 18),
+                          label: Text(l10n.addPoll),
+                          onPressed: _editPoll,
+                        )
+                      : InputChip(
+                          avatar: const Icon(Icons.poll, size: 18),
+                          label: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 220),
+                            child: Text(poll.question, overflow: TextOverflow.ellipsis),
+                          ),
+                          tooltip: l10n.editPoll,
+                          onPressed: _editPoll,
+                          deleteButtonTooltipMessage: l10n.removePoll,
+                          onDeleted: () => setState(() => _poll = null),
+                        ),
               ],
             )
           : null,
       onSubmit: _start,
+      onSaveDraft: canSaveDrafts(_forum) ? _saveAsDraft : null,
     );
   }
 }
@@ -167,10 +277,13 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
 /// The private-discussion composer: who it's with, the title and the text. No tags: byobu lets a
 /// private discussion go without.
 class _NewPrivateDiscussionPage extends StatefulWidget {
-  const _NewPrivateDiscussionPage({required this.site, this.to});
+  const _NewPrivateDiscussionPage({required this.site, this.to, this.draft});
 
   final SiteContext site;
   final FlarumUser? to;
+
+  /// The draft it resumes, whose people are read again by their ids.
+  final FlarumDraft? draft;
 
   @override
   State<_NewPrivateDiscussionPage> createState() => _NewPrivateDiscussionPageState();
@@ -179,6 +292,16 @@ class _NewPrivateDiscussionPage extends StatefulWidget {
 class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   late final List<FlarumUser> _people = [if (widget.to case final to?) to];
+
+  @override
+  void initState() {
+    super.initState();
+    for (final id in widget.draft?.recipientIds ?? const <String>[]) {
+      _forum.api.user(id).then((user) {
+        if (mounted && !_people.any((p) => p.id == user.id)) setState(() => _people.add(user));
+      }, onError: (_) {});
+    }
+  }
 
   /// Members may have only one other person in a private discussion, unless the forum lets them
   /// add more (byobu counts the reader as one of two).
@@ -196,8 +319,17 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
 
   Future<FlarumDiscussion> _start(String title, String content) async {
     if (_people.isEmpty) throw ComposeProblem(flarumL10n(context).choosePerson);
-    return _forum.api.startPrivateDiscussion(title, content, [for (final user in _people) user.id]);
+    final discussion = await _forum.api.startPrivateDiscussion(title, content, [for (final user in _people) user.id]);
+    _posted(_forum, widget.draft);
+    return discussion;
   }
+
+  Future<void> _saveAsDraft(String title, String content) => _saveDraft(
+        context,
+        _forum,
+        () => _forum.api.saveDraft(
+            id: widget.draft?.id, title: title, content: content, recipientIds: [for (final user in _people) user.id]),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -206,6 +338,8 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
       site: widget.site,
       title: l10n.startPrivateDiscussion,
       showTitleField: true,
+      initialTitle: widget.draft?.title,
+      initialContent: widget.draft?.content,
       header: Wrap(
         spacing: DesignTokens.spacingS,
         runSpacing: DesignTokens.spacingXS,
@@ -225,6 +359,7 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
         ],
       ),
       onSubmit: _start,
+      onSaveDraft: canSaveDrafts(_forum) ? _saveAsDraft : null,
     );
   }
 }

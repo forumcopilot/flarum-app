@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/posts/315",
+    "path": "/posts/348",
     "query": {},
     "signedIn": true,
     "rememberCookie": false

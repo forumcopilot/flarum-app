@@ -38,6 +38,7 @@ class ComposePage extends StatefulWidget {
     this.header,
     this.isEdit = false,
     this.pickFiles = pickUploads,
+    this.onSaveDraft,
   });
 
   final SiteContext site;
@@ -64,6 +65,11 @@ class ComposePage extends StatefulWidget {
 
   /// Picks the files to upload: the phone's pickers ([pickUploads]), or a test's.
   final Future<List<XFile>> Function(UploadSource source) pickFiles;
+
+  /// Keeps what was written as a draft (fof/drafts), offered with Discard when the writer closes
+  /// the page; null where the reader can't save drafts. A throw keeps the page open, with the
+  /// reason shown.
+  final Future<void> Function(String title, String content)? onSaveDraft;
 
   @override
   State<ComposePage> createState() => _ComposePageState();
@@ -386,6 +392,14 @@ class _ComposePageState extends State<ComposePage> {
     }
   }
 
+  Future<void> _saveDraft() async {
+    final l10n = flarumL10n(context);
+    // Placeholders aren't worth keeping, and the forum refuses a draft without text.
+    if (_uploads.any((u) => u.isUploading)) throw ComposeProblem(l10n.pleaseWaitForAttachmentsToFinishUploading);
+    if (_contentController.text.trim().isEmpty) throw ComposeProblem(l10n.draftNeedsText);
+    await widget.onSaveDraft!(_titleController.text.trim(), _contentController.text.trim());
+  }
+
   void _close() {
     FocusScope.of(context).unfocus();
     // maybePop, so closing asks first when there is writing to lose.
@@ -403,6 +417,8 @@ class _ComposePageState extends State<ComposePage> {
       hasChanges: _hasChanges,
       isEdit: widget.isEdit,
       busy: _isSubmitting,
+      onSaveDraft: widget.onSaveDraft == null ? null : _saveDraft,
+      describeFailure: (error, context) => error is ComposeProblem ? error.message : describeError(context, error),
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),

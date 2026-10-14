@@ -1,0 +1,110 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/drafts",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "drafts",
+        "attributes": {
+          "content": "A reply saved for later.",
+          "relationships": {
+            "discussion": {
+              "data": {
+                "type": "discussions",
+                "id": "94"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "drafts",
+      "id": "4",
+      "links": {
+        "self": "/drafts/4"
+      },
+      "attributes": {
+        "title": null,
+        "content": "A reply saved for later.",
+        "updatedAt": "2026-10-14T01:23:43+00:00",
+        "extra": null,
+        "relationships": {
+          "discussion": {
+            "data": {
+              "type": "discussions",
+              "id": "94"
+            }
+          }
+        },
+        "scheduledFor": null,
+        "scheduledValidationError": null,
+        "clearValidationError": null
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "type": "users",
+            "id": "4"
+          }
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "email": "carol@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 3,
+          "commentCount": 27,
+          "lastSeenAt": "2026-10-14T01:22:21+00:00",
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "newFlagCount": 0,
+          "canSuspend": false,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "canModerateExports": true,
+          "canMentionGroups": false,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": false,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "canDeleteOwnMessages": null,
+          "messageCount": 0,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false,
+          "draftCount": 1
+        }
+      }
+    ],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

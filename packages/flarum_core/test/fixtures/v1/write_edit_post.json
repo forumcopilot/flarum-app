@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "PATCH",
-    "path": "/posts/306",
+    "path": "/posts/339",
     "query": {},
     "signedIn": true,
     "rememberCookie": false,
     "body": {
       "data": {
         "type": "posts",
-        "id": "306",
+        "id": "339",
         "attributes": {
           "content": "The reply, edited."
         }
@@ -19,15 +19,15 @@
   "body": {
     "data": {
       "type": "posts",
-      "id": "306",
+      "id": "339",
       "attributes": {
         "number": 2,
-        "createdAt": "2026-10-13T20:11:08+00:00",
+        "createdAt": "2026-10-14T01:21:05+00:00",
         "contentType": "comment",
         "contentHtml": "<p>The reply, edited.</p>",
         "renderFailed": false,
         "content": "The reply, edited.",
-        "editedAt": "2026-10-13T20:11:09+00:00",
+        "editedAt": "2026-10-14T01:21:06+00:00",
         "canEdit": true,
         "canDelete": false,
         "canHide": true,
@@ -46,7 +46,7 @@
           "6": 0
         },
         "userReactionIdentifier": null,
-        "canStartPoll": false,
+        "canStartPoll": true,
         "bookmarked": false,
         "canSelectAsBestAnswer": false,
         "canLike": true,
@@ -62,7 +62,7 @@
         "discussion": {
           "data": {
             "type": "discussions",
-            "id": "73"
+            "id": "85"
           }
         },
         "likes": {
@@ -83,10 +83,10 @@
       },
       {
         "type": "discussions",
-        "id": "73",
+        "id": "85",
         "attributes": {
           "title": "Written from the app",
-          "slug": "73-written-from-the-app",
+          "slug": "85-written-from-the-app",
           "isApproved": true,
           "hasBestAnswer": false,
           "bestAnswerSetAt": null

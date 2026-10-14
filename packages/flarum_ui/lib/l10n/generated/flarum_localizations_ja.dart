@@ -967,4 +967,144 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get errorUnknown => '問題が発生しました。もう一度お試しください。';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count票',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollChooseUpTo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countつまで選べます',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollEnded => '投票は終了しました';
+
+  @override
+  String pollEndsOn(String date) {
+    return '$dateに終了';
+  }
+
+  @override
+  String get pollResultsAfterVoting => '投票すると結果が表示されます。';
+
+  @override
+  String get pollResultsWhenClosed => '投票終了後に結果が表示されます。';
+
+  @override
+  String get pollVote => '投票する';
+
+  @override
+  String get pollRemoveVote => '投票を取り消す';
+
+  @override
+  String get pollSeeVoters => '投票した人を見る';
+
+  @override
+  String get pollNoVotes => 'まだ投票はありません。';
+
+  @override
+  String get poll => '投票';
+
+  @override
+  String get pollNeedsQuestion => '質問を入力してください。';
+
+  @override
+  String get pollNeedsAnswers => '回答を2つ以上入力してください。';
+
+  @override
+  String get pollEndInPast => '終了日時は未来の日時にしてください。';
+
+  @override
+  String get pollQuestion => '質問';
+
+  @override
+  String pollAnswer(int number) {
+    return '回答$number';
+  }
+
+  @override
+  String get pollRemoveAnswer => 'この回答を削除';
+
+  @override
+  String get pollAddAnswer => '回答を追加';
+
+  @override
+  String get pollMultipleChoice => '複数選択を許可する';
+
+  @override
+  String get pollChoicesAllowed => '選べる数';
+
+  @override
+  String get pollAnyNumber => '制限なし';
+
+  @override
+  String get pollPublic => '誰が何に投票したかを表示する';
+
+  @override
+  String get pollAllowChangeVote => '投票の変更を許可する';
+
+  @override
+  String get pollCloses => '投票の終了';
+
+  @override
+  String get pollNeverCloses => 'なし';
+
+  @override
+  String get pollHideVotes => '終了まで結果を非表示にする';
+
+  @override
+  String get pollHideVotesNeedsEnd => '先に終了日時を選んでください。';
+
+  @override
+  String get addPoll => '投票を追加';
+
+  @override
+  String get editPoll => '投票を編集';
+
+  @override
+  String get removePoll => '投票を削除';
+
+  @override
+  String get draftSaved => '下書きを保存しました。';
+
+  @override
+  String get draftSavedWithoutPoll => '下書きを保存しました（下書きには投票を保存できないため、投票は含まれません）。';
+
+  @override
+  String get draftNeedsText => '下書きとして保存するには何か入力してください。';
+
+  @override
+  String get drafts => '下書き';
+
+  @override
+  String get draftsLoadFailed => '下書きを読み込めませんでした';
+
+  @override
+  String get noDrafts => '下書きはありません。書きかけの投稿を閉じるときに「下書きを保存」を選ぶと、ここに保存されます。';
+
+  @override
+  String draftReplyTo(String title) {
+    return '「$title」への返信';
+  }
+
+  @override
+  String get draftUntitled => '無題のディスカッション';
+
+  @override
+  String get deleteDraftQuestion => 'この下書きを削除しますか？';
+
+  @override
+  String get deleteDraft => '下書きを削除';
 }

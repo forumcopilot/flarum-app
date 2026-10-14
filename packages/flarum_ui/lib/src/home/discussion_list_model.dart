@@ -38,9 +38,17 @@ class DiscussionListModel extends ChangeNotifier {
   /// Loads the first page again.
   Future<void> refresh() => _load(reset: true);
 
-  /// Loads the next page, unless one is loading or there is none.
+  /// Loads the next page, unless one is loading or there is none. Not after a failure, until
+  /// [retryMore]: the list's end would ask again with every scroll.
   Future<void> loadMore() async {
     if (loading || !hasMore || error != null) return;
+    await _load(reset: false);
+  }
+
+  /// The list end's Retry: the next page, after a failure.
+  Future<void> retryMore() async {
+    if (loading) return;
+    error = null;
     await _load(reset: false);
   }
 

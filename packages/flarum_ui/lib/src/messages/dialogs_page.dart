@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -37,7 +38,12 @@ class _DialogsPageState extends State<DialogsPage> {
     _refresh();
   }
 
-  Future<void> _refresh() => _load(reset: true);
+  Future<void> _refresh() async {
+    await _load(reset: true);
+    // Failed over the list it had: it stays, and the reader learns why it didn't change.
+    final error = _error;
+    if (error != null && _dialogs.isNotEmpty && mounted) SnackbarHelper.showError(context, describeError(context, error));
+  }
 
   Future<void> _load({required bool reset}) async {
     if (_loading) return;

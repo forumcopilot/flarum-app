@@ -48,6 +48,12 @@ class _TagsPageState extends State<TagsPage> {
     }
   }
 
+  Future<void> _refresh() async {
+    await _load(refresh: true);
+    // Failed over the tags it had: they stay, and the reader learns why.
+    if (_error case final error? when mounted) SnackbarHelper.showError(context, describeError(context, error));
+  }
+
   void _open(FlarumTag tag) =>
       Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TagPage(site: widget.site, tag: tag)));
 
@@ -67,7 +73,7 @@ class _TagsPageState extends State<TagsPage> {
           ),
         (null, _) => const Center(child: CircularProgressIndicator()),
         (final List<FlarumTag> tags, _) => RefreshIndicator(
-            onRefresh: () => _load(refresh: true),
+            onRefresh: _refresh,
             child: _list(context, tags),
           ),
       },

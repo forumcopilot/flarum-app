@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -41,6 +42,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
   Future<void> _refresh() async {
     await _model.refresh();
     _settled();
+    // Failed over the list it had: it stays, and the reader learns why it didn't change.
+    final error = _model.error;
+    if (error != null && _model.items.isNotEmpty && mounted) SnackbarHelper.showError(context, describeError(context, error));
   }
 
   int? _reported;
@@ -159,7 +163,15 @@ class NotificationTile extends StatelessWidget {
       color: n.isRead ? Colors.transparent : colorScheme.primaryContainer.withValues(alpha: 0.35),
       child: ListTile(
         onTap: onTap,
-        leading: FlarumAvatar(user: n.fromUser),
+        leading: switch (n.fromUser) {
+          final user? => FlarumAvatar(user: user),
+          // From the forum itself (a suspension, an export): its kind, as the web shows it.
+          null => CircleAvatar(
+              radius: 20,
+              backgroundColor: colorScheme.secondaryContainer,
+              child: Icon(iconFor(n), color: colorScheme.onSecondaryContainer),
+            ),
+        },
         title: Text(
           message(n, flarumL10n(context)),
           style: theme.textTheme.bodyMedium?.copyWith(fontWeight: n.isRead ? FontWeight.w400 : FontWeight.w600),
@@ -168,6 +180,15 @@ class NotificationTile extends StatelessWidget {
       ),
     );
   }
+
+  /// The icon for [n] where nobody sent it.
+  static IconData iconFor(FlarumNotification n) => switch (n.contentType) {
+        'userSuspended' => Icons.block,
+        'userUnsuspended' => Icons.check_circle_outline,
+        'gdprExportAvailable' => Icons.download_outlined,
+        'selectBestAnswer' => Icons.check_circle_outline,
+        _ => Icons.notifications_outlined,
+      };
 
   /// [n]'s line, worded as the web words it.
   static String message(FlarumNotification n, FlarumLocalizations l10n) {

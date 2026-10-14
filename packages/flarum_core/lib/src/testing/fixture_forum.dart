@@ -38,6 +38,9 @@ class FixtureForum {
   /// whose list is empty, say, where only a full one was recorded.
   final replies = <String, Object>{};
 
+  /// Every request fails as it does with no connection (Dio's connection error, no response).
+  bool offline = false;
+
   String discussionId(String name) => (seed['discussions'] as Map)[name] as String;
   String userId(String name) => (seed['users'] as Map)[name] as String;
   String tagId(String name) => (seed['tags'] as Map)[name] as String;
@@ -140,6 +143,13 @@ class _FixtureAdapter implements HttpClientAdapter {
   @override
   Future<ResponseBody> fetch(RequestOptions options, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
     forum.requests.add(options);
+    if (forum.offline) {
+      throw DioException.connectionError(
+        requestOptions: options,
+        reason: 'Failed host lookup',
+        error: const SocketException('Failed host lookup'),
+      );
+    }
     if (forum.replies['${options.method} ${options.path}'] case final body?) {
       return ResponseBody.fromString(jsonEncode(body), 200, headers: {
         Headers.contentTypeHeader: ['application/vnd.api+json'],

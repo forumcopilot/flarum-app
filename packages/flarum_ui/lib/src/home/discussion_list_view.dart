@@ -1,5 +1,6 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forum_kit/views/widgets/topic_list_skeleton.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -11,7 +12,8 @@ import 'discussion_tile.dart';
 
 /// A list of discussions: pull to refresh, more as the reader nears the end,
 /// and a discussion opens at the first post the reader hasn't read. Its row
-/// is refreshed on the way back.
+/// is refreshed on the way back. A refresh that fails keeps the list shown
+/// and says why.
 class DiscussionListView extends StatelessWidget {
   const DiscussionListView({super.key, required this.site, required this.list, this.emptyMessage});
 
@@ -29,7 +31,15 @@ class DiscussionListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
-    return RefreshIndicator(onRefresh: list.refresh, child: _body(context, l10n));
+    return RefreshIndicator(onRefresh: () => _refresh(context), child: _body(context, l10n));
+  }
+
+  Future<void> _refresh(BuildContext context) async {
+    await list.refresh();
+    final error = list.error;
+    if (error != null && list.items.isNotEmpty && context.mounted) {
+      SnackbarHelper.showError(context, describeError(context, error));
+    }
   }
 
   Widget _body(BuildContext context, FlarumLocalizations l10n) {
@@ -56,7 +66,7 @@ class DiscussionListView extends StatelessWidget {
         itemBuilder: (context, i) {
           if (i == list.items.length) {
             if (list.error != null) {
-              return TextButton.icon(onPressed: list.loadMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry));
+              return TextButton.icon(onPressed: list.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry));
             }
             return list.hasMore
                 ? const Padding(

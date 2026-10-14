@@ -23,6 +23,22 @@ Future<void> _pumpUntil(WidgetTester tester, Finder finder) async {
 void main() {
   setUp(FlarumForum.resetForTesting);
 
+  testWidgets('a notification from the forum itself shows its kind, not a "?" avatar', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      theme: AppTheme.lightTheme,
+      localizationsDelegates: FlarumLocalizations.localizationsDelegates,
+      home: const Material(
+        child: Column(children: [
+          NotificationTile(notification: FlarumNotification(id: '1', contentType: 'userSuspended')),
+          NotificationTile(notification: FlarumNotification(id: '2', contentType: 'userUnsuspended')),
+        ]),
+      ),
+    ));
+    expect(find.byIcon(Icons.block), findsOneWidget);
+    expect(find.byIcon(Icons.check_circle_outline), findsOneWidget);
+    expect(find.text('?'), findsNothing);
+  });
+
   for (final version in FlarumVersion.values) {
     group('Flarum ${version.name}:', () {
       late FixtureForum fixtures;

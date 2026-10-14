@@ -194,3 +194,23 @@ before, in light and dark). Each page of posts is also prepared on a worker isol
 (`FlarumHtml.warm`, which nothing called). What remains is flutter_html's own work, mostly its
 layout. To be measured on the phone again.
 
+## Phone re-check (14 October 2026)
+
+The Pixel 4a re-check of 366df93 passed the conversation from a profile, the empty fields, the
+autofill chip, the photo names (fof/upload stores `IMG_…_2.jpg` as `img-…-2.jpg`), the author's ⋮
+and rendering (Formatting samples, a long thread, Arabic still right to left), on both forums.
+Offline, a discussion and Notifications said "Couldn't reach the forum…", but pulling Home to
+refresh kept the list it had and said nothing: the lists show an error only when they have nothing
+else to show. Home, Tags, Notifications and Messages now say why a refresh failed over the list
+they keep, and the Retry at the end of the Home list works (it called a method that does nothing
+after a failure). Notifications nobody sent (a suspension, an export) showed a "?" avatar; they show
+an icon for their kind.
+
+Benchmark, thread 26838: build over 16.7 ms in 10 and 6 frames (12–13 before), build max 45 and 54 ms
+(70–71), build p99 15.7 and 13.5 ms (17.5–17.6).
+
+```
+PERF thread frames=1055 build p50=0.8 p90=2.0 p99=15.7 max=45 | raster p50=3.5 p90=4.2 p99=8.4 max=57 | total>16.7ms=34 total>33ms=15 build>16.7ms=10 raster>16.7ms=4
+PERF thread frames=1064 build p50=0.9 p90=2.0 p99=13.5 max=54 | raster p50=3.4 p90=4.2 p99=9.5 max=53 | total>16.7ms=36 total>33ms=13 build>16.7ms=6 raster>16.7ms=6
+```
+

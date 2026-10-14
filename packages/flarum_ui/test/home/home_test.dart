@@ -100,6 +100,20 @@ void main() {
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });
+
+      testWidgets('a refresh that fails keeps the list and says why', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: Scaffold(body: HomePage(site: _site()))));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        final shown = find.byType(DiscussionTile).evaluate().length;
+
+        fixtures.offline = true;
+        await tester.fling(find.byType(DiscussionTile).first, const Offset(0, 400), 1000);
+        await _pumpUntil(tester, find.text("Couldn't reach the forum. Check your connection and try again."));
+        expect(find.byType(DiscussionTile), findsNWidgets(shown), reason: 'the list stays');
+        expect(find.textContaining('DioException'), findsNothing);
+        await tester.pump(const Duration(seconds: 10));
+      });
     });
   }
 }

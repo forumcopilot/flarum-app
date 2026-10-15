@@ -313,3 +313,27 @@ polls weren't part of this run. Fixed after it:
   reaction row): carol had three from bob's tries. A forum's behaviour, not the app's; removed on the
   server with the run's discussion.
 
+## Phone check of drafts and polls (15 October 2026)
+
+The Pixel 4a run at 492f282 (both forums, as bob) passed everything: a poll in a new discussion
+(the editor's checks, the chip, the card), voting (a vote moved, the voters' sheet, a vote taken
+back; on 2.0 a third choice refused past "Choices allowed", on 1.8 all three counted), saving a
+reply, a new discussion (without its poll, as it says) and a private discussion as drafts, the
+Drafts page (latest first, edit, delete, a private draft sent with carol back in it), and the two
+fixes (Bookmarks after Back, the tag bell's eye). The card showed "0 votes" before bob voted, not
+"The results show once you vote.": bob wrote the poll, and fof/polls shows the results to a poll's
+author (the tests have bob voting in carol's). After it: the editor's message ("Give at least two
+answers.") now goes as soon as the question or an answer is edited, not at the next Done.
+
+## Exit run on the iPhone, part one (15 October 2026)
+
+iPhone 17, iOS 26.7.1, at 988c77a. `phase-3` didn't build for iOS from a clean checkout: the project
+targeted iOS 13, no Podfile was committed, and the one Flutter generates leaves the platform
+commented out, so `pod install` stopped on firebase_core (iOS 15). The repo now has a Podfile
+(`platform :ios, '15.0'`, discourse-app's), the Pods includes in the xcconfigs and iOS 15.0 as the
+deployment target. Tung browsed for a few minutes: launch, Home, the "Formatting samples" thread,
+a profile, Tags and a tag, the forum switcher, and mondedie.fr (Home, a thread, a profile, a tag)
+all worked; Sign in opened the web view, closed without signing in. Still to do on the iPhone:
+the other census forums, signing in (Phase 2's last item: the iOS web view's remember cookie), and
+all of Part B; and the Pixel's part of the exit run.
+

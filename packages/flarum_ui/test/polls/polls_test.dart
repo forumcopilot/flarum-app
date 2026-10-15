@@ -156,11 +156,16 @@ void main() {
         await tester.pump();
         expect(find.text('Write the question.'), findsOneWidget);
         await tester.enterText(find.widgetWithText(TextField, 'Question'), WriteSamples.pollQuestion);
+        // The message goes, and the fields move up, on the next frame.
+        await tester.pump();
+        expect(find.text('Write the question.'), findsNothing);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 1'), WriteSamples.pollOptions[0]);
         await tester.tap(find.text('Done'));
         await tester.pump();
         expect(find.text('Give at least two answers.'), findsOneWidget);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 2'), WriteSamples.pollOptions[1]);
+        await tester.pump();
+        expect(find.text('Give at least two answers.'), findsNothing, reason: 'gone once the reader puts it right');
         await tester.tap(find.text('Add an answer'));
         await tester.pump();
         await tester.enterText(find.widgetWithText(TextField, 'Answer 3'), WriteSamples.pollOptions[2]);

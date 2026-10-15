@@ -24,6 +24,15 @@ with `adb reverse tcp:PORT tcp:PORT`); iOS allows local networking.
 Without `--dart-define`, the app opens the template's default forum, discuss.flarum.org, as a
 guest. CI builds that as a debug APK on every push (artifact `app-debug.apk` on the run's page).
 
+## iPhone
+
+The repo carries no signing team: choose yours once in a local clone (Xcode → `ios/Runner.xcworkspace`
+→ Runner target → Signing & Capabilities → Team, automatic signing) and don't commit it. The app
+needs iOS 15 or later (`ios/Podfile`, the project's deployment target): firebase_core, which comes
+with the SDK, requires it, and without a committed Podfile `pod install` stopped on it. Then
+`flutter run -d <iPhone>` as above, with the phone unlocked (a locked iPhone can't mount the
+developer disk image, and the install fails) and Developer Mode on.
+
 ## Quickest: CI's debug APK and the forum switcher
 
 1. From the latest green run on GitHub Actions (branch `phase-2`), download the artifact

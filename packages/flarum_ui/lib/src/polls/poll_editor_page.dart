@@ -32,9 +32,9 @@ class PollEditorPage extends StatefulWidget {
 }
 
 class _PollEditorPageState extends State<PollEditorPage> {
-  late final _question = TextEditingController(text: widget.poll?.question ?? '');
+  late final _question = _field(widget.poll?.question ?? '');
   late final List<TextEditingController> _answers = [
-    for (final answer in widget.poll?.options ?? const ['', '']) TextEditingController(text: answer),
+    for (final answer in widget.poll?.options ?? const ['', '']) _field(answer),
   ];
   late bool _multiple = widget.poll?.allowMultipleVotes ?? false;
   late int _maxVotes = widget.poll?.maxVotes ?? 0;
@@ -43,6 +43,20 @@ class _PollEditorPageState extends State<PollEditorPage> {
   late bool _hideVotes = widget.poll?.hideVotes ?? false;
   late DateTime? _endDate = widget.poll?.endDate;
   String? _problem;
+
+  /// A field whose editing clears what Done found wrong: the reader is putting it right. Only a
+  /// change of text: a tap into the field moves the cursor, which notifies too, and the message
+  /// leaving then would move the fields under the finger.
+  TextEditingController _field(String text) {
+    final controller = TextEditingController(text: text);
+    var last = text;
+    controller.addListener(() {
+      if (controller.text == last) return;
+      last = controller.text;
+      if (_problem != null && mounted) setState(() => _problem = null);
+    });
+    return controller;
+  }
 
   @override
   void dispose() {
@@ -163,7 +177,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton.icon(
-                onPressed: () => setState(() => _answers.add(TextEditingController())),
+                onPressed: () => setState(() => _answers.add(_field(''))),
                 icon: const Icon(Icons.add),
                 label: Text(l10n.pollAddAnswer),
               ),

@@ -147,6 +147,12 @@ class FlarumApi {
   Future<FlarumForumInfo> forumInfo() async {
     final info = FlarumForumInfo.fromDocument(await client.get(''));
     _version = info.version;
+    // Without fof/polls (or on 2.0 with discussion polls off, which drops its includes too) the
+    // forum has no `canStartPolls`: its includes are left off from the start, sparing a refused
+    // request and the tries after it, which forums that limit bursts of requests refuse too.
+    if (!info.attributes.containsKey('canStartPolls')) {
+      _refusedIncludes.addAll(_postIncludes.split(',').where((include) => _extensionOf(include) == 'polls'));
+    }
     return info;
   }
 

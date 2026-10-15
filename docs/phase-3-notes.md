@@ -265,3 +265,32 @@ PERF thread frames=1055 build p50=0.8 p90=2.0 p99=15.7 max=45 | raster p50=3.5 p
 PERF thread frames=1064 build p50=0.9 p90=2.0 p99=13.5 max=54 | raster p50=3.4 p90=4.2 p99=9.5 max=53 | total>16.7ms=36 total>33ms=13 build>16.7ms=6 raster>16.7ms=6
 ```
 
+## Census and SDK conformance (15 October 2026)
+
+**Census**, after this week's changes to the posts request (the poll includes) and the renderer:
+all 204 guest-readable census forums on 1.0 or later; 199 read (144 on 1.x, 55 on 2.0), 5
+unreachable as before (firewalls, a 526, a dropped connection); 1,575 posts rendered, 193 profiles
+found by slug, no parse or render errors. One thread failed: forum.osticket.com doesn't run fof/polls
+and limits bursts of requests (503), so the includes it refused, and the tries that find which
+extension to leave out, ended in a refusal. A forum whose info has no `canStartPolls` doesn't run
+fof/polls (or, on 2.0, has discussion polls off, which drops their includes too): the app now leaves
+the poll includes off for it from the start.
+
+**Conformance** (`test/conformance_test.dart`, the SDK's shared suites signed in as carol): 48 of 59
+on both versions, from 42 of 60 before Phase 3's writes. The harness now names a post to like
+(bob's in the welcome thread: carol already likes alice's) and waits out the posting throttle
+between the topic suite's new discussion and the post suite's reply. What's left:
+
+- Flarum has no such thing (5): password-protected tags, forum statistics for members (admins
+  only), two-step sign-in in the app, who's online for members, recommended users.
+- Not supported (3): thanks, and following users (ianm/follow-users, Should tier).
+- Test data (1): the seed's users have no avatars.
+- The suite's own choice (2): `getRawPostAsync` and `saveRawPostAsync` take the first post of the
+  first discussion, someone else's, whose source Flarum gives only to those who may edit it. Only
+  a change to the shared suite (the canonical SDK) would pick one of the reader's own.
+
+The plan's target of 54 counted thanks and following users among Phase 3's writes; 50 of 59 is the
+most these forums can give the suite as it stands. The runs' writes as carol (two discussions and a
+reply each, a flag, an ignore, a tag's follow state, likes, read marks, sign-in tokens) were
+removed on the server, checked against a snapshot of every row naming her taken before.
+

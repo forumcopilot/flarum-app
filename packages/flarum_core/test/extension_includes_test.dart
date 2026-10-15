@@ -45,6 +45,23 @@ void main() {
     expect(include(adapter, 5), 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion');
   });
 
+  test('a forum whose info has no canStartPolls is asked for no poll includes at all', () async {
+    const withoutPolls = (200, {
+      'data': {
+        'type': 'forums',
+        'id': '1',
+        'attributes': {'title': 'No polls', 'baseUrl': FixtureForum.baseUrl},
+      },
+    });
+    final adapter = ScriptedAdapter([withoutPolls, noPosts]);
+    final forum = api(adapter);
+    await forum.forumInfo();
+    await forum.posts('1');
+    expect(include(adapter, 1), isNot(contains('polls')));
+    expect(include(adapter, 1), contains('mentionedBy'));
+    expect(adapter.requests, hasLength(2), reason: 'nothing refused');
+  });
+
   test('discussions without flarum/tags: sent again without tags', () async {
     final adapter = ScriptedAdapter([refused, discussion, discussion]);
     final forum = api(adapter);

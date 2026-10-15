@@ -10,8 +10,9 @@ import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 import 'package:forumcopilot_sdk/test/test_exports.dart' as fc;
 
 /// The SDK's shared proxy suites (forumcopilot_sdk lib/test), run against a live test forum:
-/// the conformance check the plan asks for. They expect `result: true` from every method, so in
-/// Phase 2 the write methods (Phase 3) fail by design; the summary at the end is the report.
+/// the conformance check the plan asks for. They expect `result: true` from every method; what
+/// Flarum doesn't have answers false, and the summary at the end is the report. They write as
+/// carol (a topic, a reply, a report, likes, follows), which is removed on the server after.
 /// Only the proxies Flarum implements are driven. Signs in as carol, whose read state no fixture
 /// depends on. Skipped by default; run against one forum with
 ///
@@ -59,6 +60,9 @@ Future<void> main() async {
     testUrl: '$url/d/${(seed['discussions'] as Map)['welcome']}',
     forumPassword: '',
     email: 'carol@example.com',
+    // bob's post in the welcome thread, which carol likes and then unlikes (she already likes
+    // alice's, which the seed set).
+    likePostId: ((seed['posts'] as Map)['welcome'] as List)[2] as String,
   );
 
   // Before the groups: some suites decide while being declared whether to run signed in.
@@ -72,10 +76,13 @@ Future<void> main() async {
   group('IFCForumProxy', () => fc.runForumProxyTests(SiteProxyFactory.getForumProxy(), config));
   group('IFCTopicProxy',
       () => fc.runTopicProxyTests(SiteProxyFactory.getTopicProxy(), SiteProxyFactory.getForumProxy(), config));
-  group(
-      'IFCPostProxy',
-      () => fc.runPostProxyTests(SiteProxyFactory.getPostProxy(), SiteProxyFactory.getTopicProxy(),
-          SiteProxyFactory.getForumProxy(), config));
+  group('IFCPostProxy', () {
+    // The topic suite has just started a discussion: Flarum's posting throttle (one post every 10
+    // seconds) would refuse the reply that comes first here.
+    setUpAll(() => Future<void>.delayed(const Duration(seconds: 11)));
+    fc.runPostProxyTests(SiteProxyFactory.getPostProxy(), SiteProxyFactory.getTopicProxy(),
+        SiteProxyFactory.getForumProxy(), config);
+  });
   group('IFCUserProxy', () => fc.runUserProxyTests(SiteProxyFactory.getUserProxy(), config));
   group('IFCSearchProxy',
       () => fc.runSearchProxyTests(SiteProxyFactory.getSearchProxy(), SiteProxyFactory.getForumProxy(), config));

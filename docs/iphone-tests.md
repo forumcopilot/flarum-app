@@ -24,7 +24,7 @@ and mondedie.fr all worked. Sign in opened the web view but wasn't completed.
 4. **Light and dark**, and the forum's colours; the notch and home indicator (safe areas) on every
    screen.
 
-## From Phase 3's exit (Part B of `exit_run.md`)
+## From Phase 3's exit: reading and posting
 
 5. **Composer**: Start a discussion with tags, Reply, Quote, Edit, an @mention from the
    suggestions; the keyboard doesn't cover the toolbar; the close prompt (Discard / Save draft /

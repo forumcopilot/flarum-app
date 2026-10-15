@@ -20,11 +20,15 @@ Future<List<XFile>> pickUploads(UploadSource source) async => switch (source) {
       UploadSource.files => await FilePickerUtils.pickFiles(),
     };
 
-/// [photos], each named by Android's photo picker after its media id ("1000000057.jpg") renamed
-/// the way a phone camera names a photo, as forum_kit names one just taken (IMG_20261013_221233.jpg,
-/// then _2, _3 for the others picked with it): the name is what a post shows for the image, and
-/// 1.x's alt text. Each goes into a directory of its own, next to where the picker copied it.
-/// Photos with names of their own keep them, and any that can't be moved stay as they are.
+/// [photos] named by the picker rather than by the person, renamed the way a phone camera names a
+/// photo, as forum_kit names one just taken (IMG_20261013_221233.jpg, then _2, _3 for the others
+/// picked with it): Android's photo picker names one after its media id ("1000000057.jpg"), iOS's
+/// `image_picker_<UUID>.jpg`, and the name is what a post shows for the image, and 1.x's alt text.
+/// Each goes into a directory of its own, next to where the picker copied it. Photos with names of
+/// their own keep them, and any that can't be moved stay as they are.
+/// A picker's own name for a photo: Android's media id, or iOS's `image_picker_<UUID>`.
+final _pickerName = RegExp(r'^(\d+|image_picker_[0-9A-Fa-f-]{8,})$');
+
 @visibleForTesting
 Future<List<XFile>> nameLikeACamera(List<XFile> photos, DateTime now) async {
   String two(int n) => '$n'.padLeft(2, '0');
@@ -34,7 +38,7 @@ Future<List<XFile>> nameLikeACamera(List<XFile> photos, DateTime now) async {
   for (final photo in photos) {
     final dot = photo.name.lastIndexOf('.');
     final base = dot < 0 ? photo.name : photo.name.substring(0, dot);
-    if (!RegExp(r'^\d+$').hasMatch(base)) {
+    if (!_pickerName.hasMatch(base)) {
       renamed.add(photo);
       continue;
     }

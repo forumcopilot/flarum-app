@@ -119,14 +119,17 @@ void main() {
     );
   });
 
-  test("photos the picker names by their media id get a camera's name; others keep theirs", () async {
+  test("photos the picker names (Android's media id, iOS's image_picker_<UUID>) get a camera's name; others keep theirs", () async {
     final picked = [
       await file('1000000057.jpg', 10),
       await file('PXL_20261001_101010.jpg', 10),
       await file('1000000058.JPG', 10),
+      // iOS's picker.
+      await file('image_picker_5A1F2C3D-4E5F-4A6B-8C7D-9E0F1A2B3C4D.jpg', 10),
     ];
     final named = await nameLikeACamera(picked, DateTime(2026, 10, 13, 22, 12, 3));
-    expect([for (final f in named) f.name], ['IMG_20261013_221203.jpg', 'PXL_20261001_101010.jpg', 'IMG_20261013_221203_2.jpg']);
+    expect([for (final f in named) f.name],
+        ['IMG_20261013_221203.jpg', 'PXL_20261001_101010.jpg', 'IMG_20261013_221203_2.jpg', 'IMG_20261013_221203_3.jpg']);
     expect([for (final f in named) File(f.path).existsSync()], everyElement(isTrue));
     expect(File(picked.first.path).existsSync(), isFalse, reason: 'moved, not copied');
   });

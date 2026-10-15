@@ -8,7 +8,8 @@ flarum-app is a Flutter client for Flarum forums, the Flarum counterpart of disc
 (phases, decisions, scope) is the "Flarum App Plan": https://claude.ai/artifact/W61kE9VGWeUbHWxMycWedL.
 Current phase: **3** (the write path; plan: the "flarum-app Phase 3 Plan" doc,
 https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce), on branch `phase-3`; Phase 2 is on
-`phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md, docs/phase-3-notes.md.
+`phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md, docs/phase-3-notes.md. What still
+needs a real iPhone, to run together at the end: docs/iphone-tests.md.
 
 UI building blocks come from `forum_kit` (theme, shared widgets, caches, emoji, its own strings),
 which lives in discourse-app's `packages/forum_kit` and is shared with it. Only generic code goes

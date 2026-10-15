@@ -50,5 +50,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>To take a photo for a post.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To add photos from your library to a post.</string>
 </dict>
 </plist>

@@ -50,6 +50,45 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets('back from a bookmarked discussion, the page reads both lists again', (tester) async {
+        final fixtures = FixtureForum(version, root: _fixtures);
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        await tester.pumpWidget(_app(BookmarksPage(site: _site())));
+        await _settle(tester);
+        await tester.tap(find.text(WriteSamples.questionTitle));
+        await _settle(tester);
+        expect(find.byType(ThreadPage), findsOneWidget);
+
+        // Meanwhile the reader took both bookmarks off.
+        fixtures.replies['GET /discussions'] = {'data': <Object>[]};
+        fixtures.replies['GET /posts'] = {'data': <Object>[]};
+        Navigator.of(tester.element(find.byType(ThreadPage))).pop();
+        await _settle(tester);
+        expect(find.text(WriteSamples.questionTitle), findsNothing);
+        expect(find.text('No bookmarks yet.'), findsOneWidget);
+        await tester.tap(find.text('Posts'));
+        await _settle(tester);
+        expect(find.text(WriteSamples.answer), findsNothing);
+        expect(find.text('No bookmarks yet.'), findsOneWidget, reason: 'the same words on both tabs');
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets('a tag the reader lurks in shows the menu\'s eye on the bar', (tester) async {
+        final forum = FixtureForum(version, root: _fixtures).forum();
+        await tester.runAsync(forum.refresh);
+        await tester.pumpWidget(_app(TagPage(
+          site: _site(),
+          tag: const FlarumTag(id: '43', name: 'Cycling', slug: 'cycling', isPrimary: true, subscription: 'lurk'),
+        )));
+        await _settle(tester);
+        expect(find.descendant(of: find.byType(AppBar), matching: find.byIcon(Icons.visibility_outlined)), findsOneWidget);
+        expect(find.byIcon(Icons.notifications_active), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('a tag\'s page sets how the reader follows it', (tester) async {
         final fixtures = FixtureForum(version, root: _fixtures);
         final forum = fixtures.forum();

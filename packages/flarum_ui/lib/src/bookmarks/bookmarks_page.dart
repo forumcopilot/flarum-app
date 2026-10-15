@@ -46,6 +46,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
     if (mounted) setState(() {});
   }
 
+  /// Back from a discussion: either tab can have lost a bookmark there.
+  void _returned() {
+    if (!mounted) return;
+    _discussions.refresh();
+    _posts.refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
@@ -58,8 +65,14 @@ class _BookmarksPageState extends State<BookmarksPage> {
         ),
         body: TabBarView(
           children: [
-            DiscussionListView(site: widget.site, list: _discussions),
-            PostList(site: widget.site, model: _posts, emptyMessage: l10n.noBookmarks, failedMessage: l10n.discussionsLoadFailed),
+            DiscussionListView(site: widget.site, list: _discussions, emptyMessage: l10n.noBookmarks, onReturn: _returned),
+            PostList(
+              site: widget.site,
+              model: _posts,
+              emptyMessage: l10n.noBookmarks,
+              failedMessage: l10n.discussionsLoadFailed,
+              onReturn: _returned,
+            ),
           ],
         ),
       ),

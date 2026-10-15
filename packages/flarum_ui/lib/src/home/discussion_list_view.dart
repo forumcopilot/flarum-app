@@ -15,7 +15,7 @@ import 'discussion_tile.dart';
 /// is refreshed on the way back. A refresh that fails keeps the list shown
 /// and says why.
 class DiscussionListView extends StatelessWidget {
-  const DiscussionListView({super.key, required this.site, required this.list, this.emptyMessage});
+  const DiscussionListView({super.key, required this.site, required this.list, this.emptyMessage, this.onReturn});
 
   final SiteContext site;
   final DiscussionListModel list;
@@ -23,9 +23,13 @@ class DiscussionListView extends StatelessWidget {
   /// What an empty list says, when "No discussions" isn't it.
   final String? emptyMessage;
 
+  /// Called back from a discussion opened here, after its row is read again.
+  final VoidCallback? onReturn;
+
   Future<void> _open(BuildContext context, FlarumDiscussion discussion) async {
     await ThreadPage.open(context, site, discussion.id, near: list.openAt(discussion), title: discussion.title);
     await list.reload(discussion.id);
+    onReturn?.call();
   }
 
   @override

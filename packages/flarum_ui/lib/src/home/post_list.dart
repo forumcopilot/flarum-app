@@ -58,12 +58,17 @@ class PostListModel extends ChangeNotifier {
 
 /// [model]'s posts: each its discussion's title over its words, opening the thread at it.
 class PostList extends StatelessWidget {
-  const PostList({super.key, required this.site, required this.model, required this.emptyMessage, required this.failedMessage});
+  const PostList(
+      {super.key, required this.site, required this.model, required this.emptyMessage, required this.failedMessage, this.onReturn});
 
   final SiteContext site;
   final PostListModel model;
   final String emptyMessage;
   final String failedMessage;
+
+  /// Called back from a thread opened here, where what the reader did there can change the list
+  /// (a post's bookmark taken off).
+  final VoidCallback? onReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +102,10 @@ class PostList extends StatelessWidget {
                     style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
             onTap: discussion == null
                 ? null
-                : () => ThreadPage.open(context, site, discussion, near: post.number, title: post.discussionTitle),
+                : () async {
+                    await ThreadPage.open(context, site, discussion, near: post.number, title: post.discussionTitle);
+                    onReturn?.call();
+                  },
           );
         },
       ),

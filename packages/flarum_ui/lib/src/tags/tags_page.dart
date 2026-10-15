@@ -246,6 +246,15 @@ class _TagFollowMenu extends StatelessWidget {
   // A menu item's value can't be null (that reads as dismissing the menu).
   static const _none = '';
 
+  /// Each level's icon, in the menu and on the bar.
+  static const _icons = {
+    _none: Icons.notifications_none,
+    'follow': Icons.notifications_active,
+    'lurk': Icons.visibility_outlined,
+    'ignore': Icons.notifications_off_outlined,
+    'hide': Icons.visibility_off_outlined,
+  };
+
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
@@ -259,20 +268,17 @@ class _TagFollowMenu extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
           ),
         );
+    // The bar shows the level's own icon, as the menu draws it.
     return PopupMenuButton<String>(
-      icon: Icon(switch (level) {
-        'follow' || 'lurk' => Icons.notifications_active,
-        'ignore' || 'hide' => Icons.notifications_off_outlined,
-        _ => Icons.notifications_none,
-      }),
+      icon: Icon(_icons[level] ?? _icons[_none]),
       tooltip: l10n.notifications,
       onSelected: (value) => onChanged(value == _none ? null : value),
       itemBuilder: (_) => [
-        item(_none, Icons.notifications_none, l10n.notFollowing, l10n.notFollowingHint),
-        item('follow', Icons.notifications_active, l10n.following, l10n.tagFollowingHint),
-        item('lurk', Icons.visibility_outlined, l10n.lurking, l10n.lurkingHint),
-        item('ignore', Icons.notifications_off_outlined, l10n.ignoring, l10n.tagIgnoringHint),
-        item('hide', Icons.visibility_off_outlined, l10n.hidden, l10n.hiddenHint),
+        item(_none, _icons[_none]!, l10n.notFollowing, l10n.notFollowingHint),
+        item('follow', _icons['follow']!, l10n.following, l10n.tagFollowingHint),
+        item('lurk', _icons['lurk']!, l10n.lurking, l10n.lurkingHint),
+        item('ignore', _icons['ignore']!, l10n.ignoring, l10n.tagIgnoringHint),
+        item('hide', _icons['hide']!, l10n.hidden, l10n.hiddenHint),
       ],
     );
   }

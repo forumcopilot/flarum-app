@@ -294,3 +294,22 @@ most these forums can give the suite as it stands. The runs' writes as carol (tw
 reply each, a flag, an ignore, a tag's follow state, likes, read marks, sign-in tokens) were
 removed on the server, checked against a snapshot of every row naming her taken before.
 
+## Phone check of Milestone 2 (15 October 2026)
+
+The Pixel 4a run at c88b927 (2.0, as bob, carol for one reply) passed likes, reactions, best answer
+(chosen and removed, with the thread's and Home's marks), bookmarks, the discussion's bell (an
+ignored discussion leaves Home) and tags' levels. The offline refresh fix passed on Home, Tags and
+Notifications, and the suspension notices show their icons. Benchmark, thread 26838: build over
+16.7 ms in 9 and 6 frames, build max 57 and 47 ms, p99 14.5 and 15.1 ms (as at 366df93). Drafts and
+polls weren't part of this run. Fixed after it:
+
+- **The Bookmarks page kept a bookmark taken off in the thread** until it was opened again. It reads
+  both tabs again when the reader comes back to it, and a discussion read again on the way back
+  from it leaves a list it no longer belongs to (an ignored discussion from any list; one no longer
+  bookmarked or followed from those lists). Both empty tabs say "No bookmarks yet."
+- **A tag's bell showed the ringing bell for Lurking**, where the menu shows an eye: the bar now
+  shows the menu's icon for each level (the eye for Lurking, the crossed eye for Hidden).
+- **fof/reactions keeps a "reacted" notification** after the reaction is taken back (and an empty
+  reaction row): carol had three from bob's tries. A forum's behaviour, not the app's; removed on the
+  server with the run's discussion.
+

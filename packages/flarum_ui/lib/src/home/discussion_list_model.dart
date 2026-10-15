@@ -85,14 +85,25 @@ class DiscussionListModel extends ChangeNotifier {
   }
 
   /// Fetches discussion [id] again (after the reader has been in it) and
-  /// puts it in its place in the list.
+  /// puts it in its place in the list, or takes it out where it no longer
+  /// belongs: ignored (Flarum leaves those out of every list), or no longer
+  /// bookmarked or followed in those lists.
   Future<void> reload(String id) async {
     final index = items.indexWhere((d) => d.id == id);
     if (index < 0) return;
     try {
       final fresh = await forum.api.discussion(id);
       final at = items.indexWhere((d) => d.id == id);
-      if (at >= 0) items[at] = fresh;
+      if (at >= 0) {
+        final gone = fresh.subscription == 'ignore' ||
+            (bookmarked && !fresh.bookmarked) ||
+            (view == DiscussionView.following && fresh.subscription != 'follow');
+        if (gone) {
+          items.removeAt(at);
+        } else {
+          items[at] = fresh;
+        }
+      }
       _notify();
     } catch (_) {
       // The row keeps what it showed.

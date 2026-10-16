@@ -1,15 +1,14 @@
-import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/app_theme.dart';
-import 'package:forum_kit/utils/time_utils.dart';
+import 'package:forum_kit/theme/forum_palette.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 import '../../config/app_forum_config.dart';
-import '../../l10n/flarum_l10n.dart';
 import 'app_shell.dart';
 import 'appearance.dart';
+import 'flarum_forum_page.dart';
+import 'flarum_host.dart';
+import 'forum_theme.dart';
 
 /// The single-forum app: the forum in [site], in its colours, light or dark
 /// as the reader chose, in the languages flarum_ui has.
@@ -24,27 +23,16 @@ class FlarumApp extends StatelessWidget {
   /// Flarum's proxies, and the reader's sign-in from the last launch. Returns
   /// the forum's [SiteContext].
   static Future<SiteContext> initialize(AppForumConfig config) async {
-    initializeTimeAgo();
-    await ForumcopilotSdk.ensureInitialized();
-    FlarumProxyFactory.register();
-    final site = SiteContext(siteType: FlarumProxyFactory.siteType, site: config.toSite());
-    SiteProxyFactory.initialize(site);
-    final forum = FlarumForum.of(site);
-    try {
-      await forum.restoreSession();
-      final info = await forum.current();
-      AppTheme.palette.value = flarumPalette(info);
-      if (info.actor != null) site.setLoginData(FlarumUserProxy.loginResult(info));
-    } catch (_) {
-      // Offline or the forum is down: the screens say so and retry.
-    }
+    await FlarumHost.ensureInitialized();
+    final site = await FlarumForumPage.connect(config.toSite());
+    await FlarumForumTheme.enter(site.site.pluginUrl);
     return site;
   }
 
   /// Starts the app afresh on another forum (the debug forum switcher).
   /// Each forum keeps its own sign-in.
   Future<void> restartOn(AppForumConfig config) async {
-    AppTheme.palette.value = null;
+    await FlarumForumTheme.leave(site.site.pluginUrl);
     final next = await initialize(config);
     runApp(FlarumApp(site: next, appearance: appearance));
   }
@@ -53,28 +41,25 @@ class FlarumApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: appearance,
-      builder: (context, mode, _) => _app(mode),
+      builder: (context, mode, _) => ValueListenableBuilder(
+        valueListenable: FlarumForumTheme.current,
+        builder: (context, palette, _) => _app(mode, palette),
+      ),
     );
   }
 
-  Widget _app(ThemeMode mode) {
+  Widget _app(ThemeMode mode, ForumPalette? palette) {
     return MaterialApp(
       // Keyed by the forum: after the switcher's runApp, every screen starts afresh on the new one
       // instead of keeping the state (and the forum) it was built with.
       key: ObjectKey(site),
       title: site.site.name,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.themeFor(Brightness.light, palette),
+      darkTheme: AppTheme.themeFor(Brightness.dark, palette),
       themeMode: mode,
-      localizationsDelegates: const [
-        FlarumLocalizations.delegate,
-        KitLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: FlarumLocalizations.supportedLocales,
+      localizationsDelegates: FlarumHost.localizationsDelegates,
+      supportedLocales: FlarumHost.supportedLocales,
       home: AppShell(site: site, appearance: appearance, onSwitchForum: restartOn),
     );
   }

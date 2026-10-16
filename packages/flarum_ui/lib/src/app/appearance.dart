@@ -7,10 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// accent (links, buttons, the selected tab), its secondary the navigation
 /// accent; everything else is the kit's stock light and dark schemes, and
 /// the kit keeps the accent legible in both. Null when the forum sets none.
-ForumPalette? flarumPalette(FlarumForumInfo info) {
-  final primary = info.primaryColor;
-  if (primary == null) return null;
-  final colours = {'tertiary': primary, 'quaternary': info.secondaryColor ?? primary};
+ForumPalette? flarumPalette(FlarumForumInfo info) => flarumPaletteOf(info.primaryColor, info.secondaryColor);
+
+/// [flarumPalette] from the two colours alone, as a host's directory keeps
+/// them (hex, with or without the `#`), for a forum not yet opened.
+ForumPalette? flarumPaletteOf(String? primary, String? secondary) {
+  if (primary == null || primary.trim().isEmpty) return null;
+  final colours = {'tertiary': primary, 'quaternary': secondary ?? primary};
   return ForumPalette(
     light: DiscourseScheme.fromHex(colours),
     dark: DiscourseScheme.fromHex(colours, fallback: DiscourseScheme.dark),

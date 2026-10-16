@@ -6,10 +6,12 @@ Guidance for Claude Code sessions working in this repository.
 
 flarum-app is a Flutter client for Flarum forums, the Flarum counterpart of discourse-app. The plan
 (phases, decisions, scope) is the "Flarum App Plan": https://claude.ai/artifact/W61kE9VGWeUbHWxMycWedL.
-Current phase: **3** (the write path; plan: the "flarum-app Phase 3 Plan" doc,
-https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce), on branch `phase-3`; Phase 2 is on
-`phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md, docs/phase-3-notes.md. What still
-needs a real iPhone, to run together at the end: docs/iphone-tests.md.
+Current phase: **4** (Flapp, the multi-forum app, which hosts flarum_ui as ABDA hosts discourse_ui),
+on branch `phase-4`; Phase 3 (the write path; plan: the "flarum-app Phase 3 Plan" doc,
+https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce) is on `phase-3`, its exit run
+still to do, and Phase 2 on `phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md,
+docs/phase-3-notes.md, docs/phase-4-notes.md. What still needs a real iPhone, to run together at the
+end: docs/iphone-tests.md.
 
 UI building blocks come from `forum_kit` (theme, shared widgets, caches, emoji, its own strings),
 which lives in discourse-app's `packages/forum_kit` and is shared with it. Only generic code goes
@@ -38,6 +40,12 @@ cd packages/flarum_ui && flutter pub get && flutter analyze && flutter test
 The root is the app: a thin `lib/main.dart` over flarum_ui's `FlarumApp`. The forum is
 `AppForumConfig` (flarum_ui `lib/config/`), chosen at build time; point a build at a test forum
 with `--dart-define=FLARUM_URL=…` rather than editing it. Phone testing: `docs/device-testing.md`.
+
+A multi-forum app (Flapp) hosts flarum_ui through `FlarumHost` (start-up, localizations),
+`FlarumForumPage` (one forum, pushed over the host's screens) and `FlarumForumTheme` (the open
+forum's colours, which the host's `MaterialApp` follows); `FlarumApp` uses the same pieces for its
+one forum. Keep per-forum state keyed by the forum's address, never global: a host has several
+forums in one run (docs/phase-4-notes.md).
 
 Each package needs `pubspec_overrides.yaml` (copy the `.example`) to build against the local
 discourse-app checkout; without it, forum_kit and the SDK come from the pinned commit. CI has no

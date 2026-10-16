@@ -49,10 +49,11 @@ class FixtureForum {
   FlarumApi api({bool signedIn = true}) =>
       FlarumApi(FlarumClient(baseUrl, token: signedIn ? 'fixture-token' : null, dio: _dio()));
 
-  /// The registry's forum at [baseUrl], answered from the fixtures, signed in
-  /// as alice unless [signedIn] is false. Replaces any earlier one.
-  FlarumForum forum({bool signedIn = true}) {
-    final forum = FlarumForum.forTesting(baseUrl, _dio());
+  /// The registry's forum at [url] ([baseUrl] unless a test hosts several
+  /// forums), answered from the fixtures, signed in as alice unless
+  /// [signedIn] is false. Replaces any earlier one.
+  FlarumForum forum({bool signedIn = true, String url = baseUrl}) {
+    final forum = FlarumForum.forTesting(url, _dio());
     if (signedIn) forum.api.client.token = 'fixture-token';
     return forum;
   }

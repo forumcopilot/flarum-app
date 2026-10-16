@@ -18,10 +18,12 @@ import 'appearance.dart';
 /// The app's top level: the forum's discussions, its tags, the reader's
 /// notifications and account, one tab each. Signing in or out starts the other tabs afresh.
 class AppShell extends StatefulWidget {
-  const AppShell({super.key, required this.site, required this.appearance, this.onSwitchForum});
+  const AppShell({super.key, required this.site, this.appearance, this.onSwitchForum});
 
   final SiteContext site;
-  final Appearance appearance;
+
+  /// The app's light or dark choice, on the Account tab; null when a host offers it elsewhere.
+  final Appearance? appearance;
 
   /// Restarts the app on another forum; offered in debug builds only.
   final Future<void> Function(AppForumConfig forum)? onSwitchForum;

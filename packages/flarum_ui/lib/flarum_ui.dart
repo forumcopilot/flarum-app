@@ -30,4 +30,7 @@ export 'src/notifications/notifications_page.dart';
 export 'src/profile/user_page.dart';
 export 'src/search/search_page.dart';
 export 'src/app/appearance.dart';
+export 'src/app/flarum_forum_page.dart';
+export 'src/app/flarum_host.dart';
+export 'src/app/forum_theme.dart';
 export 'src/app/debug_forums.dart';

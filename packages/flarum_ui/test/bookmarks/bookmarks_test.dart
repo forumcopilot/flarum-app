@@ -83,8 +83,8 @@ void main() {
           tag: const FlarumTag(id: '43', name: 'Cycling', slug: 'cycling', isPrimary: true, subscription: 'lurk'),
         )));
         await _settle(tester);
-        expect(find.descendant(of: find.byType(AppBar), matching: find.byIcon(Icons.visibility_outlined)), findsOneWidget);
-        expect(find.byIcon(Icons.notifications_active), findsNothing);
+        expect(find.descendant(of: find.byType(AppBar), matching: find.byIcon(Icons.forum)), findsOneWidget);
+        expect(find.byIcon(Icons.star), findsNothing);
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });
@@ -99,12 +99,12 @@ void main() {
         await tester.pumpWidget(_app(TagPage(site: _site(), tag: tags.firstWhere((t) => t.id == cyclingId))));
         await _settle(tester);
 
-        await tester.tap(find.byTooltip('Notifications'));
+        await tester.tap(find.byTooltip('Follow'));
         await _settle(tester);
         expect(find.text('Lurking'), findsOneWidget);
         await tester.tap(find.text('Following'));
         await _settle(tester);
-        expect(find.byIcon(Icons.notifications_active), findsOneWidget);
+        expect(find.byIcon(Icons.star), findsOneWidget);
         final sent = fixtures.requests.lastWhere((r) => r.method != 'GET');
         expect(sent.path, contains('/tags/$cyclingId'));
         expect(find.byType(SnackBar), findsNothing, reason: 'the forum took it');

@@ -25,6 +25,21 @@ void main() {
     expect(find.text('Retry'), findsNothing);
   });
 
+  testWidgets('every coloured tag is filled with its colour, a secondary one too, as on the web', (tester) async {
+    const bug = FlarumTag(id: '7', name: 'bug', slug: 'bug', isPrimary: false, color: '#e74c3c');
+    const plain = FlarumTag(id: '8', name: 'misc', slug: 'misc', isPrimary: false);
+    await tester.pumpWidget(MaterialApp(
+      theme: AppTheme.lightTheme,
+      home: const Scaffold(body: Column(children: [TagLabel(tag: bug), TagLabel(tag: plain)])),
+    ));
+    BoxDecoration decoration(String name) => tester
+        .widget<Container>(find.ancestor(of: find.text(name), matching: find.byType(Container)).first)
+        .decoration! as BoxDecoration;
+    expect(decoration('bug').color, const Color(0xFFE74C3C));
+    expect(decoration('bug').border, isNull);
+    expect(decoration('misc').color, isNotNull, reason: 'a grey label, as the web draws one without a colour');
+  });
+
   testWidgets("a tag's description shows both its lines, at a large text size too", (tester) async {
     FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum();
     final site = SiteContext(

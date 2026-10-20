@@ -200,6 +200,10 @@
   "signIn": "Log In",
   "profile": "Profile",
   "following": "Following",
+  "follow": "Follow",
+  "@follow": {
+    "description": "flarum/subscriptions' button while not following: the follow menu's name"
+  },
   "home": "Home",
   "@home": {
     "description": "Home tab title"
@@ -559,6 +563,10 @@
   "markAllRead": "Mark All as Read",
   "@markAllRead": {
     "description": "Notifications tab action"
+  },
+  "markAllDiscussionsReadQuestion": "Are you sure you want to mark all discussions as read?",
+  "@markAllDiscussionsReadQuestion": {
+    "description": "Asked before Home's Mark All as Read, as Flarum asks"
   },
   "posts": "Posts",
   "profileJoined": "Joined {date}",
@@ -954,6 +962,79 @@
   "@unlike": {
     "description": "Tooltip of the like button when the reader already likes the post"
   },
+  "likedByOne": "{a} likes this.",
+  "@likedByOne": {
+    "description": "Under a post liked by one person (flarum/likes' liked_by_text)",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "likedByTwo": "{a} and {b} like this.",
+  "@likedByTwo": {
+    "description": "Under a post liked by two people",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "likedByOneMore": "{a} and {others, plural, =1{1 other} other{{others} others}} like this.",
+  "@likedByOneMore": {
+    "description": "Under a post liked by one person named and others",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "others": {
+        "type": "int"
+      }
+    }
+  },
+  "likedByMore": "{a}, {b}, and {others, plural, =1{1 other} other{{others} others}} like this.",
+  "@likedByMore": {
+    "description": "Under a post liked by two people named and others",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "others": {
+        "type": "int"
+      }
+    }
+  },
+  "likedByYou": "You like this.",
+  "@likedByYou": {
+    "description": "Under a post only the reader likes"
+  },
+  "likedByYouAndOne": "You and {a} like this.",
+  "@likedByYouAndOne": {
+    "description": "Under a post the reader and one other person like",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "likedByYouOneMore": "You, {a}, and {others, plural, =1{1 other} other{{others} others}} like this.",
+  "@likedByYouOneMore": {
+    "description": "Under a post the reader, one person named and others like",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "others": {
+        "type": "int"
+      }
+    }
+  },
   "react": "React",
   "@react": {
     "description": "Button under a post: choose a reaction (fof/reactions)"
@@ -985,10 +1066,6 @@
   "removeBestAnswer": "Unselect Best Answer",
   "@removeBestAnswer": {
     "description": "Post menu on the chosen answer: un-choose it"
-  },
-  "notificationSettings": "Notifications for this discussion",
-  "@notificationSettings": {
-    "description": "Tooltip of the thread's follow menu"
   },
   "notFollowing": "Not Following",
   "@notFollowing": {

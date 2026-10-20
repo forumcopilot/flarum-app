@@ -166,6 +166,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get following => '팔로잉';
 
   @override
+  String get follow => '팔로우';
+
+  @override
   String get home => '홈';
 
   @override
@@ -351,6 +354,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get markAllRead => '모두 읽음으로 표시';
+
+  @override
+  String get markAllDiscussionsReadQuestion => '모든 토론을 읽은 것으로 표시하시겠습니까?';
 
   @override
   String get posts => '게시물';
@@ -639,6 +645,54 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get unlike => '좋아요 취소';
 
   @override
+  String likedByOne(String a) {
+    return '$a님이 좋아합니다.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a님과 $b님이 좋아합니다.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others명',
+    );
+    return '$a님 외 $_temp0이 좋아합니다.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others명',
+    );
+    return '$a님, $b님 외 $_temp0이 좋아합니다.';
+  }
+
+  @override
+  String get likedByYou => '회원님이 좋아합니다.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return '회원님과 $a님이 좋아합니다.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others명',
+    );
+    return '회원님, $a님 외 $_temp0이 좋아합니다.';
+  }
+
+  @override
   String get react => '반응';
 
   @override
@@ -661,9 +715,6 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => '베스트 답변 해제';
-
-  @override
-  String get notificationSettings => '이 토론의 알림';
 
   @override
   String get notFollowing => '팔로우 안 함';

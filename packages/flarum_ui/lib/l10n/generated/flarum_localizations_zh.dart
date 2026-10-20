@@ -166,6 +166,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get following => '关注中';
 
   @override
+  String get follow => '关注';
+
+  @override
   String get home => '首页';
 
   @override
@@ -351,6 +354,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get markAllRead => '全部已读';
+
+  @override
+  String get markAllDiscussionsReadQuestion => '确定要将所有讨论标记为已读吗？';
 
   @override
   String get posts => '帖子';
@@ -639,6 +645,54 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get unlike => '取消赞';
 
   @override
+  String likedByOne(String a) {
+    return '$a 觉得很赞。';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a 和 $b 觉得很赞。';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others 人',
+    );
+    return '$a 和另外 $_temp0觉得很赞。';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others 人',
+    );
+    return '$a、$b 和另外 $_temp0觉得很赞。';
+  }
+
+  @override
+  String get likedByYou => '你觉得很赞。';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return '你和 $a 觉得很赞。';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others 人',
+    );
+    return '你、$a 和另外 $_temp0觉得很赞。';
+  }
+
+  @override
   String get react => '回应';
 
   @override
@@ -661,9 +715,6 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => '取消最佳回复';
-
-  @override
-  String get notificationSettings => '此讨论的通知';
 
   @override
   String get notFollowing => '不关注';

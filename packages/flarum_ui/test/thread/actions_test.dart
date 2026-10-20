@@ -58,11 +58,14 @@ void main() {
               if (r.method != 'GET' && !'${r.data}'.contains('lastReadPostNumber')) '${r.method} ${r.path}',
           ];
 
-      // Like the answer.
+      // Like the answer: at once, as the reader's (the forum's answer was recorded as bob's).
+      fixtures.latency = const Duration(milliseconds: 300);
       await tester.tap(find.descendant(of: answer, matching: find.text('Like')));
       await tester.pump();
+      expect(find.descendant(of: answer, matching: find.text('You like this.')), findsOneWidget, reason: 'one like, the reader\'s');
+      expect(find.descendant(of: answer, matching: find.text('Unlike')), findsOneWidget);
       await _settle(tester);
-      expect(find.descendant(of: answer, matching: find.text('1')), findsOneWidget, reason: 'one like');
+      fixtures.latency = Duration.zero;
 
       // React with a heart, from the picker.
       await tester.tap(find.descendant(of: answer, matching: find.byIcon(Icons.add_reaction_outlined)));
@@ -81,11 +84,11 @@ void main() {
       expect(find.text('Best Answer'), findsOneWidget);
 
       // Follow the discussion, and bookmark it.
-      await tester.tap(find.byTooltip('Notifications for this discussion'));
+      await tester.tap(find.byTooltip('Follow'));
       await _settle(tester);
       await tester.tap(find.text('Following'));
       await _settle(tester);
-      expect(find.byIcon(Icons.notifications_active), findsOneWidget);
+      expect(find.byIcon(Icons.star), findsOneWidget);
       await tester.tap(find.byTooltip('Bookmark'));
       await _settle(tester);
       expect(find.byTooltip('Remove from bookmarks'), findsOneWidget);

@@ -541,7 +541,7 @@ class _ThreadPageState extends State<ThreadPage> {
           children: [
             for (final tag in tagsInWebOrder(_model.discussion!.tags)) TagLabel(tag: tag),
             if (_recipients case final people? when people.isNotEmpty) ...[
-              Icon(Icons.mail_outline, size: DesignTokens.iconSizeS, color: Theme.of(context).colorScheme.onSurfaceVariant),
+              Icon(Icons.map_outlined, size: DesignTokens.iconSizeS, color: Theme.of(context).colorScheme.onSurfaceVariant),
               Text(l10n.privateWith(people.map((user) => user.displayName).join(', ')),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
             ],
@@ -767,18 +767,24 @@ class _FollowMenu extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
           ),
         );
+    // flarum/subscriptions' own icons: an empty star, a star, a crossed-out eye; and the level's
+    // name, as the web's button says it (Follow while not following).
     return PopupMenuButton<String>(
       icon: Icon(switch (level) {
-        'follow' => Icons.notifications_active,
-        'ignore' => Icons.notifications_off_outlined,
-        _ => Icons.notifications_none,
+        'follow' => Icons.star,
+        'ignore' => Icons.visibility_off,
+        _ => Icons.star_border,
       }),
-      tooltip: l10n.notificationSettings,
+      tooltip: switch (level) {
+        'follow' => l10n.following,
+        'ignore' => l10n.ignoring,
+        _ => l10n.follow,
+      },
       onSelected: (value) => onChanged(value == _none ? null : value),
       itemBuilder: (_) => [
-        item(_none, Icons.notifications_none, l10n.notFollowing, l10n.notFollowingHint),
-        item('follow', Icons.notifications_active, l10n.following, l10n.followingHint),
-        item('ignore', Icons.notifications_off_outlined, l10n.ignoring, l10n.ignoringHint),
+        item(_none, Icons.star_border, l10n.notFollowing, l10n.notFollowingHint),
+        item('follow', Icons.star, l10n.following, l10n.followingHint),
+        item('ignore', Icons.visibility_off, l10n.ignoring, l10n.ignoringHint),
       ],
     );
   }

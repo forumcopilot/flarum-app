@@ -59,7 +59,7 @@ class _PrivateDiscussionsPageState extends State<PrivateDiscussionsPage> {
       floatingActionButton: canStartPrivateDiscussion(_forum)
           ? FloatingActionButton.extended(
               onPressed: _start,
-              icon: const Icon(Icons.mail_outline),
+              icon: const Icon(Icons.map_outlined),
               label: Text(l10n.startPrivateDiscussion),
             )
           : null,

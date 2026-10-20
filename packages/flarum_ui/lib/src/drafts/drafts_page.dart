@@ -185,7 +185,7 @@ class _DraftTile extends StatelessWidget {
         draft.isReply
             ? Icons.reply
             : draft.isPrivateDiscussion
-                ? Icons.mail_outline
+                ? Icons.map_outlined
                 : Icons.forum_outlined,
         color: colorScheme.onSurfaceVariant,
       ),

@@ -168,6 +168,9 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get following => 'Seguindo';
 
   @override
+  String get follow => 'Seguir';
+
+  @override
   String get home => 'Início';
 
   @override
@@ -359,6 +362,10 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Marcar Tudo como Lido';
+
+  @override
+  String get markAllDiscussionsReadQuestion =>
+      'Tem certeza de que deseja marcar todas as discussões como lidas?';
 
   @override
   String get posts => 'Publicações';
@@ -658,6 +665,57 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get unlike => 'Descurtir';
 
   @override
+  String likedByOne(String a) {
+    return '$a curtiu isto.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a e $b curtiram isto.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: 'mais $others pessoas',
+      one: 'mais 1 pessoa',
+    );
+    return '$a e $_temp0 curtiram isto.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: 'mais $others pessoas',
+      one: 'mais 1 pessoa',
+    );
+    return '$a, $b e $_temp0 curtiram isto.';
+  }
+
+  @override
+  String get likedByYou => 'Você curtiu isto.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'Você e $a curtiram isto.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: 'mais $others pessoas',
+      one: 'mais 1 pessoa',
+    );
+    return 'Você, $a e $_temp0 curtiram isto.';
+  }
+
+  @override
   String get react => 'Reagir';
 
   @override
@@ -680,9 +738,6 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'Desmarcar Melhor Resposta';
-
-  @override
-  String get notificationSettings => 'Notificações desta discussão';
 
   @override
   String get notFollowing => 'Não Seguindo';

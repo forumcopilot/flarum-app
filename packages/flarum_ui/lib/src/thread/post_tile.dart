@@ -100,7 +100,6 @@ class PostTile extends StatelessWidget {
   final ValueChanged<FlarumPoll>? onPollChanged;
 
   bool get _hasMenu =>
-      onReply != null ||
       onQuote != null ||
       onEdit != null ||
       onBookmark != null ||
@@ -197,6 +196,11 @@ class PostTile extends StatelessWidget {
               ),
             ),
           _footer(context),
+          if (likedBy(post, readerId, l10n) case final likes?)
+            Padding(
+              padding: const EdgeInsets.only(top: DesignTokens.spacingXS),
+              child: _Count(icon: Icons.thumb_up_outlined, label: likes),
+            ),
           if (post.mentionedByCount > 0)
             InkWell(
               onTap: post.mentionedBy.isEmpty ? null : () => _showReplies(context),
@@ -212,7 +216,7 @@ class PostTile extends StatelessWidget {
 }
 
 extension on PostTile {
-  /// Reply, Quote and Edit, as the web offers them on a post, and the ways to object to it.
+  /// Quote and Edit, and the ways to object to a post. Reply is under the post, as on the web.
   Widget _menu(BuildContext context) {
     final kit = kitL10n(context);
     final l10n = flarumL10n(context);
@@ -221,7 +225,6 @@ extension on PostTile {
       tooltip: MaterialLocalizations.of(context).showMenuTooltip,
       onSelected: (action) => action(),
       itemBuilder: (context) => [
-        if (onReply case final reply?) PopupMenuItem(value: reply, child: _MenuRow(Icons.reply, kit.reply)),
         if (onQuote case final quote?) PopupMenuItem(value: quote, child: _MenuRow(Icons.format_quote, kit.quote)),
         if (onEdit case final edit?) PopupMenuItem(value: edit, child: _MenuRow(Icons.edit_outlined, kit.edit)),
         if (onBookmark case final bookmark?)
@@ -262,15 +265,17 @@ extension on PostTile {
     );
   }
 
-  /// Like, the post's reactions and React, as the web shows them under a post.
+  /// Like and Reply, the post's reactions and React, as the web shows them under a post. Who
+  /// likes it is the line below ([likedBy]).
   Widget _footer(BuildContext context) {
     final l10n = flarumL10n(context);
     final liked = post.isLikedBy(readerId);
     final shown = [for (final r in reactions) if ((post.reactionCounts[r.id] ?? 0) > 0) r];
-    final like = onLike != null || post.likesCount > 0;
+    final like = onLike != null;
     final react = onReact != null && reactions.isNotEmpty;
-    if (!like && shown.isEmpty && !react) return const SizedBox.shrink();
-    final muted = Theme.of(context).colorScheme.onSurfaceVariant;
+    if (!like && onReply == null && shown.isEmpty && !react) return const SizedBox.shrink();
+    final colorScheme = Theme.of(context).colorScheme;
+    final muted = colorScheme.onSurfaceVariant;
     return Padding(
       padding: const EdgeInsets.only(top: DesignTokens.spacingS),
       child: Wrap(
@@ -280,9 +285,17 @@ extension on PostTile {
           if (like)
             TextButton.icon(
               onPressed: onLike,
-              icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
-                  color: liked ? ForumColors.of(context).love : muted, size: 20),
-              label: Text(post.likesCount > 0 ? '${post.likesCount}' : l10n.like),
+              // Flarum's thumbs-up: a heart reads as one of the forum's reactions.
+              icon: Icon(liked ? Icons.thumb_up : Icons.thumb_up_outlined,
+                  color: liked ? colorScheme.primary : muted, size: 20),
+              label: Text(liked ? l10n.unlike : l10n.like),
+              style: TextButton.styleFrom(foregroundColor: muted, visualDensity: VisualDensity.compact),
+            ),
+          if (onReply case final reply?)
+            TextButton.icon(
+              onPressed: reply,
+              icon: Icon(Icons.reply, color: muted, size: 20),
+              label: Text(kitL10n(context).reply),
               style: TextButton.styleFrom(foregroundColor: muted, visualDensity: VisualDensity.compact),
             ),
           for (final reaction in shown)
@@ -425,6 +438,25 @@ String repliedBy(FlarumPost post, FlarumLocalizations l10n) {
     (_, 0) => l10n.repliedByTwo(names[0], names[1]),
     _ => l10n.repliedByMore(names[0], names[1], others),
   };
+}
+
+/// Who likes [post], as flarum/likes words it under a post: "You and Jamie like this.", "Jamie,
+/// Dmitri, and 3 others like this." Null when nobody does. The forum sends up to four likers (the
+/// reader first); the rest are counted.
+String? likedBy(FlarumPost post, String? readerId, FlarumLocalizations l10n) {
+  final total = post.likesCount;
+  if (total <= 0) return null;
+  final names = [for (final user in post.likedBy) if (user.id != readerId) user.displayName];
+  if (post.isLikedBy(readerId)) {
+    final others = total - 1;
+    if (others <= 0) return l10n.likedByYou;
+    if (names.isEmpty) return l10n.summaryLikeCount(total);
+    return others == 1 ? l10n.likedByYouAndOne(names.first) : l10n.likedByYouOneMore(names.first, others - 1);
+  }
+  if (names.isEmpty) return l10n.summaryLikeCount(total);
+  if (total == 1) return l10n.likedByOne(names.first);
+  if (names.length >= 2) return total == 2 ? l10n.likedByTwo(names[0], names[1]) : l10n.likedByMore(names[0], names[1], total - 2);
+  return l10n.likedByOneMore(names.first, total - 1);
 }
 
 extension on PostTile {

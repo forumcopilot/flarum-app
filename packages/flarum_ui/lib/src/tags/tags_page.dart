@@ -263,12 +263,13 @@ class _TagFollowMenu extends StatelessWidget {
   static const _none = '';
 
   /// Each level's icon, in the menu and on the bar.
+  /// fof/follow-tags' own: an empty star, a star, comments, a crossed-out bell, a crossed-out eye.
   static const _icons = {
-    _none: Icons.notifications_none,
-    'follow': Icons.notifications_active,
-    'lurk': Icons.visibility_outlined,
-    'ignore': Icons.notifications_off_outlined,
-    'hide': Icons.visibility_off_outlined,
+    _none: Icons.star_border,
+    'follow': Icons.star,
+    'lurk': Icons.forum,
+    'ignore': Icons.notifications_off,
+    'hide': Icons.visibility_off,
   };
 
   @override
@@ -287,7 +288,14 @@ class _TagFollowMenu extends StatelessWidget {
     // The bar shows the level's own icon, as the menu draws it.
     return PopupMenuButton<String>(
       icon: Icon(_icons[level] ?? _icons[_none]),
-      tooltip: l10n.notifications,
+      // The level, as the web's button names it: Follow while not following.
+      tooltip: switch (level) {
+        'follow' => l10n.following,
+        'lurk' => l10n.lurking,
+        'ignore' => l10n.ignoring,
+        'hide' => l10n.hidden,
+        _ => l10n.follow,
+      },
       onSelected: (value) => onChanged(value == _none ? null : value),
       itemBuilder: (_) => [
         item(_none, _icons[_none]!, l10n.notFollowing, l10n.notFollowingHint),

@@ -362,6 +362,12 @@ abstract class FlarumLocalizations {
   /// **'Following'**
   String get following;
 
+  /// flarum/subscriptions' button while not following: the follow menu's name
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get follow;
+
   /// Home tab title
   ///
   /// In en, this message translates to:
@@ -643,6 +649,12 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Mark All as Read'**
   String get markAllRead;
+
+  /// Asked before Home's Mark All as Read, as Flarum asks
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to mark all discussions as read?'**
+  String get markAllDiscussionsReadQuestion;
 
   /// No description provided for @posts.
   ///
@@ -1064,6 +1076,48 @@ abstract class FlarumLocalizations {
   /// **'Unlike'**
   String get unlike;
 
+  /// Under a post liked by one person (flarum/likes' liked_by_text)
+  ///
+  /// In en, this message translates to:
+  /// **'{a} likes this.'**
+  String likedByOne(String a);
+
+  /// Under a post liked by two people
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {b} like this.'**
+  String likedByTwo(String a, String b);
+
+  /// Under a post liked by one person named and others
+  ///
+  /// In en, this message translates to:
+  /// **'{a} and {others, plural, =1{1 other} other{{others} others}} like this.'**
+  String likedByOneMore(String a, int others);
+
+  /// Under a post liked by two people named and others
+  ///
+  /// In en, this message translates to:
+  /// **'{a}, {b}, and {others, plural, =1{1 other} other{{others} others}} like this.'**
+  String likedByMore(String a, String b, int others);
+
+  /// Under a post only the reader likes
+  ///
+  /// In en, this message translates to:
+  /// **'You like this.'**
+  String get likedByYou;
+
+  /// Under a post the reader and one other person like
+  ///
+  /// In en, this message translates to:
+  /// **'You and {a} like this.'**
+  String likedByYouAndOne(String a);
+
+  /// Under a post the reader, one person named and others like
+  ///
+  /// In en, this message translates to:
+  /// **'You, {a}, and {others, plural, =1{1 other} other{{others} others}} like this.'**
+  String likedByYouOneMore(String a, int others);
+
   /// Button under a post: choose a reaction (fof/reactions)
   ///
   /// In en, this message translates to:
@@ -1111,12 +1165,6 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Unselect Best Answer'**
   String get removeBestAnswer;
-
-  /// Tooltip of the thread's follow menu
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications for this discussion'**
-  String get notificationSettings;
 
   /// Follow menu: the reader's default for a discussion or tag
   ///

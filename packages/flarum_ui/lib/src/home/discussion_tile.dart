@@ -50,7 +50,7 @@ class DiscussionTile extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(children: [
-                      if (d.isPrivate) _glyph(Icons.mail_outline, muted, label: l10n.privateDiscussion),
+                      if (d.isPrivate) _glyph(Icons.map_outlined, muted, label: l10n.privateDiscussion),
                       if (d.isSticky) _glyph(Icons.push_pin, muted),
                       if (d.isLocked) _glyph(Icons.lock, muted),
                       if (d.hasBestAnswer)

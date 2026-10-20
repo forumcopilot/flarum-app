@@ -171,6 +171,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get following => 'Подписки';
 
   @override
+  String get follow => 'Подписаться';
+
+  @override
   String get home => 'Главная';
 
   @override
@@ -359,6 +362,10 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Отметить всё как прочитанное';
+
+  @override
+  String get markAllDiscussionsReadQuestion =>
+      'Отметить все обсуждения прочитанными?';
 
   @override
   String get posts => 'Сообщения';
@@ -665,6 +672,63 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get unlike => 'Больше не нравится';
 
   @override
+  String likedByOne(String a) {
+    return '$a оценил(а) это.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a и $b оценили это.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others человека',
+      many: '$others человек',
+      few: '$others человека',
+      one: '$others человек',
+    );
+    return '$a и ещё $_temp0 оценили это.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others человека',
+      many: '$others человек',
+      few: '$others человека',
+      one: '$others человек',
+    );
+    return '$a, $b и ещё $_temp0 оценили это.';
+  }
+
+  @override
+  String get likedByYou => 'Вы оценили это.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'Вы и $a оценили это.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others человека',
+      many: '$others человек',
+      few: '$others человека',
+      one: '$others человек',
+    );
+    return 'Вы, $a и ещё $_temp0 оценили это.';
+  }
+
+  @override
   String get react => 'Реакция';
 
   @override
@@ -687,9 +751,6 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'Отменить лучший ответ';
-
-  @override
-  String get notificationSettings => 'Уведомления об этом обсуждении';
 
   @override
   String get notFollowing => 'Не отслеживается';

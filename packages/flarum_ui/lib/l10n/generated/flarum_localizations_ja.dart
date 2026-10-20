@@ -166,6 +166,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get following => 'フォロー中';
 
   @override
+  String get follow => 'フォロー';
+
+  @override
   String get home => 'ホーム';
 
   @override
@@ -351,6 +354,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'すべて既読にする';
+
+  @override
+  String get markAllDiscussionsReadQuestion => 'すべてのディスカッションを既読にしますか？';
 
   @override
   String get posts => '投稿';
@@ -639,6 +645,54 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get unlike => 'いいねを取り消す';
 
   @override
+  String likedByOne(String a) {
+    return '$aが「いいね」しました。';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$aと$bが「いいね」しました。';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others人',
+    );
+    return '$aほか$_temp0が「いいね」しました。';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others人',
+    );
+    return '$a、$bほか$_temp0が「いいね」しました。';
+  }
+
+  @override
+  String get likedByYou => 'あなたが「いいね」しました。';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'あなたと$aが「いいね」しました。';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others人',
+    );
+    return 'あなた、$aほか$_temp0が「いいね」しました。';
+  }
+
+  @override
   String get react => 'リアクション';
 
   @override
@@ -661,9 +715,6 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'ベストアンサーを解除する';
-
-  @override
-  String get notificationSettings => 'このディスカッションの通知';
 
   @override
   String get notFollowing => 'フォローしない';

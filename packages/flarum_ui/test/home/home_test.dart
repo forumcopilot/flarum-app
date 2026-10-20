@@ -90,13 +90,36 @@ void main() {
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
         expect(find.text('Following'), findsOneWidget, reason: 'signed in');
-        expect(find.byIcon(Icons.mail_outline), findsOneWidget, reason: 'the byobu discussion is marked private');
+        expect(find.byIcon(Icons.map_outlined), findsOneWidget, reason: 'the byobu discussion is marked private, with byobu\'s map');
 
         await tester.tap(find.text('Long thread for paging tests'));
         await _pumpUntil(tester, find.text('Post 21 of 60.'));
 
         Navigator.of(tester.element(find.byType(ThreadPage))).pop();
         await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets('Mark All as Read asks first, then marks every discussion read and reloads', (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        final reader = forum.info!.actor!.id;
+        fixtures.replies['PATCH /users/$reader'] = {
+          'data': {'type': 'users', 'id': reader, 'attributes': <String, Object>{}},
+        };
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        final lists = fixtures.requests.where((r) => r.path == '/discussions').length;
+
+        await tester.tap(find.byTooltip('Mark All as Read'));
+        await tester.pumpAndSettle();
+        expect(find.text('Are you sure you want to mark all discussions as read?'), findsOneWidget);
+        await tester.tap(find.text('OK'));
+        await tester.pump(const Duration(seconds: 1));
+        final sent = fixtures.requests.singleWhere((r) => r.method == 'PATCH' && r.path == '/users/$reader');
+        expect((sent.data as Map)['data']['attributes'], contains('markedAllAsReadAt'));
+        expect(fixtures.requests.where((r) => r.path == '/discussions').length, greaterThan(lists), reason: 'reloaded');
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

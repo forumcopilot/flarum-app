@@ -175,7 +175,7 @@ class _AccountPageState extends State<AccountPage> {
             if (_forum.extensions.byobu)
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.mail_outline),
+                leading: const Icon(Icons.map_outlined),
                 title: Text(l10n.privateDiscussions),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => PrivateDiscussionsPage.open(context, widget.site),

@@ -168,6 +168,9 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get following => 'Following';
 
   @override
+  String get follow => 'Follow';
+
+  @override
   String get home => 'Home';
 
   @override
@@ -356,6 +359,10 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Mark All as Read';
+
+  @override
+  String get markAllDiscussionsReadQuestion =>
+      'Are you sure you want to mark all discussions as read?';
 
   @override
   String get posts => 'Posts';
@@ -655,6 +662,57 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get unlike => 'Unlike';
 
   @override
+  String likedByOne(String a) {
+    return '$a likes this.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a and $b like this.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others others',
+      one: '1 other',
+    );
+    return '$a and $_temp0 like this.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others others',
+      one: '1 other',
+    );
+    return '$a, $b, and $_temp0 like this.';
+  }
+
+  @override
+  String get likedByYou => 'You like this.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'You and $a like this.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others others',
+      one: '1 other',
+    );
+    return 'You, $a, and $_temp0 like this.';
+  }
+
+  @override
   String get react => 'React';
 
   @override
@@ -677,9 +735,6 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'Unselect Best Answer';
-
-  @override
-  String get notificationSettings => 'Notifications for this discussion';
 
   @override
   String get notFollowing => 'Not Following';

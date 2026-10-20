@@ -1,5 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:forum_kit/l10n/kit_l10n.dart';
+import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/views/widgets/filter_chip_bar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
@@ -62,6 +64,34 @@ class _HomePageState extends State<HomePage> {
     if (mounted) setState(() {});
   }
 
+  /// The web's Mark All as Read (the ✓ above its list), asked first as the web asks: Flarum
+  /// records the time, and every discussion older than it reads as read.
+  Future<void> _markAllRead() async {
+    final l10n = flarumL10n(context);
+    final reader = _forum.info?.actor;
+    if (reader == null) return;
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (dialog) => AlertDialog(
+        content: Text(l10n.markAllDiscussionsReadQuestion),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(dialog, false), child: Text(kitL10n(dialog).cancel)),
+          TextButton(onPressed: () => Navigator.pop(dialog, true), child: Text(l10n.ok)),
+        ],
+      ),
+    );
+    if (sure != true || !mounted) return;
+    try {
+      await _forum.api.markAllAsRead(reader.id);
+    } catch (e) {
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
+      return;
+    }
+    for (final list in _lists.values) {
+      list.refresh();
+    }
+  }
+
   String _label(DiscussionView view, FlarumLocalizations l10n) => switch (view) {
         DiscussionView.latest => l10n.latest,
         DiscussionView.top => l10n.filterTop,
@@ -83,6 +113,8 @@ class _HomePageState extends State<HomePage> {
             tooltip: l10n.search,
             onPressed: () => SearchPage.open(context, widget.site),
           ),
+          if (_forum.isSignedIn && _forum.info?.actor != null)
+            IconButton(icon: const Icon(Icons.done_all), tooltip: l10n.markAllRead, onPressed: _markAllRead),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),

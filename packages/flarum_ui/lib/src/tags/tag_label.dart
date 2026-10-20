@@ -27,8 +27,9 @@ Color? flarumTagColor(FlarumTag tag) {
   return parseDiscourseHex(hex);
 }
 
-/// A tag as the web labels it on a discussion: its name in its colour (a
-/// filled label for a primary tag, an outlined one for a secondary tag).
+/// A tag as the web labels it on a discussion: its name on its colour, primary and secondary tags
+/// alike (the colour is how readers know a tag at a glance), or on a plain grey label when the tag
+/// has no colour.
 class TagLabel extends StatelessWidget {
   const TagLabel({super.key, required this.tag});
 
@@ -38,16 +39,14 @@ class TagLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final color = flarumTagColor(tag);
-    final filled = tag.isPrimary && color != null;
-    final foreground = filled
+    final foreground = color != null
         ? (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87)
         : colorScheme.onSurfaceVariant;
     final icon = flarumTagIcon(tag.icon);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
       decoration: BoxDecoration(
-        color: filled ? color : null,
-        border: filled ? null : Border.all(color: color ?? colorScheme.outlineVariant),
+        color: color ?? colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(DesignTokens.radiusXS),
       ),
       child: Row(

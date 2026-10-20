@@ -169,6 +169,9 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get following => 'Folgt';
 
   @override
+  String get follow => 'Folgen';
+
+  @override
   String get home => 'Startseite';
 
   @override
@@ -360,6 +363,10 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Alle als gelesen markieren';
+
+  @override
+  String get markAllDiscussionsReadQuestion =>
+      'Bist du dir sicher, dass du alle Diskussionen als gelesen markieren willst?';
 
   @override
   String get posts => 'Beiträge';
@@ -661,6 +668,57 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get unlike => 'Gefällt mir nicht mehr';
 
   @override
+  String likedByOne(String a) {
+    return '$a gefällt das.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a und $b gefällt das.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others weiteren Personen',
+      one: '1 weiteren Person',
+    );
+    return '$a und $_temp0 gefällt das.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others weiteren Personen',
+      one: '1 weiteren Person',
+    );
+    return '$a, $b und $_temp0 gefällt das.';
+  }
+
+  @override
+  String get likedByYou => 'Dir gefällt das.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'Dir und $a gefällt das.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others weiteren Personen',
+      one: '1 weiteren Person',
+    );
+    return 'Dir, $a und $_temp0 gefällt das.';
+  }
+
+  @override
   String get react => 'Reagieren';
 
   @override
@@ -684,9 +742,6 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'Beste Antwort abwählen';
-
-  @override
-  String get notificationSettings => 'Benachrichtigungen für diese Diskussion';
 
   @override
   String get notFollowing => 'Nicht folgen';

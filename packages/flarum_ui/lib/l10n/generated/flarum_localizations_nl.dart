@@ -168,6 +168,9 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get following => 'Volgend';
 
   @override
+  String get follow => 'Volgen';
+
+  @override
   String get home => 'Start';
 
   @override
@@ -359,6 +362,10 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get markAllRead => 'Alles als gelezen markeren';
+
+  @override
+  String get markAllDiscussionsReadQuestion =>
+      'Weet je zeker dat je alle discussies als gelezen wilt markeren?';
 
   @override
   String get posts => 'Berichten';
@@ -660,6 +667,57 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get unlike => 'Vind ik niet meer leuk';
 
   @override
+  String likedByOne(String a) {
+    return '$a vindt dit leuk.';
+  }
+
+  @override
+  String likedByTwo(String a, String b) {
+    return '$a en $b vinden dit leuk.';
+  }
+
+  @override
+  String likedByOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others anderen',
+      one: '1 ander',
+    );
+    return '$a en $_temp0 vinden dit leuk.';
+  }
+
+  @override
+  String likedByMore(String a, String b, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others anderen',
+      one: '1 ander',
+    );
+    return '$a, $b en $_temp0 vinden dit leuk.';
+  }
+
+  @override
+  String get likedByYou => 'Jij vindt dit leuk.';
+
+  @override
+  String likedByYouAndOne(String a) {
+    return 'Jij en $a vinden dit leuk.';
+  }
+
+  @override
+  String likedByYouOneMore(String a, int others) {
+    String _temp0 = intl.Intl.pluralLogic(
+      others,
+      locale: localeName,
+      other: '$others anderen',
+      one: '1 ander',
+    );
+    return 'Jij, $a en $_temp0 vinden dit leuk.';
+  }
+
+  @override
   String get react => 'Reageren';
 
   @override
@@ -682,9 +740,6 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get removeBestAnswer => 'Beste antwoord ongedaan maken';
-
-  @override
-  String get notificationSettings => 'Meldingen voor deze discussie';
 
   @override
   String get notFollowing => 'Niet volgend';

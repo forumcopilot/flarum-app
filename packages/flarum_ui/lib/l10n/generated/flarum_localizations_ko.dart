@@ -15,6 +15,12 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get share => '공유';
 
   @override
+  String get copyLink => '링크 복사';
+
+  @override
+  String get linkCopied => '링크를 복사했습니다.';
+
+  @override
   String get cancel => '취소';
 
   @override
@@ -213,6 +219,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get signOut => '로그아웃';
+
+  @override
+  String logOutQuestion(String forum) {
+    return '$forum에서 로그아웃하시겠습니까?';
+  }
 
   @override
   String get account => '계정';

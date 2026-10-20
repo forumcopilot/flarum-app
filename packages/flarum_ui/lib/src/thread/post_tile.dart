@@ -13,6 +13,7 @@ import '../polls/poll_card.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
 import '../widgets/flarum_avatar.dart';
+import '../navigation/web_links.dart';
 
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
@@ -42,7 +43,8 @@ class PostTile extends StatelessWidget {
       this.onHide,
       this.onDeleteForever,
       this.onApprove,
-      this.onPollChanged});
+      this.onPollChanged,
+      this.link});
 
   final SiteContext site;
   final FlarumPost post;
@@ -99,7 +101,11 @@ class PostTile extends StatelessWidget {
   /// The post's poll after the reader voted in it (fof/polls); null where the reader can't vote.
   final ValueChanged<FlarumPoll>? onPollChanged;
 
+  /// The post's web address, for Share and Copy Link in its menu.
+  final String? link;
+
   bool get _hasMenu =>
+      link != null ||
       onQuote != null ||
       onEdit != null ||
       onBookmark != null ||
@@ -224,7 +230,11 @@ extension on PostTile {
       icon: const Icon(Icons.more_vert),
       tooltip: MaterialLocalizations.of(context).showMenuTooltip,
       onSelected: (action) => action(),
-      itemBuilder: (context) => [
+      itemBuilder: (menu) => [
+        if (link case final url?) ...[
+          PopupMenuItem(value: () => shareFrom(context, url), child: _MenuRow(Icons.share_outlined, l10n.share)),
+          PopupMenuItem(value: () => copyLink(context, url), child: _MenuRow(Icons.link, l10n.copyLink)),
+        ],
         if (onQuote case final quote?) PopupMenuItem(value: quote, child: _MenuRow(Icons.format_quote, kit.quote)),
         if (onEdit case final edit?) PopupMenuItem(value: edit, child: _MenuRow(Icons.edit_outlined, kit.edit)),
         if (onBookmark case final bookmark?)

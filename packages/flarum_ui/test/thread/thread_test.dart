@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -99,6 +100,31 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 20));
         expect(fixtures.requests.where((r) => r.method == 'PATCH'), isEmpty);
         model.dispose();
+      });
+
+      testWidgets("a post's menu copies its web address", (tester) async {
+        fixtures.forum();
+        String? copied;
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+          if (call.method == 'Clipboard.setData') copied = (call.arguments as Map)['text'] as String;
+          return null;
+        });
+        addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, null));
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
+        ));
+        await _pumpUntil(tester, find.byType(PostTile));
+        await tester.pump(const Duration(milliseconds: 500));
+        await tester.tap(find.descendant(of: find.byType(PostTile).at(1), matching: find.byIcon(Icons.more_vert)));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Copy Link'));
+        await tester.pump();
+        final id = fixtures.discussionId('welcome');
+        expect(copied, matches(RegExp('^${RegExp.escape(FixtureForum.baseUrl)}/d/$id(-[a-z0-9-]+)?/2\$')),
+            reason: 'the second post, as Flarum links it');
+        expect(find.text('Link copied.'), findsOneWidget);
+        await _close(tester);
       });
 
       testWidgets('a guest is offered Log In to Reply, and Reply under each post', (tester) async {

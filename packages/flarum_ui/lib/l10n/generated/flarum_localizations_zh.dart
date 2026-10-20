@@ -15,6 +15,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get share => '分享';
 
   @override
+  String get copyLink => '复制链接';
+
+  @override
+  String get linkCopied => '链接已复制。';
+
+  @override
   String get cancel => '取消';
 
   @override
@@ -213,6 +219,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get signOut => '退出登录';
+
+  @override
+  String logOutQuestion(String forum) {
+    return '确定要登出 $forum 吗？';
+  }
 
   @override
   String get account => '账户';

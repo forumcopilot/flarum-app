@@ -15,6 +15,12 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get share => 'Delen';
 
   @override
+  String get copyLink => 'Link kopiëren';
+
+  @override
+  String get linkCopied => 'Link gekopieerd.';
+
+  @override
   String get cancel => 'Annuleren';
 
   @override
@@ -216,6 +222,11 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get signOut => 'Uitloggen';
+
+  @override
+  String logOutQuestion(String forum) {
+    return 'Weet je zeker dat je wilt uitloggen bij $forum?';
+  }
 
   @override
   String get account => 'Account';

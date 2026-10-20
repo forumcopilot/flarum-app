@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
+import 'package:forum_kit/l10n/kit_l10n.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../render/links.dart';
@@ -16,6 +17,7 @@ import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
 import 'log_in_first.dart';
 import '../widgets/flarum_avatar.dart';
+import '../profile/user_page.dart';
 
 /// The reader's account: sign in (or create an account on the forum's
 /// page), or who is signed in, and sign out; and the app's appearance.
@@ -74,9 +76,24 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
+  void _openProfile(FlarumUser reader) => UserPage.open(context, widget.site, reader.slug ?? reader.username);
+
   /// Signs out here even when the forum can't be reached (the token then
-  /// stays valid there until it expires or is revoked on the web).
+  /// stays valid there until it expires or is revoked on the web). Asked
+  /// first, as the forum's own log-out page asks.
   Future<void> _signOut() async {
+    final l10n = flarumL10n(context);
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (dialog) => AlertDialog(
+        content: Text(l10n.logOutQuestion(_forum.info?.title ?? widget.site.site.name)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(dialog, false), child: Text(kitL10n(dialog).cancel)),
+          TextButton(onPressed: () => Navigator.pop(dialog, true), child: Text(l10n.signOut)),
+        ],
+      ),
+    );
+    if (sure != true || !mounted) return;
     setState(() => _busy = true);
     await FlarumUserProxy(widget.site).logoutUserAsync();
     ForumSession.changed(widget.site);
@@ -118,13 +135,28 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ],
           ] else ...[
-            Center(child: FlarumAvatar(user: reader, radius: 40)),
+            Center(child: FlarumAvatar(user: reader, radius: 40, onTap: () => _openProfile(reader))),
             const SizedBox(height: DesignTokens.spacingM),
             Text(reader.displayName, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
             Text(l10n.signedInAs('@${reader.username}'),
                 style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 textAlign: TextAlign.center),
             const SizedBox(height: DesignTokens.spacingXL),
+            // The web's session menu: Profile, Settings (on the forum's own page), then the lists.
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.person_outline),
+              title: Text(l10n.profile),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _openProfile(reader),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.settings_outlined),
+              title: Text(l10n.settings),
+              trailing: const Icon(Icons.open_in_new),
+              onTap: () => openExternally('${widget.site.site.url.replaceAll(RegExp(r'/+$'), '')}/settings'),
+            ),
             if (_forum.extensions.bookmarks) ...[
               ListTile(
                 contentPadding: EdgeInsets.zero,

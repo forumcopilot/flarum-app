@@ -128,6 +128,18 @@ abstract class FlarumLocalizations {
   /// **'Share'**
   String get share;
 
+  /// Menu item: puts the web address of a discussion, post or profile on the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Link'**
+  String get copyLink;
+
+  /// Shown once a link is on the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied.'**
+  String get linkCopied;
+
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
@@ -451,6 +463,12 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Log Out'**
   String get signOut;
+
+  /// Asked before Log Out, as Flarum's log-out page asks
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out of {forum}?'**
+  String logOutQuestion(String forum);
 
   /// Drawer: Account
   ///

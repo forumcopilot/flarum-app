@@ -8,6 +8,14 @@
   "@share": {
     "description": "Menu item to share content"
   },
+  "copyLink": "Copy Link",
+  "@copyLink": {
+    "description": "Menu item: puts the web address of a discussion, post or profile on the clipboard"
+  },
+  "linkCopied": "Link copied.",
+  "@linkCopied": {
+    "description": "Shown once a link is on the clipboard"
+  },
   "cancel": "Cancel",
   "downloading": "Downloading {filename}...",
   "@downloading": {
@@ -275,6 +283,15 @@
   "signOut": "Log Out",
   "@signOut": {
     "description": "UI text: Sign out"
+  },
+  "logOutQuestion": "Are you sure you want to log out of {forum}?",
+  "@logOutQuestion": {
+    "description": "Asked before Log Out, as Flarum's log-out page asks",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
   },
   "account": "Account",
   "@account": {

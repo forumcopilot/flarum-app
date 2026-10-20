@@ -15,6 +15,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get share => '共有';
 
   @override
+  String get copyLink => 'リンクをコピー';
+
+  @override
+  String get linkCopied => 'リンクをコピーしました。';
+
+  @override
   String get cancel => 'キャンセル';
 
   @override
@@ -213,6 +219,11 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get signOut => 'ログアウト';
+
+  @override
+  String logOutQuestion(String forum) {
+    return '$forumからログアウトしますか？';
+  }
 
   @override
   String get account => 'アカウント';

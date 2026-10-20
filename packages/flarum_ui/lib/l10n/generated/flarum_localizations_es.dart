@@ -15,6 +15,12 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get share => 'Compartir';
 
   @override
+  String get copyLink => 'Copiar enlace';
+
+  @override
+  String get linkCopied => 'Enlace copiado.';
+
+  @override
   String get cancel => 'Cancelar';
 
   @override
@@ -215,6 +221,11 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get signOut => 'Desconectarse';
+
+  @override
+  String logOutQuestion(String forum) {
+    return '¿Seguro que quieres desconectarte de $forum?';
+  }
 
   @override
   String get account => 'Cuenta';

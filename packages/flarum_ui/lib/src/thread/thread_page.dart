@@ -23,6 +23,7 @@ import '../tags/tag_label.dart';
 import '../tags/tags_page.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
+import '../navigation/web_links.dart';
 
 /// A discussion's posts, opened at its start or at post [near].
 ///
@@ -504,6 +505,15 @@ class _ThreadPageState extends State<ThreadPage> {
       appBar: AppBar(
         title: Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
         actions: [
+          if (discussion != null)
+            Builder(
+              builder: (button) => IconButton(
+                icon: const Icon(Icons.share_outlined),
+                tooltip: l10n.share,
+                onPressed: () =>
+                    shareFrom(button, WebLinks.discussion(widget.site, widget.discussionId, slug: discussion.slug)),
+              ),
+            ),
           if (_signedIn && discussion != null && _forum.extensions.bookmarks)
             IconButton(
               icon: Icon(discussion.bookmarked ? Icons.bookmark : Icons.bookmark_border),
@@ -622,6 +632,7 @@ class _ThreadPageState extends State<ThreadPage> {
         onDeleteForever: post.canDelete && post.isHidden ? () => _deletePostForever(post) : null,
         onApprove: post.canApprove && !post.isApproved ? () => _approvePost(post) : null,
         onPollChanged: _signedIn ? (poll) => _pollChanged(post.id, poll) : null,
+        link: WebLinks.discussion(widget.site, widget.discussionId, slug: _model.discussion?.slug, near: post.number),
       );
       return post.number == _flashNumber ? _Flash(key: ValueKey(_flashes), child: tile) : tile;
     }

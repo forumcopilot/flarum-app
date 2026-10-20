@@ -82,6 +82,17 @@ void main() {
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
       expect(find.text('Logged in as @alice'), findsOneWidget);
       expect(find.text('Log Out'), findsOneWidget);
+      expect(find.text('Profile'), findsOneWidget, reason: "the web's session menu: the reader's own profile");
+      expect(find.text('Settings'), findsOneWidget);
+
+      await tester.ensureVisible(find.text('Log Out'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Log Out'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Are you sure you want to log out of'), findsOneWidget);
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+      expect(find.text('Logged in as @alice'), findsOneWidget, reason: 'still logged in');
     });
 
     testWidgets('Flarum ${version.name}: logged in but offline, the tab says so and offers Retry, not Log In',

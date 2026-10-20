@@ -21,6 +21,7 @@ import '../safety/ignore_actions.dart';
 import '../safety/ignored_users.dart';
 import '../thread/thread_page.dart';
 import '../widgets/flarum_avatar.dart';
+import '../navigation/web_links.dart';
 
 /// A user's profile: who they are, when they joined and were last seen, and
 /// what they wrote: their posts, newest first, and the discussions they
@@ -151,32 +152,33 @@ class _UserPageState extends State<UserPage> {
         appBar: AppBar(
           title: Text(user.displayName),
           actions: [
-            if (_ignored.canIgnore(user) || _canWriteTo(user) || _canMessage(user) || user.canSuspend)
-              PopupMenuButton<VoidCallback>(
-                tooltip: MaterialLocalizations.of(context).showMenuTooltip,
-                onSelected: (action) => action(),
-                itemBuilder: (context) => [
-                  if (_canMessage(user))
-                    PopupMenuItem(
-                      value: () => DialogPage.open(context, widget.site, to: user),
-                      child: Text(l10n.sendMessage),
-                    ),
-                  if (_canWriteTo(user))
-                    PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
-                  if (user.canSuspend)
-                    PopupMenuItem(
-                      value: () => _suspend(user),
-                      child: Text(user.isSuspended ? l10n.unsuspend : kitL10n(context).suspendUser),
-                    ),
-                  if (_ignored.canIgnore(user))
-                    PopupMenuItem(
-                      value: () => toggleIgnore(context, widget.site, user),
-                      child: Text(_ignored.isIgnored(user)
-                          ? l10n.stopIgnoringUser(user.displayName)
-                          : l10n.ignoreUser(user.displayName)),
-                    ),
-                ],
-              ),
+            PopupMenuButton<VoidCallback>(
+              tooltip: MaterialLocalizations.of(context).showMenuTooltip,
+              onSelected: (action) => action(),
+              itemBuilder: (menu) => [
+                PopupMenuItem(value: () => shareFrom(context, WebLinks.user(widget.site, user)), child: Text(l10n.share)),
+                PopupMenuItem(value: () => copyLink(context, WebLinks.user(widget.site, user)), child: Text(l10n.copyLink)),
+                if (_canMessage(user))
+                  PopupMenuItem(
+                    value: () => DialogPage.open(context, widget.site, to: user),
+                    child: Text(l10n.sendMessage),
+                  ),
+                if (_canWriteTo(user))
+                  PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
+                if (user.canSuspend)
+                  PopupMenuItem(
+                    value: () => _suspend(user),
+                    child: Text(user.isSuspended ? l10n.unsuspend : kitL10n(context).suspendUser),
+                  ),
+                if (_ignored.canIgnore(user))
+                  PopupMenuItem(
+                    value: () => toggleIgnore(context, widget.site, user),
+                    child: Text(_ignored.isIgnored(user)
+                        ? l10n.stopIgnoringUser(user.displayName)
+                        : l10n.ignoreUser(user.displayName)),
+                  ),
+              ],
+            ),
           ],
         ),
         body: NestedScrollView(

@@ -124,6 +124,7 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
     final unread = _forum.isSignedIn ? _badge(_forum.info?.actor?.unreadNotificationCount ?? 0) : 0;
+    final messages = _forum.isSignedIn ? (_forum.info?.unreadDialogCount ?? 0) : 0;
     Widget tab(int index, Widget Function() page) => _visited.contains(index) ? page() : const SizedBox.shrink();
     return Scaffold(
       body: IndexedStack(
@@ -165,9 +166,12 @@ class _AppShellState extends State<AppShell> {
                   selectedIcon:
                       Badge(isLabelVisible: unread > 0, label: Text('$unread'), child: const Icon(Icons.notifications)),
                   label: l10n.notifications),
+              // Unread messages (flarum/messages) show on Account, where they're listed.
               NavigationDestination(
-                  icon: const Icon(Icons.account_circle_outlined),
-                  selectedIcon: const Icon(Icons.account_circle),
+                  icon: Badge(
+                      isLabelVisible: messages > 0, label: Text('$messages'), child: const Icon(Icons.account_circle_outlined)),
+                  selectedIcon:
+                      Badge(isLabelVisible: messages > 0, label: Text('$messages'), child: const Icon(Icons.account_circle)),
                   label: l10n.account),
             ],
           ),

@@ -84,6 +84,31 @@ void main() {
       expect(find.text('Log Out'), findsOneWidget);
     });
 
+    testWidgets('Flarum ${version.name}: logged in but offline, the tab says so and offers Retry, not Log In',
+        (tester) async {
+      FlarumForum.resetForTesting();
+      FlarumTokenStore.instance = FlarumTokenStore.memory();
+      final fixtures = FixtureForum(version, root: '../flarum_core/test/fixtures');
+      fixtures.forum();
+      fixtures.offline = true;
+      final site = SiteContext(
+        siteType: FlarumProxyFactory.siteType,
+        site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+      );
+      await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      expect(find.text('Log In'), findsNothing);
+      expect(find.text('Log Out'), findsOneWidget);
+      fixtures.offline = false;
+      await tester.tap(find.text('Retry'));
+      for (var i = 0; i < 10 && find.text('Logged in as @alice').evaluate().isEmpty; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      expect(find.text('Logged in as @alice'), findsOneWidget);
+    });
+
     testWidgets('Flarum ${version.name}: a guest is offered sign-in', (tester) async {
       FlarumForum.resetForTesting();
       final forum = FixtureForum(version, root: '../flarum_core/test/fixtures').forum(signedIn: false);

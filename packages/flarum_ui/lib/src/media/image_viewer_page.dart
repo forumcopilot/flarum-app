@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../render/links.dart';
+import '../../l10n/flarum_l10n.dart';
 
 /// A post's pictures, full screen: swipe between them, pinch to zoom.
 class ImageViewerPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.open_in_new),
-            tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
+            tooltip: flarumL10n(context).viewOnWeb,
             onPressed: () => openExternally(widget.urls[_index]),
           ),
         ],

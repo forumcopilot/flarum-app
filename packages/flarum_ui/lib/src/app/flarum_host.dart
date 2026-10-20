@@ -8,6 +8,7 @@ import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 import '../../config/app_forum_config.dart';
 import '../../l10n/flarum_l10n.dart';
 import 'forum_theme.dart';
+import '../render/flarum_content.dart';
 
 /// What an app that holds many forums (Flapp) needs to host flarum_ui's
 /// screens, as ABDA hosts discourse_ui's. The single-forum [FlarumApp] uses
@@ -20,14 +21,21 @@ import 'forum_theme.dart';
 /// is flarum_ui. Each forum keeps its own sign-in, caches and colours,
 /// keyed by its address.
 abstract final class FlarumHost {
-  /// The SDK, Flarum's proxies, relative times, and the forums' colours
-  /// remembered from earlier runs.
+  /// The SDK, Flarum's proxies, relative times, the forums' colours
+  /// remembered from earlier runs, and a post that fails to draw shown as its
+  /// text rather than Flutter's grey error box ([installPostBodyErrorFallback]).
   static Future<void> ensureInitialized() async {
     initializeTimeAgo();
     await ForumcopilotSdk.ensureInitialized();
     FlarumProxyFactory.register();
     await FlarumForumTheme.loadRemembered();
+    if (!_fallbackInstalled) {
+      installPostBodyErrorFallback();
+      _fallbackInstalled = true;
+    }
   }
+
+  static bool _fallbackInstalled = false;
 
   /// The localizations flarum_ui's screens use, for the host's `MaterialApp`
   /// (with the host's own in front, if it has any).

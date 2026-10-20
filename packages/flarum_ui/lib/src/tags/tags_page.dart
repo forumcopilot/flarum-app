@@ -206,6 +206,21 @@ class _TagPageState extends State<TagPage> {
     if (mounted) setState(() {});
   }
 
+  /// The description's height under the bar: up to two lines at the reader's text size. A bar's
+  /// bottom names its height before it's laid out, so it's measured; a fixed 40 cut the second line.
+  double _descriptionHeight(BuildContext context, String description) {
+    final painter = TextPainter(
+      text: TextSpan(text: description, style: Theme.of(context).textTheme.bodyMedium),
+      maxLines: 2,
+      ellipsis: '…',
+      textDirection: Directionality.of(context),
+      textScaler: MediaQuery.textScalerOf(context),
+    )..layout(maxWidth: MediaQuery.sizeOf(context).width - 2 * DesignTokens.spacingL);
+    final height = painter.height + DesignTokens.spacingS;
+    painter.dispose();
+    return height;
+  }
+
   @override
   Widget build(BuildContext context) {
     final description = widget.tag.description;
@@ -218,13 +233,14 @@ class _TagPageState extends State<TagPage> {
         bottom: description == null || description.isEmpty
             ? null
             : PreferredSize(
-                preferredSize: const Size.fromHeight(40),
+                preferredSize: Size.fromHeight(_descriptionHeight(context, description)),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(
                       DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingS),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(description, maxLines: 2, overflow: TextOverflow.ellipsis),
+                    child: Text(description,
+                        style: Theme.of(context).textTheme.bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
                   ),
                 ),
               ),

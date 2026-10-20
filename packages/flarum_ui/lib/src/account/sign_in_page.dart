@@ -51,6 +51,27 @@ class _SignInPageState extends State<SignInPage> {
   bool _done = false;
   String? _error;
 
+  InAppWebViewController? _web;
+
+  /// Set once the forum's page has drawn: until then a cover in the app's own colours stands
+  /// over the web view, which was a white flash in dark mode.
+  bool _shown = false;
+
+  void _drawn() {
+    if (!_shown && mounted) setState(() => _shown = true);
+  }
+
+  /// Back goes back in the page's history first (a Google or GitHub log-in page, Forgot
+  /// password), then out of the page.
+  Future<void> _back() async {
+    final web = _web;
+    if (web != null && await web.canGoBack()) {
+      await web.goBack();
+    } else if (mounted) {
+      Navigator.of(context).pop(false);
+    }
+  }
+
   WebUri get _url => WebUri(widget.site.site.url);
 
   @override
@@ -88,6 +109,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<void> _start(InAppWebViewController controller, WebUri? url) async {
+    _drawn();
     await controller.evaluateJavascript(source: await rootBundle.loadString('packages/flarum_ui/assets/signin.js'));
     await controller.evaluateJavascript(source: 'window.flarumAppSignIn.start(null)');
   }
@@ -96,24 +118,47 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
     final error = _error;
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.signIn)),
-      body: Column(
-        children: [
-          if (error != null)
-            MaterialBanner(
-              content: Text(l10n.signInFailedReason(error)),
-              actions: [TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(l10n.cancel))],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _back();
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text(l10n.signIn)),
+        body: Column(
+          children: [
+            if (error != null)
+              MaterialBanner(
+                content: Text(l10n.signInFailedReason(error)),
+                actions: [TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(l10n.cancel))],
+              ),
+            Expanded(
+              child: Stack(
+                children: [
+                  if (_cleared)
+                    InAppWebView(
+                      initialUrlRequest: URLRequest(url: _url),
+                      initialSettings: InAppWebViewSettings(transparentBackground: true),
+                      onWebViewCreated: (controller) => _web = controller,
+                      onPageCommitVisible: (_, __) => _drawn(),
+                      onLoadStop: _start,
+                    ),
+                  IgnorePointer(
+                    ignoring: _shown,
+                    child: AnimatedOpacity(
+                      opacity: _shown ? 0 : 1,
+                      duration: const Duration(milliseconds: 200),
+                      child: ColoredBox(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          Expanded(
-            child: _cleared
-                ? InAppWebView(
-                    initialUrlRequest: URLRequest(url: _url),
-                    onLoadStop: _start,
-                  )
-                : const Center(child: CircularProgressIndicator()),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

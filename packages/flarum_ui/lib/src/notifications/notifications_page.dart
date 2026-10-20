@@ -14,7 +14,7 @@ import '../widgets/flarum_avatar.dart';
 /// The reader's notifications: who did what, where, and when, unread ones
 /// highlighted. A tap marks one read and opens the post it's about.
 class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key, required this.site, this.onRead, this.onUnreadShown});
+  const NotificationsPage({super.key, required this.site, this.onRead, this.onUnreadShown, this.visit = 0});
 
   final SiteContext site;
 
@@ -24,6 +24,10 @@ class NotificationsPage extends StatefulWidget {
   /// The list's unread rows ([NotificationsModel.unreadShown]) whenever they change; [settled] once
   /// the forum agrees (the list loaded, or a read went through), for the badge to match it.
   final void Function(int? unread, {required bool settled})? onUnreadShown;
+
+  /// Bumped by the host each time the reader comes back to the list: it loads again, as the web's
+  /// list does each time it opens, so what came in meanwhile is there.
+  final int visit;
 
   @override
   State<NotificationsPage> createState() => _NotificationsPageState();
@@ -37,6 +41,17 @@ class _NotificationsPageState extends State<NotificationsPage> {
   void initState() {
     super.initState();
     if (_forum.isSignedIn) _refresh();
+  }
+
+  @override
+  void didUpdateWidget(NotificationsPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // After this build: the reload notifies the page, which can't rebuild while it's building.
+    if (widget.visit != oldWidget.visit && _forum.isSignedIn) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _refresh();
+      });
+    }
   }
 
   Future<void> _refresh() async {
@@ -133,9 +148,14 @@ class _NotificationsPageState extends State<NotificationsPage> {
         separatorBuilder: (_, __) => const Divider(height: 1),
         itemBuilder: (context, i) {
           if (i == _model.items.length) {
-            return const Padding(
-              padding: EdgeInsets.all(DesignTokens.spacingL),
-              child: Center(child: SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2))),
+            // The next page: loading, or failed, with Retry rather than a spinner that never stops.
+            return Padding(
+              padding: const EdgeInsets.all(DesignTokens.spacingL),
+              child: Center(
+                child: _model.error != null && !_model.loading
+                    ? TextButton.icon(onPressed: _model.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry))
+                    : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+              ),
             );
           }
           final n = _model.items[i];

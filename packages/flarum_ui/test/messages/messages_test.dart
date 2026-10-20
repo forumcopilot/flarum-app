@@ -101,12 +101,18 @@ void main() {
     expect(find.text(WriteSamples.message), findsNothing);
 
     await tester.enterText(find.byType(TextField), WriteSamples.message);
+    // A real network: the field is drawn while the message goes.
+    fixtures.latency = const Duration(milliseconds: 300);
     await tester.tap(find.byTooltip('Send message'));
     // The forum's answer names the conversation: all of it shows.
     await _pumpUntil(tester, find.text(WriteSamples.messageReply));
+    expect(tester.widget<EditableText>(find.byType(EditableText)).focusNode.hasFocus, isTrue,
+        reason: 'the keyboard stays up for the next message');
     final sent = fixtures.requests.firstWhere((r) => r.method == 'POST').data as Map;
     expect(sent['data']['attributes']['users'], [
       {'id': bobId},
     ]);
+    // What is still on its way (the read mark) arrives.
+    await tester.pump(const Duration(seconds: 1));
   });
 }

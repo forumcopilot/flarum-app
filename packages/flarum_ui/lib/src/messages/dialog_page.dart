@@ -4,11 +4,18 @@ import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
+import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../media/image_viewer_page.dart';
+import '../navigation/forum_links.dart';
+import '../profile/user_page.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
+import '../render/links.dart';
+import '../tags/tags_page.dart';
+import '../thread/thread_page.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// One conversation in flarum/messages (2.0): its messages, the newest at the bottom, and a field
@@ -111,6 +118,7 @@ class _DialogPageState extends State<DialogPage> {
       if (!mounted) return;
       setState(() {
         _dialog = dialog;
+        _error = null;
         if (reset) _messages.clear();
         _messages.addAll(page.items);
         _hasMore = page.hasMore;
@@ -120,6 +128,31 @@ class _DialogPageState extends State<DialogPage> {
       if (mounted) setState(() => _error = e);
     } finally {
       if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  /// Links in a message open in the app as they do in a post: this forum's discussions, people
+  /// and tags here, everything else outside. Pictures open in the viewer.
+  PostContentCallbacks _callbacksFor(FlarumDialogMessage message) => PostContentCallbacks(
+        onUrlTap: _openLink,
+        onMentionTap: (slug) => UserPage.open(context, widget.site, slug),
+        onImageTap: (url, context, _) => ImageViewerPage.open(
+          context,
+          url,
+          FlarumHtml.parse(message.contentHtml ?? '', forumBaseUrl: widget.site.site.url).imageUrls,
+        ),
+      );
+
+  Future<void> _openLink(String url) async {
+    switch (ForumLink.parse(url, widget.site.site.url)) {
+      case DiscussionLink(:final id, :final number):
+        await ThreadPage.open(context, widget.site, id, near: number);
+      case UserLink(:final slug):
+        await UserPage.open(context, widget.site, slug);
+      case TagLink(:final slug):
+        if (!await TagPage.openBySlug(context, widget.site, slug)) await openExternally(url);
+      default:
+        await openExternally(url);
     }
   }
 
@@ -210,9 +243,18 @@ class _DialogPageState extends State<DialogPage> {
         itemCount: _messages.length + (_hasMore ? 1 : 0),
         itemBuilder: (context, i) {
           if (i == _messages.length) {
-            return const Padding(
-              padding: EdgeInsets.all(DesignTokens.spacingL),
-              child: Center(child: SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2))),
+            // Older messages: loading, or failed, with Retry rather than a spinner that never stops.
+            return Padding(
+              padding: const EdgeInsets.all(DesignTokens.spacingL),
+              child: Center(
+                child: _error != null && !_loading
+                    ? TextButton.icon(
+                        onPressed: () => _load(reset: false),
+                        icon: const Icon(Icons.refresh),
+                        label: Text(flarumL10n(context).retry),
+                      )
+                    : const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+              ),
             );
           }
           final message = _messages[i];
@@ -220,6 +262,7 @@ class _DialogPageState extends State<DialogPage> {
             site: widget.site,
             message: message,
             mine: message.author?.id != null && message.author?.id == _readerId,
+            callbacks: _callbacksFor(message),
           );
         },
       ),
@@ -241,7 +284,9 @@ class _DialogPageState extends State<DialogPage> {
               Expanded(
                 child: TextField(
                   controller: _text,
-                  enabled: !_sending,
+                  // Read-only while sending, not disabled: a disabled field loses its focus,
+                  // and the keyboard closed after every message.
+                  readOnly: _sending,
                   minLines: 1,
                   maxLines: 5,
                   textCapitalization: TextCapitalization.sentences,
@@ -265,11 +310,12 @@ class _DialogPageState extends State<DialogPage> {
 
 /// A message: the reader's own on the right, the others' on the left with who wrote it.
 class _MessageTile extends StatelessWidget {
-  const _MessageTile({required this.site, required this.message, required this.mine});
+  const _MessageTile({required this.site, required this.message, required this.mine, required this.callbacks});
 
   final SiteContext site;
   final FlarumDialogMessage message;
   final bool mine;
+  final PostContentCallbacks callbacks;
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +335,7 @@ class _MessageTile extends StatelessWidget {
           FlarumContent(
             siteContext: site,
             content: FlarumHtml.parse(message.contentHtml ?? '', forumBaseUrl: site.site.url).html,
+            callbacks: callbacks,
           ),
           if (created != null)
             Text(formatTimeAgo(created.toLocal(), context),

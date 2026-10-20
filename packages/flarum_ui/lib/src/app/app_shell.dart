@@ -44,8 +44,12 @@ class _AppShellState extends State<AppShell> {
   /// mustn't happen just because the app started.
   final Set<int> _visited = {0};
 
+  /// Coming back to Notifications loads the list again ([NotificationsPage.visit]).
+  int _notificationsVisit = 0;
+
   void _select(int tab) {
     setState(() {
+      if (tab == _notificationsTab && tab != _tab && _visited.contains(tab)) _notificationsVisit++;
       _tab = tab;
       _visited.add(tab);
     });
@@ -116,6 +120,7 @@ class _AppShellState extends State<AppShell> {
                 key: ValueKey(('notifications', _session)),
                 site: widget.site,
                 onUnreadShown: _unreadShown,
+                visit: _notificationsVisit,
               )),
           tab(3, () => AccountPage(
                 site: widget.site,

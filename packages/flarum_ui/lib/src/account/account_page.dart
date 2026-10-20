@@ -41,6 +41,32 @@ class _AccountPageState extends State<AccountPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   bool _busy = false;
 
+  /// Logged in, but who the reader is hasn't come from the forum yet (the app started offline,
+  /// say): it's read again here, rather than the page offering Log In to someone logged in.
+  late bool _readingReader = _forum.isSignedIn && _forum.info?.actor == null;
+  Object? _readerError;
+
+  @override
+  void initState() {
+    super.initState();
+    if (_readingReader) _readReader(first: true);
+  }
+
+  Future<void> _readReader({bool first = false}) async {
+    if (!first) {
+      setState(() {
+        _readingReader = true;
+        _readerError = null;
+      });
+    }
+    try {
+      await _forum.refresh();
+    } catch (e) {
+      _readerError = e;
+    }
+    if (mounted) setState(() => _readingReader = false);
+  }
+
   Future<void> _signIn() async {
     if (await SignInPage.open(context, widget.site)) {
       if (mounted) setState(() {});
@@ -63,12 +89,22 @@ class _AccountPageState extends State<AccountPage> {
     final l10n = flarumL10n(context);
     final theme = Theme.of(context);
     final reader = _forum.isSignedIn ? _forum.info?.actor : null;
+    final readerUnknown = _forum.isSignedIn && reader == null && (_readingReader || _readerError != null);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.account)),
       body: ListView(
         padding: const EdgeInsets.all(DesignTokens.spacingXL),
         children: [
-          if (reader == null) ...[
+          if (readerUnknown) ...[
+            if (_readerError case final error?) ...[
+              Text(describeError(context, error), style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
+              const SizedBox(height: DesignTokens.spacingXL),
+              FilledButton(onPressed: _readReader, child: Text(l10n.retry)),
+            ] else
+              const Center(child: CircularProgressIndicator()),
+            const SizedBox(height: DesignTokens.spacingS),
+            OutlinedButton(onPressed: _busy ? null : _signOut, child: Text(l10n.signOut)),
+          ] else if (reader == null) ...[
             Text(l10n.signInHint, style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
             const SizedBox(height: DesignTokens.spacingXL),
             FilledButton(onPressed: _signIn, child: Text(l10n.signIn)),

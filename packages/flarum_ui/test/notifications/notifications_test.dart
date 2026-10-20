@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
@@ -85,6 +88,39 @@ void main() {
         await tester.tap(find.text('Notifications'));
         await _pumpUntil(tester, find.byType(NotificationTile));
         expect(fixtures.requests.where((r) => r.path == '/notifications'), hasLength(1));
+      });
+
+      testWidgets('coming back to Notifications loads the list again', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(FlarumApp(site: _site()));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.tap(find.text('Notifications'));
+        await _pumpUntil(tester, find.byType(NotificationTile));
+        await tester.tap(find.text('Home'));
+        await tester.pump();
+        await tester.tap(find.text('Notifications'));
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        expect(fixtures.requests.where((r) => r.path == '/notifications'), hasLength(2),
+            reason: 'what came in meanwhile is listed, as the web lists it each time it opens');
+      });
+
+      testWidgets('a next page that fails offers Retry, not a spinner that never stops', (tester) async {
+        // The first page says there is more.
+        final page = jsonDecode(File('$_root/${version.name}/notifications.json').readAsStringSync())['body'] as Map<String, dynamic>;
+        fixtures.replies['GET /notifications'] = {...page, 'links': {'next': 'https://forum.test/api/notifications?page[offset]=20'}};
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
+        await _pumpUntil(tester, find.byType(NotificationTile));
+        fixtures.offline = true;
+        await tester.drag(find.byType(ListView), const Offset(0, -500));
+        await _pumpUntil(tester, find.text('Retry'));
+        fixtures.offline = false;
+        await tester.tap(find.text('Retry'));
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('Retry'), findsNothing);
+        expect(fixtures.requests.where((r) => r.path == '/notifications'), hasLength(3));
       });
 
       testWidgets('the badge counts the rows the list shows, not each notification it groups', (tester) async {

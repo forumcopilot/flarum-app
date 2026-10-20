@@ -33,6 +33,13 @@ class NotificationsModel extends ChangeNotifier {
     await _load(reset: false);
   }
 
+  /// Tries the next page again after it failed.
+  Future<void> retryMore() async {
+    if (loading || !hasMore) return;
+    error = null;
+    await _load(reset: false);
+  }
+
   Future<void> _load({required bool reset}) async {
     loading = true;
     if (reset) error = null;

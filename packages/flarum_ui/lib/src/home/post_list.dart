@@ -27,6 +27,13 @@ class PostListModel extends ChangeNotifier {
     await _load(reset: false);
   }
 
+  /// Tries the next page again after it failed.
+  Future<void> retryMore() async {
+    if (loading || !hasMore) return;
+    error = null;
+    await _load(reset: false);
+  }
+
   Future<void> _load({required bool reset}) async {
     loading = true;
     if (reset) error = null;
@@ -87,9 +94,20 @@ class PostList extends StatelessWidget {
         return false;
       },
       child: ListView.separated(
-        itemCount: model.items.length,
+        itemCount: model.items.length + (model.hasMore ? 1 : 0),
         separatorBuilder: (_, __) => const Divider(height: 1),
         itemBuilder: (context, i) {
+          if (i == model.items.length) {
+            // The next page: loading, or failed, with Retry; it used to stop without a word.
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: model.error != null && !model.loading
+                    ? TextButton.icon(onPressed: model.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry))
+                    : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+              ),
+            );
+          }
           final post = model.items[i];
           final created = post.createdAt;
           final discussion = post.discussionId;

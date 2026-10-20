@@ -41,6 +41,10 @@ class FixtureForum {
   /// Every request fails as it does with no connection (Dio's connection error, no response).
   bool offline = false;
 
+  /// A guest's read with no guest recording gets the member's: the page reads the same, and what
+  /// the app offers a guest (Log In to Reply) depends on its being signed out, not on the data.
+  bool guestReadsMember = false;
+
   /// How long each answer takes. Zero answers before the next frame, which no network does: a test
   /// of what the reader sees while a page loads sets a real delay.
   Duration latency = Duration.zero;
@@ -106,10 +110,10 @@ class _Fixture {
   final int status;
   final Object? body;
 
-  bool matches(RequestOptions options) =>
+  bool matches(RequestOptions options, {bool asMember = false}) =>
       options.method == method &&
       options.path == path &&
-      options.headers.containsKey('Authorization') == signedIn &&
+      (asMember || options.headers.containsKey('Authorization')) == signedIn &&
       '${options.headers['Cookie'] ?? ''}'.contains('_remember=') == rememberCookie &&
       _sameQuery(options.queryParameters, query) &&
       (files != null
@@ -163,10 +167,15 @@ class _FixtureAdapter implements HttpClientAdapter {
     }
     // Where the same request was recorded more than once (a reaction, then the same reaction
     // again to take it back), each is served once, in file-name order, the last one after that.
-    var matching = [
-      for (final fixture in forum._fixtures)
-        if (fixture.matches(options) && (fixture.state == null || forum.states.contains(fixture.state))) fixture,
-    ];
+    List<_Fixture> matchingAs({bool asMember = false}) => [
+          for (final fixture in forum._fixtures)
+            if (fixture.matches(options, asMember: asMember) && (fixture.state == null || forum.states.contains(fixture.state)))
+              fixture,
+        ];
+    var matching = matchingAs();
+    if (matching.isEmpty && forum.guestReadsMember && !options.headers.containsKey('Authorization')) {
+      matching = matchingAs(asMember: true);
+    }
     if (matching.any((f) => f.state != null)) matching = [for (final f in matching) if (f.state != null) f];
     final fixture = matching.where((f) => !forum._served.contains(f)).firstOrNull ?? matching.lastOrNull;
     if (fixture != null) {

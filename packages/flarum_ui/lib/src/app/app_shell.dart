@@ -7,6 +7,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../account/account_page.dart';
+import '../account/log_in_first.dart';
 import '../home/home_page.dart';
 import '../notifications/notifications_page.dart';
 import '../safety/suspended_strip.dart';
@@ -86,6 +87,20 @@ class _AppShellState extends State<AppShell> {
     return list + math.max(0, forumUnread - atSync);
   }
 
+  @override
+  void initState() {
+    super.initState();
+    ForumSession.changesOf(widget.site).addListener(_signedInOrOut);
+  }
+
+  @override
+  void dispose() {
+    ForumSession.changesOf(widget.site).removeListener(_signedInOrOut);
+    super.dispose();
+  }
+
+  /// A Log In or Log Out anywhere in the forum ([ForumSession]): the lists load again as the new
+  /// reader.
   void _signedInOrOut() => setState(() {
         _listUnread = null;
         _forumAtSync = null;
@@ -125,7 +140,6 @@ class _AppShellState extends State<AppShell> {
           tab(3, () => AccountPage(
                 site: widget.site,
                 appearance: widget.appearance,
-                onSignInChanged: _signedInOrOut,
                 onSwitchForum: widget.onSwitchForum,
               )),
         ],

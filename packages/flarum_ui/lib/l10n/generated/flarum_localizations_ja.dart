@@ -160,6 +160,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get signIn => 'ログイン';
 
   @override
+  String get logInToReply => 'ログインして返信';
+
+  @override
+  String get cannotReply => '返信不可';
+
+  @override
   String get profile => 'プロフィール';
 
   @override

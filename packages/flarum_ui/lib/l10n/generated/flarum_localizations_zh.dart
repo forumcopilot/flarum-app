@@ -160,6 +160,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get signIn => '登录';
 
   @override
+  String get logInToReply => '登录以回复';
+
+  @override
+  String get cannotReply => '回复已关闭';
+
+  @override
   String get profile => '资料';
 
   @override

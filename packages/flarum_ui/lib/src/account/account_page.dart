@@ -14,7 +14,7 @@ import '../drafts/drafts_page.dart';
 import '../messages/dialogs_page.dart';
 import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
-import 'sign_in_page.dart';
+import 'log_in_first.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// The reader's account: sign in (or create an account on the forum's
@@ -68,7 +68,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Future<void> _signIn() async {
-    if (await SignInPage.open(context, widget.site)) {
+    if (await logInFirst(context, widget.site)) {
       if (mounted) setState(() {});
       widget.onSignInChanged?.call();
     }
@@ -79,6 +79,7 @@ class _AccountPageState extends State<AccountPage> {
   Future<void> _signOut() async {
     setState(() => _busy = true);
     await FlarumUserProxy(widget.site).logoutUserAsync();
+    ForumSession.changed(widget.site);
     if (!mounted) return;
     setState(() => _busy = false);
     widget.onSignInChanged?.call();

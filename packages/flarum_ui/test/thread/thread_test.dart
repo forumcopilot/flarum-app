@@ -101,6 +101,23 @@ void main() {
         model.dispose();
       });
 
+      testWidgets('a guest is offered Log In to Reply, and Reply under each post', (tester) async {
+        fixtures
+          ..guestReadsMember = true
+          ..forum(signedIn: false);
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
+        ));
+        await _pumpUntil(tester, find.byType(PostTile));
+        await tester.pump(const Duration(milliseconds: 500));
+        expect(find.widgetWithText(FloatingActionButton, 'Log In to Reply'), findsOneWidget);
+        expect(find.descendant(of: find.byType(PostTile).first, matching: find.text('Reply')), findsOneWidget,
+            reason: 'as the web shows it to guests, opening Log In');
+        expect(find.text('Like'), findsNothing, reason: 'the web offers guests no Like');
+        await _close(tester);
+      });
+
       testWidgets('the page shows the posts, their authors and bodies', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(

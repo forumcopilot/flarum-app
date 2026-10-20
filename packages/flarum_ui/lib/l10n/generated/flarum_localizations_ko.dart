@@ -160,6 +160,12 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get signIn => '로그인';
 
   @override
+  String get logInToReply => '로그인하고 답글 달기';
+
+  @override
+  String get cannotReply => '답장할 수 없음';
+
+  @override
   String get profile => '프로필';
 
   @override

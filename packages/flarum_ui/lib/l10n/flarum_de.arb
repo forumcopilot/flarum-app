@@ -28,6 +28,8 @@
   "unread": "Ungelesen",
   "search": "Suchen",
   "signIn": "Anmelden",
+  "logInToReply": "Anmelden zum Antworten",
+  "cannotReply": "Antworten nicht möglich",
   "profile": "Profil",
   "following": "Folgt",
   "follow": "Folgen",

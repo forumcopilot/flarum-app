@@ -162,6 +162,12 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get signIn => 'Accedi';
 
   @override
+  String get logInToReply => 'Accedi per rispondere';
+
+  @override
+  String get cannotReply => 'Non puoi rispondere';
+
+  @override
   String get profile => 'Profilo';
 
   @override

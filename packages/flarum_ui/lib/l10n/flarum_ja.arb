@@ -28,6 +28,8 @@
   "unread": "未読",
   "search": "検索",
   "signIn": "ログイン",
+  "logInToReply": "ログインして返信",
+  "cannotReply": "返信不可",
   "profile": "プロフィール",
   "following": "フォロー中",
   "follow": "フォロー",

@@ -28,6 +28,8 @@
   "unread": "未读",
   "search": "搜索",
   "signIn": "登录",
+  "logInToReply": "登录以回复",
+  "cannotReply": "回复已关闭",
   "profile": "资料",
   "following": "关注中",
   "follow": "关注",

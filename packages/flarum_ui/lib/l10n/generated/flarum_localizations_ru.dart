@@ -165,6 +165,12 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get signIn => 'Войти';
 
   @override
+  String get logInToReply => 'Войти для ответа';
+
+  @override
+  String get cannotReply => 'Нельзя ответить';
+
+  @override
   String get profile => 'Профиль';
 
   @override

@@ -198,6 +198,14 @@
   "unread": "Unread",
   "search": "Search",
   "signIn": "Log In",
+  "logInToReply": "Log In to Reply",
+  "@logInToReply": {
+    "description": "A guest's Reply, as Flarum's discussion controls word it: it opens Log In first"
+  },
+  "cannotReply": "Can't Reply",
+  "@cannotReply": {
+    "description": "Where the reader may not reply (a locked discussion), as Flarum's discussion controls word it"
+  },
   "profile": "Profile",
   "following": "Following",
   "follow": "Follow",

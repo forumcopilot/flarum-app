@@ -77,6 +77,7 @@ void main() {
         fixtures.forum(signedIn: false);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
         expect(find.text('Log in to see your notifications.'), findsOneWidget);
+        expect(find.widgetWithText(FilledButton, 'Log In'), findsOneWidget);
         expect(fixtures.requests, isEmpty);
       });
 

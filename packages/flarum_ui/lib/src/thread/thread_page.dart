@@ -9,6 +9,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../account/log_in_first.dart';
 import '../compose/composers.dart';
 import '../media/image_viewer_page.dart';
 import '../navigation/forum_links.dart';
@@ -226,6 +227,25 @@ class _ThreadPageState extends State<ThreadPage> {
 
   /// Whether the reader may reply here: signed in, and the discussion lets them.
   bool get _canReply => FlarumForum.of(widget.site).isSignedIn && (_model.discussion?.canReply ?? false);
+
+  /// A guest, where a member could reply: Reply asks them to Log In first, as the web's "Log In to
+  /// Reply" does.
+  bool get _guestCouldReply => !_forum.isSignedIn && _model.discussion != null && !_model.discussion!.isLocked;
+
+  /// Logs a guest in, reads the discussion again as them (what they may do now), then opens the
+  /// reply they asked for, starting from [initial].
+  Future<void> _logInToReply({String? initial, int? at}) async {
+    if (!await logInFirst(context, widget.site) || !mounted) return;
+    await _reload(at: at ?? _firstShownPost());
+    if (mounted && _canReply) _reply(initial: initial);
+  }
+
+  /// The number of the first post on screen, to open the thread at again.
+  int _firstShownPost() {
+    final rows = _positions.itemPositions.value.where((p) => p.itemTrailingEdge > 0).map((p) => p.index - _leading);
+    final first = rows.where((i) => i >= 0 && i < _model.posts.length).fold<int?>(null, (a, b) => a == null || b < a ? b : a);
+    return first == null ? (_near ?? 1) : _model.posts[first].number;
+  }
 
   /// Opens the composer for a reply, starting from [initial] (a quote, a reply to a post).
   Future<void> _reply({String? initial}) async {
@@ -501,7 +521,13 @@ class _ThreadPageState extends State<ThreadPage> {
               icon: const Icon(Icons.reply),
               label: Text(kitL10n(context).reply),
             )
-          : null,
+          : _guestCouldReply
+              ? FloatingActionButton.extended(
+                  onPressed: _logInToReply,
+                  icon: const Icon(Icons.login),
+                  label: Text(l10n.logInToReply),
+                )
+              : null,
       body: switch (_model) {
         ThreadModel(discussion: null, error: final error?) => EmptyStateView.error(
             message: l10n.threadLoadFailed,
@@ -576,13 +602,17 @@ class _ThreadPageState extends State<ThreadPage> {
         tags: _tags,
         isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,
         onGoToBestAnswer: post.number == 1 && _bestAnswerElsewhere ? _goToBestAnswer : null,
-        onReply: _canReply ? () => _reply(initial: replyTo(post, l10n)) : null,
+        onReply: _canReply
+            ? () => _reply(initial: replyTo(post, l10n))
+            : _guestCouldReply
+                ? () => _logInToReply(initial: replyTo(post, l10n), at: post.number)
+                : null,
         onQuote: _canReply ? () => _reply(initial: quoteOf(post, l10n)) : null,
         onEdit: post.canEdit ? () => _edit(post) : null,
         readerId: _readerId,
         reactions: _forum.info?.reactions ?? const [],
-        onLike: post.canLike ? () => _like(post) : null,
-        onReact: post.canReact ? (reaction) => _react(post, reaction) : null,
+        onLike: _signedIn && post.canLike ? () => _like(post) : null,
+        onReact: _signedIn && post.canReact ? (reaction) => _react(post, reaction) : null,
         onBookmark: _signedIn && _forum.extensions.bookmarks ? () => _bookmarkPost(post) : null,
         onChooseBestAnswer: post.canSelectAsBestAnswer && post.number > 1 ? () => _chooseBestAnswer(post) : null,
         onFlag: post.canFlag ? () => _flag(post) : null,
@@ -607,7 +637,7 @@ class _ThreadPageState extends State<ThreadPage> {
       );
     }
     // Room under the last post for the Reply button.
-    return SizedBox(height: _canReply ? 96 : DesignTokens.spacingXXXL);
+    return SizedBox(height: _canReply || _guestCouldReply ? 96 : DesignTokens.spacingXXXL);
   }
 }
 

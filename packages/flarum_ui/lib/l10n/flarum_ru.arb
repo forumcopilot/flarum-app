@@ -28,6 +28,8 @@
   "unread": "Непрочитанные",
   "search": "Поиск",
   "signIn": "Войти",
+  "logInToReply": "Войти для ответа",
+  "cannotReply": "Нельзя ответить",
   "profile": "Профиль",
   "following": "Подписки",
   "follow": "Подписаться",

@@ -10,6 +10,7 @@ import '../../l10n/flarum_l10n.dart';
 import '../thread/thread_page.dart';
 import 'notifications_model.dart';
 import '../widgets/flarum_avatar.dart';
+import '../account/log_in_first.dart';
 
 /// The reader's notifications: who did what, where, and when, unread ones
 /// highlighted. A tap marks one read and opens the post it's about.
@@ -120,7 +121,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
         ],
       ),
       body: !signedIn
-          ? EmptyStateView(icon: Icons.notifications_none, message: l10n.notificationsSignIn)
+          ? EmptyStateView(
+              icon: Icons.notifications_none,
+              message: l10n.notificationsSignIn,
+              actions: [FilledButton(onPressed: () => logInFirst(context, widget.site), child: Text(l10n.signIn))],
+            )
           : RefreshIndicator(onRefresh: _refresh, child: _body(l10n)),
     );
   }

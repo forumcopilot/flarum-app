@@ -350,6 +350,18 @@ abstract class FlarumLocalizations {
   /// **'Log In'**
   String get signIn;
 
+  /// A guest's Reply, as Flarum's discussion controls word it: it opens Log In first
+  ///
+  /// In en, this message translates to:
+  /// **'Log In to Reply'**
+  String get logInToReply;
+
+  /// Where the reader may not reply (a locked discussion), as Flarum's discussion controls word it
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t Reply'**
+  String get cannotReply;
+
   /// No description provided for @profile.
   ///
   /// In en, this message translates to:

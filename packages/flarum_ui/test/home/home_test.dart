@@ -124,6 +124,18 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets('a guest is offered Start a Discussion, as on the web', (tester) async {
+        fixtures
+          ..guestReadsMember = true
+          ..forum(signedIn: false);
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        expect(find.widgetWithText(FloatingActionButton, 'Start a Discussion'), findsOneWidget);
+        expect(find.byTooltip('Mark All as Read'), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('a refresh that fails keeps the list and says why', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: Scaffold(body: HomePage(site: _site()))));

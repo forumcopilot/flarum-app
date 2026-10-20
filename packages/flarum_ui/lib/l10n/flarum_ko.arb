@@ -28,6 +28,8 @@
   "unread": "읽지 않음",
   "search": "검색",
   "signIn": "로그인",
+  "logInToReply": "로그인하고 답글 달기",
+  "cannotReply": "답장할 수 없음",
   "profile": "프로필",
   "following": "팔로잉",
   "follow": "팔로우",

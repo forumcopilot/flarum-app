@@ -163,6 +163,12 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get signIn => 'Anmelden';
 
   @override
+  String get logInToReply => 'Anmelden zum Antworten';
+
+  @override
+  String get cannotReply => 'Antworten nicht möglich';
+
+  @override
   String get profile => 'Profil';
 
   @override

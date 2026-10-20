@@ -162,6 +162,12 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get signIn => 'Inloggen';
 
   @override
+  String get logInToReply => 'Log in om te reageren';
+
+  @override
+  String get cannotReply => 'Je kan niet reageren';
+
+  @override
   String get profile => 'Profiel';
 
   @override

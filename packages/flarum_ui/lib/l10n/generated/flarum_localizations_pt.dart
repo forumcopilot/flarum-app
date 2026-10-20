@@ -162,6 +162,12 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get signIn => 'Entrar';
 
   @override
+  String get logInToReply => 'Entrar para Responder';
+
+  @override
+  String get cannotReply => 'Não Pode Responder';
+
+  @override
   String get profile => 'Perfil';
 
   @override

@@ -59,14 +59,11 @@ class DiscussionTile extends StatelessWidget {
                   // The web's discussion badges, in its colours: what a reader scans the list for.
                   Text.rich(
                     TextSpan(children: [
-                      if (d.isHidden) _badge(Icons.delete_outline, const Color(0xFF888888), l10n.badgeHidden),
-                      if (!d.isApproved) _badge(Icons.gavel, const Color(0xFF888888), l10n.awaitingApproval),
-                      if (d.isSticky) _badge(Icons.push_pin, const Color(0xFFD13E32), l10n.badgeSticky),
-                      if (d.isLocked) _badge(Icons.lock, const Color(0xFF888888), l10n.badgeLocked),
-                      if (d.isPrivate) _badge(Icons.map_outlined, const Color(0xFF4D698E), l10n.privateDiscussion),
-                      if (d.subscription == 'follow') _badge(Icons.star, const Color(0xFFFFA000), l10n.following),
-                      if (d.hasBestAnswer) _badge(Icons.check, ForumColors.of(context).success, l10n.answered),
-                      if (d.hasPoll) _badge(Icons.poll_outlined, const Color(0xFF4D698E), l10n.poll),
+                      for (final badge in discussionBadges(context, d))
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Padding(padding: const EdgeInsets.only(right: 4), child: badge),
+                        ),
                       if (highlight case final query?) ...highlighted(d.title, query) else TextSpan(text: d.title),
                     ]),
                     maxLines: 3,
@@ -100,23 +97,6 @@ class DiscussionTile extends StatelessWidget {
     );
   }
 
-  /// A badge as the web draws one by a discussion: a white icon on a round colour, named for
-  /// screen readers.
-  static InlineSpan _badge(IconData icon, Color color, String label) => WidgetSpan(
-        alignment: PlaceholderAlignment.middle,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 4),
-          child: Tooltip(
-            message: label,
-            child: Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              child: Icon(icon, size: 11, color: Colors.white, semanticLabel: label),
-            ),
-          ),
-        ),
-      );
 }
 
 /// The replies count, or the unread count, highlighted, while there are some.
@@ -147,3 +127,31 @@ class _Count extends StatelessWidget {
     );
   }
 }
+
+/// [d]'s badges as the web draws them by a discussion, in its colours: Hidden and Awaiting
+/// approval (for moderators), the red Sticky pin, Locked, byobu's private map, a Following star,
+/// the green Answered check, Poll.
+List<Widget> discussionBadges(BuildContext context, FlarumDiscussion d) {
+  final l10n = flarumL10n(context);
+  return [
+    if (d.isHidden) discussionBadge(Icons.delete_outline, const Color(0xFF888888), l10n.badgeHidden),
+    if (!d.isApproved) discussionBadge(Icons.gavel, const Color(0xFF888888), l10n.awaitingApproval),
+    if (d.isSticky) discussionBadge(Icons.push_pin, const Color(0xFFD13E32), l10n.badgeSticky),
+    if (d.isLocked) discussionBadge(Icons.lock, const Color(0xFF888888), l10n.badgeLocked),
+    if (d.isPrivate) discussionBadge(Icons.map_outlined, const Color(0xFF4D698E), l10n.privateDiscussion),
+    if (d.subscription == 'follow') discussionBadge(Icons.star, const Color(0xFFFFA000), l10n.following),
+    if (d.hasBestAnswer) discussionBadge(Icons.check, ForumColors.of(context).success, l10n.answered),
+    if (d.hasPoll) discussionBadge(Icons.poll_outlined, const Color(0xFF4D698E), l10n.poll),
+  ];
+}
+
+/// A badge as the web draws one: a white icon on a round colour, named for screen readers.
+Widget discussionBadge(IconData icon, Color color, String label, {double size = 18}) => Tooltip(
+      message: label,
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        child: Icon(icon, size: size * 0.6, color: Colors.white, semanticLabel: label),
+      ),
+    );

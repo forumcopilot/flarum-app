@@ -224,9 +224,24 @@ class _TagPageState extends State<TagPage> {
   @override
   Widget build(BuildContext context) {
     final description = widget.tag.description;
+    // The web's tag hero: the tag's page headed in its colour, with its icon.
+    final color = flarumTagColor(widget.tag);
+    final foreground = color == null
+        ? null
+        : (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87);
+    final icon = flarumTagIcon(widget.tag.icon);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.tag.name),
+        backgroundColor: color,
+        foregroundColor: foreground,
+        surfaceTintColor: color == null ? null : Colors.transparent,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[Icon(icon, size: 22), const SizedBox(width: DesignTokens.spacingS)],
+            Flexible(child: Text(widget.tag.name, overflow: TextOverflow.ellipsis)),
+          ],
+        ),
         actions: [
           if (_forum.isSignedIn && _forum.extensions.followTags) _TagFollowMenu(level: _level, onChanged: _setLevel),
         ],
@@ -240,11 +255,12 @@ class _TagPageState extends State<TagPage> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(description,
-                        style: Theme.of(context).textTheme.bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: foreground),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis),
                   ),
                 ),
               ),
-        shape: Border(bottom: BorderSide(color: flarumTagColor(widget.tag) ?? Colors.transparent, width: 3)),
       ),
       body: DiscussionListView(site: widget.site, list: _list),
       floatingActionButton: startDiscussionButton(context, widget.site, tag: widget.tag, onStarted: _list.refresh),

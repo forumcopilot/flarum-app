@@ -88,7 +88,8 @@ void main() {
       await _settle(tester);
       await tester.tap(find.text('Following'));
       await _settle(tester);
-      expect(find.byIcon(Icons.star), findsOneWidget);
+      expect(find.descendant(of: find.byType(AppBar), matching: find.byIcon(Icons.star)), findsOneWidget);
+      expect(find.byTooltip('Following'), findsWidgets, reason: 'the bar, and the badge in the header');
       await tester.tap(find.byTooltip('Bookmark'));
       await _settle(tester);
       expect(find.byTooltip('Remove from bookmarks'), findsOneWidget);

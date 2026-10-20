@@ -88,7 +88,7 @@ void main() {
         expect(find.textContaining('Joined'), findsOneWidget);
 
         await tester.tap(find.text('Discussions'));
-        await _pumpUntil(tester, find.text('Feature request: dark mode'));
+        await _pumpUntil(tester, find.textContaining('Feature request: dark mode'));
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

@@ -127,6 +127,26 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets("the discussion opens under its hero, in its tag's colour, and the bar takes the title on scroll",
+          (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('long')),
+        ));
+        await _pumpUntil(tester, find.text('Post 1 of 60.'));
+        await tester.pump(const Duration(milliseconds: 300));
+        expect(find.descendant(of: find.byType(AppBar), matching: find.text('Long thread for paging tests')), findsNothing,
+            reason: 'the hero has the title');
+        expect(find.text('Long thread for paging tests'), findsOneWidget);
+        await tester.drag(find.byType(PostTile).first, const Offset(0, -1500));
+        for (var i = 0; i < 5; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        expect(find.descendant(of: find.byType(AppBar), matching: find.text('Long thread for paging tests')), findsOneWidget);
+        await _close(tester);
+      });
+
       testWidgets('a guest is offered Log In to Reply, and Reply under each post', (tester) async {
         fixtures
           ..guestReadsMember = true

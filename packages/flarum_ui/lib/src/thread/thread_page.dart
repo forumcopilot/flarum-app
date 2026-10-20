@@ -24,6 +24,7 @@ import '../tags/tags_page.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
 import '../navigation/web_links.dart';
+import '../home/discussion_tile.dart' show discussionBadges;
 
 /// A discussion's posts, opened at its start or at post [near].
 ///
@@ -110,11 +111,13 @@ class _ThreadPageState extends State<ThreadPage> {
     setState(() {});
   }
 
-  /// The head row, while the thread starts at its first post: the discussion's tags, and who a
-  /// private one is with. A private one has it from the start, so the rows don't shift when its
-  /// people arrive.
-  bool get _header =>
-      !_model.hasPrevious && ((_model.discussion?.tags.isNotEmpty ?? false) || (_model.discussion?.isPrivate ?? false));
+  /// The head row, while the thread starts at its first post: the web's discussion hero, in its
+  /// first tag's colour, with its badges, tags and title, and who a private one is with.
+  bool get _header => !_model.hasPrevious && _model.discussion != null;
+
+  /// Whether the hero is on screen: the bar shows the title only once it has scrolled away, as the
+  /// web's header does.
+  bool _heroOnScreen = true;
 
   /// Who a private discussion is with (fof/byobu), read once it's known to be one.
   List<FlarumUser>? _recipients;
@@ -137,6 +140,8 @@ class _ThreadPageState extends State<ThreadPage> {
   void _scrolled() {
     final visible = _positions.itemPositions.value.where((p) => p.itemLeadingEdge < 1 && p.itemTrailingEdge > 0);
     if (visible.isEmpty) return;
+    final hero = _header && visible.any((p) => p.index == 0 && p.itemTrailingEdge > 0.02);
+    if (hero != _heroOnScreen) setState(() => _heroOnScreen = hero);
     var lastPost = -1;
     var lastRow = 0;
     for (final position in visible) {
@@ -503,7 +508,9 @@ class _ThreadPageState extends State<ThreadPage> {
     final discussion = _model.discussion;
     return Scaffold(
       appBar: AppBar(
-        title: Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
+        title: _header && _heroOnScreen
+            ? null
+            : Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
         actions: [
           if (discussion != null)
             Builder(
@@ -566,25 +573,7 @@ class _ThreadPageState extends State<ThreadPage> {
   }
 
   Widget _row(BuildContext context, int row, FlarumLocalizations l10n) {
-    if (_header && row == 0) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(
-            DesignTokens.spacingL, DesignTokens.spacingM, DesignTokens.spacingL, DesignTokens.spacingS),
-        child: Wrap(
-          spacing: DesignTokens.spacingS,
-          runSpacing: DesignTokens.spacingXS,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            for (final tag in tagsInWebOrder(_model.discussion!.tags)) TagLabel(tag: tag),
-            if (_recipients case final people? when people.isNotEmpty) ...[
-              Icon(Icons.map_outlined, size: DesignTokens.iconSizeS, color: Theme.of(context).colorScheme.onSurfaceVariant),
-              Text(l10n.privateWith(people.map((user) => user.displayName).join(', ')),
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
-            ],
-          ],
-        ),
-      );
-    }
+    if (_header && row == 0) return _DiscussionHero(discussion: _model.discussion!, recipients: _recipients);
     if (_model.hasPrevious && row == 0) {
       return Padding(
         padding: const EdgeInsets.all(DesignTokens.spacingS),
@@ -692,6 +681,59 @@ class _FlashState extends State<_Flash> with SingleTickerProviderStateMixin {
         child: child,
       ),
       child: widget.child,
+    );
+  }
+}
+
+/// The web's discussion hero: the discussion's badges, tags and title on its first tag's colour
+/// (a plain band without one), and who a private one is with.
+class _DiscussionHero extends StatelessWidget {
+  const _DiscussionHero({required this.discussion, this.recipients});
+
+  final FlarumDiscussion discussion;
+  final List<FlarumUser>? recipients;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = flarumL10n(context);
+    final tags = tagsInWebOrder(discussion.tags);
+    final color = tags.isEmpty ? null : flarumTagColor(tags.first);
+    final background = color ?? theme.colorScheme.surfaceContainer;
+    final foreground = color == null
+        ? theme.colorScheme.onSurface
+        : (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87);
+    final badges = discussionBadges(context, discussion);
+    return Container(
+      color: background,
+      padding: const EdgeInsets.fromLTRB(
+          DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXL),
+      child: Column(
+        children: [
+          if (badges.isNotEmpty || tags.isNotEmpty)
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: DesignTokens.spacingXS,
+              runSpacing: DesignTokens.spacingXS,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                ...badges,
+                for (final tag in tags) TagLabel(tag: tag),
+              ],
+            ),
+          const SizedBox(height: DesignTokens.spacingS),
+          Semantics(
+            header: true,
+            child: Text(discussion.title,
+                textAlign: TextAlign.center, style: theme.textTheme.titleLarge?.copyWith(color: foreground)),
+          ),
+          if (recipients case final people? when people.isNotEmpty) ...[
+            const SizedBox(height: DesignTokens.spacingXS),
+            Text(l10n.privateWith(people.map((user) => user.displayName).join(', ')),
+                textAlign: TextAlign.center, style: theme.textTheme.bodyMedium?.copyWith(color: foreground)),
+          ],
+        ],
+      ),
     );
   }
 }

@@ -573,6 +573,163 @@
   "@notifOther": {
     "description": "Notification of a kind the app doesn't describe"
   },
+  "notifLineNewPost": "{user} posted",
+  "@notifLineNewPost": {
+    "description": "Under a discussion in the grouped list: a new post in it (flarum/subscriptions)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePostLiked": "{user} liked your post",
+  "@notifLinePostLiked": {
+    "description": "Under a discussion: a like (flarum/likes)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePostReacted": "{user} reacted to your post",
+  "@notifLinePostReacted": {
+    "description": "Under a discussion: a reaction (fof/reactions)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePostMentioned": "{user} replied to your post",
+  "@notifLinePostMentioned": {
+    "description": "Under a discussion: a reply to the reader's post (flarum/mentions)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineUserMentioned": "{user} mentioned you",
+  "@notifLineUserMentioned": {
+    "description": "Under a discussion: a mention of the reader",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineGroupMentioned": "{user} mentioned a group you're a member of",
+  "@notifLineGroupMentioned": {
+    "description": "Under a discussion: a mention of a group the reader is in",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineRenamed": "{user} changed the title",
+  "@notifLineRenamed": {
+    "description": "Under a discussion: it was renamed",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineLocked": "{user} locked",
+  "@notifLineLocked": {
+    "description": "Under a discussion: it was locked (flarum/lock)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineNewDiscussion": "{user} started",
+  "@notifLineNewDiscussion": {
+    "description": "Under a discussion: it was started in a followed tag (fof/follow-tags)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineMovedToTag": "{user} changed the tag",
+  "@notifLineMovedToTag": {
+    "description": "Under a discussion: it moved into a followed tag",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePrivateCreated": "{user} started a new private discussion with you",
+  "@notifLinePrivateCreated": {
+    "description": "Under a discussion: a private discussion with the reader began (fof/byobu)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePrivateReplied": "{user} posted in a private discussion you're a part of",
+  "@notifLinePrivateReplied": {
+    "description": "Under a discussion: a post in a private discussion",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePrivateAdded": "{user} added you to a private discussion",
+  "@notifLinePrivateAdded": {
+    "description": "Under a discussion: the reader was added to a private discussion",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLinePrivateRemoved": "{user} removed you from a private discussion",
+  "@notifLinePrivateRemoved": {
+    "description": "Under a discussion: the reader was removed from a private discussion",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineMadePublic": "{user} removed all recipients and made the discussion public",
+  "@notifLineMadePublic": {
+    "description": "Under a discussion: a private discussion was made public",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineBestAnswerAwarded": "Your post was set as the best answer by {user}",
+  "@notifLineBestAnswerAwarded": {
+    "description": "Under a discussion: the reader's post became the best answer (fof/best-answer)",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineBestAnswerChosen": "{user} set a best answer in this discussion",
+  "@notifLineBestAnswerChosen": {
+    "description": "Under a discussion: a best answer was chosen in it",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLineBestAnswerPending": "Please select a Best Answer if your question has been answered",
+  "@notifLineBestAnswerPending": {
+    "description": "Under a discussion: a reminder to choose a best answer"
+  },
   "aDiscussion": "a discussion",
   "@aDiscussion": {
     "description": "Stands in for a discussion title the notification doesn't carry"

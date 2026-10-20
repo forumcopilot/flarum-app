@@ -368,6 +368,95 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get notifOther => 'Nova notificação';
 
   @override
+  String notifLineNewPost(String user) {
+    return '$user postou';
+  }
+
+  @override
+  String notifLinePostLiked(String user) {
+    return '$user curtiu seu post';
+  }
+
+  @override
+  String notifLinePostReacted(String user) {
+    return '$user reagiu ao seu post';
+  }
+
+  @override
+  String notifLinePostMentioned(String user) {
+    return '$user respondeu ao seu post';
+  }
+
+  @override
+  String notifLineUserMentioned(String user) {
+    return '$user mencionou você';
+  }
+
+  @override
+  String notifLineGroupMentioned(String user) {
+    return '$user mencionou um grupo do qual você faz parte';
+  }
+
+  @override
+  String notifLineRenamed(String user) {
+    return '$user alterou o título';
+  }
+
+  @override
+  String notifLineLocked(String user) {
+    return '$user a trancou';
+  }
+
+  @override
+  String notifLineNewDiscussion(String user) {
+    return '$user a iniciou';
+  }
+
+  @override
+  String notifLineMovedToTag(String user) {
+    return '$user mudou a tag';
+  }
+
+  @override
+  String notifLinePrivateCreated(String user) {
+    return '$user iniciou uma nova discussão privada com você';
+  }
+
+  @override
+  String notifLinePrivateReplied(String user) {
+    return '$user postou em uma discussão privada da qual você faz parte';
+  }
+
+  @override
+  String notifLinePrivateAdded(String user) {
+    return '$user adicionou você a uma discussão privada';
+  }
+
+  @override
+  String notifLinePrivateRemoved(String user) {
+    return '$user removeu você de uma discussão privada';
+  }
+
+  @override
+  String notifLineMadePublic(String user) {
+    return '$user removeu todos os destinatários e tornou a discussão pública';
+  }
+
+  @override
+  String notifLineBestAnswerAwarded(String user) {
+    return 'Seu post foi definido como a melhor resposta por $user';
+  }
+
+  @override
+  String notifLineBestAnswerChosen(String user) {
+    return '$user definiu uma melhor resposta nesta discussão';
+  }
+
+  @override
+  String get notifLineBestAnswerPending =>
+      'Selecione uma melhor resposta se sua pergunta foi respondida';
+
+  @override
   String get aDiscussion => 'uma discussão';
 
   @override

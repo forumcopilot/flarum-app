@@ -361,6 +361,94 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get notifOther => '새 알림';
 
   @override
+  String notifLineNewPost(String user) {
+    return '$user님이 글을 올렸습니다';
+  }
+
+  @override
+  String notifLinePostLiked(String user) {
+    return '$user님이 회원님의 글을 좋아합니다';
+  }
+
+  @override
+  String notifLinePostReacted(String user) {
+    return '$user님이 회원님의 글에 반응했습니다';
+  }
+
+  @override
+  String notifLinePostMentioned(String user) {
+    return '$user님이 회원님의 글에 답글을 남겼습니다';
+  }
+
+  @override
+  String notifLineUserMentioned(String user) {
+    return '$user님이 회원님을 언급했습니다';
+  }
+
+  @override
+  String notifLineGroupMentioned(String user) {
+    return '$user님이 회원님이 속한 그룹을 언급했습니다';
+  }
+
+  @override
+  String notifLineRenamed(String user) {
+    return '$user님이 제목을 변경했습니다';
+  }
+
+  @override
+  String notifLineLocked(String user) {
+    return '$user님이 잠갔습니다';
+  }
+
+  @override
+  String notifLineNewDiscussion(String user) {
+    return '$user님이 시작했습니다';
+  }
+
+  @override
+  String notifLineMovedToTag(String user) {
+    return '$user님이 태그를 변경했습니다';
+  }
+
+  @override
+  String notifLinePrivateCreated(String user) {
+    return '$user님이 회원님과 비공개 토론을 시작했습니다';
+  }
+
+  @override
+  String notifLinePrivateReplied(String user) {
+    return '$user님이 회원님이 참여한 비공개 토론에 글을 올렸습니다';
+  }
+
+  @override
+  String notifLinePrivateAdded(String user) {
+    return '$user님이 회원님을 비공개 토론에 추가했습니다';
+  }
+
+  @override
+  String notifLinePrivateRemoved(String user) {
+    return '$user님이 회원님을 비공개 토론에서 제외했습니다';
+  }
+
+  @override
+  String notifLineMadePublic(String user) {
+    return '$user님이 모든 참여자를 제외하고 토론을 공개했습니다';
+  }
+
+  @override
+  String notifLineBestAnswerAwarded(String user) {
+    return '회원님의 글이 $user님에 의해 베스트 답변으로 선택되었습니다';
+  }
+
+  @override
+  String notifLineBestAnswerChosen(String user) {
+    return '$user님이 이 토론의 베스트 답변을 선택했습니다';
+  }
+
+  @override
+  String get notifLineBestAnswerPending => '질문에 답을 얻었다면 베스트 답변을 선택해 주세요';
+
+  @override
   String get aDiscussion => '토론';
 
   @override

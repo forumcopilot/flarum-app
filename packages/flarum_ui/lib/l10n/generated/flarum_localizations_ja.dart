@@ -361,6 +361,94 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get notifOther => '新しい通知';
 
   @override
+  String notifLineNewPost(String user) {
+    return '$user が投稿しました';
+  }
+
+  @override
+  String notifLinePostLiked(String user) {
+    return '$user が「いいね」しました';
+  }
+
+  @override
+  String notifLinePostReacted(String user) {
+    return '$userがあなたの投稿にリアクションしました';
+  }
+
+  @override
+  String notifLinePostMentioned(String user) {
+    return '$user があなたの投稿に返信しました';
+  }
+
+  @override
+  String notifLineUserMentioned(String user) {
+    return '$user があなたをメンションしました';
+  }
+
+  @override
+  String notifLineGroupMentioned(String user) {
+    return '$userがあなたの所属するグループをメンションしました';
+  }
+
+  @override
+  String notifLineRenamed(String user) {
+    return '$user がタイトルを変更しました';
+  }
+
+  @override
+  String notifLineLocked(String user) {
+    return '$user がロックしました';
+  }
+
+  @override
+  String notifLineNewDiscussion(String user) {
+    return '$userがディスカッションを開始しました';
+  }
+
+  @override
+  String notifLineMovedToTag(String user) {
+    return '$userさんがタグを変更しました';
+  }
+
+  @override
+  String notifLinePrivateCreated(String user) {
+    return '$userがあなたとの非公開ディスカッションを開始しました';
+  }
+
+  @override
+  String notifLinePrivateReplied(String user) {
+    return '$userがあなたの参加している非公開ディスカッションに投稿しました';
+  }
+
+  @override
+  String notifLinePrivateAdded(String user) {
+    return '$userがあなたを非公開ディスカッションに追加しました';
+  }
+
+  @override
+  String notifLinePrivateRemoved(String user) {
+    return '$userがあなたを非公開ディスカッションから外しました';
+  }
+
+  @override
+  String notifLineMadePublic(String user) {
+    return '$userが参加者をすべて外し、ディスカッションを公開しました';
+  }
+
+  @override
+  String notifLineBestAnswerAwarded(String user) {
+    return 'あなたの投稿が$userによってベストアンサーに選ばれました';
+  }
+
+  @override
+  String notifLineBestAnswerChosen(String user) {
+    return '$userがこのディスカッションのベストアンサーを選びました';
+  }
+
+  @override
+  String get notifLineBestAnswerPending => 'あなたの質問が解決された場合は、ベストアンサーを選んでください。';
+
+  @override
   String get aDiscussion => 'ディスカッション';
 
   @override

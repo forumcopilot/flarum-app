@@ -656,6 +656,114 @@ abstract class FlarumLocalizations {
   /// **'New notification'**
   String get notifOther;
 
+  /// Under a discussion in the grouped list: a new post in it (flarum/subscriptions)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} posted'**
+  String notifLineNewPost(String user);
+
+  /// Under a discussion: a like (flarum/likes)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} liked your post'**
+  String notifLinePostLiked(String user);
+
+  /// Under a discussion: a reaction (fof/reactions)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} reacted to your post'**
+  String notifLinePostReacted(String user);
+
+  /// Under a discussion: a reply to the reader's post (flarum/mentions)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} replied to your post'**
+  String notifLinePostMentioned(String user);
+
+  /// Under a discussion: a mention of the reader
+  ///
+  /// In en, this message translates to:
+  /// **'{user} mentioned you'**
+  String notifLineUserMentioned(String user);
+
+  /// Under a discussion: a mention of a group the reader is in
+  ///
+  /// In en, this message translates to:
+  /// **'{user} mentioned a group you\'re a member of'**
+  String notifLineGroupMentioned(String user);
+
+  /// Under a discussion: it was renamed
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed the title'**
+  String notifLineRenamed(String user);
+
+  /// Under a discussion: it was locked (flarum/lock)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} locked'**
+  String notifLineLocked(String user);
+
+  /// Under a discussion: it was started in a followed tag (fof/follow-tags)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} started'**
+  String notifLineNewDiscussion(String user);
+
+  /// Under a discussion: it moved into a followed tag
+  ///
+  /// In en, this message translates to:
+  /// **'{user} changed the tag'**
+  String notifLineMovedToTag(String user);
+
+  /// Under a discussion: a private discussion with the reader began (fof/byobu)
+  ///
+  /// In en, this message translates to:
+  /// **'{user} started a new private discussion with you'**
+  String notifLinePrivateCreated(String user);
+
+  /// Under a discussion: a post in a private discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} posted in a private discussion you\'re a part of'**
+  String notifLinePrivateReplied(String user);
+
+  /// Under a discussion: the reader was added to a private discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} added you to a private discussion'**
+  String notifLinePrivateAdded(String user);
+
+  /// Under a discussion: the reader was removed from a private discussion
+  ///
+  /// In en, this message translates to:
+  /// **'{user} removed you from a private discussion'**
+  String notifLinePrivateRemoved(String user);
+
+  /// Under a discussion: a private discussion was made public
+  ///
+  /// In en, this message translates to:
+  /// **'{user} removed all recipients and made the discussion public'**
+  String notifLineMadePublic(String user);
+
+  /// Under a discussion: the reader's post became the best answer (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'Your post was set as the best answer by {user}'**
+  String notifLineBestAnswerAwarded(String user);
+
+  /// Under a discussion: a best answer was chosen in it
+  ///
+  /// In en, this message translates to:
+  /// **'{user} set a best answer in this discussion'**
+  String notifLineBestAnswerChosen(String user);
+
+  /// Under a discussion: a reminder to choose a best answer
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a Best Answer if your question has been answered'**
+  String get notifLineBestAnswerPending;
+
   /// Stands in for a discussion title the notification doesn't carry
   ///
   /// In en, this message translates to:

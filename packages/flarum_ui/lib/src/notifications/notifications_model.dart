@@ -107,6 +107,7 @@ class NotificationsModel extends ChangeNotifier {
       discussionSlug: old.discussionSlug,
       postId: old.postId,
       postNumber: old.postNumber,
+      postHtml: old.postHtml,
     );
     _notify();
   }

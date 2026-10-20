@@ -142,17 +142,28 @@ class _NotificationsPageState extends State<NotificationsPage> {
       if (_model.loading) return const Center(child: CircularProgressIndicator());
       return EmptyStateView.scrollable(icon: Icons.notifications_none, message: l10n.noNotificationsYet);
     }
+    // Grouped under each discussion's title, as the web groups them (forum-wide ones under the
+    // forum's name), in the order the newest of each came in.
+    final groups = <String, List<FlarumNotification>>{};
+    for (final n in _model.items) {
+      groups.putIfAbsent(n.discussionId ?? '', () => []).add(n);
+    }
+    final rows = <Object>[
+      for (final group in groups.entries) ...[
+        group.key.isEmpty ? (_forum.info?.title ?? widget.site.site.name) : (group.value.first.discussionTitle ?? l10n.aDiscussion),
+        ...group.value,
+      ],
+    ];
     return NotificationListener<ScrollNotification>(
       onNotification: (n) {
         if (n.metrics.extentAfter < 400) _model.loadMore();
         return false;
       },
-      child: ListView.separated(
+      child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: _model.items.length + (_model.hasMore ? 1 : 0),
-        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemCount: rows.length + (_model.hasMore ? 1 : 0),
         itemBuilder: (context, i) {
-          if (i == _model.items.length) {
+          if (i == rows.length) {
             // The next page: loading, or failed, with Retry rather than a spinner that never stops.
             return Padding(
               padding: const EdgeInsets.all(DesignTokens.spacingL),
@@ -163,33 +174,84 @@ class _NotificationsPageState extends State<NotificationsPage> {
               ),
             );
           }
-          final n = _model.items[i];
-          return NotificationTile(notification: n, onTap: () => _open(n));
+          return switch (rows[i]) {
+            final FlarumNotification n => NotificationTile(notification: n, grouped: true, onTap: () => _open(n)),
+            final title => _GroupHeader(title: '$title'),
+          };
         },
       ),
     );
   }
 }
 
-/// One notification: the person, the line, when; unread ones on a tinted row.
+/// A discussion's title over its notifications (or the forum's name over its own), as the web
+/// heads each group.
+class _GroupHeader extends StatelessWidget {
+  const _GroupHeader({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Semantics(
+      header: true,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+            DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXS),
+        child: Text(title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+      ),
+    );
+  }
+}
+
+/// One notification, as the web lists it: who, their avatar marked with the kind (a like's
+/// thumbs-up, a mention's @), the line, a line of the post it's about, and when; unread ones on a
+/// tinted row. [grouped] under its discussion's title, the line leaves the title out.
 class NotificationTile extends StatelessWidget {
-  const NotificationTile({super.key, required this.notification, this.onTap});
+  const NotificationTile({super.key, required this.notification, this.onTap, this.grouped = false});
 
   final FlarumNotification notification;
   final VoidCallback? onTap;
+  final bool grouped;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = flarumL10n(context);
     final n = notification;
     final created = n.createdAt;
+    final excerpt = switch (n.postHtml) {
+      final html? => plainText(html).replaceAll(RegExp(r'\s+'), ' ').trim(),
+      null => null,
+    };
+    final muted = theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant);
     return Material(
       color: n.isRead ? Colors.transparent : colorScheme.primaryContainer.withValues(alpha: 0.35),
       child: ListTile(
         onTap: onTap,
         leading: switch (n.fromUser) {
-          final user? => FlarumAvatar(user: user),
+          final user? => Stack(
+              clipBehavior: Clip.none,
+              children: [
+                FlarumAvatar(user: user),
+                Positioned(
+                  right: -4,
+                  bottom: -4,
+                  child: ExcludeSemantics(
+                    child: CircleAvatar(
+                      radius: 10,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      child: Icon(iconFor(n), size: 12, color: colorScheme.onSurfaceVariant),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           // From the forum itself (a suspension, an export): its kind, as the web shows it.
           null => CircleAvatar(
               radius: 20,
@@ -198,22 +260,68 @@ class NotificationTile extends StatelessWidget {
             ),
         },
         title: Text(
-          message(n, flarumL10n(context)),
+          grouped ? line(n, l10n) : message(n, l10n),
           style: theme.textTheme.bodyMedium?.copyWith(fontWeight: n.isRead ? FontWeight.w400 : FontWeight.w600),
         ),
-        subtitle: created == null ? null : Text(formatTimeAgo(created.toLocal(), context)),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (excerpt != null && excerpt.isNotEmpty) Text(excerpt, maxLines: 1, overflow: TextOverflow.ellipsis, style: muted),
+            if (created != null) Text(formatTimeAgo(created.toLocal(), context), style: muted),
+          ],
+        ),
       ),
     );
   }
 
-  /// The icon for [n] where nobody sent it.
+  /// [n]'s kind, in the icons the web marks notifications with (Font Awesome there).
   static IconData iconFor(FlarumNotification n) => switch (n.contentType) {
+        'postLiked' => Icons.thumb_up,
+        'postReacted' => Icons.emoji_emotions_outlined,
+        'postMentioned' => Icons.reply,
+        'userMentioned' || 'groupMentioned' => Icons.alternate_email,
+        'newPost' || 'newPostInTag' || 'newDiscussionInTag' || 'newDiscussionTag' => Icons.star,
+        'discussionRenamed' => Icons.edit,
+        'discussionLocked' => Icons.lock,
+        'byobuPrivateDiscussionCreated' ||
+        'byobuPrivateDiscussionReplied' ||
+        'byobuPrivateDiscussionAdded' ||
+        'byobuRecipientRemoved' ||
+        'byobuMadePublic' =>
+          Icons.map_outlined,
+        'awardedBestAnswer' || 'bestAnswerInDiscussion' || 'selectBestAnswer' => Icons.check_circle_outline,
+        'messageReceived' => Icons.chat_bubble_outline,
         'userSuspended' => Icons.block,
         'userUnsuspended' => Icons.check_circle_outline,
         'gdprExportAvailable' => Icons.download_outlined,
-        'selectBestAnswer' => Icons.check_circle_outline,
         _ => Icons.notifications_outlined,
       };
+
+  /// [n]'s line under its discussion's title, in the web's own words ("alice liked your post").
+  static String line(FlarumNotification n, FlarumLocalizations l10n) {
+    final user = n.fromUser?.displayName ?? l10n.someone;
+    return switch (n.contentType) {
+      'newPost' || 'newPostInTag' => l10n.notifLineNewPost(user),
+      'postLiked' => l10n.notifLinePostLiked(user),
+      'postReacted' => l10n.notifLinePostReacted(user),
+      'postMentioned' => l10n.notifLinePostMentioned(user),
+      'userMentioned' => l10n.notifLineUserMentioned(user),
+      'groupMentioned' => l10n.notifLineGroupMentioned(user),
+      'discussionRenamed' => l10n.notifLineRenamed(user),
+      'discussionLocked' => l10n.notifLineLocked(user),
+      'newDiscussionInTag' => l10n.notifLineNewDiscussion(user),
+      'newDiscussionTag' => l10n.notifLineMovedToTag(user),
+      'byobuPrivateDiscussionCreated' => l10n.notifLinePrivateCreated(user),
+      'byobuPrivateDiscussionReplied' => l10n.notifLinePrivateReplied(user),
+      'byobuPrivateDiscussionAdded' => l10n.notifLinePrivateAdded(user),
+      'byobuRecipientRemoved' => l10n.notifLinePrivateRemoved(user),
+      'byobuMadePublic' => l10n.notifLineMadePublic(user),
+      'awardedBestAnswer' => l10n.notifLineBestAnswerAwarded(user),
+      'bestAnswerInDiscussion' => l10n.notifLineBestAnswerChosen(user),
+      'selectBestAnswer' => l10n.notifLineBestAnswerPending,
+      _ => message(n, l10n),
+    };
+  }
 
   /// [n]'s line, worded as the web words it.
   static String message(FlarumNotification n, FlarumLocalizations l10n) {

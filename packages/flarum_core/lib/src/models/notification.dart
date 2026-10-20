@@ -17,6 +17,7 @@ class FlarumNotification {
     this.discussionSlug,
     this.postId,
     this.postNumber,
+    this.postHtml,
   });
 
   factory FlarumNotification.fromResource(JsonApiResource resource, JsonApiDocument document) {
@@ -43,6 +44,7 @@ class FlarumNotification {
       postNumber: subjectRef?.type == 'posts'
           ? subject?.attributes.integer('number')
           : (content is Map ? int.tryParse('${content['postNumber'] ?? ''}') : null),
+      postHtml: subjectRef?.type == 'posts' ? subject?.attributes.nonEmptyString('contentHtml') : null,
     );
   }
 
@@ -70,6 +72,9 @@ class FlarumNotification {
 
   /// The post it's about, when the subject is a post.
   final String? postId;
+
+  /// The subject post's rendered text, for the line of it the web shows under a notification.
+  final String? postHtml;
 
   /// The post to open at: the subject post's number, or the event's own
   /// (byobu's replies carry `content.postNumber`).

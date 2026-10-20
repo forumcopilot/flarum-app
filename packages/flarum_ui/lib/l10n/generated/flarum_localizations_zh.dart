@@ -361,6 +361,94 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get notifOther => '新通知';
 
   @override
+  String notifLineNewPost(String user) {
+    return '$user 发布了新内容';
+  }
+
+  @override
+  String notifLinePostLiked(String user) {
+    return '$user 赞了你的帖子';
+  }
+
+  @override
+  String notifLinePostReacted(String user) {
+    return '$user 对你的帖子做出了回应';
+  }
+
+  @override
+  String notifLinePostMentioned(String user) {
+    return '$user 回复了你的帖子';
+  }
+
+  @override
+  String notifLineUserMentioned(String user) {
+    return '$user 提及了你';
+  }
+
+  @override
+  String notifLineGroupMentioned(String user) {
+    return '$user 提及了你所在的用户组';
+  }
+
+  @override
+  String notifLineRenamed(String user) {
+    return '$user 更改了标题';
+  }
+
+  @override
+  String notifLineLocked(String user) {
+    return '$user 锁定了讨论';
+  }
+
+  @override
+  String notifLineNewDiscussion(String user) {
+    return '$user 发起了讨论';
+  }
+
+  @override
+  String notifLineMovedToTag(String user) {
+    return '$user 更改了标签';
+  }
+
+  @override
+  String notifLinePrivateCreated(String user) {
+    return '$user 与你发起了新的私密讨论';
+  }
+
+  @override
+  String notifLinePrivateReplied(String user) {
+    return '$user 在你参与的私密讨论中发布了新内容';
+  }
+
+  @override
+  String notifLinePrivateAdded(String user) {
+    return '$user 将你加入私密讨论';
+  }
+
+  @override
+  String notifLinePrivateRemoved(String user) {
+    return '$user 将你移出了私密讨论';
+  }
+
+  @override
+  String notifLineMadePublic(String user) {
+    return '$user 将讨论转为公开';
+  }
+
+  @override
+  String notifLineBestAnswerAwarded(String user) {
+    return '$user 将你的帖子设为最佳回复';
+  }
+
+  @override
+  String notifLineBestAnswerChosen(String user) {
+    return '$user 选择了最佳回复';
+  }
+
+  @override
+  String get notifLineBestAnswerPending => '如果你的问题已经解决，别忘了选择最佳回复';
+
+  @override
   String get aDiscussion => '一个讨论';
 
   @override

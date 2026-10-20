@@ -65,10 +65,22 @@ void main() {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
         await _pumpUntil(tester, find.byType(NotificationTile));
-        await tester.tap(find.text('carol liked your post in Welcome to the test forum'));
+        await tester.tap(find.text('carol liked your post'));
         await _pumpUntil(tester, find.byType(ThreadPage));
         expect(fixtures.requests.any((r) => r.method == 'PATCH' && r.path.startsWith('/notifications/')), isTrue,
             reason: 'marked read');
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets('notifications sit under their discussion, with the kind, the line and the post', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
+        await _pumpUntil(tester, find.byType(NotificationTile));
+        expect(find.text('Welcome to the test forum'), findsOneWidget, reason: "the discussion's title heads its group");
+        expect(find.text('carol liked your post'), findsOneWidget, reason: "the web's own line, without the title");
+        expect(find.byIcon(Icons.thumb_up), findsOneWidget, reason: 'a like, marked as the web marks it');
+        expect(find.textContaining('Looking forward to testing'), findsWidgets, reason: 'a line of the post it is about');
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

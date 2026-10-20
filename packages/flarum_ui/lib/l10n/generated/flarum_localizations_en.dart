@@ -366,6 +366,95 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get notifOther => 'New notification';
 
   @override
+  String notifLineNewPost(String user) {
+    return '$user posted';
+  }
+
+  @override
+  String notifLinePostLiked(String user) {
+    return '$user liked your post';
+  }
+
+  @override
+  String notifLinePostReacted(String user) {
+    return '$user reacted to your post';
+  }
+
+  @override
+  String notifLinePostMentioned(String user) {
+    return '$user replied to your post';
+  }
+
+  @override
+  String notifLineUserMentioned(String user) {
+    return '$user mentioned you';
+  }
+
+  @override
+  String notifLineGroupMentioned(String user) {
+    return '$user mentioned a group you\'re a member of';
+  }
+
+  @override
+  String notifLineRenamed(String user) {
+    return '$user changed the title';
+  }
+
+  @override
+  String notifLineLocked(String user) {
+    return '$user locked';
+  }
+
+  @override
+  String notifLineNewDiscussion(String user) {
+    return '$user started';
+  }
+
+  @override
+  String notifLineMovedToTag(String user) {
+    return '$user changed the tag';
+  }
+
+  @override
+  String notifLinePrivateCreated(String user) {
+    return '$user started a new private discussion with you';
+  }
+
+  @override
+  String notifLinePrivateReplied(String user) {
+    return '$user posted in a private discussion you\'re a part of';
+  }
+
+  @override
+  String notifLinePrivateAdded(String user) {
+    return '$user added you to a private discussion';
+  }
+
+  @override
+  String notifLinePrivateRemoved(String user) {
+    return '$user removed you from a private discussion';
+  }
+
+  @override
+  String notifLineMadePublic(String user) {
+    return '$user removed all recipients and made the discussion public';
+  }
+
+  @override
+  String notifLineBestAnswerAwarded(String user) {
+    return 'Your post was set as the best answer by $user';
+  }
+
+  @override
+  String notifLineBestAnswerChosen(String user) {
+    return '$user set a best answer in this discussion';
+  }
+
+  @override
+  String get notifLineBestAnswerPending =>
+      'Please select a Best Answer if your question has been answered';
+
+  @override
   String get aDiscussion => 'a discussion';
 
   @override

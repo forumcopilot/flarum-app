@@ -473,6 +473,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get usersTab => 'ユーザー';
 
   @override
+  String get likesTab => 'いいね';
+
+  @override
+  String get mentionsTab => 'メンション';
+
+  @override
   String profileJoined(String date) {
     return '$date に参加';
   }
@@ -483,6 +489,19 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   @override
   String lastSeen(String time) {
     return '最終ログイン：$time';
+  }
+
+  @override
+  String get online => 'オンライン';
+
+  @override
+  String bestAnswerCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count件',
+    );
+    return 'ベストアンサー$_temp0';
   }
 
   @override

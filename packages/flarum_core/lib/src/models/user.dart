@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'group.dart';
 
 /// A Flarum user as the API shows it to the current reader. Counts and
 /// notification fields are only present for the reader's own account or
@@ -25,9 +26,12 @@ class FlarumUser {
     this.suspendMessage,
     this.suspendReason,
     this.canSuspend = false,
+    this.groups = const [],
+    this.bestAnswerCount,
   });
 
-  factory FlarumUser.fromResource(JsonApiResource resource) {
+  /// [document] brings the user's groups, where the request included them.
+  factory FlarumUser.fromResource(JsonApiResource resource, {JsonApiDocument? document}) {
     final a = resource.attributes;
     final username = a.string('username') ?? '';
     return FlarumUser(
@@ -50,6 +54,11 @@ class FlarumUser {
       suspendMessage: a.nonEmptyString('suspendMessage'),
       suspendReason: a.nonEmptyString('suspendReason'),
       canSuspend: a.boolean('canSuspend') ?? false,
+      groups: [
+        if (document != null)
+          for (final group in document.findAll(resource.toMany('groups'))) FlarumGroup.fromResource(group),
+      ],
+      bestAnswerCount: a.integer('bestAnswerCount'),
     );
   }
 
@@ -74,6 +83,8 @@ class FlarumUser {
         suspendMessage: suspendMessage,
         suspendReason: suspendReason,
         canSuspend: canSuspend,
+        groups: groups,
+        bestAnswerCount: bestAnswerCount,
       );
 
   final String id;
@@ -119,6 +130,12 @@ class FlarumUser {
 
   /// Whether the reader may suspend the user.
   final bool canSuspend;
+
+  /// The groups the web badges them with on their profile (shown ones only, as the web shows).
+  final List<FlarumGroup> groups;
+
+  /// Their posts chosen as best answers (fof/best-answer), when the forum counts them.
+  final int? bestAnswerCount;
 
   bool get isSuspended => suspendedUntil?.isAfter(DateTime.now()) ?? false;
 

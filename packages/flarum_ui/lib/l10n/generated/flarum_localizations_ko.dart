@@ -473,6 +473,12 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get usersTab => '사용자';
 
   @override
+  String get likesTab => '좋아요';
+
+  @override
+  String get mentionsTab => '언급';
+
+  @override
   String profileJoined(String date) {
     return '$date 가입';
   }
@@ -483,6 +489,19 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   @override
   String lastSeen(String time) {
     return '마지막 접속: $time';
+  }
+
+  @override
+  String get online => '온라인';
+
+  @override
+  String bestAnswerCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count개',
+    );
+    return '베스트 답변 $_temp0';
   }
 
   @override

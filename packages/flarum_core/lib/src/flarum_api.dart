@@ -608,8 +608,10 @@ class FlarumApi {
 
   /// A user by slug, as `/u/{slug}` names them: the username, or the id on forums that use the ID
   /// slug driver (where a username 404s). Without `bySlug` Flarum reads it as an id.
-  Future<FlarumUser> userBySlug(String slug) async => FlarumUser.fromResource(
-      (await client.get('/users/${Uri.encodeComponent(slug)}', query: {'bySlug': 'true'})).single);
+  Future<FlarumUser> userBySlug(String slug) async {
+    final document = await client.get('/users/${Uri.encodeComponent(slug)}', query: {'bySlug': 'true'});
+    return FlarumUser.fromResource(document.single, document: document);
+  }
 
   /// Users matching [query]. Needs the forum's "search users" permission
   /// (`canSearchUsers`); guests get 403 by default.
@@ -626,6 +628,32 @@ class FlarumApi {
   Future<FlarumPage<FlarumPost>> userPosts(String username, {int offset = 0, int limit = 20}) async {
     final document = await client.get('/posts', query: {
       'filter[author]': username,
+      'filter[type]': 'comment',
+      'sort': '-createdAt',
+      ..._page(offset, limit),
+      'include': 'user,discussion',
+    });
+    return _postPage(document, offset);
+  }
+
+  /// The posts user [userId] likes, newest first (flarum/likes' `likedBy` filter), as the web's
+  /// Likes tab on a profile lists them.
+  Future<FlarumPage<FlarumPost>> likedPosts(String userId, {int offset = 0, int limit = 20}) async {
+    final document = await client.get('/posts', query: {
+      'filter[likedBy]': userId,
+      'filter[type]': 'comment',
+      'sort': '-createdAt',
+      ..._page(offset, limit),
+      'include': 'user,discussion',
+    });
+    return _postPage(document, offset);
+  }
+
+  /// The posts that mention user [userId], newest first (flarum/mentions' `mentioned` filter), as
+  /// the web's Mentions tab on a profile lists them.
+  Future<FlarumPage<FlarumPost>> mentionedPosts(String userId, {int offset = 0, int limit = 20}) async {
+    final document = await client.get('/posts', query: {
+      'filter[mentioned]': userId,
       'filter[type]': 'comment',
       'sort': '-createdAt',
       ..._page(offset, limit),

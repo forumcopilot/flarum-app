@@ -473,6 +473,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get usersTab => '用户';
 
   @override
+  String get likesTab => '赞';
+
+  @override
+  String get mentionsTab => '提及';
+
+  @override
   String profileJoined(String date) {
     return '$date 加入';
   }
@@ -483,6 +489,20 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   @override
   String lastSeen(String time) {
     return '最后在线：$time';
+  }
+
+  @override
+  String get online => '在线';
+
+  @override
+  String bestAnswerCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个最佳回复',
+      one: '$count 个最佳回复',
+    );
+    return '$_temp0';
   }
 
   @override

@@ -812,6 +812,18 @@ abstract class FlarumLocalizations {
   /// **'Users'**
   String get usersTab;
 
+  /// A profile's Likes tab (flarum/likes)
+  ///
+  /// In en, this message translates to:
+  /// **'Likes'**
+  String get likesTab;
+
+  /// A profile's Mentions tab (flarum/mentions)
+  ///
+  /// In en, this message translates to:
+  /// **'Mentions'**
+  String get mentionsTab;
+
   /// When the person joined, e.g. 'Joined Mar 2024'
   ///
   /// In en, this message translates to:
@@ -829,6 +841,18 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Last seen {time}'**
   String lastSeen(String time);
+
+  /// On a profile: seen within the last 5 minutes, as the web says it
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
+  /// On a profile: their best answers (fof/best-answer)
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 best answer} other{{count} best answers}}'**
+  String bestAnswerCount(int count);
 
   /// Profile: how many discussions the user started and posts they wrote
   ///

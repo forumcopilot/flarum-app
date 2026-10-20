@@ -20,4 +20,5 @@ export 'src/models/post.dart';
 export 'src/models/reaction.dart';
 export 'src/models/tag.dart';
 export 'src/models/upload.dart';
+export 'src/models/group.dart';
 export 'src/models/user.dart';

@@ -484,6 +484,12 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get usersTab => 'Benutzer';
 
   @override
+  String get likesTab => 'Gefällt mir';
+
+  @override
+  String get mentionsTab => 'Erwähnungen';
+
+  @override
   String profileJoined(String date) {
     return 'Dabei seit $date';
   }
@@ -494,6 +500,20 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   @override
   String lastSeen(String time) {
     return 'Zuletzt online $time';
+  }
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String bestAnswerCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count beste Antworten',
+      one: '$count beste Antwort',
+    );
+    return '$_temp0';
   }
 
   @override

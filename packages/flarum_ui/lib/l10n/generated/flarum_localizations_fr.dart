@@ -483,6 +483,12 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   String get usersTab => 'Utilisateurs';
 
   @override
+  String get likesTab => 'J\'aime';
+
+  @override
+  String get mentionsTab => 'Mentions';
+
+  @override
   String profileJoined(String date) {
     return 'Inscrit en $date';
   }
@@ -493,6 +499,20 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   @override
   String lastSeen(String time) {
     return 'Vu $time';
+  }
+
+  @override
+  String get online => 'En ligne';
+
+  @override
+  String bestAnswerCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count meilleures réponses',
+      one: '$count meilleure réponse',
+    );
+    return '$_temp0';
   }
 
   @override

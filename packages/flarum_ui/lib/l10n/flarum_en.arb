@@ -759,6 +759,14 @@
   "@usersTab": {
     "description": "Search's Users tab, as Flarum's search heads its users"
   },
+  "likesTab": "Likes",
+  "@likesTab": {
+    "description": "A profile's Likes tab (flarum/likes)"
+  },
+  "mentionsTab": "Mentions",
+  "@mentionsTab": {
+    "description": "A profile's Mentions tab (flarum/mentions)"
+  },
   "profileJoined": "Joined {date}",
   "@profileJoined": {
     "description": "When the person joined, e.g. 'Joined Mar 2024'",
@@ -778,6 +786,19 @@
     "placeholders": {
       "time": {
         "type": "String"
+      }
+    }
+  },
+  "online": "Online",
+  "@online": {
+    "description": "On a profile: seen within the last 5 minutes, as the web says it"
+  },
+  "bestAnswerCount": "{count, plural, =1{1 best answer} other{{count} best answers}}",
+  "@bestAnswerCount": {
+    "description": "On a profile: their best answers (fof/best-answer)",
+    "placeholders": {
+      "count": {
+        "type": "int"
       }
     }
   },

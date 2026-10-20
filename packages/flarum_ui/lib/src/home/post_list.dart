@@ -88,44 +88,48 @@ class PostList extends StatelessWidget {
       if (model.loading) return const Center(child: CircularProgressIndicator());
       return EmptyStateView(icon: Icons.chat_bubble_outline, message: emptyMessage);
     }
-    return NotificationListener<ScrollNotification>(
-      onNotification: (n) {
-        if (n.metrics.extentAfter < 400) model.loadMore();
-        return false;
-      },
-      child: ListView.separated(
-        itemCount: model.items.length + (model.hasMore ? 1 : 0),
-        separatorBuilder: (_, __) => const Divider(height: 1),
-        itemBuilder: (context, i) {
-          if (i == model.items.length) {
-            // The next page: loading, or failed, with Retry; it used to stop without a word.
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: Center(
-                child: model.error != null && !model.loading
-                    ? TextButton.icon(onPressed: model.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry))
-                    : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
-              ),
-            );
-          }
-          final post = model.items[i];
-          final created = post.createdAt;
-          final discussion = post.discussionId;
-          return ListTile(
-            title: Text(post.discussionTitle ?? l10n.aDiscussion, maxLines: 1, overflow: TextOverflow.ellipsis),
-            subtitle: Text(plainText(post.contentHtml ?? ''), maxLines: 3, overflow: TextOverflow.ellipsis),
-            trailing: created == null
-                ? null
-                : Text(formatTimeAgo(created.toLocal(), context),
-                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-            onTap: discussion == null
-                ? null
-                : () async {
-                    await ThreadPage.open(context, site, discussion, near: post.number, title: post.discussionTitle);
-                    onReturn?.call();
-                  },
-          );
+    return RefreshIndicator(
+      onRefresh: model.refresh,
+      child: NotificationListener<ScrollNotification>(
+        onNotification: (n) {
+          if (n.metrics.extentAfter < 400) model.loadMore();
+          return false;
         },
+        child: ListView.separated(
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: model.items.length + (model.hasMore ? 1 : 0),
+          separatorBuilder: (_, __) => const Divider(height: 1),
+          itemBuilder: (context, i) {
+            if (i == model.items.length) {
+              // The next page: loading, or failed, with Retry; it used to stop without a word.
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: model.error != null && !model.loading
+                      ? TextButton.icon(onPressed: model.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry))
+                      : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+                ),
+              );
+            }
+            final post = model.items[i];
+            final created = post.createdAt;
+            final discussion = post.discussionId;
+            return ListTile(
+              title: Text(post.discussionTitle ?? l10n.aDiscussion, maxLines: 1, overflow: TextOverflow.ellipsis),
+              subtitle: Text(plainText(post.contentHtml ?? ''), maxLines: 3, overflow: TextOverflow.ellipsis),
+              trailing: created == null
+                  ? null
+                  : Text(formatTimeAgo(created.toLocal(), context),
+                      style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+              onTap: discussion == null
+                  ? null
+                  : () async {
+                      await ThreadPage.open(context, site, discussion, near: post.number, title: post.discussionTitle);
+                      onReturn?.call();
+                    },
+            );
+          },
+        ),
       ),
     );
   }

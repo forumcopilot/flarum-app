@@ -64,8 +64,10 @@ void main() {
     await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: UserPage(site: _site(), slug: '1')));
     await _pumpUntil(tester, find.text('@huseyinfiliz'));
     await tester.pump(const Duration(milliseconds: 200));
-    final lists = adapter.requests.where((uri) => uri.path == '/api/posts' || uri.path == '/api/discussions');
+    final lists = adapter.requests.where((uri) => uri.queryParameters.containsKey('filter[author]'));
     expect(lists, hasLength(2));
+    expect(adapter.requests.where((uri) => uri.queryParameters['filter[likedBy]'] == '1'), hasLength(1),
+        reason: 'the Likes tab, by id');
     for (final uri in lists) {
       // 2.0's author filter resolves a slug, which this forum's ID slug driver makes the id.
       expect(uri.queryParameters['filter[author]'], '1', reason: uri.path);
@@ -83,9 +85,12 @@ void main() {
       testWidgets('a profile shows the user, their posts and their discussions', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: UserPage(site: _site(), slug: 'bob')));
-        await _pumpUntil(tester, find.text('@bob'));
+        await _pumpUntil(tester, find.textContaining('Joined'));
         await _pumpUntil(tester, find.byType(ListTile));
         expect(find.textContaining('Joined'), findsOneWidget);
+        expect(find.textContaining('best answer'), findsOneWidget, reason: "fof/best-answer's count, as the web's card shows it");
+        expect(find.text('Likes'), findsOneWidget);
+        expect(find.text('Mentions'), findsOneWidget);
 
         await tester.tap(find.text('Discussions'));
         await _pumpUntil(tester, find.textContaining('Feature request: dark mode'));
@@ -102,7 +107,7 @@ void main() {
         await _pumpUntil(tester, find.text('@bob'));
         await tester.tap(find.text('@bob').first);
         await _pumpUntil(tester, find.byType(UserPage));
-        await _pumpUntil(tester, find.text('@bob'));
+        await _pumpUntil(tester, find.textContaining('Joined'));
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

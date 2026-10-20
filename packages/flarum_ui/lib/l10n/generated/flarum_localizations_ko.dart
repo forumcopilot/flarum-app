@@ -464,6 +464,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get markAllDiscussionsReadQuestion => '모든 토론을 읽은 것으로 표시하시겠습니까?';
 
   @override
+  String get hideWelcomeMessage => '환영 메세지 숨기기';
+
+  @override
   String get posts => '게시물';
 
   @override

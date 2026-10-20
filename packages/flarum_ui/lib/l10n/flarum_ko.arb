@@ -120,6 +120,7 @@
   "notificationsSignIn": "알림을 보려면 로그인하세요.",
   "markAllRead": "모두 읽음으로 표시",
   "markAllDiscussionsReadQuestion": "모든 토론을 읽은 것으로 표시하시겠습니까?",
+  "hideWelcomeMessage": "환영 메세지 숨기기",
   "discussionsTab": "토론",
   "lastSeen": "마지막 접속: {time}",
   "userStats": "{discussions, plural, other{토론 {discussions}개}} · {comments, plural, other{게시물 {comments}개}}",

@@ -120,6 +120,7 @@
   "notificationsSignIn": "通知を見るにはログインしてください。",
   "markAllRead": "すべて既読にする",
   "markAllDiscussionsReadQuestion": "すべてのディスカッションを既読にしますか？",
+  "hideWelcomeMessage": "ウェルカムメッセージを隠す",
   "discussionsTab": "ディスカッション",
   "lastSeen": "最終ログイン：{time}",
   "userStats": "{discussions, plural, other{ディスカッション{discussions}件}} · {comments, plural, other{投稿{comments}件}}",

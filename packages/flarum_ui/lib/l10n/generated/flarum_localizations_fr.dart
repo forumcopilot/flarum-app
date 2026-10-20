@@ -474,6 +474,9 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
       'Êtes-vous sûr de vouloir marquer toutes les discussions comme lues ?';
 
   @override
+  String get hideWelcomeMessage => 'Masquer le message de bienvenue';
+
+  @override
   String get posts => 'Messages';
 
   @override

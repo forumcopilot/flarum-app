@@ -120,6 +120,7 @@
   "notificationsSignIn": "Accede para ver tus notificaciones.",
   "markAllRead": "Marcar todas como leídas",
   "markAllDiscussionsReadQuestion": "¿Estás seguro de que deseas marcar todas las discusiones como leídas?",
+  "hideWelcomeMessage": "Ocultar el mensaje de bienvenida",
   "discussionsTab": "Discusiones",
   "lastSeen": "Última vez {time}",
   "userStats": "{discussions, plural, =1{1 discusión} other{{discussions} discusiones}} · {comments, plural, =1{1 publicación} other{{comments} publicaciones}}",

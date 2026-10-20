@@ -464,6 +464,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get markAllDiscussionsReadQuestion => 'すべてのディスカッションを既読にしますか？';
 
   @override
+  String get hideWelcomeMessage => 'ウェルカムメッセージを隠す';
+
+  @override
   String get posts => '投稿';
 
   @override

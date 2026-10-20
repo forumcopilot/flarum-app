@@ -794,6 +794,12 @@ abstract class FlarumLocalizations {
   /// **'Are you sure you want to mark all discussions as read?'**
   String get markAllDiscussionsReadQuestion;
 
+  /// The ✕ on Home's welcome message, as Flarum's welcome hero names it
+  ///
+  /// In en, this message translates to:
+  /// **'Hide welcome message'**
+  String get hideWelcomeMessage;
+
   /// No description provided for @posts.
   ///
   /// In en, this message translates to:

@@ -120,6 +120,7 @@
   "notificationsSignIn": "Log in om je meldingen te zien.",
   "markAllRead": "Alles als gelezen markeren",
   "markAllDiscussionsReadQuestion": "Weet je zeker dat je alle discussies als gelezen wilt markeren?",
+  "hideWelcomeMessage": "Welkomstbericht verbergen",
   "discussionsTab": "Discussies",
   "lastSeen": "Laatst gezien {time}",
   "userStats": "{discussions, plural, =1{1 discussie} other{{discussions} discussies}} · {comments, plural, =1{1 bericht} other{{comments} berichten}}",

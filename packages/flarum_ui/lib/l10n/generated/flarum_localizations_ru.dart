@@ -474,6 +474,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
       'Отметить все обсуждения прочитанными?';
 
   @override
+  String get hideWelcomeMessage => 'Скрыть сообщение приветствия';
+
+  @override
   String get posts => 'Сообщения';
 
   @override

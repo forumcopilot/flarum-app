@@ -474,6 +474,9 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
       'Weet je zeker dat je alle discussies als gelezen wilt markeren?';
 
   @override
+  String get hideWelcomeMessage => 'Welkomstbericht verbergen';
+
+  @override
   String get posts => 'Berichten';
 
   @override

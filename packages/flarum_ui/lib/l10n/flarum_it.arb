@@ -120,6 +120,7 @@
   "notificationsSignIn": "Accedi per vedere le tue notifiche.",
   "markAllRead": "Segna tutto come letto",
   "markAllDiscussionsReadQuestion": "Sei sicuro di voler contrassegnare tutte le discussioni come lette?",
+  "hideWelcomeMessage": "Nascondi messaggio di benvenuto",
   "discussionsTab": "Discussioni",
   "lastSeen": "Ultimo accesso {time}",
   "userStats": "{discussions, plural, =1{1 discussione} other{{discussions} discussioni}} · {comments, plural, =1{1 post} other{{comments} post}}",

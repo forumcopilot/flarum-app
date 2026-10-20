@@ -750,6 +750,10 @@
   "@markAllDiscussionsReadQuestion": {
     "description": "Asked before Home's Mark All as Read, as Flarum asks"
   },
+  "hideWelcomeMessage": "Hide welcome message",
+  "@hideWelcomeMessage": {
+    "description": "The ✕ on Home's welcome message, as Flarum's welcome hero names it"
+  },
   "posts": "Posts",
   "profileJoined": "Joined {date}",
   "@profileJoined": {

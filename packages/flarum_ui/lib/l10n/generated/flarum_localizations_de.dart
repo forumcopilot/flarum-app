@@ -475,6 +475,9 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
       'Bist du dir sicher, dass du alle Diskussionen als gelesen markieren willst?';
 
   @override
+  String get hideWelcomeMessage => 'Willkommensnachricht ausblenden';
+
+  @override
   String get posts => 'Beiträge';
 
   @override

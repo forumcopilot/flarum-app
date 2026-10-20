@@ -120,6 +120,7 @@
   "notificationsSignIn": "登录后查看你的通知。",
   "markAllRead": "全部已读",
   "markAllDiscussionsReadQuestion": "确定要将所有讨论标记为已读吗？",
+  "hideWelcomeMessage": "隐藏欢迎横幅",
   "discussionsTab": "讨论",
   "lastSeen": "最后在线：{time}",
   "userStats": "{discussions, plural, other{{discussions} 个讨论}} · {comments, plural, other{{comments} 个帖子}}",

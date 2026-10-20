@@ -50,6 +50,8 @@ class FlarumForumInfo {
     this.colorScheme,
     this.logoUrl,
     this.logoDarkUrl,
+    this.welcomeTitle,
+    this.welcomeMessage,
     this.faviconUrl,
     this.guidelinesUrl,
     this.allowSignUp = false,
@@ -77,6 +79,8 @@ class FlarumForumInfo {
       colorScheme: a.nonEmptyString('colorScheme'),
       logoUrl: a.nonEmptyString('logoUrl'),
       logoDarkUrl: a.nonEmptyString('logoDarkModeUrl'),
+      welcomeTitle: a.nonEmptyString('welcomeTitle'),
+      welcomeMessage: a.nonEmptyString('welcomeMessage'),
       faviconUrl: a.nonEmptyString('faviconUrl'),
       guidelinesUrl: a.nonEmptyString('guidelinesUrl'),
       allowSignUp: a.boolean('allowSignUp') ?? false,
@@ -118,6 +122,10 @@ class FlarumForumInfo {
 
   /// 2.0 only.
   final String? logoDarkUrl;
+  /// The welcome hero over the web's discussion list: its title, and its message (HTML).
+  final String? welcomeTitle;
+  final String? welcomeMessage;
+
   final String? faviconUrl;
 
   /// flarum/flags' community guidelines, which a report for "Inappropriate" points to.

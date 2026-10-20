@@ -474,6 +474,9 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
       'Tem certeza de que deseja marcar todas as discussões como lidas?';
 
   @override
+  String get hideWelcomeMessage => 'Ocultar mensagem de boas-vindas';
+
+  @override
   String get posts => 'Publicações';
 
   @override

@@ -472,6 +472,9 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
       'Sei sicuro di voler contrassegnare tutte le discussioni come lette?';
 
   @override
+  String get hideWelcomeMessage => 'Nascondi messaggio di benvenuto';
+
+  @override
   String get posts => 'Post';
 
   @override

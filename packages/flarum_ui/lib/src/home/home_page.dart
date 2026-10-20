@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
+import 'package:forum_kit/views/widgets/brand_image.dart';
 import 'package:forum_kit/views/widgets/filter_chip_bar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
@@ -10,6 +11,7 @@ import '../compose/start_discussion_button.dart';
 import 'discussion_list_model.dart';
 import '../search/search_page.dart';
 import 'discussion_list_view.dart';
+import 'welcome_hero.dart';
 
 /// The forum's discussions, in the web's views: Latest, Top, Newest, and
 /// Following for a signed-in reader. A discussion opens at the first post
@@ -92,6 +94,26 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  /// The forum's logo where it has one (its dark-mode logo in dark mode, on 2.0), as the web's
+  /// header shows it, named for screen readers; else its title.
+  Widget _title(BuildContext context) {
+    final title = _forum.info?.title ?? widget.title ?? '';
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final logo = (dark ? _forum.info?.logoDarkUrl : null) ?? _forum.info?.logoUrl;
+    if (logo == null) return Text(title);
+    return Semantics(
+      label: title,
+      header: true,
+      excludeSemantics: true,
+      child: BrandImage(
+        logo,
+        height: 32,
+        fallback: (_) => Text(title),
+        background: Theme.of(context).appBarTheme.backgroundColor ?? Theme.of(context).colorScheme.surface,
+      ),
+    );
+  }
+
   String _label(DiscussionView view, FlarumLocalizations l10n) => switch (view) {
         DiscussionView.latest => l10n.latest,
         DiscussionView.top => l10n.filterTop,
@@ -106,7 +128,7 @@ class _HomePageState extends State<HomePage> {
     final list = _list;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_forum.info?.title ?? widget.title ?? ''),
+        title: _title(context),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -125,7 +147,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: DiscussionListView(site: widget.site, list: list),
+      body: DiscussionListView(
+        site: widget.site,
+        list: list,
+        header: _view == DiscussionView.latest
+            ? WelcomeHero(site: widget.site, title: _forum.info?.welcomeTitle, message: _forum.info?.welcomeMessage)
+            : null,
+      ),
       floatingActionButton: startDiscussionButton(context, widget.site, onStarted: list.refresh),
     );
   }

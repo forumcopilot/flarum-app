@@ -471,6 +471,9 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
       'Are you sure you want to mark all discussions as read?';
 
   @override
+  String get hideWelcomeMessage => 'Hide welcome message';
+
+  @override
   String get posts => 'Posts';
 
   @override

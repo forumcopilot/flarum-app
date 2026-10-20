@@ -464,6 +464,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get markAllDiscussionsReadQuestion => '确定要将所有讨论标记为已读吗？';
 
   @override
+  String get hideWelcomeMessage => '隐藏欢迎横幅';
+
+  @override
   String get posts => '帖子';
 
   @override

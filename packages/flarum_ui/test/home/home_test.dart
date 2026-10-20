@@ -3,6 +3,7 @@ import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/models/domain/site.dart';
@@ -152,6 +153,28 @@ void main() {
         await _pumpUntil(tester, find.byType(DiscussionTile));
         expect(find.widgetWithText(FloatingActionButton, 'Start a Discussion'), findsOneWidget);
         expect(find.byTooltip('Mark All as Read'), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets("the forum's welcome message heads Latest, and stays hidden once hidden", (tester) async {
+        SharedPreferences.setMockInitialValues({});
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        final title = forum.info!.welcomeTitle!;
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pump();
+        expect(find.text(title), findsOneWidget);
+        await tester.tap(find.byTooltip('Hide welcome message'));
+        await tester.pump();
+        expect(find.text(title), findsNothing);
+
+        await tester.pumpWidget(const SizedBox());
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pump();
+        expect(find.text(title), findsNothing, reason: 'hidden on this phone until the forum changes it');
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

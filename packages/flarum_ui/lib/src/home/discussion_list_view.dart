@@ -15,7 +15,8 @@ import 'discussion_tile.dart';
 /// is refreshed on the way back. A refresh that fails keeps the list shown
 /// and says why.
 class DiscussionListView extends StatelessWidget {
-  const DiscussionListView({super.key, required this.site, required this.list, this.emptyMessage, this.onReturn});
+  const DiscussionListView(
+      {super.key, required this.site, required this.list, this.emptyMessage, this.onReturn, this.header});
 
   final SiteContext site;
   final DiscussionListModel list;
@@ -25,6 +26,9 @@ class DiscussionListView extends StatelessWidget {
 
   /// Called back from a discussion opened here, after its row is read again.
   final VoidCallback? onReturn;
+
+  /// Above the first discussion, scrolling with the list: Home's welcome message.
+  final Widget? header;
 
   Future<void> _open(BuildContext context, FlarumDiscussion discussion) async {
     await ThreadPage.open(context, site, discussion.id, near: list.openAt(discussion), title: discussion.title);
@@ -65,9 +69,11 @@ class DiscussionListView extends StatelessWidget {
       },
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: list.items.length + 1,
-        separatorBuilder: (_, __) => const Divider(height: 1),
-        itemBuilder: (context, i) {
+        itemCount: (header == null ? 0 : 1) + list.items.length + 1,
+        separatorBuilder: (_, i) => header != null && i == 0 ? const SizedBox.shrink() : const Divider(height: 1),
+        itemBuilder: (context, row) {
+          if (header case final header? when row == 0) return header;
+          final i = header == null ? row : row - 1;
           if (i == list.items.length) {
             if (list.error != null) {
               return TextButton.icon(onPressed: list.retryMore, icon: const Icon(Icons.refresh), label: Text(l10n.retry));

@@ -46,3 +46,27 @@ for a global one.
 
 Not yet: links in a post to another Flarum forum still open in the browser (a host hook can
 open them in the app later), and push (Phase 5).
+
+## The UI review (20 Oct)
+
+Three reviews (the app beside Flarum's website on a phone, beside discourse-app and ABDA, and
+every string beside Flarum's own) are in the "Flarum App UI Review" doc:
+https://claude.ai/artifact/XGRBZHKA3dzFmtP2SZ6PRY. Its recommended changes wait on decisions
+there. Done since:
+
+- **Flarum's wording** (e20f611): every string with a Flarum equivalent says what Flarum's
+  website says, from Flarum's English and the flarum-lang packs, in Flarum's Title Case inside
+  forums. A phone in a language the app lacks gets English (it got German). forum_kit's strings
+  (the suspend page, the discard prompts, Save draft) are still Discourse's.
+- **Bugs** (b0bbfb1, e1a12e0): the thread lands on the post after Reply, Edit or a jump (it
+  opened about half a page above); closing a composer asks before losing tags, a poll or
+  people, and the poll editor asks; the message keyboard stays up; failed next pages offer
+  Retry; notifications reload when the tab is opened again; Account says when a logged-in
+  reader's forum can't be reached; a post that fails to draw shows its text; a tag's
+  description fits; Log In is covered until the forum's page draws, and Back goes back in it.
+  `FixtureForum.latency` lets a test draw frames while a request is under way, as a phone does:
+  without it, a fixture answers before the next frame and some bugs can't show.
+
+On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
+log-in page; a message notification (2.0) opens nothing yet, and needs a look at what the
+forum sends.

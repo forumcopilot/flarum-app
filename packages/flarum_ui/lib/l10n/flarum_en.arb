@@ -74,7 +74,7 @@
     "description": "File type label under an attached file's name (shown in capitals): a plain text file"
   },
   "retry": "Retry",
-  "edited": "edited",
+  "edited": "Edited",
   "@edited": {
     "description": "UI text: edited"
   },
@@ -96,7 +96,7 @@
       }
     }
   },
-  "loadMore": "Load more",
+  "loadMore": "Load More",
   "@loadMore": {
     "description": "UI text: Load more"
   },
@@ -109,7 +109,7 @@
       }
     }
   },
-  "loadEarlierPosts": "Load earlier posts",
+  "loadEarlierPosts": "Load More",
   "@loadEarlierPosts": {
     "description": "Button at the top of a discussion opened part-way down: loads the posts before"
   },
@@ -190,14 +190,14 @@
       }
     }
   },
-  "someone": "Someone",
+  "someone": "[deleted]",
   "@someone": {
     "description": "Stands in for a user the forum didn't name (deleted account)"
   },
   "latest": "Latest",
   "unread": "Unread",
   "search": "Search",
-  "signIn": "Sign in",
+  "signIn": "Log In",
   "profile": "Profile",
   "following": "Following",
   "home": "Home",
@@ -248,7 +248,7 @@
       }
     }
   },
-  "noDiscussions": "No discussions here yet.",
+  "noDiscussions": "It looks as though there are no discussions here.",
   "@noDiscussions": {
     "description": "Empty discussion list"
   },
@@ -260,7 +260,7 @@
   "@tagsLoadFailed": {
     "description": "Error shown when the forum's tags fail to load"
   },
-  "signOut": "Sign out",
+  "signOut": "Log Out",
   "@signOut": {
     "description": "UI text: Sign out"
   },
@@ -268,11 +268,11 @@
   "@account": {
     "description": "Drawer: Account"
   },
-  "createAccount": "Create account",
+  "createAccount": "Sign Up",
   "@createAccount": {
     "description": "Button opening sign-up"
   },
-  "signInFailedReason": "Couldn't sign in: {reason}",
+  "signInFailedReason": "Couldn't log in: {reason}",
   "@signInFailedReason": {
     "description": "Shown when the forum doesn't accept the sign-in captured from its page",
     "placeholders": {
@@ -281,11 +281,11 @@
       }
     }
   },
-  "signInHint": "Sign in on the forum's own page. The app keeps you signed in until you sign out.",
+  "signInHint": "Log in on the forum's own page. The app keeps you logged in until you log out.",
   "@signInHint": {
     "description": "Under the Sign in button on the account tab"
   },
-  "signedInAs": "Signed in as {name}",
+  "signedInAs": "Logged in as {name}",
   "@signedInAs": {
     "description": "Account tab, signed in",
     "placeholders": {
@@ -302,11 +302,11 @@
   "@failedToMarkNotificationsRead": {
     "description": "Notifications tab: snackbar when Dismiss all fails and the forum gave no reason"
   },
-  "noNotificationsYet": "No notifications yet",
+  "noNotificationsYet": "No Notifications",
   "@noNotificationsYet": {
     "description": "Notifications tab, All filter: empty state"
   },
-  "notifNewPost": "{user} replied to {title}",
+  "notifNewPost": "{user} posted in {title}",
   "@notifNewPost": {
     "description": "Notification: a new reply in a discussion the reader follows",
     "placeholders": {
@@ -366,7 +366,7 @@
       }
     }
   },
-  "notifGroupMentioned": "{user} mentioned a group you're in, in {title}",
+  "notifGroupMentioned": "{user} mentioned a group you're a member of in {title}",
   "@notifGroupMentioned": {
     "description": "Notification",
     "placeholders": {
@@ -378,7 +378,7 @@
       }
     }
   },
-  "notifRenamed": "{user} renamed a discussion to {title}",
+  "notifRenamed": "{user} changed the title to {title}",
   "@notifRenamed": {
     "description": "Notification: {title} is the new title",
     "placeholders": {
@@ -414,7 +414,7 @@
       }
     }
   },
-  "notifMovedToTag": "{user} moved {title} to a tag you follow",
+  "notifMovedToTag": "{user} changed the tag of {title}",
   "@notifMovedToTag": {
     "description": "Notification (fof/follow-tags)",
     "placeholders": {
@@ -426,7 +426,7 @@
       }
     }
   },
-  "notifPrivateCreated": "{user} started a private discussion with you: {title}",
+  "notifPrivateCreated": "{user} started a new private discussion with you: {title}",
   "@notifPrivateCreated": {
     "description": "Notification (fof/byobu)",
     "placeholders": {
@@ -438,7 +438,7 @@
       }
     }
   },
-  "notifPrivateReplied": "{user} replied to the private discussion {title}",
+  "notifPrivateReplied": "{user} posted in a private discussion you're a part of: {title}",
   "@notifPrivateReplied": {
     "description": "Notification (fof/byobu)",
     "placeholders": {
@@ -486,7 +486,7 @@
       }
     }
   },
-  "notifBestAnswerAwarded": "{user} chose your post as the best answer in {title}",
+  "notifBestAnswerAwarded": "Your post was set as the best answer by {user} in {title}",
   "@notifBestAnswerAwarded": {
     "description": "Notification (fof/best-answer)",
     "placeholders": {
@@ -498,7 +498,7 @@
       }
     }
   },
-  "notifBestAnswerChosen": "{user} chose a best answer in {title}",
+  "notifBestAnswerChosen": "{user} set a best answer in {title}",
   "@notifBestAnswerChosen": {
     "description": "Notification (fof/best-answer)",
     "placeholders": {
@@ -510,7 +510,7 @@
       }
     }
   },
-  "notifBestAnswerPending": "Choose a best answer in {title}",
+  "notifBestAnswerPending": "Please select a Best Answer in {title} if your question has been answered",
   "@notifBestAnswerPending": {
     "description": "Notification (fof/best-answer): a reminder to the discussion's author",
     "placeholders": {
@@ -532,11 +532,11 @@
   "@notifSuspended": {
     "description": "Notification"
   },
-  "notifUnsuspended": "Your suspension has been lifted",
+  "notifUnsuspended": "You have been unsuspended",
   "@notifUnsuspended": {
     "description": "Notification"
   },
-  "notifExport": "Your data export is ready",
+  "notifExport": "Your data export is now ready to download.",
   "@notifExport": {
     "description": "Notification (flarum/gdpr)"
   },
@@ -552,11 +552,11 @@
   "@notificationsLoadFailed": {
     "description": "Error on the notifications tab"
   },
-  "notificationsSignIn": "Sign in to see your notifications.",
+  "notificationsSignIn": "Log in to see your notifications.",
   "@notificationsSignIn": {
     "description": "Notifications tab for a guest"
   },
-  "markAllRead": "Mark all as read",
+  "markAllRead": "Mark All as Read",
   "@markAllRead": {
     "description": "Notifications tab action"
   },
@@ -599,7 +599,7 @@
   "@userLoadFailed": {
     "description": "Error on a user's profile"
   },
-  "noPostsYet": "No posts yet.",
+  "noPostsYet": "It looks like there are no posts here.",
   "@noPostsYet": {
     "description": "Empty list on a profile"
   },
@@ -612,11 +612,11 @@
       }
     }
   },
-  "searchHint": "Search discussions and posts",
+  "searchHint": "Search Forum",
   "@searchHint": {
     "description": "Hint in the search field"
   },
-  "noResultsFor": "Nothing found for “{query}”.",
+  "noResultsFor": "It looks like there are no results for “{query}”.",
   "@noResultsFor": {
     "description": "Search with no results",
     "placeholders": {
@@ -625,19 +625,19 @@
       }
     }
   },
-  "light": "Light",
+  "light": "Light Mode",
   "@light": {
     "description": "Light theme option"
   },
-  "dark": "Dark",
+  "dark": "Dark Mode",
   "@dark": {
     "description": "Dark theme option"
   },
-  "appearance": "Appearance",
+  "appearance": "Color Scheme",
   "@appearance": {
     "description": "Drawer row and sheet title for choosing light, dark or the device's setting"
   },
-  "appearanceSystem": "System default",
+  "appearanceSystem": "System preference",
   "@appearanceSystem": {
     "description": "Appearance option that follows the device's light/dark setting"
   },
@@ -677,7 +677,7 @@
       }
     }
   },
-  "repliesTitle": "Replies",
+  "repliesTitle": "Replies to this post",
   "@repliesTitle": {
     "description": "Title of the sheet listing the replies to a post"
   },
@@ -745,11 +745,11 @@
   "@privateDiscussion": {
     "description": "Label for a private discussion (fof/byobu) in a list"
   },
-  "bestAnswer": "Best answer",
+  "bestAnswer": "Best Answer",
   "@bestAnswer": {
     "description": "Label above the post fof/best-answer chose as a discussion's answer"
   },
-  "goToBestAnswer": "Go to best answer",
+  "goToBestAnswer": "View Best Answer",
   "@goToBestAnswer": {
     "description": "Button under a question whose best answer (fof/best-answer) is another post"
   },
@@ -798,7 +798,7 @@
   "@listItem": {
     "description": "Composer: listItem"
   },
-  "mentionUser": "Mention User",
+  "mentionUser": "Mention a user, group or post",
   "@mentionUser": {
     "description": "Tooltip for mention user button"
   },
@@ -810,13 +810,25 @@
   "@content": {
     "description": "Content label for message compose"
   },
-  "send": "Send",
+  "send": "Send message",
   "@send": {
-    "description": "UI text: Send"
+    "description": "The message composer's send button (flarum/messages), as Flarum's"
   },
-  "save": "Save",
+  "postReply": "Post Reply",
+  "@postReply": {
+    "description": "The reply composer's submit button, as Flarum's"
+  },
+  "postDiscussion": "Post Discussion",
+  "@postDiscussion": {
+    "description": "The new-discussion composer's submit button, as Flarum's"
+  },
+  "postPrivateDiscussion": "Post Private Discussion",
+  "@postPrivateDiscussion": {
+    "description": "The private-discussion composer's submit button, as fof/byobu's"
+  },
+  "save": "Save Changes",
   "@save": {
-    "description": "UI text: Save"
+    "description": "The edit composer's submit button, as Flarum's"
   },
   "formatting": "Formatting",
   "@formatting": {
@@ -830,13 +842,21 @@
   "@pleaseEnterContent": {
     "description": "Validation message when content is empty"
   },
-  "composerTitleHint": "Write your title...",
+  "composerTitleHint": "Discussion Title",
   "@composerTitleHint": {
     "description": "Default hint in a composer's title field, when the page gives none of its own"
   },
-  "composerContentHint": "Write your content...",
+  "privateDiscussionTitleHint": "Private Discussion Title",
+  "@privateDiscussionTitleHint": {
+    "description": "The private-discussion composer's title placeholder, as fof/byobu's"
+  },
+  "composerContentHint": "Write a Post...",
   "@composerContentHint": {
     "description": "Default hint in a composer's text field, when the page gives none of its own"
+  },
+  "composerReplyHint": "Write a Reply...",
+  "@composerReplyHint": {
+    "description": "The reply composer's text placeholder, as Flarum's"
   },
   "composerFormattingHint": "Open formatting options",
   "@composerFormattingHint": {
@@ -846,7 +866,7 @@
   "@searchUsers": {
     "description": "Hint text for searching users"
   },
-  "startDiscussion": "Start a discussion",
+  "startDiscussion": "Start a Discussion",
   "@startDiscussion": {
     "description": "Button and page title: start a new discussion"
   },
@@ -854,7 +874,7 @@
   "@editPost": {
     "description": "Title of the composer editing a post"
   },
-  "postingThrottled": "You're posting too quickly. Wait a few seconds and try again.",
+  "postingThrottled": "You're going a little too quickly. Please try again in a few seconds.",
   "@postingThrottled": {
     "description": "The forum's posting throttle refused a post (one every 10 seconds by default)"
   },
@@ -862,15 +882,19 @@
   "@postAwaitingApproval": {
     "description": "After posting, when the forum holds the post for approval"
   },
-  "chooseTags": "Choose tags",
+  "chooseTags": "Choose Tags",
   "@chooseTags": {
     "description": "Button and page title: choose a new discussion's tags"
   },
-  "primaryTags": "Primary tags",
+  "ok": "OK",
+  "@ok": {
+    "description": "Closes the tag picker, keeping the choice, as flarum/tags' button"
+  },
+  "primaryTags": "Primary Tags",
   "@primaryTags": {
     "description": "Tag picker section: the forum's primary tags"
   },
-  "secondaryTags": "More tags",
+  "secondaryTags": "More Tags",
   "@secondaryTags": {
     "description": "Tag picker section: the forum's secondary tags"
   },
@@ -910,11 +934,7 @@
       }
     }
   },
-  "done": "Done",
-  "@done": {
-    "description": "Closes a picker, keeping the choice"
-  },
-  "noMembersFound": "No members found.",
+  "noMembersFound": "No users found matching your search.",
   "@noMembersFound": {
     "description": "Mention picker: nobody matches the search"
   },
@@ -946,7 +966,7 @@
   "@bookmark": {
     "description": "Post or discussion menu: bookmark it (fof/bookmarks)"
   },
-  "removeBookmark": "Remove bookmark",
+  "removeBookmark": "Remove from bookmarks",
   "@removeBookmark": {
     "description": "Post or discussion menu: take the bookmark off"
   },
@@ -954,15 +974,15 @@
   "@bookmarks": {
     "description": "The reader's bookmarks: an account tab entry and its page's title"
   },
-  "noBookmarks": "No bookmarks yet.",
+  "noBookmarks": "You haven't bookmarked any posts yet.",
   "@noBookmarks": {
     "description": "Bookmarks page with nothing bookmarked"
   },
-  "chooseBestAnswer": "Choose as best answer",
+  "chooseBestAnswer": "Select Best Answer",
   "@chooseBestAnswer": {
     "description": "Post menu for the one who asked (fof/best-answer)"
   },
-  "removeBestAnswer": "Remove best answer",
+  "removeBestAnswer": "Unselect Best Answer",
   "@removeBestAnswer": {
     "description": "Post menu on the chosen answer: un-choose it"
   },
@@ -970,7 +990,7 @@
   "@notificationSettings": {
     "description": "Tooltip of the thread's follow menu"
   },
-  "notFollowing": "Not following",
+  "notFollowing": "Not Following",
   "@notFollowing": {
     "description": "Follow menu: the reader's default for a discussion or tag"
   },
@@ -986,11 +1006,11 @@
   "@ignoring": {
     "description": "Follow menu: ignore the discussion or tag"
   },
-  "ignoringHint": "Never be notified, and hide it from the discussion lists.",
+  "ignoringHint": "Never be notified. Hide from the discussion list.",
   "@ignoringHint": {
     "description": "Under Ignoring in a discussion's follow menu"
   },
-  "tagFollowingHint": "Be notified of new discussions.",
+  "tagFollowingHint": "Be notified of all new discussions.",
   "@tagFollowingHint": {
     "description": "Under Following in a tag's follow menu (fof/follow-tags)"
   },
@@ -998,19 +1018,19 @@
   "@lurking": {
     "description": "Tag follow menu: told of new discussions and every reply"
   },
-  "lurkingHint": "Be notified of new discussions and every reply.",
+  "lurkingHint": "Be notified of all new discussions and replies.",
   "@lurkingHint": {
     "description": "Under Lurking in a tag's follow menu"
   },
-  "tagIgnoringHint": "Never be notified of discussions here.",
+  "tagIgnoringHint": "Never be notified.",
   "@tagIgnoringHint": {
     "description": "Under Ignoring in a tag's follow menu"
   },
-  "hidden": "Hidden",
+  "hidden": "Hiding",
   "@hidden": {
     "description": "Tag follow menu: hide the tag's discussions"
   },
-  "hiddenHint": "Hide this tag's discussions from the discussion lists.",
+  "hiddenHint": "Hide discussions from All Discussions page.",
   "@hiddenHint": {
     "description": "Under Hidden in a tag's follow menu"
   },
@@ -1081,7 +1101,7 @@
       }
     }
   },
-  "fileTooLargeForForum": "{fileName} is {fileBytes}. This forum allows up to {maxBytes}.",
+  "fileTooLargeForForum": "{fileName} is {fileBytes}. Uploads over {maxBytes} are not accepted.",
   "@fileTooLargeForForum": {
     "description": "UI text: {fileName} is {fileBytes}. This forum allows up to {maxBytes",
     "placeholders": {
@@ -1100,15 +1120,15 @@
   "@flagAction": {
     "description": "Discourse post.controls.flag_action: the post menu item that opens the flag dialog"
   },
-  "ignoredUsers": "Ignored users",
+  "ignoredUsers": "Ignored Users",
   "@ignoredUsers": {
     "description": "UI text: Ignored users"
   },
-  "ignoredUsersEmpty": "You're not ignoring anyone.",
+  "ignoredUsersEmpty": "It looks like you're not ignoring anyone.",
   "@ignoredUsersEmpty": {
     "description": "Ignored users page: empty state"
   },
-  "flagPostTitle": "Flag post",
+  "flagPostTitle": "Flag Post",
   "@flagPostTitle": {
     "description": "Title of the page that reports a post to the moderators (flarum/flags)"
   },
@@ -1124,7 +1144,7 @@
   "@flagReasonInappropriate": {
     "description": "Report reason (Flarum: reason_inappropriate_label)"
   },
-  "flagReasonInappropriateText": "This post is offensive, abusive, or breaks the community guidelines.",
+  "flagReasonInappropriateText": "This post is offensive, abusive, or violates our community guidelines.",
   "@flagReasonInappropriateText": {
     "description": "Explains the inappropriate report reason"
   },
@@ -1148,7 +1168,7 @@
   "@flagDetailsNeeded": {
     "description": "Report page: \"Other\" chosen without details"
   },
-  "communityGuidelines": "Community guidelines",
+  "communityGuidelines": "Community Guidelines",
   "@communityGuidelines": {
     "description": "Link to the forum's community guidelines, on the report page"
   },
@@ -1165,7 +1185,7 @@
       }
     }
   },
-  "stopIgnoringUser": "Stop ignoring {name}",
+  "stopIgnoringUser": "Unignore {name}",
   "@stopIgnoringUser": {
     "description": "Post and profile menu: stop ignoring this person",
     "placeholders": {
@@ -1174,7 +1194,7 @@
       }
     }
   },
-  "ignoreUserConfirm": "Ignore {name}? Their posts will be folded away. You can stop ignoring them from your account.",
+  "ignoreUserConfirm": "Are you sure you want to ignore {name}?",
   "@ignoreUserConfirm": {
     "description": "Confirmation before ignoring someone",
     "placeholders": {
@@ -1192,7 +1212,7 @@
       }
     }
   },
-  "showPost": "Show post",
+  "showPost": "Show Post",
   "@showPost": {
     "description": "Button that unfolds a post by someone the reader ignores"
   },
@@ -1200,11 +1220,11 @@
   "@ignoredOnThisPhone": {
     "description": "Ignored users page, on a forum without fof/ignore-users"
   },
-  "stopIgnoring": "Stop ignoring",
+  "stopIgnoring": "Unignore",
   "@stopIgnoring": {
     "description": "Ignored users page: button on each person"
   },
-  "termsBanner": "Accept this forum's updated terms to post again.",
+  "termsBanner": "We've temporarily restricted access to your account while you check out the new terms.",
   "@termsBanner": {
     "description": "Strip above the tab bar while the reader must accept new policies (fof/terms); until then the forum lets them only read"
   },
@@ -1212,11 +1232,11 @@
   "@termsReview": {
     "description": "Button on that strip: opens the policies"
   },
-  "termsTitle": "Updated terms",
+  "termsTitle": "Terms Update",
   "@termsTitle": {
     "description": "Title of the page with the policies to accept"
   },
-  "termsIntro": "Before you post again, accept the forum's updated policies.",
+  "termsIntro": "The terms were updated since your last visit",
   "@termsIntro": {
     "description": "Top of that page"
   },
@@ -1224,19 +1244,19 @@
   "@readPolicy": {
     "description": "Opens a policy's text on the forum's site"
   },
-  "acceptTerms": "Accept",
+  "acceptTerms": "Confirm",
   "@acceptTerms": {
     "description": "Accepts the policies"
   },
-  "termsAccepted": "Thank you. You can post again.",
+  "termsAccepted": "Thanks for accepting, you can now get back to the forum",
   "@termsAccepted": {
     "description": "Shown once the policies are accepted"
   },
-  "privateDiscussions": "Private discussions",
+  "privateDiscussions": "Private Discussions",
   "@privateDiscussions": {
     "description": "Account entry and page title: the reader's private discussions (fof/byobu)"
   },
-  "startPrivateDiscussion": "Start a private discussion",
+  "startPrivateDiscussion": "Discuss Privately",
   "@startPrivateDiscussion": {
     "description": "Button and composer title: a discussion only the people in it can read"
   },
@@ -1249,15 +1269,15 @@
       }
     }
   },
-  "addPerson": "Add someone",
+  "addPerson": "Recipients",
   "@addPerson": {
     "description": "Composer button that adds someone to a private discussion"
   },
-  "choosePerson": "Choose who to write to.",
+  "choosePerson": "This discussion will only be visible to the users you choose here. At least 1 recipient (other than yourself) is required.",
   "@choosePerson": {
     "description": "Composer: a private discussion started with no one in it"
   },
-  "noPrivateDiscussions": "No private discussions yet.",
+  "noPrivateDiscussions": "It looks as though there are no discussions here.",
   "@noPrivateDiscussions": {
     "description": "Empty private discussions page"
   },
@@ -1269,11 +1289,11 @@
   "@messages": {
     "description": "Account entry and page title: direct messages (flarum/messages, Flarum 2.0)"
   },
-  "newMessage": "New message",
+  "newMessage": "Send a Message",
   "@newMessage": {
     "description": "Button that starts a direct message to someone"
   },
-  "noMessages": "No messages yet.",
+  "noMessages": "No new messages",
   "@noMessages": {
     "description": "Empty messages page"
   },
@@ -1297,6 +1317,10 @@
   "@renameDiscussion": {
     "description": "Moderator menu: rename the discussion"
   },
+  "renameDiscussionTitle": "Rename Discussion",
+  "@renameDiscussionTitle": {
+    "description": "Title of the dialog that renames a discussion, as Flarum's"
+  },
   "lockDiscussion": "Lock",
   "@lockDiscussion": {
     "description": "Moderator menu: lock the discussion (flarum/lock)"
@@ -1317,11 +1341,11 @@
   "@restore": {
     "description": "Brings back a deleted (hidden) post or discussion"
   },
-  "deleteForever": "Delete forever",
+  "deleteForever": "Delete Forever",
   "@deleteForever": {
     "description": "Deletes a post or discussion permanently"
   },
-  "deleteForeverConfirm": "Delete this for good? It can't be undone.",
+  "deleteForeverConfirm": "Are you sure you want to delete this forever? This action cannot be undone.",
   "@deleteForeverConfirm": {
     "description": "Confirmation before deleting permanently"
   },
@@ -1346,7 +1370,7 @@
   "@suspendedIndefinitely": {
     "description": "Profile: a member suspended with no end"
   },
-  "youAreSuspended": "You're suspended until {date}.",
+  "youAreSuspended": "This suspension will be in force until {date}",
   "@youAreSuspended": {
     "description": "Strip above the tabs for a suspended reader, until a date",
     "placeholders": {
@@ -1355,7 +1379,7 @@
       }
     }
   },
-  "youAreSuspendedIndefinitely": "You're suspended.",
+  "youAreSuspendedIndefinitely": "This account is suspended",
   "@youAreSuspendedIndefinitely": {
     "description": "Strip above the tabs for a reader suspended with no end"
   },
@@ -1408,7 +1432,7 @@
       }
     }
   },
-  "errorNoConnection": "Couldn't reach the forum. Check your connection and try again.",
+  "errorNoConnection": "Something seems to be wrong with your connection. Please check your network and try again.",
   "@errorNoConnection": {
     "description": "Error: no response from the forum (offline, DNS, refused)."
   },
@@ -1420,11 +1444,11 @@
   "@errorBlocked": {
     "description": "Error: a firewall's page answered instead of the forum (a 403 without the forum's own error)."
   },
-  "errorNotFound": "This doesn't exist, or it was removed.",
+  "errorNotFound": "The requested resource was not found.",
   "@errorNotFound": {
     "description": "Error: 404/410 without the forum saying more."
   },
-  "errorRateLimited": "You're doing that too often. Please wait a moment and try again.",
+  "errorRateLimited": "You're going a little too quickly. Please try again in a few seconds.",
   "@errorRateLimited": {
     "description": "Error: 429, too many requests."
   },
@@ -1432,15 +1456,15 @@
   "@errorForumDown": {
     "description": "Error: 5xx, the forum is down or failing."
   },
-  "errorNotAllowed": "You don't have permission to do that.",
+  "errorNotAllowed": "You do not have permission to do that.",
   "@errorNotAllowed": {
     "description": "Error: 401/403 from the forum without its own words (Flarum 1.x's permission_denied)."
   },
-  "errorUnknown": "Something went wrong. Please try again.",
+  "errorUnknown": "Oops! Something went wrong. Please try again.",
   "@errorUnknown": {
     "description": "Error: anything else, instead of the exception text."
   },
-  "pollVotes": "{count, plural, =1{1 vote} other{{count} votes}}",
+  "pollVotes": "{count, plural, =1{1 vote was given} other{{count} votes were given}}",
   "@pollVotes": {
     "description": "Under a poll: how many votes it has, when the reader may see the results.",
     "placeholders": {
@@ -1449,7 +1473,7 @@
       }
     }
   },
-  "pollChooseUpTo": "{count, plural, =1{Choose 1} other{Choose up to {count}}}",
+  "pollChooseUpTo": "{count, plural, =1{Poll allows voting for 1 option.} other{Poll allows voting for {count} options.}}",
   "@pollChooseUpTo": {
     "description": "Under a poll where several answers may be chosen: how many.",
     "placeholders": {
@@ -1458,11 +1482,11 @@
       }
     }
   },
-  "pollEnded": "Voting has closed",
+  "pollEnded": "This poll has ended.",
   "@pollEnded": {
     "description": "Under a poll whose voting has closed."
   },
-  "pollEndsOn": "Closes {date}",
+  "pollEndsOn": "Poll ends {date}.",
   "@pollEndsOn": {
     "description": "Under a poll: when voting closes (a date and time).",
     "placeholders": {
@@ -1487,11 +1511,11 @@
   "@pollRemoveVote": {
     "description": "Button under a poll the reader voted in: takes their vote back."
   },
-  "pollSeeVoters": "See who voted",
+  "pollSeeVoters": "View voters",
   "@pollSeeVoters": {
     "description": "Button under a public poll: lists who voted for what."
   },
-  "pollNoVotes": "No votes yet.",
+  "pollNoVotes": "No Votes",
   "@pollNoVotes": {
     "description": "The voters sheet of a poll nobody has voted in."
   },
@@ -1499,11 +1523,11 @@
   "@poll": {
     "description": "The poll editor's title."
   },
-  "pollNeedsQuestion": "Write the question.",
+  "pollNeedsQuestion": "You must include a question",
   "@pollNeedsQuestion": {
     "description": "Poll editor: Done with no question."
   },
-  "pollNeedsAnswers": "Give at least two answers.",
+  "pollNeedsAnswers": "You must include a minimum of 2 answers",
   "@pollNeedsAnswers": {
     "description": "Poll editor: Done with fewer than two answers."
   },
@@ -1524,19 +1548,19 @@
       }
     }
   },
-  "pollRemoveAnswer": "Remove this answer",
+  "pollRemoveAnswer": "Remove Answer",
   "@pollRemoveAnswer": {
     "description": "Poll editor: tooltip of the button that removes an answer."
   },
-  "pollAddAnswer": "Add an answer",
+  "pollAddAnswer": "Add Answer",
   "@pollAddAnswer": {
     "description": "Poll editor: adds another answer field."
   },
-  "pollMultipleChoice": "Voters may choose more than one",
+  "pollMultipleChoice": "Allow people to vote for multiple options",
   "@pollMultipleChoice": {
     "description": "Poll editor switch: voters may choose several answers."
   },
-  "pollChoicesAllowed": "Choices allowed",
+  "pollChoicesAllowed": "Max votes per user",
   "@pollChoicesAllowed": {
     "description": "Poll editor: how many answers a voter may choose, in a multiple-choice poll."
   },
@@ -1544,15 +1568,15 @@
   "@pollAnyNumber": {
     "description": "Poll editor: no limit on how many answers a voter may choose."
   },
-  "pollPublic": "Show who voted for what",
+  "pollPublic": "Allow people to see who voted",
   "@pollPublic": {
     "description": "Poll editor switch: who voted for which answer is shown."
   },
-  "pollAllowChangeVote": "Voters may change their vote",
+  "pollAllowChangeVote": "Allow users to change their vote",
   "@pollAllowChangeVote": {
     "description": "Poll editor switch: voters may change their vote."
   },
-  "pollCloses": "Voting closes",
+  "pollCloses": "Poll end date (Optional)",
   "@pollCloses": {
     "description": "Poll editor: when voting closes."
   },
@@ -1560,7 +1584,7 @@
   "@pollNeverCloses": {
     "description": "Poll editor: voting never closes."
   },
-  "pollHideVotes": "Hide the results until voting closes",
+  "pollHideVotes": "Hide votes until poll ends",
   "@pollHideVotes": {
     "description": "Poll editor switch: results stay hidden until voting closes."
   },
@@ -1568,19 +1592,23 @@
   "@pollHideVotesNeedsEnd": {
     "description": "Poll editor: why hiding the results is off (it needs a closing time)."
   },
-  "addPoll": "Add a poll",
+  "addPoll": "Add Poll",
   "@addPoll": {
     "description": "New discussion composer: adds a poll (fof/polls)."
   },
-  "editPoll": "Edit the poll",
+  "submit": "Submit",
+  "@submit": {
+    "description": "Closes the poll editor, keeping the poll, as fof/polls' button"
+  },
+  "editPoll": "Edit Poll",
   "@editPoll": {
     "description": "New discussion composer: tooltip of the poll's chip."
   },
-  "removePoll": "Remove the poll",
+  "removePoll": "Remove Poll",
   "@removePoll": {
     "description": "New discussion composer: removes the poll."
   },
-  "draftSaved": "Draft saved.",
+  "draftSaved": "Saved!",
   "@draftSaved": {
     "description": "After Save draft when closing the composer."
   },
@@ -1600,7 +1628,7 @@
   "@draftsLoadFailed": {
     "description": "The drafts page couldn't load."
   },
-  "noDrafts": "No drafts. Close a post you're writing and choose Save draft to keep it here.",
+  "noDrafts": "You haven't saved any drafts. Close a post you're writing and choose Save Draft to keep it here.",
   "@noDrafts": {
     "description": "The drafts page with none. The quoted button is the composer's close prompt's Save draft."
   },
@@ -1617,7 +1645,7 @@
   "@draftUntitled": {
     "description": "A new-discussion draft without a title, in the drafts list."
   },
-  "deleteDraftQuestion": "Delete this draft?",
+  "deleteDraftQuestion": "Are you sure you want to delete your draft?",
   "@deleteDraftQuestion": {
     "description": "Asked before deleting a draft."
   },

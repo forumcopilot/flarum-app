@@ -124,7 +124,7 @@ void main() {
         ));
         await _pumpUntil(tester, find.text('bob and alice replied to this.'));
         await tester.tap(find.text('bob and alice replied to this.'));
-        await _pumpUntil(tester, find.text('Replies'));
+        await _pumpUntil(tester, find.text('Replies to this post'));
         expect(find.text('Post #3'), findsOneWidget, reason: "bob's reply, in this discussion");
         expect(find.text('Formatting samples'), findsWidgets, reason: "alice's, in another one");
         await tester.tap(find.text('Post #3'));
@@ -138,13 +138,13 @@ void main() {
           theme: AppTheme.lightTheme,
           home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('answered')),
         ));
-        await _pumpUntil(tester, find.text('Go to best answer'));
-        expect(find.text('Go to best answer'), findsOneWidget, reason: 'under the question');
-        expect(find.text('Best answer'), findsOneWidget, reason: 'above the answer, the second post');
-        final answer = find.ancestor(of: find.text('Best answer'), matching: find.byType(PostTile));
+        await _pumpUntil(tester, find.text('View Best Answer'));
+        expect(find.text('View Best Answer'), findsOneWidget, reason: 'under the question');
+        expect(find.text('Best Answer'), findsOneWidget, reason: 'above the answer, the second post');
+        final answer = find.ancestor(of: find.text('Best Answer'), matching: find.byType(PostTile));
         expect(tester.widget<PostTile>(answer).post.number, 2);
 
-        await tester.tap(find.text('Go to best answer'));
+        await tester.tap(find.text('View Best Answer'));
         await tester.pump(const Duration(seconds: 1));
         expect(fixtures.requests.where((r) => r.path.startsWith('/posts/')), isEmpty,
             reason: 'the answer is loaded, so it scrolls there without asking the forum');
@@ -160,9 +160,9 @@ void main() {
         await _pumpUntil(tester, find.text('Post 21 of 60.'));
         await tester.drag(find.byType(PostTile).first, const Offset(0, 2000));
         await tester.pump();
-        await _pumpUntil(tester, find.text('Load earlier posts'));
-        await tester.tap(find.text('Load earlier posts'));
-        await _pumpUntil(tester, find.text('Load earlier posts'), gone: true);
+        await _pumpUntil(tester, find.text('Load More'));
+        await tester.tap(find.text('Load More'));
+        await _pumpUntil(tester, find.text('Load More'), gone: true);
         expect(find.text('Post 1 of 60.'), findsNothing, reason: 'the reader stays where they were');
         await _close(tester);
       });

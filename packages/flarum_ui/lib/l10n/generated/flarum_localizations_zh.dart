@@ -101,7 +101,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => '加载更早的帖子';
+  String get loadEarlierPosts => '加载更多';
 
   @override
   String get postHidden => '此帖子已被删除。';
@@ -145,7 +145,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get someone => '某人';
+  String get someone => '[已注销]';
 
   @override
   String get latest => '最新';
@@ -194,7 +194,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get noDiscussions => '这里还没有讨论。';
+  String get noDiscussions => '这里空空如也……';
 
   @override
   String get discussionsLoadFailed => '无法加载讨论。';
@@ -209,7 +209,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get account => '账户';
 
   @override
-  String get createAccount => '创建账户';
+  String get createAccount => '注册';
 
   @override
   String signInFailedReason(String reason) {
@@ -231,11 +231,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get failedToMarkNotificationsRead => '无法将通知标记为已读';
 
   @override
-  String get noNotificationsYet => '还没有通知';
+  String get noNotificationsYet => '暂无通知';
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user 回复了 $title';
+    return '$user 在 $title 中发布了新内容';
   }
 
   @override
@@ -260,12 +260,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user 在 $title 中提到了你所在的群组';
+    return '$user 在 $title 中提及了你所在的用户组';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user 将一个讨论重命名为 $title';
+    return '$user 将标题更改为 $title';
   }
 
   @override
@@ -280,17 +280,17 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user 将 $title 移到了你关注的标签';
+    return '$user 更改了 $title 的标签';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user 与你发起了私密讨论：$title';
+    return '$user 邀请你加入新的私密讨论：$title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user 回复了私密讨论 $title';
+    return '$user 在你参与的私密讨论中发布了新内容：$title';
   }
 
   @override
@@ -310,17 +310,17 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user 在 $title 中将你的帖子选为最佳答案';
+    return '$user 在 $title 中将你的帖子设为最佳回复';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user 在 $title 中选出了最佳答案';
+    return '$user 在 $title 中选择了最佳回复';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return '请在 $title 中选出最佳答案';
+    return '如果你的问题已经解决，别忘了在 $title 中选择最佳回复';
   }
 
   @override
@@ -332,10 +332,10 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get notifSuspended => '你的账号已被封禁';
 
   @override
-  String get notifUnsuspended => '你的账号已解除封禁';
+  String get notifUnsuspended => '你的封禁已解除';
 
   @override
-  String get notifExport => '你的数据导出已就绪';
+  String get notifExport => '你的数据导出已准备好，请下载。';
 
   @override
   String get notifOther => '新通知';
@@ -350,7 +350,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get notificationsSignIn => '登录后查看你的通知。';
 
   @override
-  String get markAllRead => '全部标为已读';
+  String get markAllRead => '全部已读';
 
   @override
   String get posts => '帖子';
@@ -387,7 +387,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get userLoadFailed => '无法加载此个人资料。';
 
   @override
-  String get noPostsYet => '还没有帖子。';
+  String get noPostsYet => '这里空空如也……';
 
   @override
   String searchFailedWithError(String error) {
@@ -395,11 +395,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => '搜索讨论和帖子';
+  String get searchHint => '搜索社区';
 
   @override
   String noResultsFor(String query) {
-    return '未找到与“$query”相关的内容。';
+    return '似乎没有与“$query”相关的内容…';
   }
 
   @override
@@ -409,7 +409,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get dark => '深色';
 
   @override
-  String get appearance => '外观';
+  String get appearance => '显示模式';
 
   @override
   String get appearanceSystem => '跟随系统';
@@ -435,7 +435,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get repliesTitle => '回复';
+  String get repliesTitle => '此帖的回复';
 
   @override
   String postNumber(int number) {
@@ -471,10 +471,10 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get privateDiscussion => '私密讨论';
 
   @override
-  String get bestAnswer => '最佳答案';
+  String get bestAnswer => '最佳回复';
 
   @override
-  String get goToBestAnswer => '查看最佳答案';
+  String get goToBestAnswer => '查看最佳回复';
 
   @override
   String get answered => '已解决';
@@ -509,7 +509,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get listItem => '列表项';
 
   @override
-  String get mentionUser => '提及用户';
+  String get mentionUser => '提及用户、用户组或帖子';
 
   @override
   String get title => '标题';
@@ -518,7 +518,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get content => '内容';
 
   @override
-  String get send => '发送';
+  String get send => '发送私信';
+
+  @override
+  String get postReply => '回复';
+
+  @override
+  String get postDiscussion => '发布';
+
+  @override
+  String get postPrivateDiscussion => '发起私密讨论';
 
   @override
   String get save => '保存';
@@ -533,10 +542,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get pleaseEnterContent => '请输入内容';
 
   @override
-  String get composerTitleHint => '编写您的标题...';
+  String get composerTitleHint => '标题';
 
   @override
-  String get composerContentHint => '编写您的内容...';
+  String get privateDiscussionTitleHint => '标题';
+
+  @override
+  String get composerContentHint => '说点什么吧...';
+
+  @override
+  String get composerReplyHint => '说点什么吧...';
 
   @override
   String get composerFormattingHint => '打开格式选项';
@@ -551,13 +566,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get editPost => '编辑帖子';
 
   @override
-  String get postingThrottled => '发帖太快了。请等几秒后再试。';
+  String get postingThrottled => '操作过于频繁，请稍后再试。';
 
   @override
   String get postAwaitingApproval => '已发送。管理员审核通过后才会显示。';
 
   @override
   String get chooseTags => '选择标签';
+
+  @override
+  String get ok => '确定';
 
   @override
   String get primaryTags => '主标签';
@@ -606,10 +624,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get done => '完成';
-
-  @override
-  String get noMembersFound => '未找到成员。';
+  String get noMembersFound => '未找到符合搜索条件的用户。';
 
   @override
   String get memberSearchNotAllowed => '此论坛不允许搜索成员。';
@@ -642,16 +657,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get noBookmarks => '还没有收藏。';
 
   @override
-  String get chooseBestAnswer => '选为最佳答案';
+  String get chooseBestAnswer => '设为最佳回复';
 
   @override
-  String get removeBestAnswer => '取消最佳答案';
+  String get removeBestAnswer => '取消最佳回复';
 
   @override
   String get notificationSettings => '此讨论的通知';
 
   @override
-  String get notFollowing => '未关注';
+  String get notFollowing => '不关注';
 
   @override
   String get notFollowingHint => '仅在被 @提及时通知。';
@@ -663,25 +678,25 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get ignoring => '忽略';
 
   @override
-  String get ignoringHint => '从不通知，并在讨论列表中隐藏。';
+  String get ignoringHint => '不接收任何通知，并从讨论列表中隐藏。';
 
   @override
-  String get tagFollowingHint => '有新讨论时通知。';
+  String get tagFollowingHint => '有新讨论时通知我。';
 
   @override
   String get lurking => '潜水';
 
   @override
-  String get lurkingHint => '有新讨论和每条回复时都通知。';
+  String get lurkingHint => '有新讨论或新回复时都通知我。';
 
   @override
-  String get tagIgnoringHint => '此处的讨论从不通知。';
+  String get tagIgnoringHint => '永不通知。';
 
   @override
   String get hidden => '隐藏';
 
   @override
-  String get hiddenHint => '在讨论列表中隐藏此标签的讨论。';
+  String get hiddenHint => '在“全部讨论”中隐藏此标签下的讨论。';
 
   @override
   String get attachFile => '附加文件';
@@ -720,17 +735,17 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   @override
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes) {
-    return '$fileName 大小为 $fileBytes。此论坛最多允许 $maxBytes。';
+    return '$fileName 大小为 $fileBytes。文件大小不能超过 $maxBytes。';
   }
 
   @override
   String get flagAction => '举报';
 
   @override
-  String get ignoredUsers => '已忽略的用户';
+  String get ignoredUsers => '已屏蔽用户';
 
   @override
-  String get ignoredUsersEmpty => '你没有忽略任何人。';
+  String get ignoredUsersEmpty => '你还没有屏蔽任何人。';
 
   @override
   String get flagPostTitle => '举报帖子';
@@ -745,7 +760,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get flagReasonInappropriate => '不当内容';
 
   @override
-  String get flagReasonInappropriateText => '此帖子具有冒犯性、辱骂性或违反社区准则。';
+  String get flagReasonInappropriateText => '此帖包含冒犯、辱骂内容，或违反了社区准则。';
 
   @override
   String get flagReasonSpam => '垃圾信息';
@@ -770,53 +785,53 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String ignoreUser(String name) {
-    return '忽略 $name';
+    return '屏蔽 $name';
   }
 
   @override
   String stopIgnoringUser(String name) {
-    return '取消忽略 $name';
+    return '取消屏蔽 $name';
   }
 
   @override
   String ignoreUserConfirm(String name) {
-    return '要忽略 $name 吗？其帖子将被折叠。你可以在账户中取消忽略。';
+    return '确定要屏蔽 $name 吗？';
   }
 
   @override
   String ignoredUserPost(String name) {
-    return '你已忽略的 $name 的帖子。';
+    return '你已屏蔽的 $name 的帖子。';
   }
 
   @override
   String get showPost => '显示帖子';
 
   @override
-  String get ignoredOnThisPhone => '此论坛没有忽略列表，因此应用会将你的列表保存在此手机上。';
+  String get ignoredOnThisPhone => '此论坛没有屏蔽列表，因此应用会将你的列表保存在此手机上。';
 
   @override
-  String get stopIgnoring => '取消忽略';
+  String get stopIgnoring => '取消屏蔽';
 
   @override
-  String get termsBanner => '接受此论坛更新后的条款即可继续发帖。';
+  String get termsBanner => '在你查看并接受新条款前，我们暂时限制了你的账号访问。';
 
   @override
   String get termsReview => '查看';
 
   @override
-  String get termsTitle => '条款已更新';
+  String get termsTitle => '服务条款更新';
 
   @override
-  String get termsIntro => '继续发帖前，请接受论坛更新后的政策。';
+  String get termsIntro => '自你上次访问后，条款已有更新';
 
   @override
   String get readPolicy => '阅读';
 
   @override
-  String get acceptTerms => '接受';
+  String get acceptTerms => '确认';
 
   @override
-  String get termsAccepted => '谢谢，你现在可以继续发帖了。';
+  String get termsAccepted => '感谢接受新条款，现在可以继续使用论坛';
 
   @override
   String get privateDiscussions => '私密讨论';
@@ -830,13 +845,13 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get addPerson => '添加成员';
+  String get addPerson => '参与者';
 
   @override
-  String get choosePerson => '请选择要写给谁。';
+  String get choosePerson => '此讨论仅所选用户可见。除自己外，至少需要添加 1 个参与者。';
 
   @override
-  String get noPrivateDiscussions => '还没有私密讨论。';
+  String get noPrivateDiscussions => '这里空空如也……';
 
   @override
   String get privateOnlyOne => '此论坛一次只允许你私下写给一个人。';
@@ -845,10 +860,10 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get messages => '私信';
 
   @override
-  String get newMessage => '新私信';
+  String get newMessage => '发送私信';
 
   @override
-  String get noMessages => '还没有私信。';
+  String get noMessages => '还没有私信，开始对话吧';
 
   @override
   String get sendMessage => '发送私信';
@@ -864,6 +879,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => '重命名';
+
+  @override
+  String get renameDiscussionTitle => '更改讨论标题';
 
   @override
   String get lockDiscussion => '锁定';
@@ -884,7 +902,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get deleteForever => '永久删除';
 
   @override
-  String get deleteForeverConfirm => '确定永久删除吗？此操作无法撤销。';
+  String get deleteForeverConfirm => '确定要永久删除吗？此操作不可撤销。';
 
   @override
   String get approve => '批准';
@@ -902,11 +920,11 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String youAreSuspended(String date) {
-    return '你已被封禁至 $date。';
+    return '此账号将被封禁至 $date';
   }
 
   @override
-  String get youAreSuspendedIndefinitely => '你已被封禁。';
+  String get youAreSuspendedIndefinitely => '此账号已被封禁';
 
   @override
   String get awaitingApproval => '等待审核';
@@ -942,7 +960,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get errorNoConnection => '无法连接到论坛。请检查网络连接后重试。';
+  String get errorNoConnection => '网络连接异常，请检查网络后重试。';
 
   @override
   String get errorTimedOut => '论坛响应超时，请重试。';
@@ -951,10 +969,10 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get errorBlocked => '论坛的防火墙拦截了本应用。请稍后重试，或在浏览器中打开论坛。';
 
   @override
-  String get errorNotFound => '该内容不存在或已被删除。';
+  String get errorNotFound => '你请求的资源不存在。';
 
   @override
-  String get errorRateLimited => '操作过于频繁，请稍候再试。';
+  String get errorRateLimited => '操作过于频繁，请稍后再试。';
 
   @override
   String get errorForumDown => '论坛暂时没有响应，请稍后再试。';
@@ -963,14 +981,14 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get errorNotAllowed => '你没有权限执行此操作。';
 
   @override
-  String get errorUnknown => '出了点问题。请重试。';
+  String get errorUnknown => '糟糕，出错啦！请重试。';
 
   @override
   String pollVotes(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count 票',
+      other: '共 $count 票',
     );
     return '$_temp0';
   }
@@ -980,7 +998,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '最多选择 $count 项',
+      other: '本次投票最多可选 $count 项。',
     );
     return '$_temp0';
   }
@@ -990,7 +1008,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String pollEndsOn(String date) {
-    return '$date 结束';
+    return '投票将于 $date 结束。';
   }
 
   @override
@@ -1006,19 +1024,19 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get pollRemoveVote => '撤回我的投票';
 
   @override
-  String get pollSeeVoters => '查看投票者';
+  String get pollSeeVoters => '查看投票用户';
 
   @override
-  String get pollNoVotes => '还没有人投票。';
+  String get pollNoVotes => '暂无投票';
 
   @override
   String get poll => '投票';
 
   @override
-  String get pollNeedsQuestion => '请填写问题。';
+  String get pollNeedsQuestion => '请填写投票问题';
 
   @override
-  String get pollNeedsAnswers => '请至少填写两个选项。';
+  String get pollNeedsAnswers => '至少需要添加 2 个选项';
 
   @override
   String get pollEndInPast => '请选择未来的结束时间。';
@@ -1032,7 +1050,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   }
 
   @override
-  String get pollRemoveAnswer => '删除此选项';
+  String get pollRemoveAnswer => '删除选项';
 
   @override
   String get pollAddAnswer => '添加选项';
@@ -1041,25 +1059,25 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get pollMultipleChoice => '允许多选';
 
   @override
-  String get pollChoicesAllowed => '可选数量';
+  String get pollChoicesAllowed => '每人最多可选';
 
   @override
   String get pollAnyNumber => '不限';
 
   @override
-  String get pollPublic => '公开谁投了什么';
+  String get pollPublic => '允许查看投票用户';
 
   @override
-  String get pollAllowChangeVote => '允许修改投票';
+  String get pollAllowChangeVote => '允许用户修改投票';
 
   @override
-  String get pollCloses => '投票结束时间';
+  String get pollCloses => '投票截止时间（可选）';
 
   @override
   String get pollNeverCloses => '从不';
 
   @override
-  String get pollHideVotes => '结束前隐藏结果';
+  String get pollHideVotes => '投票结束前隐藏票数';
 
   @override
   String get pollHideVotesNeedsEnd => '请先选择投票结束时间。';
@@ -1068,13 +1086,16 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get addPoll => '添加投票';
 
   @override
+  String get submit => '提交';
+
+  @override
   String get editPoll => '编辑投票';
 
   @override
-  String get removePoll => '移除投票';
+  String get removePoll => '删除投票';
 
   @override
-  String get draftSaved => '草稿已保存。';
+  String get draftSaved => '保存成功！';
 
   @override
   String get draftSavedWithoutPoll => '草稿已保存，但不含投票：草稿无法保存投票。';
@@ -1089,7 +1110,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get draftsLoadFailed => '无法加载你的草稿';
 
   @override
-  String get noDrafts => '没有草稿。关闭正在写的帖子时选择“保存草稿”，即可保存在这里。';
+  String get noDrafts => '暂无保存的草稿。关闭正在写的帖子时选择“保存草稿”，即可保存在这里。';
 
   @override
   String draftReplyTo(String title) {
@@ -1100,7 +1121,7 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get draftUntitled => '无标题讨论';
 
   @override
-  String get deleteDraftQuestion => '删除这份草稿？';
+  String get deleteDraftQuestion => '确定要删除此草稿吗？';
 
   @override
   String get deleteDraft => '删除草稿';

@@ -3,3 +3,5 @@ template-arb-file: flarum_en.arb
 output-dir: lib/l10n/generated
 output-localization-file: flarum_localizations.dart
 output-class: FlarumLocalizations
+# A phone in a language the app lacks gets English (Flutter falls back to the first locale).
+preferred-supported-locales: [en]

@@ -101,7 +101,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => '以前の投稿を読み込む';
+  String get loadEarlierPosts => 'さらに読み込む';
 
   @override
   String get postHidden => 'この投稿は削除されました。';
@@ -145,7 +145,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get someone => '誰か';
+  String get someone => '[削除済み]';
 
   @override
   String get latest => '最新';
@@ -194,7 +194,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get noDiscussions => 'まだディスカッションはありません。';
+  String get noDiscussions => '一致するディスカッションが見つかりません。';
 
   @override
   String get discussionsLoadFailed => 'ディスカッションを読み込めませんでした。';
@@ -203,13 +203,13 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get tagsLoadFailed => 'タグを読み込めませんでした。';
 
   @override
-  String get signOut => 'サインアウト';
+  String get signOut => 'ログアウト';
 
   @override
   String get account => 'アカウント';
 
   @override
-  String get createAccount => 'アカウントを作成';
+  String get createAccount => '新規登録';
 
   @override
   String signInFailedReason(String reason) {
@@ -231,11 +231,11 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get failedToMarkNotificationsRead => '通知を既読にできませんでした';
 
   @override
-  String get noNotificationsYet => 'まだ通知はありません';
+  String get noNotificationsYet => '通知なし';
 
   @override
   String notifNewPost(String user, String title) {
-    return '$userが$titleに返信しました';
+    return '$userが$titleに投稿しました';
   }
 
   @override
@@ -260,12 +260,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$userが$titleであなたの所属グループをメンションしました';
+    return '$userが$titleであなたの所属するグループをメンションしました';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$userがディスカッションの名前を$titleに変更しました';
+    return '$userがタイトルを$titleに変更しました';
   }
 
   @override
@@ -280,7 +280,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$userが$titleをあなたがフォロー中のタグに移動しました';
+    return '$userが$titleのタグを変更しました';
   }
 
   @override
@@ -290,7 +290,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$userが非公開ディスカッション$titleに返信しました';
+    return '$userがあなたの参加している非公開ディスカッションに投稿しました：$title';
   }
 
   @override
@@ -310,17 +310,17 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$userが$titleであなたの投稿をベストアンサーに選びました';
+    return '$titleであなたの投稿が$userによってベストアンサーに選ばれました';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$userが$titleでベストアンサーを選びました';
+    return '$userが$titleのベストアンサーを選びました';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return '$titleでベストアンサーを選んでください';
+    return 'あなたの質問が解決された場合は、$titleでベストアンサーを選んでください';
   }
 
   @override
@@ -332,7 +332,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get notifSuspended => 'アカウントが一時停止されました';
 
   @override
-  String get notifUnsuspended => 'アカウントの一時停止が解除されました';
+  String get notifUnsuspended => 'アカウント利用停止が解除されました';
 
   @override
   String get notifExport => 'データのエクスポートの準備ができました';
@@ -387,7 +387,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get userLoadFailed => 'このプロフィールを読み込めませんでした。';
 
   @override
-  String get noPostsYet => 'まだ投稿はありません。';
+  String get noPostsYet => '投稿はありません。';
 
   @override
   String searchFailedWithError(String error) {
@@ -395,7 +395,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'ディスカッションと投稿を検索';
+  String get searchHint => 'フォーラムを検索';
 
   @override
   String noResultsFor(String query) {
@@ -435,7 +435,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get repliesTitle => '返信';
+  String get repliesTitle => 'この投稿への返信';
 
   @override
   String postNumber(int number) {
@@ -509,7 +509,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get listItem => 'リスト項目';
 
   @override
-  String get mentionUser => 'ユーザーをメンション';
+  String get mentionUser => 'ユーザー、投稿、グループをメンション';
 
   @override
   String get title => 'タイトル';
@@ -518,10 +518,19 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get content => 'コンテンツ';
 
   @override
-  String get send => '送信';
+  String get send => 'メッセージを送信';
 
   @override
-  String get save => '保存';
+  String get postReply => '返信する';
+
+  @override
+  String get postDiscussion => 'ディスカッションを作成';
+
+  @override
+  String get postPrivateDiscussion => '非公開ディスカッションを投稿';
+
+  @override
+  String get save => '変更を保存';
 
   @override
   String get formatting => '書式設定';
@@ -533,10 +542,16 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get pleaseEnterContent => 'コンテンツを入力してください';
 
   @override
-  String get composerTitleHint => 'タイトルを書く...';
+  String get composerTitleHint => 'ディスカッションのタイトル';
 
   @override
-  String get composerContentHint => '内容を書く...';
+  String get privateDiscussionTitleHint => '非公開ディスカッションのタイトル';
+
+  @override
+  String get composerContentHint => '本文を入力...';
+
+  @override
+  String get composerReplyHint => '返信を入力...';
 
   @override
   String get composerFormattingHint => '書式オプションを開く';
@@ -545,19 +560,22 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get searchUsers => 'ユーザーを検索...';
 
   @override
-  String get startDiscussion => 'ディスカッションを開始';
+  String get startDiscussion => 'ディスカッションの作成';
 
   @override
   String get editPost => '投稿を編集';
 
   @override
-  String get postingThrottled => '投稿の間隔が短すぎます。数秒待ってからもう一度お試しください。';
+  String get postingThrottled => '操作が早すぎます。数秒後に再度お試しください。';
 
   @override
   String get postAwaitingApproval => '送信しました。モデレーターが承認すると表示されます。';
 
   @override
   String get chooseTags => 'タグを選択';
+
+  @override
+  String get ok => 'OK';
 
   @override
   String get primaryTags => 'メインタグ';
@@ -606,9 +624,6 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get done => '完了';
-
-  @override
   String get noMembersFound => 'メンバーが見つかりません。';
 
   @override
@@ -645,13 +660,13 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get chooseBestAnswer => 'ベストアンサーに選ぶ';
 
   @override
-  String get removeBestAnswer => 'ベストアンサーを取り消す';
+  String get removeBestAnswer => 'ベストアンサーを解除する';
 
   @override
   String get notificationSettings => 'このディスカッションの通知';
 
   @override
-  String get notFollowing => 'フォローしていない';
+  String get notFollowing => 'フォローしない';
 
   @override
   String get notFollowingHint => '@メンションされたときだけ通知します。';
@@ -663,25 +678,25 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get ignoring => '無視';
 
   @override
-  String get ignoringHint => '通知せず、一覧からも非表示にします。';
+  String get ignoringHint => '通知を停止し、ディスカッション一覧に表示しません。';
 
   @override
-  String get tagFollowingHint => '新しいディスカッションを通知します。';
+  String get tagFollowingHint => '新しいディスカッションの作成を通知します。';
 
   @override
   String get lurking => '見守り';
 
   @override
-  String get lurkingHint => '新しいディスカッションとすべての返信を通知します。';
+  String get lurkingHint => 'すべての新規ディスカッションと返信を通知します。';
 
   @override
-  String get tagIgnoringHint => 'ここのディスカッションは通知しません。';
+  String get tagIgnoringHint => '通知を停止します。';
 
   @override
-  String get hidden => '非表示';
+  String get hidden => '非表示中';
 
   @override
-  String get hiddenHint => 'このタグのディスカッションを一覧から非表示にします。';
+  String get hiddenHint => 'ディスカッション一覧に表示しません。';
 
   @override
   String get attachFile => 'ファイルを添付';
@@ -721,14 +736,14 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   @override
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes) {
-    return '$fileName は $fileBytes です。このフォーラムの上限は $maxBytes です。';
+    return '$fileName は $fileBytes です。$maxBytes を超えるアップロードはできません。';
   }
 
   @override
   String get flagAction => '通報';
 
   @override
-  String get ignoredUsers => '無視中のユーザー';
+  String get ignoredUsers => '無視されたユーザー';
 
   @override
   String get ignoredUsersEmpty => '無視しているユーザーはいません。';
@@ -747,7 +762,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get flagReasonInappropriateText =>
-      'この投稿は攻撃的・侮辱的であるか、コミュニティのガイドラインに違反しています。';
+      'この投稿は悪意のある表現や暴力的表現、あるいはコミュニティガイドラインに違反した内容を含んでいます。';
 
   @override
   String get flagReasonSpam => 'スパム';
@@ -777,12 +792,12 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String stopIgnoringUser(String name) {
-    return '$nameの無視をやめる';
+    return '$nameの無視を解除';
   }
 
   @override
   String ignoreUserConfirm(String name) {
-    return '$nameを無視しますか？この人の投稿は折りたたまれます。アカウントからいつでも解除できます。';
+    return '$nameを無視しますか？';
   }
 
   @override
@@ -797,34 +812,34 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get ignoredOnThisPhone => 'このフォーラムには無視リストがないため、アプリがこの端末に保存します。';
 
   @override
-  String get stopIgnoring => '無視をやめる';
+  String get stopIgnoring => '無視を解除';
 
   @override
-  String get termsBanner => '投稿を再開するには、このフォーラムの更新された規約に同意してください。';
+  String get termsBanner => '新しい利用規約を確認している間、アカウントへのアクセスを一時的に制限しました。';
 
   @override
   String get termsReview => '確認';
 
   @override
-  String get termsTitle => '規約の更新';
+  String get termsTitle => '利用規約の更新';
 
   @override
-  String get termsIntro => '再び投稿する前に、フォーラムの更新されたポリシーに同意してください。';
+  String get termsIntro => '前回のアクセス以降、利用規約が更新されました';
 
   @override
   String get readPolicy => '読む';
 
   @override
-  String get acceptTerms => '同意する';
+  String get acceptTerms => '確認';
 
   @override
-  String get termsAccepted => 'ありがとうございます。再び投稿できます。';
+  String get termsAccepted => '承諾いただきありがとうございます、フォーラムへ戻ることができます';
 
   @override
   String get privateDiscussions => '非公開ディスカッション';
 
   @override
-  String get startPrivateDiscussion => '非公開ディスカッションを始める';
+  String get startPrivateDiscussion => '非公開ディスカッションの作成';
 
   @override
   String privateWith(String names) {
@@ -832,13 +847,14 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get addPerson => '相手を追加';
+  String get addPerson => '参加者';
 
   @override
-  String get choosePerson => '送る相手を選んでください。';
+  String get choosePerson =>
+      'このディスカッションはあなたがここで選択したユーザーにのみ表示されます。あなた以外の参加者が少なくとも1人必要です。';
 
   @override
-  String get noPrivateDiscussions => '非公開ディスカッションはまだありません。';
+  String get noPrivateDiscussions => '一致するディスカッションが見つかりません。';
 
   @override
   String get privateOnlyOne => 'このフォーラムでは、一度に1人にだけ非公開で書けます。';
@@ -868,6 +884,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get renameDiscussion => '名前を変更';
 
   @override
+  String get renameDiscussionTitle => 'タイトルの変更';
+
+  @override
   String get lockDiscussion => 'ロック';
 
   @override
@@ -886,7 +905,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get deleteForever => '完全に削除';
 
   @override
-  String get deleteForeverConfirm => '完全に削除しますか？元に戻せません。';
+  String get deleteForeverConfirm => '完全に削除しますか？この操作は取り消すことができません。';
 
   @override
   String get approve => '承認';
@@ -904,11 +923,11 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String youAreSuspended(String date) {
-    return '$dateまで利用停止中です。';
+    return 'この一時利用停止は$dateまで続きます';
   }
 
   @override
-  String get youAreSuspendedIndefinitely => '利用停止中です。';
+  String get youAreSuspendedIndefinitely => 'このアカウントは利用停止されています';
 
   @override
   String get awaitingApproval => '承認待ち';
@@ -954,19 +973,19 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
       'フォーラムのファイアウォールによってアプリがブロックされました。しばらくしてから再度お試しいただくか、ブラウザでフォーラムを開いてください。';
 
   @override
-  String get errorNotFound => '存在しないか、削除されています。';
+  String get errorNotFound => '要求されたリソースが見つかりませんでした。';
 
   @override
-  String get errorRateLimited => '操作の頻度が高すぎます。しばらく待ってからもう一度お試しください。';
+  String get errorRateLimited => '操作が早すぎます。数秒後に再度お試しください。';
 
   @override
   String get errorForumDown => 'フォーラムが現在応答していません。しばらくしてからもう一度お試しください。';
 
   @override
-  String get errorNotAllowed => 'その操作を行う権限がありません。';
+  String get errorNotAllowed => 'この操作を実行する権限がありません。';
 
   @override
-  String get errorUnknown => '問題が発生しました。もう一度お試しください。';
+  String get errorUnknown => 'エラーが発生しました。再度お試しください。';
 
   @override
   String pollVotes(int count) {
@@ -989,11 +1008,11 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   }
 
   @override
-  String get pollEnded => '投票は終了しました';
+  String get pollEnded => 'すでに締め切られた投票です';
 
   @override
   String pollEndsOn(String date) {
-    return '$dateに終了';
+    return '投票の締め切り：$date';
   }
 
   @override
@@ -1009,7 +1028,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get pollRemoveVote => '投票を取り消す';
 
   @override
-  String get pollSeeVoters => '投票した人を見る';
+  String get pollSeeVoters => '投票したユーザー一覧';
 
   @override
   String get pollNoVotes => 'まだ投票はありません。';
@@ -1018,10 +1037,10 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get poll => '投票';
 
   @override
-  String get pollNeedsQuestion => '質問を入力してください。';
+  String get pollNeedsQuestion => '質問文を入力してください';
 
   @override
-  String get pollNeedsAnswers => '回答を2つ以上入力してください。';
+  String get pollNeedsAnswers => '回答を少なくとも2つ設定する必要があります';
 
   @override
   String get pollEndInPast => '終了日時は未来の日時にしてください。';
@@ -1050,13 +1069,13 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get pollAnyNumber => '制限なし';
 
   @override
-  String get pollPublic => '誰が何に投票したかを表示する';
+  String get pollPublic => '投票者の一覧をユーザーに開示する';
 
   @override
   String get pollAllowChangeVote => '投票の変更を許可する';
 
   @override
-  String get pollCloses => '投票の終了';
+  String get pollCloses => '投票の締め切り（任意）';
 
   @override
   String get pollNeverCloses => 'なし';
@@ -1071,13 +1090,16 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get addPoll => '投票を追加';
 
   @override
+  String get submit => '送信';
+
+  @override
   String get editPoll => '投票を編集';
 
   @override
   String get removePoll => '投票を削除';
 
   @override
-  String get draftSaved => '下書きを保存しました。';
+  String get draftSaved => '保存しました';
 
   @override
   String get draftSavedWithoutPoll => '下書きを保存しました（下書きには投票を保存できないため、投票は含まれません）。';
@@ -1092,7 +1114,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get draftsLoadFailed => '下書きを読み込めませんでした';
 
   @override
-  String get noDrafts => '下書きはありません。書きかけの投稿を閉じるときに「下書きを保存」を選ぶと、ここに保存されます。';
+  String get noDrafts => '保存した下書きがありません。書きかけの投稿を閉じるときに「下書きを保存」を選ぶと、ここに保存されます。';
 
   @override
   String draftReplyTo(String title) {
@@ -1103,7 +1125,7 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get draftUntitled => '無題のディスカッション';
 
   @override
-  String get deleteDraftQuestion => 'この下書きを削除しますか？';
+  String get deleteDraftQuestion => '下書きを削除してもよろしいですか？';
 
   @override
   String get deleteDraft => '下書きを削除';

@@ -39,6 +39,9 @@ class ComposePage extends StatefulWidget {
     this.isEdit = false,
     this.pickFiles = pickUploads,
     this.onSaveDraft,
+    this.submitLabel,
+    this.titleHint,
+    this.contentHint,
   });
 
   final SiteContext site;
@@ -70,6 +73,13 @@ class ComposePage extends StatefulWidget {
   /// the page; null where the reader can't save drafts. A throw keeps the page open, with the
   /// reason shown.
   final Future<void> Function(String title, String content)? onSaveDraft;
+
+  /// The submit button and the fields' placeholders, in Flarum's words. By default: Save Changes
+  /// for an edit, Post Discussion with a title field, Post Reply without; Discussion Title, and
+  /// Write a Post... or Write a Reply....
+  final String? submitLabel;
+  final String? titleHint;
+  final String? contentHint;
 
   @override
   State<ComposePage> createState() => _ComposePageState();
@@ -435,7 +445,20 @@ class _ComposePageState extends State<ComposePage> {
                 onPressed: _isSubmitting ? null : _submit,
                 child: _isSubmitting
                     ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                    : Text(widget.isEdit ? l10n.save : l10n.send),
+                    // Flarum's labels are long ("Post Private Discussion"): at a large text size
+                    // the label shrinks to fit half the bar rather than push the title off it.
+                    : ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width / 2),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(widget.submitLabel ??
+                              (widget.isEdit
+                                  ? l10n.save
+                                  : widget.showTitleField
+                                      ? l10n.postDiscussion
+                                      : l10n.postReply)),
+                        ),
+                      ),
               ),
             ),
           ],
@@ -481,7 +504,7 @@ class _ComposePageState extends State<ComposePage> {
                             focusNode: _titleFocusNode,
                             decoration: InputDecoration(
                               labelText: l10n.title,
-                              hintText: l10n.composerTitleHint,
+                              hintText: widget.titleHint ?? l10n.composerTitleHint,
                               errorText: _titleMissing ? l10n.pleaseEnterTitle : null,
                             ),
                             textCapitalization: TextCapitalization.sentences,
@@ -504,7 +527,8 @@ class _ComposePageState extends State<ComposePage> {
                             textCapitalization: TextCapitalization.sentences,
                             decoration: InputDecoration(
                               labelText: l10n.content,
-                              hintText: l10n.composerContentHint,
+                              hintText: widget.contentHint ??
+                                  (widget.showTitleField ? l10n.composerContentHint : l10n.composerReplyHint),
                               alignLabelWithHint: true,
                               floatingLabelBehavior: FloatingLabelBehavior.always,
                               errorText: _contentMissing ? l10n.pleaseEnterContent : null,

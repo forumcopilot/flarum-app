@@ -87,7 +87,7 @@ void main() {
         for (final label in ['Rename', 'Lock', 'Sticky', 'Delete']) {
           expect(find.text(label), findsOneWidget, reason: label);
         }
-        expect(find.text('Delete forever'), findsNothing, reason: 'only once it\'s deleted');
+        expect(find.text('Delete Forever'), findsNothing, reason: 'only once it\'s deleted');
         await tester.tap(find.text('Lock'));
         await _settle(tester);
         expect(patched(fixtures, '/discussions/${questionId()}'), [
@@ -114,7 +114,7 @@ void main() {
         expect(find.descendant(of: find.byType(PostTile).at(1), matching: find.text('This post was deleted.')), findsOneWidget);
         await tester.tap(find.descendant(of: find.byType(PostTile).at(1), matching: find.byIcon(Icons.more_vert)));
         await _settle(tester);
-        expect(find.text('Delete forever'), findsOneWidget);
+        expect(find.text('Delete Forever'), findsOneWidget);
         await tester.tap(find.text('Restore'));
         await _settle(tester);
         expect(find.text('This post was deleted.'), findsNothing);
@@ -157,7 +157,8 @@ void main() {
         await tester.pumpWidget(_app(AppShell(site: _site(), appearance: Appearance.unsaved())));
         await _settle(tester);
         expect(find.byType(SuspendedStrip), findsOneWidget);
-        expect(find.text("You're suspended. ${WriteSamples.suspendReason}"), findsOneWidget);
+        expect(find.text('This account is suspended'), findsOneWidget);
+        expect(find.text(WriteSamples.suspendReason), findsOneWidget, reason: 'what the forum told them, under it');
         await _close(tester);
       });
     });

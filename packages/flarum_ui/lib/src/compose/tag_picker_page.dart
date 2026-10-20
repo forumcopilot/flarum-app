@@ -83,7 +83,7 @@ class _TagPickerPageState extends State<TagPickerPage> {
             padding: const EdgeInsetsDirectional.only(end: DesignTokens.spacingS),
             child: FilledButton(
               onPressed: problem == null ? () => Navigator.of(context).pop(_chosenTags) : null,
-              child: Text(l10n.done),
+              child: Text(l10n.ok),
             ),
           ),
         ],

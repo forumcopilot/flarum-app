@@ -133,7 +133,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
         actions: [
           Padding(
             padding: const EdgeInsetsDirectional.only(end: DesignTokens.spacingS),
-            child: FilledButton(onPressed: _done, child: Text(l10n.done)),
+            child: FilledButton(onPressed: _done, child: Text(l10n.submit)),
           ),
         ],
       ),

@@ -78,7 +78,7 @@ void main() {
         await tester.tap(find.text('Save draft'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
-        expect(find.text('Draft saved.'), findsOneWidget);
+        expect(find.text('Saved!'), findsOneWidget);
         final saved = fixtures.requests.lastWhere((r) => r.path.startsWith('/drafts/'));
         expect(saved.method, 'PATCH');
         await tester.pump(const Duration(seconds: 10));
@@ -91,7 +91,7 @@ void main() {
         final tile = find.ancestor(of: find.text(WriteSamples.draftTitle), matching: find.byType(ListTile));
         await tester.tap(find.descendant(of: tile, matching: find.byTooltip('Delete draft')));
         await _settle(tester);
-        expect(find.text('Delete this draft?'), findsOneWidget);
+        expect(find.text('Are you sure you want to delete your draft?'), findsOneWidget);
         await tester.tap(find.text('Delete'));
         await _settle(tester);
         expect(find.text(WriteSamples.draftTitle), findsNothing);
@@ -110,18 +110,18 @@ void main() {
         await _settle(tester);
         await tester.enterText(find.widgetWithText(TextField, 'Title'), WriteSamples.draftTitle);
         await tester.enterText(find.byType(TextField).last, WriteSamples.draftContent);
-        await tester.tap(find.text('Choose tags'));
+        await tester.tap(find.text('Choose Tags'));
         await _settle(tester);
         await tester.tap(find.text('General'));
         await tester.pump();
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('OK'));
         await _settle(tester);
-        await tester.tap(find.text('Add a poll'));
+        await tester.tap(find.text('Add Poll'));
         await _settle(tester);
         await tester.enterText(find.widgetWithText(TextField, 'Question'), WriteSamples.pollQuestion);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 1'), WriteSamples.pollOptions[0]);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 2'), WriteSamples.pollOptions[1]);
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('Submit'));
         await _settle(tester);
 
         await tester.tap(find.byTooltip('Close'));

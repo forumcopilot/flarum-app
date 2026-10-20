@@ -109,7 +109,7 @@ void main() {
 
         fixtures.offline = true;
         await tester.fling(find.byType(DiscussionTile).first, const Offset(0, 400), 1000);
-        await _pumpUntil(tester, find.text("Couldn't reach the forum. Check your connection and try again."));
+        await _pumpUntil(tester, find.text('Something seems to be wrong with your connection. Please check your network and try again.'));
         expect(find.byType(DiscussionTile), findsNWidgets(shown), reason: 'the list stays');
         expect(find.textContaining('DioException'), findsNothing);
         await tester.pump(const Duration(seconds: 10));

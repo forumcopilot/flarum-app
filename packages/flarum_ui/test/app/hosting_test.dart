@@ -206,7 +206,7 @@ void main() {
     await _arrive(tester, find.byType(DiscussionTile));
     await tester.tap(find.text('Account'));
     await _pumpUntil(tester, find.byType(AccountPage));
-    expect(find.text('Appearance'), findsNothing);
+    expect(find.text('Color Scheme'), findsNothing);
     await _close(tester);
   });
 }

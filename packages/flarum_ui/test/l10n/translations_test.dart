@@ -30,4 +30,11 @@ void main() {
     final de = lookupFlarumLocalizations(const Locale('de'));
     expect(de.eventRenamed('alice', 'Alt', 'Neu'), 'alice hat den Titel von „Alt“ in „Neu“ geändert.');
   });
+
+  test('a phone in a language the app lacks gets English, not the first language in the list', () {
+    // Flutter falls back to the first supported locale; l10n.yaml puts English first.
+    expect(FlarumLocalizations.supportedLocales.first, const Locale('en'));
+    expect(basicLocaleListResolution(const [Locale('sv', 'SE')], FlarumLocalizations.supportedLocales), const Locale('en'));
+    expect(basicLocaleListResolution(const [Locale('de', 'AT')], FlarumLocalizations.supportedLocales), const Locale('de'));
+  });
 }

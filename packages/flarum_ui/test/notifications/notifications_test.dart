@@ -54,7 +54,7 @@ void main() {
         final lines = model.items.map((n) => NotificationTile.message(n, l10n)).toList();
         expect(lines, contains('carol liked your post in Welcome to the test forum'));
         expect(lines, contains('bob replied to your post in Welcome to the test forum'));
-        expect(lines, contains('bob replied to the private discussion Private: test plan'));
+        expect(lines, contains("bob posted in a private discussion you're a part of: Private: test plan"));
         model.dispose();
       });
 
@@ -73,7 +73,7 @@ void main() {
       testWidgets('a guest is asked to sign in', (tester) async {
         fixtures.forum(signedIn: false);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
-        expect(find.text('Sign in to see your notifications.'), findsOneWidget);
+        expect(find.text('Log in to see your notifications.'), findsOneWidget);
         expect(fixtures.requests, isEmpty);
       });
 

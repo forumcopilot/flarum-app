@@ -56,7 +56,7 @@ void main() {
     await _pumpUntil(tester, find.text('bob'));
     expect(find.text(WriteSamples.messageReply), findsOneWidget, reason: 'the last message');
     expect(find.text('1'), findsOneWidget, reason: 'one unread');
-    expect(find.text('New message'), findsOneWidget);
+    expect(find.text('Send a Message'), findsOneWidget);
 
     await tester.tap(find.text('bob'));
     await _pumpUntil(tester, find.byType(DialogPage));
@@ -101,7 +101,7 @@ void main() {
     expect(find.text(WriteSamples.message), findsNothing);
 
     await tester.enterText(find.byType(TextField), WriteSamples.message);
-    await tester.tap(find.byTooltip('Send'));
+    await tester.tap(find.byTooltip('Send message'));
     // The forum's answer names the conversation: all of it shows.
     await _pumpUntil(tester, find.text(WriteSamples.messageReply));
     final sent = fixtures.requests.firstWhere((r) => r.method == 'POST').data as Map;

@@ -64,7 +64,7 @@ void main() {
     expect(tester.widget<CheckboxListTile>(find.widgetWithText(CheckboxListTile, 'iOS')).value, isFalse);
 
     await tester.tap(find.text('bug'));
-    await tester.tap(find.text('Done'));
+    await tester.tap(find.text('OK'));
     await tester.pumpAndSettle();
     expect(chosen?.map((t) => t.name), ['General', 'bug']);
   });

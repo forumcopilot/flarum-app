@@ -89,24 +89,24 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Send'));
+    await tester.tap(find.text('Post Reply'));
     await tester.pump();
     expect(find.text('Please enter some content'), findsOneWidget);
     expect(sent, isNull);
 
     await tester.enterText(_field(), 'too fast');
-    await tester.tap(find.text('Send'));
+    await tester.tap(find.text('Post Reply'));
     await tester.pump();
-    expect(find.text("You're posting too quickly. Wait a few seconds and try again."), findsOneWidget);
+    expect(find.text("You're going a little too quickly. Please try again in a few seconds."), findsOneWidget);
     expect(find.byType(ComposePage), findsOneWidget, reason: 'stays open');
 
     await tester.enterText(_field(), 'bad tags');
-    await tester.tap(find.text('Send'));
+    await tester.tap(find.text('Post Reply'));
     await tester.pump();
     expect(find.text('Choose a primary tag.'), findsOneWidget);
 
     await tester.enterText(_field(), 'fine');
-    await tester.tap(find.text('Send'));
+    await tester.tap(find.text('Post Reply'));
     await tester.pumpAndSettle();
     expect(find.byType(ComposePage), findsNothing, reason: 'sent, and closed');
     expect(sent, 'fine');
@@ -130,7 +130,7 @@ void main() {
         await _settle(tester);
         expect(find.text('Welcome to the test forum'), findsWidgets, reason: 'the composer names the discussion');
         await tester.enterText(_field(), WriteSamples.reply);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Reply'));
         await _pumpUntil(tester, find.byType(ComposePage), gone: true);
 
         final post = fixtures.requests.singleWhere((r) => r.method == 'POST' && r.path == '/posts');
@@ -206,7 +206,7 @@ void main() {
         expect(find.text('Edit post'), findsOneWidget);
         expect(tester.widget<TextField>(_field()).controller!.text, WriteSamples.reply);
         await tester.enterText(_field(), WriteSamples.edit);
-        await tester.tap(find.text('Save'));
+        await tester.tap(find.text('Save Changes'));
         await _pumpUntil(tester, find.byType(ComposePage), gone: true);
         expect(saved?.source, WriteSamples.edit);
         await _close(tester);
@@ -241,7 +241,7 @@ void main() {
         await tester.pump();
         expect(_text(tester), 'Here they are\n[Uploading: ${WriteSamples.uploadImageName}…]()\n');
         expect(find.byType(UploadTile), findsOneWidget);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Reply'));
         await tester.pump();
         expect(find.text('Please wait for attachments to finish uploading'), findsOneWidget);
         expect(sent, isNull);
@@ -264,7 +264,7 @@ void main() {
         expect(find.byType(UploadTile), findsOneWidget);
         expect(fixtures.requests.where((r) => r.method == 'DELETE'), isEmpty);
 
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Reply'));
         await tester.pump();
         expect(sent, startsWith('Here they are\n[upl-image-preview uuid='));
 
@@ -282,22 +282,22 @@ void main() {
         await _pumpUntil(tester, find.byType(DiscussionTile));
         await _settle(tester);
 
-        await tester.tap(find.text('Start a discussion'));
+        await tester.tap(find.text('Start a Discussion'));
         await _pumpUntil(tester, find.byType(ComposePage));
         await _settle(tester);
         await tester.enterText(_field(title: true), WriteSamples.title);
         await tester.enterText(_field(), WriteSamples.content);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Discussion'));
         await tester.pump();
         expect(find.text('Choose a primary tag.'), findsOneWidget, reason: 'the forum asks for one');
 
-        await tester.tap(find.text('Choose tags'));
+        await tester.tap(find.text('Choose Tags'));
         await _settle(tester);
         await tester.tap(find.text('General'));
         await tester.pump();
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('OK'));
         await _settle(tester);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Discussion'));
         await _pumpUntil(tester, find.byType(ThreadPage));
 
         final start = fixtures.requests.singleWhere((r) => r.method == 'POST' && r.path == '/discussions');

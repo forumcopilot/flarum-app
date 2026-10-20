@@ -47,7 +47,7 @@ void main() {
       site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
     );
     await tester.pumpWidget(MaterialApp(home: AccountPage(site: site, appearance: appearance)));
-    await tester.tap(find.text('Dark'));
+    await tester.tap(find.text('Dark Mode'));
     await tester.pump();
     expect(appearance.value, ThemeMode.dark);
   });
@@ -80,8 +80,8 @@ void main() {
         site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
       );
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
-      expect(find.text('Signed in as @alice'), findsOneWidget);
-      expect(find.text('Sign out'), findsOneWidget);
+      expect(find.text('Logged in as @alice'), findsOneWidget);
+      expect(find.text('Log Out'), findsOneWidget);
     });
 
     testWidgets('Flarum ${version.name}: a guest is offered sign-in', (tester) async {
@@ -93,8 +93,8 @@ void main() {
         site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
       );
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
-      expect(find.text('Sign in'), findsOneWidget);
-      expect(find.text('Create account'), findsNothing, reason: 'the test forums take no sign-ups');
+      expect(find.text('Log In'), findsOneWidget);
+      expect(find.text('Sign Up'), findsNothing, reason: 'the test forums take no sign-ups');
     });
   }
 

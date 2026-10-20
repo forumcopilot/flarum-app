@@ -66,11 +66,11 @@ void main() {
         Navigator.of(tester.element(find.byType(ThreadPage))).pop();
         await _settle(tester);
         expect(find.text(WriteSamples.questionTitle), findsNothing);
-        expect(find.text('No bookmarks yet.'), findsOneWidget);
+        expect(find.text("You haven't bookmarked any posts yet."), findsOneWidget);
         await tester.tap(find.text('Posts'));
         await _settle(tester);
         expect(find.text(WriteSamples.answer), findsNothing);
-        expect(find.text('No bookmarks yet.'), findsOneWidget, reason: 'the same words on both tabs');
+        expect(find.text("You haven't bookmarked any posts yet."), findsOneWidget, reason: 'the same words on both tabs');
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

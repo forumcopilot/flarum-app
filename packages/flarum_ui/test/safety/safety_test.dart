@@ -114,18 +114,18 @@ void main() {
         await openAnswerMenu(tester);
         await tester.tap(find.text('Ignore bob'));
         await _settle(tester);
-        expect(find.textContaining('Their posts will be folded away'), findsOneWidget);
+        expect(find.text('Are you sure you want to ignore bob?'), findsOneWidget);
         await tester.tap(find.widgetWithText(TextButton, 'Ignore bob'));
         await _settle(tester);
         expect(find.text('A post by bob, whom you ignore.'), findsOneWidget);
         expect(find.text(WriteSamples.answer), findsNothing);
 
-        await tester.tap(find.text('Show post'));
+        await tester.tap(find.text('Show Post'));
         await _settle(tester);
         expect(find.text(WriteSamples.answer), findsOneWidget);
 
         await openAnswerMenu(tester);
-        await tester.tap(find.text('Stop ignoring bob'));
+        await tester.tap(find.text('Unignore bob'));
         await _settle(tester);
         expect(find.text('A post by bob, whom you ignore.'), findsNothing);
         expect(find.text(WriteSamples.answer), findsOneWidget);
@@ -137,17 +137,17 @@ void main() {
         await tester.runAsync(fixtures.forum().refresh);
         await tester.pumpWidget(_app(AppShell(site: _site(), appearance: Appearance.unsaved())));
         await _settle(tester);
-        expect(find.text("Accept this forum's updated terms to post again."), findsOneWidget);
+        expect(find.text("We've temporarily restricted access to your account while you check out the new terms."), findsOneWidget);
 
         await tester.tap(find.text('Review'));
         await _settle(tester);
         expect(find.byType(TermsPage), findsOneWidget);
         expect(find.text(WriteSamples.policyName), findsOneWidget);
         expect(find.text(WriteSamples.policyUpdate), findsOneWidget);
-        await tester.tap(find.text('Accept'));
+        await tester.tap(find.text('Confirm'));
         await _settle(tester);
         expect(find.byType(TermsPage), findsNothing);
-        expect(find.text('Thank you. You can post again.'), findsOneWidget);
+        expect(find.text('Thanks for accepting, you can now get back to the forum'), findsOneWidget);
         expect(find.byType(TermsStrip), findsNothing);
         expect(fixtures.requests.where((r) => r.method == 'POST' && r.path.endsWith('/accept')), hasLength(1));
         await _close(tester);
@@ -159,7 +159,7 @@ void main() {
 
         await tester.pumpWidget(_app(IgnoredUsersPage(site: _site())));
         await _pumpUntil(tester, find.text('bob'));
-        expect(find.text('Stop ignoring'), findsOneWidget);
+        expect(find.text('Unignore'), findsOneWidget);
         await _close(tester);
       });
     });

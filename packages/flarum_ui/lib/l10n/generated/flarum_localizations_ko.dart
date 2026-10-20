@@ -93,7 +93,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get loadMore => '더 불러오기';
+  String get loadMore => '더 보기';
 
   @override
   String viewProfileOfUser(String username) {
@@ -101,7 +101,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => '이전 게시물 불러오기';
+  String get loadEarlierPosts => '더 보기';
 
   @override
   String get postHidden => '삭제된 게시물입니다.';
@@ -145,7 +145,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get someone => '누군가';
+  String get someone => '[삭제됨]';
 
   @override
   String get latest => '최신';
@@ -194,7 +194,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get noDiscussions => '아직 토론이 없습니다.';
+  String get noDiscussions => '여기엔 토론이 없는 것 같습니다.';
 
   @override
   String get discussionsLoadFailed => '토론을 불러오지 못했습니다.';
@@ -209,7 +209,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get account => '계정';
 
   @override
-  String get createAccount => '계정 만들기';
+  String get createAccount => '가입';
 
   @override
   String signInFailedReason(String reason) {
@@ -231,11 +231,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get failedToMarkNotificationsRead => '알림을 읽음으로 표시하지 못했습니다';
 
   @override
-  String get noNotificationsYet => '아직 알림이 없습니다';
+  String get noNotificationsYet => '알림 없음';
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user님이 $title에 답글을 남겼습니다';
+    return '$user님이 $title에 게시했습니다';
   }
 
   @override
@@ -265,7 +265,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user님이 토론 제목을 $title(으)로 바꿨습니다';
+    return '$user님이 제목을 $title(으)로 변경했습니다';
   }
 
   @override
@@ -280,7 +280,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user님이 $title을(를) 내가 팔로우하는 태그로 옮겼습니다';
+    return '$user님이 $title의 태그를 변경했습니다';
   }
 
   @override
@@ -320,7 +320,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String notifBestAnswerPending(String title) {
-    return '$title에서 베스트 답변을 선택하세요';
+    return '질문이 해결되었다면 $title에서 베스트 답변을 선택하세요';
   }
 
   @override
@@ -332,7 +332,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get notifSuspended => '계정이 정지되었습니다';
 
   @override
-  String get notifUnsuspended => '계정 정지가 해제되었습니다';
+  String get notifUnsuspended => '정지가 해제되었습니다';
 
   @override
   String get notifExport => '데이터 내보내기가 준비되었습니다';
@@ -387,7 +387,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get userLoadFailed => '이 프로필을 불러오지 못했습니다.';
 
   @override
-  String get noPostsYet => '아직 게시물이 없습니다.';
+  String get noPostsYet => '여기엔 게시물이 없는 것 같습니다.';
 
   @override
   String searchFailedWithError(String error) {
@@ -395,7 +395,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => '토론과 게시물 검색';
+  String get searchHint => '검색';
 
   @override
   String noResultsFor(String query) {
@@ -435,7 +435,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   }
 
   @override
-  String get repliesTitle => '답글';
+  String get repliesTitle => '이 게시물에 대한 답글';
 
   @override
   String postNumber(int number) {
@@ -509,7 +509,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get listItem => '목록 항목';
 
   @override
-  String get mentionUser => '사용자 멘션';
+  String get mentionUser => '사용자, 그룹 또는 게시물 언급';
 
   @override
   String get title => '제목';
@@ -518,10 +518,19 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get content => '내용';
 
   @override
-  String get send => '보내기';
+  String get send => '메시지 보내기';
 
   @override
-  String get save => '저장';
+  String get postReply => '글쓰기';
+
+  @override
+  String get postDiscussion => '토론 게시';
+
+  @override
+  String get postPrivateDiscussion => '비공개 토론 게시';
+
+  @override
+  String get save => '변경사항 저장';
 
   @override
   String get formatting => '서식';
@@ -533,10 +542,16 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get pleaseEnterContent => '내용을 입력하세요';
 
   @override
-  String get composerTitleHint => '제목 작성...';
+  String get composerTitleHint => '토론 제목';
 
   @override
-  String get composerContentHint => '내용 작성...';
+  String get privateDiscussionTitleHint => '비공개 토론 제목';
+
+  @override
+  String get composerContentHint => '게시물을 작성하세요...';
+
+  @override
+  String get composerReplyHint => '답장 쓰기...';
 
   @override
   String get composerFormattingHint => '서식 옵션 열기';
@@ -545,19 +560,22 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get searchUsers => '사용자 검색...';
 
   @override
-  String get startDiscussion => '토론 시작하기';
+  String get startDiscussion => '토론 시작';
 
   @override
   String get editPost => '게시물 수정';
 
   @override
-  String get postingThrottled => '너무 빨리 게시하고 있습니다. 몇 초 후에 다시 시도하세요.';
+  String get postingThrottled => '요청이 너무 빠릅니다. 잠시 후에 다시 시도하세요.';
 
   @override
   String get postAwaitingApproval => '게시되었습니다. 운영자가 승인하면 표시됩니다.';
 
   @override
   String get chooseTags => '태그 선택';
+
+  @override
+  String get ok => '확인';
 
   @override
   String get primaryTags => '주요 태그';
@@ -604,9 +622,6 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get done => '완료';
 
   @override
   String get noMembersFound => '회원을 찾을 수 없습니다.';
@@ -663,7 +678,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get ignoring => '무시';
 
   @override
-  String get ignoringHint => '알림을 받지 않고 목록에서도 숨깁니다.';
+  String get ignoringHint => '알림을 받지 않고 토론 목록에서도 숨깁니다.';
 
   @override
   String get tagFollowingHint => '새 토론 알림을 받습니다.';
@@ -747,7 +762,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get flagReasonInappropriateText =>
-      '이 게시물은 공격적이거나 모욕적이거나 커뮤니티 가이드라인을 위반합니다.';
+      '이 게시물은 모욕적, 폭력적이거나 커뮤니티 가이드라인을 위반합니다.';
 
   @override
   String get flagReasonSpam => '스팸';
@@ -782,7 +797,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String ignoreUserConfirm(String name) {
-    return '$name 님을 무시할까요? 이 사용자의 게시물이 접혀서 표시됩니다. 계정에서 언제든 해제할 수 있습니다.';
+    return '$name 님을 무시하시겠습니까?';
   }
 
   @override
@@ -800,7 +815,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get stopIgnoring => '무시 해제';
 
   @override
-  String get termsBanner => '다시 글을 쓰려면 이 포럼의 변경된 약관에 동의하세요.';
+  String get termsBanner => '새 약관을 확인하는 동안 계정 접근이 일시적으로 제한되었습니다.';
 
   @override
   String get termsReview => '검토';
@@ -809,7 +824,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get termsTitle => '변경된 약관';
 
   @override
-  String get termsIntro => '다시 글을 쓰기 전에 포럼의 변경된 정책에 동의해 주세요.';
+  String get termsIntro => '마지막 방문 이후 약관이 변경되었습니다';
 
   @override
   String get readPolicy => '읽기';
@@ -818,7 +833,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get acceptTerms => '동의';
 
   @override
-  String get termsAccepted => '감사합니다. 이제 다시 글을 쓸 수 있습니다.';
+  String get termsAccepted => '동의해 주셔서 감사합니다. 이제 포럼으로 돌아갈 수 있습니다.';
 
   @override
   String get privateDiscussions => '비공개 토론';
@@ -835,10 +850,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get addPerson => '사람 추가';
 
   @override
-  String get choosePerson => '글을 보낼 사람을 선택하세요.';
+  String get choosePerson =>
+      '이 토론은 여기에서 선택한 사용자에게만 표시됩니다. 나를 제외하고 최소 1명의 참여자가 필요합니다.';
 
   @override
-  String get noPrivateDiscussions => '아직 비공개 토론이 없습니다.';
+  String get noPrivateDiscussions => '여기엔 토론이 없는 것 같습니다.';
 
   @override
   String get privateOnlyOne => '이 포럼에서는 한 번에 한 사람에게만 비공개로 글을 쓸 수 있습니다.';
@@ -868,6 +884,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get renameDiscussion => '이름 바꾸기';
 
   @override
+  String get renameDiscussionTitle => '토론 이름 변경';
+
+  @override
   String get lockDiscussion => '잠금';
 
   @override
@@ -886,7 +905,7 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get deleteForever => '영구 삭제';
 
   @override
-  String get deleteForeverConfirm => '영구 삭제할까요? 되돌릴 수 없습니다.';
+  String get deleteForeverConfirm => '영구히 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.';
 
   @override
   String get approve => '승인';
@@ -904,11 +923,11 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String youAreSuspended(String date) {
-    return '$date까지 이용이 정지되었습니다.';
+    return '이 정지는 $date까지 유지됩니다';
   }
 
   @override
-  String get youAreSuspendedIndefinitely => '이용이 정지되었습니다.';
+  String get youAreSuspendedIndefinitely => '이 계정은 정지되었습니다';
 
   @override
   String get awaitingApproval => '승인 대기 중';
@@ -953,19 +972,19 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get errorBlocked => '포럼의 방화벽이 앱을 차단했습니다. 나중에 다시 시도하거나 브라우저에서 포럼을 여세요.';
 
   @override
-  String get errorNotFound => '존재하지 않거나 삭제되었습니다.';
+  String get errorNotFound => '요청한 리소스를 찾을 수 없습니다.';
 
   @override
-  String get errorRateLimited => '너무 자주 시도하고 있습니다. 잠시 후 다시 시도하세요.';
+  String get errorRateLimited => '요청이 너무 빠릅니다. 잠시 후에 다시 시도하세요.';
 
   @override
   String get errorForumDown => '포럼이 지금 응답하지 않습니다. 나중에 다시 시도하세요.';
 
   @override
-  String get errorNotAllowed => '그 작업을 할 권한이 없습니다.';
+  String get errorNotAllowed => '이에 대한 권한이 없습니다.';
 
   @override
-  String get errorUnknown => '문제가 발생했습니다. 다시 시도하세요.';
+  String get errorUnknown => '이런! 뭔가 잘못되었습니다. 다시 시도하세요.';
 
   @override
   String pollVotes(int count) {
@@ -1068,6 +1087,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get addPoll => '투표 추가';
+
+  @override
+  String get submit => '제출';
 
   @override
   String get editPoll => '투표 편집';

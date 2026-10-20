@@ -70,7 +70,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get retry => 'Opnieuw';
 
   @override
-  String get edited => 'bewerkt';
+  String get edited => 'Bijgewerkt';
 
   @override
   String nReplies(int count) {
@@ -103,7 +103,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => 'Eerdere berichten laden';
+  String get loadEarlierPosts => 'Meer laden';
 
   @override
   String get postHidden => 'Dit bericht is verwijderd.';
@@ -147,7 +147,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get someone => 'Iemand';
+  String get someone => '[verwijderd]';
 
   @override
   String get latest => 'Nieuwste';
@@ -196,7 +196,8 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get noDiscussions => 'Hier zijn nog geen discussies.';
+  String get noDiscussions =>
+      'Het lijkt erop dat er hier geen discussies zijn.';
 
   @override
   String get discussionsLoadFailed => 'Discussies konden niet worden geladen.';
@@ -205,13 +206,13 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get tagsLoadFailed => 'De tags konden niet worden geladen.';
 
   @override
-  String get signOut => 'Afmelden';
+  String get signOut => 'Uitloggen';
 
   @override
   String get account => 'Account';
 
   @override
-  String get createAccount => 'Account aanmaken';
+  String get createAccount => 'Registreren';
 
   @override
   String signInFailedReason(String reason) {
@@ -236,11 +237,11 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
       'Meldingen markeren als gelezen mislukt';
 
   @override
-  String get noNotificationsYet => 'Nog geen meldingen';
+  String get noNotificationsYet => 'Geen meldingen';
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user reageerde in $title';
+    return '$user heeft gereageerd in $title';
   }
 
   @override
@@ -265,12 +266,12 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user noemde een groep waar je in zit, in $title';
+    return '$user vermeldde in $title een groep waarvan je lid bent';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user heeft een discussie hernoemd naar $title';
+    return '$user heeft de titel veranderd in $title';
   }
 
   @override
@@ -285,17 +286,17 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user heeft $title verplaatst naar een tag die je volgt';
+    return '$user heeft de tag van $title veranderd';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user is een privédiscussie met je begonnen: $title';
+    return '$user heeft een nieuwe privédiscussie met jou gestart: $title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user reageerde in de privédiscussie $title';
+    return '$user heeft een bericht geplaatst in een privédiscussie waar jij deel van bent: $title';
   }
 
   @override
@@ -315,17 +316,17 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user koos je bericht als beste antwoord in $title';
+    return 'Je bericht is in $title als beste antwoord gemarkeerd door $user';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user koos een beste antwoord in $title';
+    return '$user heeft een beste antwoord geselecteerd in $title';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return 'Kies een beste antwoord in $title';
+    return 'Selecteer een beste antwoord in $title zodra je vraag is beantwoord';
   }
 
   @override
@@ -337,10 +338,11 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get notifSuspended => 'Je account is geschorst';
 
   @override
-  String get notifUnsuspended => 'Je schorsing is opgeheven';
+  String get notifUnsuspended => 'Je schorsing is ongedaan gemaakt';
 
   @override
-  String get notifExport => 'Je gegevensexport staat klaar';
+  String get notifExport =>
+      'Je gegevensexport is nu klaar om te worden gedownload.';
 
   @override
   String get notifOther => 'Nieuwe melding';
@@ -395,7 +397,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get userLoadFailed => 'Dit profiel kon niet worden geladen.';
 
   @override
-  String get noPostsYet => 'Nog geen berichten.';
+  String get noPostsYet => 'Zo te zien zijn er hier geen berichten.';
 
   @override
   String searchFailedWithError(String error) {
@@ -403,24 +405,24 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'Zoek in discussies en berichten';
+  String get searchHint => 'Zoeken';
 
   @override
   String noResultsFor(String query) {
-    return 'Niets gevonden voor ‘$query’.';
+    return 'Er lijken geen resultaten te zijn voor ‘$query’.';
   }
 
   @override
-  String get light => 'Licht';
+  String get light => 'Lichte modus';
 
   @override
-  String get dark => 'Donker';
+  String get dark => 'Donkere modus';
 
   @override
-  String get appearance => 'Weergave';
+  String get appearance => 'Kleurenschema';
 
   @override
-  String get appearanceSystem => 'Systeemstandaard';
+  String get appearanceSystem => 'Systeemvoorkeur';
 
   @override
   String repliedByOne(String a) {
@@ -444,7 +446,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get repliesTitle => 'Reacties';
+  String get repliesTitle => 'Reacties op dit bericht';
 
   @override
   String postNumber(int number) {
@@ -484,7 +486,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get bestAnswer => 'Beste antwoord';
 
   @override
-  String get goToBestAnswer => 'Naar het beste antwoord';
+  String get goToBestAnswer => 'Bekijk beste antwoord';
 
   @override
   String get answered => 'Beantwoord';
@@ -519,7 +521,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get listItem => 'Lijstitem';
 
   @override
-  String get mentionUser => 'Gebruiker vermelden';
+  String get mentionUser => 'Vermeld een gebruiker, groep of bericht';
 
   @override
   String get title => 'Titel';
@@ -528,10 +530,19 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get content => 'Inhoud';
 
   @override
-  String get send => 'Verzenden';
+  String get send => 'Verzend bericht';
 
   @override
-  String get save => 'Opslaan';
+  String get postReply => 'Plaats reactie';
+
+  @override
+  String get postDiscussion => 'Plaatsen';
+
+  @override
+  String get postPrivateDiscussion => 'Start privédiscussie';
+
+  @override
+  String get save => 'Wijzigingen opslaan';
 
   @override
   String get formatting => 'Opmaak';
@@ -543,10 +554,16 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get pleaseEnterContent => 'Voer inhoud in';
 
   @override
-  String get composerTitleHint => 'Schrijf je titel…';
+  String get composerTitleHint => 'Discussietitel';
 
   @override
-  String get composerContentHint => 'Schrijf je inhoud…';
+  String get privateDiscussionTitleHint => 'Titel';
+
+  @override
+  String get composerContentHint => 'Schrijf een bericht...';
+
+  @override
+  String get composerReplyHint => 'Schrijf een reactie...';
 
   @override
   String get composerFormattingHint => 'Opmaakopties openen';
@@ -555,21 +572,24 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get searchUsers => 'Gebruikers zoeken...';
 
   @override
-  String get startDiscussion => 'Discussie starten';
+  String get startDiscussion => 'Start een discussie';
 
   @override
   String get editPost => 'Bericht bewerken';
 
   @override
   String get postingThrottled =>
-      'Je plaatst te snel. Wacht een paar seconden en probeer het opnieuw.';
+      'Je gaat een beetje te snel. Probeer het over een paar seconden nog eens.';
 
   @override
   String get postAwaitingApproval =>
       'Verzonden. Het verschijnt zodra een moderator het goedkeurt.';
 
   @override
-  String get chooseTags => 'Tags kiezen';
+  String get chooseTags => 'Kies tags';
+
+  @override
+  String get ok => 'Oké';
 
   @override
   String get primaryTags => 'Hoofdtags';
@@ -622,10 +642,8 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get done => 'Klaar';
-
-  @override
-  String get noMembersFound => 'Geen leden gevonden.';
+  String get noMembersFound =>
+      'Geen gebruikers gevonden die overeenkomen met je zoekopdracht.';
 
   @override
   String get memberSearchNotAllowed =>
@@ -660,16 +678,16 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get noBookmarks => 'Nog geen bladwijzers.';
 
   @override
-  String get chooseBestAnswer => 'Kiezen als beste antwoord';
+  String get chooseBestAnswer => 'Selecteer als beste antwoord';
 
   @override
-  String get removeBestAnswer => 'Beste antwoord verwijderen';
+  String get removeBestAnswer => 'Beste antwoord ongedaan maken';
 
   @override
   String get notificationSettings => 'Meldingen voor deze discussie';
 
   @override
-  String get notFollowing => 'Niet volgen';
+  String get notFollowing => 'Niet volgend';
 
   @override
   String get notFollowingHint => 'Alleen een melding bij een @vermelding.';
@@ -682,27 +700,26 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get ignoringHint =>
-      'Nooit een melding, en verbergen in de discussielijsten.';
+      'Word niet op de hoogte gesteld. Verberg van de discussielijst.';
 
   @override
-  String get tagFollowingHint => 'Een melding bij nieuwe discussies.';
+  String get tagFollowingHint =>
+      'Geattendeerd worden op alle nieuwe discussies.';
 
   @override
   String get lurking => 'Meelezen';
 
   @override
-  String get lurkingHint =>
-      'Een melding bij nieuwe discussies en elke reactie.';
+  String get lurkingHint => 'Meldingen van alle nieuwe discussies en reacties.';
 
   @override
-  String get tagIgnoringHint => 'Nooit een melding over discussies hier.';
+  String get tagIgnoringHint => 'Geen meldingen.';
 
   @override
   String get hidden => 'Verborgen';
 
   @override
-  String get hiddenHint =>
-      'De discussies van deze tag verbergen in de discussielijsten.';
+  String get hiddenHint => 'Verberg discussies op de pagina Alle discussies.';
 
   @override
   String get attachFile => 'Bestand bijvoegen';
@@ -742,7 +759,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   @override
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes) {
-    return '$fileName is $fileBytes. Dit forum staat maximaal $maxBytes toe.';
+    return '$fileName is $fileBytes. Uploads boven $maxBytes worden niet geaccepteerd.';
   }
 
   @override
@@ -769,7 +786,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get flagReasonInappropriateText =>
-      'Dit bericht is beledigend, kwetsend of in strijd met de communityrichtlijnen.';
+      'Dit bericht is beledigend, grof of schendt onze communityrichtlijnen.';
 
   @override
   String get flagReasonSpam => 'Spam';
@@ -805,7 +822,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String ignoreUserConfirm(String name) {
-    return '$name negeren? Hun berichten worden ingeklapt. Je kunt dit ongedaan maken vanuit je account.';
+    return 'Weet je zeker dat je $name wilt negeren?';
   }
 
   @override
@@ -825,7 +842,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get termsBanner =>
-      'Accepteer de bijgewerkte voorwaarden van dit forum om weer te kunnen posten.';
+      'We hebben de toegang tot je account tijdelijk beperkt terwijl je de nieuwe voorwaarden bekijkt.';
 
   @override
   String get termsReview => 'Bekijken';
@@ -835,22 +852,23 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get termsIntro =>
-      'Accepteer het bijgewerkte beleid van het forum voordat je weer post.';
+      'De voorwaarden zijn bijgewerkt sinds je laatste bezoek';
 
   @override
   String get readPolicy => 'Lezen';
 
   @override
-  String get acceptTerms => 'Accepteren';
+  String get acceptTerms => 'Bevestigen';
 
   @override
-  String get termsAccepted => 'Bedankt. Je kunt weer posten.';
+  String get termsAccepted =>
+      'Bedankt voor het accepteren, je kunt nu terug naar het forum';
 
   @override
   String get privateDiscussions => 'Privédiscussies';
 
   @override
-  String get startPrivateDiscussion => 'Een privédiscussie starten';
+  String get startPrivateDiscussion => 'Bespreek privé';
 
   @override
   String privateWith(String names) {
@@ -858,13 +876,15 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   }
 
   @override
-  String get addPerson => 'Iemand toevoegen';
+  String get addPerson => 'Ontvangers';
 
   @override
-  String get choosePerson => 'Kies aan wie je schrijft.';
+  String get choosePerson =>
+      'Deze discussie zal alleen zichtbaar zijn voor de gebruikers die je hier kiest. Er is minimaal 1 ontvanger (anders dan jezelf) vereist.';
 
   @override
-  String get noPrivateDiscussions => 'Nog geen privédiscussies.';
+  String get noPrivateDiscussions =>
+      'Het lijkt erop dat er hier geen discussies zijn.';
 
   @override
   String get privateOnlyOne =>
@@ -874,10 +894,10 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get messages => 'Berichten';
 
   @override
-  String get newMessage => 'Nieuw bericht';
+  String get newMessage => 'Stuur een bericht';
 
   @override
-  String get noMessages => 'Nog geen berichten.';
+  String get noMessages => 'Geen nieuwe berichten';
 
   @override
   String get sendMessage => 'Een bericht sturen';
@@ -895,6 +915,9 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get renameDiscussion => 'Hernoemen';
 
   @override
+  String get renameDiscussionTitle => 'Discussie hernoemen';
+
+  @override
   String get lockDiscussion => 'Vergrendelen';
 
   @override
@@ -910,11 +933,11 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get restore => 'Herstellen';
 
   @override
-  String get deleteForever => 'Definitief verwijderen';
+  String get deleteForever => 'Permanent verwijderen';
 
   @override
   String get deleteForeverConfirm =>
-      'Definitief verwijderen? Dit kan niet ongedaan worden gemaakt.';
+      'Weet je zeker dat je dit voor altijd wilt verwijderen? Deze actie kan niet ongedaan gemaakt worden.';
 
   @override
   String get approve => 'Goedkeuren';
@@ -932,11 +955,11 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String youAreSuspended(String date) {
-    return 'Je bent geschorst tot $date.';
+    return 'Deze schorsing is van kracht tot $date';
   }
 
   @override
-  String get youAreSuspendedIndefinitely => 'Je bent geschorst.';
+  String get youAreSuspendedIndefinitely => 'Dit account is geschorst';
 
   @override
   String get awaitingApproval => 'Wacht op goedkeuring';
@@ -976,7 +999,7 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get errorNoConnection =>
-      'Het forum is niet bereikbaar. Controleer je verbinding en probeer het opnieuw.';
+      'Er lijkt iets mis te zijn met je verbinding. Controleer je netwerk en probeer het opnieuw.';
 
   @override
   String get errorTimedOut =>
@@ -987,29 +1010,29 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
       'De firewall van het forum heeft de app geblokkeerd. Probeer het later opnieuw of open het forum in een browser.';
 
   @override
-  String get errorNotFound => 'Dit bestaat niet of is verwijderd.';
+  String get errorNotFound => 'Het opgevraagde kon niet worden gevonden.';
 
   @override
   String get errorRateLimited =>
-      'Je doet dat te vaak. Wacht even en probeer het opnieuw.';
+      'Je gaat een beetje te snel. Probeer het over een paar seconden nog eens.';
 
   @override
   String get errorForumDown =>
       'Het forum reageert momenteel niet. Probeer het later opnieuw.';
 
   @override
-  String get errorNotAllowed => 'Je hebt geen toestemming om dat te doen.';
+  String get errorNotAllowed => 'Je hebt geen permissie om dat te doen.';
 
   @override
-  String get errorUnknown => 'Er ging iets mis. Probeer het opnieuw.';
+  String get errorUnknown => 'Oeps! Er is iets misgegaan. Probeer het opnieuw.';
 
   @override
   String pollVotes(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count stemmen',
-      one: '1 stem',
+      other: '$count stemmen gegeven',
+      one: '1 stem gegeven',
     );
     return '$_temp0';
   }
@@ -1019,18 +1042,18 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Kies er maximaal $count',
-      one: 'Kies 1',
+      other: '$count opties',
+      one: '$count optie',
     );
-    return '$_temp0';
+    return 'Peiling staat toe om op $_temp0 te stemmen.';
   }
 
   @override
-  String get pollEnded => 'De stemming is gesloten';
+  String get pollEnded => 'Deze peiling is beëindigd.';
 
   @override
   String pollEndsOn(String date) {
-    return 'Sluit op $date';
+    return 'Peiling eindigt op $date.';
   }
 
   @override
@@ -1048,19 +1071,19 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get pollRemoveVote => 'Mijn stem intrekken';
 
   @override
-  String get pollSeeVoters => 'Zien wie er stemde';
+  String get pollSeeVoters => 'Stemmers bekijken';
 
   @override
-  String get pollNoVotes => 'Nog geen stemmen.';
+  String get pollNoVotes => 'Geen stemmen';
 
   @override
   String get poll => 'Peiling';
 
   @override
-  String get pollNeedsQuestion => 'Schrijf de vraag.';
+  String get pollNeedsQuestion => 'Je moet een vraag toevoegen';
 
   @override
-  String get pollNeedsAnswers => 'Geef minstens twee antwoorden.';
+  String get pollNeedsAnswers => 'Je moet minimaal 2 antwoorden toevoegen';
 
   @override
   String get pollEndInPast => 'Kies een sluitingstijd in de toekomst.';
@@ -1080,34 +1103,38 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get pollAddAnswer => 'Antwoord toevoegen';
 
   @override
-  String get pollMultipleChoice => 'Meer dan één antwoord toestaan';
+  String get pollMultipleChoice => 'Sta toe om op meerdere opties te stemmen';
 
   @override
-  String get pollChoicesAllowed => 'Toegestane antwoorden';
+  String get pollChoicesAllowed => 'Maximale stemmen per gebruiker';
 
   @override
   String get pollAnyNumber => 'Onbeperkt';
 
   @override
-  String get pollPublic => 'Tonen wie wat stemde';
+  String get pollPublic => 'Mensen laten zien wie er gestemd heeft';
 
   @override
-  String get pollAllowChangeVote => 'Stem wijzigen toestaan';
+  String get pollAllowChangeVote => 'Gebruikers toestaan hun stem te wijzigen';
 
   @override
-  String get pollCloses => 'Stemming sluit';
+  String get pollCloses => 'Einddatum peiling (optioneel)';
 
   @override
   String get pollNeverCloses => 'Nooit';
 
   @override
-  String get pollHideVotes => 'Uitslag verbergen tot de stemming sluit';
+  String get pollHideVotes =>
+      'Verberg resultaten totdat de peiling is beëindigd';
 
   @override
   String get pollHideVotesNeedsEnd => 'Kies eerst wanneer de stemming sluit.';
 
   @override
   String get addPoll => 'Peiling toevoegen';
+
+  @override
+  String get submit => 'Versturen';
 
   @override
   String get editPoll => 'Peiling bewerken';

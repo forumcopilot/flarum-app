@@ -103,8 +103,8 @@ abstract class FlarumLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('de'),
     Locale('en'),
+    Locale('de'),
     Locale('es'),
     Locale('fr'),
     Locale('it'),
@@ -233,7 +233,7 @@ abstract class FlarumLocalizations {
   /// UI text: edited
   ///
   /// In en, this message translates to:
-  /// **'edited'**
+  /// **'Edited'**
   String get edited;
 
   /// Disclosure under a post listing its direct replies
@@ -251,7 +251,7 @@ abstract class FlarumLocalizations {
   /// UI text: Load more
   ///
   /// In en, this message translates to:
-  /// **'Load more'**
+  /// **'Load More'**
   String get loadMore;
 
   /// Screen-reader label of a user row in the who-reacted sheet
@@ -263,7 +263,7 @@ abstract class FlarumLocalizations {
   /// Button at the top of a discussion opened part-way down: loads the posts before
   ///
   /// In en, this message translates to:
-  /// **'Load earlier posts'**
+  /// **'Load More'**
   String get loadEarlierPosts;
 
   /// Shown in place of a deleted (hidden) post
@@ -323,7 +323,7 @@ abstract class FlarumLocalizations {
   /// Stands in for a user the forum didn't name (deleted account)
   ///
   /// In en, this message translates to:
-  /// **'Someone'**
+  /// **'[deleted]'**
   String get someone;
 
   /// No description provided for @latest.
@@ -347,7 +347,7 @@ abstract class FlarumLocalizations {
   /// No description provided for @signIn.
   ///
   /// In en, this message translates to:
-  /// **'Sign in'**
+  /// **'Log In'**
   String get signIn;
 
   /// No description provided for @profile.
@@ -413,7 +413,7 @@ abstract class FlarumLocalizations {
   /// Empty discussion list
   ///
   /// In en, this message translates to:
-  /// **'No discussions here yet.'**
+  /// **'It looks as though there are no discussions here.'**
   String get noDiscussions;
 
   /// Error shown when a discussion list fails to load
@@ -431,7 +431,7 @@ abstract class FlarumLocalizations {
   /// UI text: Sign out
   ///
   /// In en, this message translates to:
-  /// **'Sign out'**
+  /// **'Log Out'**
   String get signOut;
 
   /// Drawer: Account
@@ -443,25 +443,25 @@ abstract class FlarumLocalizations {
   /// Button opening sign-up
   ///
   /// In en, this message translates to:
-  /// **'Create account'**
+  /// **'Sign Up'**
   String get createAccount;
 
   /// Shown when the forum doesn't accept the sign-in captured from its page
   ///
   /// In en, this message translates to:
-  /// **'Couldn\'t sign in: {reason}'**
+  /// **'Couldn\'t log in: {reason}'**
   String signInFailedReason(String reason);
 
   /// Under the Sign in button on the account tab
   ///
   /// In en, this message translates to:
-  /// **'Sign in on the forum\'s own page. The app keeps you signed in until you sign out.'**
+  /// **'Log in on the forum\'s own page. The app keeps you logged in until you log out.'**
   String get signInHint;
 
   /// Account tab, signed in
   ///
   /// In en, this message translates to:
-  /// **'Signed in as {name}'**
+  /// **'Logged in as {name}'**
   String signedInAs(String name);
 
   /// UI text: All notifications marked as read
@@ -479,13 +479,13 @@ abstract class FlarumLocalizations {
   /// Notifications tab, All filter: empty state
   ///
   /// In en, this message translates to:
-  /// **'No notifications yet'**
+  /// **'No Notifications'**
   String get noNotificationsYet;
 
   /// Notification: a new reply in a discussion the reader follows
   ///
   /// In en, this message translates to:
-  /// **'{user} replied to {title}'**
+  /// **'{user} posted in {title}'**
   String notifNewPost(String user, String title);
 
   /// Notification
@@ -515,13 +515,13 @@ abstract class FlarumLocalizations {
   /// Notification
   ///
   /// In en, this message translates to:
-  /// **'{user} mentioned a group you\'re in, in {title}'**
+  /// **'{user} mentioned a group you\'re a member of in {title}'**
   String notifGroupMentioned(String user, String title);
 
   /// Notification: {title} is the new title
   ///
   /// In en, this message translates to:
-  /// **'{user} renamed a discussion to {title}'**
+  /// **'{user} changed the title to {title}'**
   String notifRenamed(String user, String title);
 
   /// Notification
@@ -539,19 +539,19 @@ abstract class FlarumLocalizations {
   /// Notification (fof/follow-tags)
   ///
   /// In en, this message translates to:
-  /// **'{user} moved {title} to a tag you follow'**
+  /// **'{user} changed the tag of {title}'**
   String notifMovedToTag(String user, String title);
 
   /// Notification (fof/byobu)
   ///
   /// In en, this message translates to:
-  /// **'{user} started a private discussion with you: {title}'**
+  /// **'{user} started a new private discussion with you: {title}'**
   String notifPrivateCreated(String user, String title);
 
   /// Notification (fof/byobu)
   ///
   /// In en, this message translates to:
-  /// **'{user} replied to the private discussion {title}'**
+  /// **'{user} posted in a private discussion you\'re a part of: {title}'**
   String notifPrivateReplied(String user, String title);
 
   /// Notification (fof/byobu)
@@ -575,19 +575,19 @@ abstract class FlarumLocalizations {
   /// Notification (fof/best-answer)
   ///
   /// In en, this message translates to:
-  /// **'{user} chose your post as the best answer in {title}'**
+  /// **'Your post was set as the best answer by {user} in {title}'**
   String notifBestAnswerAwarded(String user, String title);
 
   /// Notification (fof/best-answer)
   ///
   /// In en, this message translates to:
-  /// **'{user} chose a best answer in {title}'**
+  /// **'{user} set a best answer in {title}'**
   String notifBestAnswerChosen(String user, String title);
 
   /// Notification (fof/best-answer): a reminder to the discussion's author
   ///
   /// In en, this message translates to:
-  /// **'Choose a best answer in {title}'**
+  /// **'Please select a Best Answer in {title} if your question has been answered'**
   String notifBestAnswerPending(String title);
 
   /// Notification (flarum/messages, 2.0)
@@ -605,13 +605,13 @@ abstract class FlarumLocalizations {
   /// Notification
   ///
   /// In en, this message translates to:
-  /// **'Your suspension has been lifted'**
+  /// **'You have been unsuspended'**
   String get notifUnsuspended;
 
   /// Notification (flarum/gdpr)
   ///
   /// In en, this message translates to:
-  /// **'Your data export is ready'**
+  /// **'Your data export is now ready to download.'**
   String get notifExport;
 
   /// Notification of a kind the app doesn't describe
@@ -635,13 +635,13 @@ abstract class FlarumLocalizations {
   /// Notifications tab for a guest
   ///
   /// In en, this message translates to:
-  /// **'Sign in to see your notifications.'**
+  /// **'Log in to see your notifications.'**
   String get notificationsSignIn;
 
   /// Notifications tab action
   ///
   /// In en, this message translates to:
-  /// **'Mark all as read'**
+  /// **'Mark All as Read'**
   String get markAllRead;
 
   /// No description provided for @posts.
@@ -683,7 +683,7 @@ abstract class FlarumLocalizations {
   /// Empty list on a profile
   ///
   /// In en, this message translates to:
-  /// **'No posts yet.'**
+  /// **'It looks like there are no posts here.'**
   String get noPostsYet;
 
   /// Search page: snackbar when a search fails, with the reason
@@ -695,37 +695,37 @@ abstract class FlarumLocalizations {
   /// Hint in the search field
   ///
   /// In en, this message translates to:
-  /// **'Search discussions and posts'**
+  /// **'Search Forum'**
   String get searchHint;
 
   /// Search with no results
   ///
   /// In en, this message translates to:
-  /// **'Nothing found for “{query}”.'**
+  /// **'It looks like there are no results for “{query}”.'**
   String noResultsFor(String query);
 
   /// Light theme option
   ///
   /// In en, this message translates to:
-  /// **'Light'**
+  /// **'Light Mode'**
   String get light;
 
   /// Dark theme option
   ///
   /// In en, this message translates to:
-  /// **'Dark'**
+  /// **'Dark Mode'**
   String get dark;
 
   /// Drawer row and sheet title for choosing light, dark or the device's setting
   ///
   /// In en, this message translates to:
-  /// **'Appearance'**
+  /// **'Color Scheme'**
   String get appearance;
 
   /// Appearance option that follows the device's light/dark setting
   ///
   /// In en, this message translates to:
-  /// **'System default'**
+  /// **'System preference'**
   String get appearanceSystem;
 
   /// Under a post: who replied to (mentioned) it
@@ -749,7 +749,7 @@ abstract class FlarumLocalizations {
   /// Title of the sheet listing the replies to a post
   ///
   /// In en, this message translates to:
-  /// **'Replies'**
+  /// **'Replies to this post'**
   String get repliesTitle;
 
   /// A post by its number in the discussion
@@ -791,13 +791,13 @@ abstract class FlarumLocalizations {
   /// Label above the post fof/best-answer chose as a discussion's answer
   ///
   /// In en, this message translates to:
-  /// **'Best answer'**
+  /// **'Best Answer'**
   String get bestAnswer;
 
   /// Button under a question whose best answer (fof/best-answer) is another post
   ///
   /// In en, this message translates to:
-  /// **'Go to best answer'**
+  /// **'View Best Answer'**
   String get goToBestAnswer;
 
   /// Screen-reader label for the check mark on a discussion that has a best answer (fof/best-answer)
@@ -863,7 +863,7 @@ abstract class FlarumLocalizations {
   /// Tooltip for mention user button
   ///
   /// In en, this message translates to:
-  /// **'Mention User'**
+  /// **'Mention a user, group or post'**
   String get mentionUser;
 
   /// UI text: Title
@@ -878,16 +878,34 @@ abstract class FlarumLocalizations {
   /// **'Content'**
   String get content;
 
-  /// UI text: Send
+  /// The message composer's send button (flarum/messages), as Flarum's
   ///
   /// In en, this message translates to:
-  /// **'Send'**
+  /// **'Send message'**
   String get send;
 
-  /// UI text: Save
+  /// The reply composer's submit button, as Flarum's
   ///
   /// In en, this message translates to:
-  /// **'Save'**
+  /// **'Post Reply'**
+  String get postReply;
+
+  /// The new-discussion composer's submit button, as Flarum's
+  ///
+  /// In en, this message translates to:
+  /// **'Post Discussion'**
+  String get postDiscussion;
+
+  /// The private-discussion composer's submit button, as fof/byobu's
+  ///
+  /// In en, this message translates to:
+  /// **'Post Private Discussion'**
+  String get postPrivateDiscussion;
+
+  /// The edit composer's submit button, as Flarum's
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
   String get save;
 
   /// Composer: formatting
@@ -911,14 +929,26 @@ abstract class FlarumLocalizations {
   /// Default hint in a composer's title field, when the page gives none of its own
   ///
   /// In en, this message translates to:
-  /// **'Write your title...'**
+  /// **'Discussion Title'**
   String get composerTitleHint;
+
+  /// The private-discussion composer's title placeholder, as fof/byobu's
+  ///
+  /// In en, this message translates to:
+  /// **'Private Discussion Title'**
+  String get privateDiscussionTitleHint;
 
   /// Default hint in a composer's text field, when the page gives none of its own
   ///
   /// In en, this message translates to:
-  /// **'Write your content...'**
+  /// **'Write a Post...'**
   String get composerContentHint;
+
+  /// The reply composer's text placeholder, as Flarum's
+  ///
+  /// In en, this message translates to:
+  /// **'Write a Reply...'**
+  String get composerReplyHint;
 
   /// Screen-reader hint of the composer's formatting menu button
   ///
@@ -935,7 +965,7 @@ abstract class FlarumLocalizations {
   /// Button and page title: start a new discussion
   ///
   /// In en, this message translates to:
-  /// **'Start a discussion'**
+  /// **'Start a Discussion'**
   String get startDiscussion;
 
   /// Title of the composer editing a post
@@ -947,7 +977,7 @@ abstract class FlarumLocalizations {
   /// The forum's posting throttle refused a post (one every 10 seconds by default)
   ///
   /// In en, this message translates to:
-  /// **'You\'re posting too quickly. Wait a few seconds and try again.'**
+  /// **'You\'re going a little too quickly. Please try again in a few seconds.'**
   String get postingThrottled;
 
   /// After posting, when the forum holds the post for approval
@@ -959,19 +989,25 @@ abstract class FlarumLocalizations {
   /// Button and page title: choose a new discussion's tags
   ///
   /// In en, this message translates to:
-  /// **'Choose tags'**
+  /// **'Choose Tags'**
   String get chooseTags;
+
+  /// Closes the tag picker, keeping the choice, as flarum/tags' button
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 
   /// Tag picker section: the forum's primary tags
   ///
   /// In en, this message translates to:
-  /// **'Primary tags'**
+  /// **'Primary Tags'**
   String get primaryTags;
 
   /// Tag picker section: the forum's secondary tags
   ///
   /// In en, this message translates to:
-  /// **'More tags'**
+  /// **'More Tags'**
   String get secondaryTags;
 
   /// Tag picker: fewer primary tags than the forum asks for
@@ -998,16 +1034,10 @@ abstract class FlarumLocalizations {
   /// **'{count, plural, =1{Choose at most 1 more tag.} other{Choose at most {count} more tags.}}'**
   String tagsTooManySecondary(int count);
 
-  /// Closes a picker, keeping the choice
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get done;
-
   /// Mention picker: nobody matches the search
   ///
   /// In en, this message translates to:
-  /// **'No members found.'**
+  /// **'No users found matching your search.'**
   String get noMembersFound;
 
   /// Mention picker: the reader lacks the forum's search-users permission
@@ -1055,7 +1085,7 @@ abstract class FlarumLocalizations {
   /// Post or discussion menu: take the bookmark off
   ///
   /// In en, this message translates to:
-  /// **'Remove bookmark'**
+  /// **'Remove from bookmarks'**
   String get removeBookmark;
 
   /// The reader's bookmarks: an account tab entry and its page's title
@@ -1067,19 +1097,19 @@ abstract class FlarumLocalizations {
   /// Bookmarks page with nothing bookmarked
   ///
   /// In en, this message translates to:
-  /// **'No bookmarks yet.'**
+  /// **'You haven\'t bookmarked any posts yet.'**
   String get noBookmarks;
 
   /// Post menu for the one who asked (fof/best-answer)
   ///
   /// In en, this message translates to:
-  /// **'Choose as best answer'**
+  /// **'Select Best Answer'**
   String get chooseBestAnswer;
 
   /// Post menu on the chosen answer: un-choose it
   ///
   /// In en, this message translates to:
-  /// **'Remove best answer'**
+  /// **'Unselect Best Answer'**
   String get removeBestAnswer;
 
   /// Tooltip of the thread's follow menu
@@ -1091,7 +1121,7 @@ abstract class FlarumLocalizations {
   /// Follow menu: the reader's default for a discussion or tag
   ///
   /// In en, this message translates to:
-  /// **'Not following'**
+  /// **'Not Following'**
   String get notFollowing;
 
   /// Under Not following in a discussion's follow menu
@@ -1115,13 +1145,13 @@ abstract class FlarumLocalizations {
   /// Under Ignoring in a discussion's follow menu
   ///
   /// In en, this message translates to:
-  /// **'Never be notified, and hide it from the discussion lists.'**
+  /// **'Never be notified. Hide from the discussion list.'**
   String get ignoringHint;
 
   /// Under Following in a tag's follow menu (fof/follow-tags)
   ///
   /// In en, this message translates to:
-  /// **'Be notified of new discussions.'**
+  /// **'Be notified of all new discussions.'**
   String get tagFollowingHint;
 
   /// Tag follow menu: told of new discussions and every reply
@@ -1133,25 +1163,25 @@ abstract class FlarumLocalizations {
   /// Under Lurking in a tag's follow menu
   ///
   /// In en, this message translates to:
-  /// **'Be notified of new discussions and every reply.'**
+  /// **'Be notified of all new discussions and replies.'**
   String get lurkingHint;
 
   /// Under Ignoring in a tag's follow menu
   ///
   /// In en, this message translates to:
-  /// **'Never be notified of discussions here.'**
+  /// **'Never be notified.'**
   String get tagIgnoringHint;
 
   /// Tag follow menu: hide the tag's discussions
   ///
   /// In en, this message translates to:
-  /// **'Hidden'**
+  /// **'Hiding'**
   String get hidden;
 
   /// Under Hidden in a tag's follow menu
   ///
   /// In en, this message translates to:
-  /// **'Hide this tag\'s discussions from the discussion lists.'**
+  /// **'Hide discussions from All Discussions page.'**
   String get hiddenHint;
 
   /// Accessibility label for attach file button
@@ -1207,7 +1237,7 @@ abstract class FlarumLocalizations {
   /// UI text: {fileName} is {fileBytes}. This forum allows up to {maxBytes
   ///
   /// In en, this message translates to:
-  /// **'{fileName} is {fileBytes}. This forum allows up to {maxBytes}.'**
+  /// **'{fileName} is {fileBytes}. Uploads over {maxBytes} are not accepted.'**
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes);
 
@@ -1220,19 +1250,19 @@ abstract class FlarumLocalizations {
   /// UI text: Ignored users
   ///
   /// In en, this message translates to:
-  /// **'Ignored users'**
+  /// **'Ignored Users'**
   String get ignoredUsers;
 
   /// Ignored users page: empty state
   ///
   /// In en, this message translates to:
-  /// **'You\'re not ignoring anyone.'**
+  /// **'It looks like you\'re not ignoring anyone.'**
   String get ignoredUsersEmpty;
 
   /// Title of the page that reports a post to the moderators (flarum/flags)
   ///
   /// In en, this message translates to:
-  /// **'Flag post'**
+  /// **'Flag Post'**
   String get flagPostTitle;
 
   /// Report reason (Flarum: reason_off_topic_label)
@@ -1256,7 +1286,7 @@ abstract class FlarumLocalizations {
   /// Explains the inappropriate report reason
   ///
   /// In en, this message translates to:
-  /// **'This post is offensive, abusive, or breaks the community guidelines.'**
+  /// **'This post is offensive, abusive, or violates our community guidelines.'**
   String get flagReasonInappropriateText;
 
   /// Report reason (Flarum: reason_spam_label)
@@ -1292,7 +1322,7 @@ abstract class FlarumLocalizations {
   /// Link to the forum's community guidelines, on the report page
   ///
   /// In en, this message translates to:
-  /// **'Community guidelines'**
+  /// **'Community Guidelines'**
   String get communityGuidelines;
 
   /// Shown after a post was reported
@@ -1310,13 +1340,13 @@ abstract class FlarumLocalizations {
   /// Post and profile menu: stop ignoring this person
   ///
   /// In en, this message translates to:
-  /// **'Stop ignoring {name}'**
+  /// **'Unignore {name}'**
   String stopIgnoringUser(String name);
 
   /// Confirmation before ignoring someone
   ///
   /// In en, this message translates to:
-  /// **'Ignore {name}? Their posts will be folded away. You can stop ignoring them from your account.'**
+  /// **'Are you sure you want to ignore {name}?'**
   String ignoreUserConfirm(String name);
 
   /// In place of a post by someone the reader ignores
@@ -1328,7 +1358,7 @@ abstract class FlarumLocalizations {
   /// Button that unfolds a post by someone the reader ignores
   ///
   /// In en, this message translates to:
-  /// **'Show post'**
+  /// **'Show Post'**
   String get showPost;
 
   /// Ignored users page, on a forum without fof/ignore-users
@@ -1340,13 +1370,13 @@ abstract class FlarumLocalizations {
   /// Ignored users page: button on each person
   ///
   /// In en, this message translates to:
-  /// **'Stop ignoring'**
+  /// **'Unignore'**
   String get stopIgnoring;
 
   /// Strip above the tab bar while the reader must accept new policies (fof/terms); until then the forum lets them only read
   ///
   /// In en, this message translates to:
-  /// **'Accept this forum\'s updated terms to post again.'**
+  /// **'We\'ve temporarily restricted access to your account while you check out the new terms.'**
   String get termsBanner;
 
   /// Button on that strip: opens the policies
@@ -1358,13 +1388,13 @@ abstract class FlarumLocalizations {
   /// Title of the page with the policies to accept
   ///
   /// In en, this message translates to:
-  /// **'Updated terms'**
+  /// **'Terms Update'**
   String get termsTitle;
 
   /// Top of that page
   ///
   /// In en, this message translates to:
-  /// **'Before you post again, accept the forum\'s updated policies.'**
+  /// **'The terms were updated since your last visit'**
   String get termsIntro;
 
   /// Opens a policy's text on the forum's site
@@ -1376,25 +1406,25 @@ abstract class FlarumLocalizations {
   /// Accepts the policies
   ///
   /// In en, this message translates to:
-  /// **'Accept'**
+  /// **'Confirm'**
   String get acceptTerms;
 
   /// Shown once the policies are accepted
   ///
   /// In en, this message translates to:
-  /// **'Thank you. You can post again.'**
+  /// **'Thanks for accepting, you can now get back to the forum'**
   String get termsAccepted;
 
   /// Account entry and page title: the reader's private discussions (fof/byobu)
   ///
   /// In en, this message translates to:
-  /// **'Private discussions'**
+  /// **'Private Discussions'**
   String get privateDiscussions;
 
   /// Button and composer title: a discussion only the people in it can read
   ///
   /// In en, this message translates to:
-  /// **'Start a private discussion'**
+  /// **'Discuss Privately'**
   String get startPrivateDiscussion;
 
   /// Who a private discussion is with; names is a list of display names
@@ -1406,19 +1436,19 @@ abstract class FlarumLocalizations {
   /// Composer button that adds someone to a private discussion
   ///
   /// In en, this message translates to:
-  /// **'Add someone'**
+  /// **'Recipients'**
   String get addPerson;
 
   /// Composer: a private discussion started with no one in it
   ///
   /// In en, this message translates to:
-  /// **'Choose who to write to.'**
+  /// **'This discussion will only be visible to the users you choose here. At least 1 recipient (other than yourself) is required.'**
   String get choosePerson;
 
   /// Empty private discussions page
   ///
   /// In en, this message translates to:
-  /// **'No private discussions yet.'**
+  /// **'It looks as though there are no discussions here.'**
   String get noPrivateDiscussions;
 
   /// Composer: the forum lets members write privately to one other person only
@@ -1436,13 +1466,13 @@ abstract class FlarumLocalizations {
   /// Button that starts a direct message to someone
   ///
   /// In en, this message translates to:
-  /// **'New message'**
+  /// **'Send a Message'**
   String get newMessage;
 
   /// Empty messages page
   ///
   /// In en, this message translates to:
-  /// **'No messages yet.'**
+  /// **'No new messages'**
   String get noMessages;
 
   /// Profile menu: write a direct message to this person
@@ -1474,6 +1504,12 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Rename'**
   String get renameDiscussion;
+
+  /// Title of the dialog that renames a discussion, as Flarum's
+  ///
+  /// In en, this message translates to:
+  /// **'Rename Discussion'**
+  String get renameDiscussionTitle;
 
   /// Moderator menu: lock the discussion (flarum/lock)
   ///
@@ -1508,13 +1544,13 @@ abstract class FlarumLocalizations {
   /// Deletes a post or discussion permanently
   ///
   /// In en, this message translates to:
-  /// **'Delete forever'**
+  /// **'Delete Forever'**
   String get deleteForever;
 
   /// Confirmation before deleting permanently
   ///
   /// In en, this message translates to:
-  /// **'Delete this for good? It can\'t be undone.'**
+  /// **'Are you sure you want to delete this forever? This action cannot be undone.'**
   String get deleteForeverConfirm;
 
   /// Approves a post held for approval (flarum/approval)
@@ -1544,13 +1580,13 @@ abstract class FlarumLocalizations {
   /// Strip above the tabs for a suspended reader, until a date
   ///
   /// In en, this message translates to:
-  /// **'You\'re suspended until {date}.'**
+  /// **'This suspension will be in force until {date}'**
   String youAreSuspended(String date);
 
   /// Strip above the tabs for a reader suspended with no end
   ///
   /// In en, this message translates to:
-  /// **'You\'re suspended.'**
+  /// **'This account is suspended'**
   String get youAreSuspendedIndefinitely;
 
   /// Label on a post held for a moderator's approval
@@ -1580,7 +1616,7 @@ abstract class FlarumLocalizations {
   /// Error: no response from the forum (offline, DNS, refused).
   ///
   /// In en, this message translates to:
-  /// **'Couldn\'t reach the forum. Check your connection and try again.'**
+  /// **'Something seems to be wrong with your connection. Please check your network and try again.'**
   String get errorNoConnection;
 
   /// Error: the forum did not answer in time.
@@ -1598,13 +1634,13 @@ abstract class FlarumLocalizations {
   /// Error: 404/410 without the forum saying more.
   ///
   /// In en, this message translates to:
-  /// **'This doesn\'t exist, or it was removed.'**
+  /// **'The requested resource was not found.'**
   String get errorNotFound;
 
   /// Error: 429, too many requests.
   ///
   /// In en, this message translates to:
-  /// **'You\'re doing that too often. Please wait a moment and try again.'**
+  /// **'You\'re going a little too quickly. Please try again in a few seconds.'**
   String get errorRateLimited;
 
   /// Error: 5xx, the forum is down or failing.
@@ -1616,37 +1652,37 @@ abstract class FlarumLocalizations {
   /// Error: 401/403 from the forum without its own words (Flarum 1.x's permission_denied).
   ///
   /// In en, this message translates to:
-  /// **'You don\'t have permission to do that.'**
+  /// **'You do not have permission to do that.'**
   String get errorNotAllowed;
 
   /// Error: anything else, instead of the exception text.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong. Please try again.'**
+  /// **'Oops! Something went wrong. Please try again.'**
   String get errorUnknown;
 
   /// Under a poll: how many votes it has, when the reader may see the results.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 vote} other{{count} votes}}'**
+  /// **'{count, plural, =1{1 vote was given} other{{count} votes were given}}'**
   String pollVotes(int count);
 
   /// Under a poll where several answers may be chosen: how many.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{Choose 1} other{Choose up to {count}}}'**
+  /// **'{count, plural, =1{Poll allows voting for 1 option.} other{Poll allows voting for {count} options.}}'**
   String pollChooseUpTo(int count);
 
   /// Under a poll whose voting has closed.
   ///
   /// In en, this message translates to:
-  /// **'Voting has closed'**
+  /// **'This poll has ended.'**
   String get pollEnded;
 
   /// Under a poll: when voting closes (a date and time).
   ///
   /// In en, this message translates to:
-  /// **'Closes {date}'**
+  /// **'Poll ends {date}.'**
   String pollEndsOn(String date);
 
   /// Under a poll whose results the reader sees only once they have voted.
@@ -1676,13 +1712,13 @@ abstract class FlarumLocalizations {
   /// Button under a public poll: lists who voted for what.
   ///
   /// In en, this message translates to:
-  /// **'See who voted'**
+  /// **'View voters'**
   String get pollSeeVoters;
 
   /// The voters sheet of a poll nobody has voted in.
   ///
   /// In en, this message translates to:
-  /// **'No votes yet.'**
+  /// **'No Votes'**
   String get pollNoVotes;
 
   /// The poll editor's title.
@@ -1694,13 +1730,13 @@ abstract class FlarumLocalizations {
   /// Poll editor: Done with no question.
   ///
   /// In en, this message translates to:
-  /// **'Write the question.'**
+  /// **'You must include a question'**
   String get pollNeedsQuestion;
 
   /// Poll editor: Done with fewer than two answers.
   ///
   /// In en, this message translates to:
-  /// **'Give at least two answers.'**
+  /// **'You must include a minimum of 2 answers'**
   String get pollNeedsAnswers;
 
   /// Poll editor: the closing time chosen has passed.
@@ -1724,25 +1760,25 @@ abstract class FlarumLocalizations {
   /// Poll editor: tooltip of the button that removes an answer.
   ///
   /// In en, this message translates to:
-  /// **'Remove this answer'**
+  /// **'Remove Answer'**
   String get pollRemoveAnswer;
 
   /// Poll editor: adds another answer field.
   ///
   /// In en, this message translates to:
-  /// **'Add an answer'**
+  /// **'Add Answer'**
   String get pollAddAnswer;
 
   /// Poll editor switch: voters may choose several answers.
   ///
   /// In en, this message translates to:
-  /// **'Voters may choose more than one'**
+  /// **'Allow people to vote for multiple options'**
   String get pollMultipleChoice;
 
   /// Poll editor: how many answers a voter may choose, in a multiple-choice poll.
   ///
   /// In en, this message translates to:
-  /// **'Choices allowed'**
+  /// **'Max votes per user'**
   String get pollChoicesAllowed;
 
   /// Poll editor: no limit on how many answers a voter may choose.
@@ -1754,19 +1790,19 @@ abstract class FlarumLocalizations {
   /// Poll editor switch: who voted for which answer is shown.
   ///
   /// In en, this message translates to:
-  /// **'Show who voted for what'**
+  /// **'Allow people to see who voted'**
   String get pollPublic;
 
   /// Poll editor switch: voters may change their vote.
   ///
   /// In en, this message translates to:
-  /// **'Voters may change their vote'**
+  /// **'Allow users to change their vote'**
   String get pollAllowChangeVote;
 
   /// Poll editor: when voting closes.
   ///
   /// In en, this message translates to:
-  /// **'Voting closes'**
+  /// **'Poll end date (Optional)'**
   String get pollCloses;
 
   /// Poll editor: voting never closes.
@@ -1778,7 +1814,7 @@ abstract class FlarumLocalizations {
   /// Poll editor switch: results stay hidden until voting closes.
   ///
   /// In en, this message translates to:
-  /// **'Hide the results until voting closes'**
+  /// **'Hide votes until poll ends'**
   String get pollHideVotes;
 
   /// Poll editor: why hiding the results is off (it needs a closing time).
@@ -1790,25 +1826,31 @@ abstract class FlarumLocalizations {
   /// New discussion composer: adds a poll (fof/polls).
   ///
   /// In en, this message translates to:
-  /// **'Add a poll'**
+  /// **'Add Poll'**
   String get addPoll;
+
+  /// Closes the poll editor, keeping the poll, as fof/polls' button
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
 
   /// New discussion composer: tooltip of the poll's chip.
   ///
   /// In en, this message translates to:
-  /// **'Edit the poll'**
+  /// **'Edit Poll'**
   String get editPoll;
 
   /// New discussion composer: removes the poll.
   ///
   /// In en, this message translates to:
-  /// **'Remove the poll'**
+  /// **'Remove Poll'**
   String get removePoll;
 
   /// After Save draft when closing the composer.
   ///
   /// In en, this message translates to:
-  /// **'Draft saved.'**
+  /// **'Saved!'**
   String get draftSaved;
 
   /// After Save draft for a new discussion with a poll: fof/drafts has nowhere to keep it.
@@ -1838,7 +1880,7 @@ abstract class FlarumLocalizations {
   /// The drafts page with none. The quoted button is the composer's close prompt's Save draft.
   ///
   /// In en, this message translates to:
-  /// **'No drafts. Close a post you\'re writing and choose Save draft to keep it here.'**
+  /// **'You haven\'t saved any drafts. Close a post you\'re writing and choose Save Draft to keep it here.'**
   String get noDrafts;
 
   /// A reply draft in the drafts list: the discussion it replies to.
@@ -1856,7 +1898,7 @@ abstract class FlarumLocalizations {
   /// Asked before deleting a draft.
   ///
   /// In en, this message translates to:
-  /// **'Delete this draft?'**
+  /// **'Are you sure you want to delete your draft?'**
   String get deleteDraftQuestion;
 
   /// Deletes a draft from the drafts list.

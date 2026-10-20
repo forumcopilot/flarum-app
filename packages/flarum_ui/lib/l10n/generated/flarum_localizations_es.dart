@@ -70,7 +70,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get retry => 'Reintentar';
 
   @override
-  String get edited => 'editado';
+  String get edited => 'Editado';
 
   @override
   String nReplies(int count) {
@@ -103,7 +103,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get loadEarlierPosts => 'Cargar publicaciones anteriores';
+  String get loadEarlierPosts => 'Cargar más';
 
   @override
   String get postHidden => 'Esta publicación fue eliminada.';
@@ -147,7 +147,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get someone => 'Alguien';
+  String get someone => '[borrado]';
 
   @override
   String get latest => 'Recientes';
@@ -159,7 +159,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get search => 'Buscar';
 
   @override
-  String get signIn => 'Iniciar sesión';
+  String get signIn => 'Acceder';
 
   @override
   String get profile => 'Perfil';
@@ -196,7 +196,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get noDiscussions => 'Todavía no hay discusiones aquí.';
+  String get noDiscussions => 'Parece que no hay discusiones aquí.';
 
   @override
   String get discussionsLoadFailed => 'No se pudieron cargar las discusiones.';
@@ -205,26 +205,26 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get tagsLoadFailed => 'No se pudieron cargar las etiquetas.';
 
   @override
-  String get signOut => 'Cerrar sesión';
+  String get signOut => 'Desconectarse';
 
   @override
   String get account => 'Cuenta';
 
   @override
-  String get createAccount => 'Crear cuenta';
+  String get createAccount => 'Regístrate';
 
   @override
   String signInFailedReason(String reason) {
-    return 'No se pudo iniciar sesión: $reason';
+    return 'No se pudo acceder: $reason';
   }
 
   @override
   String get signInHint =>
-      'Inicia sesión en la página del propio foro. La app mantiene tu sesión hasta que la cierres.';
+      'Accede en la página del propio foro. La app te mantiene conectado hasta que te desconectes.';
 
   @override
   String signedInAs(String name) {
-    return 'Sesión iniciada como $name';
+    return 'Conectado como $name';
   }
 
   @override
@@ -236,11 +236,11 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
       'No se pudieron marcar las notificaciones como leídas';
 
   @override
-  String get noNotificationsYet => 'Aún no hay notificaciones';
+  String get noNotificationsYet => 'No hay notificaciones';
 
   @override
   String notifNewPost(String user, String title) {
-    return '$user respondió en $title';
+    return '$user publicó en $title';
   }
 
   @override
@@ -265,12 +265,12 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String notifGroupMentioned(String user, String title) {
-    return '$user mencionó a un grupo al que perteneces en $title';
+    return '$user mencionó un grupo del que eres miembro en $title';
   }
 
   @override
   String notifRenamed(String user, String title) {
-    return '$user renombró una discusión a $title';
+    return '$user cambió el título a $title';
   }
 
   @override
@@ -285,17 +285,17 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String notifMovedToTag(String user, String title) {
-    return '$user movió $title a una etiqueta que sigues';
+    return '$user cambió la etiqueta de $title';
   }
 
   @override
   String notifPrivateCreated(String user, String title) {
-    return '$user inició una discusión privada contigo: $title';
+    return '$user inició una nueva discusión privada contigo: $title';
   }
 
   @override
   String notifPrivateReplied(String user, String title) {
-    return '$user respondió en la discusión privada $title';
+    return '$user publicó en una discusión privada de la que formas parte: $title';
   }
 
   @override
@@ -315,17 +315,17 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String notifBestAnswerAwarded(String user, String title) {
-    return '$user eligió tu publicación como la mejor respuesta en $title';
+    return 'Tu mensaje fue seleccionado como la mejor respuesta por $user en $title';
   }
 
   @override
   String notifBestAnswerChosen(String user, String title) {
-    return '$user eligió una mejor respuesta en $title';
+    return '$user escogió la mejor respuesta en $title';
   }
 
   @override
   String notifBestAnswerPending(String title) {
-    return 'Elige una mejor respuesta en $title';
+    return 'Por favor, selecciona la mejor respuesta en $title si tu duda fue resuelta';
   }
 
   @override
@@ -337,10 +337,11 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get notifSuspended => 'Tu cuenta fue suspendida';
 
   @override
-  String get notifUnsuspended => 'Se levantó la suspensión de tu cuenta';
+  String get notifUnsuspended => 'Te han quitado la suspensión';
 
   @override
-  String get notifExport => 'Tu exportación de datos está lista';
+  String get notifExport =>
+      'Tus datos exportados ya están listos para descargar.';
 
   @override
   String get notifOther => 'Nueva notificación';
@@ -353,11 +354,10 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
       'No se pudieron cargar tus notificaciones.';
 
   @override
-  String get notificationsSignIn =>
-      'Inicia sesión para ver tus notificaciones.';
+  String get notificationsSignIn => 'Accede para ver tus notificaciones.';
 
   @override
-  String get markAllRead => 'Marcar todo como leído';
+  String get markAllRead => 'Marcar todas como leídas';
 
   @override
   String get posts => 'Publicaciones';
@@ -396,7 +396,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get userLoadFailed => 'No se pudo cargar este perfil.';
 
   @override
-  String get noPostsYet => 'Todavía no hay publicaciones.';
+  String get noPostsYet => 'Parece que no hay publicaciones aquí.';
 
   @override
   String searchFailedWithError(String error) {
@@ -404,24 +404,24 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get searchHint => 'Buscar discusiones y publicaciones';
+  String get searchHint => 'Buscar en el foro';
 
   @override
   String noResultsFor(String query) {
-    return 'No se encontró nada para «$query».';
+    return 'Parece que no hay resultados para «$query».';
   }
 
   @override
-  String get light => 'Claro';
+  String get light => 'Modo claro';
 
   @override
-  String get dark => 'Oscuro';
+  String get dark => 'Modo oscuro';
 
   @override
-  String get appearance => 'Apariencia';
+  String get appearance => 'Combinación de colores';
 
   @override
-  String get appearanceSystem => 'Sistema';
+  String get appearanceSystem => 'Preferencias del sistema';
 
   @override
   String repliedByOne(String a) {
@@ -445,7 +445,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get repliesTitle => 'Respuestas';
+  String get repliesTitle => 'Respuestas a esta publicación';
 
   @override
   String postNumber(int number) {
@@ -485,7 +485,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get bestAnswer => 'Mejor respuesta';
 
   @override
-  String get goToBestAnswer => 'Ir a la mejor respuesta';
+  String get goToBestAnswer => 'Ver mejor respuesta';
 
   @override
   String get answered => 'Respondida';
@@ -520,7 +520,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get listItem => 'Elemento de Lista';
 
   @override
-  String get mentionUser => 'Mencionar usuario';
+  String get mentionUser => 'Mencionar a un usuario, grupo o publicación';
 
   @override
   String get title => 'Título';
@@ -529,10 +529,19 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get content => 'Contenido';
 
   @override
-  String get send => 'Enviar';
+  String get send => 'Enviar mensaje';
 
   @override
-  String get save => 'Guardar';
+  String get postReply => 'Publicar respuesta';
+
+  @override
+  String get postDiscussion => 'Publicar discusión';
+
+  @override
+  String get postPrivateDiscussion => 'Publicar discusión privada';
+
+  @override
+  String get save => 'Guardar cambios';
 
   @override
   String get formatting => 'Formato';
@@ -544,10 +553,16 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get pleaseEnterContent => 'Por favor ingresa algún contenido';
 
   @override
-  String get composerTitleHint => 'Escribe tu título...';
+  String get composerTitleHint => 'Título de la discusión';
 
   @override
-  String get composerContentHint => 'Escribe tu contenido...';
+  String get privateDiscussionTitleHint => 'Título de la discusión privada';
+
+  @override
+  String get composerContentHint => 'Escribe una publicación...';
+
+  @override
+  String get composerReplyHint => 'Escribe una respuesta...';
 
   @override
   String get composerFormattingHint => 'Abrir opciones de formato';
@@ -556,21 +571,24 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get searchUsers => 'Buscar usuarios...';
 
   @override
-  String get startDiscussion => 'Iniciar una discusión';
+  String get startDiscussion => 'Crear discusión';
 
   @override
   String get editPost => 'Editar publicación';
 
   @override
   String get postingThrottled =>
-      'Estás publicando demasiado rápido. Espera unos segundos e inténtalo de nuevo.';
+      'Vas muy rápido. Por favor, vuelve a intentarlo en unos segundos.';
 
   @override
   String get postAwaitingApproval =>
       'Enviado. Aparecerá cuando un moderador lo apruebe.';
 
   @override
-  String get chooseTags => 'Elegir etiquetas';
+  String get chooseTags => 'Selecciona etiquetas';
+
+  @override
+  String get ok => 'Aceptar';
 
   @override
   String get primaryTags => 'Etiquetas principales';
@@ -623,10 +641,8 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get done => 'Listo';
-
-  @override
-  String get noMembersFound => 'No se encontraron miembros.';
+  String get noMembersFound =>
+      'No se encontraron usuarios que coincidieran con tu búsqueda.';
 
   @override
   String get memberSearchNotAllowed => 'Este foro no permite buscar miembros.';
@@ -660,10 +676,10 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get noBookmarks => 'Todavía no hay guardados.';
 
   @override
-  String get chooseBestAnswer => 'Elegir como mejor respuesta';
+  String get chooseBestAnswer => 'Seleccionar mejor respuesta';
 
   @override
-  String get removeBestAnswer => 'Quitar mejor respuesta';
+  String get removeBestAnswer => 'Desmarcar mejor respuesta';
 
   @override
   String get notificationSettings => 'Notificaciones de esta discusión';
@@ -682,28 +698,28 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get ignoringHint =>
-      'No recibir avisos nunca y ocultarla de las listas.';
+      'No ser notificado nunca. Ocultar de la lista de discusiones.';
 
   @override
-  String get tagFollowingHint => 'Recibir avisos de discusiones nuevas.';
+  String get tagFollowingHint =>
+      'Recibir notificaciones de todas las nuevas discusiones.';
 
   @override
   String get lurking => 'Observando';
 
   @override
   String get lurkingHint =>
-      'Recibir avisos de discusiones nuevas y de cada respuesta.';
+      'Recibir notificaciones de todas las nuevas discusiones y respuestas.';
 
   @override
-  String get tagIgnoringHint =>
-      'No recibir avisos nunca de las discusiones de aquí.';
+  String get tagIgnoringHint => 'Nunca recibir notificaciones.';
 
   @override
-  String get hidden => 'Oculta';
+  String get hidden => 'Ocultando';
 
   @override
   String get hiddenHint =>
-      'Ocultar las discusiones de esta etiqueta de las listas.';
+      'Ocultar discusiones de la página Todas las discusiones.';
 
   @override
   String get attachFile => 'Adjuntar archivo';
@@ -743,7 +759,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   @override
   String fileTooLargeForForum(
       Object fileName, Object fileBytes, Object maxBytes) {
-    return '$fileName pesa $fileBytes. Este foro permite hasta $maxBytes.';
+    return '$fileName pesa $fileBytes. No se aceptan subidas de más de $maxBytes.';
   }
 
   @override
@@ -756,7 +772,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get ignoredUsersEmpty => 'No estás ignorando a nadie.';
 
   @override
-  String get flagPostTitle => 'Reportar publicación';
+  String get flagPostTitle => 'Reportar mensaje';
 
   @override
   String get flagReasonOffTopic => 'Fuera de tema';
@@ -770,7 +786,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get flagReasonInappropriateText =>
-      'Esta publicación es ofensiva, abusiva o incumple las normas de la comunidad.';
+      'Este mensaje es ofensivo, inapropiado o viola las normas del foro.';
 
   @override
   String get flagReasonSpam => 'Spam';
@@ -806,7 +822,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String ignoreUserConfirm(String name) {
-    return '¿Ignorar a $name? Sus publicaciones se plegarán. Puedes dejar de ignorarle desde tu cuenta.';
+    return '¿Seguro que quieres ignorar a $name?';
   }
 
   @override
@@ -826,32 +842,33 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get termsBanner =>
-      'Acepta los términos actualizados de este foro para volver a publicar.';
+      'Hemos restringido temporalmente el acceso a tu cuenta mientras revisas los nuevos términos.';
 
   @override
   String get termsReview => 'Revisar';
 
   @override
-  String get termsTitle => 'Términos actualizados';
+  String get termsTitle => 'Actualización de términos de uso';
 
   @override
   String get termsIntro =>
-      'Antes de volver a publicar, acepta las políticas actualizadas del foro.';
+      'Los términos se actualizaron desde tu última visita';
 
   @override
   String get readPolicy => 'Leer';
 
   @override
-  String get acceptTerms => 'Aceptar';
+  String get acceptTerms => 'Confirmar';
 
   @override
-  String get termsAccepted => 'Gracias. Ya puedes volver a publicar.';
+  String get termsAccepted =>
+      'Gracias por aceptarlo, ahora puedes volver al foro';
 
   @override
   String get privateDiscussions => 'Discusiones privadas';
 
   @override
-  String get startPrivateDiscussion => 'Iniciar una discusión privada';
+  String get startPrivateDiscussion => 'Discutir en privado';
 
   @override
   String privateWith(String names) {
@@ -859,13 +876,14 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get addPerson => 'Añadir a alguien';
+  String get addPerson => 'Destinatarios';
 
   @override
-  String get choosePerson => 'Elige a quién escribir.';
+  String get choosePerson =>
+      'Esta discusión solo será visible para los usuarios que elijas aquí. Se requiere al menos 1 destinatario (además de ti).';
 
   @override
-  String get noPrivateDiscussions => 'Aún no hay discusiones privadas.';
+  String get noPrivateDiscussions => 'Parece que no hay discusiones aquí.';
 
   @override
   String get privateOnlyOne =>
@@ -875,10 +893,10 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get messages => 'Mensajes';
 
   @override
-  String get newMessage => 'Nuevo mensaje';
+  String get newMessage => 'Enviar un mensaje';
 
   @override
-  String get noMessages => 'Aún no hay mensajes.';
+  String get noMessages => 'Sin nuevos mensajes';
 
   @override
   String get sendMessage => 'Enviar un mensaje';
@@ -894,6 +912,9 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => 'Renombrar';
+
+  @override
+  String get renameDiscussionTitle => 'Cambiar el título de esta discusión';
 
   @override
   String get lockDiscussion => 'Bloquear';
@@ -915,7 +936,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get deleteForeverConfirm =>
-      '¿Eliminar esto para siempre? No se puede deshacer.';
+      '¿Estás seguro de que deseas eliminar esto para siempre? Esta acción no se puede deshacer.';
 
   @override
   String get approve => 'Aprobar';
@@ -933,11 +954,11 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String youAreSuspended(String date) {
-    return 'Estás suspendido hasta $date.';
+    return 'Esta suspensión estará en vigor hasta el $date';
   }
 
   @override
-  String get youAreSuspendedIndefinitely => 'Estás suspendido.';
+  String get youAreSuspendedIndefinitely => 'Esta cuenta está suspendida';
 
   @override
   String get awaitingApproval => 'Pendiente de aprobación';
@@ -977,7 +998,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get errorNoConnection =>
-      'No se pudo conectar con el foro. Comprueba tu conexión e inténtalo de nuevo.';
+      'Parece que hay algún problema con tu conexión. Comprueba tu red e inténtalo de nuevo.';
 
   @override
   String get errorTimedOut =>
@@ -988,11 +1009,11 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
       'El cortafuegos del foro bloqueó la aplicación. Inténtalo más tarde o abre el foro en un navegador.';
 
   @override
-  String get errorNotFound => 'Esto no existe o se ha eliminado.';
+  String get errorNotFound => 'El recurso solicitado no fue encontrado.';
 
   @override
   String get errorRateLimited =>
-      'Estás haciendo eso con demasiada frecuencia. Espera un momento e inténtalo de nuevo.';
+      'Vas muy rápido. Por favor, vuelve a intentarlo en unos segundos.';
 
   @override
   String get errorForumDown =>
@@ -1002,7 +1023,8 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get errorNotAllowed => 'No tienes permiso para hacer eso.';
 
   @override
-  String get errorUnknown => 'Algo salió mal. Inténtalo de nuevo.';
+  String get errorUnknown =>
+      '¡Caramba! Algo salió mal. Por favor, vuelve a intentarlo.';
 
   @override
   String pollVotes(int count) {
@@ -1020,18 +1042,18 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Elige hasta $count',
-      one: 'Elige 1',
+      other: '$count opciones',
+      one: '$count opción',
     );
-    return '$_temp0';
+    return 'La encuesta permite votar por $_temp0.';
   }
 
   @override
-  String get pollEnded => 'La votación ha terminado';
+  String get pollEnded => 'Esta encuesta ha terminado.';
 
   @override
   String pollEndsOn(String date) {
-    return 'Termina el $date';
+    return 'La encuesta termina el $date.';
   }
 
   @override
@@ -1048,19 +1070,19 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get pollRemoveVote => 'Retirar mi voto';
 
   @override
-  String get pollSeeVoters => 'Ver quién votó';
+  String get pollSeeVoters => 'Ver los votantes';
 
   @override
-  String get pollNoVotes => 'Aún no hay votos.';
+  String get pollNoVotes => 'Sin votos';
 
   @override
   String get poll => 'Encuesta';
 
   @override
-  String get pollNeedsQuestion => 'Escribe la pregunta.';
+  String get pollNeedsQuestion => 'Debes incluir una pregunta';
 
   @override
-  String get pollNeedsAnswers => 'Indica al menos dos respuestas.';
+  String get pollNeedsAnswers => 'Debes incluir un mínimo de 2 respuestas';
 
   @override
   String get pollEndInPast => 'Elige un cierre en el futuro.';
@@ -1074,50 +1096,54 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   }
 
   @override
-  String get pollRemoveAnswer => 'Quitar esta respuesta';
+  String get pollRemoveAnswer => 'Eliminar respuesta';
 
   @override
-  String get pollAddAnswer => 'Añadir una respuesta';
+  String get pollAddAnswer => 'Añadir respuesta';
 
   @override
-  String get pollMultipleChoice => 'Se puede elegir más de una';
+  String get pollMultipleChoice => 'Permitir votar a varias opciones';
 
   @override
-  String get pollChoicesAllowed => 'Respuestas permitidas';
+  String get pollChoicesAllowed => 'Número máximo de votos por usuario';
 
   @override
   String get pollAnyNumber => 'Sin límite';
 
   @override
-  String get pollPublic => 'Mostrar quién votó qué';
+  String get pollPublic => 'Permitir que la gente vea quién ha votado';
 
   @override
-  String get pollAllowChangeVote => 'Se puede cambiar el voto';
+  String get pollAllowChangeVote => 'Permitir a los usuarios cambiar su voto';
 
   @override
-  String get pollCloses => 'La votación termina';
+  String get pollCloses => 'Fecha de finalización de la encuesta (opcional)';
 
   @override
   String get pollNeverCloses => 'Nunca';
 
   @override
-  String get pollHideVotes => 'Ocultar los resultados hasta que termine';
+  String get pollHideVotes =>
+      'Ocultar los votos hasta que finalice la encuesta';
 
   @override
   String get pollHideVotesNeedsEnd =>
       'Primero elige cuándo termina la votación.';
 
   @override
-  String get addPoll => 'Añadir una encuesta';
+  String get addPoll => 'Añadir encuesta';
+
+  @override
+  String get submit => 'Enviar';
 
   @override
   String get editPoll => 'Editar la encuesta';
 
   @override
-  String get removePoll => 'Quitar la encuesta';
+  String get removePoll => 'Eliminar la encuesta';
 
   @override
-  String get draftSaved => 'Borrador guardado.';
+  String get draftSaved => '¡Guardado!';
 
   @override
   String get draftSavedWithoutPoll =>
@@ -1134,7 +1160,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get noDrafts =>
-      'No hay borradores. Cierra un mensaje que estés escribiendo y elige «Guardar borrador» para guardarlo aquí.';
+      'No has guardado ningún borrador. Cierra un mensaje que estés escribiendo y elige «Guardar borrador» para guardarlo aquí.';
 
   @override
   String draftReplyTo(String title) {
@@ -1145,7 +1171,7 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get draftUntitled => 'Discusión sin título';
 
   @override
-  String get deleteDraftQuestion => '¿Eliminar este borrador?';
+  String get deleteDraftQuestion => '¿Seguro que quieres eliminar tu borrador?';
 
   @override
   String get deleteDraft => 'Eliminar borrador';

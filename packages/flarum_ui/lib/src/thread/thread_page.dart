@@ -620,13 +620,13 @@ class _RenameDialogState extends State<_RenameDialog> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(flarumL10n(context).renameDiscussion),
+        title: Text(flarumL10n(context).renameDiscussionTitle),
         content: TextField(controller: _field, autofocus: true, textCapitalization: TextCapitalization.sentences),
         actions: [
           TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(kitL10n(context).cancel)),
           TextButton(
             onPressed: () => Navigator.of(context).pop(_field.text.trim().isEmpty ? null : _field.text.trim()),
-            child: Text(flarumL10n(context).save),
+            child: Text(flarumL10n(context).renameDiscussion),
           ),
         ],
       );

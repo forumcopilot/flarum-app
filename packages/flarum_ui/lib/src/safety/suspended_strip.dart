@@ -28,10 +28,17 @@ class SuspendedStrip extends StatelessWidget {
           children: [
             Icon(Icons.block, color: colorScheme.onErrorContainer),
             const SizedBox(width: DesignTokens.spacingM),
+            // Flarum's own words, as its suspension dialog: the state as a heading, then what the
+            // forum told them.
             Expanded(
-              child: Text(
-                [headline, if (reader.suspendMessage case final message?) message].join(' '),
-                style: TextStyle(color: colorScheme.onErrorContainer),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(headline,
+                      style: TextStyle(color: colorScheme.onErrorContainer, fontWeight: FontWeight.w600)),
+                  if (reader.suspendMessage case final message?)
+                    Text(message, style: TextStyle(color: colorScheme.onErrorContainer)),
+                ],
               ),
             ),
           ],

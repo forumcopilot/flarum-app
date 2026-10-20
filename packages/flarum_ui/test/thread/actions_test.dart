@@ -76,9 +76,9 @@ void main() {
       // Choose it as the best answer, from its menu.
       await tester.tap(find.descendant(of: answer, matching: find.byIcon(Icons.more_vert)));
       await _settle(tester);
-      await tester.tap(find.text('Choose as best answer'));
+      await tester.tap(find.text('Select Best Answer'));
       await _settle(tester);
-      expect(find.text('Best answer'), findsOneWidget);
+      expect(find.text('Best Answer'), findsOneWidget);
 
       // Follow the discussion, and bookmark it.
       await tester.tap(find.byTooltip('Notifications for this discussion'));
@@ -88,7 +88,7 @@ void main() {
       expect(find.byIcon(Icons.notifications_active), findsOneWidget);
       await tester.tap(find.byTooltip('Bookmark'));
       await _settle(tester);
-      expect(find.byTooltip('Remove bookmark'), findsOneWidget);
+      expect(find.byTooltip('Remove from bookmarks'), findsOneWidget);
 
       expect(writes(), [
         'PATCH /posts/${(jsonDecode(File('$_fixtures/${version.name}/write_like.json').readAsStringSync())['request']['path'] as String).split('/').last}',

@@ -78,7 +78,7 @@ void main() {
 
         final [phone, tablet, _] = WriteSamples.pollOptions;
         await tester.tap(find.text(phone));
-        await _pumpUntil(tester, find.text('1 vote'));
+        await _pumpUntil(tester, find.text('1 vote was given'));
         expect(find.text('100%'), findsOneWidget);
         expect(find.text('The results show once you vote.'), findsNothing);
 
@@ -87,7 +87,7 @@ void main() {
         final [first, second] = votesSent(fixtures);
         expect((first as List).single, isNot((second as List).single), reason: 'changed, not added');
 
-        await tester.tap(find.text('See who voted'));
+        await tester.tap(find.text('View voters'));
         await _pumpUntil(tester, find.descendant(of: find.byType(BottomSheet), matching: find.text('bob')));
         expect(find.descendant(of: find.byType(BottomSheet), matching: find.text(tablet)), findsOneWidget);
         await tester.tapAt(const Offset(10, 10));
@@ -121,14 +121,14 @@ void main() {
         await tester.pumpWidget(_app(Scaffold(
           body: PollCard(site: _site(), poll: once, onChanged: (poll) => voted = poll),
         )));
-        expect(find.text('Choose up to 2'), findsOneWidget);
+        expect(find.text('Poll allows voting for 2 options.'), findsOneWidget);
         final [android, ios, desktop] = WriteSamples.multiplePollOptions;
         await tester.tap(find.text(android));
         await tester.tap(find.text(ios));
         await tester.pump();
         await tester.tap(find.text(desktop));
         await tester.pump();
-        expect(find.text('Choose up to 2'), findsWidgets, reason: 'a third is refused');
+        expect(find.text('Poll allows voting for 2 options.'), findsWidgets, reason: 'a third is refused');
         expect(voted, isNull, reason: 'nothing sent before Vote');
         await tester.tap(find.text('Vote'));
         for (var i = 0; i < 40 && voted == null; i++) {
@@ -149,42 +149,42 @@ void main() {
         await tester.tap(find.text('open'));
         await _settle(tester);
 
-        await tester.tap(find.text('Add a poll'));
+        await tester.tap(find.text('Add Poll'));
         await _settle(tester);
         expect(find.byType(PollEditorPage), findsOneWidget);
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('Submit'));
         await tester.pump();
-        expect(find.text('Write the question.'), findsOneWidget);
+        expect(find.text('You must include a question'), findsOneWidget);
         await tester.enterText(find.widgetWithText(TextField, 'Question'), WriteSamples.pollQuestion);
         // The message goes, and the fields move up, on the next frame.
         await tester.pump();
-        expect(find.text('Write the question.'), findsNothing);
+        expect(find.text('You must include a question'), findsNothing);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 1'), WriteSamples.pollOptions[0]);
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('Submit'));
         await tester.pump();
-        expect(find.text('Give at least two answers.'), findsOneWidget);
+        expect(find.text('You must include a minimum of 2 answers'), findsOneWidget);
         await tester.enterText(find.widgetWithText(TextField, 'Answer 2'), WriteSamples.pollOptions[1]);
         await tester.pump();
-        expect(find.text('Give at least two answers.'), findsNothing, reason: 'gone once the reader puts it right');
-        await tester.tap(find.text('Add an answer'));
+        expect(find.text('You must include a minimum of 2 answers'), findsNothing, reason: 'gone once the reader puts it right');
+        await tester.tap(find.text('Add Answer'));
         await tester.pump();
         await tester.enterText(find.widgetWithText(TextField, 'Answer 3'), WriteSamples.pollOptions[2]);
-        await tester.tap(find.text('Show who voted for what'));
-        await tester.tap(find.text('Voters may change their vote'));
+        await tester.tap(find.text('Allow people to see who voted'));
+        await tester.tap(find.text('Allow users to change their vote'));
         await tester.pump();
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('Submit'));
         await _settle(tester);
         expect(find.widgetWithText(InputChip, WriteSamples.pollQuestion), findsOneWidget);
 
         await tester.enterText(find.widgetWithText(TextField, 'Title'), WriteSamples.pollTitle);
         await tester.enterText(find.byType(TextField).last, WriteSamples.pollContent);
-        await tester.tap(find.text('Choose tags'));
+        await tester.tap(find.text('Choose Tags'));
         await _settle(tester);
         await tester.tap(find.text('General'));
         await tester.pump();
-        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('OK'));
         await _settle(tester);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Discussion'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         final sent = fixtures.requests.lastWhere((r) => r.method == 'POST' && r.path == '/discussions').data as Map;

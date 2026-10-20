@@ -72,7 +72,7 @@ void main() {
         // The title follows the private discussion's glyph.
         final tile = find.textContaining(WriteSamples.privateTitle, findRichText: true);
         await _pumpUntil(tester, tile);
-        expect(find.text('Start a private discussion'), findsOneWidget);
+        expect(find.text('Discuss Privately'), findsOneWidget);
 
         await tester.tap(tile);
         await _pumpUntil(tester, find.byType(PostTile));
@@ -102,18 +102,18 @@ void main() {
         await _settle(tester);
 
         await tester.enterText(find.widgetWithText(TextField, 'Title'), WriteSamples.privateTitle);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Private Discussion'));
         await _settle(tester);
         // Under the field, until there's something in it.
         expect(find.text('Please enter some content'), findsOneWidget);
         await tester.enterText(find.byType(TextField).last, WriteSamples.privateContent);
         await tester.pump();
         expect(find.text('Please enter some content'), findsNothing);
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Private Discussion'));
         await _settle(tester);
-        expect(find.text('Choose who to write to.'), findsOneWidget);
+        expect(find.text('This discussion will only be visible to the users you choose here. At least 1 recipient (other than yourself) is required.'), findsOneWidget);
 
-        await tester.tap(find.text('Add someone'));
+        await tester.tap(find.text('Recipients'));
         await _settle(tester);
         await tester.enterText(find.descendant(of: find.byType(MentionPickerPage), matching: find.byType(TextField)), 'bo');
         await tester.pump(const Duration(milliseconds: 400));
@@ -122,11 +122,11 @@ void main() {
         await _settle(tester);
         expect(find.widgetWithText(InputChip, 'bob'), findsOneWidget);
 
-        await tester.tap(find.text('Add someone'));
+        await tester.tap(find.text('Recipients'));
         await _settle(tester);
         expect(find.text('This forum lets you write privately to one person at a time.'), findsOneWidget);
 
-        await tester.tap(find.text('Send'));
+        await tester.tap(find.text('Post Private Discussion'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         expect((started?.title, started?.isPrivate), (WriteSamples.privateTitle, true));

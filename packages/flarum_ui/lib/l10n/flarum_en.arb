@@ -1646,6 +1646,18 @@
   "@awaitingApproval": {
     "description": "Label on a post held for a moderator's approval"
   },
+  "badgeSticky": "Sticky",
+  "@badgeSticky": {
+    "description": "A discussion row's sticky badge, as flarum/sticky's tooltip names it"
+  },
+  "badgeLocked": "Locked",
+  "@badgeLocked": {
+    "description": "A discussion row's locked badge (flarum/lock)"
+  },
+  "badgeHidden": "Hidden",
+  "@badgeHidden": {
+    "description": "A discussion row's hidden badge, shown to moderators"
+  },
   "eventMerged": "{user} merged {count, plural, =1{1 post} other{{count} posts}} from {titles} into this discussion.",
   "@eventMerged": {
     "description": "Event post (fof/merge-discussions): posts from other discussions merged into this one; titles is their titles, e.g. '“A”, “B”'",

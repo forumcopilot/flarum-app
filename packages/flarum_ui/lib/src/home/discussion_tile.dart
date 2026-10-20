@@ -12,9 +12,12 @@ import '../widgets/flarum_avatar.dart';
 /// avatar, the title (bold while there's something unread), its tags, who
 /// replied last and when, and how many replies (or unread ones).
 class DiscussionTile extends StatelessWidget {
-  const DiscussionTile({super.key, required this.discussion, this.unread = 0, this.onTap});
+  const DiscussionTile({super.key, required this.discussion, this.unread = 0, this.recipients = const [], this.onTap});
 
   final FlarumDiscussion discussion;
+
+  /// Who a private discussion is with, shown where the web shows its tags.
+  final List<FlarumUser> recipients;
 
   /// Posts the reader hasn't read; zero for a guest.
   final int unread;
@@ -48,13 +51,17 @@ class DiscussionTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // The web's discussion badges, in its colours: what a reader scans the list for.
                   Text.rich(
                     TextSpan(children: [
-                      if (d.isPrivate) _glyph(Icons.map_outlined, muted, label: l10n.privateDiscussion),
-                      if (d.isSticky) _glyph(Icons.push_pin, muted),
-                      if (d.isLocked) _glyph(Icons.lock, muted),
-                      if (d.hasBestAnswer)
-                        _glyph(Icons.check_circle, ForumColors.of(context).success, label: l10n.answered),
+                      if (d.isHidden) _badge(Icons.delete_outline, const Color(0xFF888888), l10n.badgeHidden),
+                      if (!d.isApproved) _badge(Icons.gavel, const Color(0xFF888888), l10n.awaitingApproval),
+                      if (d.isSticky) _badge(Icons.push_pin, const Color(0xFFD13E32), l10n.badgeSticky),
+                      if (d.isLocked) _badge(Icons.lock, const Color(0xFF888888), l10n.badgeLocked),
+                      if (d.isPrivate) _badge(Icons.map_outlined, const Color(0xFF4D698E), l10n.privateDiscussion),
+                      if (d.subscription == 'follow') _badge(Icons.star, const Color(0xFFFFA000), l10n.following),
+                      if (d.hasBestAnswer) _badge(Icons.check, ForumColors.of(context).success, l10n.answered),
+                      if (d.hasPoll) _badge(Icons.poll_outlined, const Color(0xFF4D698E), l10n.poll),
                       TextSpan(text: d.title),
                     ]),
                     maxLines: 3,
@@ -71,6 +78,9 @@ class DiscussionTile extends StatelessWidget {
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       for (final tag in tagsInWebOrder(d.tags)) TagLabel(tag: tag),
+                      if (recipients.isNotEmpty)
+                        Text(l10n.privateWith(recipients.map((user) => user.displayName).join(', ')),
+                            style: theme.textTheme.bodySmall?.copyWith(color: muted, fontWeight: FontWeight.w600)),
                       Text(meta, style: theme.textTheme.bodySmall?.copyWith(color: muted)),
                     ],
                   ),
@@ -85,11 +95,21 @@ class DiscussionTile extends StatelessWidget {
     );
   }
 
-  static InlineSpan _glyph(IconData icon, Color color, {String? label}) => WidgetSpan(
+  /// A badge as the web draws one by a discussion: a white icon on a round colour, named for
+  /// screen readers.
+  static InlineSpan _badge(IconData icon, Color color, String label) => WidgetSpan(
         alignment: PlaceholderAlignment.middle,
         child: Padding(
           padding: const EdgeInsets.only(right: 4),
-          child: Icon(icon, size: 16, color: color, semanticLabel: label),
+          child: Tooltip(
+            message: label,
+            child: Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+              child: Icon(icon, size: 11, color: Colors.white, semanticLabel: label),
+            ),
+          ),
         ),
       );
 }

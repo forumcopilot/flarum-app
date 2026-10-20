@@ -1086,6 +1086,15 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get awaitingApproval => '等待审核';
 
   @override
+  String get badgeSticky => '置顶';
+
+  @override
+  String get badgeLocked => '锁定';
+
+  @override
+  String get badgeHidden => '隐藏';
+
+  @override
   String eventMerged(String user, int count, String titles) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

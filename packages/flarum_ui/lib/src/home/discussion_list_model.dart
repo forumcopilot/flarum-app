@@ -122,6 +122,24 @@ class DiscussionListModel extends ChangeNotifier {
     return last == null || next <= last ? next : last;
   }
 
+  final Map<String, List<FlarumUser>> _recipients = {};
+  final Set<String> _readingRecipients = {};
+
+  /// Who private discussion [d] is with (fof/byobu): in the list where it was asked for (the
+  /// Private Discussions page), else read once for its row, which shows it when it comes.
+  List<FlarumUser> recipientsOf(FlarumDiscussion d) {
+    if (!d.isPrivate) return const [];
+    if (d.recipients.isNotEmpty) return d.recipients;
+    if (_recipients[d.id] case final known?) return known;
+    if (_readingRecipients.add(d.id)) {
+      forum.api.recipients(d.id).then((users) {
+        _recipients[d.id] = users;
+        _notify();
+      }, onError: (Object _) {});
+    }
+    return const [];
+  }
+
   bool _disposed = false;
 
   void _notify() {

@@ -1132,6 +1132,15 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get awaitingApproval => 'Wartet auf Freigabe';
 
   @override
+  String get badgeSticky => 'Angeheftet';
+
+  @override
+  String get badgeLocked => 'Geschlossen';
+
+  @override
+  String get badgeHidden => 'Versteckt';
+
+  @override
   String eventMerged(String user, int count, String titles) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

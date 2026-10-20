@@ -1089,6 +1089,15 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get awaitingApproval => '승인 대기 중';
 
   @override
+  String get badgeSticky => '고정';
+
+  @override
+  String get badgeLocked => '잠금';
+
+  @override
+  String get badgeHidden => '숨김';
+
+  @override
   String eventMerged(String user, int count, String titles) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

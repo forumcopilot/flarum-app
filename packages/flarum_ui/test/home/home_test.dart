@@ -81,16 +81,36 @@ void main() {
           theme: AppTheme.lightTheme,
           home: Scaffold(body: Column(children: [DiscussionTile(discussion: answered), DiscussionTile(discussion: plain)])),
         ));
-        expect(find.byIcon(Icons.check_circle), findsOneWidget, reason: 'only the answered one');
-        expect(tester.widget<Icon>(find.byIcon(Icons.check_circle)).semanticLabel, 'Answered');
+        expect(find.byIcon(Icons.check), findsOneWidget, reason: 'only the answered one, a green check as on the web');
+        expect(tester.widget<Icon>(find.byIcon(Icons.check)).semanticLabel, 'Answered');
       });
 
       testWidgets('the home page lists discussions and opens one where the reader left off', (tester) async {
         fixtures.forum();
+        // Who the private discussion is with, read for its row (none was recorded for it).
+        fixtures.replies['GET /discussions/${fixtures.discussionId('private')}'] = {
+          'data': {
+            'type': 'discussions',
+            'id': fixtures.discussionId('private'),
+            'attributes': {'title': 'Private: test plan'},
+            'relationships': {
+              'recipientUsers': {
+                'data': [
+                  {'type': 'users', 'id': '90'},
+                ],
+              },
+            },
+          },
+          'included': [
+            {'type': 'users', 'id': '90', 'attributes': {'username': 'carol', 'displayName': 'carol'}},
+          ],
+        };
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
         expect(find.text('Following'), findsOneWidget, reason: 'signed in');
         expect(find.byIcon(Icons.map_outlined), findsOneWidget, reason: 'the byobu discussion is marked private, with byobu\'s map');
+        await _pumpUntil(tester, find.text('With carol'));
+        expect(find.byIcon(Icons.push_pin), findsWidgets, reason: "the rules are sticky: the web's red pin");
 
         await tester.tap(find.text('Long thread for paging tests'));
         await _pumpUntil(tester, find.text('Post 21 of 60.'));

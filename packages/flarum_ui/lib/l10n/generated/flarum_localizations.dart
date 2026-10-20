@@ -1781,6 +1781,24 @@ abstract class FlarumLocalizations {
   /// **'Awaiting approval'**
   String get awaitingApproval;
 
+  /// A discussion row's sticky badge, as flarum/sticky's tooltip names it
+  ///
+  /// In en, this message translates to:
+  /// **'Sticky'**
+  String get badgeSticky;
+
+  /// A discussion row's locked badge (flarum/lock)
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get badgeLocked;
+
+  /// A discussion row's hidden badge, shown to moderators
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden'**
+  String get badgeHidden;
+
   /// Event post (fof/merge-discussions): posts from other discussions merged into this one; titles is their titles, e.g. '“A”, “B”'
   ///
   /// In en, this message translates to:

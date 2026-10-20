@@ -84,6 +84,7 @@ class DiscussionListView extends StatelessWidget {
             key: ValueKey(d.id),
             discussion: d,
             unread: list.unreadIn(d),
+            recipients: list.recipientsOf(d),
             onTap: () => _open(context, d),
           );
         },

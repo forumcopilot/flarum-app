@@ -275,6 +275,28 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets('closing after choosing tags asks first, as it does for text', (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        await tester.pumpWidget(_app(HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await _settle(tester);
+
+        await tester.tap(find.text('Start a Discussion'));
+        await _pumpUntil(tester, find.byType(ComposePage));
+        await _settle(tester);
+        await tester.tap(find.text('Choose Tags'));
+        await _settle(tester);
+        await tester.tap(find.text('General'));
+        await tester.pump();
+        await tester.tap(find.text('OK'));
+        await _settle(tester);
+        await tester.tap(find.byTooltip(MaterialLocalizations.of(tester.element(find.byType(ComposePage))).closeButtonTooltip));
+        await _settle(tester);
+        expect(find.text('Do you want to discard your post?'), findsOneWidget, reason: 'the tags would be lost');
+        await _close(tester);
+      });
+
       testWidgets('Start a discussion asks for its tags, then starts it', (tester) async {
         final forum = fixtures.forum();
         await tester.runAsync(forum.refresh);

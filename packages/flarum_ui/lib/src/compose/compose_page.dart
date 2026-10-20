@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flarum_core/flarum_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
@@ -42,6 +43,7 @@ class ComposePage extends StatefulWidget {
     this.submitLabel,
     this.titleHint,
     this.contentHint,
+    this.otherChanges,
   });
 
   final SiteContext site;
@@ -81,6 +83,10 @@ class ComposePage extends StatefulWidget {
   final String? titleHint;
   final String? contentHint;
 
+  /// Whether the writer changed something the page doesn't hold itself: a new discussion's tags
+  /// and poll, a private one's people. Closing then asks too, as it does for the text.
+  final ValueListenable<bool>? otherChanges;
+
   @override
   State<ComposePage> createState() => _ComposePageState();
 }
@@ -111,7 +117,10 @@ class _ComposePageState extends State<ComposePage> {
   late final String _openedTitle = _titleController.text;
   late final String _openedContent = _contentController.text;
 
-  bool _hasChanges() => _titleController.text != _openedTitle || _contentController.text != _openedContent;
+  bool _hasChanges() =>
+      _titleController.text != _openedTitle ||
+      _contentController.text != _openedContent ||
+      (widget.otherChanges?.value ?? false);
 
   /// Whether the toolbar offers @-mentions: they need the forum's search-users permission.
   bool get _canMention => FlarumForum.of(widget.site).info?.can('canSearchUsers') ?? false;
@@ -423,7 +432,7 @@ class _ComposePageState extends State<ComposePage> {
     final textTheme = Theme.of(context).textTheme;
 
     return DiscardChangesScope(
-      listenable: Listenable.merge([_titleController, _contentController]),
+      listenable: Listenable.merge([_titleController, _contentController, widget.otherChanges]),
       hasChanges: _hasChanges,
       isEdit: widget.isEdit,
       busy: _isSubmitting,

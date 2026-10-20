@@ -421,27 +421,49 @@ class _ThreadPageState extends State<ThreadPage> {
     );
   }
 
-  /// Opens the thread again at post [number], loaded afresh: a new reply, an edited post.
-  void _reload({required int at}) {
+  /// Opens the thread again at post [number], loaded afresh: a new reply, an edited post, a post
+  /// outside the window. The list starts again (a new key) only once the new window is in, so it
+  /// opens at the post: started before, it took its first row from the old window, where the post
+  /// isn't, and stayed at the top of the new one, about half a page above it.
+  Future<void> _reload({required int at}) async {
+    _near = at;
+    await _model.open(near: at);
+    if (!mounted) return;
+    if (_model.error case final error? when _model.discussion != null) {
+      // The old window stays; say why the new one didn't come.
+      SnackbarHelper.showError(context, describeError(context, error));
+      return;
+    }
     setState(() {
-      _near = at;
       _generation++;
+      _flash(at);
     });
-    _model.open(near: at);
   }
 
   /// Scrolls to post [number], reopening the thread there if it isn't loaded.
   void _goTo(int number) {
     final index = _model.indexOfNumber(number);
-    if (index >= 0 && _scroll.isAttached) {
+    // Loaded, or missing from the window's middle (deleted): the next one stands in. A post before
+    // the window is not loaded, though the window's first post is the first with a number above it.
+    final loaded = index > 0 || (index == 0 && (_model.posts.first.number == number || !_model.hasPrevious));
+    if (loaded && _scroll.isAttached) {
       _scroll.scrollTo(index: _leading + index, duration: const Duration(milliseconds: 300));
+      setState(() => _flash(number));
       return;
     }
-    setState(() {
-      _near = number;
-      _generation++;
-    });
-    _model.open(near: number);
+    _reload(at: number);
+  }
+
+  @visibleForTesting
+  void goTo(int number) => _goTo(number);
+
+  /// The post the reader was just taken to, lit up for a moment as the web does (`flashItem`).
+  int? _flashNumber;
+  int _flashes = 0;
+
+  void _flash(int number) {
+    _flashNumber = number;
+    _flashes++;
   }
 
   PostContentCallbacks _callbacksFor(FlarumPost post) => PostContentCallbacks(
@@ -544,7 +566,7 @@ class _ThreadPageState extends State<ThreadPage> {
     final index = row - _leading;
     if (index < _model.posts.length) {
       final post = _model.posts[index];
-      return PostTile(
+      final tile = PostTile(
         key: ValueKey(post.id),
         site: widget.site,
         post: post,
@@ -571,6 +593,7 @@ class _ThreadPageState extends State<ThreadPage> {
         onApprove: post.canApprove && !post.isApproved ? () => _approvePost(post) : null,
         onPollChanged: _signedIn ? (poll) => _pollChanged(post.id, poll) : null,
       );
+      return post.number == _flashNumber ? _Flash(key: ValueKey(_flashes), child: tile) : tile;
     }
     // The end: more to come, a page that failed, or the thread's end.
     if (_model.hasNext) {
@@ -585,6 +608,50 @@ class _ThreadPageState extends State<ThreadPage> {
     }
     // Room under the last post for the Reply button.
     return SizedBox(height: _canReply ? 96 : DesignTokens.spacingXXXL);
+  }
+}
+
+/// A tint behind [child] that fades out, to show which post the reader was taken to. Still when
+/// the phone asks for less motion: the post is at the top of the list either way.
+class _Flash extends StatefulWidget {
+  const _Flash({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  State<_Flash> createState() => _FlashState();
+}
+
+class _FlashState extends State<_Flash> with SingleTickerProviderStateMixin {
+  late final _fade = AnimationController(vsync: this, duration: const Duration(milliseconds: 1600));
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _fade.value = 1;
+    } else if (!_fade.isAnimating && _fade.value == 0) {
+      _fade.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _fade.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tint = Theme.of(context).colorScheme.primary.withValues(alpha: 0.12);
+    return AnimatedBuilder(
+      animation: _fade,
+      builder: (context, child) => ColoredBox(
+        color: Color.lerp(tint, tint.withValues(alpha: 0), Curves.easeIn.transform(_fade.value))!,
+        child: child,
+      ),
+      child: widget.child,
+    );
   }
 }
 

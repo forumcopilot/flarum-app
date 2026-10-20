@@ -151,6 +151,24 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets('a jump to a post outside the window opens there, with the post at the top', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('long')),
+        ));
+        await _pumpUntil(tester, find.text('Post 1 of 60.'));
+        // A real network: frames are drawn while the window loads.
+        fixtures.latency = const Duration(milliseconds: 300);
+        (tester.state(find.byType(ThreadPage)) as dynamic).goTo(21);
+        await _pumpUntil(tester, find.text('Post 21 of 60.'));
+        await tester.pump(const Duration(seconds: 2));
+        expect(tester.getTopLeft(find.text('Post 21 of 60.')).dy, lessThan(250),
+            reason: 'at the top, not half a page below, where the list used to stay');
+        expect(find.text('Post 12 of 60.'), findsNothing, reason: "the window's first posts are above the screen");
+        await _close(tester);
+      });
+
       testWidgets('opened part-way down, it offers the posts before', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(

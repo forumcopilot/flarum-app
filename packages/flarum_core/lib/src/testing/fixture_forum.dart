@@ -41,6 +41,10 @@ class FixtureForum {
   /// Every request fails as it does with no connection (Dio's connection error, no response).
   bool offline = false;
 
+  /// How long each answer takes. Zero answers before the next frame, which no network does: a test
+  /// of what the reader sees while a page loads sets a real delay.
+  Duration latency = Duration.zero;
+
   String discussionId(String name) => (seed['discussions'] as Map)[name] as String;
   String userId(String name) => (seed['users'] as Map)[name] as String;
   String tagId(String name) => (seed['tags'] as Map)[name] as String;
@@ -144,6 +148,7 @@ class _FixtureAdapter implements HttpClientAdapter {
   @override
   Future<ResponseBody> fetch(RequestOptions options, Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
     forum.requests.add(options);
+    if (forum.latency > Duration.zero) await Future<void>.delayed(forum.latency);
     if (forum.offline) {
       throw DioException.connectionError(
         requestOptions: options,

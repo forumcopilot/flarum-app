@@ -163,6 +163,15 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
 
   FlarumNewPoll? _poll;
 
+  /// Set once the writer picks tags or adds, changes or removes the poll.
+  final _touched = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _touched.dispose();
+    super.dispose();
+  }
+
   /// Without flarum/tags the forum has no tags to choose.
   bool get _usesTags => _forum.info?.tagRules != null;
 
@@ -192,7 +201,10 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
     final tags = _tags;
     if (tags == null) return;
     final chosen = await TagPickerPage.open(context, tags: tags, rules: _forum.info?.tagRules, selected: _chosen);
-    if (chosen != null && mounted) setState(() => _chosen = chosen);
+    if (chosen != null && mounted) {
+      setState(() => _chosen = chosen);
+      _touched.value = true;
+    }
   }
 
   Future<void> _editPoll() async {
@@ -202,7 +214,10 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
       poll: _poll,
       limitsChoices: _forum.info?.version == FlarumVersion.v2,
     );
-    if (poll != null && mounted) setState(() => _poll = poll);
+    if (poll != null && mounted) {
+      setState(() => _poll = poll);
+      _touched.value = true;
+    }
   }
 
   Future<FlarumDiscussion> _start(String title, String content) async {
@@ -231,6 +246,7 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
       site: widget.site,
       title: l10n.startDiscussion,
       showTitleField: true,
+      otherChanges: _touched,
       initialTitle: widget.draft?.title,
       initialContent: widget.draft?.content,
       header: _usesTags || _canStartPolls
@@ -263,7 +279,10 @@ class _NewDiscussionPageState extends State<_NewDiscussionPage> {
                           tooltip: l10n.editPoll,
                           onPressed: _editPoll,
                           deleteButtonTooltipMessage: l10n.removePoll,
-                          onDeleted: () => setState(() => _poll = null),
+                          onDeleted: () {
+                            setState(() => _poll = null);
+                            _touched.value = true;
+                          },
                         ),
               ],
             )
@@ -293,6 +312,15 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   late final List<FlarumUser> _people = [if (widget.to case final to?) to];
 
+  /// Set once the writer adds or removes someone.
+  final _touched = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _touched.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -315,6 +343,7 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
     final user = await MentionPickerPage.open(context, widget.site);
     if (user == null || !mounted || user.id == _forum.info?.actor?.id || _people.any((p) => p.id == user.id)) return;
     setState(() => _people.add(user));
+    _touched.value = true;
   }
 
   Future<FlarumDiscussion> _start(String title, String content) async {
@@ -339,6 +368,7 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
       title: l10n.startPrivateDiscussion,
       showTitleField: true,
       submitLabel: l10n.postPrivateDiscussion,
+      otherChanges: _touched,
       titleHint: l10n.privateDiscussionTitleHint,
       initialTitle: widget.draft?.title,
       initialContent: widget.draft?.content,
@@ -351,7 +381,10 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
             InputChip(
               avatar: FlarumAvatar(user: user, radius: 12),
               label: Text(user.displayName),
-              onDeleted: () => setState(() => _people.remove(user)),
+              onDeleted: () {
+                setState(() => _people.remove(user));
+                _touched.value = true;
+              },
             ),
           ActionChip(
             avatar: const Icon(Icons.person_add_alt, size: 18),

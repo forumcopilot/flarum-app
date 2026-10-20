@@ -48,6 +48,32 @@ Future<void> _close(WidgetTester tester) async {
 /// fof/polls in the thread and the composer, replayed from the write fixtures: carol's poll, bob
 /// voting in it (tool/record_write_fixtures.dart).
 void main() {
+
+  testWidgets('the poll editor closes at once untouched, and asks once something is written', (tester) async {
+    await tester.pumpWidget(_app(Builder(
+      builder: (context) => TextButton(
+        onPressed: () => PollEditorPage.open(context, maxOptions: 10),
+        child: const Text('open'),
+      ),
+    )));
+    Future<void> close() async {
+      await tester.tap(find.byIcon(Icons.close));
+      await _settle(tester);
+    }
+
+    await tester.tap(find.text('open'));
+    await _settle(tester);
+    await close();
+    expect(find.byType(PollEditorPage), findsNothing, reason: 'nothing to lose');
+
+    await tester.tap(find.text('open'));
+    await _settle(tester);
+    await tester.enterText(find.widgetWithText(TextField, 'Question'), 'Which day?');
+    await tester.pump();
+    await close();
+    expect(find.text('Do you want to discard your changes?'), findsOneWidget);
+    expect(find.byType(PollEditorPage), findsOneWidget, reason: 'still open until the reader says');
+  });
   setUp(FlarumForum.resetForTesting);
 
   for (final version in FlarumVersion.values) {

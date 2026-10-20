@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/views/widgets/discard_changes_scope.dart';
 import 'package:intl/intl.dart';
 
 import '../../l10n/flarum_l10n.dart';
@@ -44,6 +45,35 @@ class _PollEditorPageState extends State<PollEditorPage> {
   late DateTime? _endDate = widget.poll?.endDate;
   String? _problem;
 
+  /// Bumped by every edit, for the close prompt to follow ([DiscardChangesScope]).
+  final _edits = ValueNotifier(0);
+
+  /// The form as it opened, to tell whether closing would lose an edit.
+  late final String _opened;
+
+  @override
+  void initState() {
+    super.initState();
+    _opened = _snapshot();
+  }
+
+  String _snapshot() => [
+        _question.text,
+        for (final answer in _answers) answer.text,
+        _multiple,
+        _maxVotes,
+        _public,
+        _changeVote,
+        _hideVotes,
+        _endDate,
+      ].join('\u0000');
+
+  /// A change the reader made: rebuilt, and counted as an edit.
+  void _edit(VoidCallback change) {
+    setState(change);
+    _edits.value++;
+  }
+
   /// A field whose editing clears what Done found wrong: the reader is putting it right. Only a
   /// change of text: a tap into the field moves the cursor, which notifies too, and the message
   /// leaving then would move the fields under the finger.
@@ -53,6 +83,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
     controller.addListener(() {
       if (controller.text == last) return;
       last = controller.text;
+      _edits.value++;
       if (_problem != null && mounted) setState(() => _problem = null);
     });
     return controller;
@@ -60,6 +91,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
 
   @override
   void dispose() {
+    _edits.dispose();
     _question.dispose();
     for (final answer in _answers) {
       answer.dispose();
@@ -85,7 +117,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
     if (day == null || !mounted) return;
     final time = await showTimePicker(context: context, initialTime: TimeOfDay.fromDateTime(initial));
     if (time == null || !mounted) return;
-    setState(() => _endDate = DateTime(day.year, day.month, day.day, time.hour, time.minute));
+    _edit(() => _endDate = DateTime(day.year, day.month, day.day, time.hour, time.minute));
   }
 
   void _done() {
@@ -122,119 +154,124 @@ class _PollEditorPageState extends State<PollEditorPage> {
     final colorScheme = theme.colorScheme;
     final locale = Localizations.localeOf(context).toString();
     final answerCount = _answers.length;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.poll),
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
-          onPressed: () => Navigator.of(context).maybePop(),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsetsDirectional.only(end: DesignTokens.spacingS),
-            child: FilledButton(onPressed: _done, child: Text(l10n.submit)),
+    return DiscardChangesScope(
+      listenable: _edits,
+      hasChanges: () => _snapshot() != _opened,
+      isEdit: true,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.poll),
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
+            onPressed: () => Navigator.of(context).maybePop(),
           ),
-        ],
-      ),
-      body: ListView(
-        padding: DesignTokens.paddingL,
-        children: [
-          if (_problem case final problem?)
+          actions: [
             Padding(
-              padding: const EdgeInsets.only(bottom: DesignTokens.spacingM),
-              child: Text(problem, style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.error)),
+              padding: const EdgeInsetsDirectional.only(end: DesignTokens.spacingS),
+              child: FilledButton(onPressed: _done, child: Text(l10n.submit)),
             ),
-          TextField(
-            controller: _question,
-            autofocus: widget.poll == null,
-            maxLength: 255,
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration(labelText: l10n.pollQuestion),
-          ),
-          const SizedBox(height: DesignTokens.spacingS),
-          for (final (i, answer) in _answers.indexed)
-            Padding(
-              padding: const EdgeInsets.only(bottom: DesignTokens.spacingS),
-              child: TextField(
-                controller: answer,
-                maxLength: 255,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  labelText: l10n.pollAnswer(i + 1),
-                  counterText: '',
-                  suffixIcon: answerCount > 2
-                      ? IconButton(
-                          icon: const Icon(Icons.remove_circle_outline),
-                          tooltip: l10n.pollRemoveAnswer,
-                          onPressed: () => setState(() => _answers.removeAt(i).dispose()),
-                        )
-                      : null,
+          ],
+        ),
+        body: ListView(
+          padding: DesignTokens.paddingL,
+          children: [
+            if (_problem case final problem?)
+              Padding(
+                padding: const EdgeInsets.only(bottom: DesignTokens.spacingM),
+                child: Text(problem, style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.error)),
+              ),
+            TextField(
+              controller: _question,
+              autofocus: widget.poll == null,
+              maxLength: 255,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(labelText: l10n.pollQuestion),
+            ),
+            const SizedBox(height: DesignTokens.spacingS),
+            for (final (i, answer) in _answers.indexed)
+              Padding(
+                padding: const EdgeInsets.only(bottom: DesignTokens.spacingS),
+                child: TextField(
+                  controller: answer,
+                  maxLength: 255,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    labelText: l10n.pollAnswer(i + 1),
+                    counterText: '',
+                    suffixIcon: answerCount > 2
+                        ? IconButton(
+                            icon: const Icon(Icons.remove_circle_outline),
+                            tooltip: l10n.pollRemoveAnswer,
+                            onPressed: () => _edit(() => _answers.removeAt(i).dispose()),
+                          )
+                        : null,
+                  ),
                 ),
               ),
-            ),
-          if (answerCount < widget.maxOptions)
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: TextButton.icon(
-                onPressed: () => setState(() => _answers.add(_field(''))),
-                icon: const Icon(Icons.add),
-                label: Text(l10n.pollAddAnswer),
+            if (answerCount < widget.maxOptions)
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: TextButton.icon(
+                  onPressed: () => _edit(() => _answers.add(_field(''))),
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n.pollAddAnswer),
+                ),
               ),
+            const Divider(height: DesignTokens.spacingXL),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.pollMultipleChoice),
+              value: _multiple,
+              onChanged: (value) => _edit(() => _multiple = value),
             ),
-          const Divider(height: DesignTokens.spacingXL),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.pollMultipleChoice),
-            value: _multiple,
-            onChanged: (value) => setState(() => _multiple = value),
-          ),
-          if (_multiple && widget.limitsChoices)
+            if (_multiple && widget.limitsChoices)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(l10n.pollChoicesAllowed),
+                trailing: DropdownButton<int>(
+                  value: _maxVotes > answerCount ? 0 : _maxVotes,
+                  items: [
+                    DropdownMenuItem(value: 0, child: Text(l10n.pollAnyNumber)),
+                    for (var n = 2; n < answerCount; n++) DropdownMenuItem(value: n, child: Text('$n')),
+                  ],
+                  onChanged: (value) => _edit(() => _maxVotes = value ?? 0),
+                ),
+              ),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.pollPublic),
+              value: _public,
+              onChanged: (value) => _edit(() => _public = value),
+            ),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.pollAllowChangeVote),
+              value: _changeVote,
+              onChanged: (value) => _edit(() => _changeVote = value),
+            ),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(l10n.pollChoicesAllowed),
-              trailing: DropdownButton<int>(
-                value: _maxVotes > answerCount ? 0 : _maxVotes,
-                items: [
-                  DropdownMenuItem(value: 0, child: Text(l10n.pollAnyNumber)),
-                  for (var n = 2; n < answerCount; n++) DropdownMenuItem(value: n, child: Text('$n')),
-                ],
-                onChanged: (value) => setState(() => _maxVotes = value ?? 0),
-              ),
+              title: Text(l10n.pollCloses),
+              subtitle: Text(_endDate == null ? l10n.pollNeverCloses : DateFormat.yMMMd(locale).add_jm().format(_endDate!)),
+              onTap: _chooseEnd,
+              trailing: _endDate == null
+                  ? const Icon(Icons.event_outlined)
+                  : IconButton(
+                      icon: const Icon(Icons.clear),
+                      tooltip: l10n.pollNeverCloses,
+                      onPressed: () => _edit(() => _endDate = null),
+                    ),
             ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.pollPublic),
-            value: _public,
-            onChanged: (value) => setState(() => _public = value),
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.pollAllowChangeVote),
-            value: _changeVote,
-            onChanged: (value) => setState(() => _changeVote = value),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.pollCloses),
-            subtitle: Text(_endDate == null ? l10n.pollNeverCloses : DateFormat.yMMMd(locale).add_jm().format(_endDate!)),
-            onTap: _chooseEnd,
-            trailing: _endDate == null
-                ? const Icon(Icons.event_outlined)
-                : IconButton(
-                    icon: const Icon(Icons.clear),
-                    tooltip: l10n.pollNeverCloses,
-                    onPressed: () => setState(() => _endDate = null),
-                  ),
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.pollHideVotes),
-            subtitle: _endDate == null ? Text(l10n.pollHideVotesNeedsEnd) : null,
-            value: _hideVotes && _endDate != null,
-            onChanged: _endDate == null ? null : (value) => setState(() => _hideVotes = value),
-          ),
-        ],
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.pollHideVotes),
+              subtitle: _endDate == null ? Text(l10n.pollHideVotesNeedsEnd) : null,
+              value: _hideVotes && _endDate != null,
+              onChanged: _endDate == null ? null : (value) => _edit(() => _hideVotes = value),
+            ),
+          ],
+        ),
       ),
     );
   }

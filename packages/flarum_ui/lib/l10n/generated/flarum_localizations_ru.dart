@@ -480,6 +480,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get posts => 'Сообщения';
 
   @override
+  String get usersTab => 'Пользователи';
+
+  @override
   String profileJoined(String date) {
     return 'С нами с $date';
   }
@@ -526,6 +529,12 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get searchHint => 'Поиск';
+
+  @override
+  String get recentSearches => 'Недавние поиски';
+
+  @override
+  String get clearRecentSearches => 'Очистить';
 
   @override
   String noResultsFor(String query) {

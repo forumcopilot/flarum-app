@@ -479,6 +479,9 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get posts => 'Publicaciones';
 
   @override
+  String get usersTab => 'Usuarios';
+
+  @override
   String profileJoined(String date) {
     return 'Se unió en $date';
   }
@@ -521,6 +524,12 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get searchHint => 'Buscar en el foro';
+
+  @override
+  String get recentSearches => 'Búsquedas recientes';
+
+  @override
+  String get clearRecentSearches => 'Borrar';
 
   @override
   String noResultsFor(String query) {

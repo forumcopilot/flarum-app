@@ -806,6 +806,12 @@ abstract class FlarumLocalizations {
   /// **'Posts'**
   String get posts;
 
+  /// Search's Users tab, as Flarum's search heads its users
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get usersTab;
+
   /// When the person joined, e.g. 'Joined Mar 2024'
   ///
   /// In en, this message translates to:
@@ -853,6 +859,18 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Search Forum'**
   String get searchHint;
+
+  /// Heading over the searches made before, shown while the search field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Searches'**
+  String get recentSearches;
+
+  /// Forgets the recent searches
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearRecentSearches;
 
   /// Search with no results
   ///

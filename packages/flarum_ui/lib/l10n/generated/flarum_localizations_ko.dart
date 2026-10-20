@@ -470,6 +470,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get posts => '게시물';
 
   @override
+  String get usersTab => '사용자';
+
+  @override
   String profileJoined(String date) {
     return '$date 가입';
   }
@@ -510,6 +513,12 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get searchHint => '검색';
+
+  @override
+  String get recentSearches => '최근 검색';
+
+  @override
+  String get clearRecentSearches => '지우기';
 
   @override
   String noResultsFor(String query) {

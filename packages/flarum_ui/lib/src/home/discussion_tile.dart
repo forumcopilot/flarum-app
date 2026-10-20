@@ -7,17 +7,22 @@ import 'package:forum_kit/utils/time_utils.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../tags/tag_label.dart';
 import '../widgets/flarum_avatar.dart';
+import '../search/highlight.dart';
 
 /// A discussion in a list, as the web's discussion row: the starter's
 /// avatar, the title (bold while there's something unread), its tags, who
 /// replied last and when, and how many replies (or unread ones).
 class DiscussionTile extends StatelessWidget {
-  const DiscussionTile({super.key, required this.discussion, this.unread = 0, this.recipients = const [], this.onTap});
+  const DiscussionTile(
+      {super.key, required this.discussion, this.unread = 0, this.recipients = const [], this.onTap, this.highlight});
 
   final FlarumDiscussion discussion;
 
   /// Who a private discussion is with, shown where the web shows its tags.
   final List<FlarumUser> recipients;
+
+  /// A search: its words are bold in the title.
+  final String? highlight;
 
   /// Posts the reader hasn't read; zero for a guest.
   final int unread;
@@ -62,7 +67,7 @@ class DiscussionTile extends StatelessWidget {
                       if (d.subscription == 'follow') _badge(Icons.star, const Color(0xFFFFA000), l10n.following),
                       if (d.hasBestAnswer) _badge(Icons.check, ForumColors.of(context).success, l10n.answered),
                       if (d.hasPoll) _badge(Icons.poll_outlined, const Color(0xFF4D698E), l10n.poll),
-                      TextSpan(text: d.title),
+                      if (highlight case final query?) ...highlighted(d.title, query) else TextSpan(text: d.title),
                     ]),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

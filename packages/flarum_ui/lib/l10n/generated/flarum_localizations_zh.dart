@@ -470,6 +470,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get posts => '帖子';
 
   @override
+  String get usersTab => '用户';
+
+  @override
   String profileJoined(String date) {
     return '$date 加入';
   }
@@ -510,6 +513,12 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get searchHint => '搜索社区';
+
+  @override
+  String get recentSearches => '最近搜索';
+
+  @override
+  String get clearRecentSearches => '清除';
 
   @override
   String noResultsFor(String query) {

@@ -755,6 +755,10 @@
     "description": "The ✕ on Home's welcome message, as Flarum's welcome hero names it"
   },
   "posts": "Posts",
+  "usersTab": "Users",
+  "@usersTab": {
+    "description": "Search's Users tab, as Flarum's search heads its users"
+  },
   "profileJoined": "Joined {date}",
   "@profileJoined": {
     "description": "When the person joined, e.g. 'Joined Mar 2024'",
@@ -809,6 +813,14 @@
   "searchHint": "Search Forum",
   "@searchHint": {
     "description": "Hint in the search field"
+  },
+  "recentSearches": "Recent Searches",
+  "@recentSearches": {
+    "description": "Heading over the searches made before, shown while the search field is empty"
+  },
+  "clearRecentSearches": "Clear",
+  "@clearRecentSearches": {
+    "description": "Forgets the recent searches"
   },
   "noResultsFor": "It looks like there are no results for “{query}”.",
   "@noResultsFor": {

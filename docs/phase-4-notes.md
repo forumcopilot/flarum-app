@@ -90,6 +90,19 @@ approved, and are built (its table names each one's commit). Done since:
 - **The composer's bar** (44b3495; item 18): Bold, Italic, Quote, Link, a bulleted list and Code
   in one tap, with flarum-markdown's tooltips; the rest under Formatting.
 
+- **The rest of the Later list** (21 Oct): Home's view and sort menus (19; 3b353a8); messages
+  grouped as a chat, with flarum/messages' labels and Mark all as read (22; 74c7762); a sticky
+  discussion's opening words (17; 126efa7: 2.0 sends `firstPostExcerpt`, 1.x's are read with
+  `filter[number]=1`, since 1.x lists include the first post only when a request names no
+  includes); swipe to mark read and long-press controls (20; 98116ca); flarum_ui's own Suspend page
+  and close prompts in Flarum's words (23; 294ffb0, no longer forum_kit's); Edit Tags and Flagged
+  Posts (24; 7bd401f); the discussion's people on `@` (25; 88e188f); notification settings (29;
+  4041917); each tag's latest discussion and the best answer's preview (30; 7abb713). 2.0's
+  coloured header (`theme_colored_header`) is only in the web page's HTML, so the app can't follow
+  it. Flapp: Explore opens a typed address and a non-Flarum link offers the browser (28; 5b4a725),
+  a post's link to another forum opens it in Flapp through `FlarumHost.openOtherForumLink` (27;
+  72306ad, b0ebaa8), and Your forums badges unread activity (26; d73e0cf).
+
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
 and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one

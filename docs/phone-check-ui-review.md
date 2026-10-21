@@ -1,11 +1,11 @@
 # Phone check: the UI review's changes
 
-The 15 changes from the UI review, the bugs it found, and the message notification fix, on the
-Pixel (the iPhone's part is in `iphone-tests.md`, run at the end). What each change should look
+The 15 changes from the UI review, the bugs it found, the message notification fix and the
+review's Later list, on the Pixel (the iPhone's part is in `iphone-tests.md`, run at the end). What each change should look
 like, with the website beside it: the "Flarum App UI Changes" page,
 https://claude.ai/artifact/7tRPwsajPnnFewKn5dPJ6S.
 
-Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 44b3495 or later),
+Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 7abb713 or later),
 against the pinned discourse-app (no pubspec_overrides). Build once per forum, 2.0 first:
 
     flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
@@ -70,6 +70,51 @@ unless it names one.
 17. **The composer's bar**: Reply, write a word, select it, tap B: it becomes **bold** markup;
     the bar has Italic, Quote, Link, List and Code too, ••• holds the rest, and the bar scrolls
     sideways to @ and the uploads. Close without posting.
+
+18. **Home's menus**: "All Discussions ▾" lists All Discussions, Following, Bookmarks, Private
+    Discussions (and Messages on 2.0), then the tags; Following lists the discussions bob follows,
+    a tag opens its page. The sort menu ("Latest ▾") has Latest, Top, Newest, Oldest, and on 2.0
+    Title (A–Z) and (Z–A); Oldest puts the oldest first.
+19. **Sticky discussions**: on Home and on a tag's page, a sticky discussion bob hasn't opened
+    shows its first lines under its row (Forum rules: "Be kind. Stay on topic…"); once opened, it
+    doesn't.
+20. **Swipe and long-press on a discussion**: swipe an unread discussion to the right: "Mark as
+    Read" shows behind it, and the row's unread count goes. Long-press a row: its title, Mark as
+    Read (if unread), Not Following / Following / Ignoring, Bookmark, Share, Copy Link.
+21. **Closing a composer**: Reply, write something, ✕: "You have not posted your reply. Do you
+    wish to discard it?" with Cancel, Save Draft and Discard; Start a Discussion asks about "your
+    discussion", an edit about "your changes". Cancel each time.
+22. **Mentions**: in a discussion with several people, Reply and type "@": the discussion's
+    people show at once, the latest poster first, without bob; type a letter to narrow them.
+    Close without posting.
+23. **Messages** (2.0 only): Account → Messages: the ✓✓ (Mark all as read) when one is unread.
+    In a conversation: "Start of the conversation" above the first message, two messages a minute
+    apart from the same person drawn as one run with one avatar; long-press a message: "Message
+    copied.", and it pastes elsewhere.
+24. **Notification settings**: Notifications → ⚙: a row per kind of notification, in the
+    forum's words, with Web and Email boxes (likes have Web only), then "Automatically follow
+    discussions that I reply to". Untick one, and check the forum's settings page in the browser
+    shows it unticked; tick it again.
+25. **Tags and best answers**: Tags: each tag shows its latest discussion and when; a tap on it
+    opens the discussion at its last post. "Router keeps dropping Wi-Fi every evening": under the
+    first post, the best answer's preview (Best Answer, Nils Hagen, its first lines); a tap goes to
+    it.
+26. **Moderation** (only with a moderator's login on a test forum; skip it otherwise, tests cover
+    it): a discussion's shield menu → Edit Tags (the tag picker, on its tags); Account → Flagged
+    Posts; a member's profile → ⋮ → Suspend: Flarum's page (Not suspended, Suspended
+    indefinitely, for a number of days, the reason and the message). Cancel each time.
+
+**Flapp** (forumcopilot/flapp main, 697d1b6 or later, built from the Mac's checkout):
+
+27. **Your forums' badges**: log in to a test forum in Flapp, go back to the list: its tile has a
+    badge with its unread notifications and messages; one you aren't logged in to has none.
+28. **Explore**: type "discuss.flarum.org" into Explore's search: "Open discuss.flarum.org" above
+    the results opens it. Add forum → "example.com": "…isn't a Flarum forum…" with Open in
+    browser, which opens it in Chrome.
+29. **Links to other forums**: in a throwaway discussion on a test forum, reply with a link to
+    https://discuss.flarum.org/d/1 and tap it: it opens in Flapp (Flarum Community, that
+    discussion), not in Chrome; a link to https://example.com still opens Chrome. Delete the
+    reply after (or list it below).
 
 Report: PASS or FAIL per check and forum, with what you saw and screenshots of failures; the
 Pixel model and Android version; and everything created (likes left, messages, anything posted)

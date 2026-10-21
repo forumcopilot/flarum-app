@@ -54,7 +54,10 @@ The Pixel's list is `phone-check-ui-review.md`; on the iPhone, what differs from
 4. **Saving a picture**: the picture viewer's Save Image asks to add to Photos the first time
    (the app's words: "To save pictures from posts to your photos."), then the picture is in
    Photos; Share offers the picture, with Save Image among the choices.
-5. **Colours under the notch**: the discussion header and a tag's page in the tag's colour reach
+5. **Gestures**: swiping a discussion to mark it read doesn't fight iOS's back swipe (it goes
+   right from the row, Back from the screen's edge); long-press menus and the picture viewer's
+   drag down.
+6. **Colours under the notch**: the discussion header and a tag's page in the tag's colour reach
    the top of the screen cleanly, in light and dark.
 
 ## Later phases

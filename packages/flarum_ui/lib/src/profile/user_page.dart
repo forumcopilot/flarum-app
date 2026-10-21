@@ -235,9 +235,10 @@ class _UserPageState extends State<UserPage> {
   }
 }
 
-/// The web's user card: a band in the member's colour (the colour of their letter avatar; a quiet
-/// band behind a picture, whose colour the web reads from the image), their avatar, which opens
-/// large, their name, group badges, online or last seen, when they joined, and their best answers.
+/// The web's user card: a band in the member's colour (the colour of their letter avatar, under
+/// the web's darkening layer; a quiet band behind a picture, whose colour the web reads from the
+/// image), their avatar in a white ring, which opens large, their name, group badges, online or
+/// last seen, when they joined, and their best answers.
 class _UserHeader extends StatelessWidget {
   const _UserHeader({required this.user});
 
@@ -251,10 +252,12 @@ class _UserHeader extends StatelessWidget {
     final joined = user.joinTime;
     final seen = user.lastSeenAt;
     final avatar = user.avatarUrl;
-    final band = avatar == null ? flarumAvatarColor(user.displayName) : theme.colorScheme.surfaceContainer;
-    final onBand = avatar == null
-        ? (ThemeData.estimateBrightnessForColor(band) == Brightness.dark ? Colors.white : Colors.black87)
-        : theme.colorScheme.onSurface;
+    // Flarum's shadow colour, which it lays over the card (.darkenBackground) and under the avatar.
+    final shadow = Colors.black.withValues(alpha: theme.brightness == Brightness.dark ? 0.5 : 0.35);
+    final band = avatar == null
+        ? Color.alphaBlend(shadow, flarumAvatarColor(user.displayName))
+        : theme.colorScheme.surfaceContainer;
+    final onBand = avatar == null ? Colors.white : theme.colorScheme.onSurface;
     final online = seen != null && DateTime.now().difference(seen.toLocal()) < const Duration(minutes: 5);
     final info = [
       if (online) l10n.online else if (seen != null) l10n.lastSeen(formatTimeAgo(seen.toLocal(), context)),
@@ -268,10 +271,18 @@ class _UserHeader extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXL),
       child: Column(
         children: [
-          FlarumAvatar(
-            user: user,
-            radius: 40,
-            onTap: avatar == null ? null : () => ImageViewerPage.open(context, avatar, [avatar]),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [BoxShadow(color: shadow, blurRadius: 6, offset: const Offset(0, 2))],
+            ),
+            child: FlarumAvatar(
+              user: user,
+              radius: 36,
+              onTap: avatar == null ? null : () => ImageViewerPage.open(context, avatar, [avatar]),
+            ),
           ),
           const SizedBox(height: DesignTokens.spacingM),
           Text(user.displayName, textAlign: TextAlign.center, style: theme.textTheme.titleLarge?.copyWith(color: onBand)),

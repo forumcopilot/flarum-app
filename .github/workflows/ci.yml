@@ -31,7 +31,10 @@ jobs:
 
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test
+      - run: flutter test --file-reporter json:build/test-results.json
+      # The log is for admins only: each failing test as an annotation, on the public run page.
+      - if: failure()
+        run: python3 ../../tool/ci/annotate_failures.py build/test-results.json
 
   flarum_ui:
     name: flarum_ui
@@ -51,7 +54,9 @@ jobs:
 
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test
+      - run: flutter test --file-reporter json:build/test-results.json
+      - if: failure()
+        run: python3 ../../tool/ci/annotate_failures.py build/test-results.json
 
   app:
     name: App (analyze, test, debug APK)
@@ -73,7 +78,9 @@ jobs:
 
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test
+      - run: flutter test --file-reporter json:build/test-results.json
+      - if: failure()
+        run: python3 tool/ci/annotate_failures.py build/test-results.json
       - run: flutter build apk --debug
 
       # The template's default forum (discuss.flarum.org), for a quick look on a phone.

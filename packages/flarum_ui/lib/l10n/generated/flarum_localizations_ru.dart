@@ -768,6 +768,24 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get formatting => 'Форматирование';
 
   @override
+  String get addBold => 'Жирный текст';
+
+  @override
+  String get addItalic => 'Курсивный текст';
+
+  @override
+  String get insertQuote => 'Цитата';
+
+  @override
+  String get addLink => 'Вставить ссылку';
+
+  @override
+  String get addBulletedList => 'Маркированный список';
+
+  @override
+  String get insertCode => 'Код';
+
+  @override
   String get pleaseEnterTitle => 'Пожалуйста, введите заголовок';
 
   @override

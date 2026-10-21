@@ -601,6 +601,12 @@ class _ComposePageState extends State<ComposePage> {
     final kit = kitL10n(context);
     final colorScheme = Theme.of(context).colorScheme;
     final iconColor = _isContentFieldFocused ? colorScheme.onSurfaceVariant : colorScheme.onSurfaceVariant.withValues(alpha: 0.38);
+    // While the text isn't being edited, the formats wait (they act at its cursor).
+    Widget format(String action, IconData icon, String tooltip) => IconButton(
+          icon: Icon(icon, color: iconColor),
+          tooltip: tooltip,
+          onPressed: _isContentFieldFocused ? () => _insertMarkup(action) : null,
+        );
     PopupMenuEntry<String> item(String action, IconData icon, String label) => PopupMenuItem(
           value: action,
           child: Row(
@@ -626,65 +632,68 @@ class _ComposePageState extends State<ComposePage> {
         top: false,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: DesignTokens.spacingXS),
-          child: Row(
-            children: [
-              Semantics(
-                label: l10n.formatting,
-                hint: l10n.composerFormattingHint,
-                button: true,
-                enabled: _isContentFieldFocused,
-                child: PopupMenuButton<String>(
+          // One row that scrolls sideways, as the website's composer bar: the common formats one
+          // tap away, the rest under Formatting; then mentions and uploads.
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                format('B', Icons.format_bold, l10n.addBold),
+                format('I', Icons.format_italic, l10n.addItalic),
+                format('QUOTE', Icons.format_quote, l10n.insertQuote),
+                format('URL', Icons.link, l10n.addLink),
+                format('LIST', Icons.format_list_bulleted, l10n.addBulletedList),
+                format('CODE', Icons.code, l10n.insertCode),
+                Semantics(
+                  label: l10n.formatting,
+                  hint: l10n.composerFormattingHint,
+                  button: true,
                   enabled: _isContentFieldFocused,
-                  // A menu of actions: a bold glyph would read as a bold button.
-                  icon: Icon(Icons.text_format, color: iconColor),
-                  tooltip: l10n.formatting,
-                  onSelected: _insertMarkup,
-                  itemBuilder: (context) => [
-                    item('B', Icons.format_bold, l10n.bold),
-                    item('I', Icons.format_italic, kit.italic),
-                    item('U', Icons.format_underline, l10n.underline),
-                    item('S', Icons.strikethrough_s, l10n.strikethrough),
-                    const PopupMenuDivider(),
-                    item('URL', Icons.link, kit.link),
-                    item('IMG', Icons.image, kit.image),
-                    item('VIDEO', Icons.videocam, l10n.video),
-                    const PopupMenuDivider(),
-                    item('QUOTE', Icons.format_quote, kit.quote),
-                    item('CODE', Icons.code, kit.code),
-                    item('SPOILER', Icons.visibility_off, l10n.spoiler),
-                    const PopupMenuDivider(),
-                    item('LIST', Icons.format_list_bulleted, l10n.bulletList),
-                    item('LIST=1', Icons.format_list_numbered, l10n.numberedList),
-                    item('*', Icons.subdirectory_arrow_right, l10n.listItem),
-                  ],
-                ),
-              ),
-              if (_canMention)
-                IconButton(
-                  icon: Icon(Icons.alternate_email, color: iconColor),
-                  tooltip: l10n.mentionUser,
-                  onPressed: _isContentFieldFocused ? _mention : null,
-                ),
-              // Uploads go at the cursor, or at the end: they don't wait for the text's focus.
-              if (_canUpload) ...[
-                IconButton(
-                  icon: Icon(Icons.add_photo_alternate_outlined, color: colorScheme.onSurfaceVariant),
-                  tooltip: l10n.uploadImage,
-                  onPressed: _isSubmitting ? null : () => _pick(UploadSource.photos),
-                ),
-                if (FilePickerUtils.canTakePhoto)
-                  IconButton(
-                    icon: Icon(Icons.photo_camera_outlined, color: colorScheme.onSurfaceVariant),
-                    tooltip: l10n.takePhoto,
-                    onPressed: _isSubmitting ? null : () => _pick(UploadSource.camera),
+                  child: PopupMenuButton<String>(
+                    enabled: _isContentFieldFocused,
+                    icon: Icon(Icons.more_horiz, color: iconColor),
+                    tooltip: l10n.formatting,
+                    onSelected: _insertMarkup,
+                    itemBuilder: (context) => [
+                      item('U', Icons.format_underline, l10n.underline),
+                      item('S', Icons.strikethrough_s, l10n.strikethrough),
+                      item('SPOILER', Icons.visibility_off, l10n.spoiler),
+                      const PopupMenuDivider(),
+                      item('IMG', Icons.image, kit.image),
+                      item('VIDEO', Icons.videocam, l10n.video),
+                      const PopupMenuDivider(),
+                      item('LIST=1', Icons.format_list_numbered, l10n.numberedList),
+                      item('*', Icons.subdirectory_arrow_right, l10n.listItem),
+                    ],
                   ),
-                IconButton(
-                  icon: Icon(Icons.attach_file, color: colorScheme.onSurfaceVariant),
-                  tooltip: l10n.attachFile,
-                  onPressed: _isSubmitting ? null : () => _pick(UploadSource.files),
                 ),
+                if (_canMention)
+                  IconButton(
+                    icon: Icon(Icons.alternate_email, color: iconColor),
+                    tooltip: l10n.mentionUser,
+                    onPressed: _isContentFieldFocused ? _mention : null,
+                  ),
+                // Uploads go at the cursor, or at the end: they don't wait for the text's focus.
+                if (_canUpload) ...[
+                  IconButton(
+                    icon: Icon(Icons.add_photo_alternate_outlined, color: colorScheme.onSurfaceVariant),
+                    tooltip: l10n.uploadImage,
+                    onPressed: _isSubmitting ? null : () => _pick(UploadSource.photos),
+                  ),
+                  if (FilePickerUtils.canTakePhoto)
+                    IconButton(
+                      icon: Icon(Icons.photo_camera_outlined, color: colorScheme.onSurfaceVariant),
+                      tooltip: l10n.takePhoto,
+                      onPressed: _isSubmitting ? null : () => _pick(UploadSource.camera),
+                    ),
+                  IconButton(
+                    icon: Icon(Icons.attach_file, color: colorScheme.onSurfaceVariant),
+                    tooltip: l10n.attachFile,
+                    onPressed: _isSubmitting ? null : () => _pick(UploadSource.files),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

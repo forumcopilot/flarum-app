@@ -112,6 +112,39 @@ void main() {
     expect(sent, 'fine');
   });
 
+  testWidgets('the bar formats in one tap, as the website\'s does; the rest are under Formatting', (tester) async {
+    await tester.pumpWidget(_app(Builder(
+      builder: (context) => TextButton(
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
+          builder: (_) => ComposePage(site: _site(), title: 'Reply', onSubmit: (_, __) async => null),
+        )),
+        child: const Text('open'),
+      ),
+    )));
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    for (final tooltip in ['Add bold text', 'Add italic text', 'Insert a quote', 'Add a link', 'Add a bulleted list', 'Insert code']) {
+      expect(find.byTooltip(tooltip), findsOneWidget, reason: tooltip);
+    }
+
+    await tester.enterText(_field(), 'loud');
+    final field = tester.widget<TextField>(_field()).controller!;
+    field.selection = const TextSelection(baseOffset: 0, extentOffset: 4);
+    await tester.pump();
+    await tester.tap(find.byTooltip('Add bold text'));
+    await tester.pump();
+    expect(_text(tester), '**loud**');
+
+    await tester.tap(find.byTooltip('Formatting'));
+    await tester.pumpAndSettle();
+    expect(find.text('Underline'), findsOneWidget);
+    expect(find.text('Spoiler'), findsOneWidget);
+    expect(find.text('Bold'), findsNothing, reason: 'in the bar, not the menu');
+    await tester.tap(find.text('Spoiler'));
+    await tester.pumpAndSettle();
+    expect(_text(tester), '**loud**||||', reason: 'the spoiler, at the cursor');
+  });
+
   for (final version in FlarumVersion.values) {
     group('Flarum ${version.name}:', () {
       late FixtureForum fixtures;

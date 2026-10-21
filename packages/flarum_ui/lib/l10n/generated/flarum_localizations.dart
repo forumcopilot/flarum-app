@@ -1172,6 +1172,42 @@ abstract class FlarumLocalizations {
   /// **'Formatting'**
   String get formatting;
 
+  /// The composer bar's Bold button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Add bold text'**
+  String get addBold;
+
+  /// The composer bar's Italic button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Add italic text'**
+  String get addItalic;
+
+  /// The composer bar's Quote button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Insert a quote'**
+  String get insertQuote;
+
+  /// The composer bar's Link button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Add a link'**
+  String get addLink;
+
+  /// The composer bar's bulleted list button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Add a bulleted list'**
+  String get addBulletedList;
+
+  /// The composer bar's Code button (flarum-markdown).
+  ///
+  /// In en, this message translates to:
+  /// **'Insert code'**
+  String get insertCode;
+
   /// Validation message when title is empty
   ///
   /// In en, this message translates to:

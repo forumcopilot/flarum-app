@@ -738,6 +738,24 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get formatting => '格式';
 
   @override
+  String get addBold => '粗体';
+
+  @override
+  String get addItalic => '斜体';
+
+  @override
+  String get insertQuote => '引用';
+
+  @override
+  String get addLink => '链接';
+
+  @override
+  String get addBulletedList => '无序列表';
+
+  @override
+  String get insertCode => '插入代码';
+
+  @override
   String get pleaseEnterTitle => '请输入标题';
 
   @override

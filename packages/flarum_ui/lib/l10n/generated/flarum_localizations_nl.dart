@@ -756,6 +756,24 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get formatting => 'Opmaak';
 
   @override
+  String get addBold => 'Vetgedrukte tekst toevoegen';
+
+  @override
+  String get addItalic => 'Cursieve tekst toevoegen';
+
+  @override
+  String get insertQuote => 'Citaat invoegen';
+
+  @override
+  String get addLink => 'Hyperlink toevoegen';
+
+  @override
+  String get addBulletedList => 'Opsomminglijst toevoegen';
+
+  @override
+  String get insertCode => 'Voeg code in';
+
+  @override
   String get pleaseEnterTitle => 'Voer een titel in';
 
   @override

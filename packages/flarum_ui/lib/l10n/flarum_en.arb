@@ -1124,6 +1124,30 @@
   "@formatting": {
     "description": "Composer: formatting"
   },
+  "addBold": "Add bold text",
+  "@addBold": {
+    "description": "The composer bar's Bold button (flarum-markdown)."
+  },
+  "addItalic": "Add italic text",
+  "@addItalic": {
+    "description": "The composer bar's Italic button (flarum-markdown)."
+  },
+  "insertQuote": "Insert a quote",
+  "@insertQuote": {
+    "description": "The composer bar's Quote button (flarum-markdown)."
+  },
+  "addLink": "Add a link",
+  "@addLink": {
+    "description": "The composer bar's Link button (flarum-markdown)."
+  },
+  "addBulletedList": "Add a bulleted list",
+  "@addBulletedList": {
+    "description": "The composer bar's bulleted list button (flarum-markdown)."
+  },
+  "insertCode": "Insert code",
+  "@insertCode": {
+    "description": "The composer bar's Code button (flarum-markdown)."
+  },
   "pleaseEnterTitle": "Please enter a title",
   "@pleaseEnterTitle": {
     "description": "Validation message when title is empty"

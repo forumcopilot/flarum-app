@@ -737,6 +737,24 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get formatting => '書式設定';
 
   @override
+  String get addBold => '太字を追加';
+
+  @override
+  String get addItalic => '斜体を追加';
+
+  @override
+  String get insertQuote => '引用を追加';
+
+  @override
+  String get addLink => 'リンクを追加';
+
+  @override
+  String get addBulletedList => '箇条書きを追加';
+
+  @override
+  String get insertCode => 'コードを追加';
+
+  @override
   String get pleaseEnterTitle => 'タイトルを入力してください';
 
   @override

@@ -736,6 +736,24 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get formatting => '서식';
 
   @override
+  String get addBold => '굵은 텍스트 추가';
+
+  @override
+  String get addItalic => '이탤릭체 텍스트 추가';
+
+  @override
+  String get insertQuote => '인용문 삽입';
+
+  @override
+  String get addLink => '링크 추가';
+
+  @override
+  String get addBulletedList => '글머리 기호 목록 추가';
+
+  @override
+  String get insertCode => '코드 삽입';
+
+  @override
   String get pleaseEnterTitle => '제목을 입력하세요';
 
   @override

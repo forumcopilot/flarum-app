@@ -756,6 +756,24 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get formatting => 'Formatação';
 
   @override
+  String get addBold => 'Adicionar texto em negrito';
+
+  @override
+  String get addItalic => 'Adicionar texto em itálico';
+
+  @override
+  String get insertQuote => 'Inserir uma citação';
+
+  @override
+  String get addLink => 'Adicionar um link';
+
+  @override
+  String get addBulletedList => 'Adicionar uma lista com marcadores';
+
+  @override
+  String get insertCode => 'Inserir código';
+
+  @override
   String get pleaseEnterTitle => 'Por favor, insira um título';
 
   @override

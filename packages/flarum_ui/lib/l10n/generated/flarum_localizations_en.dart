@@ -753,6 +753,24 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get formatting => 'Formatting';
 
   @override
+  String get addBold => 'Add bold text';
+
+  @override
+  String get addItalic => 'Add italic text';
+
+  @override
+  String get insertQuote => 'Insert a quote';
+
+  @override
+  String get addLink => 'Add a link';
+
+  @override
+  String get addBulletedList => 'Add a bulleted list';
+
+  @override
+  String get insertCode => 'Insert code';
+
+  @override
   String get pleaseEnterTitle => 'Please enter a title';
 
   @override

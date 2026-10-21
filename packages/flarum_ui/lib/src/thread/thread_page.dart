@@ -146,10 +146,14 @@ class _ThreadPageState extends State<ThreadPage> {
     if (visible.isEmpty) return;
     final hero = _header && visible.any((p) => p.index == 0 && p.itemTrailingEdge > 0.02);
     if (hero != _heroOnScreen) setState(() => _heroOnScreen = hero);
-    // The first post on screen, counted from the discussion's start, for the bar's "12 of 340".
+    // The first post on screen, counted from the discussion's start, for the bar's "12 of 340";
+    // the last, once the discussion's end is all on screen (the web's scrubber reads "60 of 60"
+    // there, where the top post can be 57).
     final shown = visible.map((p) => p.index - _leading).where((i) => i >= 0 && i < _model.posts.length);
     if (shown.isNotEmpty) {
-      final position = _model.start + shown.reduce(math.min) + 1;
+      final atEnd = !_model.hasNext &&
+          visible.any((p) => p.index - _leading == _model.posts.length - 1 && p.itemTrailingEdge <= 1.0);
+      final position = atEnd ? _model.start + _model.posts.length : _model.start + shown.reduce(math.min) + 1;
       if (position != _position) setState(() => _position = position);
     }
     var lastPost = -1;
@@ -523,7 +527,8 @@ class _ThreadPageState extends State<ThreadPage> {
     // the window is not loaded, though the window's first post is the first with a number above it.
     final loaded = index > 0 || (index == 0 && (_model.posts.first.number == number || !_model.hasPrevious));
     if (loaded && _scroll.isAttached) {
-      _scroll.scrollTo(index: _leading + index, duration: const Duration(milliseconds: 300));
+      // The first post, with the discussion's header above it.
+      _scroll.scrollTo(index: _rowOf(index), duration: const Duration(milliseconds: 300));
       setState(() => _flash(number));
       return;
     }
@@ -543,7 +548,7 @@ class _ThreadPageState extends State<ThreadPage> {
     if (total == 0) return;
     index = index.clamp(0, total - 1);
     if (index >= _model.start && index < _model.end && _scroll.isAttached) {
-      _scroll.scrollTo(index: _leading + index - _model.start, duration: const Duration(milliseconds: 300));
+      _scroll.scrollTo(index: _rowOf(index - _model.start), duration: const Duration(milliseconds: 300));
       setState(() => _flash(_model.posts[index - _model.start].number));
       return;
     }
@@ -711,8 +716,12 @@ class _ThreadPageState extends State<ThreadPage> {
     final near = _near;
     if (near == null) return 0;
     final index = _model.indexOfNumber(near);
-    return index < 0 ? 0 : _leading + index;
+    return index < 0 ? 0 : _rowOf(index);
   }
+
+  /// The list's row for the loaded post at [index]: the discussion's header for its first post,
+  /// so the header shows with it rather than just above the screen.
+  int _rowOf(int index) => index == 0 && _header ? 0 : _leading + index;
 
   Widget _row(BuildContext context, int row, FlarumLocalizations l10n) {
     if (_header && row == 0) return _DiscussionHero(discussion: _model.discussion!, recipients: _recipients);

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../flarum_api.dart';
@@ -36,7 +37,18 @@ class FlarumForum {
   final FlarumApi api;
 
   /// What the last [refresh] read, or null before the first.
-  FlarumForumInfo? info;
+  FlarumForumInfo? get info => _info;
+  set info(FlarumForumInfo? value) {
+    _info = value;
+    _infoChanges.value++;
+  }
+
+  FlarumForumInfo? _info;
+  final _infoChanges = ValueNotifier(0);
+
+  /// Notifies whenever [info] is read again ([refresh], a sign-in or sign-out), from wherever: the
+  /// badges counting what's unread follow it.
+  Listenable get infoChanges => _infoChanges;
 
   FlarumVersion? get version => info?.version;
 

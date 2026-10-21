@@ -10,9 +10,16 @@ import '../render/links.dart';
 /// The web addresses of a forum's pages, as Flarum links them: to share or copy, so they open on
 /// the forum's website, or in an app that reads Flarum links.
 abstract final class WebLinks {
-  /// A discussion, at post [near] when it's past the first.
-  static String discussion(SiteContext site, String id, {String? slug, int? near}) =>
-      '${_base(site)}/d/$id${slug == null || slug.isEmpty ? '' : '-$slug'}${near == null || near <= 1 ? '' : '/$near'}';
+  /// A discussion, at post [near] when it's past the first. Flarum's [slug] is already the whole
+  /// path segment, its id included (`3-welcome-to-the-forum`); one without the id gets it.
+  static String discussion(SiteContext site, String id, {String? slug, int? near}) {
+    final segment = slug == null || slug.isEmpty
+        ? id
+        : slug == id || slug.startsWith('$id-')
+            ? slug
+            : '$id-$slug';
+    return '${_base(site)}/d/$segment${near == null || near <= 1 ? '' : '/$near'}';
+  }
 
   static String user(SiteContext site, FlarumUser user) => '${_base(site)}/u/${user.slug ?? user.username}';
 

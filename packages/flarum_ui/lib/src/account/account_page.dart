@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import 'forum_web_page.dart';
 import '../safety/flagged_posts_page.dart';
 import '../render/links.dart';
 import '../../config/app_forum_config.dart';
@@ -97,6 +98,7 @@ class _AccountPageState extends State<AccountPage> {
     if (sure != true || !mounted) return;
     setState(() => _busy = true);
     await FlarumUserProxy(widget.site).logoutUserAsync();
+    await forgetWebLogin(widget.site);
     ForumSession.changed(widget.site);
     if (!mounted) return;
     setState(() => _busy = false);
@@ -155,8 +157,9 @@ class _AccountPageState extends State<AccountPage> {
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.settings_outlined),
               title: Text(l10n.settings),
-              trailing: const Icon(Icons.open_in_new),
-              onTap: () => openExternally('${widget.site.site.url.replaceAll(RegExp(r'/+$'), '')}/settings'),
+              trailing: const Icon(Icons.chevron_right),
+              // The forum's settings page, logged in as the reader (in Chrome they usually aren't).
+              onTap: () => ForumWebPage.open(context, widget.site, path: '/settings', title: l10n.settings),
             ),
             if (_forum.extensions.bookmarks) ...[
               ListTile(

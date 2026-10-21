@@ -152,8 +152,11 @@ class DiscussionListModel extends ChangeNotifier {
   /// Private Discussions page), else read once for its row, which shows it when it comes.
   List<FlarumUser> recipientsOf(FlarumDiscussion d) {
     if (!d.isPrivate) return const [];
-    if (d.recipients.isNotEmpty) return d.recipients;
-    if (_recipients[d.id] case final known?) return known;
+    // The others, as the web names them: never the reader.
+    List<FlarumUser> others(List<FlarumUser> users) =>
+        [for (final user in users) if (user.id != forum.info?.actor?.id) user];
+    if (d.recipients.isNotEmpty) return others(d.recipients);
+    if (_recipients[d.id] case final known?) return others(known);
     if (_readingRecipients.add(d.id)) {
       forum.api.recipients(d.id).then((users) {
         _recipients[d.id] = users;

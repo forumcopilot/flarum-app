@@ -4,6 +4,7 @@ import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/models/domain/site.dart';
@@ -100,6 +101,26 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 20));
         expect(fixtures.requests.where((r) => r.method == 'PATCH'), isEmpty);
         model.dispose();
+      });
+
+      testWidgets("opened at its first post, a discussion shows its header; at its end, the bar counts the last post",
+          (tester) async {
+        fixtures.forum();
+        tester.view.physicalSize = const Size(800, 3000);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome'), near: 1),
+        ));
+        await _pumpUntil(tester, find.byType(PostTile));
+        await tester.pump(const Duration(milliseconds: 300));
+        expect(tester.widget<ScrollablePositionedList>(find.byType(ScrollablePositionedList)).initialScrollIndex, 0,
+            reason: 'the header row, not the first post under it');
+        // All four posts on the tall screen: the last is in view, as the web's "4 of 4".
+        expect(find.textContaining('4 of 4'), findsOneWidget);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
       });
 
       testWidgets("a post's link off the forum goes to the host first, which may open it in the app", (tester) async {

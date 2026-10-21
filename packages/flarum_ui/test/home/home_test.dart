@@ -98,12 +98,15 @@ void main() {
               'recipientUsers': {
                 'data': [
                   {'type': 'users', 'id': '90'},
+                  // The reader is a recipient too, and isn't named to herself.
+                  {'type': 'users', 'id': fixtures.userId('alice')},
                 ],
               },
             },
           },
           'included': [
             {'type': 'users', 'id': '90', 'attributes': {'username': 'carol', 'displayName': 'carol'}},
+            {'type': 'users', 'id': fixtures.userId('alice'), 'attributes': {'username': 'alice', 'displayName': 'alice'}},
           ],
         };
         // Tall enough for the private discussion's row, under the stickies' opening words.

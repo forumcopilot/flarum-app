@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
@@ -33,7 +34,7 @@ class AppShell extends StatefulWidget {
   State<AppShell> createState() => _AppShellState();
 }
 
-class _AppShellState extends State<AppShell> {
+class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   int _tab = 0;
 
@@ -54,15 +55,15 @@ class _AppShellState extends State<AppShell> {
       _tab = tab;
       _visited.add(tab);
     });
-    // The badge's count comes from the forum's info; read it again after a
-    // look at the notifications.
-    if (tab == _notificationsTab) _refreshBadge();
+    // The badges' counts come from the forum's info: read it again at each tab, as the web reads
+    // its counts again on each page.
+    _refreshBadge();
   }
 
-  /// Reads the forum's info again for the badge's unread count.
+  /// Reads the forum's info again for the badges' unread counts ([_infoChanged] redraws them).
   void _refreshBadge() {
     if (!_forum.isSignedIn) return;
-    _forum.refresh().then((_) => mounted ? setState(() {}) : null, onError: (_) {});
+    _forum.refresh().ignore();
   }
 
   /// The Notifications list's unread rows, once it has loaded, and the forum's count when the two
@@ -90,13 +91,33 @@ class _AppShellState extends State<AppShell> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     ForumSession.changesOf(widget.site).addListener(_signedInOrOut);
+    // Read again anywhere (a conversation read, a page's refresh): the badges follow.
+    _forum.infoChanges.addListener(_infoChanged);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     ForumSession.changesOf(widget.site).removeListener(_signedInOrOut);
+    _forum.infoChanges.removeListener(_infoChanged);
     super.dispose();
+  }
+
+  void _infoChanged() {
+    if (!mounted) return;
+    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _infoChanged());
+      return;
+    }
+    setState(() {});
+  }
+
+  /// Back in front: what came while the app was away (a message, a notification) shows.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) _refreshBadge();
   }
 
   /// A Log In or Log Out anywhere in the forum ([ForumSession]): the lists load again as the new

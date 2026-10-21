@@ -157,6 +157,33 @@
   "@scrubberNow": {
     "description": "The scrubber's jump to the newest post, as Flarum names it"
   },
+  "timeGapDays": "{count, plural, =1{a day later} other{{count} days later}}",
+  "@timeGapDays": {
+    "description": "Between two posts written days apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, \"{period} later\"). Shown when they're more than 4 days apart.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeGapMonths": "{count, plural, =1{a month later} other{{count} months later}}",
+  "@timeGapMonths": {
+    "description": "Between two posts written months apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, \"{period} later\"). Shown when they're more than 4 days apart.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeGapYears": "{count, plural, =1{a year later} other{{count} years later}}",
+  "@timeGapYears": {
+    "description": "Between two posts written years apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, \"{period} later\"). Shown when they're more than 4 days apart.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "postHidden": "This post was deleted.",
   "@postHidden": {
     "description": "Shown in place of a deleted (hidden) post"

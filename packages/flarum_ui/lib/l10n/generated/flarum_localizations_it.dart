@@ -142,6 +142,39 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get scrubberNow => 'Ora';
 
   @override
+  String timeGapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count giorni dopo',
+      one: 'un giorno dopo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count mesi dopo',
+      one: 'un mese dopo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapYears(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count anni dopo',
+      one: 'un anno dopo',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get postHidden => 'Questo post è stato eliminato.';
 
   @override

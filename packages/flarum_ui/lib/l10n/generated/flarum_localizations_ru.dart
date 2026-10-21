@@ -147,6 +147,45 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get scrubberNow => 'Сейчас';
 
   @override
+  String timeGapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count дня спустя',
+      many: '$count дней спустя',
+      few: '$count дня спустя',
+      one: '$count день спустя',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count месяца спустя',
+      many: '$count месяцев спустя',
+      few: '$count месяца спустя',
+      one: '$count месяц спустя',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapYears(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count года спустя',
+      many: '$count лет спустя',
+      few: '$count года спустя',
+      one: '$count год спустя',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get postHidden => 'Это сообщение удалено.';
 
   @override

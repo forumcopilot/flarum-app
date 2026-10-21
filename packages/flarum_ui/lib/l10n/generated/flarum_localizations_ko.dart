@@ -138,6 +138,36 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get scrubberNow => '최신 게시물';
 
   @override
+  String timeGapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count일 후',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count개월 후',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapYears(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count년 후',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get postHidden => '삭제된 게시물입니다.';
 
   @override

@@ -139,6 +139,36 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get scrubberNow => '最新回复';
 
   @override
+  String timeGapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 天后',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个月后',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapYears(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 年后',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get postHidden => '此帖子已被删除。';
 
   @override

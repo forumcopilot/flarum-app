@@ -139,6 +139,36 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get scrubberNow => '最新の投稿';
 
   @override
+  String timeGapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count日後',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countか月後',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String timeGapYears(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count年後',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get postHidden => 'この投稿は削除されました。';
 
   @override

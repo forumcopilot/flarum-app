@@ -459,7 +459,7 @@ class _ThreadPageState extends State<ThreadPage> {
   /// outside the window. The list starts again (a new key) only once the new window is in, so it
   /// opens at the post: started before, it took its first row from the old window, where the post
   /// isn't, and stayed at the top of the new one, about half a page above it.
-  Future<void> _reload({required int at}) async {
+  Future<void> _reload({required int at, bool flash = true}) async {
     _near = at;
     await _model.open(near: at);
     if (!mounted) return;
@@ -470,7 +470,7 @@ class _ThreadPageState extends State<ThreadPage> {
     }
     setState(() {
       _generation++;
-      _flash(at);
+      if (flash) _flash(at);
     });
   }
 
@@ -647,14 +647,19 @@ class _ThreadPageState extends State<ThreadPage> {
             onRetry: () => _model.open(near: _near),
           ),
         ThreadModel(discussion: null) => const Center(child: CircularProgressIndicator()),
-        _ => ScrollablePositionedList.separated(
-            key: ValueKey(_generation),
-            itemScrollController: _scroll,
-            itemPositionsListener: _positions,
-            itemCount: _rowCount,
-            initialScrollIndex: _initialRow(),
-            separatorBuilder: (_, __) => const Divider(height: 1),
-            itemBuilder: (context, row) => _row(context, row, l10n),
+        // Pulled down at the top: the posts on screen again, with what's changed.
+        _ => RefreshIndicator(
+            onRefresh: () => _reload(at: _firstShownPost(), flash: false),
+            child: ScrollablePositionedList.separated(
+              key: ValueKey(_generation),
+              itemScrollController: _scroll,
+              itemPositionsListener: _positions,
+              itemCount: _rowCount,
+              initialScrollIndex: _initialRow(),
+              physics: const AlwaysScrollableScrollPhysics(),
+              separatorBuilder: (_, __) => const Divider(height: 1),
+              itemBuilder: (context, row) => _row(context, row, l10n),
+            ),
           ),
       },
     );
@@ -718,7 +723,14 @@ class _ThreadPageState extends State<ThreadPage> {
         onPollChanged: _signedIn ? (poll) => _pollChanged(post.id, poll) : null,
         link: WebLinks.discussion(widget.site, widget.discussionId, slug: _model.discussion?.slug, near: post.number),
       );
-      return post.number == _flashNumber ? _Flash(key: ValueKey(_flashes), child: tile) : tile;
+      final shown = post.number == _flashNumber ? _Flash(key: ValueKey(_flashes), child: tile) : tile;
+      final gap = index > 0 ? timeLapsed(_model.posts[index - 1].createdAt, post.createdAt, l10n) : null;
+      if (gap == null) return shown;
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [_TimeGap(text: gap), shown],
+      );
     }
     // The end: more to come, a page that failed, or the thread's end.
     if (_model.hasNext) {
@@ -733,6 +745,45 @@ class _ThreadPageState extends State<ThreadPage> {
     }
     // Room under the last post for the Reply button.
     return const SizedBox(height: DesignTokens.spacingXXXL);
+  }
+}
+
+/// What the website writes between two posts more than 4 days apart ("5 days later"), counted as
+/// it counts them (dayjs: days up to 25, then a month, months up to 10, then a year); null when
+/// they're closer, or either time is missing.
+String? timeLapsed(DateTime? before, DateTime? after, FlarumLocalizations l10n) {
+  if (before == null || after == null) return null;
+  final gap = after.difference(before);
+  if (gap <= const Duration(days: 4)) return null;
+  final days = (gap.inHours / 24).round();
+  if (days <= 25) return l10n.timeGapDays(days);
+  if (days <= 45) return l10n.timeGapMonths(1);
+  final months = (days / 30.44).round();
+  if (months <= 10) return l10n.timeGapMonths(months);
+  if (months <= 17) return l10n.timeGapYears(1);
+  return l10n.timeGapYears((days / 365.25).round());
+}
+
+/// The website's mark of a long silence between posts: small, bold, in capitals, muted.
+class _TimeGap extends StatelessWidget {
+  const _TimeGap({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, 0),
+      child: Text(
+        text.toUpperCase(),
+        style: theme.textTheme.labelSmall?.copyWith(
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.4,
+          color: theme.colorScheme.onSurfaceVariant,
+        ),
+      ),
+    );
   }
 }
 

@@ -320,6 +320,24 @@ abstract class FlarumLocalizations {
   /// **'Now'**
   String get scrubberNow;
 
+  /// Between two posts written days apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, "{period} later"). Shown when they're more than 4 days apart.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{a day later} other{{count} days later}}'**
+  String timeGapDays(int count);
+
+  /// Between two posts written months apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, "{period} later"). Shown when they're more than 4 days apart.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{a month later} other{{count} months later}}'**
+  String timeGapMonths(int count);
+
+  /// Between two posts written years apart, as the website marks a long silence (core.forum.post_stream.time_lapsed_text, "{period} later"). Shown when they're more than 4 days apart.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{a year later} other{{count} years later}}'**
+  String timeGapYears(int count);
+
   /// Shown in place of a deleted (hidden) post
   ///
   /// In en, this message translates to:

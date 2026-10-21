@@ -169,7 +169,7 @@ class _ThreadPageState extends State<ThreadPage> {
   }
 
   /// Opens a link from a post: this forum's discussions here, users and tags
-  /// through the host, everything else outside the app.
+  /// through the host, another forum's where the host opens it, everything else outside the app.
   void _openLink(String url) {
     final link = ForumLink.parse(url, widget.site.site.url);
     switch (link) {
@@ -184,13 +184,13 @@ class _ThreadPageState extends State<ThreadPage> {
       case TagLink(:final slug):
         _openTag(slug, url);
       default:
-        openExternally(url);
+        openPostLink(context, url);
     }
   }
 
   /// A tag in the app, as a profile opens in it; a tag the forum doesn't list, on the web.
   Future<void> _openTag(String slug, String url) async {
-    if (!await TagPage.openBySlug(context, widget.site, slug)) openExternally(url);
+    if (!await TagPage.openBySlug(context, widget.site, slug) && mounted) openExternally(url);
   }
 
   /// Opens the profile of the user whose slug is [slug] (see [UserPage]).

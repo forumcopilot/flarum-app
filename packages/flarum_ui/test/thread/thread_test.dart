@@ -102,6 +102,30 @@ void main() {
         model.dispose();
       });
 
+      testWidgets("a post's link off the forum goes to the host first, which may open it in the app", (tester) async {
+        fixtures.forum();
+        final offered = <String>[];
+        FlarumHost.openOtherForumLink = (context, url) async {
+          offered.add(url);
+          return true;
+        };
+        addTearDown(() => FlarumHost.openOtherForumLink = null);
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
+        ));
+        await _pumpUntil(tester, find.textContaining('a link'));
+        await tester.pump(const Duration(milliseconds: 300));
+        await tester.tapOnText(find.textRange.ofSubstring('a link').first);
+        await tester.pump();
+        expect(offered, ['https://flarum.org'], reason: 'flarum.org: not this forum');
+        await tester.tap(find.text('@bob').first);
+        await tester.pump();
+        expect(offered, hasLength(1), reason: "this forum's own links stay in it");
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets("a post's menu copies its web address", (tester) async {
         fixtures.forum();
         String? copied;

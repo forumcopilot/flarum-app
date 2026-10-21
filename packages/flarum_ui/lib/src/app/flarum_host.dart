@@ -54,4 +54,10 @@ abstract final class FlarumHost {
   /// folder), called [name] until its own title has loaded.
   static Site site({required String name, required String url}) =>
       AppForumConfig(name: name, baseUrl: url).toSite();
+
+  /// Where a link in a post or message that leads off its forum goes first. A host with several
+  /// forums opens another Flarum forum's link in the app and answers true; false, or no handler,
+  /// opens it in the browser. Links the reader asked to see on the web (View on Web) don't come
+  /// here.
+  static Future<bool> Function(BuildContext context, String url)? openOtherForumLink;
 }

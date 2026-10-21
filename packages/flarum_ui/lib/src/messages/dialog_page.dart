@@ -154,7 +154,7 @@ class _DialogPageState extends State<DialogPage> {
       case TagLink(:final slug):
         if (!await TagPage.openBySlug(context, widget.site, slug)) await openExternally(url);
       default:
-        await openExternally(url);
+        await openPostLink(context, url);
     }
   }
 

@@ -16,8 +16,9 @@ unless it names one.
 
 1. **Home**: the forum's welcome message heads Latest; ✕ hides it, and it stays hidden after the
    app is closed and opened again. Discussion rows: Forum rules has the red pin and the lock;
-   secondary tags (question, bug, iOS) are filled with their colour; a private discussion says
-   "With carol". The double tick (Mark All as Read) asks "Are you sure…"; Cancel.
+   secondary tags (question, bug, iOS) are filled with their colour; a private discussion names
+   only the others in it, never bob ("With alice"). The double tick (Mark All as Read) asks "Are
+   you sure…"; Cancel.
 2. **A discussion**: open "Router keeps dropping Wi-Fi every evening" (Tech Help). The header is in
    the tag's colour with the lock and the green check; scrolled up, the title moves into the top
    bar. The bottom bar says "1 of 5 posts" and Can't Reply (it's locked). Under each post: Like
@@ -30,14 +31,16 @@ unless it names one.
    composer with the mention: close it without posting.
 5. **Follow**: the star in the discussion's top bar → Following (the star fills; Following on
    the header); set it back to Not Following.
-6. **Share and Copy Link**: the top bar's share icon opens Android's share sheet (cancel it). A
-   post's ⋮ → Copy Link → "Link copied."; paste it into Chrome: it opens that post on the website.
+6. **Share and Copy Link**: the top bar's share icon opens Android's share sheet with the
+   website's address (`…/d/3-welcome-to-the-test-forum`, the id once); cancel it. A post's ⋮ →
+   Copy Link → "Link copied."; paste it into Chrome: `…/d/3-welcome-to-the-test-forum/4` opens
+   that post on the website.
    On bob's profile, ⋮ → Share and Copy Link.
 7. **Notifications**: grouped under each discussion's title, each with its kind's icon on the
    avatar and the post's first lines; a tap opens the post.
-8. **Account**: Profile opens bob's card; Settings opens the forum's settings page in the
-   browser; on 2.0 an unread-messages badge on the Account tab when bob has one; Log Out asks
-   first: Cancel.
+8. **Account**: Profile opens bob's card; Settings opens the forum's settings page in the app,
+   logged in as bob (the ↗ in its top bar opens it in Chrome); Back returns to Account. Log Out
+   asks first: Cancel.
 9. **Profile**: bob's card is a darkened version of his avatar colour, his avatar ringed in
    white; Last seen, Joined, best answers. The Likes and Mentions tabs list posts, and a tap opens
    one.
@@ -53,21 +56,23 @@ unless it names one.
     it goes back inside the page, not out of it.
 13. **Dark mode**: with the phone in dark mode, the discussion header, a tag's page and the
     profile card are readable.
-14. **A message notification** (2.0 only): on the website as bob, Settings → Notifications → tick
-    the alert (bell) column for "Someone sends me a message". As carol on the website, send bob a
-    message. In the app, Notifications shows "carol sent you a message" with its text; a tap opens
-    the conversation. Then untick bob's setting again.
+14. **The unread-messages badge** (2.0 only; flarum/messages only emails about a message, so it
+    never shows in Notifications): with the app on Home, as carol on the website send bob a
+    message. Put the app in the background and bring it back: the Account tab shows 1 (or change
+    tab: it shows then too). Open the conversation in Account → Messages, then Back: the Account
+    tab's badge is gone at once.
 
-15. **The picture viewer**: in "Formatting samples", tap a picture. Drag it down a little and let
+15. **The picture viewer**: in "Formatting samples", tap a picture (for the sideways swipe, 2.0's
+    "Feature request: dark mode" has bob's post with two). Drag it down a little and let
     go: it springs back; drag it further: it closes, the discussion showing through as it goes.
     Double-tap: it zooms in where tapped; drag around; double-tap: back out. Save Image: "Image
     saved.", and the picture is in Google Photos (or the gallery). Share: the share sheet offers
     the picture itself. Swipe sideways to the next picture.
 
 16. **Pull to refresh and long silences**: in a discussion, pull down at the top: the spinner,
-    then the posts again. No test-forum discussion has posts more than 4 days apart: with the
-    forum switcher at the bottom of Account, open discuss.flarum.org, where an older thread with
-    replies shows "… DAYS LATER" or "… MONTHS LATER" between posts; switch back after.
+    then the posts again. 2.0's "Feature request: dark mode" shows "10 DAYS LATER" before bob's
+    iPhone post. (On discuss.flarum.org, through the forum switcher at the bottom of Account,
+    "Install Issue - templateSpec.call", sorted Oldest, shows "12 DAYS LATER".)
 17. **The composer's bar**: Reply, write a word, select it, tap B: it becomes **bold** markup;
     the bar has Italic, Quote, Link, List and Code too, ••• holds the rest, and the bar scrolls
     sideways to @ and the uploads. Close without posting.
@@ -84,7 +89,8 @@ unless it names one.
     Read (if unread), Not Following / Following / Ignoring, Bookmark, Share, Copy Link.
 21. **Closing a composer**: Reply, write something, ✕: "You have not posted your reply. Do you
     wish to discard it?" with Cancel, Save Draft and Discard; Start a Discussion asks about "your
-    discussion", an edit about "your changes". Cancel each time.
+    discussion", an edit about "your changes" (2.0: bob's latest post; on 1.8 none of bob's posts
+    can be edited any more). Cancel each time.
 22. **Mentions**: in a discussion with several people, Reply and type "@": the discussion's
     people show at once, the latest poster first, without bob; type a letter to narrow them.
     Close without posting.
@@ -93,9 +99,9 @@ unless it names one.
     first message. Send carol two short messages in a row: they're drawn as one run, the time once
     under the second. Long-press a message: "Message copied.", and it pastes elsewhere.
 24. **Notification settings**: Notifications → ⚙: a row per kind of notification, in the
-    forum's words, with Web and Email boxes (likes have Web only), then "Automatically follow
-    discussions that I reply to". Untick one, and check the forum's settings page in the browser
-    shows it unticked; tick it again.
+    forum's words, with Web and Email boxes (likes have Web only, messages Email only), then
+    "Automatically follow discussions that I reply to". Untick one, and check Account → Settings
+    (the forum's page, in the app) shows it unticked; tick it again.
 25. **Tags and best answers**: Tags: each tag shows its latest discussion and when; a tap on it
     opens the discussion at its last post. "Router keeps dropping Wi-Fi every evening": under the
     first post, the best answer's preview (Best Answer, Nils Hagen, its first lines); a tap goes to

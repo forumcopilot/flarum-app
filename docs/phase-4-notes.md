@@ -103,6 +103,19 @@ approved, and are built (its table names each one's commit). Done since:
   a post's link to another forum opens it in Flapp through `FlarumHost.openOtherForumLink` (27;
   72306ad, b0ebaa8), and Your forums badges unread activity (26; d73e0cf).
 
+- **The Pixel run** (Pixel 4a, 20–21 Oct, at 3174df4; report on the Mac,
+  ~/flarum-phone-run/report-ui-review.md): everything passed on both forums but three bugs, fixed
+  since with tests: shared links repeated the id (Flarum's slug already starts with it);
+  Account → Settings opened the website's settings in Chrome, where the reader isn't logged in
+  (it's now a page in the app with the reader's token as the forum's remember cookie,
+  `ForumWebPage`, forgotten at Log Out); and the unread-messages badge waited for the Notifications
+  tab (the shell now follows `FlarumForum.infoChanges`, and reads the info again on each tab and
+  when the app comes back). Also: a private discussion's row no longer names the reader, a
+  discussion opened at its first post shows its header, and the bar counts the last post at the
+  end. A message notification can't be checked: flarum/messages only emails it (CLAUDE.md).
+  Left: Home keeps a discussion's row as it was when it's read from another tab, until a refresh
+  (as before for unread counts); a 1.8 visit once left a discussion unread, not reproduced.
+
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
 and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one

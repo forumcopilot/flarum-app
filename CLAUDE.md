@@ -124,8 +124,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}` `lastReadMessageId`. Dialogs
   can't be filtered by person (only `unread`): `FlarumApi.dialogWith` reads the list. A new
   message notifies with `messageReceived` (subject a `dialog-messages` resource, its dialog as
-  linkage), by email unless the reader turns on the alert in their settings; the actor's
-  `messageCount` counts unread ones. Dialogs can't be deleted through the API (the
+  linkage) by email only: its blueprint isn't `AlertableInterface`, so 2.0's alert driver registers
+  no alert preference for it (the website greys the column out) and it never reaches the
+  notification list. New messages show as the actor's `messageCount` (the app's badges); the app
+  still opens a `messageReceived` notification's conversation, should a forum make it alertable. Dialogs can't be deleted through the API (the
   recorder uses `tool/test_forums/delete_dialogs.php`).
 - Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
   source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made

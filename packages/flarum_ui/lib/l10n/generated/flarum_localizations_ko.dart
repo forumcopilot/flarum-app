@@ -245,6 +245,81 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get notifications => '알림';
 
   @override
+  String get notifyPrefNewPost => '누군가 내가 팔로우 중인 게시물에 답장했을 때';
+
+  @override
+  String get notifyPrefPostMentioned => '누군가 내 게시물 중 하나에 답장했을 때';
+
+  @override
+  String get notifyPrefUserMentioned => '누군가 게시물에서 나를 언급했을 때';
+
+  @override
+  String get notifyPrefGroupMentioned => '누군가가 게시물에서 내가 속한 그룹을 언급';
+
+  @override
+  String get notifyPrefPostLiked => '누군가 내 게시물 중 하나에 좋아요를 눌렀을 때';
+
+  @override
+  String get notifyPrefPostReacted => '누군가 내 게시물 중 하나에 반응했을 때';
+
+  @override
+  String get notifyPrefDiscussionRenamed => '누군가 내가 시작한 게시물의 이름을 바꿨을 때';
+
+  @override
+  String get notifyPrefDiscussionLocked => '누군가 내 게시물을 잠궜을 때';
+
+  @override
+  String get notifyPrefMessageReceived => '누군가 나에게 메시지를 보냈을 때';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      '누군가 나를 새 비공개 토의에 포함했을 때';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      '내가 참여한 비공개 토의에 누군가 글을 올렸을 때';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      '누군가 나를 기존 비공개 토의에 추가했을 때';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved => '참여 중인 비공개 토의에서 누군가 나갔을 때';
+
+  @override
+  String get notifyPrefAwardedBestAnswer => '누군가 내 게시물을 베스트 답변으로 선택했을 때';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion => '내가 참여한 토의에서 베스트 답변이 선택되었을 때';
+
+  @override
+  String get notifyPrefSelectBestAnswer => '내가 시작한 토의에서 베스트 답변을 고르라는 자동 알림';
+
+  @override
+  String get notifyPrefNewDiscussionInTag => '내가 팔로우하는 태그에 누군가 토의를 만들었을 때';
+
+  @override
+  String get notifyPrefNewPostInTag => '내가 팔로우하는 태그에 누군가 글을 올렸을 때';
+
+  @override
+  String get notifyPrefNewDiscussionTag => '누군가 토의의 태그를 내가 팔로우하는 태그로 바꿨을 때';
+
+  @override
+  String get notifyByWeb => '웹';
+
+  @override
+  String get notifyByEmail => '이메일';
+
+  @override
+  String get followAfterReply => '답장한 게시물을 자동으로 팔로우';
+
+  @override
+  String get followAfterCreate => '내가 만든 토의를 자동으로 팔로우';
+
+  @override
+  String get notifyForAllPosts => '토론에서 모든 새로운 게시물에 대해 알림을 받도록 설정';
+
+  @override
   String get settings => '설정';
 
   @override

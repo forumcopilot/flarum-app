@@ -252,6 +252,94 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get notifications => 'Notifications';
 
   @override
+  String get notifyPrefNewPost =>
+      'Someone posts in a discussion I\'m following';
+
+  @override
+  String get notifyPrefPostMentioned => 'Someone replies to one of my posts';
+
+  @override
+  String get notifyPrefUserMentioned => 'Someone mentions me in a post';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Someone mentions a group I\'m a member of in a post';
+
+  @override
+  String get notifyPrefPostLiked => 'Someone likes one of my posts';
+
+  @override
+  String get notifyPrefPostReacted => 'Someone reacts to one of my posts';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Someone renames a discussion I started';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Someone locks a discussion I started';
+
+  @override
+  String get notifyPrefMessageReceived => 'Someone sends me a message';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Someone includes me in a new private discussion';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Someone posts in a private discussion I\'m a recipient of';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Someone adds me to an existing private discussion';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'A recipient user leaves a private discussion I\'m a part of';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Someone sets my post as a best answer';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'A best answer is set in a discussion I participated in';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'An automated reminder to select a best answer in a discussion I started';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Someone creates a discussion in a tag I\'m following';
+
+  @override
+  String get notifyPrefNewPostInTag => 'Someone posts in a tag I\'m following';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Someone re-tags a discussion to a tag I\'m following';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'Email';
+
+  @override
+  String get followAfterReply =>
+      'Automatically follow discussions that I reply to';
+
+  @override
+  String get followAfterCreate =>
+      'Automatically follow discussions that I create';
+
+  @override
+  String get notifyForAllPosts =>
+      'Notify about every new post instead of only the last in a discussion';
+
+  @override
   String get settings => 'Settings';
 
   @override

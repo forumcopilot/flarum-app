@@ -263,6 +263,92 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get notifications => 'Уведомления';
 
   @override
+  String get notifyPrefNewPost => 'Кто-то ответил в теме из моих подписок';
+
+  @override
+  String get notifyPrefPostMentioned => 'Кто-то ответил на моё сообщение';
+
+  @override
+  String get notifyPrefUserMentioned => 'Кто-то упомянул меня в сообщении';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Кто-то упомянул мою группу в сообщении';
+
+  @override
+  String get notifyPrefPostLiked => 'Кто-то оценил моё сообщение';
+
+  @override
+  String get notifyPrefPostReacted => 'Реакция на одно из моих сообщений';
+
+  @override
+  String get notifyPrefDiscussionRenamed => 'Кто-то изменил название моей темы';
+
+  @override
+  String get notifyPrefDiscussionLocked => 'Кто-то закрыл мою тему';
+
+  @override
+  String get notifyPrefMessageReceived => 'Кто-то отправил мне сообщение';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Кто-то создал со мной переписку';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Кто-то ответил в переписке со мной';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Кто-то добавил меня в переписку';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Кто-то покинул переписку, в которой я участвую';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Моё сообщение выбрано в качестве лучшего ответа';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Лучший ответ в теме с моим участием';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Автоматическое напоминание о необходимости выбрать лучший ответ в моей теме';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Кто-то создал тему в теге из моих подписок';
+
+  @override
+  String get notifyPrefNewPostInTag =>
+      'Кто-то отправил сообщение в теге из моих подписок';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Кто-то переместил тему в тег из моих подписок';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'Email';
+
+  @override
+  String get followAfterReply =>
+      'Автоматически подписываться на темы, в которых я участвую';
+
+  @override
+  String get followAfterCreate =>
+      'Автоматически подписываться на созданные мной темы';
+
+  @override
+  String get notifyForAllPosts =>
+      'Уведомлять о каждом сообщении в теме, а не только о последнем';
+
+  @override
   String get settings => 'Настройки';
 
   @override

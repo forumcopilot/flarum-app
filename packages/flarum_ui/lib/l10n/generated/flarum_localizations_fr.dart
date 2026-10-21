@@ -252,6 +252,98 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   String get notifications => 'Notifications';
 
   @override
+  String get notifyPrefNewPost =>
+      'Quelqu\'un publie un message dans une discussion à laquelle je suis abonné';
+
+  @override
+  String get notifyPrefPostMentioned =>
+      'Quelqu\'un répond à un de mes messages';
+
+  @override
+  String get notifyPrefUserMentioned =>
+      'Quelqu\'un me mentionne dans un message';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Quelqu\'un mentionne un groupe dont je suis membre dans un message';
+
+  @override
+  String get notifyPrefPostLiked => 'Quelqu\'un aime un de mes messages';
+
+  @override
+  String get notifyPrefPostReacted =>
+      'Quelqu\'un a réagi à l\'un de mes messages';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Quelqu\'un renomme une discussion que j\'ai démarrée';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Quelqu\'un verrouille une discussion que j\'ai démarrée';
+
+  @override
+  String get notifyPrefMessageReceived => 'Quelqu\'un m\'a envoyé un message';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Quelqu\'un m\'a ajouté à une nouvelle discussion privée';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Quelqu\'un a publié un message dans une discussion privée dont je suis destinataire';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Quelqu\'un m\'a ajouté à une discussion privée existante';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Un utilisateur destinataire a quitté une discussion privée dont je fais partie';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Quelqu\'un a indiqué mon message comme meilleure réponse';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Une meilleure réponse a été indiquée dans une discussion à laquelle j\'ai participé';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Un rappel automatique pour sélectionner la meilleure réponse dans une discussion que j\'ai démarrée';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Quelqu\'un crée une discussion sous une étiquette que je suis';
+
+  @override
+  String get notifyPrefNewPostInTag =>
+      'Quelqu\'un publie un message sous une étiquette que je suis';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Quelqu\'un modifie l\'étiquette d\'une discussion publiée sous une étiquette que je suis';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'Adresse de courriel';
+
+  @override
+  String get followAfterReply =>
+      'Suivre automatiquement les discussions auxquelles je réponds';
+
+  @override
+  String get followAfterCreate =>
+      'Suivre automatiquement les discussions que je crée';
+
+  @override
+  String get notifyForAllPosts =>
+      'Notifier chaque nouveau message au lieu de ne notifier que le dernier message dans une discussion';
+
+  @override
   String get settings => 'Paramètres';
 
   @override

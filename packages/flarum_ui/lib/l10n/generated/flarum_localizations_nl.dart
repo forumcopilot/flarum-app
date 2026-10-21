@@ -252,6 +252,93 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get notifications => 'Meldingen';
 
   @override
+  String get notifyPrefNewPost =>
+      'Iemand heeft gereageerd in een discussie die je volgt';
+
+  @override
+  String get notifyPrefPostMentioned => 'Iemand reageert op mijn berichten';
+
+  @override
+  String get notifyPrefUserMentioned => 'Iemand noemt mij in een bericht';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Iemand vermeldt een groep waarvan ik lid ben in een bericht';
+
+  @override
+  String get notifyPrefPostLiked => 'Iemand vindt een van mijn berichten leuk';
+
+  @override
+  String get notifyPrefPostReacted =>
+      'Iemand reageert op een van mijn berichten';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Iemand heeft een discussie die jij hebt gestart hernoemd';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Iemand sluit de discussie die ik heb gestart';
+
+  @override
+  String get notifyPrefMessageReceived => 'Iemand stuurt me een bericht';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Iemand heeft mij toegevoegd in een nieuw privégesprek';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Iemand heeft een bericht geplaatst in een privégesprek waar ik ontvanger van ben';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Iemand voegt me toe aan een bestaande privégesprek';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Een ontvangende gebruiker heeft het privégesprek verlaten waar jij deel van bent';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Iemand stelt mijn bericht in als beste antwoord';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Een beste antwoord wordt gegeven in een discussie waaraan ik heb deelgenomen';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Een automatische herinnering om het beste antwoord te selecteren in een discussie die ik ben begonnen';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Iemand start een discussie in een tag die ik volg';
+
+  @override
+  String get notifyPrefNewPostInTag => 'Iemand post in een tag die ik volg';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Iemand tagt een discussie opnieuw naar een tag die ik volg';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'E-mail';
+
+  @override
+  String get followAfterReply => 'Automatisch discussies volgen als ik reageer';
+
+  @override
+  String get followAfterCreate => 'Volg automatisch discussies die ik start';
+
+  @override
+  String get notifyForAllPosts =>
+      'Geef een melding over elke nieuwe post in plaats van alleen de laatste in een discussie';
+
+  @override
   String get settings => 'Instellingen';
 
   @override

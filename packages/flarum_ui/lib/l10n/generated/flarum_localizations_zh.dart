@@ -246,6 +246,78 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get notifications => '通知';
 
   @override
+  String get notifyPrefNewPost => '我关注的讨论有新内容';
+
+  @override
+  String get notifyPrefPostMentioned => '有人回复我的帖子';
+
+  @override
+  String get notifyPrefUserMentioned => '有人在帖子中提及我';
+
+  @override
+  String get notifyPrefGroupMentioned => '有人在帖子中提及我所在的用户组';
+
+  @override
+  String get notifyPrefPostLiked => '有人赞我';
+
+  @override
+  String get notifyPrefPostReacted => '有人给我的帖子戳表情';
+
+  @override
+  String get notifyPrefDiscussionRenamed => '有人更改我的讨论标题';
+
+  @override
+  String get notifyPrefDiscussionLocked => '有人锁定我的讨论';
+
+  @override
+  String get notifyPrefMessageReceived => '有人给我发私信';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated => '有人邀请我加入新的私密讨论';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied => '我参与的私密讨论有新内容';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded => '有人将我加入已有的私密讨论';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved => '我参与的私密讨论有人退出';
+
+  @override
+  String get notifyPrefAwardedBestAnswer => '有人将我的帖子设为最佳回复';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion => '我参与的讨论设置了最佳回复';
+
+  @override
+  String get notifyPrefSelectBestAnswer => '提醒我为自己发起的讨论选择最佳回复';
+
+  @override
+  String get notifyPrefNewDiscussionInTag => '有人在我关注的标签下发起讨论';
+
+  @override
+  String get notifyPrefNewPostInTag => '有人在我关注的标签下回复';
+
+  @override
+  String get notifyPrefNewDiscussionTag => '有人将讨论移至我关注的标签';
+
+  @override
+  String get notifyByWeb => '站内通知';
+
+  @override
+  String get notifyByEmail => '邮箱';
+
+  @override
+  String get followAfterReply => '自动关注我参与的讨论';
+
+  @override
+  String get followAfterCreate => '自动关注我发起的讨论';
+
+  @override
+  String get notifyForAllPosts => '通知所有新帖。关闭后每个讨论未读期间仅通知一次';
+
+  @override
   String get settings => '设置';
 
   @override

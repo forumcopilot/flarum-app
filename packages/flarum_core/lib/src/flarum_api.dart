@@ -1050,6 +1050,18 @@ class FlarumApi {
     });
   }
 
+  /// Changes the reader [userId]'s [preferences] (the forum's settings page): each key as given,
+  /// the rest as they were. `notify_<type>_alert` and `_email` are its notification grid.
+  Future<void> savePreferences(String userId, Map<String, Object?> preferences) async {
+    await client.patch('/users/$userId', {
+      'data': {
+        'type': 'users',
+        'id': userId,
+        'attributes': {'preferences': preferences},
+      },
+    });
+  }
+
   /// Marks all the reader's notifications read.
   Future<void> markAllNotificationsRead() => client.postEmpty('/notifications/read');
 

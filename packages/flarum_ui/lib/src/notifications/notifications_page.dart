@@ -9,6 +9,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../messages/dialog_page.dart';
 import '../thread/thread_page.dart';
+import 'notification_settings_page.dart';
 import 'notifications_model.dart';
 import '../widgets/flarum_avatar.dart';
 import '../account/log_in_first.dart';
@@ -121,6 +122,13 @@ class _NotificationsPageState extends State<NotificationsPage> {
         actions: [
           if (signedIn && _model.items.any((n) => !n.isRead))
             IconButton(icon: const Icon(Icons.done_all), tooltip: l10n.markAllRead, onPressed: _markAllRead),
+          // Which notifications come, as the forum's settings page sets them.
+          if (signedIn)
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              tooltip: l10n.settings,
+              onPressed: () => NotificationSettingsPage.open(context, widget.site),
+            ),
         ],
       ),
       body: !signedIn

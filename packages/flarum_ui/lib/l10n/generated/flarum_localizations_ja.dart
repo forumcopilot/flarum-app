@@ -246,6 +246,79 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get notifications => '通知';
 
   @override
+  String get notifyPrefNewPost => 'フォローしているスレッドに誰かが投稿した時';
+
+  @override
+  String get notifyPrefPostMentioned => '誰かがあなたの投稿に返信した時';
+
+  @override
+  String get notifyPrefUserMentioned => '誰かがあなたをメンションした時';
+
+  @override
+  String get notifyPrefGroupMentioned => '誰かがあなたの所属するグループにメンションした時';
+
+  @override
+  String get notifyPrefPostLiked => 'あなたの投稿に「いいね」が付いた時';
+
+  @override
+  String get notifyPrefPostReacted => '誰かがあなたの投稿にリアクションした時';
+
+  @override
+  String get notifyPrefDiscussionRenamed => 'あなたの作成したスレッドのタイトルが変更された時';
+
+  @override
+  String get notifyPrefDiscussionLocked => 'スレッドがロックされた時';
+
+  @override
+  String get notifyPrefMessageReceived => '誰かがあなたにメッセージを送った時';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated => '新しいプライベートスレッドに含められた時';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      '参加しているプライベートスレッドに投稿があった時';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded => 'プライベートスレッドに追加された時';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved => '参加しているプライベートスレッドからユーザーが退出した時';
+
+  @override
+  String get notifyPrefAwardedBestAnswer => '自分の投稿がベストアンサーに選ばれたとき';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion => '参加しているスレッドでベストアンサーが選ばれた時';
+
+  @override
+  String get notifyPrefSelectBestAnswer => '自分が始めたスレッドでベストアンサーを選ぶよう自動で通知する';
+
+  @override
+  String get notifyPrefNewDiscussionInTag => 'フォローしているタグに新しいスレッドが作成された時';
+
+  @override
+  String get notifyPrefNewPostInTag => 'フォローしているタグに投稿があった時';
+
+  @override
+  String get notifyPrefNewDiscussionTag => 'フォローしているタグに既存のスレッドが移動された時';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'メールアドレス';
+
+  @override
+  String get followAfterReply => '返信したスレッドを自動的にフォローする';
+
+  @override
+  String get followAfterCreate => '作成したスレッドを自動的にフォローする';
+
+  @override
+  String get notifyForAllPosts => 'スレッドの最後の投稿だけでなく全ての新しい投稿を通知する';
+
+  @override
   String get settings => '設定';
 
   @override

@@ -127,6 +127,50 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets("the settings say which notifications come, as the forum's settings page; a change is saved",
+          (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        final reader = forum.info!.actor!.id;
+        final emailed = forum.info!.preferences['notify_newPost_email'] == true;
+        fixtures.replies['PATCH /users/$reader'] = {
+          'data': {'type': 'users', 'id': reader, 'attributes': <String, Object>{}},
+        };
+        tester.view.physicalSize = const Size(800, 2400);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
+        await _pumpUntil(tester, find.byType(NotificationTile));
+        await tester.tap(find.byTooltip('Settings'));
+        await _pumpUntil(tester, find.text('Someone likes one of my posts'));
+        // The page has finished sliding in.
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        expect(find.text('Someone posts in a discussion I\'m following'), findsOneWidget);
+        expect(find.text('Someone sends me a message'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
+            reason: 'flarum/messages is 2.0 only');
+        expect(find.text('Automatically follow discussions that I reply to'), findsOneWidget);
+
+        // The email box on the following row (likes come on the web only: flarum/likes sends no email).
+        final row = find.ancestor(of: find.text('Someone posts in a discussion I\'m following'), matching: find.byType(Row)).first;
+        final boxes = find.descendant(of: row, matching: find.byType(Checkbox));
+        expect(boxes, findsNWidgets(2));
+        expect(find.descendant(
+          of: find.ancestor(of: find.text('Someone likes one of my posts'), matching: find.byType(Row)).first,
+          matching: find.byType(Checkbox),
+        ), findsOneWidget);
+        await tester.tap(boxes.last);
+        await tester.pump(const Duration(milliseconds: 300));
+        final sent = fixtures.requests.singleWhere((r) => r.method == 'PATCH' && r.path == '/users/$reader');
+        expect((sent.data as Map)['data']['attributes'], {
+          'preferences': {'notify_newPost_email': !emailed},
+        });
+        expect(tester.widget<Checkbox>(boxes.last).value, !emailed);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('a guest is asked to sign in', (tester) async {
         fixtures.forum(signedIn: false);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));

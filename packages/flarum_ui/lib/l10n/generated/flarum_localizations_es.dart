@@ -252,6 +252,97 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get notifications => 'Notificaciones';
 
   @override
+  String get notifyPrefNewPost =>
+      'Alguién publicó en una discusión que tú sigues';
+
+  @override
+  String get notifyPrefPostMentioned => 'Alguien respondió a tu publicación';
+
+  @override
+  String get notifyPrefUserMentioned =>
+      'Alguien te mencionó en una publicación';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Alguien menciona un grupo del que soy miembro en una publicación';
+
+  @override
+  String get notifyPrefPostLiked => 'A alguien le gusta tu publicación';
+
+  @override
+  String get notifyPrefPostReacted =>
+      'Cuando alguien reaccione a uno de mis mensajes';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Alguien cambió el título de una discusión que tú creaste';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Alguien cerró una discusión que tú creaste';
+
+  @override
+  String get notifyPrefMessageReceived => 'Alguien me envía un mensaje';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Alguien me incluye en una nueva discusión privada';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Alguien publica en una discusión privada de la que soy destinatario';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Alguien me agrega a una discusión privada existente';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Un usuario destinatario abandona una discusión privada de la que formo parte';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Cuando alguien asigne mi mensaje como la mejor respuesta';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Cuando la mejor respuesta sea asignada en un discusión en la que participé';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Un recordatorio automático para seleccionar la mejor respuesta en una discusión que inicié';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Alguien crea una discusión en una etiqueta que estoy siguiendo';
+
+  @override
+  String get notifyPrefNewPostInTag =>
+      'Alguien publica en una etiqueta que estoy siguiendo';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Alguien vuelve a etiquetar una discusión con una etiqueta que estoy siguiendo';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'Correo electrónico';
+
+  @override
+  String get followAfterReply =>
+      'Seguir automáticamente las discusiones en las que tú participes';
+
+  @override
+  String get followAfterCreate =>
+      'Seguir automáticamente discusiones creadas por mi';
+
+  @override
+  String get notifyForAllPosts =>
+      'Notificar sobre cada nueva publicación en lugar de sólo la última en una discusión';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

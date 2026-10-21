@@ -291,6 +291,102 @@
   "@notifications": {
     "description": "Notifications tab title"
   },
+  "notifyPrefNewPost": "Someone posts in a discussion I'm following",
+  "@notifyPrefNewPost": {
+    "description": "Notification settings: the newPost notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefPostMentioned": "Someone replies to one of my posts",
+  "@notifyPrefPostMentioned": {
+    "description": "Notification settings: the postMentioned notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefUserMentioned": "Someone mentions me in a post",
+  "@notifyPrefUserMentioned": {
+    "description": "Notification settings: the userMentioned notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefGroupMentioned": "Someone mentions a group I'm a member of in a post",
+  "@notifyPrefGroupMentioned": {
+    "description": "Notification settings: the groupMentioned notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefPostLiked": "Someone likes one of my posts",
+  "@notifyPrefPostLiked": {
+    "description": "Notification settings: the postLiked notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefPostReacted": "Someone reacts to one of my posts",
+  "@notifyPrefPostReacted": {
+    "description": "Notification settings: the postReacted notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefDiscussionRenamed": "Someone renames a discussion I started",
+  "@notifyPrefDiscussionRenamed": {
+    "description": "Notification settings: the discussionRenamed notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefDiscussionLocked": "Someone locks a discussion I started",
+  "@notifyPrefDiscussionLocked": {
+    "description": "Notification settings: the discussionLocked notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefMessageReceived": "Someone sends me a message",
+  "@notifyPrefMessageReceived": {
+    "description": "Notification settings: the messageReceived notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefByobuPrivateDiscussionCreated": "Someone includes me in a new private discussion",
+  "@notifyPrefByobuPrivateDiscussionCreated": {
+    "description": "Notification settings: the byobuPrivateDiscussionCreated notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefByobuPrivateDiscussionReplied": "Someone posts in a private discussion I'm a recipient of",
+  "@notifyPrefByobuPrivateDiscussionReplied": {
+    "description": "Notification settings: the byobuPrivateDiscussionReplied notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefByobuPrivateDiscussionAdded": "Someone adds me to an existing private discussion",
+  "@notifyPrefByobuPrivateDiscussionAdded": {
+    "description": "Notification settings: the byobuPrivateDiscussionAdded notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefByobuRecipientRemoved": "A recipient user leaves a private discussion I'm a part of",
+  "@notifyPrefByobuRecipientRemoved": {
+    "description": "Notification settings: the byobuRecipientRemoved notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefAwardedBestAnswer": "Someone sets my post as a best answer",
+  "@notifyPrefAwardedBestAnswer": {
+    "description": "Notification settings: the awardedBestAnswer notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefBestAnswerInDiscussion": "A best answer is set in a discussion I participated in",
+  "@notifyPrefBestAnswerInDiscussion": {
+    "description": "Notification settings: the bestAnswerInDiscussion notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefSelectBestAnswer": "An automated reminder to select a best answer in a discussion I started",
+  "@notifyPrefSelectBestAnswer": {
+    "description": "Notification settings: the selectBestAnswer notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefNewDiscussionInTag": "Someone creates a discussion in a tag I'm following",
+  "@notifyPrefNewDiscussionInTag": {
+    "description": "Notification settings: the newDiscussionInTag notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefNewPostInTag": "Someone posts in a tag I'm following",
+  "@notifyPrefNewPostInTag": {
+    "description": "Notification settings: the newPostInTag notification's row, in the words of the forum's settings page."
+  },
+  "notifyPrefNewDiscussionTag": "Someone re-tags a discussion to a tag I'm following",
+  "@notifyPrefNewDiscussionTag": {
+    "description": "Notification settings: the newDiscussionTag notification's row, in the words of the forum's settings page."
+  },
+  "notifyByWeb": "Web",
+  "@notifyByWeb": {
+    "description": "Notification settings: the column for notifications in the forum's list (and the app's Notifications)."
+  },
+  "notifyByEmail": "Email",
+  "@notifyByEmail": {
+    "description": "Notification settings: the column for notifications by email."
+  },
+  "followAfterReply": "Automatically follow discussions that I reply to",
+  "@followAfterReply": {
+    "description": "Notification settings (flarum/subscriptions)."
+  },
+  "followAfterCreate": "Automatically follow discussions that I create",
+  "@followAfterCreate": {
+    "description": "Notification settings (flarum/subscriptions, 2.0)."
+  },
+  "notifyForAllPosts": "Notify about every new post instead of only the last in a discussion",
+  "@notifyForAllPosts": {
+    "description": "Notification settings (flarum/subscriptions)."
+  },
   "settings": "Settings",
   "@settings": {
     "description": "UI text: Settings"

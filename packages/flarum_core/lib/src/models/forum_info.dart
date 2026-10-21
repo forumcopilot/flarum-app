@@ -152,6 +152,12 @@ class FlarumForumInfo {
   /// The reader's dialogs with messages they haven't read (flarum/messages, 2.0). Null without it.
   int? get unreadDialogCount => actorAttributes.integer('messageCount');
 
+  /// The reader's preferences, as their settings page holds them (empty for a guest).
+  Map<String, Object?> get preferences => switch (actorAttributes['preferences']) {
+        final Map<String, dynamic> map => map,
+        _ => const {},
+      };
+
   /// Posts flagged since the moderator last looked at Flagged Posts (flarum/flags).
   int? get newFlagCount => actorAttributes.integer('newFlagCount');
 

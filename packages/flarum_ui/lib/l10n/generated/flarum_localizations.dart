@@ -464,6 +464,150 @@ abstract class FlarumLocalizations {
   /// **'Notifications'**
   String get notifications;
 
+  /// Notification settings: the newPost notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone posts in a discussion I\'m following'**
+  String get notifyPrefNewPost;
+
+  /// Notification settings: the postMentioned notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone replies to one of my posts'**
+  String get notifyPrefPostMentioned;
+
+  /// Notification settings: the userMentioned notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone mentions me in a post'**
+  String get notifyPrefUserMentioned;
+
+  /// Notification settings: the groupMentioned notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone mentions a group I\'m a member of in a post'**
+  String get notifyPrefGroupMentioned;
+
+  /// Notification settings: the postLiked notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone likes one of my posts'**
+  String get notifyPrefPostLiked;
+
+  /// Notification settings: the postReacted notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone reacts to one of my posts'**
+  String get notifyPrefPostReacted;
+
+  /// Notification settings: the discussionRenamed notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone renames a discussion I started'**
+  String get notifyPrefDiscussionRenamed;
+
+  /// Notification settings: the discussionLocked notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone locks a discussion I started'**
+  String get notifyPrefDiscussionLocked;
+
+  /// Notification settings: the messageReceived notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone sends me a message'**
+  String get notifyPrefMessageReceived;
+
+  /// Notification settings: the byobuPrivateDiscussionCreated notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone includes me in a new private discussion'**
+  String get notifyPrefByobuPrivateDiscussionCreated;
+
+  /// Notification settings: the byobuPrivateDiscussionReplied notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone posts in a private discussion I\'m a recipient of'**
+  String get notifyPrefByobuPrivateDiscussionReplied;
+
+  /// Notification settings: the byobuPrivateDiscussionAdded notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone adds me to an existing private discussion'**
+  String get notifyPrefByobuPrivateDiscussionAdded;
+
+  /// Notification settings: the byobuRecipientRemoved notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'A recipient user leaves a private discussion I\'m a part of'**
+  String get notifyPrefByobuRecipientRemoved;
+
+  /// Notification settings: the awardedBestAnswer notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone sets my post as a best answer'**
+  String get notifyPrefAwardedBestAnswer;
+
+  /// Notification settings: the bestAnswerInDiscussion notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'A best answer is set in a discussion I participated in'**
+  String get notifyPrefBestAnswerInDiscussion;
+
+  /// Notification settings: the selectBestAnswer notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'An automated reminder to select a best answer in a discussion I started'**
+  String get notifyPrefSelectBestAnswer;
+
+  /// Notification settings: the newDiscussionInTag notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone creates a discussion in a tag I\'m following'**
+  String get notifyPrefNewDiscussionInTag;
+
+  /// Notification settings: the newPostInTag notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone posts in a tag I\'m following'**
+  String get notifyPrefNewPostInTag;
+
+  /// Notification settings: the newDiscussionTag notification's row, in the words of the forum's settings page.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone re-tags a discussion to a tag I\'m following'**
+  String get notifyPrefNewDiscussionTag;
+
+  /// Notification settings: the column for notifications in the forum's list (and the app's Notifications).
+  ///
+  /// In en, this message translates to:
+  /// **'Web'**
+  String get notifyByWeb;
+
+  /// Notification settings: the column for notifications by email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get notifyByEmail;
+
+  /// Notification settings (flarum/subscriptions).
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically follow discussions that I reply to'**
+  String get followAfterReply;
+
+  /// Notification settings (flarum/subscriptions, 2.0).
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically follow discussions that I create'**
+  String get followAfterCreate;
+
+  /// Notification settings (flarum/subscriptions).
+  ///
+  /// In en, this message translates to:
+  /// **'Notify about every new post instead of only the last in a discussion'**
+  String get notifyForAllPosts;
+
   /// UI text: Settings
   ///
   /// In en, this message translates to:

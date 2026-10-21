@@ -253,6 +253,98 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get notifications => 'Benachrichtigungen';
 
   @override
+  String get notifyPrefNewPost =>
+      'Jemand hat in einer Diskussion geantwortet, der du folgst';
+
+  @override
+  String get notifyPrefPostMentioned =>
+      'Jemand hat auf deinen Beitrag geantwortet';
+
+  @override
+  String get notifyPrefUserMentioned =>
+      'Jemand hat dich in einem Beitrag erwähnt';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Jemand erwähnt in einem Beitrag eine Gruppe, in der du Mitglied bist';
+
+  @override
+  String get notifyPrefPostLiked => 'Jemandem gefällt dein Beitrag';
+
+  @override
+  String get notifyPrefPostReacted =>
+      'Jemand reagiert auf einen meiner Beiträge';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Wenn jemand eine Diskussion ändert, die du gestartet hast';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Jemand hat eine Diskussion von dir geschlossen';
+
+  @override
+  String get notifyPrefMessageReceived => 'Jemand schickt mir eine Nachricht';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Jemand nimmt mich in eine neue private Diskussion auf';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Jemand postet in einer privaten Diskussion in der ich Empfänger bin';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Jemand fügt mich zu einer bestehenden privaten Diskussion hinzu';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Ein Empfänger verlässt eine private Diskussion, an der ich teilnehme';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Jemand legt meinen Beitrag als beste Antwort fest';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Die beste Antwort findet sich in einer Diskussion, an der ich teilgenommen habe';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Eine automatische Erinnerung, um in einer von mir begonnenen Diskussion die beste Antwort auszuwählen';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Jemand erstellt eine Diskussion in einem Tag, dem ich folge';
+
+  @override
+  String get notifyPrefNewPostInTag =>
+      'Jemand postet in einem Tag, dem ich folge';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Jemand markiert eine Diskussion erneut mit einem Tag, dem ich folge';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'E-Mail';
+
+  @override
+  String get followAfterReply =>
+      'Diskussionen automatisch folgen, an denen ich teilgenommen habe';
+
+  @override
+  String get followAfterCreate =>
+      'Diskussionen, die ich erstelle, automatisch folgen';
+
+  @override
+  String get notifyForAllPosts =>
+      'Benachrichtige über jeden neuen Beitrag und nicht nur über den letzten in einer Diskussion';
+
+  @override
   String get settings => 'Einstellungen';
 
   @override

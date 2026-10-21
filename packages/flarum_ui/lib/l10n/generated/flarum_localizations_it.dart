@@ -252,6 +252,96 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get notifications => 'Notifiche';
 
   @override
+  String get notifyPrefNewPost =>
+      'Qualcuno ha scritto in una discussione che sto seguendo';
+
+  @override
+  String get notifyPrefPostMentioned =>
+      'Qualcuno ha risposto a un mio messaggio';
+
+  @override
+  String get notifyPrefUserMentioned => 'Qualcuno mi ha menzionato in un post';
+
+  @override
+  String get notifyPrefGroupMentioned =>
+      'Qualcuno ha menzionato un gruppo di cui faccio parte in un post';
+
+  @override
+  String get notifyPrefPostLiked => 'A qualcuno piace un mio messaggio';
+
+  @override
+  String get notifyPrefPostReacted => 'Qualcuno ha reagito a uno dei miei post';
+
+  @override
+  String get notifyPrefDiscussionRenamed =>
+      'Qualcuno ha modificato una discussione che ho iniziato';
+
+  @override
+  String get notifyPrefDiscussionLocked =>
+      'Qualcuno ha chiuso una discussione che ho iniziato';
+
+  @override
+  String get notifyPrefMessageReceived => 'Qualcuno mi invia un messaggio';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionCreated =>
+      'Qualcuno mi include in una nuova discussione privata';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionReplied =>
+      'Qualcuno pubblica un messaggio in una discussione privata di cui sono destinatario';
+
+  @override
+  String get notifyPrefByobuPrivateDiscussionAdded =>
+      'Qualcuno mi aggiunge a una discussione privata esistente';
+
+  @override
+  String get notifyPrefByobuRecipientRemoved =>
+      'Un utente destinatario lascia una discussione privata di cui faccio parte';
+
+  @override
+  String get notifyPrefAwardedBestAnswer =>
+      'Qualcuno imposta il mio post come risposta migliore';
+
+  @override
+  String get notifyPrefBestAnswerInDiscussion =>
+      'Una risposta migliore è stata scelta in una discussione a cui ho partecipato';
+
+  @override
+  String get notifyPrefSelectBestAnswer =>
+      'Un promemoria automatico per selezionare una risposta migliore nel thread che ho aperto';
+
+  @override
+  String get notifyPrefNewDiscussionInTag =>
+      'Qualcuno crea una discussione in una categoria che sto seguendo';
+
+  @override
+  String get notifyPrefNewPostInTag =>
+      'Qualcuno posta in una categoria che sto seguendo';
+
+  @override
+  String get notifyPrefNewDiscussionTag =>
+      'Qualcuno modifica la categoria di una discussione in una che categoria sto seguendo';
+
+  @override
+  String get notifyByWeb => 'Web';
+
+  @override
+  String get notifyByEmail => 'E-mail';
+
+  @override
+  String get followAfterReply =>
+      'Segui automaticamente le discussioni a cui rispondo';
+
+  @override
+  String get followAfterCreate =>
+      'Segui automaticamente le discussioni che creo';
+
+  @override
+  String get notifyForAllPosts =>
+      'Notifica di ogni nuovo post anziché solo l\'ultimo in una discussione';
+
+  @override
   String get settings => 'Impostazioni';
 
   @override

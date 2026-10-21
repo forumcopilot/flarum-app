@@ -1,17 +1,27 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/foundation.dart';
 
-/// The forum home's views, as the web's sort menu and sidebar offer them.
-enum DiscussionView { latest, top, newest, following }
+/// The forum home's lists, as the web's view menu offers them: All Discussions, and the
+/// reader's Following, Bookmarks (fof/bookmarks) and Private Discussions (fof/byobu).
+enum DiscussionView { all, following, bookmarks, private }
 
-/// A list of discussions for a view, optionally of one tag or started by one
-/// user, loaded a page at a time.
+/// A list of discussions for a view, in a sort, optionally of one tag or started by one user,
+/// loaded a page at a time.
 class DiscussionListModel extends ChangeNotifier {
   DiscussionListModel(this.forum,
-      {this.view = DiscussionView.latest, this.tagSlug, this.author, this.bookmarked = false, this.private = false, this.pageSize = 20});
+      {this.view = DiscussionView.all,
+      this.sort = DiscussionSort.latest,
+      this.tagSlug,
+      this.author,
+      bool bookmarked = false,
+      bool private = false,
+      this.pageSize = 20})
+      : bookmarked = bookmarked || view == DiscussionView.bookmarks,
+        private = private || view == DiscussionView.private;
 
   final FlarumForum forum;
   final DiscussionView view;
+  final DiscussionSort sort;
   final String? tagSlug;
 
   /// A username: only the discussions they started.
@@ -59,11 +69,7 @@ class DiscussionListModel extends ChangeNotifier {
     try {
       if (reset && signedIn) markedAllAsReadAt = (await forum.current()).actor?.markedAllAsReadAt;
       final page = await forum.api.discussions(
-        sort: switch (view) {
-          DiscussionView.top => DiscussionSort.top,
-          DiscussionView.newest => DiscussionSort.newest,
-          _ => DiscussionSort.latest,
-        },
+        sort: sort,
         following: view == DiscussionView.following,
         tagSlug: tagSlug,
         author: author,

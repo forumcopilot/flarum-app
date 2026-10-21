@@ -488,6 +488,42 @@ abstract class FlarumLocalizations {
   /// **'Newest'**
   String get viewNewest;
 
+  /// Home's view menu: every discussion (the web's first sidebar link).
+  ///
+  /// In en, this message translates to:
+  /// **'All Discussions'**
+  String get allDiscussions;
+
+  /// Home's sort menu: oldest discussions first.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest'**
+  String get sortOldest;
+
+  /// Home's sort menu (2.0): by title, A to Z.
+  ///
+  /// In en, this message translates to:
+  /// **'Title (A–Z)'**
+  String get sortTitleAz;
+
+  /// Home's sort menu (2.0): by title, Z to A.
+  ///
+  /// In en, this message translates to:
+  /// **'Title (Z–A)'**
+  String get sortTitleZa;
+
+  /// Home's sort menu, for screen readers.
+  ///
+  /// In en, this message translates to:
+  /// **'Change discussion list sorting'**
+  String get changeSorting;
+
+  /// Home's view menu, for screen readers.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle navigation dropdown menu'**
+  String get toggleNavigation;
+
   /// Discussion row: who replied last and when ({time} is e.g. '5 minutes ago')
   ///
   /// In en, this message translates to:

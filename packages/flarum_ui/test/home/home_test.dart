@@ -61,7 +61,7 @@ void main() {
       });
 
       test('the other views ask for their own order', () async {
-        final newest = DiscussionListModel(fixtures.forum(), view: DiscussionView.newest);
+        final newest = DiscussionListModel(fixtures.forum(), sort: DiscussionSort.newest);
         await newest.refresh();
         expect(fixtures.requests.last.queryParameters['sort'], '-createdAt');
 
@@ -108,7 +108,7 @@ void main() {
         };
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
-        expect(find.text('Following'), findsOneWidget, reason: 'signed in');
+        expect(find.text('All Discussions'), findsOneWidget, reason: "the view menu's face");
         expect(find.byIcon(Icons.map_outlined), findsOneWidget, reason: 'the byobu discussion is marked private, with byobu\'s map');
         await _pumpUntil(tester, find.text('With carol'));
         expect(find.byIcon(Icons.push_pin), findsWidgets, reason: "the rules are sticky: the web's red pin");
@@ -118,6 +118,38 @@ void main() {
 
         Navigator.of(tester.element(find.byType(ThreadPage))).pop();
         await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets('the view menu switches the list, as the web\'s sidebar; the sort menu orders it', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pump(const Duration(milliseconds: 300));
+
+        await tester.tap(find.byTooltip('Toggle navigation dropdown menu'));
+        await tester.pumpAndSettle();
+        for (final view in ['All Discussions', 'Following', 'Bookmarks', 'Private Discussions', 'Support']) {
+          expect(find.text(view), findsWidgets, reason: view);
+        }
+        expect(find.text('Messages'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
+            reason: 'flarum/messages is 2.0 only');
+        await tester.tap(find.text('Following').last);
+        await tester.pumpAndSettle();
+        await _pumpUntil(tester, find.textContaining('Feature request: dark mode'));
+        expect(find.byType(DiscussionTile), findsOneWidget, reason: 'the one alice follows');
+        expect(fixtures.requests.last.queryParameters['filter[subscription]'] ?? fixtures.requests.last.queryParameters['filter[q]'],
+            anyOf('following', contains('is:following')));
+
+        await tester.tap(find.byTooltip('Change discussion list sorting'));
+        await tester.pumpAndSettle();
+        expect(find.text('Oldest'), findsOneWidget);
+        expect(find.text('Title (A–Z)'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
+            reason: '1.x refuses sorting by title');
+        await tester.tap(find.text('Oldest'));
+        await tester.pumpAndSettle();
+        expect(fixtures.requests.last.queryParameters['sort'], 'createdAt');
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

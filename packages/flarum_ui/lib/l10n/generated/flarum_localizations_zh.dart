@@ -258,6 +258,24 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get viewNewest => '最新发布';
 
   @override
+  String get allDiscussions => '全部讨论';
+
+  @override
+  String get sortOldest => '陈年旧帖';
+
+  @override
+  String get sortTitleAz => '标题（正序）';
+
+  @override
+  String get sortTitleZa => '标题（倒序）';
+
+  @override
+  String get changeSorting => '更改讨论列表排序方式';
+
+  @override
+  String get toggleNavigation => '展开或收起导航栏菜单';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$user 回复于 $time';
   }

@@ -264,6 +264,24 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get viewNewest => 'Nieuw';
 
   @override
+  String get allDiscussions => 'Alle discussies';
+
+  @override
+  String get sortOldest => 'Oudste';
+
+  @override
+  String get sortTitleAz => 'Titel (A–Z)';
+
+  @override
+  String get sortTitleZa => 'Titel (Z–A)';
+
+  @override
+  String get changeSorting => 'Verander de sortering van de discussielijst';
+
+  @override
+  String get toggleNavigation => 'Toggle navigatie dropdown menu';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$user reageerde $time';
   }

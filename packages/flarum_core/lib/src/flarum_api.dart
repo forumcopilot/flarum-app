@@ -22,11 +22,19 @@ enum DiscussionSort {
   latest('-lastPostedAt'),
   top('-commentCount'),
   newest('-createdAt'),
-  oldest('createdAt');
+  oldest('createdAt'),
+
+  /// By title, A to Z and Z to A: 2.0 only (1.x refuses `sort=title` with 400).
+  titleAz('title'),
+  titleZa('-title');
 
   const DiscussionSort(this.param);
 
   final String param;
+
+  /// The sorts [version]'s website offers.
+  static List<DiscussionSort> offeredOn(FlarumVersion? version) =>
+      version == FlarumVersion.v1 ? const [latest, top, newest, oldest] : values;
 }
 
 /// One page of a list. Flarum pages by offset; [hasMore] comes from the

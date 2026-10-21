@@ -307,6 +307,30 @@
   "@viewNewest": {
     "description": "Discussion list view: discussions by when they started, newest first"
   },
+  "allDiscussions": "All Discussions",
+  "@allDiscussions": {
+    "description": "Home's view menu: every discussion (the web's first sidebar link)."
+  },
+  "sortOldest": "Oldest",
+  "@sortOldest": {
+    "description": "Home's sort menu: oldest discussions first."
+  },
+  "sortTitleAz": "Title (A–Z)",
+  "@sortTitleAz": {
+    "description": "Home's sort menu (2.0): by title, A to Z."
+  },
+  "sortTitleZa": "Title (Z–A)",
+  "@sortTitleZa": {
+    "description": "Home's sort menu (2.0): by title, Z to A."
+  },
+  "changeSorting": "Change discussion list sorting",
+  "@changeSorting": {
+    "description": "Home's sort menu, for screen readers."
+  },
+  "toggleNavigation": "Toggle navigation dropdown menu",
+  "@toggleNavigation": {
+    "description": "Home's view menu, for screen readers."
+  },
   "discussionReplied": "{user} replied {time}",
   "@discussionReplied": {
     "description": "Discussion row: who replied last and when ({time} is e.g. '5 minutes ago')",

@@ -257,6 +257,24 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get viewNewest => '새 토론';
 
   @override
+  String get allDiscussions => '모든 토의';
+
+  @override
+  String get sortOldest => '오래된 순';
+
+  @override
+  String get sortTitleAz => '제목 (A–Z)';
+
+  @override
+  String get sortTitleZa => '제목 (Z–A)';
+
+  @override
+  String get changeSorting => '토의 정렬 방식 변경';
+
+  @override
+  String get toggleNavigation => '탐색 드롭다운 메뉴 토글하기';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$user님이 $time에 답글';
   }

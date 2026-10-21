@@ -264,6 +264,24 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get viewNewest => 'Nuevas';
 
   @override
+  String get allDiscussions => 'Discusiones';
+
+  @override
+  String get sortOldest => 'Más viejo';
+
+  @override
+  String get sortTitleAz => 'Título (A–Z)';
+
+  @override
+  String get sortTitleZa => 'Título (Z–A)';
+
+  @override
+  String get changeSorting => 'Cambiar el orden de la lista de discusiones';
+
+  @override
+  String get toggleNavigation => 'Alternar el menú desplegable de navegación';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$user respondió $time';
   }

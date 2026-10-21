@@ -275,6 +275,24 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get viewNewest => 'Новые';
 
   @override
+  String get allDiscussions => 'Все темы';
+
+  @override
+  String get sortOldest => 'Старое';
+
+  @override
+  String get sortTitleAz => 'Название (А–Я)';
+
+  @override
+  String get sortTitleZa => 'Название (Я–А)';
+
+  @override
+  String get changeSorting => 'Изменить сортировку списка тем';
+
+  @override
+  String get toggleNavigation => 'Меню навигации';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$user ответил(а) $time';
   }

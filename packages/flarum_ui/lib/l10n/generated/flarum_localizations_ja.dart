@@ -258,6 +258,24 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get viewNewest => '新規';
 
   @override
+  String get allDiscussions => 'すべてのスレッド';
+
+  @override
+  String get sortOldest => '古い順';
+
+  @override
+  String get sortTitleAz => 'タイトル (A–Z)';
+
+  @override
+  String get sortTitleZa => 'タイトル (Z–A)';
+
+  @override
+  String get changeSorting => 'スレッド一覧の並び順を変更する';
+
+  @override
+  String get toggleNavigation => 'ナビゲーションドロップダウンメニューの切り替え';
+
+  @override
   String discussionReplied(String user, String time) {
     return '$userが$timeに返信';
   }

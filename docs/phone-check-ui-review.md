@@ -5,7 +5,7 @@ Pixel (the iPhone's part is in `iphone-tests.md`, run at the end). What each cha
 like, with the website beside it: the "Flarum App UI Changes" page,
 https://claude.ai/artifact/7tRPwsajPnnFewKn5dPJ6S.
 
-Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 5da4295 or later),
+Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 44b3495 or later),
 against the pinned discourse-app (no pubspec_overrides). Build once per forum, 2.0 first:
 
     flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
@@ -63,6 +63,13 @@ unless it names one.
     Double-tap: it zooms in where tapped; drag around; double-tap: back out. Save Image: "Image
     saved.", and the picture is in Google Photos (or the gallery). Share: the share sheet offers
     the picture itself. Swipe sideways to the next picture.
+
+16. **Pull to refresh and long silences**: in a discussion, pull down at the top: the spinner,
+    then the posts again. (No test-forum discussion has posts more than 4 days apart; on
+    discuss.flarum.org a long thread shows "… DAYS LATER" or "… MONTHS LATER" between posts.)
+17. **The composer's bar**: Reply, write a word, select it, tap B: it becomes **bold** markup;
+    the bar has Italic, Quote, Link, List and Code too, ••• holds the rest, and the bar scrolls
+    sideways to @ and the uploads. Close without posting.
 
 Report: PASS or FAIL per check and forum, with what you saw and screenshots of failures; the
 Pixel model and Android version; and everything created (likes left, messages, anything posted)

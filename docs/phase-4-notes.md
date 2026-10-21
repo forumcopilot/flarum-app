@@ -85,6 +85,10 @@ approved, and are built (its table names each one's commit). Done since:
   zoom, Save Image (saver_gallery; Android 9 and earlier ask for storage, iOS asks to add to
   Photos itself, so permission_handler is only asked on Android) and Share.
 - **Message notifications** (1ab43bd) open their conversation (flarum/messages' `messageReceived`).
+- **A discussion** (592cfd4; item 21) pulls to refresh, and marks posts more than 4 days apart
+  with the website's "12 days later" (counted as dayjs counts it).
+- **The composer's bar** (44b3495; item 18): Bold, Italic, Quote, Link, a bulleted list and Code
+  in one tap, with flarum-markdown's tooltips; the rest under Formatting.
 
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,

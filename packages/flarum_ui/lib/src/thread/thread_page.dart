@@ -263,11 +263,21 @@ class _ThreadPageState extends State<ThreadPage> {
     return first == null ? (_near ?? 1) : _model.posts[first].number;
   }
 
+  /// The people in the discussion as far as it's loaded, its latest posters first, the reader left
+  /// out: who `@` offers in a reply.
+  List<FlarumUser> _people() {
+    final seen = <String>{if (_readerId case final reader?) reader};
+    return [
+      for (final post in _model.posts.reversed)
+        if (post.author case final author? when seen.add(author.id)) author,
+    ];
+  }
+
   /// Opens the composer for a reply, starting from [initial] (a quote, a reply to a post).
   Future<void> _reply({String? initial}) async {
     final discussion = _model.discussion;
     if (discussion == null) return;
-    final post = await composeReply(context, widget.site, discussion, initialContent: initial);
+    final post = await composeReply(context, widget.site, discussion, initialContent: initial, mentionable: _people());
     if (post == null || !mounted) return;
     if (!post.isApproved) {
       SnackbarHelper.showInfo(context, flarumL10n(context).postAwaitingApproval);

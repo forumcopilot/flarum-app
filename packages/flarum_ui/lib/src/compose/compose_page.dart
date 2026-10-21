@@ -44,6 +44,7 @@ class ComposePage extends StatefulWidget {
     this.titleHint,
     this.contentHint,
     this.otherChanges,
+    this.mentionable = const [],
   });
 
   final SiteContext site;
@@ -86,6 +87,10 @@ class ComposePage extends StatefulWidget {
   /// Whether the writer changed something the page doesn't hold itself: a new discussion's tags
   /// and poll, a private one's people. Closing then asks too, as it does for the text.
   final ValueListenable<bool>? otherChanges;
+
+  /// The discussion's people, its latest posters first (the reader left out): what `@` offers
+  /// before anything is typed, as flarum/mentions suggests the people already in a discussion.
+  final List<FlarumUser> mentionable;
 
   @override
   State<ComposePage> createState() => _ComposePageState();
@@ -176,26 +181,41 @@ class _ComposePageState extends State<ComposePage> {
     );
   }
 
-  /// The `@name` typed just before the cursor, as the web's mention autocomplete reads it.
+  /// The `@name` typed just before the cursor (nothing yet, just after `@`), as the web's mention
+  /// autocomplete reads it.
   ({int start, String query})? _mentionAtCursor() {
     final value = _contentController.value;
     final cursor = value.selection.baseOffset;
     if (!value.selection.isCollapsed || cursor < 0 || cursor > value.text.length) return null;
-    final typed = RegExp(r'(?:^|[\s(])@([^\s@"#]{2,30})$').firstMatch(value.text.substring(0, cursor));
+    final typed = RegExp(r'(?:^|[\s(])@([^\s@"#]{0,30})$').firstMatch(value.text.substring(0, cursor));
     if (typed == null) return null;
     final query = typed.group(1)!;
     return (start: cursor - query.length - 1, query: query);
   }
 
+  /// The discussion's people whose name starts with [query] (any of them for none).
+  List<FlarumUser> _localMatches(String query) {
+    final q = query.toLowerCase();
+    return [
+      for (final user in widget.mentionable)
+        if (q.isEmpty || user.displayName.toLowerCase().startsWith(q) || user.username.toLowerCase().startsWith(q)) user,
+    ];
+  }
+
   void _contentChanged() {
-    if (!_canMention) return;
+    if (!_canMention && widget.mentionable.isEmpty) return;
     _suggestTimer?.cancel();
     final typing = _mentionAtCursor();
     if (typing == null) {
       if (_suggestions.isNotEmpty) setState(() => _suggestions = const []);
       return;
     }
-    _suggestTimer = Timer(const Duration(milliseconds: 250), () => _suggest(typing.query));
+    // The discussion's own people at once; the forum's members from the second letter.
+    final local = _localMatches(typing.query).take(5).toList();
+    if (local.isNotEmpty || typing.query.length < 2) setState(() => _suggestions = local);
+    if (_canMention && typing.query.length >= 2) {
+      _suggestTimer = Timer(const Duration(milliseconds: 250), () => _suggest(typing.query));
+    }
   }
 
   Future<void> _suggest(String query) async {
@@ -203,7 +223,9 @@ class _ComposePageState extends State<ComposePage> {
     try {
       final page = await FlarumForum.of(widget.site).api.searchUsers(query);
       if (!mounted || search != _suggestSearches || _mentionAtCursor()?.query != query) return;
-      setState(() => _suggestions = page.items.take(5).toList());
+      final local = _localMatches(query);
+      final known = {for (final user in local) user.id};
+      setState(() => _suggestions = [...local, ...page.items.where((user) => !known.contains(user.id))].take(5).toList());
     } catch (_) {
       // Suggestions are a convenience; the mention button still searches.
     }

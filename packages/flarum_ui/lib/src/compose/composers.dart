@@ -17,7 +17,7 @@ import 'tag_picker_page.dart';
 /// Opens the composer for a reply in [discussion], starting from [initialContent] (a quote, a
 /// reply to a post), or from [draft]. The reply once posted, or null.
 Future<FlarumPost?> composeReply(BuildContext context, SiteContext site, FlarumDiscussion discussion,
-    {String? initialContent, FlarumDraft? draft}) {
+    {String? initialContent, FlarumDraft? draft, List<FlarumUser> mentionable = const []}) {
   final forum = FlarumForum.of(site);
   return Navigator.of(context).push(MaterialPageRoute<FlarumPost>(
     fullscreenDialog: true,
@@ -26,6 +26,7 @@ Future<FlarumPost?> composeReply(BuildContext context, SiteContext site, FlarumD
       title: kitL10n(context).reply,
       topicTitle: discussion.title,
       initialContent: draft?.content ?? initialContent,
+      mentionable: mentionable,
       onSubmit: (_, content) async {
         final post = await forum.api.reply(discussion.id, content);
         _posted(forum, draft);

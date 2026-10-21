@@ -214,6 +214,31 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets("a reply's @ offers the discussion's people at once, its latest posters first", (tester) async {
+        final forum = fixtures.forum();
+        await tester.runAsync(forum.refresh);
+        await tester.pumpWidget(_app(ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome'))));
+        await _pumpUntil(tester, find.byType(PostTile));
+        await _settle(tester);
+        await tester.tap(find.descendant(of: find.byKey(const ValueKey('thread-bar')), matching: find.text('Reply')));
+        await _pumpUntil(tester, find.byType(ComposePage));
+        await _settle(tester);
+        await tester.tap(_field());
+        await tester.enterText(_field(), 'Thanks @');
+        await tester.pump();
+        final offered = [for (final chip in tester.widgetList<ActionChip>(find.byType(ActionChip))) (chip.label as Text).data];
+        expect(offered, ['carol', 'bob', 'admin'], reason: 'everyone who posted, newest first, alice (the reader) left out');
+        expect(fixtures.requests.where((r) => r.path == '/users'), isEmpty, reason: 'no search for them');
+
+        await tester.enterText(_field(), 'Thanks @ca');
+        await tester.pump();
+        expect(find.byType(ActionChip), findsOneWidget);
+        await tester.tap(find.widgetWithText(ActionChip, 'carol'));
+        await tester.pump();
+        expect(_text(tester), 'Thanks @"carol"#${fixtures.userId('carol')} ');
+        await _close(tester);
+      });
+
       testWidgets('an edit opens on the post\'s source and saves it', (tester) async {
         fixtures.forum();
         // The reply the write fixtures recorded: bob's, his to edit.

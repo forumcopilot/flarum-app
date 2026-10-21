@@ -786,6 +786,24 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get save => 'Сохранить';
 
   @override
+  String get discardReplyQuestion =>
+      'Вы не отправили свой ответ. Вы хотите отменить сообщение?';
+
+  @override
+  String get discardDiscussionQuestion =>
+      'Вы не создали тему. Отменить создание?';
+
+  @override
+  String get discardEditQuestion =>
+      'Вы не сохранили изменения. Вы хотите отказаться от них?';
+
+  @override
+  String get discard => 'Удалить';
+
+  @override
+  String get saveDraft => 'Сохранить черновик';
+
+  @override
   String get formatting => 'Форматирование';
 
   @override
@@ -1267,6 +1285,38 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get unsuspend => 'Снять блокировку';
+
+  @override
+  String get suspend => 'Блокировать';
+
+  @override
+  String suspendUserTitle(String username) {
+    return 'Блокировка $username';
+  }
+
+  @override
+  String get suspensionStatus => 'Статус блокировки';
+
+  @override
+  String get notSuspended => 'Не заблокирован';
+
+  @override
+  String get suspendIndefinitely => 'Заблокирован навсегда';
+
+  @override
+  String get suspendLimitedTime => 'Заблокирован на период...';
+
+  @override
+  String get suspendDays => 'дней';
+
+  @override
+  String get suspendReasonLabel => 'Причина блокировки';
+
+  @override
+  String get suspendMessageLabel => 'Показать сообщение пользователю';
+
+  @override
+  String get optional => 'Опционально';
 
   @override
   String suspendedUntil(String date) {

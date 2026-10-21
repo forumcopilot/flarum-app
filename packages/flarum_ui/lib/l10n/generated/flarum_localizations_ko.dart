@@ -754,6 +754,21 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get save => '변경사항 저장';
 
   @override
+  String get discardReplyQuestion => '답글을 게시하지 않았습니다. 답글을 버리시겠습니까?';
+
+  @override
+  String get discardDiscussionQuestion => '토의 내용을 게시하지 않았습니다. 게시를 취소하시겠습니까?';
+
+  @override
+  String get discardEditQuestion => '변경 내용을 저장하지 않았습니다. 변경 내용을 취소하시겠습니까?';
+
+  @override
+  String get discard => '버리기';
+
+  @override
+  String get saveDraft => '임시 저장';
+
+  @override
   String get formatting => '서식';
 
   @override
@@ -1205,6 +1220,38 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get unsuspend => '정지 해제';
+
+  @override
+  String get suspend => '정지';
+
+  @override
+  String suspendUserTitle(String username) {
+    return '$username님을 정지';
+  }
+
+  @override
+  String get suspensionStatus => '정지 상태';
+
+  @override
+  String get notSuspended => '일시 정지되지 않음';
+
+  @override
+  String get suspendIndefinitely => '무기한 정지';
+
+  @override
+  String get suspendLimitedTime => '일정 기간 정지...';
+
+  @override
+  String get suspendDays => '일간';
+
+  @override
+  String get suspendReasonLabel => '정지 사유';
+
+  @override
+  String get suspendMessageLabel => '사용자에게 표시할 메시지';
+
+  @override
+  String get optional => '선택 사항';
 
   @override
   String suspendedUntil(String date) {

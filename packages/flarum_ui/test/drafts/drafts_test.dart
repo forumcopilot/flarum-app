@@ -75,7 +75,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.byTooltip('Close'));
         await _settle(tester);
-        await tester.tap(find.text('Save draft'));
+        await tester.tap(find.text('Save Draft'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         expect(find.text('Saved!'), findsOneWidget);
@@ -126,7 +126,7 @@ void main() {
 
         await tester.tap(find.byTooltip('Close'));
         await _settle(tester);
-        await tester.tap(find.text('Save draft'));
+        await tester.tap(find.text('Save Draft'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         expect(find.text("Draft saved, without the poll: drafts don't keep polls."), findsOneWidget);
@@ -148,7 +148,7 @@ void main() {
         await tester.tap(find.byTooltip('Close'));
         await _settle(tester);
         expect(find.text('Discard'), findsOneWidget);
-        expect(find.text('Save draft'), findsNothing);
+        expect(find.text('Save Draft'), findsNothing);
       });
     });
   }

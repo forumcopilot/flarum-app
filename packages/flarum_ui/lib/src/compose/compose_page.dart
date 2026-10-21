@@ -8,11 +8,11 @@ import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/emoji_shortcodes.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/file_picker_utils.dart';
-import 'package:forum_kit/views/widgets/discard_changes_scope.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 
 import '../../l10n/flarum_l10n.dart';
+import 'discard_changes_scope.dart';
 import '../render/file_kind.dart';
 import '../widgets/flarum_avatar.dart';
 import 'flarum_markup.dart';
@@ -434,7 +434,12 @@ class _ComposePageState extends State<ComposePage> {
     return DiscardChangesScope(
       listenable: Listenable.merge([_titleController, _contentController, widget.otherChanges]),
       hasChanges: _hasChanges,
-      isEdit: widget.isEdit,
+      // Flarum's question for what's being written.
+      question: widget.isEdit
+          ? flarumL10n(context).discardEditQuestion
+          : widget.showTitleField
+              ? flarumL10n(context).discardDiscussionQuestion
+              : flarumL10n(context).discardReplyQuestion,
       busy: _isSubmitting,
       onSaveDraft: widget.onSaveDraft == null ? null : _saveDraft,
       describeFailure: (error, context) => error is ComposeProblem ? error.message : describeError(context, error),

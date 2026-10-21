@@ -771,6 +771,24 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get save => 'Save Changes';
 
   @override
+  String get discardReplyQuestion =>
+      'You have not posted your reply. Do you wish to discard it?';
+
+  @override
+  String get discardDiscussionQuestion =>
+      'You have not posted your discussion. Do you wish to discard it?';
+
+  @override
+  String get discardEditQuestion =>
+      'You have not saved your changes. Do you wish to discard them?';
+
+  @override
+  String get discard => 'Discard';
+
+  @override
+  String get saveDraft => 'Save Draft';
+
+  @override
   String get formatting => 'Formatting';
 
   @override
@@ -1242,6 +1260,38 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get unsuspend => 'Unsuspend';
+
+  @override
+  String get suspend => 'Suspend';
+
+  @override
+  String suspendUserTitle(String username) {
+    return 'Suspend $username';
+  }
+
+  @override
+  String get suspensionStatus => 'Suspension Status';
+
+  @override
+  String get notSuspended => 'Not suspended';
+
+  @override
+  String get suspendIndefinitely => 'Suspended indefinitely';
+
+  @override
+  String get suspendLimitedTime => 'Suspended for a limited time...';
+
+  @override
+  String get suspendDays => 'days';
+
+  @override
+  String get suspendReasonLabel => 'Reason for suspension';
+
+  @override
+  String get suspendMessageLabel => 'Display message for user';
+
+  @override
+  String get optional => 'Optional';
 
   @override
   String suspendedUntil(String date) {

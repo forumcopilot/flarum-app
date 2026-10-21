@@ -775,6 +775,24 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get save => 'Änderungen speichern';
 
   @override
+  String get discardReplyQuestion =>
+      'Deine Antwort wurde nicht versendet. Möchtest du sie verwerfen?';
+
+  @override
+  String get discardDiscussionQuestion =>
+      'Dein Beitrag wurde nicht versendet. Möchtest du ihn verwerfen?';
+
+  @override
+  String get discardEditQuestion =>
+      'Deine Änderungen wurden nicht übernommen. Möchtest du sie verwerfen?';
+
+  @override
+  String get discard => 'Verwerfen';
+
+  @override
+  String get saveDraft => 'Entwurf speichern';
+
+  @override
   String get formatting => 'Formatierung';
 
   @override
@@ -1254,6 +1272,38 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get unsuspend => 'Sperre aufheben';
+
+  @override
+  String get suspend => 'Ausschließen';
+
+  @override
+  String suspendUserTitle(String username) {
+    return '$username ausschließen';
+  }
+
+  @override
+  String get suspensionStatus => 'Ausschluss-Status';
+
+  @override
+  String get notSuspended => 'Nicht ausschließen';
+
+  @override
+  String get suspendIndefinitely => 'Dauerhaft ausschließen';
+
+  @override
+  String get suspendLimitedTime => 'Temporär ausschließen …';
+
+  @override
+  String get suspendDays => 'Tage';
+
+  @override
+  String get suspendReasonLabel => 'Grund für den Ausschluss';
+
+  @override
+  String get suspendMessageLabel => 'Nachricht für den Benutzer anzeigen';
+
+  @override
+  String get optional => 'Optional';
 
   @override
   String suspendedUntil(String date) {

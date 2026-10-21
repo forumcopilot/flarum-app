@@ -1208,6 +1208,36 @@ abstract class FlarumLocalizations {
   /// **'Save Changes'**
   String get save;
 
+  /// Closing a reply with something written.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not posted your reply. Do you wish to discard it?'**
+  String get discardReplyQuestion;
+
+  /// Closing a new discussion with something written.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not posted your discussion. Do you wish to discard it?'**
+  String get discardDiscussionQuestion;
+
+  /// Closing an edit (or the poll editor) with changes.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not saved your changes. Do you wish to discard them?'**
+  String get discardEditQuestion;
+
+  /// The close prompt: throws away what was written.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get discard;
+
+  /// The close prompt: keeps what was written as a draft (fof/drafts).
+  ///
+  /// In en, this message translates to:
+  /// **'Save Draft'**
+  String get saveDraft;
+
   /// Composer: formatting
   ///
   /// In en, this message translates to:
@@ -1954,6 +1984,66 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Unsuspend'**
   String get unsuspend;
+
+  /// A profile's menu (moderators): opens the Suspend page, which also lifts a suspension.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend'**
+  String get suspend;
+
+  /// The suspend page's title (flarum/suspend).
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend {username}'**
+  String suspendUserTitle(String username);
+
+  /// The suspend page: the heading over how long.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspension Status'**
+  String get suspensionStatus;
+
+  /// The suspend page: no suspension (lifts one).
+  ///
+  /// In en, this message translates to:
+  /// **'Not suspended'**
+  String get notSuspended;
+
+  /// The suspend page: suspended with no end.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended indefinitely'**
+  String get suspendIndefinitely;
+
+  /// The suspend page: suspended for a number of days.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended for a limited time...'**
+  String get suspendLimitedTime;
+
+  /// The suspend page: after the number of days (flarum/suspend's limited_time_days_text, trimmed).
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get suspendDays;
+
+  /// The suspend page: why, for moderators.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for suspension'**
+  String get suspendReasonLabel;
+
+  /// The suspend page: what the member is told.
+  ///
+  /// In en, this message translates to:
+  /// **'Display message for user'**
+  String get suspendMessageLabel;
+
+  /// The suspend page: the reason's and the message's placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
 
   /// Profile: a suspended member, until a date
   ///

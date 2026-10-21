@@ -1,16 +1,15 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
-import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/utils/discourse_color.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
-import 'package:forum_kit/views/widgets/suspend_user_page.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:intl/intl.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../safety/suspend_user_page.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
 import '../compose/composers.dart';
@@ -123,21 +122,13 @@ class _UserPageState extends State<UserPage> {
   bool _canWriteTo(FlarumUser user) =>
       canStartPrivateDiscussion(_forum) && user.id != _forum.info?.actor?.id && !user.blocksPd;
 
-  /// Suspends [user] (flarum/suspend) with forum_kit's Suspend User page, or lifts their suspension.
-  /// The reason chosen is what they're told, and what moderators see.
+  /// Suspends [user] (flarum/suspend), or lifts their suspension, with Flarum's Suspend page: how
+  /// long, the reason for moderators and the message they're told.
   Future<void> _suspend(FlarumUser user) async {
-    DateTime? until;
-    String? reason;
-    if (!user.isSuspended) {
-      final choice = await showSuspendUserPage(context);
-      if (choice == null) return;
-      until = choice.expires == 0
-          ? FlarumUser.indefiniteSuspension
-          : DateTime.fromMillisecondsSinceEpoch(choice.expires * 1000, isUtc: true);
-      reason = choice.reason;
-    }
+    final choice = await showSuspendUserPage(context, user);
+    if (choice == null) return;
     try {
-      final saved = await _forum.api.suspend(user.id, until, reason: reason, message: reason);
+      final saved = await _forum.api.suspend(user.id, choice.until, reason: choice.reason, message: choice.message);
       if (mounted) setState(() => _user = saved);
     } catch (e) {
       if (mounted) SnackbarHelper.showError(context, describeError(context, e));
@@ -203,7 +194,7 @@ class _UserPageState extends State<UserPage> {
                 if (user.canSuspend)
                   PopupMenuItem(
                     value: () => _suspend(user),
-                    child: Text(user.isSuspended ? l10n.unsuspend : kitL10n(context).suspendUser),
+                    child: Text(l10n.suspend),
                   ),
                 if (_ignored.canIgnore(user))
                   PopupMenuItem(

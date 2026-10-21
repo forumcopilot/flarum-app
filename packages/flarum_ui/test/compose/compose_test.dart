@@ -326,7 +326,7 @@ void main() {
         await _settle(tester);
         await tester.tap(find.byTooltip(MaterialLocalizations.of(tester.element(find.byType(ComposePage))).closeButtonTooltip));
         await _settle(tester);
-        expect(find.text('Do you want to discard your post?'), findsOneWidget, reason: 'the tags would be lost');
+        expect(find.text('You have not posted your discussion. Do you wish to discard it?'), findsOneWidget, reason: 'the tags would be lost');
         await _close(tester);
       });
 

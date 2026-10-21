@@ -755,6 +755,21 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get save => '変更を保存';
 
   @override
+  String get discardReplyQuestion => 'まだ返信が完了していません。内容を破棄してもよろしいですか？';
+
+  @override
+  String get discardDiscussionQuestion => 'まだ投稿が完了していません。内容を破棄してもよろしいですか？';
+
+  @override
+  String get discardEditQuestion => 'まだ変更を保存していません。内容を破棄してもよろしいですか？';
+
+  @override
+  String get discard => '破棄';
+
+  @override
+  String get saveDraft => '下書きを保存';
+
+  @override
   String get formatting => '書式設定';
 
   @override
@@ -1206,6 +1221,38 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get unsuspend => '停止を解除';
+
+  @override
+  String get suspend => 'アカウント停止';
+
+  @override
+  String suspendUserTitle(String username) {
+    return 'アカウント $username の停止';
+  }
+
+  @override
+  String get suspensionStatus => 'アカウント状態';
+
+  @override
+  String get notSuspended => '停止解除';
+
+  @override
+  String get suspendIndefinitely => '無期限停止';
+
+  @override
+  String get suspendLimitedTime => '一時利用停止...';
+
+  @override
+  String get suspendDays => '日間';
+
+  @override
+  String get suspendReasonLabel => 'アカウント停止理由';
+
+  @override
+  String get suspendMessageLabel => 'ユーザーにメッセージを表示';
+
+  @override
+  String get optional => '任意';
 
   @override
   String suspendedUntil(String date) {

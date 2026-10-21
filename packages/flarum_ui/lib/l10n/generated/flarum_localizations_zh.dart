@@ -756,6 +756,21 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get save => '保存';
 
   @override
+  String get discardReplyQuestion => '回复尚未发布，确定要丢弃吗？';
+
+  @override
+  String get discardDiscussionQuestion => '讨论尚未发布，确定要丢弃吗？';
+
+  @override
+  String get discardEditQuestion => '更改尚未保存，确定要丢弃吗？';
+
+  @override
+  String get discard => '丢弃';
+
+  @override
+  String get saveDraft => '保存草稿';
+
+  @override
   String get formatting => '格式';
 
   @override
@@ -1204,6 +1219,38 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get unsuspend => '解除封禁';
+
+  @override
+  String get suspend => '封禁';
+
+  @override
+  String suspendUserTitle(String username) {
+    return '封禁 $username';
+  }
+
+  @override
+  String get suspensionStatus => '封禁状态';
+
+  @override
+  String get notSuspended => '未封禁';
+
+  @override
+  String get suspendIndefinitely => '永久封禁';
+
+  @override
+  String get suspendLimitedTime => '限时封禁';
+
+  @override
+  String get suspendDays => '天';
+
+  @override
+  String get suspendReasonLabel => '封禁原因';
+
+  @override
+  String get suspendMessageLabel => '向用户显示的消息';
+
+  @override
+  String get optional => '可选';
 
   @override
   String suspendedUntil(String date) {

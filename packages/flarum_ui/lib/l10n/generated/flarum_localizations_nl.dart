@@ -774,6 +774,24 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get save => 'Wijzigingen opslaan';
 
   @override
+  String get discardReplyQuestion =>
+      'Je hebt je reactie nog niet geplaatst. Weet je zeker dat je wilt annuleren?';
+
+  @override
+  String get discardDiscussionQuestion =>
+      'Je hebt je bericht nog niet geplaatst. Weet je zeker dat je wilt annuleren?';
+
+  @override
+  String get discardEditQuestion =>
+      'Je hebt je wijzigingen nog niet opgeslagen. Weet je zeker dat je wilt annuleren?';
+
+  @override
+  String get discard => 'Verwijderen';
+
+  @override
+  String get saveDraft => 'Concept opslaan';
+
+  @override
   String get formatting => 'Opmaak';
 
   @override
@@ -1248,6 +1266,38 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get unsuspend => 'Schorsing opheffen';
+
+  @override
+  String get suspend => 'Opschorten';
+
+  @override
+  String suspendUserTitle(String username) {
+    return '$username opschorten';
+  }
+
+  @override
+  String get suspensionStatus => 'Opschortingsstatus';
+
+  @override
+  String get notSuspended => 'Niet geschorst';
+
+  @override
+  String get suspendIndefinitely => 'Opgeschort voor onbepaalde tijd';
+
+  @override
+  String get suspendLimitedTime => 'Opgeschort voor een beperkte tijd ...';
+
+  @override
+  String get suspendDays => 'dagen';
+
+  @override
+  String get suspendReasonLabel => 'Reden voor schorsing';
+
+  @override
+  String get suspendMessageLabel => 'Bericht weergeven voor gebruiker';
+
+  @override
+  String get optional => 'Optioneel';
 
   @override
   String suspendedUntil(String date) {

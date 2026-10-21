@@ -1,10 +1,10 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
-import 'package:forum_kit/views/widgets/discard_changes_scope.dart';
 import 'package:intl/intl.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../compose/discard_changes_scope.dart';
 
 /// The poll to start a discussion with (fof/polls), as the web's poll form asks for it: the
 /// question, two answers or more (up to the forum's [maxOptions]), whether several may be chosen,
@@ -157,7 +157,7 @@ class _PollEditorPageState extends State<PollEditorPage> {
     return DiscardChangesScope(
       listenable: _edits,
       hasChanges: () => _snapshot() != _opened,
-      isEdit: true,
+      question: flarumL10n(context).discardEditQuestion,
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.poll),

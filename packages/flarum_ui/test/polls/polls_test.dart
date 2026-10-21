@@ -71,7 +71,7 @@ void main() {
     await tester.enterText(find.widgetWithText(TextField, 'Question'), 'Which day?');
     await tester.pump();
     await close();
-    expect(find.text('Do you want to discard your changes?'), findsOneWidget);
+    expect(find.text('You have not saved your changes. Do you wish to discard them?'), findsOneWidget);
     expect(find.byType(PollEditorPage), findsOneWidget, reason: 'still open until the reader says');
   });
   setUp(FlarumForum.resetForTesting);

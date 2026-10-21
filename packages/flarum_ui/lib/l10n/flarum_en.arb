@@ -1148,6 +1148,26 @@
   "@save": {
     "description": "The edit composer's submit button, as Flarum's"
   },
+  "discardReplyQuestion": "You have not posted your reply. Do you wish to discard it?",
+  "@discardReplyQuestion": {
+    "description": "Closing a reply with something written."
+  },
+  "discardDiscussionQuestion": "You have not posted your discussion. Do you wish to discard it?",
+  "@discardDiscussionQuestion": {
+    "description": "Closing a new discussion with something written."
+  },
+  "discardEditQuestion": "You have not saved your changes. Do you wish to discard them?",
+  "@discardEditQuestion": {
+    "description": "Closing an edit (or the poll editor) with changes."
+  },
+  "discard": "Discard",
+  "@discard": {
+    "description": "The close prompt: throws away what was written."
+  },
+  "saveDraft": "Save Draft",
+  "@saveDraft": {
+    "description": "The close prompt: keeps what was written as a draft (fof/drafts)."
+  },
   "formatting": "Formatting",
   "@formatting": {
     "description": "Composer: formatting"
@@ -1779,6 +1799,51 @@
   "unsuspend": "Unsuspend",
   "@unsuspend": {
     "description": "Profile menu: lift a suspension (flarum/suspend)"
+  },
+  "suspend": "Suspend",
+  "@suspend": {
+    "description": "A profile's menu (moderators): opens the Suspend page, which also lifts a suspension."
+  },
+  "suspendUserTitle": "Suspend {username}",
+  "@suspendUserTitle": {
+    "description": "The suspend page's title (flarum/suspend).",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "suspensionStatus": "Suspension Status",
+  "@suspensionStatus": {
+    "description": "The suspend page: the heading over how long."
+  },
+  "notSuspended": "Not suspended",
+  "@notSuspended": {
+    "description": "The suspend page: no suspension (lifts one)."
+  },
+  "suspendIndefinitely": "Suspended indefinitely",
+  "@suspendIndefinitely": {
+    "description": "The suspend page: suspended with no end."
+  },
+  "suspendLimitedTime": "Suspended for a limited time...",
+  "@suspendLimitedTime": {
+    "description": "The suspend page: suspended for a number of days."
+  },
+  "suspendDays": "days",
+  "@suspendDays": {
+    "description": "The suspend page: after the number of days (flarum/suspend's limited_time_days_text, trimmed)."
+  },
+  "suspendReasonLabel": "Reason for suspension",
+  "@suspendReasonLabel": {
+    "description": "The suspend page: why, for moderators."
+  },
+  "suspendMessageLabel": "Display message for user",
+  "@suspendMessageLabel": {
+    "description": "The suspend page: what the member is told."
+  },
+  "optional": "Optional",
+  "@optional": {
+    "description": "The suspend page: the reason's and the message's placeholder."
   },
   "suspendedUntil": "Suspended until {date}",
   "@suspendedUntil": {

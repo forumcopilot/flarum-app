@@ -127,14 +127,16 @@ void main() {
         await _pumpUntil(tester, find.textContaining('Joined'));
         await tester.tap(find.byTooltip('Show menu'));
         await _settle(tester);
-        await tester.tap(find.text('Suspend User'));
+        await tester.tap(find.text('Suspend'));
         await _settle(tester);
 
-        // Forever is the default; the reason is ours.
-        await tester.tap(find.text('Custom…'));
+        // Flarum's Suspend page: not suspended until chosen; the reason and the message are ours.
+        expect(find.text('Suspend bob'), findsOneWidget);
+        await tester.tap(find.text('Suspended indefinitely'));
         await _settle(tester);
-        await tester.enterText(find.byType(TextField).last, WriteSamples.suspendReason);
-        await tester.tap(find.widgetWithText(FilledButton, 'Suspend User'));
+        await tester.enterText(find.byKey(const ValueKey('suspend-reason')), WriteSamples.suspendReason);
+        await tester.enterText(find.byKey(const ValueKey('suspend-message')), WriteSamples.suspendReason);
+        await tester.tap(find.widgetWithText(FilledButton, 'Save Changes'));
         await _settle(tester);
         expect(find.text('Suspended indefinitely'), findsOneWidget);
         final sent = fixtures.requests.lastWhere((r) => r.method == 'PATCH').data as Map;
@@ -144,9 +146,15 @@ void main() {
           'suspendMessage': WriteSamples.suspendReason,
         });
 
+        // The same page lifts it: Not suspended.
         await tester.tap(find.byTooltip('Show menu'));
         await _settle(tester);
-        await tester.tap(find.text('Unsuspend'));
+        await tester.tap(find.text('Suspend'));
+        await _settle(tester);
+        expect(find.text(WriteSamples.suspendReason), findsWidgets, reason: 'the suspension as it stands');
+        await tester.tap(find.text('Not suspended'));
+        await _settle(tester);
+        await tester.tap(find.widgetWithText(FilledButton, 'Save Changes'));
         await _settle(tester);
         expect(find.text('Suspended indefinitely'), findsNothing);
         await _close(tester);

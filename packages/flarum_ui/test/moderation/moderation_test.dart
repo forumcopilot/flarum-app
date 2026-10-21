@@ -124,7 +124,7 @@ void main() {
       testWidgets('a moderator suspends bob indefinitely from his profile, and lets him back', (tester) async {
         final fixtures = await asModerator(tester);
         await tester.pumpWidget(_app(UserPage(site: _site(), slug: 'bob')));
-        await _pumpUntil(tester, find.text('@bob'));
+        await _pumpUntil(tester, find.textContaining('Joined'));
         await tester.tap(find.byTooltip('Show menu'));
         await _settle(tester);
         await tester.tap(find.text('Suspend User'));

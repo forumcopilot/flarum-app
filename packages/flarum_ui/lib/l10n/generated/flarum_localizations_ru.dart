@@ -115,6 +115,25 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get loadEarlierPosts => 'Показать ещё';
 
   @override
+  String scrubberPosition(int index, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$index из $count сообщения',
+      many: '$index из $count сообщений',
+      few: '$index из $count сообщений',
+      one: '$index из $count сообщения',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scrubberOriginalPost => 'Начало';
+
+  @override
+  String get scrubberNow => 'Сейчас';
+
+  @override
   String get postHidden => 'Это сообщение удалено.';
 
   @override

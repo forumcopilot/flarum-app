@@ -278,6 +278,24 @@ abstract class FlarumLocalizations {
   /// **'Load More'**
   String get loadEarlierPosts;
 
+  /// Where the reader is in a discussion, as Flarum's post scrubber says it
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{{index} of {count} post} other{{index} of {count} posts}}'**
+  String scrubberPosition(int index, int count);
+
+  /// The scrubber's jump to the first post, as Flarum names it
+  ///
+  /// In en, this message translates to:
+  /// **'Original Post'**
+  String get scrubberOriginalPost;
+
+  /// The scrubber's jump to the newest post, as Flarum names it
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get scrubberNow;
+
   /// Shown in place of a deleted (hidden) post
   ///
   /// In en, this message translates to:

@@ -110,6 +110,23 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get loadEarlierPosts => 'さらに読み込む';
 
   @override
+  String scrubberPosition(int index, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$index / $count 件',
+      one: '$index / $count 件',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scrubberOriginalPost => '最初の投稿';
+
+  @override
+  String get scrubberNow => '最新の投稿';
+
+  @override
   String get postHidden => 'この投稿は削除されました。';
 
   @override

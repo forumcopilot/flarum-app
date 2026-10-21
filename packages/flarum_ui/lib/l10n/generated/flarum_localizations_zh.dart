@@ -110,6 +110,23 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get loadEarlierPosts => '加载更多';
 
   @override
+  String scrubberPosition(int index, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$index / $count 条',
+      one: '$index / $count 条',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scrubberOriginalPost => '最早内容';
+
+  @override
+  String get scrubberNow => '最新回复';
+
+  @override
   String get postHidden => '此帖子已被删除。';
 
   @override

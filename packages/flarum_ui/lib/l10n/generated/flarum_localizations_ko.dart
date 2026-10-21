@@ -110,6 +110,22 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get loadEarlierPosts => '더 보기';
 
   @override
+  String scrubberPosition(int index, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count개 게시물 중 $index',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scrubberOriginalPost => '원본 게시물';
+
+  @override
+  String get scrubberNow => '최신 게시물';
+
+  @override
   String get postHidden => '삭제된 게시물입니다.';
 
   @override

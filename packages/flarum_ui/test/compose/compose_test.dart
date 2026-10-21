@@ -125,7 +125,7 @@ void main() {
         await _pumpUntil(tester, find.byType(PostTile));
         await _settle(tester);
 
-        await tester.tap(find.widgetWithText(FloatingActionButton, 'Reply'));
+        await tester.tap(find.descendant(of: find.byKey(const ValueKey('thread-bar')), matching: find.text('Reply')));
         await _pumpUntil(tester, find.byType(ComposePage));
         await _settle(tester);
         expect(find.text('Welcome to the test forum'), findsWidgets, reason: 'the composer names the discussion');

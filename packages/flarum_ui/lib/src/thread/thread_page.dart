@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
@@ -142,6 +144,12 @@ class _ThreadPageState extends State<ThreadPage> {
     if (visible.isEmpty) return;
     final hero = _header && visible.any((p) => p.index == 0 && p.itemTrailingEdge > 0.02);
     if (hero != _heroOnScreen) setState(() => _heroOnScreen = hero);
+    // The first post on screen, counted from the discussion's start, for the bar's "12 of 340".
+    final shown = visible.map((p) => p.index - _leading).where((i) => i >= 0 && i < _model.posts.length);
+    if (shown.isNotEmpty) {
+      final position = _model.start + shown.reduce(math.min) + 1;
+      if (position != _position) setState(() => _position = position);
+    }
     var lastPost = -1;
     var lastRow = 0;
     for (final position in visible) {
@@ -483,6 +491,83 @@ class _ThreadPageState extends State<ThreadPage> {
   @visibleForTesting
   void goTo(int number) => _goTo(number);
 
+  /// The first post on screen, from 1, once the list has drawn.
+  int? _position;
+
+  /// Takes the reader to the post at [index] (0 for the first), as the scrubber moves: scrolled to
+  /// where it's loaded, else the thread opened around it.
+  Future<void> _goToIndex(int index) async {
+    final total = _model.total;
+    if (total == 0) return;
+    index = index.clamp(0, total - 1);
+    if (index >= _model.start && index < _model.end && _scroll.isAttached) {
+      _scroll.scrollTo(index: _leading + index - _model.start, duration: const Duration(milliseconds: 300));
+      setState(() => _flash(_model.posts[index - _model.start].number));
+      return;
+    }
+    await _model.openAtIndex(index);
+    if (!mounted) return;
+    if (_model.error case final error? when _model.discussion != null) {
+      SnackbarHelper.showError(context, describeError(context, error));
+      return;
+    }
+    final at = index - _model.start;
+    if (at < 0 || at >= _model.posts.length) return;
+    final number = _model.posts[at].number;
+    setState(() {
+      _near = number;
+      _generation++;
+      _flash(number);
+    });
+  }
+
+  /// The web's post scrubber: Original Post, a slider over the whole discussion, and Now.
+  Future<void> _scrub() async {
+    final total = _model.total;
+    final l10n = flarumL10n(context);
+    var value = ((_position ?? _model.start + 1).clamp(1, total)).toDouble();
+    final target = await showModalBottomSheet<int>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheet) => SafeArea(
+        child: StatefulBuilder(
+          builder: (sheet, setSheet) => Padding(
+            padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingL),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextButton.icon(
+                  onPressed: () => Navigator.pop(sheet, 0),
+                  icon: const Icon(Icons.vertical_align_top),
+                  label: Text(l10n.scrubberOriginalPost),
+                ),
+                Text(l10n.scrubberPosition(value.round(), total),
+                    textAlign: TextAlign.center, style: Theme.of(sheet).textTheme.titleMedium),
+                if (total > 1)
+                  Slider(
+                    value: value,
+                    min: 1,
+                    max: total.toDouble(),
+                    divisions: total - 1,
+                    label: l10n.scrubberPosition(value.round(), total),
+                    onChanged: (v) => setSheet(() => value = v),
+                    onChangeEnd: (v) => Navigator.pop(sheet, v.round() - 1),
+                  ),
+                TextButton.icon(
+                  onPressed: () => Navigator.pop(sheet, total - 1),
+                  icon: const Icon(Icons.vertical_align_bottom),
+                  label: Text(l10n.scrubberNow),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    if (target != null && mounted) _goToIndex(target);
+  }
+
   /// The post the reader was just taken to, lit up for a moment as the web does (`flashItem`).
   int? _flashNumber;
   int _flashes = 0;
@@ -532,19 +617,29 @@ class _ThreadPageState extends State<ThreadPage> {
             _ModerationMenu(discussion: discussion, onSelected: _moderate),
         ],
       ),
-      floatingActionButton: _canReply
-          ? FloatingActionButton.extended(
-              onPressed: _reply,
-              icon: const Icon(Icons.reply),
-              label: Text(kitL10n(context).reply),
-            )
-          : _guestCouldReply
-              ? FloatingActionButton.extended(
-                  onPressed: _logInToReply,
-                  icon: const Icon(Icons.login),
-                  label: Text(l10n.logInToReply),
-                )
-              : null,
+      // Where the reader is ("12 of 340", opening the scrubber) and Reply, as the web's bar under
+      // a discussion on a phone: "Log In to Reply" for a guest, "Can't Reply" where they may not.
+      bottomNavigationBar: discussion == null || _model.total == 0
+          ? null
+          : _ThreadBar(
+              key: const ValueKey('thread-bar'),
+              position: (_position ?? _model.start + 1).clamp(1, _model.total),
+              total: _model.total,
+              onScrub: _scrub,
+              action: _canReply
+                  ? FilledButton.icon(
+                      onPressed: _reply,
+                      icon: const Icon(Icons.reply),
+                      label: Text(kitL10n(context).reply),
+                    )
+                  : _guestCouldReply
+                      ? FilledButton.tonalIcon(
+                          onPressed: _logInToReply,
+                          icon: const Icon(Icons.login),
+                          label: Text(l10n.logInToReply),
+                        )
+                      : OutlinedButton(onPressed: null, child: Text(l10n.cannotReply)),
+            ),
       body: switch (_model) {
         ThreadModel(discussion: null, error: final error?) => EmptyStateView.error(
             message: l10n.threadLoadFailed,
@@ -637,7 +732,7 @@ class _ThreadPageState extends State<ThreadPage> {
       );
     }
     // Room under the last post for the Reply button.
-    return SizedBox(height: _canReply || _guestCouldReply ? 96 : DesignTokens.spacingXXXL);
+    return const SizedBox(height: DesignTokens.spacingXXXL);
   }
 }
 
@@ -733,6 +828,43 @@ class _DiscussionHero extends StatelessWidget {
                 textAlign: TextAlign.center, style: theme.textTheme.bodyMedium?.copyWith(color: foreground)),
           ],
         ],
+      ),
+    );
+  }
+}
+
+/// The bar under a discussion: where the reader is, which opens the scrubber, and [action] (Reply).
+class _ThreadBar extends StatelessWidget {
+  const _ThreadBar({super.key, required this.position, required this.total, required this.onScrub, required this.action});
+
+  final int position;
+  final int total;
+  final VoidCallback onScrub;
+  final Widget action;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Material(
+      color: colorScheme.surfaceContainer,
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: DesignTokens.spacingXS),
+          child: Row(
+            children: [
+              Flexible(
+                child: TextButton.icon(
+                  onPressed: onScrub,
+                  icon: const Icon(Icons.unfold_more),
+                  label: Text(flarumL10n(context).scrubberPosition(position, total), overflow: TextOverflow.ellipsis),
+                ),
+              ),
+              const SizedBox(width: DesignTokens.spacingS),
+              action,
+            ],
+          ),
+        ),
       ),
     );
   }

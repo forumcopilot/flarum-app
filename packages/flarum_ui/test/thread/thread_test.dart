@@ -157,7 +157,8 @@ void main() {
         ));
         await _pumpUntil(tester, find.byType(PostTile));
         await tester.pump(const Duration(milliseconds: 500));
-        expect(find.widgetWithText(FloatingActionButton, 'Log In to Reply'), findsOneWidget);
+        expect(find.descendant(of: find.byKey(const ValueKey('thread-bar')), matching: find.text('Log In to Reply')),
+            findsOneWidget);
         expect(find.descendant(of: find.byType(PostTile).first, matching: find.text('Reply')), findsOneWidget,
             reason: 'as the web shows it to guests, opening Log In');
         expect(find.text('Like'), findsNothing, reason: 'the web offers guests no Like');
@@ -186,6 +187,9 @@ void main() {
           home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
         ));
         await _pumpUntil(tester, find.text('bob and alice replied to this.'));
+        // Clear of the bar at the bottom of the screen.
+        await tester.drag(find.byType(PostTile).first, const Offset(0, -150));
+        await tester.pump(const Duration(milliseconds: 300));
         await tester.tap(find.text('bob and alice replied to this.'));
         await _pumpUntil(tester, find.text('Replies to this post'));
         expect(find.text('Post #3'), findsOneWidget, reason: "bob's reply, in this discussion");
@@ -229,6 +233,25 @@ void main() {
         expect(tester.getTopLeft(find.text('Post 21 of 60.')).dy, lessThan(250),
             reason: 'at the top, not half a page below, where the list used to stay');
         expect(find.text('Post 12 of 60.'), findsNothing, reason: "the window's first posts are above the screen");
+        await _close(tester);
+      });
+
+      testWidgets('the bar says where the reader is, and its scrubber goes to the Original Post', (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('long'), near: 21),
+        ));
+        await _pumpUntil(tester, find.text('Post 21 of 60.'));
+        await tester.pump(const Duration(milliseconds: 500));
+        final bar = find.byKey(const ValueKey('thread-bar'));
+        expect(find.descendant(of: bar, matching: find.textContaining(RegExp(r'^\d+ of \d+ posts$'))), findsOneWidget);
+        await tester.tap(find.descendant(of: bar, matching: find.byIcon(Icons.unfold_more)));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Original Post'));
+        await _pumpUntil(tester, find.text('Post 1 of 60.'));
+        await tester.pump(const Duration(milliseconds: 500));
+        expect(find.descendant(of: bar, matching: find.textContaining(RegExp(r'^1 of \d+ posts$'))), findsOneWidget);
         await _close(tester);
       });
 

@@ -121,6 +121,26 @@
   "@loadEarlierPosts": {
     "description": "Button at the top of a discussion opened part-way down: loads the posts before"
   },
+  "scrubberPosition": "{count, plural, =1{{index} of {count} post} other{{index} of {count} posts}}",
+  "@scrubberPosition": {
+    "description": "Where the reader is in a discussion, as Flarum's post scrubber says it",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scrubberOriginalPost": "Original Post",
+  "@scrubberOriginalPost": {
+    "description": "The scrubber's jump to the first post, as Flarum names it"
+  },
+  "scrubberNow": "Now",
+  "@scrubberNow": {
+    "description": "The scrubber's jump to the newest post, as Flarum names it"
+  },
   "postHidden": "This post was deleted.",
   "@postHidden": {
     "description": "Shown in place of a deleted (hidden) post"

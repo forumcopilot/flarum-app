@@ -76,6 +76,29 @@ class ThreadModel extends ChangeNotifier {
     _notify();
   }
 
+  /// Opens the discussion around its post at [index] (0 for the first), as the web's scrubber jumps
+  /// to a position rather than a post number: the page around it, by offset.
+  Future<void> openAtIndex(int index) async {
+    error = null;
+    notifyListeners();
+    try {
+      final discussion = await forum.api.discussion(discussionId, withPostIds: true);
+      final total = discussion.postIds.length;
+      final offset = math.max(0, math.min(index - pageSize ~/ 2, total - pageSize));
+      final page = await forum.api.posts(discussionId, offset: offset, limit: pageSize);
+      this.discussion = discussion;
+      start = offset;
+      _warm(page.items);
+      posts
+        ..clear()
+        ..addAll(page.items);
+      _readUpTo = discussion.lastReadPostNumber ?? 0;
+    } catch (e) {
+      error = e;
+    }
+    _notify();
+  }
+
   /// Loads the page after the window.
   Future<void> loadNext() async {
     if (loadingNext || !hasNext || _disposed) return;

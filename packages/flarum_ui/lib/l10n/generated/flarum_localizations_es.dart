@@ -112,6 +112,23 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get loadEarlierPosts => 'Cargar más';
 
   @override
+  String scrubberPosition(int index, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$index de $count publicaciones',
+      one: '$index de $count publicación',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scrubberOriginalPost => 'Publicación original';
+
+  @override
+  String get scrubberNow => 'Ahora';
+
+  @override
   String get postHidden => 'Esta publicación fue eliminada.';
 
   @override

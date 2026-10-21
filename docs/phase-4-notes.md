@@ -51,8 +51,8 @@ open them in the app later), and push (Phase 5).
 
 Three reviews (the app beside Flarum's website on a phone, beside discourse-app and ABDA, and
 every string beside Flarum's own) are in the "Flarum App UI Review" doc:
-https://claude.ai/artifact/XGRBZHKA3dzFmtP2SZ6PRY. Its recommended changes wait on decisions
-there. Done since:
+https://claude.ai/artifact/XGRBZHKA3dzFmtP2SZ6PRY. All 15 of its recommended changes were
+approved, and are built (its table names each one's commit). Done since:
 
 - **Flarum's wording** (e20f611): every string with a Flarum equivalent says what Flarum's
   website says, from Flarum's English and the flarum-lang packs, in Flarum's Title Case inside
@@ -66,7 +66,22 @@ there. Done since:
   description fits; Log In is covered until the forum's page draws, and Back goes back in it.
   `FixtureForum.latency` lets a test draw frames while a request is under way, as a phone does:
   without it, a fixture answers before the next frame and some bugs can't show.
+- **The 15 changes** (2cc41a4 to d3c77b0, 20 to 21 Oct): Like and Reply under each post, and
+  likes as "bob and carol like this" with Flarum's thumbs-up; Flarum's icons (Follow's star,
+  byobu's map); every coloured tag filled; Mark All as Read, asking first. Guests are offered Log
+  In where they'd act (`logInFirst`, with `ForumSession` telling every screen). Share and Copy
+  Link (`WebLinks` builds the website's addresses); Account opens the reader's profile and the
+  forum's settings, and asks before Log Out. Notifications grouped by discussion, with the type's
+  icon and the post's first lines. Discussion rows wear the web's badges and name who a private
+  one is with. Home shows the forum's logo and its welcome message, which can be hidden until the
+  forum changes it. Search: the matched words in bold in context, more pages, a Users tab, recent
+  searches; Posts only on 2.0, since on 1.x it repeated the discussions' best posts. The
+  discussion's header and a tag's page in the tag's colour. The profile as Flarum's user card,
+  with groups, best answers, and Likes and Mentions tabs. The thread's bottom bar: where the
+  reader is ("12 of 340 posts", opening the scrubber: Original Post, a slider, Now) and Reply,
+  Log In to Reply or Can't Reply, in place of the floating Reply button.
 
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
-log-in page; a message notification (2.0) opens nothing yet, and needs a look at what the
+log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
+and the hero colours in dark mode; a message notification (2.0) opens nothing yet, and needs a look at what the
 forum sends.

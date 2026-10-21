@@ -1130,6 +1130,30 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
       'Danke für deine Meldung. Unsere Moderatoren sehen sich den Beitrag an.';
 
   @override
+  String get flaggedPosts => 'Gemeldete Beiträge';
+
+  @override
+  String get noFlags => 'Keine Meldungen';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$username in $discussion';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return 'Gemeldet von $username als $reason';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return 'Von $username gemeldet';
+  }
+
+  @override
+  String get dismissFlag => 'Meldung ablehnen';
+
+  @override
   String ignoreUser(String name) {
     return '$name ignorieren';
   }
@@ -1241,6 +1265,9 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => 'Umbenennen';
+
+  @override
+  String get editTags => 'Tags ändern';
 
   @override
   String get renameDiscussionTitle => 'Diskussion umbenennen';

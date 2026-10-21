@@ -1085,6 +1085,30 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get flagSent => '感谢你的举报，版主会尽快处理。';
 
   @override
+  String get flaggedPosts => '被举报的帖子';
+
+  @override
+  String get noFlags => '暂无举报';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$username 发布于 $discussion';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return '由 $username 举报：$reason';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return '由 $username 举报';
+  }
+
+  @override
+  String get dismissFlag => '驳回举报';
+
+  @override
   String ignoreUser(String name) {
     return '屏蔽 $name';
   }
@@ -1189,6 +1213,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => '重命名';
+
+  @override
+  String get editTags => '编辑标签';
 
   @override
   String get renameDiscussionTitle => '更改讨论标题';

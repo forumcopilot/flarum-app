@@ -1607,6 +1607,51 @@
   "@flagSent": {
     "description": "Shown after a post was reported"
   },
+  "flaggedPosts": "Flagged Posts",
+  "@flaggedPosts": {
+    "description": "Moderators' list of flagged posts (flarum/flags), from Account."
+  },
+  "noFlags": "No Flags",
+  "@noFlags": {
+    "description": "Flagged Posts, when there are none."
+  },
+  "flaggedPostItem": "{username} in {discussion}",
+  "@flaggedPostItem": {
+    "description": "Flagged Posts: whose post, in which discussion.",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      },
+      "discussion": {
+        "type": "String"
+      }
+    }
+  },
+  "flaggedByWithReason": "Flagged by {username} as {reason}",
+  "@flaggedByWithReason": {
+    "description": "Flagged Posts: who flagged the post, and why.",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "flaggedBy": "Flagged by {username}",
+  "@flaggedBy": {
+    "description": "Flagged Posts: who flagged the post (no reason given).",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "dismissFlag": "Dismiss Flag",
+  "@dismissFlag": {
+    "description": "Flagged Posts: clears a post's flags."
+  },
   "ignoreUser": "Ignore {name}",
   "@ignoreUser": {
     "description": "Post and profile menu: ignore this person (fof/ignore-users), their posts folded away",
@@ -1759,6 +1804,10 @@
   "renameDiscussion": "Rename",
   "@renameDiscussion": {
     "description": "Moderator menu: rename the discussion"
+  },
+  "editTags": "Edit Tags",
+  "@editTags": {
+    "description": "A discussion's menu: change its tags (flarum/tags)."
   },
   "renameDiscussionTitle": "Rename Discussion",
   "@renameDiscussionTitle": {

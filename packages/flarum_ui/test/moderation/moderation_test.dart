@@ -160,6 +160,85 @@ void main() {
         await _close(tester);
       });
 
+      testWidgets("a moderator edits the discussion's tags with the composer's picker", (tester) async {
+        final fixtures = await asModerator(tester);
+        fixtures.replies['PATCH /discussions/${questionId()}'] = {
+          'data': {'type': 'discussions', 'id': questionId(), 'attributes': <String, Object>{}},
+        };
+        await tester.pumpWidget(_app(ThreadPage(site: _site(), discussionId: questionId())));
+        await _pumpUntil(tester, find.byType(PostTile));
+        await _settle(tester);
+        await tester.tap(find.byTooltip('Moderate'));
+        await _settle(tester);
+        await tester.tap(find.text('Edit Tags'));
+        await _settle(tester);
+        await tester.tap(find.text('General'));
+        await tester.pump();
+        await tester.tap(find.text('OK'));
+        await _settle(tester);
+        final sent = fixtures.requests.singleWhere((r) => r.method == 'PATCH' && '${r.data}'.contains('relationships'));
+        final general = (await tester.runAsync(() => FlarumForum.of(_site()).tags()))!.singleWhere((t) => t.slug == 'general');
+        final ids = [for (final tag in (sent.data as Map)['data']['relationships']['tags']['data'] as List) tag['id']];
+        expect(ids, contains(general.id));
+        expect(ids, hasLength(2), reason: 'General with the tag it had (a secondary one)');
+        expect((sent.data as Map)['data']['attributes'], isEmpty, reason: '2.0 rc.8 needs them, empty');
+        await _close(tester);
+      });
+
+      testWidgets('Flagged Posts lists each flagged post with who flagged it; Dismiss Flag clears it', (tester) async {
+        final fixtures = await asModerator(tester);
+        fixtures.replies['GET /flags'] = {
+          'data': [
+            {
+              'type': 'flags',
+              'id': '7',
+              'attributes': {'type': 'user', 'reason': 'spam', 'reasonDetail': 'Links to a shop', 'createdAt': '2026-10-20T10:00:00+00:00'},
+              'relationships': {
+                'user': {
+                  'data': {'type': 'users', 'id': '91'},
+                },
+                'post': {
+                  'data': {'type': 'posts', 'id': '501'},
+                },
+              },
+            },
+          ],
+          'included': [
+            {'type': 'users', 'id': '91', 'attributes': {'username': 'carol', 'displayName': 'carol'}},
+            {'type': 'users', 'id': '92', 'attributes': {'username': 'bob', 'displayName': 'bob'}},
+            {'type': 'discussions', 'id': '601', 'attributes': {'title': 'Cheap watches'}},
+            {
+              'type': 'posts',
+              'id': '501',
+              'attributes': {'number': 3, 'contentType': 'comment', 'contentHtml': '<p>Buy watches here.</p>'},
+              'relationships': {
+                'user': {
+                  'data': {'type': 'users', 'id': '92'},
+                },
+                'discussion': {
+                  'data': {'type': 'discussions', 'id': '601'},
+                },
+              },
+            },
+          ],
+        };
+        fixtures.replies['DELETE /posts/501/flags'] = <String, Object>{};
+        await tester.pumpWidget(_app(AccountPage(site: _site())));
+        await _settle(tester);
+        expect(find.text('Flagged Posts'), findsOneWidget);
+        expect(find.text('1'), findsOneWidget, reason: 'the new flag');
+        await tester.tap(find.text('Flagged Posts'));
+        await _pumpUntil(tester, find.text('bob in Cheap watches'));
+        await _settle(tester);
+        expect(find.text('Flagged by carol as Spam'), findsOneWidget);
+        expect(find.text('Links to a shop'), findsOneWidget);
+        await tester.tap(find.text('Dismiss Flag'));
+        await _settle(tester);
+        expect(fixtures.requests.where((r) => r.method == 'DELETE' && r.path == '/posts/501/flags'), hasLength(1));
+        expect(find.text('No Flags'), findsOneWidget);
+        await _close(tester);
+      });
+
       testWidgets('a suspended reader is told above the tabs', (tester) async {
         await asModerator(tester, states: {'suspended'});
         await tester.pumpWidget(_app(AppShell(site: _site(), appearance: Appearance.unsaved())));

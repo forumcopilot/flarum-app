@@ -1086,6 +1086,30 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get flagSent => '通報ありがとうございます。モデレーターが確認します。';
 
   @override
+  String get flaggedPosts => '報告された投稿';
+
+  @override
+  String get noFlags => '報告された投稿はありません';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$discussionにおける$username';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return '$username が $reason であると報告しました';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return '$username が報告しました';
+  }
+
+  @override
+  String get dismissFlag => '報告を却下する';
+
+  @override
   String ignoreUser(String name) {
     return '$nameを無視';
   }
@@ -1191,6 +1215,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => '名前を変更';
+
+  @override
+  String get editTags => 'タグの編集';
 
   @override
   String get renameDiscussionTitle => 'タイトルの変更';

@@ -1145,6 +1145,30 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get flagSent => 'Спасибо за жалобу. Модераторы её рассмотрят.';
 
   @override
+  String get flaggedPosts => 'Жалобы';
+
+  @override
+  String get noFlags => 'Жалобы отсутствуют';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$username в $discussion';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return '$username оставил(а) жалобу на сообщение, причина: $reason';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return '$username оставил(а) жалобу на сообщение';
+  }
+
+  @override
+  String get dismissFlag => 'Отклонить жалобу';
+
+  @override
   String ignoreUser(String name) {
     return 'Игнорировать $name';
   }
@@ -1254,6 +1278,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => 'Переименовать';
+
+  @override
+  String get editTags => 'Изменить теги';
 
   @override
   String get renameDiscussionTitle => 'Изменение названия';

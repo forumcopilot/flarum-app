@@ -1124,6 +1124,30 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
       'Grazie per la segnalazione. I moderatori la esamineranno.';
 
   @override
+  String get flaggedPosts => 'Segnalazioni';
+
+  @override
+  String get noFlags => 'Non ci sono segnalazioni';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$username in $discussion';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return 'Segnalato da $username per $reason';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return 'Segnalato da $username';
+  }
+
+  @override
+  String get dismissFlag => 'Elimina Segnalazione';
+
+  @override
   String ignoreUser(String name) {
     return 'Ignora $name';
   }
@@ -1234,6 +1258,9 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => 'Rinomina';
+
+  @override
+  String get editTags => 'Modifica Etichette';
 
   @override
   String get renameDiscussionTitle => 'Rinomina discussione';

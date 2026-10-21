@@ -12,6 +12,7 @@ export 'src/json_api.dart';
 export 'src/models/dialog.dart';
 export 'src/models/discussion.dart';
 export 'src/models/draft.dart';
+export 'src/models/flag.dart';
 export 'src/models/forum_info.dart';
 export 'src/models/notification.dart';
 export 'src/models/policy.dart';

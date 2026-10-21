@@ -7,6 +7,7 @@ import 'json_api.dart';
 import 'models/dialog.dart';
 import 'models/discussion.dart';
 import 'models/draft.dart';
+import 'models/flag.dart';
 import 'models/forum_info.dart';
 import 'models/notification.dart';
 import 'models/poll.dart';
@@ -703,6 +704,40 @@ class FlarumApi {
       'filter[number]': '$number',
     });
     return document.data.isEmpty ? null : document.data.first.id;
+  }
+
+  /// The forum's flagged posts, newest first, for its moderators (flarum/flags): each flag with who
+  /// raised it and the post, its author and its discussion (the endpoint's default includes). 1.x
+  /// sends one flag per post, all at once; 2.0 pages them. Listing them clears the moderator's
+  /// new-flag count, as opening the web's list does.
+  Future<FlarumPage<FlarumFlag>> flags({int offset = 0, int limit = 20}) async {
+    final document = await client.get('/flags', query: _page(offset, limit));
+    return FlarumPage(
+      [for (final resource in document.data) FlarumFlag.fromResource(resource, document)],
+      offset: offset,
+      hasMore: document.hasNext,
+    );
+  }
+
+  /// Dismisses every flag on post [postId] (the web's Dismiss Flag).
+  Future<void> dismissFlags(String postId) => client.delete('/posts/$postId/flags');
+
+  /// Puts discussion [id] in [tagIds] (flarum/tags), as the web's Edit Tags does. 2.0 rc.8 fails
+  /// with 500 on a PATCH with relationships alone, so it carries empty attributes too.
+  Future<FlarumDiscussion> setDiscussionTags(String id, List<String> tagIds) async {
+    final document = await client.patch('/discussions/$id', {
+      'data': {
+        'type': 'discussions',
+        'id': id,
+        'attributes': <String, Object?>{},
+        'relationships': {
+          'tags': {
+            'data': [for (final tag in tagIds) {'type': 'tags', 'id': tag}],
+          },
+        },
+      },
+    });
+    return FlarumDiscussion.fromResource(document.single, document);
   }
 
   /// Flags post [id] for the forum's moderators (flarum/flags). [reason] is `off_topic`,

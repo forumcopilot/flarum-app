@@ -13,6 +13,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../account/log_in_first.dart';
 import '../compose/composers.dart';
+import '../compose/tag_picker_page.dart';
 import '../media/image_viewer_page.dart';
 import '../navigation/forum_links.dart';
 import '../render/flarum_html.dart';
@@ -386,6 +387,15 @@ class _ThreadPageState extends State<ThreadPage> {
           final title = await _askTitle(discussion.title);
           if (title == null || title == discussion.title) return;
           await api.renameDiscussion(id, title);
+        case _DiscussionAction.editTags:
+          // The tag picker the composer has, on the discussion's tags and the forum's rules.
+          final tags = await _forum.tags();
+          if (!mounted) return;
+          final chosen = await TagPickerPage.open(context, tags: tags, rules: _forum.info?.tagRules, selected: discussion.tags);
+          if (chosen == null) return;
+          final ids = [for (final tag in chosen) tag.id];
+          if ({...ids}.length == discussion.tags.length && discussion.tags.every((t) => ids.contains(t.id))) return;
+          await api.setDiscussionTags(id, ids);
         case _DiscussionAction.lock || _DiscussionAction.unlock:
           await api.setLocked(id, action == _DiscussionAction.lock);
         case _DiscussionAction.stick || _DiscussionAction.unstick:
@@ -404,6 +414,8 @@ class _ThreadPageState extends State<ThreadPage> {
       if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }
   }
+
+  bool _canEditTags(FlarumDiscussion d) => d.canTag && _forum.extensions.tags && !d.isPrivate;
 
   Future<String?> _askTitle(String title) =>
       showDialog<String>(context: context, builder: (_) => _RenameDialog(title: title));
@@ -614,8 +626,8 @@ class _ThreadPageState extends State<ThreadPage> {
               onPressed: _bookmarkDiscussion,
             ),
           if (_signedIn && discussion != null) _FollowMenu(level: discussion.subscription, onChanged: _setSubscription),
-          if (discussion != null && _ModerationMenu.offersAny(discussion))
-            _ModerationMenu(discussion: discussion, onSelected: _moderate),
+          if (discussion != null && _ModerationMenu.offersAny(discussion, canEditTags: _canEditTags(discussion)))
+            _ModerationMenu(discussion: discussion, onSelected: _moderate, canEditTags: _canEditTags(discussion)),
         ],
       ),
       // Where the reader is ("12 of 340", opening the scrubber) and Reply, as the web's bar under
@@ -892,7 +904,7 @@ class _Spinner extends StatelessWidget {
 }
 
 /// How the reader follows the discussion (flarum/subscriptions), as the web's menu offers it.
-enum _DiscussionAction { rename, lock, unlock, stick, unstick, hide, restore, deleteForever }
+enum _DiscussionAction { rename, editTags, lock, unlock, stick, unstick, hide, restore, deleteForever }
 
 /// Asks for a discussion's new title; pops it, or null.
 class _RenameDialog extends StatefulWidget {
@@ -931,12 +943,16 @@ class _RenameDialogState extends State<_RenameDialog> {
 /// may rename it too, and delete it while nobody has replied: for an author who isn't a moderator
 /// the menu is a plain ⋮, not the moderator's shield.
 class _ModerationMenu extends StatelessWidget {
-  const _ModerationMenu({required this.discussion, required this.onSelected});
+  const _ModerationMenu({required this.discussion, required this.onSelected, this.canEditTags = false});
 
   final FlarumDiscussion discussion;
   final void Function(_DiscussionAction action) onSelected;
 
-  static bool offersAny(FlarumDiscussion d) => d.canRename || d.canLock || d.canSticky || d.canHide || d.canDelete;
+  /// Whether Edit Tags is offered: the reader may tag it, on a forum with flarum/tags.
+  final bool canEditTags;
+
+  static bool offersAny(FlarumDiscussion d, {bool canEditTags = false}) =>
+      d.canRename || canEditTags || d.canLock || d.canSticky || d.canHide || d.canDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -954,6 +970,7 @@ class _ModerationMenu extends StatelessWidget {
       onSelected: onSelected,
       itemBuilder: (context) => [
         if (d.canRename) item(_DiscussionAction.rename, Icons.edit_outlined, l10n.renameDiscussion),
+        if (canEditTags) item(_DiscussionAction.editTags, Icons.sell_outlined, l10n.editTags),
         if (d.canLock)
           d.isLocked
               ? item(_DiscussionAction.unlock, Icons.lock_open, l10n.unlockDiscussion)

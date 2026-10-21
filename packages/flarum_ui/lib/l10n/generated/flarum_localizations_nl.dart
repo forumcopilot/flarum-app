@@ -1124,6 +1124,30 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
       'Bedankt voor je melding. Onze moderators kijken ernaar.';
 
   @override
+  String get flaggedPosts => 'Gerapporteerde berichten';
+
+  @override
+  String get noFlags => 'Niets gerapporteerd';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$username in $discussion';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return '$username heeft dit gerapporteerd als $reason';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return '$username heeft dit gerapporteerd';
+  }
+
+  @override
+  String get dismissFlag => 'Vlag verwijderen';
+
+  @override
   String ignoreUser(String name) {
     return '$name negeren';
   }
@@ -1235,6 +1259,9 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => 'Hernoemen';
+
+  @override
+  String get editTags => 'Categorieën bijwerken';
 
   @override
   String get renameDiscussionTitle => 'Discussie hernoemen';

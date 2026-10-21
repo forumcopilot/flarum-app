@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../safety/flagged_posts_page.dart';
 import '../render/links.dart';
 import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
@@ -202,6 +203,24 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 onTap: () async {
                   await DraftsPage.open(context, widget.site);
+                  if (mounted) setState(() {});
+                },
+              ),
+            // A moderator's flag list, with the web's count of new flags.
+            if (canViewFlags(_forum))
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.flag_outlined),
+                title: Text(l10n.flaggedPosts),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if ((_forum.info?.newFlagCount ?? 0) > 0) Badge(label: Text('${_forum.info!.newFlagCount}')),
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
+                onTap: () async {
+                  await FlaggedPostsPage.open(context, widget.site);
                   if (mounted) setState(() {});
                 },
               ),

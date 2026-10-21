@@ -1085,6 +1085,30 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get flagSent => '신고해 주셔서 감사합니다. 운영진이 확인할 예정입니다.';
 
   @override
+  String get flaggedPosts => '신고된 게시물';
+
+  @override
+  String get noFlags => '신고 없음';
+
+  @override
+  String flaggedPostItem(String username, String discussion) {
+    return '$discussion의 $username님';
+  }
+
+  @override
+  String flaggedByWithReason(String username, String reason) {
+    return '$username님이 $reason로 신고함';
+  }
+
+  @override
+  String flaggedBy(String username) {
+    return '$username님이 신고함';
+  }
+
+  @override
+  String get dismissFlag => '신고 해제';
+
+  @override
   String ignoreUser(String name) {
     return '$name 무시하기';
   }
@@ -1190,6 +1214,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get renameDiscussion => '이름 바꾸기';
+
+  @override
+  String get editTags => '태그 편집';
 
   @override
   String get renameDiscussionTitle => '토론 이름 변경';

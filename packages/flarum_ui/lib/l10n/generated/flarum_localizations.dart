@@ -1733,6 +1733,42 @@ abstract class FlarumLocalizations {
   /// **'Thank you for flagging this post. Our moderators will look into it.'**
   String get flagSent;
 
+  /// Moderators' list of flagged posts (flarum/flags), from Account.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged Posts'**
+  String get flaggedPosts;
+
+  /// Flagged Posts, when there are none.
+  ///
+  /// In en, this message translates to:
+  /// **'No Flags'**
+  String get noFlags;
+
+  /// Flagged Posts: whose post, in which discussion.
+  ///
+  /// In en, this message translates to:
+  /// **'{username} in {discussion}'**
+  String flaggedPostItem(String username, String discussion);
+
+  /// Flagged Posts: who flagged the post, and why.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged by {username} as {reason}'**
+  String flaggedByWithReason(String username, String reason);
+
+  /// Flagged Posts: who flagged the post (no reason given).
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged by {username}'**
+  String flaggedBy(String username);
+
+  /// Flagged Posts: clears a post's flags.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss Flag'**
+  String get dismissFlag;
+
   /// Post and profile menu: ignore this person (fof/ignore-users), their posts folded away
   ///
   /// In en, this message translates to:
@@ -1924,6 +1960,12 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Rename'**
   String get renameDiscussion;
+
+  /// A discussion's menu: change its tags (flarum/tags).
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Tags'**
+  String get editTags;
 
   /// Title of the dialog that renames a discussion, as Flarum's
   ///

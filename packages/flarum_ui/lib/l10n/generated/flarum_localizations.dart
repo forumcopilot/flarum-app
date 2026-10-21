@@ -176,6 +176,30 @@ abstract class FlarumLocalizations {
   /// **'View on Web'**
   String get viewOnWeb;
 
+  /// The picture viewer's button that saves the picture to the phone's photos.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Image'**
+  String get saveImage;
+
+  /// Said once the picture viewer has saved a picture to the phone's photos.
+  ///
+  /// In en, this message translates to:
+  /// **'Image saved.'**
+  String get imageSaved;
+
+  /// Said when the picture viewer could not save a picture (not downloaded, or the phone refused).
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save the image.'**
+  String get imageSaveFailed;
+
+  /// Said when the phone refused the permission to save a picture.
+  ///
+  /// In en, this message translates to:
+  /// **'The app may not save to your photos. You can allow it in the phone\'s settings.'**
+  String get imageSaveNotAllowed;
+
   /// Accessible label for an audio or video pause button
   ///
   /// In en, this message translates to:

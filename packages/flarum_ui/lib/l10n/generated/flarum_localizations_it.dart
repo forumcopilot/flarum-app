@@ -43,6 +43,19 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get viewOnWeb => 'Visualizza sul Web';
 
   @override
+  String get saveImage => 'Salva immagine';
+
+  @override
+  String get imageSaved => 'Immagine salvata.';
+
+  @override
+  String get imageSaveFailed => 'Impossibile salvare l\'immagine.';
+
+  @override
+  String get imageSaveNotAllowed =>
+      'L\'app non può salvare nelle tue foto. Puoi consentirlo nelle impostazioni del telefono.';
+
+  @override
   String get mediaPause => 'Pausa';
 
   @override

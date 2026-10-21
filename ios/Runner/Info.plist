@@ -66,6 +66,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>To take a photo for a post.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save pictures from posts to your photos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To add photos from your library to a post.</string>
 </dict>

@@ -43,6 +43,18 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get viewOnWeb => '웹에서 보기';
 
   @override
+  String get saveImage => '이미지 저장';
+
+  @override
+  String get imageSaved => '이미지를 저장했습니다.';
+
+  @override
+  String get imageSaveFailed => '이미지를 저장하지 못했습니다.';
+
+  @override
+  String get imageSaveNotAllowed => '앱에 사진 저장 권한이 없습니다. 휴대폰 설정에서 허용할 수 있습니다.';
+
+  @override
   String get mediaPause => '일시 정지';
 
   @override

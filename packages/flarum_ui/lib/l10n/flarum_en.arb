@@ -47,6 +47,22 @@
   "@viewOnWeb": {
     "description": "Menu item to view content on web browser"
   },
+  "saveImage": "Save Image",
+  "@saveImage": {
+    "description": "The picture viewer's button that saves the picture to the phone's photos."
+  },
+  "imageSaved": "Image saved.",
+  "@imageSaved": {
+    "description": "Said once the picture viewer has saved a picture to the phone's photos."
+  },
+  "imageSaveFailed": "Couldn't save the image.",
+  "@imageSaveFailed": {
+    "description": "Said when the picture viewer could not save a picture (not downloaded, or the phone refused)."
+  },
+  "imageSaveNotAllowed": "The app may not save to your photos. You can allow it in the phone's settings.",
+  "@imageSaveNotAllowed": {
+    "description": "Said when the phone refused the permission to save a picture."
+  },
   "mediaPause": "Pause",
   "@mediaPause": {
     "description": "Accessible label for an audio or video pause button"

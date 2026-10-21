@@ -43,6 +43,18 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get viewOnWeb => '在网页中查看';
 
   @override
+  String get saveImage => '保存图片';
+
+  @override
+  String get imageSaved => '图片已保存。';
+
+  @override
+  String get imageSaveFailed => '无法保存图片。';
+
+  @override
+  String get imageSaveNotAllowed => '应用无权保存到你的照片。你可以在手机设置中允许。';
+
+  @override
   String get mediaPause => '暂停';
 
   @override

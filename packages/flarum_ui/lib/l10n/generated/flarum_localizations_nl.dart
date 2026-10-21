@@ -43,6 +43,19 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get viewOnWeb => 'Bekijken op web';
 
   @override
+  String get saveImage => 'Afbeelding opslaan';
+
+  @override
+  String get imageSaved => 'Afbeelding opgeslagen.';
+
+  @override
+  String get imageSaveFailed => 'De afbeelding kon niet worden opgeslagen.';
+
+  @override
+  String get imageSaveNotAllowed =>
+      'De app mag niet in je foto’s opslaan. Je kunt het toestaan in de instellingen van je telefoon.';
+
+  @override
   String get mediaPause => 'Pauzeren';
 
   @override

@@ -27,6 +27,7 @@ dependencies:
       path: packages/forumcopilot_sdk
       ref: ac722f5da4eff1c0025354a5951712452feef05e
   # The post renderer, as discourse_ui has it.
+  device_info_plus: ^11.2.0 # the picture viewer: Android before 10 asks for storage to save
   dio: ^5.4.0
   flutter_html: ^3.0.0-beta.2
   flutter_layout_grid: ^2.0.8 # post tables: CSS-grid track sizing, with col/rowspan
@@ -34,6 +35,8 @@ dependencies:
   flutter_inappwebview: ^6.1.5 # sign-in: the forum's page, and its HttpOnly remember cookie
   image_picker: ^1.2.1 # the composer's uploads: XFile, as forum_kit's pickers give them
   intl: ^0.20.2
+  permission_handler: ^12.0.0+1 # the picture viewer: storage, to save on Android before 10
+  saver_gallery: ^4.1.0 # the picture viewer's Save Image, into the phone's photos
   scrollable_positioned_list: ^0.3.8 # a thread opens scrolled to a post
   share_plus: ^12.0.1
   shared_preferences: ^2.5.1 # the reader's appearance choice

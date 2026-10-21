@@ -122,8 +122,10 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - flarum/messages (2.0): `/api/dialogs` and `/api/dialog-messages` (newest first); a first message
   carries `attributes.users` (and lands in the direct dialog the two already have, if any), later
   ones `relationships.dialog`; read with `PATCH /api/dialogs/{id}` `lastReadMessageId`. Dialogs
-  can't be filtered by person (only `unread`): `FlarumApi.dialogWith` reads the list. No
-  notifications, only the actor's `messageCount`. Dialogs can't be deleted through the API (the
+  can't be filtered by person (only `unread`): `FlarumApi.dialogWith` reads the list. A new
+  message notifies with `messageReceived` (subject a `dialog-messages` resource, its dialog as
+  linkage), by email unless the reader turns on the alert in their settings; the actor's
+  `messageCount` counts unread ones. Dialogs can't be deleted through the API (the
   recorder uses `tool/test_forums/delete_dialogs.php`).
 - Writing: `POST /api/posts` and `POST /api/discussions` answer 201, `PATCH /api/posts/{id}` 200. A post's
   source (`content`) comes only to readers who may edit it, so a quote of someone else's post is made

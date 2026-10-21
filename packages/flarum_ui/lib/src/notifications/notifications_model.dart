@@ -108,6 +108,7 @@ class NotificationsModel extends ChangeNotifier {
       postId: old.postId,
       postNumber: old.postNumber,
       postHtml: old.postHtml,
+      dialogId: old.dialogId,
     );
     _notify();
   }

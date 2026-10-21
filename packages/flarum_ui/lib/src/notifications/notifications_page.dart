@@ -7,6 +7,7 @@ import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../messages/dialog_page.dart';
 import '../thread/thread_page.dart';
 import 'notifications_model.dart';
 import '../widgets/flarum_avatar.dart';
@@ -91,6 +92,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
       widget.onRead?.call();
       _settled();
     });
+    // A message (flarum/messages) opens its conversation.
+    if (n.dialogId case final dialog?) return DialogPage.open(context, widget.site, dialogId: dialog);
     final discussion = n.discussionId;
     if (discussion == null) return;
     await ThreadPage.open(context, widget.site, discussion, near: n.openAt, title: n.discussionTitle);

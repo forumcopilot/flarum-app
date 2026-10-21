@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
+import 'package:flarum_ui/src/messages/dialog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
@@ -40,6 +41,47 @@ void main() {
     expect(find.byIcon(Icons.block), findsOneWidget);
     expect(find.byIcon(Icons.check_circle_outline), findsOneWidget);
     expect(find.text('?'), findsNothing);
+  });
+
+  testWidgets('Flarum v2: a message notification opens its conversation, with the message under it', (tester) async {
+    final fixtures = FixtureForum(FlarumVersion.v2, root: _root);
+    Map<String, dynamic> recorded(String name) =>
+        (jsonDecode(File('$_root/v2/$name.json').readAsStringSync()) as Map<String, dynamic>)['body'] as Map<String, dynamic>;
+    // A message as flarum/messages sends it (carrying its dialog as linkage only), and the
+    // notification of it, which the test forums' members don't get: by default it's emailed.
+    final message = (recorded('write_dialog_messages')['data'] as List).first as Map<String, dynamic>;
+    final dialog = (message['relationships'] as Map)['dialog']['data']['id'];
+    final list = recorded('notifications');
+    fixtures.replies['GET /notifications'] = {
+      ...list,
+      'data': [
+        {
+          'type': 'notifications',
+          'id': '900',
+          'attributes': {'contentType': 'messageReceived', 'createdAt': '2026-10-20T10:00:00+00:00', 'isRead': false},
+          'relationships': {
+            'subject': {
+              'data': {'type': 'dialog-messages', 'id': message['id']},
+            },
+            'fromUser': {
+              'data': {'type': 'users', 'id': '3'},
+            },
+          },
+        },
+        ...list['data'] as List,
+      ],
+      'included': [...list['included'] as List, message],
+    };
+    fixtures.forum();
+    await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
+    await _pumpUntil(tester, find.textContaining('sent you a message'));
+    expect(find.byIcon(Icons.chat_bubble_outline), findsOneWidget);
+    expect(find.textContaining('Got it, thanks.'), findsOneWidget, reason: 'the message, as a post shows under its line');
+    await tester.tap(find.textContaining('sent you a message'));
+    await _pumpUntil(tester, find.byType(DialogPage));
+    expect(tester.widget<DialogPage>(find.byType(DialogPage)).dialogId, dialog);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 5));
   });
 
   for (final version in FlarumVersion.values) {

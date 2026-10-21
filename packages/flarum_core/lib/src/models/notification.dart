@@ -18,6 +18,7 @@ class FlarumNotification {
     this.postId,
     this.postNumber,
     this.postHtml,
+    this.dialogId,
   });
 
   factory FlarumNotification.fromResource(JsonApiResource resource, JsonApiDocument document) {
@@ -44,7 +45,12 @@ class FlarumNotification {
       postNumber: subjectRef?.type == 'posts'
           ? subject?.attributes.integer('number')
           : (content is Map ? int.tryParse('${content['postNumber'] ?? ''}') : null),
-      postHtml: subjectRef?.type == 'posts' ? subject?.attributes.nonEmptyString('contentHtml') : null,
+      // A message (flarum/messages, 2.0) is shown like a post: its text under the line.
+      postHtml: subjectRef?.type == 'posts' || subjectRef?.type == 'dialog-messages'
+          ? subject?.attributes.nonEmptyString('contentHtml')
+          : null,
+      // A message's dialog comes with it, as linkage, without being included.
+      dialogId: subjectRef?.type == 'dialog-messages' ? subject?.toOne('dialog')?.id : null,
     );
   }
 
@@ -75,6 +81,9 @@ class FlarumNotification {
 
   /// The subject post's rendered text, for the line of it the web shows under a notification.
   final String? postHtml;
+
+  /// The conversation a message notification (`messageReceived`, flarum/messages) is from.
+  final String? dialogId;
 
   /// The post to open at: the subject post's number, or the event's own
   /// (byobu's replies carry `content.postNumber`).

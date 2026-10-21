@@ -83,5 +83,6 @@ approved, and are built (its table names each one's commit). Done since:
 
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
-and the hero colours in dark mode; a message notification (2.0) opens nothing yet, and needs a look at what the
-forum sends.
+and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one
+on a phone, with the alert turned on in the reader's settings (flarum/messages only emails by
+default).

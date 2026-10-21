@@ -229,13 +229,17 @@ void main() {
           theme: AppTheme.lightTheme,
           home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('answered')),
         ));
-        await _pumpUntil(tester, find.text('View Best Answer'));
-        expect(find.text('View Best Answer'), findsOneWidget, reason: 'under the question');
-        expect(find.text('Best Answer'), findsOneWidget, reason: 'above the answer, the second post');
-        final answer = find.ancestor(of: find.text('Best Answer'), matching: find.byType(PostTile));
-        expect(tester.widget<PostTile>(answer).post.number, 2);
+        await _pumpUntil(tester, find.text('Best Answer'));
+        await tester.pump(const Duration(milliseconds: 300));
+        // Previewed under the question, as fof/best-answer shows it, and marked above the answer.
+        final marks = find.text('Best Answer');
+        expect(marks, findsNWidgets(2));
+        expect([
+          for (final mark in marks.evaluate())
+            tester.widget<PostTile>(find.ancestor(of: find.byWidget(mark.widget), matching: find.byType(PostTile))).post.number,
+        ], [1, 2]);
 
-        await tester.tap(find.text('View Best Answer'));
+        await tester.tap(marks.first);
         await tester.pump(const Duration(seconds: 1));
         expect(fixtures.requests.where((r) => r.path.startsWith('/posts/')), isEmpty,
             reason: 'the answer is loaded, so it scrolls there without asking the forum');

@@ -81,7 +81,7 @@ void main() {
       await _settle(tester);
       await tester.tap(find.text('Select Best Answer'));
       await _settle(tester);
-      expect(find.text('Best Answer'), findsOneWidget);
+      expect(find.text('Best Answer'), findsNWidgets(2), reason: 'on the answer, and previewed under the question');
 
       // Follow the discussion, and bookmark it.
       await tester.tap(find.byTooltip('Follow'));

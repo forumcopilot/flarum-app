@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
+import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
@@ -9,6 +10,7 @@ import '../../l10n/flarum_l10n.dart';
 import '../compose/start_discussion_button.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
+import '../thread/thread_page.dart';
 import 'tag_label.dart';
 
 /// The forum's tags, as the web's tags page: the primary tags in the admin's
@@ -34,6 +36,18 @@ class _TagsPageState extends State<TagsPage> {
     _load();
   }
 
+  /// Each tag's latest discussion, read after the tags (a page without them still works).
+  Map<String, FlarumDiscussion> _latest = const {};
+
+  Future<void> _loadLatest() async {
+    try {
+      final latest = await _forum.api.tagsLatestDiscussions();
+      if (mounted) setState(() => _latest = latest);
+    } catch (_) {
+      // The tags show without them.
+    }
+  }
+
   Future<void> _load({bool refresh = false}) async {
     try {
       final tags = await _forum.tags(refresh: refresh);
@@ -42,6 +56,7 @@ class _TagsPageState extends State<TagsPage> {
           _tags = tags;
           _error = null;
         });
+        _loadLatest();
       }
     } catch (e) {
       if (mounted) setState(() => _error = e);
@@ -89,7 +104,7 @@ class _TagsPageState extends State<TagsPage> {
       physics: const AlwaysScrollableScrollPhysics(),
       children: [
         for (final tag in primary) ...[
-          _TagTile(tag: tag, onTap: () => _open(tag)),
+          _TagTile(tag: tag, latest: _latest[tag.id], site: widget.site, onTap: () => _open(tag)),
           for (final child in tags.where((t) => t.parentId == tag.id).toList()..sort(byPosition))
             _TagTile(tag: child, child: true, onTap: () => _open(child)),
         ],
@@ -111,11 +126,16 @@ class _TagsPageState extends State<TagsPage> {
 }
 
 class _TagTile extends StatelessWidget {
-  const _TagTile({required this.tag, required this.onTap, this.child = false});
+  const _TagTile({required this.tag, required this.onTap, this.child = false, this.latest, this.site});
 
   final FlarumTag tag;
   final VoidCallback onTap;
   final bool child;
+
+  /// The tag's latest discussion, under its description as on the web's Tags page; it opens at its
+  /// last post.
+  final FlarumDiscussion? latest;
+  final SiteContext? site;
 
   @override
   Widget build(BuildContext context) {
@@ -135,11 +155,46 @@ class _TagTile extends StatelessWidget {
         child: Icon(flarumTagIcon(tag.icon) ?? Icons.sell_outlined, size: size * 0.55, color: onColor),
       ),
       title: Text(tag.name, style: child ? theme.textTheme.bodyLarge : theme.textTheme.titleMedium),
-      subtitle: description == null || description.isEmpty || child
-          ? null
-          : Text(description, maxLines: 2, overflow: TextOverflow.ellipsis),
+      subtitle: _subtitle(context, description),
       trailing: Text('${tag.discussionCount}',
           style: theme.textTheme.labelMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+    );
+  }
+
+  Widget? _subtitle(BuildContext context, String? description) {
+    final theme = Theme.of(context);
+    final latest = this.latest;
+    final site = this.site;
+    final hasDescription = description != null && description.isNotEmpty && !child;
+    if (!hasDescription && (latest == null || site == null)) return null;
+    final when = latest?.lastPostedAt;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (hasDescription) Text(description, maxLines: 2, overflow: TextOverflow.ellipsis),
+        if (latest != null && site != null)
+          InkWell(
+            onTap: () => ThreadPage.open(context, site, latest.id, near: latest.lastPostNumber, title: latest.title),
+            child: Padding(
+              padding: const EdgeInsets.only(top: DesignTokens.spacingXS),
+              child: Row(
+                children: [
+                  Icon(Icons.forum_outlined, size: 14, color: theme.colorScheme.onSurfaceVariant),
+                  const SizedBox(width: DesignTokens.spacingXS),
+                  Flexible(
+                    child: Text(latest.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)),
+                  ),
+                  if (when != null)
+                    Text(' · ${formatTimeAgo(when.toLocal(), context)}',
+                        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                ],
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

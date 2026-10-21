@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
@@ -71,6 +74,57 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
     }
     tester.platformDispatcher.clearTextScaleFactorTestValue();
+  });
+
+  testWidgets("each tag shows its latest discussion, as the web's Tags page, which opens at its last post",
+      (tester) async {
+    final fixtures = FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures');
+    final recorded = jsonDecode(File('../flarum_core/test/fixtures/v2/tags.json').readAsStringSync())['body'] as Map;
+    final support = (recorded['data'] as List).cast<Map>().firstWhere((t) => t['attributes']['slug'] == 'support');
+    final crashes = fixtures.discussionId('long');
+    // The tags as recorded, Support's latest discussion with them.
+    fixtures.replies['GET /tags'] = {
+      ...recorded,
+      'data': [
+        for (final tag in (recorded['data'] as List).cast<Map>())
+          tag == support
+              ? {
+                  ...tag,
+                  'relationships': {
+                    ...(tag['relationships'] as Map? ?? const {}),
+                    'lastPostedDiscussion': {
+                      'data': {'type': 'discussions', 'id': crashes},
+                    },
+                  },
+                }
+              : tag,
+      ],
+      'included': [
+        ...(recorded['included'] as List? ?? const []),
+        {
+          'type': 'discussions',
+          'id': crashes,
+          'attributes': {'title': 'Long thread for paging tests', 'lastPostNumber': 60, 'lastPostedAt': '2026-10-08T17:52:29+00:00'},
+        },
+      ],
+    };
+    fixtures.forum();
+    final site = SiteContext(
+      siteType: FlarumProxyFactory.siteType,
+      site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
+    );
+    await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: TagsPage(site: site)));
+    for (var i = 0; i < 20 && find.text('Long thread for paging tests').evaluate().isEmpty; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    expect(find.text('Long thread for paging tests'), findsOneWidget, reason: "under Support, its latest");
+    await tester.tap(find.text('Long thread for paging tests'));
+    for (var i = 0; i < 20 && find.byType(ThreadPage).evaluate().isEmpty; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    expect(tester.widget<ThreadPage>(find.byType(ThreadPage)).near, 60, reason: 'at its last post');
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 5));
   });
 
   for (final version in FlarumVersion.values) {

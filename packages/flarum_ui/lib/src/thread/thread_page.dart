@@ -219,6 +219,25 @@ class _ThreadPageState extends State<ThreadPage> {
     return answer != null && !_model.posts.any((post) => post.number == 1 && post.id == answer);
   }
 
+  /// The best answer, read once for its preview under the question.
+  FlarumPost? _bestAnswer;
+  String? _readingBestAnswer;
+
+  FlarumPost? _bestAnswerPreview() {
+    final id = _model.discussion?.bestAnswerPostId;
+    if (id == null) return null;
+    if (_bestAnswer?.id == id) return _bestAnswer;
+    final loaded = _model.posts.where((post) => post.id == id).firstOrNull;
+    if (loaded != null) return loaded;
+    if (_readingBestAnswer != id) {
+      _readingBestAnswer = id;
+      _forum.api.post(id).then((answer) {
+        if (mounted) setState(() => _bestAnswer = answer);
+      }, onError: (Object _) {});
+    }
+    return null;
+  }
+
   /// Goes to the best answer: scrolls there if it's loaded, else finds its number and opens the thread there.
   Future<void> _goToBestAnswer() async {
     final id = _model.discussion?.bestAnswerPostId;
@@ -724,6 +743,7 @@ class _ThreadPageState extends State<ThreadPage> {
         tags: _tags,
         isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,
         onGoToBestAnswer: post.number == 1 && _bestAnswerElsewhere ? _goToBestAnswer : null,
+        bestAnswerPreview: post.number == 1 && _bestAnswerElsewhere ? _bestAnswerPreview() : null,
         onReply: _canReply
             ? () => _reply(initial: replyTo(post, l10n))
             : _guestCouldReply

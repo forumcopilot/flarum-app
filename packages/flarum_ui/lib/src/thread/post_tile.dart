@@ -28,6 +28,7 @@ class PostTile extends StatelessWidget {
       this.tags,
       this.isBestAnswer = false,
       this.onGoToBestAnswer,
+      this.bestAnswerPreview,
       this.onReply,
       this.onQuote,
       this.onEdit,
@@ -64,6 +65,10 @@ class PostTile extends StatelessWidget {
 
   /// Set on the question when another post is its best answer: offers a way there.
   final VoidCallback? onGoToBestAnswer;
+
+  /// That best answer, shown under the question as fof/best-answer previews it (its author and
+  /// opening lines; a tap goes to it). Until it's read, the way there is a button.
+  final FlarumPost? bestAnswerPreview;
 
   /// The post's menu: reply to it, quote it, edit it. Each shows only when given.
   final VoidCallback? onReply;
@@ -192,14 +197,16 @@ class PostTile extends StatelessWidget {
             _PostBody(site: site, html: post.contentHtml ?? '', callbacks: callbacks),
             for (final poll in post.polls) PollCard(key: ValueKey('poll-${poll.id}'), site: site, poll: poll, onChanged: onPollChanged),
           ],
-          if (onGoToBestAnswer != null)
+          if (onGoToBestAnswer case final goTo?)
             Padding(
               padding: const EdgeInsets.only(top: DesignTokens.spacingS),
-              child: OutlinedButton.icon(
-                onPressed: onGoToBestAnswer,
-                icon: Icon(Icons.check_circle_outline, color: ForumColors.of(context).success),
-                label: Text(l10n.goToBestAnswer),
-              ),
+              child: bestAnswerPreview != null
+                  ? _BestAnswerPreview(answer: bestAnswerPreview!, onTap: goTo)
+                  : OutlinedButton.icon(
+                      onPressed: goTo,
+                      icon: Icon(Icons.check_circle_outline, color: ForumColors.of(context).success),
+                      label: Text(l10n.goToBestAnswer),
+                    ),
             ),
           _footer(context),
           if (likedBy(post, readerId, l10n) case final likes?)
@@ -507,6 +514,55 @@ extension on PostTile {
 }
 
 /// "✓ Best answer", in the forum's success colour, above the answer.
+/// The best answer under its question, as fof/best-answer previews it: "Best Answer", who wrote
+/// it, its opening lines; a tap goes to it.
+class _BestAnswerPreview extends StatelessWidget {
+  const _BestAnswerPreview({required this.answer, required this.onTap});
+
+  final FlarumPost answer;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final success = ForumColors.of(context).success;
+    final l10n = flarumL10n(context);
+    return Material(
+      color: theme.colorScheme.surfaceContainerLow,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: success.withValues(alpha: 0.5)),
+        borderRadius: BorderRadius.circular(DesignTokens.radiusM),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(DesignTokens.spacingM),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  _BestAnswerLabel(text: l10n.bestAnswer),
+                  const SizedBox(width: DesignTokens.spacingS),
+                  FlarumAvatar(user: answer.author, radius: 10),
+                  const SizedBox(width: DesignTokens.spacingXS),
+                  Flexible(
+                    child: Text(answer.author?.displayName ?? l10n.someone,
+                        maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.labelLarge),
+                  ),
+                ],
+              ),
+              const SizedBox(height: DesignTokens.spacingXS),
+              Text(plainText(answer.contentHtml ?? ''), maxLines: 4, overflow: TextOverflow.ellipsis),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _BestAnswerLabel extends StatelessWidget {
   const _BestAnswerLabel({required this.text});
 

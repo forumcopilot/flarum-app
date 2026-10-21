@@ -691,6 +691,17 @@ class FlarumApi {
     return [for (final resource in document.data) FlarumTag.fromResource(resource)];
   }
 
+  /// Each tag's latest discussion (the one last posted in), by tag id, as the web's Tags page shows
+  /// it under each tag. Tags with none the reader may see are left out.
+  Future<Map<String, FlarumDiscussion>> tagsLatestDiscussions() async {
+    final document = await client.get('/tags', query: {'include': 'lastPostedDiscussion'});
+    return {
+      for (final tag in document.data)
+        if (document.find(tag.toOne('lastPostedDiscussion')) case final discussion?)
+          tag.id: FlarumDiscussion.fromResource(discussion, document),
+    };
+  }
+
   /// One post, with its discussion and number (for links to it).
   Future<FlarumPost> post(String id) async {
     final document = await client.get('/posts/$id');

@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import '../plain_text.dart';
 import 'post.dart';
 import 'tag.dart';
 import 'user.dart';
@@ -41,6 +42,7 @@ class FlarumDiscussion {
     this.tags = const [],
     this.mostRelevantPost,
     this.postIds = const [],
+    this.firstPostExcerpt,
   });
 
   factory FlarumDiscussion.fromResource(JsonApiResource resource, JsonApiDocument document) {
@@ -86,6 +88,10 @@ class FlarumDiscussion {
       tags: [for (final tag in document.findAll(resource.toMany('tags'))) FlarumTag.fromResource(tag)],
       mostRelevantPost: relevant == null ? null : FlarumPost.fromResource(relevant, document, discussion: resource),
       postIds: [for (final ref in resource.toMany('posts')) ref.id],
+      // 2.0 sends it (when the forum shows excerpts); 1.x's web cuts it from the first post, when
+      // a response includes it.
+      firstPostExcerpt: flarumExcerpt(a.nonEmptyString('firstPostExcerpt') ??
+          document.find(resource.toOne('firstPost'))?.attributes.nonEmptyString('contentHtml')),
     );
   }
 
@@ -132,6 +138,7 @@ class FlarumDiscussion {
         tags: tags,
         mostRelevantPost: mostRelevantPost,
         postIds: postIds,
+        firstPostExcerpt: firstPostExcerpt,
       );
 
   final String id;
@@ -149,6 +156,10 @@ class FlarumDiscussion {
   final int? lastReadPostNumber;
   final DateTime? lastReadAt;
   final bool isSticky;
+
+  /// The first post's opening words, as flarum/sticky shows them under a sticky discussion the
+  /// reader hasn't opened; null where the list didn't bring them.
+  final String? firstPostExcerpt;
   final bool isLocked;
 
   /// flarum/subscriptions state for the reader: `follow`, `ignore`, or null.

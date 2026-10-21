@@ -262,7 +262,7 @@ class _TagPageState extends State<TagPage> {
                 ),
               ),
       ),
-      body: DiscussionListView(site: widget.site, list: _list),
+      body: DiscussionListView(site: widget.site, list: _list, excerpts: true),
       floatingActionButton: startDiscussionButton(context, widget.site, tag: widget.tag, onStarted: _list.refresh),
     );
   }

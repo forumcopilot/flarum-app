@@ -14,12 +14,21 @@ import '../search/highlight.dart';
 /// replied last and when, and how many replies (or unread ones).
 class DiscussionTile extends StatelessWidget {
   const DiscussionTile(
-      {super.key, required this.discussion, this.unread = 0, this.recipients = const [], this.onTap, this.highlight});
+      {super.key,
+      required this.discussion,
+      this.unread = 0,
+      this.recipients = const [],
+      this.onTap,
+      this.highlight,
+      this.excerpt});
 
   final FlarumDiscussion discussion;
 
   /// Who a private discussion is with, shown where the web shows its tags.
   final List<FlarumUser> recipients;
+
+  /// The first post's opening words, under the row as flarum/sticky shows a sticky discussion's.
+  final String? excerpt;
 
   /// A search: its words are bold in the title.
   final String? highlight;
@@ -86,6 +95,10 @@ class DiscussionTile extends StatelessWidget {
                       Text(meta, style: theme.textTheme.bodySmall?.copyWith(color: muted)),
                     ],
                   ),
+                  if (excerpt case final excerpt?) ...[
+                    const SizedBox(height: DesignTokens.spacingXS),
+                    Text(excerpt, maxLines: 3, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodySmall?.copyWith(color: muted)),
+                  ],
                 ],
               ),
             ),

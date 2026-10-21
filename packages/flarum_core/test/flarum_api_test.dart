@@ -59,6 +59,13 @@ void main() {
           expect(page.hasMore, isTrue, reason: 'the community content (community_seed.php) fills a second page');
         });
 
+        test("a sticky discussion's opening words come with 2.0's list; 1.x's are its first post", () async {
+          final rules = (await api.discussions()).items.singleWhere((d) => d.title == 'Forum rules');
+          expect(rules.firstPostExcerpt, version == FlarumVersion.v2 ? startsWith('Be kind. Stay on topic.') : isNull);
+          expect((await api.forumInfo()).showsExcerpts, isTrue);
+          expect(flarumExcerpt('<p>${'word ' * 50}</p>'), hasLength(178), reason: "175 characters and Flarum's '...'");
+        });
+
         test('filters by tag, with primary, child and secondary tags', () async {
           final page = await api.discussions(tagSlug: 'support');
           final tags = {for (final tag in page.items.single.tags) tag.slug: tag};

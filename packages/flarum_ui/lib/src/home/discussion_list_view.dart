@@ -16,7 +16,7 @@ import 'discussion_tile.dart';
 /// and says why.
 class DiscussionListView extends StatelessWidget {
   const DiscussionListView(
-      {super.key, required this.site, required this.list, this.emptyMessage, this.onReturn, this.header});
+      {super.key, required this.site, required this.list, this.emptyMessage, this.onReturn, this.header, this.excerpts = false});
 
   final SiteContext site;
   final DiscussionListModel list;
@@ -29,6 +29,9 @@ class DiscussionListView extends StatelessWidget {
 
   /// Above the first discussion, scrolling with the list: Home's welcome message.
   final Widget? header;
+
+  /// Whether sticky discussions show their opening words, as on the web's index and tag pages.
+  final bool excerpts;
 
   Future<void> _open(BuildContext context, FlarumDiscussion discussion) async {
     await ThreadPage.open(context, site, discussion.id, near: list.openAt(discussion), title: discussion.title);
@@ -91,6 +94,7 @@ class DiscussionListView extends StatelessWidget {
             discussion: d,
             unread: list.unreadIn(d),
             recipients: list.recipientsOf(d),
+            excerpt: excerpts ? list.excerptOf(d) : null,
             onTap: () => _open(context, d),
           );
         },

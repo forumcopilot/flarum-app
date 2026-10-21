@@ -590,6 +590,19 @@ class FlarumApi {
     return _postPage(document, offset);
   }
 
+  /// Discussion [discussionId]'s first post, alone and without its relations: its opening words
+  /// for a list (flarum/sticky's excerpt, which 1.x's lists send only with the first post). Null
+  /// when it's gone.
+  Future<FlarumPost?> firstPost(String discussionId) async {
+    final document = await client.get('/posts', query: {
+      'filter[discussion]': discussionId,
+      'filter[number]': '1',
+      'page[limit]': '1',
+    });
+    final first = document.data.firstOrNull;
+    return first == null ? null : FlarumPost.fromResource(first, document);
+  }
+
   /// A page of posts around post [number], for opening a discussion at the
   /// reader's last read post or a linked post.
   ///

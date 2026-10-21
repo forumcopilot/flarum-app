@@ -106,6 +106,10 @@ void main() {
             {'type': 'users', 'id': '90', 'attributes': {'username': 'carol', 'displayName': 'carol'}},
           ],
         };
+        // Tall enough for the private discussion's row, under the stickies' opening words.
+        tester.view.physicalSize = const Size(800, 1600);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
         expect(find.text('All Discussions'), findsOneWidget, reason: "the view menu's face");
@@ -150,6 +154,30 @@ void main() {
         await tester.tap(find.text('Oldest'));
         await tester.pumpAndSettle();
         expect(fixtures.requests.last.queryParameters['sort'], 'createdAt');
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets("a sticky discussion the reader hasn't opened shows its opening words, as flarum/sticky does", (tester) async {
+        // 1.x: the first post, read for the row (2.0 sends the words with the list).
+        fixtures.replies['GET /posts'] = {
+          'data': [
+            {
+              'type': 'posts',
+              'id': '9',
+              'attributes': {'number': 1, 'contentType': 'comment', 'contentHtml': '<p>Be kind. Stay on topic.</p>'},
+            },
+          ],
+        };
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await _pumpUntil(tester, find.textContaining('Be kind. Stay on topic.'));
+        expect(
+          find.descendant(of: find.widgetWithText(DiscussionTile, 'Formatting samples'), matching: find.textContaining('Be kind')),
+          findsNothing,
+          reason: 'only under the sticky ones',
+        );
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

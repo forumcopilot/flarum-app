@@ -1,3 +1,5 @@
+export '../plain_text.dart';
+
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forumcopilot_sdk/interfaces/i_fc_post_proxy.dart';
 import 'package:forumcopilot_sdk/models/entities/fc_poll.dart';
@@ -16,6 +18,7 @@ import 'flarum_attachment_proxy.dart';
 import 'flarum_forum.dart';
 import 'flarum_forum_proxy.dart' show describeFlarumError;
 import 'flarum_topic_proxy.dart';
+import '../plain_text.dart';
 
 /// A discussion's posts: pages by offset, or around a post (the reader's
 /// first unread, or a linked one). Writing, reporting, likes, reactions and
@@ -416,17 +419,4 @@ class FlarumPostProxy implements IFCPostProxy {
       );
 
   static final _epoch = DateTime.fromMillisecondsSinceEpoch(0);
-}
-
-/// Rendered post HTML as plain text: tags dropped, block ends as line
-/// breaks, the common entities decoded. Good enough to quote from.
-String plainText(String html) {
-  var text = html
-      .replaceAll(RegExp(r'<script[\s\S]*?</script>', caseSensitive: false), '')
-      .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
-      .replaceAll(RegExp(r'</(p|div|li|h\d|blockquote|pre)>', caseSensitive: false), '\n')
-      .replaceAll(RegExp(r'<[^>]+>'), '');
-  const entities = {'&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' '};
-  entities.forEach((entity, char) => text = text.replaceAll(entity, char));
-  return text.replaceAll(RegExp(r'\n{3,}'), '\n\n').trim();
 }

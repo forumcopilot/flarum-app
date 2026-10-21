@@ -152,6 +152,10 @@ class FlarumForumInfo {
   /// The reader's dialogs with messages they haven't read (flarum/messages, 2.0). Null without it.
   int? get unreadDialogCount => actorAttributes.integer('messageCount');
 
+  /// Whether lists show a sticky discussion's opening words (2.0's excerptDisplayEnabled; 1.x
+  /// always does).
+  bool get showsExcerpts => attributes.boolean('excerptDisplayEnabled') ?? true;
+
   /// The reader's saved drafts (fof/drafts). Null without it.
   int? get draftCount => actorAttributes.integer('draftCount');
 

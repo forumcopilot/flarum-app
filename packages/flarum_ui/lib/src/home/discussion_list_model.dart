@@ -128,6 +128,23 @@ class DiscussionListModel extends ChangeNotifier {
     return last == null || next <= last ? next : last;
   }
 
+  final Map<String, String?> _excerpts = {};
+
+  /// A sticky discussion's opening words, under its row while the reader hasn't opened it, as
+  /// flarum/sticky shows a forum's rules (on 2.0 when the forum shows excerpts). 2.0 sends them
+  /// with the list; on 1.x the first post is read once, and the row shows them when they come.
+  String? excerptOf(FlarumDiscussion d) {
+    if (!d.isSticky || (d.lastReadPostNumber ?? 0) > 0 || !(forum.info?.showsExcerpts ?? true)) return null;
+    if (d.firstPostExcerpt case final known?) return known;
+    if (_excerpts.containsKey(d.id)) return _excerpts[d.id];
+    _excerpts[d.id] = null;
+    forum.api.firstPost(d.id).then((post) {
+      _excerpts[d.id] = flarumExcerpt(post?.contentHtml);
+      _notify();
+    }, onError: (Object _) {});
+    return null;
+  }
+
   final Map<String, List<FlarumUser>> _recipients = {};
   final Set<String> _readingRecipients = {};
 

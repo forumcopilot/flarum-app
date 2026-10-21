@@ -245,6 +245,7 @@ class _HomePageState extends State<HomePage> {
         site: widget.site,
         list: list,
         emptyMessage: _view == DiscussionView.bookmarks ? l10n.noBookmarks : null,
+        excerpts: true,
         header: _view == DiscussionView.all
             ? WelcomeHero(site: widget.site, title: _forum.info?.welcomeTitle, message: _forum.info?.welcomeMessage)
             : null,

@@ -51,7 +51,10 @@ The Pixel's list is `phone-check-ui-review.md`; on the iPhone, what differs from
 2. **Where am I**: the bottom bar and the scrubber clear the home indicator; dragging the slider.
 3. **Log In**: no white flash before the forum's page in dark mode (WKWebView), and Back inside a
    "Log in with …" page goes back in it.
-4. **Colours under the notch**: the discussion header and a tag's page in the tag's colour reach
+4. **Saving a picture**: the picture viewer's Save Image asks to add to Photos the first time
+   (the app's words: "To save pictures from posts to your photos."), then the picture is in
+   Photos; Share offers the picture, with Save Image among the choices.
+5. **Colours under the notch**: the discussion header and a tag's page in the tag's colour reach
    the top of the screen cleanly, in light and dark.
 
 ## Later phases

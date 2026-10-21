@@ -5,7 +5,7 @@ Pixel (the iPhone's part is in `iphone-tests.md`, run at the end). What each cha
 like, with the website beside it: the "Flarum App UI Changes" page,
 https://claude.ai/artifact/7tRPwsajPnnFewKn5dPJ6S.
 
-Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 1ab43bd or later),
+Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 5da4295 or later),
 against the pinned discourse-app (no pubspec_overrides). Build once per forum, 2.0 first:
 
     flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
@@ -57,6 +57,12 @@ unless it names one.
     the alert (bell) column for "Someone sends me a message". As carol on the website, send bob a
     message. In the app, Notifications shows "carol sent you a message" with its text; a tap opens
     the conversation. Then untick bob's setting again.
+
+15. **The picture viewer**: in "Formatting samples", tap a picture. Drag it down a little and let
+    go: it springs back; drag it further: it closes, the discussion showing through as it goes.
+    Double-tap: it zooms in where tapped; drag around; double-tap: back out. Save Image: "Image
+    saved.", and the picture is in Google Photos (or the gallery). Share: the share sheet offers
+    the picture itself. Swipe sideways to the next picture.
 
 Report: PASS or FAIL per check and forum, with what you saw and screenshots of failures; the
 Pixel model and Android version; and everything created (likes left, messages, anything posted)

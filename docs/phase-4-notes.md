@@ -81,6 +81,11 @@ approved, and are built (its table names each one's commit). Done since:
   reader is ("12 of 340 posts", opening the scrubber: Original Post, a slider, Now) and Reply,
   Log In to Reply or Can't Reply, in place of the floating Reply button.
 
+- **The picture viewer** (5da4295; the review's item 16): drag down to close, double-tap to
+  zoom, Save Image (saver_gallery; Android 9 and earlier ask for storage, iOS asks to add to
+  Photos itself, so permission_handler is only asked on Android) and Share.
+- **Message notifications** (1ab43bd) open their conversation (flarum/messages' `messageReceived`).
+
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
 and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one

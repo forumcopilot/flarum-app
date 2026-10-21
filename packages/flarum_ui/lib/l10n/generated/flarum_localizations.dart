@@ -1829,6 +1829,24 @@ abstract class FlarumLocalizations {
   /// **'Messages'**
   String get messages;
 
+  /// Messages: marks every conversation read (flarum/messages' messages page).
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllMessagesRead;
+
+  /// Above a conversation's first message, as flarum/messages marks it.
+  ///
+  /// In en, this message translates to:
+  /// **'Start of the conversation'**
+  String get startOfConversation;
+
+  /// Said once a long-pressed message's text is copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Message copied.'**
+  String get messageCopied;
+
   /// Button that starts a direct message to someone
   ///
   /// In en, this message translates to:

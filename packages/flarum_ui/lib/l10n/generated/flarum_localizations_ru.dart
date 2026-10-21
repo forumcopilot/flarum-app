@@ -1205,6 +1205,15 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get messages => 'Сообщения';
 
   @override
+  String get markAllMessagesRead => 'Отметить всё как прочитанное';
+
+  @override
+  String get startOfConversation => 'Начало диалога';
+
+  @override
+  String get messageCopied => 'Сообщение скопировано.';
+
+  @override
   String get newMessage => 'Написать сообщение';
 
   @override

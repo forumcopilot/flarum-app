@@ -1186,6 +1186,15 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get messages => 'Berichten';
 
   @override
+  String get markAllMessagesRead => 'Markeer alles als gelezen';
+
+  @override
+  String get startOfConversation => 'Begin van het gesprek';
+
+  @override
+  String get messageCopied => 'Bericht gekopieerd.';
+
+  @override
   String get newMessage => 'Stuur een bericht';
 
   @override

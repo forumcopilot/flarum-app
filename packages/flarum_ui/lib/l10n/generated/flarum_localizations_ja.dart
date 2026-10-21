@@ -1145,6 +1145,15 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get messages => 'メッセージ';
 
   @override
+  String get markAllMessagesRead => 'すべて既読にする';
+
+  @override
+  String get startOfConversation => '会話の始まり';
+
+  @override
+  String get messageCopied => 'メッセージをコピーしました。';
+
+  @override
   String get newMessage => '新しいメッセージ';
 
   @override

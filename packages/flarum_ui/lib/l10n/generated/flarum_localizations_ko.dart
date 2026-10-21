@@ -1144,6 +1144,15 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get messages => '메시지';
 
   @override
+  String get markAllMessagesRead => '모두 읽음으로 표시';
+
+  @override
+  String get startOfConversation => '대화의 시작';
+
+  @override
+  String get messageCopied => '메시지를 복사했습니다.';
+
+  @override
   String get newMessage => '새 메시지';
 
   @override

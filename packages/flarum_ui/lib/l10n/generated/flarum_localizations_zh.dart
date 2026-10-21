@@ -1143,6 +1143,15 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get messages => '私信';
 
   @override
+  String get markAllMessagesRead => '全部标记为已读';
+
+  @override
+  String get startOfConversation => '对话开始';
+
+  @override
+  String get messageCopied => '消息已复制。';
+
+  @override
   String get newMessage => '发送私信';
 
   @override

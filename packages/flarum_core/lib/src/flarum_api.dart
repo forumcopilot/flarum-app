@@ -956,6 +956,10 @@ class FlarumApi {
     });
   }
 
+  /// Marks all the reader's conversations read (flarum/messages, 2.0), as the messages page's
+  /// Mark all as read does.
+  Future<void> markAllDialogsRead() => client.postEmpty('/dialogs/read');
+
   /// Marks every discussion read for the reader [userId]: Flarum records the
   /// time, and treats anything older as read. There's no per-tag version.
   Future<void> markAllAsRead(String userId) async {

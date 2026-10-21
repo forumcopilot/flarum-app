@@ -1185,6 +1185,15 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
   String get messages => 'Mensajes';
 
   @override
+  String get markAllMessagesRead => 'Marcar todo como leído';
+
+  @override
+  String get startOfConversation => 'Comienzo de la conversación';
+
+  @override
+  String get messageCopied => 'Mensaje copiado.';
+
+  @override
   String get newMessage => 'Enviar un mensaje';
 
   @override

@@ -25,6 +25,7 @@ import '../tags/tag_label.dart';
 import '../tags/tags_page.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
+import 'time_gap.dart';
 import '../navigation/web_links.dart';
 import '../home/discussion_tile.dart' show discussionBadges;
 
@@ -729,7 +730,7 @@ class _ThreadPageState extends State<ThreadPage> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [_TimeGap(text: gap), shown],
+        children: [TimeGap(text: gap), shown],
       );
     }
     // The end: more to come, a page that failed, or the thread's end.
@@ -745,45 +746,6 @@ class _ThreadPageState extends State<ThreadPage> {
     }
     // Room under the last post for the Reply button.
     return const SizedBox(height: DesignTokens.spacingXXXL);
-  }
-}
-
-/// What the website writes between two posts more than 4 days apart ("5 days later"), counted as
-/// it counts them (dayjs: days up to 25, then a month, months up to 10, then a year); null when
-/// they're closer, or either time is missing.
-String? timeLapsed(DateTime? before, DateTime? after, FlarumLocalizations l10n) {
-  if (before == null || after == null) return null;
-  final gap = after.difference(before);
-  if (gap <= const Duration(days: 4)) return null;
-  final days = (gap.inHours / 24).round();
-  if (days <= 25) return l10n.timeGapDays(days);
-  if (days <= 45) return l10n.timeGapMonths(1);
-  final months = (days / 30.44).round();
-  if (months <= 10) return l10n.timeGapMonths(months);
-  if (months <= 17) return l10n.timeGapYears(1);
-  return l10n.timeGapYears((days / 365.25).round());
-}
-
-/// The website's mark of a long silence between posts: small, bold, in capitals, muted.
-class _TimeGap extends StatelessWidget {
-  const _TimeGap({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, 0),
-      child: Text(
-        text.toUpperCase(),
-        style: theme.textTheme.labelSmall?.copyWith(
-          fontWeight: FontWeight.w700,
-          letterSpacing: 0.4,
-          color: theme.colorScheme.onSurfaceVariant,
-        ),
-      ),
-    );
   }
 }
 

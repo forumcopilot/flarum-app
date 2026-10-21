@@ -73,6 +73,19 @@ class _DialogsPageState extends State<DialogsPage> {
     _forum.refresh().ignore();
   }
 
+  /// The messages page's Mark all as read: every conversation, at once.
+  Future<void> _markAllRead() async {
+    try {
+      await _forum.api.markAllDialogsRead();
+    } catch (e) {
+      if (mounted) SnackbarHelper.showError(context, describeError(context, e));
+      return;
+    }
+    await _refresh();
+    // The Account tab's count.
+    _forum.refresh().ignore();
+  }
+
   Future<void> _newMessage() async {
     final user = await MentionPickerPage.open(context, widget.site);
     if (user != null && mounted && user.id != _forum.info?.actor?.id) await _open(to: user);
@@ -82,7 +95,13 @@ class _DialogsPageState extends State<DialogsPage> {
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.messages)),
+      appBar: AppBar(
+        title: Text(l10n.messages),
+        actions: [
+          if (_dialogs.any((d) => d.unreadCount > 0))
+            IconButton(icon: const Icon(Icons.done_all), tooltip: l10n.markAllMessagesRead, onPressed: _markAllRead),
+        ],
+      ),
       body: RefreshIndicator(onRefresh: _refresh, child: _body(l10n)),
       floatingActionButton: canSendMessages(_forum)
           ? FloatingActionButton.extended(

@@ -1,5 +1,6 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
@@ -16,6 +17,7 @@ import '../render/flarum_html.dart';
 import '../render/links.dart';
 import '../tags/tags_page.dart';
 import '../thread/thread_page.dart';
+import '../thread/time_gap.dart';
 import '../widgets/flarum_avatar.dart';
 
 /// One conversation in flarum/messages (2.0): its messages, the newest at the bottom, and a field
@@ -257,16 +259,43 @@ class _DialogPageState extends State<DialogPage> {
               ),
             );
           }
+          // Upside down: the older neighbour is next in the list, the newer one before.
           final message = _messages[i];
-          return _MessageTile(
+          final older = i + 1 < _messages.length ? _messages[i + 1] : null;
+          final newer = i > 0 ? _messages[i - 1] : null;
+          final tile = _MessageTile(
             site: widget.site,
             message: message,
             mine: message.author?.id != null && message.author?.id == _readerId,
             callbacks: _callbacksFor(message),
+            joinsOlder: older != null && _sameRun(older, message),
+            joinsNewer: newer != null && _sameRun(message, newer),
+          );
+          // Above it, as flarum/messages marks them: the conversation's start, or a long silence.
+          final label = older == null
+              ? (_hasMore ? null : l10n.startOfConversation)
+              : timeLapsed(older.createdAt, message.createdAt, l10n);
+          if (label == null) return tile;
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [TimeGap(text: label, centered: true), const SizedBox(height: DesignTokens.spacingS), tile],
           );
         },
       ),
     );
+  }
+
+  /// Whether [newer] follows [older] in one run, as a chat groups them: the same person, within
+  /// a few minutes.
+  static bool _sameRun(FlarumDialogMessage older, FlarumDialogMessage newer) {
+    final author = older.author?.id;
+    final (a, b) = (older.createdAt, newer.createdAt);
+    return author != null &&
+        author == newer.author?.id &&
+        a != null &&
+        b != null &&
+        b.difference(a) < const Duration(minutes: 5);
   }
 
   Widget _inputBar(FlarumLocalizations l10n) {
@@ -308,49 +337,88 @@ class _DialogPageState extends State<DialogPage> {
   }
 }
 
-/// A message: the reader's own on the right, the others' on the left with who wrote it.
+/// A message: the reader's own on the right, the others' on the left with who wrote it. In a run
+/// of one person's messages, the avatar and the time go once, on the run's last; a long press
+/// copies the message's text.
 class _MessageTile extends StatelessWidget {
-  const _MessageTile({required this.site, required this.message, required this.mine, required this.callbacks});
+  const _MessageTile({
+    required this.site,
+    required this.message,
+    required this.mine,
+    required this.callbacks,
+    this.joinsOlder = false,
+    this.joinsNewer = false,
+  });
 
   final SiteContext site;
   final FlarumDialogMessage message;
   final bool mine;
   final PostContentCallbacks callbacks;
 
+  /// In a run with the message before it, or after it.
+  final bool joinsOlder;
+  final bool joinsNewer;
+
+  static const _avatarRadius = 14.0;
+
+  void _copy(BuildContext context) {
+    Clipboard.setData(ClipboardData(text: plainText(message.contentHtml ?? '')));
+    SnackbarHelper.showInfo(context, flarumL10n(context).messageCopied);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final created = message.createdAt;
-    final bubble = Container(
-      constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.8),
-      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingM, vertical: DesignTokens.spacingS),
-      decoration: BoxDecoration(
-        color: mine ? colorScheme.primaryContainer : colorScheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(DesignTokens.radiusL),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FlarumContent(
-            siteContext: site,
-            content: FlarumHtml.parse(message.contentHtml ?? '', forumBaseUrl: site.site.url).html,
-            callbacks: callbacks,
+    final last = !joinsNewer;
+    // Rounded all round, but tighter where it meets its run.
+    const round = Radius.circular(DesignTokens.radiusL);
+    const tight = Radius.circular(DesignTokens.radiusS);
+    final radius = BorderRadius.only(
+      topLeft: !mine && joinsOlder ? tight : round,
+      bottomLeft: !mine && joinsNewer ? tight : round,
+      topRight: mine && joinsOlder ? tight : round,
+      bottomRight: mine && joinsNewer ? tight : round,
+    );
+    final bubble = Material(
+      color: mine ? colorScheme.primaryContainer : colorScheme.surfaceContainerHigh,
+      borderRadius: radius,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onLongPress: () => _copy(context),
+        child: Container(
+          constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.8),
+          padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingM, vertical: DesignTokens.spacingS),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FlarumContent(
+                siteContext: site,
+                content: FlarumHtml.parse(message.contentHtml ?? '', forumBaseUrl: site.site.url).html,
+                callbacks: callbacks,
+              ),
+              if (created != null && last)
+                Text(formatTimeAgo(created.toLocal(), context),
+                    style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+            ],
           ),
-          if (created != null)
-            Text(formatTimeAgo(created.toLocal(), context),
-                style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
-        ],
+        ),
       ),
     );
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL, vertical: DesignTokens.spacingXS),
+      padding: EdgeInsets.fromLTRB(
+        DesignTokens.spacingL,
+        joinsOlder ? 1 : DesignTokens.spacingXS,
+        DesignTokens.spacingL,
+        joinsNewer ? 1 : DesignTokens.spacingXS,
+      ),
       child: Row(
         mainAxisAlignment: mine ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!mine) ...[
-            FlarumAvatar(user: message.author, radius: 14),
+            last ? FlarumAvatar(user: message.author, radius: _avatarRadius) : const SizedBox(width: _avatarRadius * 2),
             const SizedBox(width: DesignTokens.spacingS),
           ],
           Flexible(child: bubble),

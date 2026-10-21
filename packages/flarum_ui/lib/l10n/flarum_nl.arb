@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "Je meldingen konden niet worden geladen.",
   "notificationsSignIn": "Log in om je meldingen te zien.",
   "markAllRead": "Alles als gelezen markeren",
+  "markAsRead": "Markeren als gelezen",
   "markAllDiscussionsReadQuestion": "Weet je zeker dat je alle discussies als gelezen wilt markeren?",
   "hideWelcomeMessage": "Welkomstbericht verbergen",
   "discussionsTab": "Discussies",

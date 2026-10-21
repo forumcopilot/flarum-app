@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "Impossible de charger vos notifications.",
   "notificationsSignIn": "Connectez-vous pour voir vos notifications.",
   "markAllRead": "Tout marquer comme lu",
+  "markAsRead": "Marquer comme lue",
   "markAllDiscussionsReadQuestion": "Êtes-vous sûr de vouloir marquer toutes les discussions comme lues ?",
   "hideWelcomeMessage": "Masquer le message de bienvenue",
   "discussionsTab": "Discussions",

@@ -7,6 +7,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../thread/thread_page.dart';
+import 'discussion_actions.dart';
 import 'discussion_list_model.dart';
 import 'discussion_tile.dart';
 
@@ -89,15 +90,58 @@ class DiscussionListView extends StatelessWidget {
                 : const SizedBox(height: 48);
           }
           final d = list.items[i];
-          return DiscussionTile(
+          final unread = list.unreadIn(d);
+          final tile = DiscussionTile(
             key: ValueKey(d.id),
             discussion: d,
-            unread: list.unreadIn(d),
+            unread: unread,
             recipients: list.recipientsOf(d),
             excerpt: excerpts ? list.excerptOf(d) : null,
             onTap: () => _open(context, d),
+            onLongPress: () => showDiscussionActions(context, site, list, d),
+          );
+          if (!list.signedIn || unread == 0) return tile;
+          // Swiped towards the end, an unread discussion is marked read; the row stays.
+          return Dismissible(
+            key: ValueKey('read-${d.id}'),
+            direction: DismissDirection.startToEnd,
+            background: _MarkReadBackground(label: l10n.markAsRead),
+            confirmDismiss: (_) async {
+              markDiscussionRead(context, list, d);
+              return false;
+            },
+            child: tile,
           );
         },
+      ),
+    );
+  }
+}
+
+/// Behind a row swiped to mark it read: what the swipe does.
+class _MarkReadBackground extends StatelessWidget {
+  const _MarkReadBackground({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: colorScheme.primaryContainer,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Row(
+          children: [
+            Icon(Icons.done, color: colorScheme.onPrimaryContainer),
+            const SizedBox(width: 12),
+            Flexible(
+              child: Text(label,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.w600)),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -20,7 +20,8 @@ class DiscussionTile extends StatelessWidget {
       this.recipients = const [],
       this.onTap,
       this.highlight,
-      this.excerpt});
+      this.excerpt,
+      this.onLongPress});
 
   final FlarumDiscussion discussion;
 
@@ -29,6 +30,9 @@ class DiscussionTile extends StatelessWidget {
 
   /// The first post's opening words, under the row as flarum/sticky shows a sticky discussion's.
   final String? excerpt;
+
+  /// Its controls (Mark as Read, Follow, Bookmark, Share), as the web's row menu.
+  final VoidCallback? onLongPress;
 
   /// A search: its words are bold in the title.
   final String? highlight;
@@ -54,6 +58,7 @@ class DiscussionTile extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL, vertical: DesignTokens.spacingM),
         child: Row(

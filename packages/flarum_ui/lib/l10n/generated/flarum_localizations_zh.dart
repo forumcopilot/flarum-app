@@ -538,6 +538,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get markAllRead => '全部已读';
 
   @override
+  String get markAsRead => '标记为已读';
+
+  @override
   String get markAllDiscussionsReadQuestion => '确定要将所有讨论标记为已读吗？';
 
   @override

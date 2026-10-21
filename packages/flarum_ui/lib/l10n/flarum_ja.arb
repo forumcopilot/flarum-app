@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "通知を読み込めませんでした。",
   "notificationsSignIn": "通知を見るにはログインしてください。",
   "markAllRead": "すべて既読にする",
+  "markAsRead": "既読にする",
   "markAllDiscussionsReadQuestion": "すべてのディスカッションを既読にしますか？",
   "hideWelcomeMessage": "ウェルカムメッセージを隠す",
   "discussionsTab": "ディスカッション",

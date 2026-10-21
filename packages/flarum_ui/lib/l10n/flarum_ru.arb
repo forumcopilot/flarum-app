@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "Не удалось загрузить уведомления.",
   "notificationsSignIn": "Войдите, чтобы видеть уведомления.",
   "markAllRead": "Отметить всё как прочитанное",
+  "markAsRead": "Отметить как прочитанное",
   "markAllDiscussionsReadQuestion": "Отметить все обсуждения прочитанными?",
   "hideWelcomeMessage": "Скрыть сообщение приветствия",
   "discussionsTab": "Обсуждения",

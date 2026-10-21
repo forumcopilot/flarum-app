@@ -538,6 +538,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get markAllRead => 'すべて既読にする';
 
   @override
+  String get markAsRead => '既読にする';
+
+  @override
   String get markAllDiscussionsReadQuestion => 'すべてのディスカッションを既読にしますか？';
 
   @override

@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "알림을 불러오지 못했습니다.",
   "notificationsSignIn": "알림을 보려면 로그인하세요.",
   "markAllRead": "모두 읽음으로 표시",
+  "markAsRead": "읽음으로 표시",
   "markAllDiscussionsReadQuestion": "모든 토론을 읽은 것으로 표시하시겠습니까?",
   "hideWelcomeMessage": "환영 메세지 숨기기",
   "discussionsTab": "토론",

@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "No se pudieron cargar tus notificaciones.",
   "notificationsSignIn": "Accede para ver tus notificaciones.",
   "markAllRead": "Marcar todas como leídas",
+  "markAsRead": "Marcar como leído",
   "markAllDiscussionsReadQuestion": "¿Estás seguro de que deseas marcar todas las discusiones como leídas?",
   "hideWelcomeMessage": "Ocultar el mensaje de bienvenida",
   "discussionsTab": "Discusiones",

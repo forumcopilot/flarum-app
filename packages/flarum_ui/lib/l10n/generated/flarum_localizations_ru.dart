@@ -559,6 +559,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get markAllRead => 'Отметить всё как прочитанное';
 
   @override
+  String get markAsRead => 'Отметить как прочитанное';
+
+  @override
   String get markAllDiscussionsReadQuestion =>
       'Отметить все обсуждения прочитанными?';
 

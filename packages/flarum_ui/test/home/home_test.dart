@@ -182,6 +182,48 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets('swiped, an unread discussion is marked read; a long press offers its controls', (tester) async {
+        final long = fixtures.discussionId('long');
+        final welcome = fixtures.discussionId('welcome');
+        fixtures.replies['PATCH /discussions/$long'] = {
+          'data': {'type': 'discussions', 'id': long, 'attributes': <String, Object>{}},
+        };
+        fixtures.replies['PATCH /discussions/$welcome'] = {
+          'data': {'type': 'discussions', 'id': welcome, 'attributes': <String, Object>{}},
+        };
+        fixtures.forum();
+        tester.view.physicalSize = const Size(800, 1600);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
+        await _pumpUntil(tester, find.byType(DiscussionTile));
+        await tester.pump(const Duration(milliseconds: 300));
+
+        await tester.drag(find.text('Long thread for paging tests'), const Offset(500, 0));
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        final read = fixtures.requests.singleWhere((r) => r.method == 'PATCH' && r.path == '/discussions/$long');
+        expect((read.data as Map)['data']['attributes'], {'lastReadPostNumber': 60}, reason: 'to its last post');
+        expect(find.text('Long thread for paging tests'), findsOneWidget, reason: 'the row stays');
+
+        await tester.longPress(find.text('Welcome to the test forum'));
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        for (final control in ['Not Following', 'Following', 'Ignoring', 'Share', 'Copy Link']) {
+          expect(find.descendant(of: find.byType(BottomSheet), matching: find.text(control)), findsOneWidget, reason: control);
+        }
+        await tester.tap(find.descendant(of: find.byType(BottomSheet), matching: find.text('Following')));
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 100));
+        }
+        final follow = fixtures.requests.singleWhere((r) => r.method == 'PATCH' && r.path == '/discussions/$welcome');
+        expect((follow.data as Map)['data']['attributes'], {'subscription': 'follow'});
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('Mark All as Read asks first, then marks every discussion read and reloads', (tester) async {
         final forum = fixtures.forum();
         await tester.runAsync(forum.refresh);

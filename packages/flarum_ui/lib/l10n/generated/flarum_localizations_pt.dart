@@ -551,6 +551,9 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
   String get markAllRead => 'Marcar Tudo como Lido';
 
   @override
+  String get markAsRead => 'Marcar como Lida';
+
+  @override
   String get markAllDiscussionsReadQuestion =>
       'Tem certeza de que deseja marcar todas as discussões como lidas?';
 

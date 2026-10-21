@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "Deine Benachrichtigungen konnten nicht geladen werden.",
   "notificationsSignIn": "Melde dich an, um deine Benachrichtigungen zu sehen.",
   "markAllRead": "Alle als gelesen markieren",
+  "markAsRead": "Als gelesen markieren",
   "markAllDiscussionsReadQuestion": "Bist du dir sicher, dass du alle Diskussionen als gelesen markieren willst?",
   "hideWelcomeMessage": "Willkommensnachricht ausblenden",
   "discussionsTab": "Diskussionen",

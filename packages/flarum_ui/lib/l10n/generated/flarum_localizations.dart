@@ -884,6 +884,12 @@ abstract class FlarumLocalizations {
   /// **'Mark All as Read'**
   String get markAllRead;
 
+  /// A discussion's swipe and its controls: marks it read (the web marks it so from its unread count).
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Read'**
+  String get markAsRead;
+
   /// Asked before Home's Mark All as Read, as Flarum asks
   ///
   /// In en, this message translates to:

@@ -537,6 +537,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get markAllRead => '모두 읽음으로 표시';
 
   @override
+  String get markAsRead => '읽음으로 표시';
+
+  @override
   String get markAllDiscussionsReadQuestion => '모든 토론을 읽은 것으로 표시하시겠습니까?';
 
   @override

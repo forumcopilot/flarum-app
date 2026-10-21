@@ -138,6 +138,7 @@
   "notificationsLoadFailed": "无法加载你的通知。",
   "notificationsSignIn": "登录后查看你的通知。",
   "markAllRead": "全部已读",
+  "markAsRead": "标记为已读",
   "markAllDiscussionsReadQuestion": "确定要将所有讨论标记为已读吗？",
   "hideWelcomeMessage": "隐藏欢迎横幅",
   "discussionsTab": "讨论",

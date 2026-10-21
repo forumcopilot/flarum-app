@@ -833,6 +833,10 @@
   "@markAllRead": {
     "description": "Notifications tab action"
   },
+  "markAsRead": "Mark as Read",
+  "@markAsRead": {
+    "description": "A discussion's swipe and its controls: marks it read (the web marks it so from its unread count)."
+  },
   "markAllDiscussionsReadQuestion": "Are you sure you want to mark all discussions as read?",
   "@markAllDiscussionsReadQuestion": {
     "description": "Asked before Home's Mark All as Read, as Flarum asks"

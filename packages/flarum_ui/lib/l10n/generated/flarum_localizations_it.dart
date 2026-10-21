@@ -550,6 +550,9 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get markAllRead => 'Segna tutto come letto';
 
   @override
+  String get markAsRead => 'Segna come letto';
+
+  @override
   String get markAllDiscussionsReadQuestion =>
       'Sei sicuro di voler contrassegnare tutte le discussioni come lette?';
 

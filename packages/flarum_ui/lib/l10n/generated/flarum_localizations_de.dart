@@ -552,6 +552,9 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
   String get markAllRead => 'Alle als gelesen markieren';
 
   @override
+  String get markAsRead => 'Als gelesen markieren';
+
+  @override
   String get markAllDiscussionsReadQuestion =>
       'Bist du dir sicher, dass du alle Diskussionen als gelesen markieren willst?';
 

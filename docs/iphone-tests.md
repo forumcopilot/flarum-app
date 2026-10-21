@@ -42,6 +42,18 @@ and mondedie.fr all worked. Sign in opened the web view but wasn't completed.
    message to carol (2.0).
 10. **Offline**: airplane mode, pull Home → the list stays with "Couldn't reach the forum…".
 
+## From Phase 4's UI review
+
+The Pixel's list is `phone-check-ui-review.md`; on the iPhone, what differs from Android:
+
+1. **Share**: the discussion's share icon and a profile's Share open iOS's share sheet; Copy Link
+   then pasting into Safari opens the post on the website.
+2. **Where am I**: the bottom bar and the scrubber clear the home indicator; dragging the slider.
+3. **Log In**: no white flash before the forum's page in dark mode (WKWebView), and Back inside a
+   "Log in with …" page goes back in it.
+4. **Colours under the notch**: the discussion header and a tag's page in the tag's colour reach
+   the top of the screen cleanly, in light and dark.
+
 ## Later phases
 
 - Phase 5: a push notification arrives (APNs) within a poll interval, and tapping it opens the

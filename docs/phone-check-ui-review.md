@@ -5,7 +5,7 @@ review's Later list, on the Pixel (the iPhone's part is in `iphone-tests.md`, ru
 like, with the website beside it: the "Flarum App UI Changes" page,
 https://claude.ai/artifact/7tRPwsajPnnFewKn5dPJ6S.
 
-Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 7abb713 or later),
+Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 5fcb495 or later),
 against the pinned discourse-app (no pubspec_overrides). Build once per forum, 2.0 first:
 
     flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
@@ -65,8 +65,9 @@ unless it names one.
     the picture itself. Swipe sideways to the next picture.
 
 16. **Pull to refresh and long silences**: in a discussion, pull down at the top: the spinner,
-    then the posts again. (No test-forum discussion has posts more than 4 days apart; on
-    discuss.flarum.org a long thread shows "… DAYS LATER" or "… MONTHS LATER" between posts.)
+    then the posts again. No test-forum discussion has posts more than 4 days apart: with the
+    forum switcher at the bottom of Account, open discuss.flarum.org, where an older thread with
+    replies shows "… DAYS LATER" or "… MONTHS LATER" between posts; switch back after.
 17. **The composer's bar**: Reply, write a word, select it, tap B: it becomes **bold** markup;
     the bar has Italic, Quote, Link, List and Code too, ••• holds the rest, and the bar scrolls
     sideways to @ and the uploads. Close without posting.
@@ -88,9 +89,9 @@ unless it names one.
     people show at once, the latest poster first, without bob; type a letter to narrow them.
     Close without posting.
 23. **Messages** (2.0 only): Account → Messages: the ✓✓ (Mark all as read) when one is unread.
-    In a conversation: "Start of the conversation" above the first message, two messages a minute
-    apart from the same person drawn as one run with one avatar; long-press a message: "Message
-    copied.", and it pastes elsewhere.
+    In bob's conversation with carol (check 14 started one): "Start of the conversation" above the
+    first message. Send carol two short messages in a row: they're drawn as one run, the time once
+    under the second. Long-press a message: "Message copied.", and it pastes elsewhere.
 24. **Notification settings**: Notifications → ⚙: a row per kind of notification, in the
     forum's words, with Web and Email boxes (likes have Web only), then "Automatically follow
     discussions that I reply to". Untick one, and check the forum's settings page in the browser
@@ -104,17 +105,21 @@ unless it names one.
     Posts; a member's profile → ⋮ → Suspend: Flarum's page (Not suspended, Suspended
     indefinitely, for a number of days, the reason and the message). Cancel each time.
 
-**Flapp** (forumcopilot/flapp main, 697d1b6 or later, built from the Mac's checkout):
+**Flapp** (forumcopilot/flapp main, 697d1b6 or later): in its checkout beside flarum-app (clone
+git@github.com:forumcopilot/flapp.git there if it's missing), `git pull`, move any
+`pubspec_overrides.yaml` aside so it builds the pinned flarum-app, then `flutter run -d <pixel>`.
+Log in to the 2.0 test forum as bob inside Flapp for check 27.
 
 27. **Your forums' badges**: log in to a test forum in Flapp, go back to the list: its tile has a
     badge with its unread notifications and messages; one you aren't logged in to has none.
 28. **Explore**: type "discuss.flarum.org" into Explore's search: "Open discuss.flarum.org" above
     the results opens it. Add forum → "example.com": "…isn't a Flarum forum…" with Open in
     browser, which opens it in Chrome.
-29. **Links to other forums**: in a throwaway discussion on a test forum, reply with a link to
-    https://discuss.flarum.org/d/1 and tap it: it opens in Flapp (Flarum Community, that
-    discussion), not in Chrome; a link to https://example.com still opens Chrome. Delete the
-    reply after (or list it below).
+29. **Links to other forums**: in Flapp, on the 2.0 test forum as bob, Start a Discussion "Phone
+    check links" (tag General) with the text `https://discuss.flarum.org/d/1 and https://example.com`.
+    In the posted discussion tap the first link: it opens in Flapp (Flarum Community, that
+    discussion), not in Chrome; Back, then the second link opens Chrome. List the discussion in the
+    report, to be removed on the server.
 
 Report: PASS or FAIL per check and forum, with what you saw and screenshots of failures; the
 Pixel model and Android version; and everything created (likes left, messages, anything posted)

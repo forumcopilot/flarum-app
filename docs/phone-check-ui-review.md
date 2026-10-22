@@ -53,7 +53,9 @@ unless it names one.
     and Back returns to the discussion. The Notifications tab offers Log In. Then Log In as bob
     from there: with the phone in dark mode, the page shows no white flash before the forum's
     page; on the forum's page, open a "Log in with …" link if the forum has one and press Back:
-    it goes back inside the page, not out of it.
+    it goes back inside the page, not out of it. Logged in, Start a Discussion → Choose Tags:
+    General can be chosen (it stayed greyed out until a restart); close the composer without
+    posting.
 13. **Dark mode**: with the phone in dark mode, the discussion header, a tag's page and the
     profile card are readable.
 14. **The unread-messages badge** (2.0 only; flarum/messages only emails about a message, so it
@@ -122,10 +124,12 @@ Log in to the 2.0 test forum as bob inside Flapp for check 27.
     the results opens it. Add forum → "example.com": "…isn't a Flarum forum…" with Open in
     browser, which opens it in Chrome.
 29. **Links to other forums**: in Flapp, on the 2.0 test forum as bob, Start a Discussion "Phone
-    check links" (tag General) with the text `https://discuss.flarum.org/d/1 and https://example.com`.
-    In the posted discussion tap the first link: it opens in Flapp (Flarum Community, that
-    discussion), not in Chrome; Back, then the second link opens Chrome. List the discussion in the
-    report, to be removed on the server.
+    check links" (tag General) with the text `https://discuss.flarum.org/d/4 and https://example.com`.
+    In the posted discussion tap the first link: it opens in Flapp (Flarum Community, "Install
+    Issue - templateSpec.call"), not in Chrome. Back goes to Flarum Community's Home, then to Your
+    forums: one forum is open at a time, so the test forum closed. Open the test forum and the
+    discussion again: the second link opens Chrome. List the discussion in the report, to be removed
+    on the server.
 
 Report: PASS or FAIL per check and forum, with what you saw and screenshots of failures; the
 Pixel model and Android version; and everything created (likes left, messages, anything posted)

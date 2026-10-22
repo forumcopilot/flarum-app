@@ -116,6 +116,17 @@ approved, and are built (its table names each one's commit). Done since:
   Left: Home keeps a discussion's row as it was when it's read from another tab, until a refresh
   (as before for unread counts); a 1.8 visit once left a discussion unread, not reproduced.
 
+- **The re-check** (Pixel 4a, 22 Oct, flarum-app 6b8634d, Flapp a2a4031 pinning 7abb713): the
+  fixes passed on both forums (checks 1, 3, 6, 8, 14, 16, 24, 27, 28). Found: after Log In from a
+  guest's visit, every tag in Choose Tags stayed greyed out until the app restarted. Sign-in kept
+  the tags read as a guest (`canStartDiscussion` false), as sign-out already forgot them; it
+  forgets them now too. Check 29's Back goes to the linked forum's Home, then Your forums: Flapp
+  keeps one forum open at a time (`ForumOpener`), so the forum the link was in closes; the
+  checklist says so now. Bob's Notifications tab said 13 at launch and 7 once the list had loaded:
+  Flarum counts 13 unread notifications, the list shows 7 rows (four suspended and four
+  unsuspended notices on his own account make one row each), and the badge goes by the list once
+  it has loaded. Flapp's tile, which never loads the list, says 13.
+
 On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
 log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
 and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one

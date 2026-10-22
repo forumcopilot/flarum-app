@@ -91,6 +91,8 @@ class FlarumForum {
     api.client
       ..token = token
       ..cookiePrefix = cookiePrefix;
+    // The tags were read as a guest: where the reader may start a discussion is theirs now.
+    _tags = null;
     try {
       final info = await refresh();
       if (info.actor == null) throw StateError('The forum did not accept this sign-in');

@@ -31,6 +31,22 @@ void main() {
         expect(await FlarumTokenStore.instance.read(FixtureForum.baseUrl), (token: 'fixture-token', cookiePrefix: 'flarum'));
       });
 
+      test("signing in forgets the tags read as a guest, so the composer offers the member's", () async {
+        final forum = fixtures.forum(signedIn: false);
+        fixtures.replies['GET /tags'] = {
+          'data': [
+            {'type': 'tags', 'id': '1', 'attributes': {'name': 'General', 'slug': 'general', 'canStartDiscussion': false}},
+          ],
+        };
+        expect((await forum.tags()).single.canStartDiscussion, isFalse);
+        fixtures.replies.remove('GET /tags');
+
+        await FlarumUserProxy.completeSignIn(testSite(), 'fixture-token');
+
+        final general = (await forum.tags()).firstWhere((t) => t.name == 'General');
+        expect(general.canStartDiscussion, isTrue);
+      });
+
       test('the next launch picks the sign-in up again', () async {
         await FlarumTokenStore.instance.write(FixtureForum.baseUrl, (token: 'fixture-token', cookiePrefix: 'myforum'));
         final forum = fixtures.forum(signedIn: false);

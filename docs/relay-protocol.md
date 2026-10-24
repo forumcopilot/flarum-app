@@ -34,7 +34,9 @@ The signature is the DER-encoded ECDSA signature over the message's SHA-256 (PHP
 | `X-Flapp-Time` | The Unix time the call was signed |
 | `X-Flapp-Signature` | The signature |
 
-The relay refuses a call signed more than 5 minutes from its own clock, and a signature it has already seen.
+The relay refuses a call signed more than 5 minutes from its own clock (401), and a call it has already seen (409).
+It recognises a call by the key and the signed message, not the signature, since an ECDSA signature has a second
+valid form. A forum that gets 409 for a push it sent again can count it as delivered.
 
 `tests/fixtures/signed-samples.json` holds calls signed this way, with the public key, for the relay's tests.
 
@@ -62,8 +64,14 @@ extension is disabled; if the relay can't be reached, the forum disconnects anyw
 
 ### Push: `POST /v1/push`
 
-To come with milestone 3: `{"forumId": "…", "pushes": [{"handle": "…", "payload": {…}}]}`, answered with
-`{"gone": ["<handle>", …]}`.
+```json
+{"forumId": "…", "pushes": [{"handle": "…", "payload": {"v": 1, "id": 42, "type": "postMentioned", "title": "…", "body": "…"}}]}
+```
+
+At most 500 pushes a call. A payload is `{v, id, type, title, body, excerpt?, open?, unread?}` under 3 KB, `open` being
+`{discussion, post}`, `{dialog}` or `{user}`. Answer: `200 {"sent": 1, "gone": ["<handle>", …]}`. `gone` lists handles the
+relay doesn't know for this forum, whose devices the forum deletes; a phone that is only out of reach keeps its
+handle. The extension sends these from milestone 3; flapp-push's README has the relay's side, including the limits.
 
 ## What the forum announces
 

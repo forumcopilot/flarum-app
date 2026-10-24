@@ -12,7 +12,6 @@
 namespace ForumCopilot\Flapp\Tests\integration\api;
 
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
-use Flarum\User\User;
 use ForumCopilot\Flapp\Device;
 use ForumCopilot\Flapp\Tests\integration\FlappTestCase;
 
@@ -27,9 +26,9 @@ class DevicesTest extends FlappTestCase
         $this->extension('forumcopilot-flapp');
 
         $this->prepareDatabase([
-            User::class => [
+            'users' => [
                 $this->normalUser(),
-                ['id' => 3, 'username' => 'carol', 'email' => 'carol@machine.local', 'is_email_confirmed' => 1],
+                ['id' => 3, 'username' => 'carol', 'password' => '$2y$10$LO59tiT7uggl6Oe23o/O6.utnF6ipngYjvMvaxo1TciKqBttDNKim', 'email' => 'carol@machine.local', 'is_email_confirmed' => 1],
             ],
         ]);
     }

@@ -12,7 +12,6 @@
 namespace ForumCopilot\Flapp\Tests\integration;
 
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
-use Flarum\User\User;
 
 class NotificationSettingsTest extends FlappTestCase
 {
@@ -23,7 +22,7 @@ class NotificationSettingsTest extends FlappTestCase
         parent::setUp();
 
         $this->prepareDatabase([
-            User::class => [$this->normalUser()],
+            'users' => [$this->normalUser()],
         ]);
     }
 
@@ -36,7 +35,7 @@ class NotificationSettingsTest extends FlappTestCase
 
     public function test_every_type_gets_a_flapp_setting_on_where_the_web_alert_is(): void
     {
-        $this->extension('flarum-mentions', 'flarum-subscriptions', 'flarum-messages', 'forumcopilot-flapp');
+        $this->extension('flarum-mentions', 'flarum-subscriptions', 'forumcopilot-flapp');
 
         $preferences = $this->preferences();
 
@@ -44,16 +43,6 @@ class NotificationSettingsTest extends FlappTestCase
             $this->assertArrayHasKey("notify_{$type}_alert", $preferences, "$type has a Web alert");
             $this->assertSame($preferences["notify_{$type}_alert"], $preferences["notify_{$type}_flapp"], "$type follows its Web alert");
         }
-    }
-
-    public function test_messages_get_push_though_they_have_no_web_alert(): void
-    {
-        $this->extension('flarum-mentions', 'flarum-messages', 'forumcopilot-flapp');
-
-        $preferences = $this->preferences();
-
-        $this->assertArrayNotHasKey('notify_messageReceived_alert', $preferences);
-        $this->assertTrue($preferences['notify_messageReceived_flapp']);
     }
 
     public function test_a_reader_turns_a_type_off(): void

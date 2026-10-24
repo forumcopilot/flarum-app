@@ -12,7 +12,6 @@
 namespace ForumCopilot\Flapp\Tests\integration\api;
 
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
-use Flarum\User\User;
 use ForumCopilot\Flapp\Connection;
 use ForumCopilot\Flapp\Device;
 use ForumCopilot\Flapp\Push\RelayClient;
@@ -33,7 +32,7 @@ class ConnectionTest extends FlappTestCase
         $this->extension('forumcopilot-flapp');
 
         $this->prepareDatabase([
-            User::class => [$this->normalUser()],
+            'users' => [$this->normalUser()],
         ]);
     }
 

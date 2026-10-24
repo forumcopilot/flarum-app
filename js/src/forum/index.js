@@ -1,11 +1,11 @@
 import app from 'flarum/forum/app';
 import { extend } from 'flarum/common/extend';
+import NotificationGrid from 'flarum/forum/components/NotificationGrid';
 
 app.initializers.add('forumcopilot-flapp', () => {
   // The Flapp column, for readers with a Flapp device on this forum only, so
-  // the grid doesn't change for anyone else. Flarum 2.0 loads the settings
-  // page on demand, hence the module name.
-  extend('flarum/forum/components/NotificationGrid', 'notificationMethods', function (items) {
+  // the grid doesn't change for anyone else.
+  extend(NotificationGrid.prototype, 'notificationMethods', function (items) {
     if (!(this.attrs.user.attribute('flappDeviceCount') > 0)) return;
 
     items.add('flapp', {

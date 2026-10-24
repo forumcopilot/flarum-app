@@ -11,8 +11,8 @@
 
 namespace ForumCopilot\Flapp;
 
-use Flarum\Api\Resource\ForumResource;
-use Flarum\Api\Resource\UserResource;
+use Flarum\Api\Serializer\CurrentUserSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
 use Flarum\Extension\Event\Disabling;
 use Flarum\User\User;
@@ -32,20 +32,20 @@ return [
         ->post('/flapp-push/connection', 'flapp.connection.create', Api\Controller\ConnectController::class)
         ->delete('/flapp-push/connection', 'flapp.connection.delete', Api\Controller\DisconnectController::class),
 
-    // Every type gets a Flapp box, not only alertable ones, so 2.0's messages
-    // reach the phone too. The defaults are worked out per type in the driver.
+    // Every type gets a Flapp box, not only alertable ones. The defaults are
+    // worked out per type in the driver.
     (new Extend\Notification())
         ->driver('flapp', Notification\FlappNotificationDriver::class),
 
     (new Extend\Model(User::class))
         ->hasMany('flappDevices', Device::class, 'user_id'),
 
-    // Flarum 2.0 only: 1.x adds these through ApiSerializer.
-    (new Extend\ApiResource(ForumResource::class))
-        ->fields(Api\ForumResourceFields::class),
+    // Flarum 1.x only: 2.0 adds these through ApiResource.
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->attributes(Api\ForumAttributes::class),
 
-    (new Extend\ApiResource(UserResource::class))
-        ->fields(Api\UserResourceFields::class),
+    (new Extend\ApiSerializer(CurrentUserSerializer::class))
+        ->attributes(Api\CurrentUserAttributes::class),
 
     (new Extend\ServiceProvider())
         ->register(FlappServiceProvider::class),

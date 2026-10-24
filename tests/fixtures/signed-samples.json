@@ -1,0 +1,30 @@
+{
+    "about": "Calls signed by forumcopilot/flarum-flapp, for the relay to check. ECDSA P-256 over SHA-256, DER, unpadded base64url. The private key was thrown away.",
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEKDKRx2HTkur4I9m2oTS5PJPw5LGf\npDuuM00IoAhI8B8kTrryn2oHZx3PsI81aYibpgeKsCHXuP2ExUsj9HcQuA==\n-----END PUBLIC KEY-----\n",
+    "samples": [
+        {
+            "method": "POST",
+            "path": "/v1/forums",
+            "time": 1792800000,
+            "body": "{\"url\":\"https://forum.example\",\"title\":\"Example Forum\",\"publicKey\":\"-----BEGIN PUBLIC KEY-----\\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEKDKRx2HTkur4I9m2oTS5PJPw5LGf\\npDuuM00IoAhI8B8kTrryn2oHZx3PsI81aYibpgeKsCHXuP2ExUsj9HcQuA==\\n-----END PUBLIC KEY-----\\n\"}",
+            "message": "POST\n/v1/forums\n1792800000\n6e84847f73bd9306b7d6a4008afe3af0cb5e83f0ee70d0ad264407de4466c6e3",
+            "signature": "MEUCIDg0o92s199mel_uHMRUfkiPntoa-PQ5MBfCY1HoVTvuAiEA6vg8-V-Bs4CSi6DgYwGAZKUzzl1Jr2I0JkMS_FebHkg"
+        },
+        {
+            "method": "DELETE",
+            "path": "/v1/forums/f_abc",
+            "time": 1792800000,
+            "body": "",
+            "message": "DELETE\n/v1/forums/f_abc\n1792800000\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "signature": "MEUCIQDLjJ1km3tdvRurBFP3BmpUin557HilU1B0g7wrNDWcTwIgQxL7OpSHtnfOW-MptbDzC194yp4hS4VdqRdvluEqOoA"
+        },
+        {
+            "method": "POST",
+            "path": "/v1/push",
+            "time": 1792800000,
+            "body": "{\"forumId\":\"f_abc\",\"pushes\":[{\"handle\":\"aaaaaaaaaaaaaaaaaaaaaa\",\"payload\":{\"v\":1,\"title\":\"Café über alles\",\"body\":\"bob replied to your post\"}}]}",
+            "message": "POST\n/v1/push\n1792800000\n502b64729b7881cb93615ec319c7e7f05d4705733d5668942a03f765830cf5ff",
+            "signature": "MEYCIQCPVYBFs76r62uSJtWb6puwWeA3dEhYNL9JuJn0qtQ5kQIhAPhqzjCfxls6CiYcbgpt5VtvtnkuR2vUoYzMEO6PbqEZ"
+        }
+    ]
+}

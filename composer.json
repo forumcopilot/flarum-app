@@ -1,0 +1,87 @@
+{
+    "name": "forumcopilot/flarum-flapp",
+    "description": "Push notifications for Flapp, the app for Flarum forums.",
+    "keywords": [
+        "flarum",
+        "push",
+        "notifications",
+        "app"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "homepage": "https://flapp.forumcopilot.com",
+    "support": {
+        "issues": "https://github.com/forumcopilot/flarum-flapp/issues",
+        "source": "https://github.com/forumcopilot/flarum-flapp"
+    },
+    "require": {
+        "php": "^8.3",
+        "ext-openssl": "*",
+        "flarum/core": "^2.0"
+    },
+    "require-dev": {
+        "flarum/testing": "^2.0",
+        "flarum/messages": "^2.0",
+        "flarum/mentions": "^2.0",
+        "flarum/subscriptions": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ForumCopilot\\Flapp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ForumCopilot\\Flapp\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Flapp",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-mobile-alt",
+                "color": "#fff",
+                "backgroundColor": "#e7672e"
+            }
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": true,
+                "forum": true,
+                "js": true,
+                "jsCommon": false,
+                "css": false,
+                "locale": true,
+                "gitConf": true,
+                "githubActions": true,
+                "prettier": true,
+                "typescript": false,
+                "bundlewatch": false,
+                "backendTesting": true,
+                "editorConfig": true,
+                "styleci": false
+            }
+        }
+    },
+    "scripts": {
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "phpunit -c tests/phpunit.unit.xml",
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php"
+    },
+    "scripts-descriptions": {
+        "test": "Runs all tests.",
+        "test:unit": "Runs all unit tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once."
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}

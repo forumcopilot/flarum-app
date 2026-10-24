@@ -1,0 +1,2 @@
+(()=>{"use strict";const t=flarum.reg.get("core","forum/app"),o=flarum.reg.get("core","common/extend");t.initializers.add("forumcopilot-flapp",()=>{(0,o.extend)("flarum/forum/components/NotificationGrid","notificationMethods",function(o){this.attrs.user.attribute("flappDeviceCount")>0&&o.add("flapp",{name:"flapp",icon:"fas fa-mobile-alt",label:t.translator.trans("forumcopilot-flapp.forum.settings.notify_by_flapp_heading")})})})})(),module.exports={};
+//# sourceMappingURL=forum.js.map

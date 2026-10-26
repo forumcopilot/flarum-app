@@ -40,6 +40,11 @@ class RelayClient
     const TIMEOUT = 2;
 
     /**
+     * The most pushes the relay takes in one call.
+     */
+    const MAX_PUSHES = 500;
+
+    /**
      * @var ClientInterface
      */
     protected $http;
@@ -85,6 +90,35 @@ class RelayClient
                 throw $e;
             }
         }
+    }
+
+    /**
+     * Hand a batch of pushes to the relay.
+     *
+     * @param array[] $pushes each ['handle' => …, 'payload' => […]], at most MAX_PUSHES
+     * @return string[] the handles the relay no longer knows for this forum
+     * @throws RelayException
+     */
+    public function push(string $relay, string $forumId, string $privateKey, array $pushes): array
+    {
+        try {
+            $answer = $this->call($relay, 'POST', '/v1/push', [
+                'forumId' => $forumId,
+                'pushes' => array_values($pushes),
+            ], $privateKey, $forumId);
+        } catch (RelayException $e) {
+            // The relay has this call already: sent again after an answer
+            // that never arrived.
+            if ($e->getCode() === 409) {
+                return [];
+            }
+
+            throw $e;
+        }
+
+        $gone = isset($answer['gone']) && is_array($answer['gone']) ? $answer['gone'] : [];
+
+        return array_values(array_filter($gone, 'is_string'));
     }
 
     /**

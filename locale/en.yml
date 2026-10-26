@@ -34,3 +34,7 @@ forumcopilot-flapp:
   forum:
     settings:
       notify_by_flapp_heading: Flapp
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: New notification

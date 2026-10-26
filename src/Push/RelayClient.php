@@ -122,6 +122,34 @@ class RelayClient
     }
 
     /**
+     * Tell the relay the readers' unread counts after they read
+     * notifications, for the iPhone badge.
+     *
+     * @param array[] $counts each ['handle' => …, 'unread' => n], at most MAX_PUSHES
+     * @return string[] the handles the relay no longer knows for this forum
+     * @throws RelayException
+     */
+    public function unread(string $relay, string $forumId, string $privateKey, array $counts): array
+    {
+        try {
+            $answer = $this->call($relay, 'POST', '/v1/unread', [
+                'forumId' => $forumId,
+                'counts' => array_values($counts),
+            ], $privateKey, $forumId);
+        } catch (RelayException $e) {
+            if ($e->getCode() === 409) {
+                return [];
+            }
+
+            throw $e;
+        }
+
+        $gone = isset($answer['gone']) && is_array($answer['gone']) ? $answer['gone'] : [];
+
+        return array_values(array_filter($gone, 'is_string'));
+    }
+
+    /**
      * @param array|null $data the JSON body, if any
      * @return array the JSON answer
      */

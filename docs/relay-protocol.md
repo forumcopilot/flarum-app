@@ -74,6 +74,17 @@ the notification's (Flarum 2.0's private messages have none), `open` being
 relay doesn't know for this forum, whose devices the forum deletes; a phone that is only out of reach keeps its
 handle. The extension sends these from milestone 3; flapp-push's README has the relay's side, including the limits.
 
+### Unread: `POST /v1/unread`
+
+```json
+{"forumId": "…", "counts": [{"handle": "…", "unread": 3}]}
+```
+
+Sent when a reader reads a notification, all of them or (Flarum 2.0) a conversation, or deletes them all, on the web
+or in the app, for each of their devices: `unread` is what a push's payload would carry now. The relay keeps it for the
+iPhone badge and sends each iPhone whose badge changes a badge-only update. At most 500 counts a call. Answer: as for
+a push, `200 {"sent": 1, "gone": […]}`.
+
 ## What the forum announces
 
 `GET /api` carries, once connected:

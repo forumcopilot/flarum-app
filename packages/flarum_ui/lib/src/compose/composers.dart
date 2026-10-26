@@ -368,7 +368,7 @@ class _NewPrivateDiscussionPageState extends State<_NewPrivateDiscussionPage> {
       site: widget.site,
       title: l10n.startPrivateDiscussion,
       showTitleField: true,
-      submitLabel: l10n.postPrivateDiscussion,
+      submitLabel: l10n.composerSend,
       otherChanges: _touched,
       titleHint: l10n.privateDiscussionTitleHint,
       initialTitle: widget.draft?.title,

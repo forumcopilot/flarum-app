@@ -1690,4 +1690,81 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => '账户与隐私';
+
+  @override
+  String get editProfile => '编辑资料';
+
+  @override
+  String get forumSettingsPage => '邮箱、密码等';
+
+  @override
+  String get forumSettingsPageHint => '在论坛的设置页面';
+
+  @override
+  String get ignoredUsersHint => '你已隐藏其帖子的成员';
+
+  @override
+  String get message => '私信';
+
+  @override
+  String get notificationSettings => '通知设置';
+
+  @override
+  String get privacy => '隐私';
+
+  @override
+  String get viewProfile => '查看资料';
+
+  @override
+  String get yourStuff => '我的内容';
+
+  @override
+  String joinForum(String name) {
+    return '加入 $name';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '讨论',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '帖子',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '最佳答案',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => '发布';
+
+  @override
+  String get composerSend => '发送';
+
+  @override
+  String get composerSave => '保存';
+
+  @override
+  String get bulletedList => '无序列表';
 }

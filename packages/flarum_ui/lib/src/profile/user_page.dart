@@ -9,6 +9,9 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:intl/intl.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../account/account_page.dart' show ProfileStats;
+import '../account/forum_web_page.dart';
+import 'package:forum_kit/theme/forum_colors.dart';
 import '../safety/suspend_user_page.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
@@ -20,7 +23,7 @@ import '../messages/dialogs_page.dart';
 import '../private/private_discussions_page.dart';
 import '../safety/ignore_actions.dart';
 import '../safety/ignored_users.dart';
-import '../tags/tag_label.dart' show flarumTagIcon;
+import '../tags/tag_label.dart' show flarumTagIcon, textOn;
 import '../thread/thread_page.dart';
 import '../widgets/flarum_avatar.dart';
 import '../navigation/web_links.dart';
@@ -172,6 +175,21 @@ class _UserPageState extends State<UserPage> {
       if (_mentions case final mentions?)
         (l10n.mentionsTab, PostList(site: widget.site, model: mentions, emptyMessage: l10n.noPostsYet, failedMessage: l10n.userLoadFailed)),
     ];
+    final own = user.id == _forum.info?.actor?.id;
+    // Message is the button: a direct message where the forum has them, else a private discussion.
+    final VoidCallback? message = _canMessage(user)
+        ? () => DialogPage.open(context, widget.site, to: user)
+        : _canWriteTo(user)
+            ? () => _writeTo(user)
+            : null;
+    PopupMenuItem<VoidCallback> item(VoidCallback action, IconData icon, String label) => PopupMenuItem(
+          value: action,
+          child: Row(children: [
+            Icon(icon, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            const SizedBox(width: DesignTokens.spacingM),
+            Flexible(child: Text(label)),
+          ]),
+        );
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -182,34 +200,34 @@ class _UserPageState extends State<UserPage> {
               tooltip: MaterialLocalizations.of(context).showMenuTooltip,
               onSelected: (action) => action(),
               itemBuilder: (menu) => [
-                PopupMenuItem(value: () => shareFrom(context, WebLinks.user(widget.site, user)), child: Text(l10n.share)),
-                PopupMenuItem(value: () => copyLink(context, WebLinks.user(widget.site, user)), child: Text(l10n.copyLink)),
-                if (_canMessage(user))
-                  PopupMenuItem(
-                    value: () => DialogPage.open(context, widget.site, to: user),
-                    child: Text(l10n.sendMessage),
-                  ),
-                if (_canWriteTo(user))
-                  PopupMenuItem(value: () => _writeTo(user), child: Text(l10n.startPrivateDiscussion)),
-                if (user.canSuspend)
-                  PopupMenuItem(
-                    value: () => _suspend(user),
-                    child: Text(l10n.suspend),
-                  ),
+                item(() => shareFrom(context, WebLinks.user(widget.site, user)), Icons.share_outlined, l10n.share),
+                item(() => copyLink(context, WebLinks.user(widget.site, user)), Icons.link, l10n.copyLink),
+                // The button writes the one kind; the other is here.
+                if (_canMessage(user) && _canWriteTo(user))
+                  item(() => _writeTo(user), Icons.forum_outlined, l10n.startPrivateDiscussion),
+                if (user.canSuspend) item(() => _suspend(user), Icons.gavel, l10n.suspend),
                 if (_ignored.canIgnore(user))
-                  PopupMenuItem(
-                    value: () => toggleIgnore(context, widget.site, user),
-                    child: Text(_ignored.isIgnored(user)
-                        ? l10n.stopIgnoringUser(user.displayName)
-                        : l10n.ignoreUser(user.displayName)),
-                  ),
+                  _ignored.isIgnored(user)
+                      ? item(() => toggleIgnore(context, widget.site, user), Icons.person_outline,
+                          l10n.stopIgnoringUser(user.displayName))
+                      : item(() => toggleIgnore(context, widget.site, user), Icons.person_off_outlined,
+                          l10n.ignoreUser(user.displayName)),
               ],
             ),
           ],
         ),
         body: NestedScrollView(
           headerSliverBuilder: (context, _) => [
-            SliverToBoxAdapter(child: _UserHeader(user: user)),
+            SliverToBoxAdapter(
+              child: _UserHeader(
+                user: user,
+                onMessage: own ? null : message,
+                onEditProfile: own
+                    ? () => ForumWebPage.open(context, widget.site,
+                        path: '/u/${user.slug ?? user.username}', title: l10n.editProfile)
+                    : null,
+              ),
+            ),
             SliverPersistentHeader(
               pinned: true,
               delegate: _PinnedTabs(TabBar(
@@ -226,93 +244,132 @@ class _UserPageState extends State<UserPage> {
   }
 }
 
-/// The web's user card: a band in the member's colour (the colour of their letter avatar, under
-/// the web's darkening layer; a quiet band behind a picture, whose colour the web reads from the
-/// image), their avatar in a white ring, which opens large, their name, group badges, online or
-/// last seen, when they joined, and their best answers.
+/// A member's profile head, as the Discourse app's: a band of their colour (the colour of their
+/// letter avatar, as the web's card has it; a quiet band behind a picture) with their avatar over
+/// its edge, which opens large; then their name, group badges, whether they're online and when
+/// they joined, and Message (or Edit Profile on the reader's own), then their numbers. It used to
+/// be the web's card, everything centred on the band.
 class _UserHeader extends StatelessWidget {
-  const _UserHeader({required this.user});
+  const _UserHeader({required this.user, this.onMessage, this.onEditProfile});
 
   final FlarumUser user;
+
+  /// Writes to them: a direct message (flarum/messages) or a private discussion (byobu).
+  final VoidCallback? onMessage;
+
+  /// The reader's own profile: its page on the forum, where it's edited.
+  final VoidCallback? onEditProfile;
+
+  static const _band = 88.0;
+  static const _avatar = 40.0;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final l10n = flarumL10n(context);
     final locale = Localizations.localeOf(context).toString();
     final joined = user.joinTime;
     final seen = user.lastSeenAt;
     final avatar = user.avatarUrl;
-    // Flarum's shadow colour, which it lays over the card (.darkenBackground) and under the avatar.
-    final shadow = Colors.black.withValues(alpha: theme.brightness == Brightness.dark ? 0.5 : 0.35);
+    final dark = theme.brightness == Brightness.dark;
     final band = avatar == null
-        ? Color.alphaBlend(shadow, flarumAvatarColor(user.displayName))
-        : theme.colorScheme.surfaceContainer;
-    final onBand = avatar == null ? Colors.white : theme.colorScheme.onSurface;
+        ? Color.lerp(colorScheme.surface, flarumAvatarColor(user.displayName), dark ? 0.45 : 0.6)!
+        : colorScheme.surfaceContainerHigh;
     final online = seen != null && DateTime.now().difference(seen.toLocal()) < const Duration(minutes: 5);
     final info = [
       if (online) l10n.online else if (seen != null) l10n.lastSeen(formatTimeAgo(seen.toLocal(), context)),
       if (joined != null) l10n.profileJoined(DateFormat.yMMM(locale).format(joined.toLocal())),
-      if (user.bestAnswerCount case final answers?) l10n.bestAnswerCount(answers),
     ];
     final groups = [for (final group in user.groups) if (!group.isHidden && group.nameSingular.isNotEmpty) group];
-    return Container(
-      color: band,
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXL),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [BoxShadow(color: shadow, blurRadius: 6, offset: const Offset(0, 2))],
-            ),
-            child: FlarumAvatar(
-              user: user,
-              radius: 36,
-              onTap: avatar == null ? null : () => ImageViewerPage.open(context, avatar, [avatar]),
-            ),
+    final muted = theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(
+          height: _band + _avatar,
+          child: Stack(
+            children: [
+              Positioned(left: 0, right: 0, top: 0, height: _band, child: ColoredBox(color: band)),
+              Positioned(
+                left: DesignTokens.spacingL,
+                bottom: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(color: colorScheme.surface, shape: BoxShape.circle),
+                  child: FlarumAvatar(
+                    user: user,
+                    radius: _avatar,
+                    onTap: avatar == null ? null : () => ImageViewerPage.open(context, avatar, [avatar]),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: DesignTokens.spacingM),
-          Text(user.displayName, textAlign: TextAlign.center, style: theme.textTheme.titleLarge?.copyWith(color: onBand)),
-          if (user.displayName != user.username)
-            Text('@${user.username}', style: theme.textTheme.bodyMedium?.copyWith(color: onBand.withValues(alpha: 0.8))),
-          if (groups.isNotEmpty) ...[
-            const SizedBox(height: DesignTokens.spacingS),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: DesignTokens.spacingXS,
-              runSpacing: DesignTokens.spacingXS,
-              children: [for (final group in groups) _GroupBadge(group: group)],
-            ),
-          ],
-          if (info.isNotEmpty) ...[
-            const SizedBox(height: DesignTokens.spacingS),
-            Text(info.join(' · '),
-                textAlign: TextAlign.center, style: theme.textTheme.bodySmall?.copyWith(color: onBand.withValues(alpha: 0.85))),
-          ],
-          if (user.discussionCount != null && user.commentCount != null)
-            Text(l10n.userStats(user.discussionCount!, user.commentCount!),
-                textAlign: TextAlign.center, style: theme.textTheme.bodySmall?.copyWith(color: onBand.withValues(alpha: 0.85))),
-          // Shown to them and to moderators (flarum/suspend).
-          if (user.isSuspended)
-            Text(
-              user.isSuspendedIndefinitely
-                  ? l10n.suspendedIndefinitely
-                  : l10n.suspendedUntil(DateFormat.yMMMd(locale).format(user.suspendedUntil!.toLocal())),
-              style: theme.textTheme.bodySmall?.copyWith(color: avatar == null ? onBand : theme.colorScheme.error),
-            ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              DesignTokens.spacingL, DesignTokens.spacingM, DesignTokens.spacingL, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(user.displayName, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+              if (user.displayName != user.username) Text('@${user.username}', style: muted),
+              if (groups.isNotEmpty) ...[
+                const SizedBox(height: DesignTokens.spacingS),
+                Wrap(
+                  spacing: DesignTokens.spacingXS,
+                  runSpacing: DesignTokens.spacingXS,
+                  children: [for (final group in groups) GroupBadge(group: group)],
+                ),
+              ],
+              if (info.isNotEmpty) ...[
+                const SizedBox(height: DesignTokens.spacingS),
+                Row(children: [
+                  if (online) ...[
+                    Icon(Icons.circle, size: 10, color: ForumColors.of(context).success),
+                    const SizedBox(width: DesignTokens.spacingXS),
+                  ],
+                  Flexible(child: Text(info.join(' · '), style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant))),
+                ]),
+              ],
+              // Shown to them and to moderators (flarum/suspend).
+              if (user.isSuspended) ...[
+                const SizedBox(height: DesignTokens.spacingS),
+                Chip(
+                  avatar: Icon(Icons.gavel, size: 16, color: colorScheme.onErrorContainer),
+                  label: Text(user.isSuspendedIndefinitely
+                      ? l10n.suspendedIndefinitely
+                      : l10n.suspendedUntil(DateFormat.yMMMd(locale).format(user.suspendedUntil!.toLocal()))),
+                  backgroundColor: colorScheme.errorContainer,
+                  labelStyle: TextStyle(color: colorScheme.onErrorContainer),
+                  side: BorderSide.none,
+                  visualDensity: VisualDensity.compact,
+                ),
+              ],
+              if (onMessage != null || onEditProfile != null) ...[
+                const SizedBox(height: DesignTokens.spacingM),
+                if (onEditProfile case final edit?)
+                  OutlinedButton.icon(onPressed: edit, icon: const Icon(Icons.edit_outlined), label: Text(l10n.editProfile))
+                else
+                  FilledButton.tonalIcon(
+                    onPressed: onMessage,
+                    icon: const Icon(Icons.chat_bubble_outline),
+                    label: Text(l10n.message),
+                  ),
+              ],
+            ],
+          ),
+        ),
+        ProfileStats(user: user),
+      ],
     );
   }
 }
 
 /// A group's badge, as the web shows it on a profile: its icon and name on its colour.
-class _GroupBadge extends StatelessWidget {
-  const _GroupBadge({required this.group});
+class GroupBadge extends StatelessWidget {
+  const GroupBadge({super.key, required this.group});
 
   final FlarumGroup group;
 
@@ -323,7 +380,7 @@ class _GroupBadge extends StatelessWidget {
     final background = color ?? colorScheme.secondaryContainer;
     final foreground = color == null
         ? colorScheme.onSecondaryContainer
-        : (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87);
+        : textOn(color);
     final icon = flarumTagIcon(group.icon);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: 2),

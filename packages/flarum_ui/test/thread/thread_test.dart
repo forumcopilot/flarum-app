@@ -4,6 +4,7 @@ import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forum_kit/views/widgets/post_action_button.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -206,7 +207,8 @@ void main() {
             findsOneWidget);
         expect(find.descendant(of: find.byType(PostTile).first, matching: find.byIcon(Icons.reply)), findsOneWidget,
             reason: 'as the web shows it to guests, opening Log In');
-        expect(find.byIcon(Icons.thumb_up_outlined), findsNothing, reason: 'the web offers guests no Like');
+        expect(find.byWidgetPredicate((w) => w is PostActionButton && w.icon == Icons.thumb_up_outlined), findsNothing,
+            reason: 'the web offers guests no Like');
         await _close(tester);
       });
 

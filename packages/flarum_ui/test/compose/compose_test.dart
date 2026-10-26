@@ -89,30 +89,30 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Post Reply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
     await tester.pump();
     expect(find.text('Please enter some content'), findsOneWidget);
     expect(sent, isNull);
 
     await tester.enterText(_field(), 'too fast');
-    await tester.tap(find.text('Post Reply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
     await tester.pump();
     expect(find.text("You're going a little too quickly. Please try again in a few seconds."), findsOneWidget);
     expect(find.byType(ComposePage), findsOneWidget, reason: 'stays open');
 
     await tester.enterText(_field(), 'bad tags');
-    await tester.tap(find.text('Post Reply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
     await tester.pump();
     expect(find.text('Choose a primary tag.'), findsOneWidget);
 
     await tester.enterText(_field(), 'fine');
-    await tester.tap(find.text('Post Reply'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
     await tester.pumpAndSettle();
     expect(find.byType(ComposePage), findsNothing, reason: 'sent, and closed');
     expect(sent, 'fine');
   });
 
-  testWidgets('the bar formats in one tap, as the website\'s does; the rest are under Formatting', (tester) async {
+  testWidgets("the bar is the Discourse app's: what to add, then every format under Formatting, then @", (tester) async {
     await tester.pumpWidget(_app(Builder(
       builder: (context) => TextButton(
         onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
@@ -123,23 +123,24 @@ void main() {
     )));
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
-    for (final tooltip in ['Add bold text', 'Add italic text', 'Insert a quote', 'Add a link', 'Add a bulleted list', 'Insert code']) {
-      expect(find.byTooltip(tooltip), findsOneWidget, reason: tooltip);
-    }
+    expect(find.byTooltip('Add bold text'), findsNothing, reason: 'the formats are under Formatting');
+    expect(find.widgetWithText(FilledButton, 'Reply'), findsOneWidget, reason: 'a short label, as the page is titled');
 
     await tester.enterText(_field(), 'loud');
     final field = tester.widget<TextField>(_field()).controller!;
     field.selection = const TextSelection(baseOffset: 0, extentOffset: 4);
     await tester.pump();
-    await tester.tap(find.byTooltip('Add bold text'));
-    await tester.pump();
+    await tester.tap(find.byTooltip('Formatting'));
+    await tester.pumpAndSettle();
+    for (final format in ['Bold', 'Italic', 'Underline', 'Link', 'Quote', 'Code', 'Spoiler', 'Bulleted List']) {
+      expect(find.text(format), findsOneWidget, reason: format);
+    }
+    await tester.tap(find.text('Bold'));
+    await tester.pumpAndSettle();
     expect(_text(tester), '**loud**');
 
     await tester.tap(find.byTooltip('Formatting'));
     await tester.pumpAndSettle();
-    expect(find.text('Underline'), findsOneWidget);
-    expect(find.text('Spoiler'), findsOneWidget);
-    expect(find.text('Bold'), findsNothing, reason: 'in the bar, not the menu');
     await tester.tap(find.text('Spoiler'));
     await tester.pumpAndSettle();
     expect(_text(tester), '**loud**||||', reason: 'the spoiler, at the cursor');
@@ -163,7 +164,7 @@ void main() {
         await _settle(tester);
         expect(find.text('Welcome to the test forum'), findsWidgets, reason: 'the composer names the discussion');
         await tester.enterText(_field(), WriteSamples.reply);
-        await tester.tap(find.text('Post Reply'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
         await _pumpUntil(tester, find.byType(ComposePage), gone: true);
 
         final post = fixtures.requests.singleWhere((r) => r.method == 'POST' && r.path == '/posts');
@@ -264,7 +265,7 @@ void main() {
         expect(find.text('Edit post'), findsOneWidget);
         expect(tester.widget<TextField>(_field()).controller!.text, WriteSamples.reply);
         await tester.enterText(_field(), WriteSamples.edit);
-        await tester.tap(find.text('Save Changes'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Save'));
         await _pumpUntil(tester, find.byType(ComposePage), gone: true);
         expect(saved?.source, WriteSamples.edit);
         await _close(tester);
@@ -299,7 +300,7 @@ void main() {
         await tester.pump();
         expect(_text(tester), 'Here they are\n[Uploading: ${WriteSamples.uploadImageName}…]()\n');
         expect(find.byType(UploadTile), findsOneWidget);
-        await tester.tap(find.text('Post Reply'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
         await tester.pump();
         expect(find.text('Please wait for attachments to finish uploading'), findsOneWidget);
         expect(sent, isNull);
@@ -322,7 +323,7 @@ void main() {
         expect(find.byType(UploadTile), findsOneWidget);
         expect(fixtures.requests.where((r) => r.method == 'DELETE'), isEmpty);
 
-        await tester.tap(find.text('Post Reply'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Reply'));
         await tester.pump();
         expect(sent, startsWith('Here they are\n[upl-image-preview uuid='));
 
@@ -367,7 +368,7 @@ void main() {
         await _settle(tester);
         await tester.enterText(_field(title: true), WriteSamples.title);
         await tester.enterText(_field(), WriteSamples.content);
-        await tester.tap(find.text('Post Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Post'));
         await tester.pump();
         expect(find.text('Choose a primary tag.'), findsOneWidget, reason: 'the forum asks for one');
 
@@ -377,7 +378,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('OK'));
         await _settle(tester);
-        await tester.tap(find.text('Post Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Post'));
         await _pumpUntil(tester, find.byType(ThreadPage));
 
         final start = fixtures.requests.singleWhere((r) => r.method == 'POST' && r.path == '/discussions');

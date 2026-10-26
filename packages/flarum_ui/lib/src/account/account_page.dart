@@ -1,12 +1,16 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/views/widgets/forum_icon_tile.dart';
+import 'package:forum_kit/views/widgets/sheet_title.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../app/forum_drawer.dart';
+import 'account_privacy_page.dart';
 import 'forum_web_page.dart';
+import '../notifications/notification_settings_page.dart';
 import '../safety/flagged_posts_page.dart';
 import '../render/links.dart';
 import '../../config/app_forum_config.dart';
@@ -15,13 +19,14 @@ import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
 import '../compose/composers.dart' show canSaveDrafts;
 import '../drafts/drafts_page.dart';
-import '../safety/ignored_users_page.dart';
 import 'log_in_first.dart';
 import '../widgets/flarum_avatar.dart';
 import '../profile/user_page.dart';
 
-/// The reader's account: sign in (or create an account on the forum's
-/// page), or who is signed in, and sign out; and the app's appearance.
+/// The reader's own tab, as the Discourse app's Profile tab: who they are (View Profile, Edit
+/// Profile, their numbers), their stuff (posts, drafts, bookmarks, flags to review), then the
+/// settings (notifications, the app's colour scheme, account and privacy) and Log Out. A guest gets
+/// the forum and Log In. It used to be one flat list, with Settings on the forum's web page.
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key, required this.site, this.appearance, this.onSignInChanged, this.onSwitchForum});
 
@@ -84,13 +89,19 @@ class _AccountPageState extends State<AccountPage> {
   /// first, as the forum's own log-out page asks.
   Future<void> _signOut() async {
     final l10n = flarumL10n(context);
+    final error = Theme.of(context).colorScheme.error;
     final sure = await showDialog<bool>(
       context: context,
       builder: (dialog) => AlertDialog(
+        title: Text(l10n.signOut),
         content: Text(l10n.logOutQuestion(_forum.info?.title ?? widget.site.site.name)),
         actions: [
           TextButton(onPressed: () => Navigator.pop(dialog, false), child: Text(kitL10n(dialog).cancel)),
-          TextButton(onPressed: () => Navigator.pop(dialog, true), child: Text(l10n.signOut)),
+          TextButton(
+            onPressed: () => Navigator.pop(dialog, true),
+            style: TextButton.styleFrom(foregroundColor: error),
+            child: Text(l10n.signOut),
+          ),
         ],
       ),
     );
@@ -104,159 +115,356 @@ class _AccountPageState extends State<AccountPage> {
     widget.onSignInChanged?.call();
   }
 
+  /// The app's light or dark choice, in a sheet, as the Discourse app offers it.
+  void _chooseAppearance(Appearance appearance) {
+    final l10n = flarumL10n(context);
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheet) => SafeArea(
+        child: ValueListenableBuilder<ThemeMode>(
+          valueListenable: appearance,
+          builder: (context, mode, _) => RadioGroup<ThemeMode>(
+            groupValue: mode,
+            onChanged: (choice) {
+              if (choice == null) return;
+              appearance.choose(choice);
+              Navigator.of(sheet).pop();
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SheetTitle(l10n.appearance),
+                for (final choice in ThemeMode.values)
+                  RadioListTile<ThemeMode>(value: choice, title: Text(_appearanceLabel(choice, l10n))),
+                const SizedBox(height: DesignTokens.spacingS),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static String _appearanceLabel(ThemeMode mode, FlarumLocalizations l10n) => switch (mode) {
+        ThemeMode.system => l10n.appearanceSystem,
+        ThemeMode.light => l10n.light,
+        ThemeMode.dark => l10n.dark,
+      };
+
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
-    final theme = Theme.of(context);
     final reader = _forum.isSignedIn ? _forum.info?.actor : null;
     final readerUnknown = _forum.isSignedIn && reader == null && (_readingReader || _readerError != null);
     return Scaffold(
       appBar: AppBar(leading: forumDrawerButton(context), title: Text(l10n.profile)),
-      body: ListView(
-        padding: const EdgeInsets.all(DesignTokens.spacingXL),
-        children: [
-          if (readerUnknown) ...[
-            if (_readerError case final error?) ...[
-              Text(describeError(context, error), style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
-              const SizedBox(height: DesignTokens.spacingXL),
-              FilledButton(onPressed: _readReader, child: Text(l10n.retry)),
-            ] else
-              const Center(child: CircularProgressIndicator()),
-            const SizedBox(height: DesignTokens.spacingS),
-            OutlinedButton(onPressed: _busy ? null : _signOut, child: Text(l10n.signOut)),
-          ] else if (reader == null) ...[
-            Text(l10n.signInHint, style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
-            const SizedBox(height: DesignTokens.spacingXL),
-            FilledButton(onPressed: _signIn, child: Text(l10n.signIn)),
-            // Sign-up happens on the forum's page, when the forum takes new members.
-            if (_forum.info?.allowSignUp ?? false) ...[
-              const SizedBox(height: DesignTokens.spacingS),
-              OutlinedButton(
-                onPressed: () => openExternally(widget.site.site.url),
-                child: Text(l10n.createAccount),
-              ),
-            ],
-          ] else ...[
-            Center(child: FlarumAvatar(user: reader, radius: 40, onTap: () => _openProfile(reader))),
-            const SizedBox(height: DesignTokens.spacingM),
-            Text(reader.displayName, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
-            Text(l10n.signedInAs('@${reader.username}'),
-                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                textAlign: TextAlign.center),
-            const SizedBox(height: DesignTokens.spacingXL),
-            // The web's session menu: Profile, Settings (on the forum's own page), then the lists.
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.person_outline),
-              title: Text(l10n.profile),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => _openProfile(reader),
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.settings_outlined),
-              title: Text(l10n.settings),
-              trailing: const Icon(Icons.chevron_right),
-              // The forum's settings page, logged in as the reader (in Chrome they usually aren't).
-              onTap: () => ForumWebPage.open(context, widget.site, path: '/settings', title: l10n.settings),
-            ),
-            if (_forum.extensions.bookmarks) ...[
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.bookmark_border),
-                title: Text(l10n.bookmarks),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => BookmarksPage.open(context, widget.site),
-              ),
-            ],
-            if (canSaveDrafts(_forum))
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.edit_note),
-                title: Text(l10n.drafts),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if ((_forum.info?.draftCount ?? 0) > 0)
-                      Badge(
-                        label: Text('${_forum.info!.draftCount}'),
-                        backgroundColor: theme.colorScheme.secondaryContainer,
-                        textColor: theme.colorScheme.onSecondaryContainer,
-                      ),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
-                onTap: () async {
-                  await DraftsPage.open(context, widget.site);
-                  if (mounted) setState(() {});
-                },
-              ),
-            // A moderator's flag list, with the web's count of new flags.
-            if (canViewFlags(_forum))
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.flag_outlined),
-                title: Text(l10n.flaggedPosts),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if ((_forum.info?.newFlagCount ?? 0) > 0) Badge(label: Text('${_forum.info!.newFlagCount}')),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
-                onTap: () async {
-                  await FlaggedPostsPage.open(context, widget.site);
-                  if (mounted) setState(() {});
-                },
-              ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.person_off_outlined),
-              title: Text(l10n.ignoredUsers),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => IgnoredUsersPage.open(context, widget.site),
-            ),
-            const SizedBox(height: DesignTokens.spacingL),
-            OutlinedButton.icon(
-              onPressed: _busy ? null : _signOut,
-              icon: _busy
-                  ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-                  : const Icon(Icons.logout),
-              label: Text(l10n.signOut),
-            ),
-          ],
-          if (widget.appearance case final appearance?) ...[
-            const SizedBox(height: DesignTokens.spacingXXL),
-            Text(l10n.appearance, style: theme.textTheme.titleSmall),
-            const SizedBox(height: DesignTokens.spacingS),
-            ValueListenableBuilder<ThemeMode>(
-              valueListenable: appearance,
-              builder: (context, mode, _) => SegmentedButton<ThemeMode>(
-                segments: [
-                  ButtonSegment(value: ThemeMode.system, label: Text(l10n.appearanceSystem)),
-                  ButtonSegment(value: ThemeMode.light, label: Text(l10n.light)),
-                  ButtonSegment(value: ThemeMode.dark, label: Text(l10n.dark)),
+      body: readerUnknown
+          ? _unknownReader(context)
+          : RefreshIndicator(
+              onRefresh: _readReader,
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: DesignTokens.spacingXL),
+                children: [
+                  ...reader == null ? _guest(context) : _hub(context, reader),
+                  ..._settings(context, reader),
+                  if (showForumSwitcher && widget.onSwitchForum != null)
+                    ListTile(
+                      leading: const Icon(Icons.swap_horiz),
+                      title: const Text('Forum (debug)'),
+                      subtitle: Text(widget.site.site.url),
+                      onTap: () async {
+                        final forum = await DebugForumPage.open(context, widget.site.site.url);
+                        if (forum != null) await widget.onSwitchForum!(forum);
+                      },
+                    ),
                 ],
-                selected: {mode},
-                onSelectionChanged: (choice) => appearance.choose(choice.single),
               ),
             ),
+    );
+  }
+
+  /// Logged in, but the forum hasn't said who the reader is: wait, or retry, or log out.
+  Widget _unknownReader(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final theme = Theme.of(context);
+    return ListView(
+      padding: const EdgeInsets.all(DesignTokens.spacingXL),
+      children: [
+        if (_readerError case final error?) ...[
+          Text(describeError(context, error), style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
+          const SizedBox(height: DesignTokens.spacingXL),
+          FilledButton(onPressed: _readReader, child: Text(l10n.retry)),
+        ] else
+          const Center(child: CircularProgressIndicator()),
+        const SizedBox(height: DesignTokens.spacingS),
+        OutlinedButton(onPressed: _busy ? null : _signOut, child: Text(l10n.signOut)),
+      ],
+    );
+  }
+
+  /// The forum, and Log In (and Sign Up, on the forum's page, where it takes new members).
+  List<Widget> _guest(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final theme = Theme.of(context);
+    final name = _forum.info?.title ?? widget.site.site.name;
+    return [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(
+            DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ForumIconTile(name: name, url: _forum.info?.faviconUrl, size: 48),
+            const SizedBox(height: DesignTokens.spacingM),
+            Text(l10n.joinForum(name), style: theme.textTheme.titleLarge),
+            const SizedBox(height: DesignTokens.spacingXS),
+            Text(l10n.logInToTakePart,
+                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+            const SizedBox(height: DesignTokens.spacingL),
+            Row(children: [
+              Expanded(child: FilledButton(onPressed: _signIn, child: Text(l10n.signIn))),
+              if (_forum.info?.allowSignUp ?? false) ...[
+                const SizedBox(width: DesignTokens.spacingS),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => openExternally(widget.site.site.url),
+                    child: Text(l10n.createAccount),
+                  ),
+                ),
+              ],
+            ]),
+            const SizedBox(height: DesignTokens.spacingS),
+            Text(l10n.signInHint, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           ],
-          if (showForumSwitcher && widget.onSwitchForum != null) ...[
-            const SizedBox(height: DesignTokens.spacingXXL),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.swap_horiz),
-              title: const Text('Forum (debug)'),
-              subtitle: Text(widget.site.site.url),
-              onTap: () async {
-                final forum = await DebugForumPage.open(context, widget.site.site.url);
-                if (forum != null) await widget.onSwitchForum!(forum);
-              },
-            ),
-          ],
-        ],
+        ),
       ),
+    ];
+  }
+
+  /// Who the reader is, their numbers, and their stuff.
+  List<Widget> _hub(BuildContext context, FlarumUser reader) {
+    final l10n = flarumL10n(context);
+    final theme = Theme.of(context);
+    final muted = theme.colorScheme.onSurfaceVariant;
+    final slug = reader.slug ?? reader.username;
+    return [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(
+            DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingM),
+        child: Row(children: [
+          FlarumAvatar(user: reader, radius: 32, onTap: () => _openProfile(reader)),
+          const SizedBox(width: DesignTokens.spacingL),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(reader.displayName, style: theme.textTheme.titleLarge, maxLines: 1, overflow: TextOverflow.ellipsis),
+                Text(l10n.signedInAs('@${reader.username}'),
+                    style: theme.textTheme.bodyMedium?.copyWith(color: muted), maxLines: 1, overflow: TextOverflow.ellipsis),
+              ],
+            ),
+          ),
+        ]),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL),
+        child: Row(children: [
+          Expanded(child: FilledButton.tonal(onPressed: () => _openProfile(reader), child: Text(l10n.viewProfile))),
+          const SizedBox(width: DesignTokens.spacingS),
+          // The forum's own profile page, where its owner changes their picture (and bio, where
+          // the forum has one); the app has no form of its own for them yet.
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () => ForumWebPage.open(context, widget.site, path: '/u/$slug', title: l10n.editProfile),
+              child: Text(l10n.editProfile),
+            ),
+          ),
+        ]),
+      ),
+      ProfileStats(user: reader, onTap: () => _openProfile(reader)),
+      const _Band(),
+      _Heading(l10n.yourStuff),
+      _Row(icon: Icons.forum_outlined, label: l10n.myPosts, onTap: () => _openProfile(reader)),
+      if (canSaveDrafts(_forum))
+        _Row(
+          icon: Icons.edit_note,
+          label: l10n.drafts,
+          count: _forum.info?.draftCount,
+          onTap: () async {
+            await DraftsPage.open(context, widget.site);
+            if (mounted) setState(() {});
+          },
+        ),
+      if (_forum.extensions.bookmarks)
+        _Row(icon: Icons.bookmark_border, label: l10n.bookmarks, onTap: () => BookmarksPage.open(context, widget.site)),
+      // A moderator's flag list, with the web's count of new flags.
+      if (canViewFlags(_forum))
+        _Row(
+          icon: Icons.flag_outlined,
+          label: l10n.flaggedPosts,
+          count: _forum.info?.newFlagCount,
+          onTap: () async {
+            await FlaggedPostsPage.open(context, widget.site);
+            if (mounted) setState(() {});
+          },
+        ),
+    ];
+  }
+
+  /// Notifications, the colour scheme, account and privacy, and Log Out.
+  List<Widget> _settings(BuildContext context, FlarumUser? reader) {
+    final l10n = flarumL10n(context);
+    final theme = Theme.of(context);
+    final appearance = widget.appearance;
+    final rows = [
+      if (reader != null)
+        _Row(
+          icon: Icons.notifications_none,
+          label: l10n.notificationSettings,
+          onTap: () => NotificationSettingsPage.open(context, widget.site),
+        ),
+      if (appearance != null)
+        ValueListenableBuilder<ThemeMode>(
+          valueListenable: appearance,
+          builder: (context, mode, _) => _Row(
+            icon: Icons.brightness_6_outlined,
+            label: l10n.appearance,
+            trailing: Text(_appearanceLabel(mode, l10n),
+                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+            onTap: () => _chooseAppearance(appearance),
+          ),
+        ),
+      if (reader != null)
+        _Row(
+          icon: Icons.shield_outlined,
+          label: l10n.accountAndPrivacy,
+          onTap: () => AccountPrivacyPage.open(context, widget.site),
+        ),
+      if (reader != null)
+        _Row(
+          icon: Icons.logout,
+          label: l10n.signOut,
+          color: theme.colorScheme.error,
+          onTap: _busy ? null : _signOut,
+        ),
+    ];
+    if (rows.isEmpty) return const [];
+    return [const _Band(), _Heading(l10n.settings), ...rows];
+  }
+}
+
+/// A member's numbers, as the Discourse app's stats strip: each number over what it counts.
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key, required this.user, this.onTap});
+
+  final FlarumUser user;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final discussions = user.discussionCount;
+    final posts = user.commentCount;
+    final answers = user.bestAnswerCount;
+    final stats = [
+      if (discussions != null) (discussions, l10n.statDiscussions(discussions)),
+      if (posts != null) (posts, l10n.statPosts(posts)),
+      if (answers != null) (answers, l10n.statBestAnswers(answers)),
+    ];
+    if (stats.isEmpty) return const SizedBox(height: DesignTokens.spacingL);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: DesignTokens.spacingM),
+      child: Row(children: [for (final (value, label) in stats) _Stat(value: value, label: label, onTap: onTap)]),
+    );
+  }
+}
+
+class _Stat extends StatelessWidget {
+  const _Stat({required this.value, required this.label, this.onTap});
+
+  final int value;
+  final String label;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    return Expanded(
+      // The number and its label read as one ("26 posts").
+      child: MergeSemantics(
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(DesignTokens.radiusM),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: DesignTokens.spacingS),
+            child: Column(children: [
+              Text('$value', style: textTheme.titleLarge?.copyWith(color: colorScheme.primary)),
+              Text(label, style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The band set between the tab's sections.
+class _Band extends StatelessWidget {
+  const _Band();
+
+  @override
+  Widget build(BuildContext context) => ColoredBox(
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        child: const SizedBox(height: DesignTokens.spacingS, width: double.infinity),
+      );
+}
+
+class _Heading extends StatelessWidget {
+  const _Heading(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(
+            DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXS),
+        child: Semantics(
+          header: true,
+          child: Text(label,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+        ),
+      );
+}
+
+/// One destination on the tab: an icon, a label, and a count or value.
+class _Row extends StatelessWidget {
+  const _Row({required this.icon, required this.label, required this.onTap, this.count, this.trailing, this.color});
+
+  final IconData icon;
+  final String label;
+  final VoidCallback? onTap;
+  final int? count;
+  final Widget? trailing;
+
+  /// For Log Out.
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    return ListTile(
+      leading: Icon(icon, color: color ?? colorScheme.onSurfaceVariant),
+      title: Text(label, style: textTheme.bodyLarge?.copyWith(color: color ?? colorScheme.onSurface)),
+      trailing: trailing ??
+          ((count ?? 0) > 0
+              ? Text('$count', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant))
+              : null),
+      onTap: onTap,
     );
   }
 }

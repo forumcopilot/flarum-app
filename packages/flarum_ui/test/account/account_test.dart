@@ -39,7 +39,7 @@ void main() {
     expect(flarumPalette(info()), isNull);
   });
 
-  testWidgets('the appearance is chosen on the account tab', (tester) async {
+  testWidgets('the appearance is chosen on the profile tab', (tester) async {
     FlarumForum.resetForTesting();
     FixtureForum(FlarumVersion.v2, root: '../flarum_core/test/fixtures').forum(signedIn: false);
     final appearance = Appearance.unsaved();
@@ -48,6 +48,10 @@ void main() {
       site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
     );
     await tester.pumpWidget(MaterialApp(home: AccountPage(site: site, appearance: appearance)));
+    // A row that names the choice, which opens the choices in a sheet, as the Discourse app's.
+    expect(find.text('System preference'), findsOneWidget);
+    await tester.tap(find.text('Color Scheme'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Dark Mode'));
     await tester.pump();
     expect(appearance.value, ThemeMode.dark);
@@ -82,9 +86,13 @@ void main() {
       );
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
       expect(find.text('Logged in as @alice'), findsOneWidget);
-      expect(find.text('Log Out'), findsOneWidget);
-      expect(find.widgetWithText(ListTile, 'Profile'), findsOneWidget, reason: "the web's session menu: the reader's own profile");
-      expect(find.text('Settings'), findsOneWidget);
+      expect(find.widgetWithText(FilledButton, 'View Profile'), findsOneWidget);
+      expect(find.widgetWithText(OutlinedButton, 'Edit Profile'), findsOneWidget);
+      expect(find.text('Your Stuff'), findsOneWidget);
+      await tester.scrollUntilVisible(find.text('Log Out'), 200);
+      expect(find.text('Settings'), findsOneWidget, reason: 'the settings heading');
+      expect(find.text('Notification Settings'), findsOneWidget);
+      expect(find.text('Account and Privacy'), findsOneWidget);
 
       await tester.ensureVisible(find.text('Log Out'));
       await tester.pumpAndSettle();
@@ -96,7 +104,8 @@ void main() {
       expect(find.text('Logged in as @alice'), findsOneWidget, reason: 'still logged in');
     });
 
-    testWidgets("Flarum ${version.name}: Settings opens the forum's settings page in the app, logged in as the reader",
+    testWidgets(
+        "Flarum ${version.name}: Account and Privacy opens the forum's settings page in the app, logged in as the reader",
         (tester) async {
       FlarumForum.resetForTesting();
       FlarumTokenStore.instance = FlarumTokenStore.memory();
@@ -113,7 +122,10 @@ void main() {
         site: const AppForumConfig(name: 'Test forum', baseUrl: FixtureForum.baseUrl).toSite(),
       );
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
-      await tester.tap(find.text('Settings'));
+      await tester.scrollUntilVisible(find.text('Account and Privacy'), 200);
+      await tester.tap(find.text('Account and Privacy'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Email, Password and More'));
       await tester.pumpAndSettle();
       expect(find.text("the forum's page"), findsOneWidget);
       expect(opened.single, '${FixtureForum.baseUrl}/settings ${forum.api.client.cookiePrefix}_remember=${forum.api.client.token}',

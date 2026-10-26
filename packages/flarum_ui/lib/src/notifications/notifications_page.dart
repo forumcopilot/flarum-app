@@ -1,6 +1,7 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
+import 'package:forum_kit/views/widgets/unread_badge.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
@@ -222,8 +223,10 @@ class _GroupHeader extends StatelessWidget {
 }
 
 /// One notification, as the web lists it: who, their avatar marked with the kind (a like's
-/// thumbs-up, a mention's @), the line, a line of the post it's about, and when; unread ones on a
-/// tinted row. [grouped] under its discussion's title, the line leaves the title out.
+/// thumbs-up, a mention's @), the line, a line of the post it's about, and when; unread ones in
+/// bold with the shared unread dot at the end, as the Discourse app marks them (they used to sit on
+/// a tinted row, heavy in dark mode). [grouped] under its discussion's title, the line leaves the
+/// title out.
 class NotificationTile extends StatelessWidget {
   const NotificationTile({super.key, required this.notification, this.onTap, this.grouped = false});
 
@@ -244,9 +247,10 @@ class NotificationTile extends StatelessWidget {
     };
     final muted = theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant);
     return Material(
-      color: n.isRead ? Colors.transparent : colorScheme.primaryContainer.withValues(alpha: 0.35),
+      color: Colors.transparent,
       child: ListTile(
         onTap: onTap,
+        trailing: n.isRead ? null : UnreadBadge(semanticLabel: l10n.unread),
         leading: switch (n.fromUser) {
           final user? => Stack(
               clipBehavior: Clip.none,

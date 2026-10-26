@@ -2,6 +2,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
+import 'package:forum_kit/views/widgets/unread_badge.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -180,7 +181,7 @@ class _DialogTile extends StatelessWidget {
                 style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
           if (unread) ...[
             const SizedBox(height: DesignTokens.spacingXS),
-            Badge(label: Text('${dialog.unreadCount}')),
+            UnreadBadge(count: dialog.unreadCount),
           ],
         ],
       ),

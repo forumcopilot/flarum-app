@@ -2438,5 +2438,97 @@
         "type": "int"
       }
     }
+  },
+  "accountAndPrivacy": "Account and Privacy",
+  "@accountAndPrivacy": {
+    "description": "The Profile tab's row, and the page, for the reader's account and privacy settings"
+  },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Button on the reader's own profile: opens the forum's profile page, where it's edited"
+  },
+  "forumSettingsPage": "Email, Password and More",
+  "@forumSettingsPage": {
+    "description": "Account and Privacy's row that opens the forum's settings page (email, password, nickname)"
+  },
+  "forumSettingsPageHint": "On the forum's settings page",
+  "@forumSettingsPageHint": {
+    "description": "Under Email, Password and More: where they're changed"
+  },
+  "ignoredUsersHint": "Members whose posts you've hidden",
+  "@ignoredUsersHint": {
+    "description": "Under Ignored Users on Account and Privacy"
+  },
+  "message": "Message",
+  "@message": {
+    "description": "Button on a member's profile and card: write to them"
+  },
+  "notificationSettings": "Notification Settings",
+  "@notificationSettings": {
+    "description": "The Profile tab's row that opens the notification settings"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Heading on Account and Privacy"
+  },
+  "viewProfile": "View Profile",
+  "@viewProfile": {
+    "description": "Button on the Profile tab that opens the reader's profile as others see it"
+  },
+  "yourStuff": "Your Stuff",
+  "@yourStuff": {
+    "description": "Heading on the Profile tab over the reader's posts, drafts and bookmarks"
+  },
+  "joinForum": "Join {name}",
+  "@joinForum": {
+    "description": "The Profile tab for a guest; name is the forum's",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "statDiscussions": "{count, plural, =1{discussion} other{discussions}}",
+  "@statDiscussions": {
+    "description": "Under a member's number of discussions, in their stats",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "statPosts": "{count, plural, =1{post} other{posts}}",
+  "@statPosts": {
+    "description": "Under a member's number of posts, in their stats",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "statBestAnswers": "{count, plural, =1{best answer} other{best answers}}",
+  "@statBestAnswers": {
+    "description": "Under a member's number of best answers (fof/best-answer), in their stats",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "composerPost": "Post",
+  "@composerPost": {
+    "description": "The composer's send button for a new discussion (its title says Start a Discussion)"
+  },
+  "composerSend": "Send",
+  "@composerSend": {
+    "description": "The composer's send button for a private discussion"
+  },
+  "composerSave": "Save",
+  "@composerSave": {
+    "description": "The composer's button that saves an edited post"
+  },
+  "bulletedList": "Bulleted List",
+  "@bulletedList": {
+    "description": "Formatting menu item that starts a bulleted list"
   }
 }

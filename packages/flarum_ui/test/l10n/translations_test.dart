@@ -10,7 +10,9 @@ void main() {
     Map<String, dynamic> arb(String file) => jsonDecode(File('lib/l10n/$file').readAsStringSync()) as Map<String, dynamic>;
     final english = arb('flarum_en.arb');
     final keys = english.keys.where((k) => !k.startsWith('@'));
-    Set<String> placeholders(String message) => {for (final m in RegExp(r'\{(\w+)[,}]').allMatches(message)) m[1]!};
+    // A plural's branches (`=1{post}`, `other{posts}`) follow a word or `=1`; placeholders don't.
+    Set<String> placeholders(String message) =>
+        {for (final m in RegExp(r'(?<![=A-Za-z0-9_])\{(\w+)[,}]').allMatches(message)) m[1]!};
     for (final file in Directory('lib/l10n').listSync().map((f) => f.uri.pathSegments.last)) {
       if (!file.endsWith('.arb') || file == 'flarum_en.arb') continue;
       final language = arb(file);

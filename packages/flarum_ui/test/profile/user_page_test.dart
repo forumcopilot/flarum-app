@@ -98,6 +98,40 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets("a member's profile offers Message, as the Discourse app's does, and their numbers", (tester) async {
+        fixtures.forum();
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: UserPage(site: _site(), slug: 'bob')));
+        await _pumpUntil(tester, find.textContaining('Joined'));
+        final message = find.ancestor(of: find.text('Message'), matching: find.byWidgetPredicate((w) => w is FilledButton));
+        expect(message, findsOneWidget, reason: 'alice may write to bob (a message on 2.0, a private discussion on 1.x)');
+        expect(find.text('Edit Profile'), findsNothing, reason: "it isn't hers");
+        expect(find.text('posts'), findsOneWidget, reason: 'the stats strip');
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
+      testWidgets("a post's avatar opens the member's card, and its Profile the whole profile", (tester) async {
+        fixtures.forum();
+        tester.view.physicalSize = const Size(800, 1600);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
+        ));
+        await _pumpUntil(tester, find.byType(PostTile));
+        final bobsPost = find.ancestor(of: find.text('bob').first, matching: find.byType(PostTile)).first;
+        await tester.tap(find.descendant(of: bobsPost, matching: find.byType(CircleAvatar)).first);
+        await _pumpUntil(tester, find.byType(BottomSheet));
+        await _pumpUntil(tester, find.descendant(of: find.byType(BottomSheet), matching: find.textContaining('Joined')));
+        expect(find.byType(UserPage), findsNothing, reason: 'the card comes first');
+        await tester.pump(const Duration(milliseconds: 600)); // the sheet up
+        await tester.tap(find.descendant(of: find.byType(BottomSheet), matching: find.text('Profile')));
+        await _pumpUntil(tester, find.byType(UserPage));
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('a mention in a thread opens the profile', (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(

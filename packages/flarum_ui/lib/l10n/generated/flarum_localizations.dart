@@ -2734,6 +2734,114 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 like or reaction. Show who} other{{count} likes and reactions. Show who}}'**
   String likesAndReactionsCount(int count);
+
+  /// The Profile tab's row, and the page, for the reader's account and privacy settings
+  ///
+  /// In en, this message translates to:
+  /// **'Account and Privacy'**
+  String get accountAndPrivacy;
+
+  /// Button on the reader's own profile: opens the forum's profile page, where it's edited
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// Account and Privacy's row that opens the forum's settings page (email, password, nickname)
+  ///
+  /// In en, this message translates to:
+  /// **'Email, Password and More'**
+  String get forumSettingsPage;
+
+  /// Under Email, Password and More: where they're changed
+  ///
+  /// In en, this message translates to:
+  /// **'On the forum\'s settings page'**
+  String get forumSettingsPageHint;
+
+  /// Under Ignored Users on Account and Privacy
+  ///
+  /// In en, this message translates to:
+  /// **'Members whose posts you\'ve hidden'**
+  String get ignoredUsersHint;
+
+  /// Button on a member's profile and card: write to them
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// The Profile tab's row that opens the notification settings
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Settings'**
+  String get notificationSettings;
+
+  /// Heading on Account and Privacy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get privacy;
+
+  /// Button on the Profile tab that opens the reader's profile as others see it
+  ///
+  /// In en, this message translates to:
+  /// **'View Profile'**
+  String get viewProfile;
+
+  /// Heading on the Profile tab over the reader's posts, drafts and bookmarks
+  ///
+  /// In en, this message translates to:
+  /// **'Your Stuff'**
+  String get yourStuff;
+
+  /// The Profile tab for a guest; name is the forum's
+  ///
+  /// In en, this message translates to:
+  /// **'Join {name}'**
+  String joinForum(String name);
+
+  /// Under a member's number of discussions, in their stats
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{discussion} other{discussions}}'**
+  String statDiscussions(int count);
+
+  /// Under a member's number of posts, in their stats
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{post} other{posts}}'**
+  String statPosts(int count);
+
+  /// Under a member's number of best answers (fof/best-answer), in their stats
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{best answer} other{best answers}}'**
+  String statBestAnswers(int count);
+
+  /// The composer's send button for a new discussion (its title says Start a Discussion)
+  ///
+  /// In en, this message translates to:
+  /// **'Post'**
+  String get composerPost;
+
+  /// The composer's send button for a private discussion
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get composerSend;
+
+  /// The composer's button that saves an edited post
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get composerSave;
+
+  /// Formatting menu item that starts a bulleted list
+  ///
+  /// In en, this message translates to:
+  /// **'Bulleted List'**
+  String get bulletedList;
 }
 
 class _FlarumLocalizationsDelegate

@@ -211,6 +211,24 @@ class _DialogPageState extends State<DialogPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(others.isEmpty ? l10n.messages : others.map((user) => user.displayName).join(', ')),
+        // Who it's with, as the Discourse app's conversation offers its people.
+        actions: [
+          if (others.length == 1)
+            PopupMenuButton<VoidCallback>(
+              tooltip: MaterialLocalizations.of(context).showMenuTooltip,
+              onSelected: (action) => action(),
+              itemBuilder: (_) => [
+                PopupMenuItem(
+                  value: () => UserPage.open(context, widget.site, others.single.slug ?? others.single.username),
+                  child: Row(children: [
+                    Icon(Icons.person_outline, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    const SizedBox(width: DesignTokens.spacingM),
+                    Flexible(child: Text(l10n.viewProfile)),
+                  ]),
+                ),
+              ],
+            ),
+        ],
       ),
       body: Column(
         children: [

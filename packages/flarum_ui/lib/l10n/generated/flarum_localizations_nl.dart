@@ -1775,4 +1775,84 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => 'Account en privacy';
+
+  @override
+  String get editProfile => 'Profiel bewerken';
+
+  @override
+  String get forumSettingsPage => 'E-mail, wachtwoord en meer';
+
+  @override
+  String get forumSettingsPageHint => 'Op de instellingenpagina van het forum';
+
+  @override
+  String get ignoredUsersHint => 'Leden van wie je de berichten verbergt';
+
+  @override
+  String get message => 'Bericht';
+
+  @override
+  String get notificationSettings => 'Meldingsinstellingen';
+
+  @override
+  String get privacy => 'Privacy';
+
+  @override
+  String get viewProfile => 'Profiel bekijken';
+
+  @override
+  String get yourStuff => 'Jouw spullen';
+
+  @override
+  String joinForum(String name) {
+    return 'Word lid van $name';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'discussies',
+      one: 'discussie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'berichten',
+      one: 'bericht',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'beste antwoorden',
+      one: 'beste antwoord',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => 'Plaatsen';
+
+  @override
+  String get composerSend => 'Versturen';
+
+  @override
+  String get composerSave => 'Opslaan';
+
+  @override
+  String get bulletedList => 'Opsomming';
 }

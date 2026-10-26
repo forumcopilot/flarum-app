@@ -85,6 +85,8 @@ class PostActionsRow extends StatelessWidget {
       if (total > 0)
         _ReactionSummary(
           glyphs: [for (final (r, _) in used.take(3)) reactionGlyph(r)],
+          // Without the Like button beside it (a guest), the count says what it counts.
+          likes: onLike == null && post.likesCount > 0,
           total: total,
           onTap: () => _showWhoReacted(context),
         ),
@@ -292,9 +294,12 @@ class PostActionsRow extends StatelessWidget {
 /// The post's likes and reactions in one count, with its most used reactions' glyphs; a tap shows
 /// who.
 class _ReactionSummary extends StatelessWidget {
-  const _ReactionSummary({required this.glyphs, required this.total, required this.onTap});
+  const _ReactionSummary({required this.glyphs, required this.total, required this.onTap, this.likes = false});
 
   final List<String> glyphs;
+
+  /// Marks the likes with the thumb, where no Like button stands beside the count.
+  final bool likes;
   final int total;
   final VoidCallback onTap;
 
@@ -318,11 +323,15 @@ class _ReactionSummary extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                if (likes) ...[
+                  Icon(Icons.thumb_up_outlined, size: glyphSize * 0.85, color: colorScheme.onSurfaceVariant),
+                  const SizedBox(width: 2),
+                ],
                 for (final glyph in glyphs) ...[
                   Text(glyph, textScaler: TextScaler.noScaling, style: TextStyle(fontSize: glyphSize * 0.85, height: 1)),
                   const SizedBox(width: 2),
                 ],
-                if (glyphs.isNotEmpty) const SizedBox(width: DesignTokens.spacingXS),
+                if (glyphs.isNotEmpty || likes) const SizedBox(width: DesignTokens.spacingXS),
                 Text('$total', style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurfaceVariant)),
               ],
             ),

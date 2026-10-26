@@ -1694,4 +1694,81 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => 'アカウントとプライバシー';
+
+  @override
+  String get editProfile => 'プロフィールを編集';
+
+  @override
+  String get forumSettingsPage => 'メール、パスワードなど';
+
+  @override
+  String get forumSettingsPageHint => 'フォーラムの設定ページで';
+
+  @override
+  String get ignoredUsersHint => '投稿を非表示にしているメンバー';
+
+  @override
+  String get message => 'メッセージ';
+
+  @override
+  String get notificationSettings => '通知設定';
+
+  @override
+  String get privacy => 'プライバシー';
+
+  @override
+  String get viewProfile => 'プロフィールを見る';
+
+  @override
+  String get yourStuff => 'あなたのコンテンツ';
+
+  @override
+  String joinForum(String name) {
+    return '$nameに参加';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ディスカッション',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '投稿',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ベストアンサー',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => '投稿';
+
+  @override
+  String get composerSend => '送信';
+
+  @override
+  String get composerSave => '保存';
+
+  @override
+  String get bulletedList => '箇条書き';
 }

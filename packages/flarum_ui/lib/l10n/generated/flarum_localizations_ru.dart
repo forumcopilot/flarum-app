@@ -1816,4 +1816,90 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => 'Аккаунт и конфиденциальность';
+
+  @override
+  String get editProfile => 'Редактировать профиль';
+
+  @override
+  String get forumSettingsPage => 'Почта, пароль и другое';
+
+  @override
+  String get forumSettingsPageHint => 'На странице настроек форума';
+
+  @override
+  String get ignoredUsersHint => 'Участники, чьи сообщения вы скрыли';
+
+  @override
+  String get message => 'Написать';
+
+  @override
+  String get notificationSettings => 'Настройки уведомлений';
+
+  @override
+  String get privacy => 'Конфиденциальность';
+
+  @override
+  String get viewProfile => 'Открыть профиль';
+
+  @override
+  String get yourStuff => 'Ваши материалы';
+
+  @override
+  String joinForum(String name) {
+    return 'Присоединяйтесь к $name';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'обсуждения',
+      many: 'обсуждений',
+      few: 'обсуждения',
+      one: 'обсуждение',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'сообщения',
+      many: 'сообщений',
+      few: 'сообщения',
+      one: 'сообщение',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'лучшего ответа',
+      many: 'лучших ответов',
+      few: 'лучших ответа',
+      one: 'лучший ответ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => 'Опубликовать';
+
+  @override
+  String get composerSend => 'Отправить';
+
+  @override
+  String get composerSave => 'Сохранить';
+
+  @override
+  String get bulletedList => 'Маркированный список';
 }

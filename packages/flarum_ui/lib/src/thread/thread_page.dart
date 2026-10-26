@@ -24,6 +24,7 @@ import '../safety/ignore_actions.dart';
 import '../safety/ignored_users.dart';
 import '../tags/tag_label.dart';
 import '../tags/tags_page.dart';
+import '../profile/user_card_sheet.dart';
 import 'post_tile.dart';
 import 'thread_model.dart';
 import 'time_gap.dart';
@@ -753,7 +754,9 @@ class _ThreadPageState extends State<ThreadPage> {
         site: widget.site,
         post: post,
         callbacks: _callbacksFor(post),
-        onAuthorTap: (author) => _openUser(author.slug ?? author.username),
+        // The member's card first, as the Discourse app and the website show one; Profile opens the rest.
+        onAuthorTap: (author) =>
+            showUserCard(context, widget.site, author, onOpenProfile: () => _openUser(author.slug ?? author.username)),
         onOpenReply: _openReply,
         tags: _tags,
         isBestAnswer: post.id == _model.discussion!.bestAnswerPostId,

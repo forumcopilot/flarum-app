@@ -1696,4 +1696,81 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => '계정 및 개인정보';
+
+  @override
+  String get editProfile => '프로필 편집';
+
+  @override
+  String get forumSettingsPage => '이메일, 비밀번호 등';
+
+  @override
+  String get forumSettingsPageHint => '포럼 설정 페이지에서';
+
+  @override
+  String get ignoredUsersHint => '게시물을 숨긴 회원';
+
+  @override
+  String get message => '메시지';
+
+  @override
+  String get notificationSettings => '알림 설정';
+
+  @override
+  String get privacy => '개인정보';
+
+  @override
+  String get viewProfile => '프로필 보기';
+
+  @override
+  String get yourStuff => '내 항목';
+
+  @override
+  String joinForum(String name) {
+    return '$name에 가입';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '토론',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '게시물',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '베스트 답변',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => '게시';
+
+  @override
+  String get composerSend => '보내기';
+
+  @override
+  String get composerSave => '저장';
+
+  @override
+  String get bulletedList => '글머리 기호 목록';
 }

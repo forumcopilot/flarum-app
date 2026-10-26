@@ -210,7 +210,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('OK'));
         await _settle(tester);
-        await tester.tap(find.text('Post Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Post'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         final sent = fixtures.requests.lastWhere((r) => r.method == 'POST' && r.path == '/discussions').data as Map;

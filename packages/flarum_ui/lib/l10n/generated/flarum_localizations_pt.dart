@@ -1776,4 +1776,84 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get accountAndPrivacy => 'Conta e Privacidade';
+
+  @override
+  String get editProfile => 'Editar Perfil';
+
+  @override
+  String get forumSettingsPage => 'E-mail, Senha e Mais';
+
+  @override
+  String get forumSettingsPageHint => 'Na página de configurações do fórum';
+
+  @override
+  String get ignoredUsersHint => 'Membros cujas publicações você ocultou';
+
+  @override
+  String get message => 'Mensagem';
+
+  @override
+  String get notificationSettings => 'Configurações de Notificação';
+
+  @override
+  String get privacy => 'Privacidade';
+
+  @override
+  String get viewProfile => 'Ver Perfil';
+
+  @override
+  String get yourStuff => 'Suas Coisas';
+
+  @override
+  String joinForum(String name) {
+    return 'Participe de $name';
+  }
+
+  @override
+  String statDiscussions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'discussões',
+      one: 'discussão',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'publicações',
+      one: 'publicação',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String statBestAnswers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'melhores respostas',
+      one: 'melhor resposta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get composerPost => 'Publicar';
+
+  @override
+  String get composerSend => 'Enviar';
+
+  @override
+  String get composerSave => 'Salvar';
+
+  @override
+  String get bulletedList => 'Lista com Marcadores';
 }

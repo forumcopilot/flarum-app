@@ -102,14 +102,14 @@ void main() {
         await _settle(tester);
 
         await tester.enterText(find.widgetWithText(TextField, 'Title'), WriteSamples.privateTitle);
-        await tester.tap(find.text('Post Private Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Send'));
         await _settle(tester);
         // Under the field, until there's something in it.
         expect(find.text('Please enter some content'), findsOneWidget);
         await tester.enterText(find.byType(TextField).last, WriteSamples.privateContent);
         await tester.pump();
         expect(find.text('Please enter some content'), findsNothing);
-        await tester.tap(find.text('Post Private Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Send'));
         await _settle(tester);
         expect(find.text('This discussion will only be visible to the users you choose here. At least 1 recipient (other than yourself) is required.'), findsOneWidget);
 
@@ -126,7 +126,7 @@ void main() {
         await _settle(tester);
         expect(find.text('This forum lets you write privately to one person at a time.'), findsOneWidget);
 
-        await tester.tap(find.text('Post Private Discussion'));
+        await tester.tap(find.widgetWithText(FilledButton, 'Send'));
         await _settle(tester);
         expect(find.byType(ComposePage), findsNothing);
         expect((started?.title, started?.isPrivate), (WriteSamples.privateTitle, true));

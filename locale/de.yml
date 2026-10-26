@@ -1,0 +1,37 @@
+forumcopilot-flapp:
+  # The admin page.
+  admin:
+    page:
+      intro: "Flapp ist eine App für Flarum-Foren, für Android und iPhone. Mit dieser Erweiterung bekommen deine Mitglieder, die sie nutzen, Push-Benachrichtigungen aus diesem Forum innerhalb von Sekunden, in ihrer eigenen Sprache, für die Benachrichtigungen, die sie auswählen."
+      independent: "Flapp ist eine unabhängige App. Sie stammt nicht von den Machern von Flarum und ist nicht mit ihnen verbunden."
+      how_heading: "Was das Verbinden bewirkt"
+      how_text: "Beim Verbinden meldet sich dieses Forum beim Flapp-Relay an, das jede Push-Benachrichtigung zur Zustellung an Google und Apple weitergibt. Das Forum entscheidet, was gesendet wird, und verfasst es; das Relay erhält nie die Anmeldung von irgendjemandem. Trennen oder das Deaktivieren dieser Erweiterung weist das Relay an, das Forum zu vergessen."
+      members_heading: "Was deine Mitglieder sehen"
+      members_text: "Wer sich in Flapp bei diesem Forum anmeldet, bekommt in den Benachrichtigungseinstellungen eine Spalte „Flapp“, im Forum und in der App, und wählt dort aus, welche Benachrichtigungen das Telefon erreichen. Was im Web standardmäßig benachrichtigt, ist zu Beginn eingeschaltet. Mitglieder, die Flapp nicht nutzen, merken keine Änderung."
+      privacy_link: "Datenschutzerklärung von Flapp"
+      status_heading: "Status"
+      connected_text: "Verbunden mit {relay}."
+      not_connected_text: "Nicht verbunden. Mitglieder, die Flapp nutzen, bekommen noch keine Push-Benachrichtigungen aus diesem Forum."
+      connect_button: "Verbinden"
+      disconnect_button: "Trennen"
+      disconnect_confirmation: "Vom Flapp-Relay trennen? Die Telefone der Mitglieder bekommen dann keine Push-Benachrichtigungen mehr aus diesem Forum."
+
+  # Errors from the extension's API calls.
+  api:
+    already_connected: "Dieses Forum ist bereits verbunden. Trenne es zuerst."
+    invalid_app: "Der Name der App fehlt oder ist ungültig."
+    invalid_handle: "Das Handle fehlt oder ist ungültig."
+    invalid_locale: "Die Sprache ist ungültig."
+    invalid_platform: "Die Plattform muss android oder ios sein."
+    not_connected: "Dieses Forum ist nicht mit dem Flapp-Relay verbunden."
+    relay_failed: "Das Flapp-Relay konnte dieses Forum nicht verbinden: {message}"
+    token_needed: "Ein Gerät muss mit dem Token des Lesers im Authorization-Header registriert werden."
+
+  # The reader's notification settings.
+  forum:
+    settings:
+      notify_by_flapp_heading: "Flapp"
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: "Neue Benachrichtigung"

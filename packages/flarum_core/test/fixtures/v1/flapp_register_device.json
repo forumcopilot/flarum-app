@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flapp-push/devices",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "handle": "fixture-handle-0123456789abcdef",
+      "platform": "android",
+      "app": "flapp",
+      "locale": "de"
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "flappDevices",
+      "id": "2",
+      "attributes": {
+        "platform": "android",
+        "app": "flapp",
+        "locale": "de",
+        "createdAt": "2026-10-26T06:36:24+00:00"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/flapp-push/devices/2",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 404,
+  "body": {
+    "errors": [
+      {
+        "status": "404",
+        "code": "not_found"
+      }
+    ]
+  }
+}

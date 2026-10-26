@@ -90,6 +90,15 @@ A write fixture is matched by its request's attributes (the texts in `WriteSampl
 its method and path, so a reply that worked and one the throttle refused can both be replayed.
 Fixtures recorded with a `state` (`ignoring`, `terms`) are served only to tests that ask for it.
 
+Both forums also run forumcopilot/flarum-flapp (Flapp's push extension), connected to the staging
+relay. Its calls have their own recorder, which registers a made-up handle as bob's device and
+deletes it again (the forum doesn't check handles with the relay), and records the forum's
+`flappPush` announcement as the `flapp` state:
+
+```bash
+FLARUM_TEST_PASSWORD=… dart run tool/record_flapp_fixtures.dart http://127.0.0.1:8081
+```
+
 ## CAPTCHA
 
 For sign-in tests, 1.8 runs blomstra/turnstile (on sign-in, sign-up and password reset) and

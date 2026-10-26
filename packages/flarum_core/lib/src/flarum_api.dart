@@ -225,6 +225,41 @@ class FlarumApi {
     }
   }
 
+  /// Registers this phone for the signed-in reader's pushes on a forum running the Flapp extension
+  /// (`POST /flapp-push/devices`): the [handle] the relay gave the phone for this forum, the
+  /// [platform] (`android` or `ios`), the [app] and the phone's [locale]. Returns the device's id.
+  ///
+  /// The device hangs on the token that registers it, which must be sent in the header, as
+  /// [client] does; ending that sign-in on the website removes the device too. Registering the
+  /// same handle again moves it to this reader and token. A forum keeps 10 devices per reader.
+  Future<String> registerFlappDevice({
+    required String handle,
+    required String platform,
+    required String app,
+    String? locale,
+  }) async {
+    final answer = await client.postJson('/flapp-push/devices', {
+      'handle': handle,
+      'platform': platform,
+      'app': app,
+      if (locale != null) 'locale': locale,
+    });
+    final data = answer['data'];
+    final id = data is Map ? data['id'] : null;
+    if (id is! String || id.isEmpty) throw const FormatException('The forum answered without a device id');
+    return id;
+  }
+
+  /// Stops pushes to this phone from the forum (`DELETE /flapp-push/devices/{id}`). A device the
+  /// forum no longer has (it went with its token, or the relay said it was gone) counts as deleted.
+  Future<void> deleteFlappDevice(String id) async {
+    try {
+      await client.delete('/flapp-push/devices/$id');
+    } on FlarumApiException catch (e) {
+      if (!e.isNotFound) rethrow;
+    }
+  }
+
   /// A page of discussions. [tagSlug] limits it to a tag (or any of several,
   /// joined by commas), [excludeTagSlugs] leaves tags out, [following] keeps
   /// discussions the reader follows, [unread] ones with posts the reader hasn't

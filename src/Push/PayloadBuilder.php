@@ -215,11 +215,14 @@ class PayloadBuilder
 
         if ($subject instanceof Post) {
             // A reply to the reader's post: the subject is their post, the
-            // data names the reply.
-            if (isset($data['replyNumber'], $data['discussionId'])) {
+            // data names the reply. Flarum 1.8 gives only its number; the
+            // reply is in the same discussion.
+            if (isset($data['replyNumber'])) {
+                $discussionId = isset($data['discussionId']) ? $data['discussionId'] : $subject->discussion_id;
+
                 return [
-                    $this->open(['discussion' => $data['discussionId'], 'post' => $data['replyNumber']]),
-                    $this->post($data['discussionId'], $data['replyNumber']),
+                    $this->open(['discussion' => $discussionId, 'post' => $data['replyNumber']]),
+                    $this->post($discussionId, $data['replyNumber']),
                 ];
             }
 

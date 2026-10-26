@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_drawer.dart';
 import '../compose/composers.dart';
 import '../home/discussion_list_model.dart';
 import '../home/discussion_list_view.dart';
@@ -10,9 +11,12 @@ import '../thread/thread_page.dart';
 
 /// The reader's private discussions (fof/byobu), and a way to start one.
 class PrivateDiscussionsPage extends StatefulWidget {
-  const PrivateDiscussionsPage({super.key, required this.site});
+  const PrivateDiscussionsPage({super.key, required this.site, this.switcher});
 
   final SiteContext site;
+
+  /// Under the title on the Messages tab: chips for this list and the direct messages.
+  final PreferredSizeWidget? switcher;
 
   static Future<void> open(BuildContext context, SiteContext site) =>
       Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => PrivateDiscussionsPage(site: site)));
@@ -54,7 +58,12 @@ class _PrivateDiscussionsPageState extends State<PrivateDiscussionsPage> {
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.privateDiscussions)),
+      // On the Messages tab, it's titled as the tab.
+      appBar: AppBar(
+        leading: forumDrawerButton(context),
+        title: Text(widget.switcher == null ? l10n.privateDiscussions : l10n.messages),
+        bottom: widget.switcher,
+      ),
       body: DiscussionListView(site: widget.site, list: _list, emptyMessage: l10n.noPrivateDiscussions),
       floatingActionButton: canStartPrivateDiscussion(_forum)
           ? FloatingActionButton.extended(

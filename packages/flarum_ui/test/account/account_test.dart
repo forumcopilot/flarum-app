@@ -71,7 +71,7 @@ void main() {
   });
 
   for (final version in FlarumVersion.values) {
-    testWidgets('Flarum ${version.name}: the account tab shows who is signed in', (tester) async {
+    testWidgets('Flarum ${version.name}: the profile tab shows who is signed in', (tester) async {
       FlarumForum.resetForTesting();
       FlarumTokenStore.instance = FlarumTokenStore.memory();
       final forum = FixtureForum(version, root: '../flarum_core/test/fixtures').forum();
@@ -83,7 +83,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: AccountPage(site: site)));
       expect(find.text('Logged in as @alice'), findsOneWidget);
       expect(find.text('Log Out'), findsOneWidget);
-      expect(find.text('Profile'), findsOneWidget, reason: "the web's session menu: the reader's own profile");
+      expect(find.widgetWithText(ListTile, 'Profile'), findsOneWidget, reason: "the web's session menu: the reader's own profile");
       expect(find.text('Settings'), findsOneWidget);
 
       await tester.ensureVisible(find.text('Log Out'));

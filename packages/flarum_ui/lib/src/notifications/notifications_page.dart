@@ -7,6 +7,7 @@ import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_drawer.dart';
 import '../messages/dialog_page.dart';
 import '../thread/thread_page.dart';
 import 'notification_settings_page.dart';
@@ -118,6 +119,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final signedIn = _forum.isSignedIn;
     return Scaffold(
       appBar: AppBar(
+        leading: forumDrawerButton(context),
         title: Text(l10n.notifications),
         actions: [
           if (signedIn && _model.items.any((n) => !n.isRead))

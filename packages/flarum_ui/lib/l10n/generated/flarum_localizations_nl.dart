@@ -1652,4 +1652,127 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get deleteDraft => 'Concept verwijderen';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ongelezen reacties',
+      one: '1 ongelezen reactie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reacties',
+      one: '1 reactie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count discussies',
+      one: '1 discussie',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return 'Zoeken in $name';
+  }
+
+  @override
+  String get community => 'Community';
+
+  @override
+  String get allTags => 'Alle tags';
+
+  @override
+  String get otherTags => 'Overige tags';
+
+  @override
+  String get myPosts => 'Mijn berichten';
+
+  @override
+  String get directMessages => 'Directe berichten';
+
+  @override
+  String get drawerIntroduction =>
+      'Hier vind je de tags van het forum en je lijsten. Tik op ☰ om dit weer te openen.';
+
+  @override
+  String get goToYourProfile => 'Naar je profiel';
+
+  @override
+  String get notLoggedIn => 'Niet ingelogd';
+
+  @override
+  String get logInToTakePart =>
+      'Log in om te posten, te reageren en meldingen te krijgen.';
+
+  @override
+  String get logInToSeeMessages => 'Log in om je berichten te zien.';
+
+  @override
+  String get noFollowedDiscussions => 'Je volgt nog geen discussies.';
+
+  @override
+  String showChildTags(String name) {
+    return 'Tags in $name tonen';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return 'Tags in $name verbergen';
+  }
+
+  @override
+  String get holdForReactions => 'Lang indrukken voor reacties';
+
+  @override
+  String removeYourReaction(String name) {
+    return 'Jouw reactie: $name. Tik om die in te trekken.';
+  }
+
+  @override
+  String get reactionTapAgainToRemove =>
+      'Kies je reactie nog eens om die in te trekken.';
+
+  @override
+  String get likesAndReactions => 'Likes en reacties';
+
+  @override
+  String get you => 'Jij';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'en $count anderen',
+      one: 'en 1 ander',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count likes en reacties. Laat zien van wie',
+      one: '1 like of reactie. Laat zien van wie',
+    );
+    return '$_temp0';
+  }
 }

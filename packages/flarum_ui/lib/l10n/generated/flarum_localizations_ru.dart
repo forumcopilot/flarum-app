@@ -1682,4 +1682,138 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get deleteDraft => 'Удалить черновик';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count непрочитанного ответа',
+      many: '$count непрочитанных ответов',
+      few: '$count непрочитанных ответа',
+      one: '$count непрочитанный ответ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ответа',
+      many: '$count ответов',
+      few: '$count ответа',
+      one: '$count ответ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count обсуждения',
+      many: '$count обсуждений',
+      few: '$count обсуждения',
+      one: '$count обсуждение',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return 'Поиск: $name';
+  }
+
+  @override
+  String get community => 'Сообщество';
+
+  @override
+  String get allTags => 'Все теги';
+
+  @override
+  String get otherTags => 'Другие теги';
+
+  @override
+  String get myPosts => 'Мои сообщения';
+
+  @override
+  String get directMessages => 'Личные сообщения';
+
+  @override
+  String get drawerIntroduction =>
+      'Здесь теги форума и ваши списки. Нажмите ☰, чтобы открыть это снова.';
+
+  @override
+  String get goToYourProfile => 'Перейти в профиль';
+
+  @override
+  String get notLoggedIn => 'Вход не выполнен';
+
+  @override
+  String get logInToTakePart =>
+      'Войдите, чтобы писать, отвечать и получать уведомления.';
+
+  @override
+  String get logInToSeeMessages => 'Войдите, чтобы увидеть свои сообщения.';
+
+  @override
+  String get noFollowedDiscussions =>
+      'Вы пока не следите ни за одним обсуждением.';
+
+  @override
+  String showChildTags(String name) {
+    return 'Показать теги в «$name»';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return 'Скрыть теги в «$name»';
+  }
+
+  @override
+  String get holdForReactions => 'Удерживайте для реакций';
+
+  @override
+  String removeYourReaction(String name) {
+    return 'Ваша реакция: $name. Нажмите, чтобы убрать.';
+  }
+
+  @override
+  String get reactionTapAgainToRemove =>
+      'Выберите свою реакцию ещё раз, чтобы убрать её.';
+
+  @override
+  String get likesAndReactions => 'Лайки и реакции';
+
+  @override
+  String get you => 'Вы';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'и ещё $count человека',
+      many: 'и ещё $count человек',
+      few: 'и ещё $count человека',
+      one: 'и ещё $count человек',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count лайка и реакции. Показать, от кого',
+      many: '$count лайков и реакций. Показать, от кого',
+      few: '$count лайка и реакции. Показать, от кого',
+      one: '$count лайк или реакция. Показать, от кого',
+    );
+    return '$_temp0';
+  }
 }

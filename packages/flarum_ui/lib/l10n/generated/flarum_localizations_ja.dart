@@ -1579,4 +1579,119 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get deleteDraft => '下書きを削除';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '未読の返信 $count 件',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '返信 $count 件',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 件のディスカッション',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return '$nameを検索';
+  }
+
+  @override
+  String get community => 'コミュニティ';
+
+  @override
+  String get allTags => 'すべてのタグ';
+
+  @override
+  String get otherTags => 'その他のタグ';
+
+  @override
+  String get myPosts => '自分の投稿';
+
+  @override
+  String get directMessages => 'ダイレクトメッセージ';
+
+  @override
+  String get drawerIntroduction => 'フォーラムのタグとあなたのリストはここにあります。☰ をタップするとまた開けます。';
+
+  @override
+  String get goToYourProfile => 'プロフィールへ';
+
+  @override
+  String get notLoggedIn => 'ログインしていません';
+
+  @override
+  String get logInToTakePart => 'ログインすると投稿・返信・通知の受け取りができます。';
+
+  @override
+  String get logInToSeeMessages => 'メッセージを見るにはログインしてください。';
+
+  @override
+  String get noFollowedDiscussions => 'まだフォロー中のディスカッションはありません。';
+
+  @override
+  String showChildTags(String name) {
+    return '$nameのタグを表示';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return '$nameのタグを隠す';
+  }
+
+  @override
+  String get holdForReactions => '長押しでリアクション';
+
+  @override
+  String removeYourReaction(String name) {
+    return 'あなたのリアクション: $name。タップで取り消します。';
+  }
+
+  @override
+  String get reactionTapAgainToRemove => '同じリアクションをもう一度選ぶと取り消せます。';
+
+  @override
+  String get likesAndReactions => 'いいねとリアクション';
+
+  @override
+  String get you => 'あなた';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ほか $count 人',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'いいねとリアクション $count 件。誰か見る',
+    );
+    return '$_temp0';
+  }
 }

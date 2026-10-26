@@ -82,8 +82,9 @@ void main() {
           theme: AppTheme.lightTheme,
           home: Scaffold(body: Column(children: [DiscussionTile(discussion: answered), DiscussionTile(discussion: plain)])),
         ));
-        expect(find.byIcon(Icons.check), findsOneWidget, reason: 'only the answered one, a green check as on the web');
-        expect(tester.widget<Icon>(find.byIcon(Icons.check)).semanticLabel, 'Answered');
+        expect(find.byIcon(Icons.check_circle), findsOneWidget, reason: 'only the answered one, at the end of its row');
+        expect(tester.widget<Icon>(find.byIcon(Icons.check_circle)).semanticLabel, 'Answered');
+        expect(find.text('Answered'), findsOneWidget, reason: 'its state in a word, as the Discourse app says Solved');
       });
 
       testWidgets('the home page lists discussions and opens one where the reader left off', (tester) async {
@@ -115,10 +116,12 @@ void main() {
         addTearDown(tester.view.reset);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
-        expect(find.text('All Discussions'), findsOneWidget, reason: "the view menu's face");
-        expect(find.byIcon(Icons.map_outlined), findsOneWidget, reason: 'the byobu discussion is marked private, with byobu\'s map');
+        expect(find.widgetWithText(FilterChip, 'Latest'), findsOneWidget, reason: 'the chips under the header');
+        expect(find.widgetWithText(FilterChip, 'Tags'), findsOneWidget);
         await _pumpUntil(tester, find.text('With carol'));
-        expect(find.byIcon(Icons.push_pin), findsWidgets, reason: "the rules are sticky: the web's red pin");
+        expect(find.byIcon(Icons.lock_outline), findsWidgets, reason: 'the byobu discussion says who it is with, locked');
+        expect(find.byIcon(Icons.push_pin_outlined), findsWidgets, reason: 'the rules are sticky');
+        expect(find.text('Sticky'), findsWidgets);
 
         await tester.tap(find.text('Long thread for paging tests'));
         await _pumpUntil(tester, find.text('Post 21 of 60.'));
@@ -129,34 +132,32 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
-      testWidgets('the view menu switches the list, as the web\'s sidebar; the sort menu orders it', (tester) async {
+      testWidgets("the chips order the list, as the web's sort menu, and Tags shows the forum's tags", (tester) async {
         fixtures.forum();
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: HomePage(site: _site())));
         await _pumpUntil(tester, find.byType(DiscussionTile));
         await tester.pump(const Duration(milliseconds: 300));
 
-        await tester.tap(find.byTooltip('Toggle navigation dropdown menu'));
-        await tester.pumpAndSettle();
-        for (final view in ['All Discussions', 'Following', 'Bookmarks', 'Private Discussions', 'Support']) {
-          expect(find.text(view), findsWidgets, reason: view);
+        for (final chip in ['Latest', 'Tags', 'Top', 'Newest', 'Oldest']) {
+          expect(find.widgetWithText(FilterChip, chip), findsOneWidget, reason: chip);
         }
-        expect(find.text('Messages'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
-            reason: 'flarum/messages is 2.0 only');
-        await tester.tap(find.text('Following').last);
-        await tester.pumpAndSettle();
-        await _pumpUntil(tester, find.textContaining('Feature request: dark mode'));
-        expect(find.byType(DiscussionTile), findsOneWidget, reason: 'the one alice follows');
-        expect(fixtures.requests.last.queryParameters['filter[subscription]'] ?? fixtures.requests.last.queryParameters['filter[q]'],
-            anyOf('following', contains('is:following')));
-
-        await tester.tap(find.byTooltip('Change discussion list sorting'));
-        await tester.pumpAndSettle();
-        expect(find.text('Oldest'), findsOneWidget);
-        expect(find.text('Title (A–Z)'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
+        expect(find.widgetWithText(FilterChip, 'Title (A–Z)'), version == FlarumVersion.v2 ? findsOneWidget : findsNothing,
             reason: '1.x refuses sorting by title');
-        await tester.tap(find.text('Oldest'));
+        await tester.ensureVisible(find.widgetWithText(FilterChip, 'Oldest'));
         await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(FilterChip, 'Oldest'));
+        for (var i = 0; i < 10; i++) {
+          await tester.pump(const Duration(milliseconds: 50));
+        }
         expect(fixtures.requests.last.queryParameters['sort'], 'createdAt');
+
+        await tester.ensureVisible(find.widgetWithText(FilterChip, 'Tags'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(FilterChip, 'Tags'));
+        await tester.pump();
+        await _pumpUntil(tester, find.byType(TagCard));
+        expect(find.widgetWithText(TagCard, 'Support'), findsOneWidget);
+        expect(find.widgetWithText(ChildTagChip, 'iOS'), findsOneWidget, reason: "a child tag is a chip on its parent's card");
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
       });

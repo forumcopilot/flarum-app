@@ -1580,4 +1580,120 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get deleteDraft => '임시글 삭제';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '읽지 않은 답글 $count개',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '답글 $count개',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '토론 $count개',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return '$name 검색';
+  }
+
+  @override
+  String get community => '커뮤니티';
+
+  @override
+  String get allTags => '모든 태그';
+
+  @override
+  String get otherTags => '기타 태그';
+
+  @override
+  String get myPosts => '내 게시물';
+
+  @override
+  String get directMessages => '다이렉트 메시지';
+
+  @override
+  String get drawerIntroduction =>
+      '포럼의 태그와 내 목록이 여기에 있습니다. ☰을 탭하면 다시 열 수 있습니다.';
+
+  @override
+  String get goToYourProfile => '내 프로필로 이동';
+
+  @override
+  String get notLoggedIn => '로그인하지 않음';
+
+  @override
+  String get logInToTakePart => '로그인하면 글을 쓰고, 답글을 달고, 알림을 받을 수 있습니다.';
+
+  @override
+  String get logInToSeeMessages => '메시지를 보려면 로그인하세요.';
+
+  @override
+  String get noFollowedDiscussions => '아직 팔로우 중인 토론이 없습니다.';
+
+  @override
+  String showChildTags(String name) {
+    return '$name의 태그 보기';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return '$name의 태그 숨기기';
+  }
+
+  @override
+  String get holdForReactions => '길게 눌러 반응 남기기';
+
+  @override
+  String removeYourReaction(String name) {
+    return '내 반응: $name. 탭하면 취소됩니다.';
+  }
+
+  @override
+  String get reactionTapAgainToRemove => '같은 반응을 다시 선택하면 취소됩니다.';
+
+  @override
+  String get likesAndReactions => '좋아요와 반응';
+
+  @override
+  String get you => '나';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '외 $count명',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '좋아요와 반응 $count개. 누가 했는지 보기',
+    );
+    return '$_temp0';
+  }
 }

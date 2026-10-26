@@ -1,25 +1,26 @@
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
-import 'package:forum_kit/theme/design_tokens.dart';
-import 'package:forum_kit/views/widgets/brand_image.dart';
+import 'package:forum_kit/views/widgets/filter_chip_bar.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_drawer.dart';
 import '../compose/start_discussion_button.dart';
-import '../messages/dialogs_page.dart';
 import 'discussion_list_model.dart';
 import '../search/search_page.dart';
-import '../tags/tag_label.dart';
 import '../tags/tags_page.dart';
 import 'discussion_list_view.dart';
+import 'forum_masthead.dart';
 import 'welcome_hero.dart';
 
-/// The forum's discussions, as the web's index page lists them: a view menu (All Discussions,
-/// and the reader's Following, Bookmarks and Private Discussions; Messages and each tag open their
-/// own pages) and a sort menu (Latest, Top, Newest, Oldest, and by title on 2.0). A discussion
-/// opens at the first post the reader hasn't read.
+/// The forum's discussions, as the Discourse app's Home: the forum's header with a search field,
+/// then chips for the web's sorts (Latest, Top, Newest, Oldest, and by title on 2.0) and the
+/// forum's Tags, pinned under the header's bar as it collapses. The reader's own lists (Following,
+/// Bookmarks) and each tag are in the forum's drawer. A discussion opens at the first post the
+/// reader hasn't read.
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.site, this.title});
 
@@ -32,26 +33,54 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+/// What a Home chip shows: the discussions in a sort, or the forum's tags.
+sealed class _HomeView {
+  const _HomeView();
+}
+
+class _Sorted extends _HomeView {
+  const _Sorted(this.sort);
+
+  final DiscussionSort sort;
+
+  @override
+  bool operator ==(Object other) => other is _Sorted && other.sort == sort;
+
+  @override
+  int get hashCode => sort.hashCode;
+}
+
+class _Tags extends _HomeView {
+  const _Tags();
+
+  @override
+  bool operator ==(Object other) => other is _Tags;
+
+  @override
+  int get hashCode => 0;
+}
+
 class _HomePageState extends State<HomePage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
-  final Map<(DiscussionView, DiscussionSort), DiscussionListModel> _lists = {};
-  DiscussionView _view = DiscussionView.all;
-  DiscussionSort _sort = DiscussionSort.latest;
+  final Map<DiscussionSort, DiscussionListModel> _lists = {};
+  _HomeView _view = const _Sorted(DiscussionSort.latest);
 
-  /// The forum's primary tags, at the end of the view menu as on the web.
-  List<FlarumTag> _tags = const [];
+  /// Folded to its icon while the reader scrolls on through the list.
+  bool _fabExtended = true;
 
-  List<DiscussionView> get _views => [
-        DiscussionView.all,
-        if (_forum.isSignedIn) DiscussionView.following,
-        if (_forum.isSignedIn && _forum.extensions.bookmarks) DiscussionView.bookmarks,
-        if (_forum.isSignedIn && _forum.extensions.byobu) DiscussionView.private,
-      ];
+  /// The chips, in order: the two the reader wants most (what's new, where things are), then the
+  /// other orders.
+  List<_HomeView> get _views {
+    final sorts = DiscussionSort.offeredOn(_forum.info?.version);
+    return [
+      const _Sorted(DiscussionSort.latest),
+      if (_forum.extensions.tags) const _Tags(),
+      for (final sort in sorts.skip(1)) _Sorted(sort),
+    ];
+  }
 
-  List<DiscussionSort> get _sorts => DiscussionSort.offeredOn(_forum.info?.version);
-
-  DiscussionListModel get _list => _lists.putIfAbsent((_view, _sort), () {
-        final model = DiscussionListModel(_forum, view: _view, sort: _sort)..addListener(_changed);
+  DiscussionListModel _list(DiscussionSort sort) => _lists.putIfAbsent(sort, () {
+        final model = DiscussionListModel(_forum, sort: sort)..addListener(_changed);
         model.refresh();
         return model;
       });
@@ -60,12 +89,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _forum.current().then((_) => _changed(), onError: (_) {});
-    _forum.tags().then((tags) {
-      int byPosition(FlarumTag a, FlarumTag b) => (a.position ?? 1 << 30).compareTo(b.position ?? 1 << 30);
-      if (mounted) setState(() => _tags = tags.where((t) => t.isPrimary && !t.isChild).toList()..sort(byPosition));
-    }, onError: (_) {
-      // No flarum/tags, or not now: the menu goes without them.
-    });
   }
 
   @override
@@ -110,182 +133,72 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  /// The forum's logo where it has one (its dark-mode logo in dark mode, on 2.0), as the web's
-  /// header shows it, named for screen readers; else its title.
-  Widget _title(BuildContext context) {
-    final title = _forum.info?.title ?? widget.title ?? '';
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final logo = (dark ? _forum.info?.logoDarkUrl : null) ?? _forum.info?.logoUrl;
-    if (logo == null) return Text(title);
-    return Semantics(
-      label: title,
-      header: true,
-      excludeSemantics: true,
-      child: BrandImage(
-        logo,
-        height: 32,
-        fallback: (_) => Text(title),
-        background: Theme.of(context).appBarTheme.backgroundColor ?? Theme.of(context).colorScheme.surface,
-      ),
-    );
-  }
-
-  String _viewLabel(DiscussionView view, FlarumLocalizations l10n) => switch (view) {
-        DiscussionView.all => l10n.allDiscussions,
-        DiscussionView.following => l10n.following,
-        DiscussionView.bookmarks => l10n.bookmarks,
-        DiscussionView.private => l10n.privateDiscussions,
+  String _viewLabel(_HomeView view, FlarumLocalizations l10n) => switch (view) {
+        _Sorted(:final sort) => discussionSortLabel(sort, l10n),
+        _Tags() => l10n.tags,
       };
-
-  /// The web's icons for its sidebar links.
-  static IconData _viewIcon(DiscussionView view) => switch (view) {
-        DiscussionView.all => Icons.forum_outlined,
-        DiscussionView.following => Icons.star_outline,
-        DiscussionView.bookmarks => Icons.bookmark_outline,
-        DiscussionView.private => Icons.map_outlined,
-      };
-
-  String _sortLabel(DiscussionSort sort, FlarumLocalizations l10n) => switch (sort) {
-        DiscussionSort.latest => l10n.latest,
-        DiscussionSort.top => l10n.filterTop,
-        DiscussionSort.newest => l10n.viewNewest,
-        DiscussionSort.oldest => l10n.sortOldest,
-        DiscussionSort.titleAz => l10n.sortTitleAz,
-        DiscussionSort.titleZa => l10n.sortTitleZa,
-      };
-
-  /// What the view menu picked: a list of Home's, or a page of its own.
-  void _picked(Object choice) {
-    switch (choice) {
-      case DiscussionView view:
-        setState(() => _view = view);
-      case FlarumTag tag:
-        Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => TagPage(site: widget.site, tag: tag)));
-      case _Messages():
-        DialogsPage.open(context, widget.site);
-    }
-  }
-
-  Widget _viewMenu(BuildContext context, FlarumLocalizations l10n, List<DiscussionView> views) {
-    final theme = Theme.of(context);
-    PopupMenuItem<Object> entry(Object value, IconData icon, String label, {Color? color, bool selected = false}) =>
-        PopupMenuItem(
-          value: value,
-          child: Row(
-            children: [
-              Icon(icon, size: 20, color: color ?? (selected ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant)),
-              const SizedBox(width: DesignTokens.spacingM),
-              Flexible(
-                child: Text(label, style: selected ? TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600) : null),
-              ),
-            ],
-          ),
-        );
-    return PopupMenuButton<Object>(
-      tooltip: l10n.toggleNavigation,
-      onSelected: _picked,
-      itemBuilder: (_) => [
-        entry(DiscussionView.all, _viewIcon(DiscussionView.all), l10n.allDiscussions, selected: _view == DiscussionView.all),
-        if (_forum.isSignedIn && _forum.extensions.messages) entry(const _Messages(), Icons.mail_outline, l10n.messages),
-        for (final view in views.skip(1)) entry(view, _viewIcon(view), _viewLabel(view, l10n), selected: _view == view),
-        if (_tags.isNotEmpty) const PopupMenuDivider(),
-        for (final tag in _tags)
-          entry(tag, flarumTagIcon(tag.icon) ?? Icons.label, tag.name,
-              color: flarumTagColor(tag) ?? theme.colorScheme.onSurfaceVariant),
-      ],
-      child: _MenuLabel(icon: _viewIcon(_view), label: _viewLabel(_view, l10n)),
-    );
-  }
-
-  Widget _sortMenu(FlarumLocalizations l10n) => PopupMenuButton<DiscussionSort>(
-        tooltip: l10n.changeSorting,
-        initialValue: _sort,
-        onSelected: (sort) => setState(() => _sort = sort),
-        itemBuilder: (_) => [
-          for (final sort in _sorts) CheckedPopupMenuItem(value: sort, checked: sort == _sort, child: Text(_sortLabel(sort, l10n))),
-        ],
-        child: _MenuLabel(label: _sortLabel(_sort, l10n)),
-      );
 
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
+    final info = _forum.info;
     final views = _views;
-    // A view the reader can't have now (logged out): back to All Discussions.
-    if (!views.contains(_view)) _view = DiscussionView.all;
-    if (!_sorts.contains(_sort)) _sort = DiscussionSort.latest;
-    final list = _list;
-    return Scaffold(
-      appBar: AppBar(
-        title: _title(context),
+    // A view the forum can't have (by title on 1.x): back to Latest.
+    if (!views.contains(_view)) _view = const _Sorted(DiscussionSort.latest);
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final header = [
+      ForumMasthead(
+        name: info?.title ?? widget.title ?? '',
+        description: info?.description,
+        logoUrl: (dark ? info?.logoDarkUrl : null) ?? info?.logoUrl,
+        iconUrl: info?.faviconUrl,
+        leading: forumDrawerButton(context),
+        onSearch: () => SearchPage.open(context, widget.site),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: l10n.search,
-            onPressed: () => SearchPage.open(context, widget.site),
-          ),
-          if (_forum.isSignedIn && _forum.info?.actor != null)
+          if (_forum.isSignedIn && info?.actor != null)
             IconButton(icon: const Icon(Icons.done_all), tooltip: l10n.markAllRead, onPressed: _markAllRead),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS),
-            child: Row(
-              children: [
-                Flexible(child: _viewMenu(context, l10n, views)),
-                const SizedBox(width: DesignTokens.spacingS),
-                _sortMenu(l10n),
-              ],
-            ),
+      ),
+      PinnedHeaderSliver(
+        child: ColoredBox(
+          color: Theme.of(context).colorScheme.surface,
+          child: FilterChipBar(
+            options: [for (final view in views) FilterChipOption(label: _viewLabel(view, l10n))],
+            selectedIndex: views.indexOf(_view),
+            onSelected: (i) => setState(() => _view = views[i]),
           ),
         ),
       ),
-      body: DiscussionListView(
-        site: widget.site,
-        list: list,
-        emptyMessage: _view == DiscussionView.bookmarks ? l10n.noBookmarks : null,
-        excerpts: true,
-        header: _view == DiscussionView.all
-            ? WelcomeHero(site: widget.site, title: _forum.info?.welcomeTitle, message: _forum.info?.welcomeMessage)
-            : null,
+    ];
+    final edge = ForumMasthead.collapsedHeight(context);
+    final view = _view;
+    final DiscussionListModel? list = view is _Sorted ? _list(view.sort) : null;
+    return Scaffold(
+      body: NotificationListener<UserScrollNotification>(
+        onNotification: (n) {
+          if (n.depth != 0) return false;
+          final extended = switch (n.direction) {
+            ScrollDirection.reverse => false,
+            ScrollDirection.forward => true,
+            ScrollDirection.idle => _fabExtended,
+          };
+          if (extended != _fabExtended) setState(() => _fabExtended = extended);
+          return false;
+        },
+        child: list == null
+            ? TagsView(key: const ValueKey('tags'), site: widget.site, headerSlivers: header, refreshEdgeOffset: edge)
+            : DiscussionListView(
+                key: ValueKey(view),
+                site: widget.site,
+                list: list,
+                excerpts: true,
+                headerSlivers: header,
+                refreshEdgeOffset: edge,
+                header: WelcomeHero(site: widget.site, title: info?.welcomeTitle, message: info?.welcomeMessage),
+              ),
       ),
-      floatingActionButton: startDiscussionButton(context, widget.site, onStarted: list.refresh),
-    );
-  }
-}
-
-/// The view menu's Messages: the conversations page (flarum/messages, 2.0).
-class _Messages {
-  const _Messages();
-}
-
-/// A menu's face, as the web's dropdown buttons show it: what's chosen, and the arrow.
-class _MenuLabel extends StatelessWidget {
-  const _MenuLabel({this.icon, required this.label});
-
-  final IconData? icon;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final color = theme.colorScheme.onSurface;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: DesignTokens.spacingM),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[Icon(icon, size: 20, color: theme.colorScheme.primary), const SizedBox(width: DesignTokens.spacingS)],
-          Flexible(
-            child: Text(label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.titleSmall?.copyWith(color: color, fontWeight: FontWeight.w600)),
-          ),
-          Icon(Icons.arrow_drop_down, color: theme.colorScheme.onSurfaceVariant),
-        ],
-      ),
+      floatingActionButton:
+          startDiscussionButton(context, widget.site, onStarted: list?.refresh, extended: _fabExtended),
     );
   }
 }

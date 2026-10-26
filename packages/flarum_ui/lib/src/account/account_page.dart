@@ -5,6 +5,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_drawer.dart';
 import 'forum_web_page.dart';
 import '../safety/flagged_posts_page.dart';
 import '../render/links.dart';
@@ -14,8 +15,6 @@ import '../app/debug_forums.dart';
 import '../bookmarks/bookmarks_page.dart';
 import '../compose/composers.dart' show canSaveDrafts;
 import '../drafts/drafts_page.dart';
-import '../messages/dialogs_page.dart';
-import '../private/private_discussions_page.dart';
 import '../safety/ignored_users_page.dart';
 import 'log_in_first.dart';
 import '../widgets/flarum_avatar.dart';
@@ -112,7 +111,7 @@ class _AccountPageState extends State<AccountPage> {
     final reader = _forum.isSignedIn ? _forum.info?.actor : null;
     final readerUnknown = _forum.isSignedIn && reader == null && (_readingReader || _readerError != null);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.account)),
+      appBar: AppBar(leading: forumDrawerButton(context), title: Text(l10n.profile)),
       body: ListView(
         padding: const EdgeInsets.all(DesignTokens.spacingXL),
         children: [
@@ -170,23 +169,6 @@ class _AccountPageState extends State<AccountPage> {
                 onTap: () => BookmarksPage.open(context, widget.site),
               ),
             ],
-            if (_forum.extensions.messages)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.chat_bubble_outline),
-                title: Text(l10n.messages),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if ((_forum.info?.unreadDialogCount ?? 0) > 0) Badge(label: Text('${_forum.info!.unreadDialogCount}')),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
-                onTap: () async {
-                  await DialogsPage.open(context, widget.site);
-                  if (mounted) setState(() {});
-                },
-              ),
             if (canSaveDrafts(_forum))
               ListTile(
                 contentPadding: EdgeInsets.zero,
@@ -226,14 +208,6 @@ class _AccountPageState extends State<AccountPage> {
                   await FlaggedPostsPage.open(context, widget.site);
                   if (mounted) setState(() {});
                 },
-              ),
-            if (_forum.extensions.byobu)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.map_outlined),
-                title: Text(l10n.privateDiscussions),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => PrivateDiscussionsPage.open(context, widget.site),
               ),
             ListTile(
               contentPadding: EdgeInsets.zero,

@@ -1575,4 +1575,119 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get deleteDraft => '删除草稿';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 条未读回复',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 条回复',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个讨论',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return '搜索 $name';
+  }
+
+  @override
+  String get community => '社区';
+
+  @override
+  String get allTags => '全部标签';
+
+  @override
+  String get otherTags => '其他标签';
+
+  @override
+  String get myPosts => '我的帖子';
+
+  @override
+  String get directMessages => '私信';
+
+  @override
+  String get drawerIntroduction => '论坛的标签和你的列表都在这里。点按 ☰ 可再次打开。';
+
+  @override
+  String get goToYourProfile => '前往你的资料';
+
+  @override
+  String get notLoggedIn => '未登录';
+
+  @override
+  String get logInToTakePart => '登录后即可发帖、回复并接收通知。';
+
+  @override
+  String get logInToSeeMessages => '登录后查看你的私信。';
+
+  @override
+  String get noFollowedDiscussions => '你还没有关注任何讨论。';
+
+  @override
+  String showChildTags(String name) {
+    return '显示 $name 下的标签';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return '隐藏 $name 下的标签';
+  }
+
+  @override
+  String get holdForReactions => '长按以添加回应';
+
+  @override
+  String removeYourReaction(String name) {
+    return '你的回应：$name。点按可撤回。';
+  }
+
+  @override
+  String get reactionTapAgainToRemove => '再次选择你的回应即可撤回。';
+
+  @override
+  String get likesAndReactions => '赞和回应';
+
+  @override
+  String get you => '你';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '以及另外 $count 人',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个赞和回应。查看是谁',
+    );
+    return '$_temp0';
+  }
 }

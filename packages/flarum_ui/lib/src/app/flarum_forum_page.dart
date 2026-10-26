@@ -15,7 +15,7 @@ import 'forum_theme.dart';
 /// ([AppShell]) once the forum has answered, in the forum's colours.
 ///
 /// Pushed over the host's own screens, so Back and the edge swipe return
-/// there, and each tab's top bar has a back arrow to them. The forum's
+/// there; each tab's top bar has the forum's ☰, as the Discourse app's do. The forum's
 /// colours are on the app while it is open ([FlarumForumTheme]); this page
 /// wears them from its first frame, before that change lands.
 class FlarumForumPage extends StatefulWidget {

@@ -11,7 +11,8 @@ import '../account/log_in_first.dart';
 /// The Start a discussion button for a list of discussions (a tag's, with [tag]), when the
 /// reader may start one there; null when they may not. It opens the composer, then the new
 /// discussion; [onStarted] refreshes the list behind it.
-Widget? startDiscussionButton(BuildContext context, SiteContext site, {FlarumTag? tag, VoidCallback? onStarted}) {
+Widget? startDiscussionButton(BuildContext context, SiteContext site,
+    {FlarumTag? tag, VoidCallback? onStarted, bool extended = true}) {
   final forum = FlarumForum.of(site);
   final guest = !forum.isSignedIn;
   // A guest is offered it too, as the web offers it, and asked to Log In first.
@@ -36,6 +37,10 @@ Widget? startDiscussionButton(BuildContext context, SiteContext site, {FlarumTag
       }
       ThreadPage.open(context, site, discussion.id, title: discussion.title);
     },
+    // Folded to its icon while the reader scrolls on, as Material 3's extended button does, so it
+    // doesn't sit over the rows' counts.
+    isExtended: extended,
+    tooltip: extended ? null : l10n.startDiscussion,
     icon: const Icon(Icons.edit_outlined),
     label: Text(l10n.startDiscussion),
   );

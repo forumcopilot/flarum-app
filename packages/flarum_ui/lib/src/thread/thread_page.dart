@@ -28,7 +28,7 @@ import 'post_tile.dart';
 import 'thread_model.dart';
 import 'time_gap.dart';
 import '../navigation/web_links.dart';
-import '../home/discussion_tile.dart' show discussionBadges;
+import '../home/discussion_tile.dart' show discussionStatuses;
 
 /// A discussion's posts, opened at its start or at post [near].
 ///
@@ -724,7 +724,13 @@ class _ThreadPageState extends State<ThreadPage> {
   int _rowOf(int index) => index == 0 && _header ? 0 : _leading + index;
 
   Widget _row(BuildContext context, int row, FlarumLocalizations l10n) {
-    if (_header && row == 0) return _DiscussionHero(discussion: _model.discussion!, recipients: _recipients);
+    if (_header && row == 0) {
+      return _DiscussionHero(
+        discussion: _model.discussion!,
+        recipients: _recipients,
+        onTagTap: (tag) => TagPage.open(context, widget.site, tag),
+      );
+    }
     if (_model.hasPrevious && row == 0) {
       return Padding(
         padding: const EdgeInsets.all(DesignTokens.spacingS),
@@ -844,52 +850,70 @@ class _FlashState extends State<_Flash> with SingleTickerProviderStateMixin {
   }
 }
 
-/// The web's discussion hero: the discussion's badges, tags and title on its first tag's colour
-/// (a plain band without one), and who a private one is with.
+/// The discussion's head, as the Discourse app heads a topic: its title, who a private one is
+/// with, then where it lives (its tags, which open their pages) and its state ("Answered",
+/// "Locked"…), on the page itself. It used to be the web's hero, a band of the first tag's colour
+/// with the title centred on it, which most of Flarum's palette left hard to read.
 class _DiscussionHero extends StatelessWidget {
-  const _DiscussionHero({required this.discussion, this.recipients});
+  const _DiscussionHero({required this.discussion, this.recipients, this.onTagTap});
 
   final FlarumDiscussion discussion;
   final List<FlarumUser>? recipients;
+  final ValueChanged<FlarumTag>? onTagTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = flarumL10n(context);
     final tags = tagsInWebOrder(discussion.tags);
-    final color = tags.isEmpty ? null : flarumTagColor(tags.first);
-    final background = color ?? theme.colorScheme.surfaceContainer;
-    final foreground = color == null
-        ? theme.colorScheme.onSurface
-        : (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87);
-    final badges = discussionBadges(context, discussion);
+    final statuses = discussionStatuses(context, discussion);
+    final tap = onTagTap;
     return Container(
-      color: background,
+      color: theme.colorScheme.surface,
       padding: const EdgeInsets.fromLTRB(
-          DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingXL),
+          DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingL, DesignTokens.spacingS),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (badges.isNotEmpty || tags.isNotEmpty)
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: DesignTokens.spacingXS,
-              runSpacing: DesignTokens.spacingXS,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                ...badges,
-                for (final tag in tags) TagLabel(tag: tag),
-              ],
-            ),
-          const SizedBox(height: DesignTokens.spacingS),
           Semantics(
             header: true,
             child: Text(discussion.title,
-                textAlign: TextAlign.center, style: theme.textTheme.titleLarge?.copyWith(color: foreground)),
+                style: theme.textTheme.titleLarge?.copyWith(fontWeight: DesignTokens.fontWeightMedium)),
           ),
           if (recipients case final people? when people.isNotEmpty) ...[
             const SizedBox(height: DesignTokens.spacingXS),
             Text(l10n.privateWith(people.map((user) => user.displayName).join(', ')),
-                textAlign: TextAlign.center, style: theme.textTheme.bodyMedium?.copyWith(color: foreground)),
+                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+          ],
+          if (tags.isNotEmpty || statuses.isNotEmpty) ...[
+            const SizedBox(height: DesignTokens.spacingXS),
+            Wrap(
+              spacing: DesignTokens.spacingM,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                for (final tag in tags)
+                  TagLabel(
+                    tag: tag,
+                    parent: parentAmong(tag, discussion.tags),
+                    large: true,
+                    onTap: tap == null ? null : () => tap(tag),
+                  ),
+                for (final status in statuses)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(status.icon, size: DesignTokens.iconSizeS, color: status.color, semanticLabel: status.label),
+                        const SizedBox(width: DesignTokens.spacingXS),
+                        ExcludeSemantics(
+                          child: Text(status.label, style: theme.textTheme.labelLarge?.copyWith(color: status.color)),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ],
         ],
       ),

@@ -204,9 +204,9 @@ void main() {
         await tester.pump(const Duration(milliseconds: 500));
         expect(find.descendant(of: find.byKey(const ValueKey('thread-bar')), matching: find.text('Log In to Reply')),
             findsOneWidget);
-        expect(find.descendant(of: find.byType(PostTile).first, matching: find.text('Reply')), findsOneWidget,
+        expect(find.descendant(of: find.byType(PostTile).first, matching: find.byIcon(Icons.reply)), findsOneWidget,
             reason: 'as the web shows it to guests, opening Log In');
-        expect(find.text('Like'), findsNothing, reason: 'the web offers guests no Like');
+        expect(find.byIcon(Icons.thumb_up_outlined), findsNothing, reason: 'the web offers guests no Like');
         await _close(tester);
       });
 
@@ -231,11 +231,15 @@ void main() {
           theme: AppTheme.lightTheme,
           home: ThreadPage(site: _site(), discussionId: fixtures.discussionId('welcome')),
         ));
-        await _pumpUntil(tester, find.text('bob and alice replied to this.'));
+        // Three replies, from bob and alice (twice).
+        await _pumpUntil(tester, find.text('3 replies'));
+        expect(find.byWidgetPredicate((w) => w is Semantics && w.properties.label == 'bob and alice replied to this.'),
+            findsOneWidget,
+            reason: 'who, for a screen reader');
         // Clear of the bar at the bottom of the screen.
         await tester.drag(find.byType(PostTile).first, const Offset(0, -150));
         await tester.pump(const Duration(milliseconds: 300));
-        await tester.tap(find.text('bob and alice replied to this.'));
+        await tester.tap(find.text('3 replies'));
         await _pumpUntil(tester, find.text('Replies to this post'));
         expect(find.text('Post #3'), findsOneWidget, reason: "bob's reply, in this discussion");
         expect(find.text('Formatting samples'), findsWidgets, reason: "alice's, in another one");

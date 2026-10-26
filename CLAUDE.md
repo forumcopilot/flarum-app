@@ -138,9 +138,13 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Actions: like = PATCH the post's `isLiked`; a reaction = its `reaction` (an id; the same id again
   takes it back; 1.x fails with 500 on null); bookmark = `bookmarked` on the post or discussion;
   follow = the discussion's `subscription`. Best answer: 1.x the discussion's `bestAnswerPostId` (0
-  for none), 2.0 `relationships.bestAnswerPost` with empty attributes. Who liked a post comes only
-  with the `likes` include (up to 4, the reader first). 1.x lists bookmarked discussions only by the
-  `is:bookmarked` gambit.
+  for none), 2.0 `relationships.bestAnswerPost` with empty attributes. Who liked a post comes with
+  the `likes` include (up to 4, the reader first); everyone who did is `GET /api/users?filter[liked]=
+  {postId}` on both versions (the web's "Liked by" dialog), which needs `searchUsers` (guests get 403).
+  Who reacted (fof/reactions): 1.x `GET /api/posts/{id}/reactions`, 2.0 `GET /api/post_reactions?
+  filter[post]={id}` (paged, include `user,reaction`), both behind `canSeeReactions`; neither is in
+  flarum_core yet (no fixtures recorded; checked against the extensions' source on the test forums,
+  26 Oct 2026). 1.x lists bookmarked discussions only by the `is:bookmarked` gambit.
 - Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
   the username by default, the id on forums with the ID slug driver, where a username 404s. Their
   posts and discussions: `filter[author]` (and 1.x's `author:` gambit) takes the username on 1.x

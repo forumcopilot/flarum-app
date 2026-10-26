@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
-import 'package:forum_kit/utils/emoji_shortcodes.dart';
 import 'package:forum_kit/utils/time_utils.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -14,6 +13,7 @@ import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
 import '../widgets/flarum_avatar.dart';
 import '../navigation/web_links.dart';
+import 'post_actions_row.dart';
 
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
@@ -113,7 +113,6 @@ class PostTile extends StatelessWidget {
       link != null ||
       onQuote != null ||
       onEdit != null ||
-      onBookmark != null ||
       onChooseBestAnswer != null ||
       onFlag != null ||
       onIgnore != null ||
@@ -208,20 +207,19 @@ class PostTile extends StatelessWidget {
                       label: Text(l10n.goToBestAnswer),
                     ),
             ),
-          _footer(context),
-          if (likedBy(post, readerId, l10n) case final likes?)
-            Padding(
-              padding: const EdgeInsets.only(top: DesignTokens.spacingXS),
-              child: _Count(icon: Icons.thumb_up_outlined, label: likes),
-            ),
-          if (post.mentionedByCount > 0)
-            InkWell(
-              onTap: post.mentionedBy.isEmpty ? null : () => _showReplies(context),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: DesignTokens.spacingS),
-                child: _Count(icon: Icons.reply, label: repliedBy(post, l10n)),
-              ),
-            ),
+          PostActionsRow(
+            post: post,
+            readerId: readerId,
+            reactions: reactions,
+            onLike: onLike,
+            onReact: onReact,
+            onBookmark: onBookmark,
+            onReply: onReply,
+            onShowReplies: post.mentionedBy.isEmpty ? null : () => _showReplies(context),
+            repliesLabel: post.mentionedByCount > 0 ? repliedBy(post, l10n) : null,
+            likesLabel: likedBy(post, readerId, l10n),
+            onOpenUser: onAuthorTap,
+          ),
         ],
       ),
     );
@@ -244,13 +242,6 @@ extension on PostTile {
         ],
         if (onQuote case final quote?) PopupMenuItem(value: quote, child: _MenuRow(Icons.format_quote, kit.quote)),
         if (onEdit case final edit?) PopupMenuItem(value: edit, child: _MenuRow(Icons.edit_outlined, kit.edit)),
-        if (onBookmark case final bookmark?)
-          PopupMenuItem(
-            value: bookmark,
-            child: post.bookmarked
-                ? _MenuRow(Icons.bookmark_remove_outlined, l10n.removeBookmark)
-                : _MenuRow(Icons.bookmark_add_outlined, l10n.bookmark),
-          ),
         if (onChooseBestAnswer case final choose?)
           PopupMenuItem(
             value: choose,
@@ -282,105 +273,7 @@ extension on PostTile {
     );
   }
 
-  /// Like and Reply, the post's reactions and React, as the web shows them under a post. Who
-  /// likes it is the line below ([likedBy]).
-  Widget _footer(BuildContext context) {
-    final l10n = flarumL10n(context);
-    final liked = post.isLikedBy(readerId);
-    final shown = [for (final r in reactions) if ((post.reactionCounts[r.id] ?? 0) > 0) r];
-    final like = onLike != null;
-    final react = onReact != null && reactions.isNotEmpty;
-    if (!like && onReply == null && shown.isEmpty && !react) return const SizedBox.shrink();
-    final colorScheme = Theme.of(context).colorScheme;
-    final muted = colorScheme.onSurfaceVariant;
-    return Padding(
-      padding: const EdgeInsets.only(top: DesignTokens.spacingS),
-      child: Wrap(
-        spacing: DesignTokens.spacingS,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          if (like)
-            TextButton.icon(
-              onPressed: onLike,
-              // Flarum's thumbs-up: a heart reads as one of the forum's reactions.
-              icon: Icon(liked ? Icons.thumb_up : Icons.thumb_up_outlined,
-                  color: liked ? colorScheme.primary : muted, size: 20),
-              label: Text(liked ? l10n.unlike : l10n.like),
-              style: TextButton.styleFrom(foregroundColor: muted, visualDensity: VisualDensity.compact),
-            ),
-          if (onReply case final reply?)
-            TextButton.icon(
-              onPressed: reply,
-              icon: Icon(Icons.reply, color: muted, size: 20),
-              label: Text(kitL10n(context).reply),
-              style: TextButton.styleFrom(foregroundColor: muted, visualDensity: VisualDensity.compact),
-            ),
-          for (final reaction in shown)
-            ChoiceChip(
-              label: Text('${reactionGlyph(reaction)} ${post.reactionCounts[reaction.id]}'),
-              selected: post.userReactionId == reaction.id,
-              onSelected: onReact == null ? null : (_) => onReact!(reaction),
-              visualDensity: VisualDensity.compact,
-              showCheckmark: false,
-            ),
-          if (react)
-            IconButton(
-              icon: Icon(Icons.add_reaction_outlined, color: muted, size: 20),
-              tooltip: l10n.react,
-              visualDensity: VisualDensity.compact,
-              onPressed: () => _pickReaction(context),
-            ),
-        ],
-      ),
-    );
-  }
-
-  /// The forum's reactions in a sheet; the chosen one goes to [onReact].
-  void _pickReaction(BuildContext context) {
-    final l10n = flarumL10n(context);
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (sheet) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-              DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingL),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l10n.reactions, style: Theme.of(sheet).textTheme.titleMedium),
-              const SizedBox(height: DesignTokens.spacingM),
-              Wrap(
-                spacing: DesignTokens.spacingS,
-                runSpacing: DesignTokens.spacingS,
-                children: [
-                  for (final reaction in reactions)
-                    Tooltip(
-                      message: reaction.display ?? reaction.identifier,
-                      child: ChoiceChip(
-                        label: Text(reactionGlyph(reaction), style: const TextStyle(fontSize: 24)),
-                        selected: post.userReactionId == reaction.id,
-                        showCheckmark: false,
-                        onSelected: (_) {
-                          Navigator.of(sheet).pop();
-                          onReact!(reaction);
-                        },
-                      ),
-                    ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
-
-/// A reaction's glyph: its emoji, from the shortcode it's named by; else its name.
-String reactionGlyph(FlarumReaction reaction) =>
-    (reaction.type == 'emoji' ? discourseEmojiChar(reaction.identifier) : null) ?? reaction.display ?? reaction.identifier;
 
 /// A post by someone the reader ignores, folded to a line until the reader shows it, as the web
 /// folds it (fof/ignore-users).

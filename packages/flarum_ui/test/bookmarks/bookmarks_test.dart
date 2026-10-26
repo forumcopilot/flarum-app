@@ -75,7 +75,7 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
-      testWidgets('a tag the reader lurks in shows the menu\'s eye on the bar', (tester) async {
+      testWidgets('a tag the reader lurks in says so on its header\'s button', (tester) async {
         final forum = FixtureForum(version, root: _fixtures).forum();
         await tester.runAsync(forum.refresh);
         await tester.pumpWidget(_app(TagPage(
@@ -83,7 +83,9 @@ void main() {
           tag: const FlarumTag(id: '43', name: 'Cycling', slug: 'cycling', isPrimary: true, subscription: 'lurk'),
         )));
         await _settle(tester);
-        expect(find.descendant(of: find.byType(AppBar), matching: find.byIcon(Icons.forum)), findsOneWidget);
+        expect(find.widgetWithText(OutlinedButton, 'Lurking'), findsOneWidget, reason: 'the level, named, in the header');
+        expect(find.descendant(of: find.byType(OutlinedButton), matching: find.byIcon(Icons.forum)), findsOneWidget,
+            reason: "fof/follow-tags' comments icon");
         expect(find.byIcon(Icons.star), findsNothing);
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
@@ -99,12 +101,13 @@ void main() {
         await tester.pumpWidget(_app(TagPage(site: _site(), tag: tags.firstWhere((t) => t.id == cyclingId))));
         await _settle(tester);
 
-        await tester.tap(find.byTooltip('Follow'));
+        await tester.tap(find.widgetWithText(OutlinedButton, 'Follow'));
         await _settle(tester);
         expect(find.text('Lurking'), findsOneWidget);
         await tester.tap(find.text('Following'));
         await _settle(tester);
-        expect(find.byIcon(Icons.star), findsOneWidget);
+        expect(find.widgetWithText(OutlinedButton, 'Following'), findsOneWidget);
+        expect(find.descendant(of: find.byType(OutlinedButton), matching: find.byIcon(Icons.star)), findsOneWidget);
         final sent = fixtures.requests.lastWhere((r) => r.method != 'GET');
         expect(sent.path, contains('/tags/$cyclingId'));
         expect(find.byType(SnackBar), findsNothing, reason: 'the forum took it');

@@ -1667,4 +1667,128 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get deleteDraft => 'Supprimer le brouillon';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count réponses non lues',
+      one: '1 réponse non lue',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count réponses',
+      one: '1 réponse',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count discussions',
+      one: '1 discussion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return 'Rechercher dans $name';
+  }
+
+  @override
+  String get community => 'Communauté';
+
+  @override
+  String get allTags => 'Toutes les étiquettes';
+
+  @override
+  String get otherTags => 'Autres étiquettes';
+
+  @override
+  String get myPosts => 'Mes messages';
+
+  @override
+  String get directMessages => 'Messages directs';
+
+  @override
+  String get drawerIntroduction =>
+      'Les étiquettes du forum et vos listes sont ici. Touchez ☰ pour rouvrir ce menu.';
+
+  @override
+  String get goToYourProfile => 'Voir votre profil';
+
+  @override
+  String get notLoggedIn => 'Non connecté';
+
+  @override
+  String get logInToTakePart =>
+      'Connectez-vous pour publier, répondre et recevoir des notifications.';
+
+  @override
+  String get logInToSeeMessages => 'Connectez-vous pour voir vos messages.';
+
+  @override
+  String get noFollowedDiscussions =>
+      'Vous ne suivez encore aucune discussion.';
+
+  @override
+  String showChildTags(String name) {
+    return 'Afficher les étiquettes de $name';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return 'Masquer les étiquettes de $name';
+  }
+
+  @override
+  String get holdForReactions => 'Appui long pour les réactions';
+
+  @override
+  String removeYourReaction(String name) {
+    return 'Votre réaction : $name. Touchez pour la retirer.';
+  }
+
+  @override
+  String get reactionTapAgainToRemove =>
+      'Choisissez à nouveau votre réaction pour la retirer.';
+
+  @override
+  String get likesAndReactions => 'J’aime et réactions';
+
+  @override
+  String get you => 'Vous';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'et $count autres personnes',
+      one: 'et 1 autre personne',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count j’aime et réactions. Voir qui',
+      one: '1 j’aime ou réaction. Voir qui',
+    );
+    return '$_temp0';
+  }
 }

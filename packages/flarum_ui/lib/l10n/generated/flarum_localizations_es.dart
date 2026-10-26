@@ -1656,4 +1656,127 @@ class FlarumLocalizationsEs extends FlarumLocalizations {
 
   @override
   String get deleteDraft => 'Eliminar borrador';
+
+  @override
+  String unreadReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count respuestas sin leer',
+      one: '1 respuesta sin leer',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String replyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count respuestas',
+      one: '1 respuesta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tagDiscussionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count discusiones',
+      one: '1 discusión',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchForum(String name) {
+    return 'Buscar en $name';
+  }
+
+  @override
+  String get community => 'Comunidad';
+
+  @override
+  String get allTags => 'Todas las etiquetas';
+
+  @override
+  String get otherTags => 'Otras etiquetas';
+
+  @override
+  String get myPosts => 'Mis publicaciones';
+
+  @override
+  String get directMessages => 'Mensajes directos';
+
+  @override
+  String get drawerIntroduction =>
+      'Aquí están las etiquetas del foro y tus listas. Toca ☰ para volver a abrirlo.';
+
+  @override
+  String get goToYourProfile => 'Ir a tu perfil';
+
+  @override
+  String get notLoggedIn => 'Sin iniciar sesión';
+
+  @override
+  String get logInToTakePart =>
+      'Accede para publicar, responder y recibir notificaciones.';
+
+  @override
+  String get logInToSeeMessages => 'Accede para ver tus mensajes.';
+
+  @override
+  String get noFollowedDiscussions => 'Todavía no sigues ninguna discusión.';
+
+  @override
+  String showChildTags(String name) {
+    return 'Mostrar etiquetas de $name';
+  }
+
+  @override
+  String hideChildTags(String name) {
+    return 'Ocultar etiquetas de $name';
+  }
+
+  @override
+  String get holdForReactions => 'Mantén pulsado para reaccionar';
+
+  @override
+  String removeYourReaction(String name) {
+    return 'Tu reacción: $name. Toca para quitarla.';
+  }
+
+  @override
+  String get reactionTapAgainToRemove =>
+      'Vuelve a elegir tu reacción para quitarla.';
+
+  @override
+  String get likesAndReactions => 'Me gusta y reacciones';
+
+  @override
+  String get you => 'Tú';
+
+  @override
+  String andOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'y $count personas más',
+      one: 'y 1 persona más',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String likesAndReactionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count me gusta y reacciones. Ver quién',
+      one: '1 me gusta o reacción. Ver quién',
+    );
+    return '$_temp0';
+  }
 }

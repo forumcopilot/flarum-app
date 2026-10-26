@@ -63,7 +63,8 @@ Future<void> _close(WidgetTester tester) async {
 
 void main() {
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
+    // The drawer has introduced itself already (its own test below), so it doesn't open over them.
+    SharedPreferences.setMockInitialValues({'forum_drawer_introduced': true});
     FlarumForum.resetForTesting();
     FlarumTokenStore.instance = FlarumTokenStore.memory();
     FlarumForumTheme.reset();
@@ -126,7 +127,9 @@ void main() {
     expect(FlarumForumTheme.current.value, flarumPaletteOf('#4D698E', '#4D698E'),
         reason: 'the forum\'s colours, from its GET /api');
 
-    await tester.tap(find.byType(BackButton));
+    // The forum's bar has ☰, as the Discourse app's does: Back (the system's) returns to the host.
+    expect(find.byType(BackButton), findsNothing);
+    await tester.binding.handlePopRoute();
     await _pumpUntil(tester, find.byType(AppShell), gone: true);
     await tester.pump(const Duration(milliseconds: 600));
     expect(find.text('My forums'), findsOneWidget);
@@ -185,7 +188,7 @@ void main() {
     }));
     await tester.tap(find.text('One'));
     await _arrive(tester, find.byType(DiscussionTile));
-    await tester.tap(find.byType(BackButton));
+    await tester.binding.handlePopRoute();
     await _pumpUntil(tester, find.byType(AppShell), gone: true);
     await tester.pump(const Duration(milliseconds: 600));
 
@@ -197,16 +200,40 @@ void main() {
     await _close(tester);
   });
 
-  testWidgets('the account tab leaves the appearance to a host that offers it', (tester) async {
+  testWidgets('the profile tab leaves the appearance to a host that offers it', (tester) async {
     FixtureForum(FlarumVersion.v2, root: _fixtures).forum(url: 'https://two.test');
     await tester.pumpWidget(_Host({
       'Two': () => FlarumForumPage(site: FlarumHost.site(name: 'Forum two', url: 'https://two.test')),
     }));
     await tester.tap(find.text('Two'));
     await _arrive(tester, find.byType(DiscussionTile));
-    await tester.tap(find.text('Account'));
+    await tester.tap(find.text('Profile'));
     await _pumpUntil(tester, find.byType(AccountPage));
     expect(find.text('Color Scheme'), findsNothing);
+    await _close(tester);
+  });
+
+  testWidgets('pushed over a host, the drawer opens once by itself to say where it is; then only from ☰',
+      (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    FixtureForum(FlarumVersion.v2, root: _fixtures).forum(url: 'https://two.test');
+    await tester.pumpWidget(_Host({
+      'Two': () => FlarumForumPage(site: FlarumHost.site(name: 'Forum two', url: 'https://two.test')),
+    }));
+    await tester.tap(find.text('Two'));
+    await _arrive(tester, find.byType(DiscussionTile));
+    await _pumpUntil(tester, find.byType(ForumDrawer));
+    await tester.pump(const Duration(milliseconds: 600));
+    expect(find.textContaining('Tap ☰ to open this again'), findsOneWidget);
+    expect((await SharedPreferences.getInstance()).getBool('forum_drawer_introduced'), isTrue);
+
+    // Closed, it stays closed; the edge means Back here, so it opens from ☰.
+    await tester.tapAt(const Offset(780, 300));
+    await _pumpUntil(tester, find.byType(ForumDrawer), gone: true);
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await _pumpUntil(tester, find.byType(ForumDrawer));
+    await tester.pump(const Duration(milliseconds: 600));
+    expect(find.textContaining('Tap ☰ to open this again'), findsNothing, reason: 'the introduction is said once');
     await _close(tester);
   });
 }

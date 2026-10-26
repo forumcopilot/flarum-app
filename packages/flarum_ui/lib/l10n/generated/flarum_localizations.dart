@@ -2590,6 +2590,150 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Delete draft'**
   String get deleteDraft;
+
+  /// Screen reader label for a discussion row's unread count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 unread reply} other{{count} unread replies}}'**
+  String unreadReplies(int count);
+
+  /// Screen reader label for a discussion row's reply count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 reply} other{{count} replies}}'**
+  String replyCount(int count);
+
+  /// How many discussions a tag has, on its card and its page's header
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 discussion} other{{count} discussions}}'**
+  String tagDiscussionCount(int count);
+
+  /// Placeholder of the search field in Home's header; name is the forum's name
+  ///
+  /// In en, this message translates to:
+  /// **'Search {name}'**
+  String searchForum(String name);
+
+  /// Heading of the drawer's section with the forum's lists (All Discussions, Following…)
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get community;
+
+  /// Drawer item that opens the page with all the forum's tags
+  ///
+  /// In en, this message translates to:
+  /// **'All Tags'**
+  String get allTags;
+
+  /// Heading over the secondary tags on the Tags page, after the primary tags' cards
+  ///
+  /// In en, this message translates to:
+  /// **'Other Tags'**
+  String get otherTags;
+
+  /// Drawer item that opens the reader's own profile, on their posts
+  ///
+  /// In en, this message translates to:
+  /// **'My Posts'**
+  String get myPosts;
+
+  /// Chip on the Messages tab for flarum/messages' conversations, beside Private Discussions
+  ///
+  /// In en, this message translates to:
+  /// **'Direct Messages'**
+  String get directMessages;
+
+  /// Shown in the forum's drawer the one time it opens by itself; ☰ is the button that opens it
+  ///
+  /// In en, this message translates to:
+  /// **'The forum\'s tags and your lists are here. Tap ☰ to open this again.'**
+  String get drawerIntroduction;
+
+  /// Under the reader's name on the drawer's account card
+  ///
+  /// In en, this message translates to:
+  /// **'Go to your profile'**
+  String get goToYourProfile;
+
+  /// The drawer's account card for a guest
+  ///
+  /// In en, this message translates to:
+  /// **'Not logged in'**
+  String get notLoggedIn;
+
+  /// Under Not logged in on the drawer's account card, above Log In and Sign Up
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to post, reply and get notifications.'**
+  String get logInToTakePart;
+
+  /// The Messages tab for a guest, above Log In
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to see your messages.'**
+  String get logInToSeeMessages;
+
+  /// The Following page when the reader follows no discussion
+  ///
+  /// In en, this message translates to:
+  /// **'You aren\'t following any discussions yet.'**
+  String get noFollowedDiscussions;
+
+  /// Tooltip of the drawer's button that unfolds a tag's child tags; name is the parent tag
+  ///
+  /// In en, this message translates to:
+  /// **'Show tags in {name}'**
+  String showChildTags(String name);
+
+  /// Tooltip of the drawer's button that folds a tag's child tags; name is the parent tag
+  ///
+  /// In en, this message translates to:
+  /// **'Hide tags in {name}'**
+  String hideChildTags(String name);
+
+  /// Screen reader hint on a post's Like button when the forum has reactions
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press for reactions'**
+  String get holdForReactions;
+
+  /// Screen reader label of the reader's own reaction under a post; name is the reaction's name
+  ///
+  /// In en, this message translates to:
+  /// **'Your reaction: {name}. Tap to take it back.'**
+  String removeYourReaction(String name);
+
+  /// Note in the reaction picker when the reader has already reacted to the post
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your reaction again to take it back.'**
+  String get reactionTapAgainToRemove;
+
+  /// Title of the sheet showing who liked a post and its reactions
+  ///
+  /// In en, this message translates to:
+  /// **'Likes and Reactions'**
+  String get likesAndReactions;
+
+  /// The reader, in the list of who liked a post
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get you;
+
+  /// After the likers the forum names, how many more liked the post
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{and 1 other} other{and {count} others}}'**
+  String andOthers(int count);
+
+  /// Screen reader label of a post's count of likes and reactions, which shows who
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 like or reaction. Show who} other{{count} likes and reactions. Show who}}'**
+  String likesAndReactionsCount(int count);
 }
 
 class _FlarumLocalizationsDelegate

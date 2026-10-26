@@ -2297,5 +2297,146 @@
   "deleteDraft": "Delete draft",
   "@deleteDraft": {
     "description": "Deletes a draft from the drafts list."
+  },
+  "unreadReplies": "{count, plural, =1{1 unread reply} other{{count} unread replies}}",
+  "@unreadReplies": {
+    "description": "Screen reader label for a discussion row's unread count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "replyCount": "{count, plural, =1{1 reply} other{{count} replies}}",
+  "@replyCount": {
+    "description": "Screen reader label for a discussion row's reply count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tagDiscussionCount": "{count, plural, =1{1 discussion} other{{count} discussions}}",
+  "@tagDiscussionCount": {
+    "description": "How many discussions a tag has, on its card and its page's header",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchForum": "Search {name}",
+  "@searchForum": {
+    "description": "Placeholder of the search field in Home's header; name is the forum's name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "community": "Community",
+  "@community": {
+    "description": "Heading of the drawer's section with the forum's lists (All Discussions, Following…)"
+  },
+  "allTags": "All Tags",
+  "@allTags": {
+    "description": "Drawer item that opens the page with all the forum's tags"
+  },
+  "otherTags": "Other Tags",
+  "@otherTags": {
+    "description": "Heading over the secondary tags on the Tags page, after the primary tags' cards"
+  },
+  "myPosts": "My Posts",
+  "@myPosts": {
+    "description": "Drawer item that opens the reader's own profile, on their posts"
+  },
+  "directMessages": "Direct Messages",
+  "@directMessages": {
+    "description": "Chip on the Messages tab for flarum/messages' conversations, beside Private Discussions"
+  },
+  "drawerIntroduction": "The forum's tags and your lists are here. Tap ☰ to open this again.",
+  "@drawerIntroduction": {
+    "description": "Shown in the forum's drawer the one time it opens by itself; ☰ is the button that opens it"
+  },
+  "goToYourProfile": "Go to your profile",
+  "@goToYourProfile": {
+    "description": "Under the reader's name on the drawer's account card"
+  },
+  "notLoggedIn": "Not logged in",
+  "@notLoggedIn": {
+    "description": "The drawer's account card for a guest"
+  },
+  "logInToTakePart": "Log in to post, reply and get notifications.",
+  "@logInToTakePart": {
+    "description": "Under Not logged in on the drawer's account card, above Log In and Sign Up"
+  },
+  "logInToSeeMessages": "Log in to see your messages.",
+  "@logInToSeeMessages": {
+    "description": "The Messages tab for a guest, above Log In"
+  },
+  "noFollowedDiscussions": "You aren't following any discussions yet.",
+  "@noFollowedDiscussions": {
+    "description": "The Following page when the reader follows no discussion"
+  },
+  "showChildTags": "Show tags in {name}",
+  "@showChildTags": {
+    "description": "Tooltip of the drawer's button that unfolds a tag's child tags; name is the parent tag",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hideChildTags": "Hide tags in {name}",
+  "@hideChildTags": {
+    "description": "Tooltip of the drawer's button that folds a tag's child tags; name is the parent tag",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "holdForReactions": "Long-press for reactions",
+  "@holdForReactions": {
+    "description": "Screen reader hint on a post's Like button when the forum has reactions"
+  },
+  "removeYourReaction": "Your reaction: {name}. Tap to take it back.",
+  "@removeYourReaction": {
+    "description": "Screen reader label of the reader's own reaction under a post; name is the reaction's name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reactionTapAgainToRemove": "Choose your reaction again to take it back.",
+  "@reactionTapAgainToRemove": {
+    "description": "Note in the reaction picker when the reader has already reacted to the post"
+  },
+  "likesAndReactions": "Likes and Reactions",
+  "@likesAndReactions": {
+    "description": "Title of the sheet showing who liked a post and its reactions"
+  },
+  "you": "You",
+  "@you": {
+    "description": "The reader, in the list of who liked a post"
+  },
+  "andOthers": "{count, plural, =1{and 1 other} other{and {count} others}}",
+  "@andOthers": {
+    "description": "After the likers the forum names, how many more liked the post",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "likesAndReactionsCount": "{count, plural, =1{1 like or reaction. Show who} other{{count} likes and reactions. Show who}}",
+  "@likesAndReactionsCount": {
+    "description": "Screen reader label of a post's count of likes and reactions, which shows who",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

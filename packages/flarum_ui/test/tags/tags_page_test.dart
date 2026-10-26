@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
+import 'package:forum_kit/utils/html_colors.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 void main() {
@@ -28,19 +29,38 @@ void main() {
     expect(find.text('Retry'), findsNothing);
   });
 
-  testWidgets('every coloured tag is filled with its colour, a secondary one too, as on the web', (tester) async {
-    const bug = FlarumTag(id: '7', name: 'bug', slug: 'bug', isPrimary: false, color: '#e74c3c');
-    const plain = FlarumTag(id: '8', name: 'misc', slug: 'misc', isPrimary: false);
-    await tester.pumpWidget(MaterialApp(
-      theme: AppTheme.lightTheme,
-      home: const Scaffold(body: Column(children: [TagLabel(tag: bug), TagLabel(tag: plain)])),
-    ));
-    BoxDecoration decoration(String name) => tester
-        .widget<Container>(find.ancestor(of: find.text(name), matching: find.byType(Container)).first)
-        .decoration! as BoxDecoration;
-    expect(decoration('bug').color, const Color(0xFFE74C3C));
-    expect(decoration('bug').border, isNull);
-    expect(decoration('misc').color, isNotNull, reason: 'a grey label, as the web draws one without a colour');
+  for (final brightness in Brightness.values) {
+    testWidgets('a tag\'s name reads in the page\'s own text colour, its colour kept to a mark (${brightness.name})',
+        (tester) async {
+      const support = FlarumTag(id: '9', name: 'Support', slug: 'support', isPrimary: true, color: '#e67e22');
+      const bug = FlarumTag(id: '7', name: 'bug', slug: 'bug', isPrimary: false, color: '#e74c3c');
+      const plain = FlarumTag(id: '8', name: 'misc', slug: 'misc', isPrimary: false);
+      final theme = brightness == Brightness.light ? AppTheme.lightTheme : AppTheme.darkTheme;
+      await tester.pumpWidget(MaterialApp(
+        theme: theme,
+        home: const Scaffold(body: Column(children: [TagLabel(tag: support), TagLabel(tag: bug), TagLabel(tag: plain)])),
+      ));
+      final scheme = theme.colorScheme;
+      for (final name in ['Support', 'bug', 'misc']) {
+        final color = tester.widget<Text>(find.text(name)).style!.color!;
+        expect(color, scheme.onSurfaceVariant, reason: name);
+        // Under 4.5:1 is what the old labels gave white on Flarum's orange (2.85:1).
+        expect(contrastRatio(color, name == 'Support' ? scheme.surface : scheme.surfaceContainerHighest),
+            greaterThanOrEqualTo(4.5), reason: name);
+      }
+      final mark = tester.widget<Container>(find.descendant(of: find.byType(TagMark), matching: find.byType(Container)));
+      expect((mark.decoration! as BoxDecoration).color, tagMarkColor(const Color(0xFFE67E22), scheme.surface),
+          reason: 'the primary tag\'s own colour, as its mark');
+      final chip = tester.widget<DecoratedBox>(
+          find.ancestor(of: find.text('bug'), matching: find.byType(DecoratedBox)).first);
+      expect((chip.decoration as BoxDecoration).color, scheme.surfaceContainerHighest, reason: 'a neutral chip');
+    });
+  }
+
+  test('text on a tag colour is whichever of white and black reads better', () {
+    expect(textOn(const Color(0xFFE67E22)), Colors.black87, reason: "Flarum's orange: white was 2.85:1");
+    expect(textOn(const Color(0xFF27AE60)), Colors.black87, reason: "Flarum's green: white was 2.87:1");
+    expect(textOn(const Color(0xFF34495E)), Colors.white, reason: 'a dark navy');
   });
 
   testWidgets("a tag's description shows both its lines, at a large text size too", (tester) async {

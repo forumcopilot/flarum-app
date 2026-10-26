@@ -7,6 +7,7 @@ import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_drawer.dart';
 import '../compose/mention_picker_page.dart';
 import '../widgets/flarum_avatar.dart';
 import 'dialog_page.dart';
@@ -14,9 +15,12 @@ import 'dialog_page.dart';
 /// The reader's direct messages (flarum/messages, 2.0): a conversation each, the latest first,
 /// and New message.
 class DialogsPage extends StatefulWidget {
-  const DialogsPage({super.key, required this.site});
+  const DialogsPage({super.key, required this.site, this.switcher});
 
   final SiteContext site;
+
+  /// Under the title on the Messages tab: chips for this list and the private discussions.
+  final PreferredSizeWidget? switcher;
 
   static Future<void> open(BuildContext context, SiteContext site) =>
       Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => DialogsPage(site: site)));
@@ -96,7 +100,9 @@ class _DialogsPageState extends State<DialogsPage> {
     final l10n = flarumL10n(context);
     return Scaffold(
       appBar: AppBar(
+        leading: forumDrawerButton(context),
         title: Text(l10n.messages),
+        bottom: widget.switcher,
         actions: [
           if (_dialogs.any((d) => d.unreadCount > 0))
             IconButton(icon: const Icon(Icons.done_all), tooltip: l10n.markAllMessagesRead, onPressed: _markAllRead),

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
+import 'package:flarum_ui/src/widgets/flarum_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
@@ -60,21 +61,34 @@ void main() {
 
       // Like the answer: at once, as the reader's (the forum's answer was recorded as bob's).
       fixtures.latency = const Duration(milliseconds: 300);
-      await tester.tap(find.descendant(of: answer, matching: find.text('Like')));
+      await tester.tap(find.descendant(of: answer, matching: find.byIcon(Icons.thumb_up_outlined)));
       await tester.pump();
-      expect(find.descendant(of: answer, matching: find.text('You like this.')), findsOneWidget, reason: 'one like, the reader\'s');
-      expect(find.descendant(of: answer, matching: find.text('Unlike')), findsOneWidget);
+      expect(find.descendant(of: answer, matching: find.byIcon(Icons.thumb_up)), findsOneWidget,
+          reason: 'the thumb fills, in the accent');
+      expect(find.descendant(of: answer, matching: find.text('1')), findsOneWidget, reason: 'one like, the reader\'s');
       await _settle(tester);
       fixtures.latency = Duration.zero;
 
-      // React with a heart, from the picker.
-      await tester.tap(find.descendant(of: answer, matching: find.byIcon(Icons.add_reaction_outlined)));
+      // Who: the count opens the sheet, which lists the liker (the forum's answer names bob).
+      await tester.tap(find.descendant(of: answer, matching: find.text('1')));
       await _settle(tester);
+      expect(find.text('Likes and Reactions'), findsOneWidget);
+      expect(find.descendant(of: find.byType(BottomSheet), matching: find.byType(FlarumAvatar)), findsOneWidget);
+      await tester.tapAt(const Offset(400, 20));
+      await _settle(tester);
+
+      // React with a heart: a long press on Like offers the forum's reactions.
+      // (Saved, the like reads as the recording's, bob's: the thumb may be empty again.)
+      await tester.longPress(find.descendant(
+          of: answer,
+          matching: find.byWidgetPredicate((w) => w is Icon && (w.icon == Icons.thumb_up || w.icon == Icons.thumb_up_outlined))));
+      await _settle(tester);
+      expect(find.text('React'), findsOneWidget, reason: "the picker's title");
       await tester.tap(find.text('❤️'));
       await _settle(tester);
-      final heart = find.descendant(of: answer, matching: find.widgetWithText(ChoiceChip, '❤️ 1'));
-      expect(heart, findsOneWidget);
-      expect(tester.widget<ChoiceChip>(heart).selected, isTrue, reason: 'the reader\'s reaction');
+      expect(find.descendant(of: answer, matching: find.text('❤️')), findsNWidgets(2),
+          reason: 'in the count, and as the reader\'s own reaction beside Like');
+      expect(find.descendant(of: answer, matching: find.text('2')), findsOneWidget, reason: 'a like and a heart');
 
       // Choose it as the best answer, from its menu.
       await tester.tap(find.descendant(of: answer, matching: find.byIcon(Icons.more_vert)));

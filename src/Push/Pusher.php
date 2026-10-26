@@ -136,6 +136,50 @@ class Pusher
     }
 
     /**
+     * Tell the relay the reader's unread count after they read notifications,
+     * so their iPhones' badges follow.
+     */
+    public function sendUnread(User $user): void
+    {
+        $forumId = $this->connection->forumId();
+        $relayUrl = $this->connection->connectedRelayUrl();
+        $privateKey = $this->connection->privateKey();
+
+        if (! $forumId || ! $relayUrl || ! $privateKey) {
+            return;
+        }
+
+        $handles = Device::query()
+            ->where('user_id', $user->id)
+            ->whereIn('access_token_id', AccessToken::query()->whereValid()->select('id'))
+            ->pluck('handle')
+            ->all();
+
+        if (! $handles) {
+            return;
+        }
+
+        $unread = UnreadCount::of($user);
+        $counts = [];
+
+        foreach ($handles as $handle) {
+            $counts[] = ['handle' => $handle, 'unread' => $unread];
+        }
+
+        try {
+            $gone = $this->relay->unread($relayUrl, $forumId, $privateKey, $counts);
+        } catch (RelayException $e) {
+            $this->log->warning('[forumcopilot/flarum-flapp] Unread count not sent: '.$e->getMessage());
+
+            return;
+        }
+
+        if ($gone) {
+            Device::query()->whereIn('handle', $gone)->delete();
+        }
+    }
+
+    /**
      * Whether this is the first push of this notification to this reader:
      * a notification synced twice in quick succession is pushed once.
      */

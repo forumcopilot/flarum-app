@@ -15,6 +15,9 @@ use Flarum\Api\Resource\ForumResource;
 use Flarum\Api\Resource\UserResource;
 use Flarum\Extend;
 use Flarum\Extension\Event\Disabling;
+use Flarum\Notification\Event\DeletedAll;
+use Flarum\Notification\Event\Read;
+use Flarum\Notification\Event\ReadAll;
 use Flarum\User\User;
 
 return [
@@ -50,6 +53,11 @@ return [
     (new Extend\ServiceProvider())
         ->register(FlappServiceProvider::class),
 
+    // Reading notifications, on the web or in the app, updates the badge.
     (new Extend\Event())
-        ->listen(Disabling::class, Listener\DisconnectWhenDisabled::class),
+        ->listen(Disabling::class, Listener\DisconnectWhenDisabled::class)
+        ->listen(Read::class, Listener\SendUnreadWhenRead::class)
+        ->listen(ReadAll::class, Listener\SendUnreadWhenRead::class)
+        ->listen(DeletedAll::class, Listener\SendUnreadWhenRead::class)
+        ->listen('Flarum\Messages\Dialog\Event\UserRead', Listener\SendUnreadWhenRead::class),
 ];

@@ -47,7 +47,7 @@ the 9 Oct 2026 decision says: screens are each app's own; only generic pieces go
 
 - **Flarum app:** the Tags page shows each tag's latest discussion under its description
   ("Show us your bakes this week · 23 days ago"); tapping it opens that discussion at its last
-  post. `tags/tags_page.dart` (`_TagTile`), `FlarumApi.tagsLatestDiscussions`.
+  post. `tags/tags_page.dart` (`TagCard`), `FlarumApi.tagsLatestDiscussions`.
 - **ABDA:** category cards say "N new this week" or the topic count, but not what is happening
   (`views/listitems/category_card.dart`). Discourse's own categories page can show latest topics
   per category, so the data is there (`/categories.json?include_subcategories…` /
@@ -57,4 +57,4 @@ the 9 Oct 2026 decision says: screens are each app's own; only generic pieces go
 
 The thread slider, recent searches, the solution summary card and the "N days later" gaps are in
 both apps. ABDA's server drafts (saved while typing) are better than the Flarum app's
-save-on-close, and the Flarum app is adopting them.
+save-on-close; the Flarum app keeps save-on-close for now (fof/drafts is optional on Flarum).

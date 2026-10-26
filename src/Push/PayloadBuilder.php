@@ -187,8 +187,7 @@ class PayloadBuilder
             $parameters = ['username' => $from ? $from->display_name : $this->translator->trans('core.lib.username.deleted_text')];
 
             if ($type === 'postReacted') {
-                $reaction = (string) $blueprint->getData();
-                $parameters['reaction'] = isset(self::REACTIONS[$reaction]) ? self::REACTIONS[$reaction] : $reaction;
+                $parameters['reaction'] = self::reaction($blueprint->getData());
             }
 
             $line = $this->line($this->lines[$type], $parameters);
@@ -221,9 +220,51 @@ class PayloadBuilder
             return (string) $this->line('flarum-suspend.forum.notifications.user_suspended_indefinite_text', []);
         }
 
-        $time = Carbon::instance($until)->locale($locale ?: 'en')->diffForHumans(Carbon::now(), CarbonInterface::DIFF_ABSOLUTE);
+        $time = self::suspendedFor($until, $locale ?: 'en');
 
         return (string) $this->line('flarum-suspend.forum.notifications.user_suspended_text', ['timeReadable' => $time]);
+    }
+
+    /**
+     * How long until [until], rounded as the web's "a day" is: a day's
+     * suspension is a few seconds short of a day by the time it's pushed.
+     */
+    public static function suspendedFor(\DateTimeInterface $until, string $locale, ?CarbonInterface $now = null): string
+    {
+        return Carbon::instance($until)->locale($locale)->diffForHumans(
+            $now ?: Carbon::now(),
+            CarbonInterface::DIFF_ABSOLUTE,
+            false,
+            1,
+            CarbonInterface::ROUND
+        );
+    }
+
+    /**
+     * The reaction, as the push shows it. fof/reactions hands over the
+     * reaction itself (its model, or the model as JSON), whose identifier is
+     * a shortcode for an emoji one: the emoji, else its display name or
+     * identifier.
+     */
+    public static function reaction($data): string
+    {
+        if (is_string($data) && substr($data, 0, 1) === '{') {
+            $decoded = json_decode($data, true);
+            $data = is_array($decoded) ? $decoded : $data;
+        }
+
+        if (is_object($data)) {
+            $data = ['identifier' => isset($data->identifier) ? $data->identifier : null, 'display' => isset($data->display) ? $data->display : null];
+        }
+
+        $identifier = is_array($data) ? (string) ($data['identifier'] ?? '') : (string) $data;
+        $display = is_array($data) && isset($data['display']) && is_string($data['display']) ? trim($data['display']) : '';
+
+        if (isset(self::REACTIONS[$identifier])) {
+            return self::REACTIONS[$identifier];
+        }
+
+        return $display !== '' ? $display : $identifier;
     }
 
     /**

@@ -19,6 +19,7 @@ use Flarum\Post\Post;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\User\User;
 use ForumCopilot\Flapp\Device;
+use ForumCopilot\Flapp\Extend\PushLines;
 use ForumCopilot\Flapp\Push\Signer;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Psr7\Request;
@@ -114,6 +115,18 @@ class PushTest extends FlappTestCase
         ], $body['pushes'][0]['payload']);
 
         $this->assertNotNull(Device::query()->findOrFail(1)->last_sent_at);
+    }
+
+    public function test_another_extension_can_give_a_type_its_words(): void
+    {
+        $this->extend((new PushLines())->line('discussionRenamed', 'core.lib.username.deleted_text'));
+        $this->connected();
+        $this->fakeRelay([new Response(200, [], json_encode(['sent' => 1, 'gone' => []]))]);
+
+        $this->rename();
+
+        $body = json_decode((string) $this->relayCalls[0]['request']->getBody(), true);
+        $this->assertEquals('[deleted]', $body['pushes'][0]['payload']['body']);
     }
 
     public function test_nothing_is_pushed_for_a_type_the_reader_turned_off(): void

@@ -43,7 +43,7 @@ class PayloadBuilder
     /**
      * The web's own line for each type; {username} is whoever acted. A key the
      * forum doesn't have (its extension isn't installed) falls through to the
-     * email subject.
+     * email subject. Other extensions add theirs with Extend\PushLines.
      */
     const LINES = [
         'discussionRenamed' => 'core.forum.notifications.discussion_renamed_text',
@@ -62,6 +62,17 @@ class PayloadBuilder
         'newDiscussionTag' => 'fof-follow-tags.forum.notifications.new_discussion_tag_text',
         'awardedBestAnswer' => 'fof-best-answer.forum.notification.awarded',
         'bestAnswerInDiscussion' => 'fof-best-answer.forum.notification.best_answer_in_discussion',
+        'postReacted' => 'fof-reactions.forum.notification',
+    ];
+
+    /**
+     * fof/reactions names its emoji reactions by shortcode, its six default
+     * ones first; the push shows the emoji, or the name of any other.
+     */
+    const REACTIONS = [
+        'thumbsup' => '👍', 'thumbsdown' => '👎', 'laughing' => '😆', 'confused' => '😕', 'heart' => '❤️', 'tada' => '🎉',
+        '+1' => '👍', '-1' => '👎', 'smile' => '😄', 'joy' => '😂', 'open_mouth' => '😮', 'cry' => '😢', 'rage' => '😡',
+        'fire' => '🔥', 'rocket' => '🚀', 'eyes' => '👀', 'clap' => '👏', 'pray' => '🙏', '100' => '💯', 'thinking' => '🤔',
     ];
 
     /**
@@ -83,10 +94,16 @@ class PayloadBuilder
      */
     protected $settings;
 
-    public function __construct(TranslatorInterface $translator, SettingsRepositoryInterface $settings)
+    /**
+     * @var array<string, string> LINES and those of Extend\PushLines
+     */
+    protected $lines;
+
+    public function __construct(TranslatorInterface $translator, SettingsRepositoryInterface $settings, array $lines = self::LINES)
     {
         $this->translator = $translator;
         $this->settings = $settings;
+        $this->lines = $lines;
     }
 
     public function build(BlueprintInterface $blueprint, User $user): array
@@ -165,10 +182,16 @@ class PayloadBuilder
             return $this->suspended($blueprint->getSubject(), $locale);
         }
 
-        if (isset(self::LINES[$type])) {
+        if (isset($this->lines[$type])) {
             $from = $blueprint->getFromUser();
-            $username = $from ? $from->display_name : $this->translator->trans('core.lib.username.deleted_text');
-            $line = $this->line(self::LINES[$type], ['username' => $username]);
+            $parameters = ['username' => $from ? $from->display_name : $this->translator->trans('core.lib.username.deleted_text')];
+
+            if ($type === 'postReacted') {
+                $reaction = (string) $blueprint->getData();
+                $parameters['reaction'] = isset(self::REACTIONS[$reaction]) ? self::REACTIONS[$reaction] : $reaction;
+            }
+
+            $line = $this->line($this->lines[$type], $parameters);
 
             if ($line !== null) {
                 return $line;

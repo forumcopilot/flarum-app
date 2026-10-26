@@ -33,9 +33,10 @@ abstract class FlarumPushDevice {
   Future<FlappInstallation> installation();
 }
 
-/// Where this phone gets a forum's pushes: the relay, the handle it gave the phone for the forum,
-/// and the device the forum keeps for the reader.
-typedef FlappRegistration = ({String relay, String handle, String deviceId});
+/// Where this phone gets a forum's pushes: the relay, the forum's id there (which its pushes
+/// carry), the handle the relay gave the phone for the forum, and the device the forum keeps for
+/// the reader.
+typedef FlappRegistration = ({String relay, String forumId, String handle, String deviceId});
 
 /// Push through the Flapp extension, per forum: a forum whose `GET /api` announces `flappPush`
 /// gets the phone registered when the reader signs in, and unregistered when they sign out. A
@@ -87,7 +88,7 @@ abstract final class FlarumPush {
       locale: device.locale,
     );
 
-    final registration = (relay: push.relay, handle: handle, deviceId: deviceId);
+    final registration = (relay: push.relay, forumId: push.forumId, handle: handle, deviceId: deviceId);
     await store.write(forum.baseUrl, registration);
     _registeredThisRun.add(forum.baseUrl);
     return registration;
@@ -125,6 +126,16 @@ abstract final class FlarumPush {
     } on Object catch (e) {
       debugPrint('Flapp push: handle not deleted on ${saved.relay}: $e');
     }
+  }
+
+  /// The address of the forum whose pushes carry [forumId], while the phone is registered with it:
+  /// null once the reader has signed out there, so a push sent before the forum heard of it is
+  /// dropped rather than shown.
+  static Future<String?> forumUrlFor(String forumId) async {
+    for (final MapEntry(key: url, value: registration) in (await store.all()).entries) {
+      if (registration.forumId == forumId) return url;
+    }
+    return null;
   }
 
   /// Tells every relay the phone has handles on that its push token or notification permission
@@ -187,7 +198,12 @@ class SecureFlappRegistrationStore implements FlappRegistrationStore {
   @override
   Future<void> write(String forumUrl, FlappRegistration registration) => _storage.write(
         key: '$_prefix$forumUrl',
-        value: jsonEncode({'relay': registration.relay, 'handle': registration.handle, 'deviceId': registration.deviceId}),
+        value: jsonEncode({
+          'relay': registration.relay,
+          'forumId': registration.forumId,
+          'handle': registration.handle,
+          'deviceId': registration.deviceId,
+        }),
       );
 
   @override
@@ -204,7 +220,12 @@ class SecureFlappRegistrationStore implements FlappRegistrationStore {
     if (raw == null) return null;
     try {
       final json = jsonDecode(raw) as Map<String, dynamic>;
-      return (relay: json['relay'] as String, handle: json['handle'] as String, deviceId: json['deviceId'] as String);
+      return (
+        relay: json['relay'] as String,
+        forumId: json['forumId'] as String,
+        handle: json['handle'] as String,
+        deviceId: json['deviceId'] as String,
+      );
     } on Object {
       return null;
     }

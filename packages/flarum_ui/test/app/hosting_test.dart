@@ -178,6 +178,39 @@ void main() {
     await _close(tester);
   });
 
+  testWidgets('a forum opened from a push opens what it names and marks the notification read', (tester) async {
+    final fixtures = FixtureForum(FlarumVersion.v2, root: _fixtures)..forum(url: 'https://two.test');
+    fixtures.replies['PATCH /notifications/7'] = <String, Object>{};
+    await tester.pumpWidget(_Host({
+      'Two': () => FlarumForumPage(
+            site: FlarumHost.site(name: 'Forum two', url: 'https://two.test'),
+            link: ForumLink.fromPush({'discussion_id': fixtures.discussionId('welcome'), 'post_number': '2'}),
+            notificationId: '7',
+          ),
+    }));
+    await tester.tap(find.text('Two'));
+    await _arrive(tester, find.byType(PostTile));
+
+    expect(find.byType(ThreadPage), findsOneWidget);
+    expect(fixtures.requests.where((r) => r.method == 'PATCH' && r.path == '/notifications/7'), hasLength(1));
+    await _close(tester);
+  });
+
+  testWidgets('a push naming a user by id opens their profile', (tester) async {
+    final fixtures = FixtureForum(FlarumVersion.v2, root: _fixtures)..forum(url: 'https://two.test');
+    await tester.pumpWidget(_Host({
+      'Two': () => FlarumForumPage(
+            site: FlarumHost.site(name: 'Forum two', url: 'https://two.test'),
+            link: UserIdLink(fixtures.userId('bob')),
+          ),
+    }));
+    await tester.tap(find.text('Two'));
+    await _arrive(tester, find.byType(UserPage));
+
+    expect(fixtures.requests.map((r) => r.path), containsAllInOrder(['/users/${fixtures.userId('bob')}', '/users/bob']));
+    await _close(tester);
+  });
+
   testWidgets('a forum opened again this run opens at once', (tester) async {
     FixtureForum(FlarumVersion.v1, root: _fixtures).forum(url: 'https://one.test');
     await tester.pumpWidget(_Host({

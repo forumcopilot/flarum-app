@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forum_kit/theme/app_theme.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
+import '../messages/dialog_page.dart';
 import '../navigation/forum_links.dart';
 import '../profile/user_page.dart';
 import '../tags/tags_page.dart';
@@ -19,7 +22,7 @@ import 'forum_theme.dart';
 /// colours are on the app while it is open ([FlarumForumTheme]); this page
 /// wears them from its first frame, before that change lands.
 class FlarumForumPage extends StatefulWidget {
-  const FlarumForumPage({super.key, required this.site, this.link, this.appearance});
+  const FlarumForumPage({super.key, required this.site, this.link, this.notificationId, this.appearance});
 
   /// The forum ([FlarumHost.site]).
   final Site site;
@@ -29,6 +32,10 @@ class FlarumForumPage extends StatefulWidget {
   /// opens the home.
   final ForumLink? link;
 
+  /// The forum's notification the reader tapped in the system's tray (a push), marked read once
+  /// the forum is open, as tapping it on the website does.
+  final String? notificationId;
+
   /// The app's light or dark choice, offered on the Account tab. Null when
   /// the host offers it on its own screens: it is the app's setting, not
   /// the forum's.
@@ -36,13 +43,16 @@ class FlarumForumPage extends StatefulWidget {
 
   /// Connects to [site]: picks up the reader's sign-in from an earlier
   /// launch, reads the forum, and records its colours. Offline or with the
-  /// forum down, it returns all the same: the screens say so and retry.
+  /// forum down, it returns all the same: the screens say so and retry. In an
+  /// app with push ([FlarumPush]), it also registers the phone with a forum
+  /// that runs the Flapp extension, once a run, without waiting for it.
   static Future<SiteContext> connect(Site site) async {
     final forum = FlarumForum.forUrl(site.pluginUrl);
     try {
       await forum.restoreSession();
       _restored.add(forum.baseUrl);
       await FlarumForumTheme.update(site.pluginUrl, flarumPalette(await forum.current()));
+      unawaited(FlarumPush.registerQuietly(forum));
     } catch (_) {
       // Offline or the forum is down.
     }
@@ -102,6 +112,10 @@ class _FlarumForumPageState extends State<FlarumForumPage> {
 
   /// Takes the reader to [FlarumForumPage.link], once the home is built under it.
   void _opened(SiteContext site) {
+    final forum = FlarumForum.of(site);
+    if (widget.notificationId case final id? when forum.isSignedIn) {
+      forum.api.markNotificationRead(id).ignore();
+    }
     if (widget.link case final link?) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _open(link, site);
@@ -117,6 +131,20 @@ class _FlarumForumPageState extends State<FlarumForumPage> {
         UserPage.open(context, site, slug);
       case TagLink(:final slug):
         TagPage.openBySlug(context, site, slug);
+      case DialogLink(:final id):
+        DialogPage.open(context, site, dialogId: id);
+      case UserIdLink(:final id):
+        _openUser(id, site);
+    }
+  }
+
+  /// A user's profile, found by id: [UserPage] goes by the slug, which the forum knows.
+  Future<void> _openUser(String id, SiteContext site) async {
+    try {
+      final user = await FlarumForum.of(site).api.user(id);
+      if (mounted) await UserPage.open(context, site, user.slug ?? user.username);
+    } on FlarumApiException {
+      // Deleted since, or hidden: the forum's home is where the reader stays.
     }
   }
 

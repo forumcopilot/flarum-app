@@ -52,7 +52,8 @@ void main() {
         final registration = await FlarumPush.register(forum);
 
         final push = (await forum.current()).flappPush!;
-        expect(registration, (relay: push.relay, handle: _handle, deviceId: '2'));
+        expect(registration, (relay: push.relay, forumId: push.forumId, handle: _handle, deviceId: '2'));
+        expect(await FlarumPush.forumUrlFor(push.forumId), forum.baseUrl);
         expect(await FlarumPush.store.read(forum.baseUrl), registration);
         final [installation, handle] = relay.requests;
         expect([installation.method, installation.uri.toString()], ['PUT', 'https://staging-push.flarumapp.com/v1/installation']);
@@ -85,6 +86,7 @@ void main() {
         expect(fixtures.requests.last.path, '/flapp-push/devices/2');
         expect([relay.requests.last.method, relay.requests.last.path], ['DELETE', '/v1/handles/$_handle']);
         expect(await FlarumPush.store.read(forum.baseUrl), isNull);
+        expect(await FlarumPush.forumUrlFor((await forum.current()).flappPush!.forumId), isNull);
       });
 
       test('signing in registers the phone; signing out unregisters it before revoking the token', () async {
@@ -148,9 +150,9 @@ void main() {
       FlarumPush.device = _Device(token: 'new-token');
       final relay = ScriptedAdapter([(200, {'ok': true, 'handles': 2})]);
       FlarumPush.newDio = relay.dio;
-      const registration = (relay: 'https://push.test', handle: _handle, deviceId: '1');
-      await FlarumPush.store.write('https://a.test', registration);
-      await FlarumPush.store.write('https://b.test', (relay: 'https://push.test', handle: 'another-handle-0123456', deviceId: '4'));
+      await FlarumPush.store.write('https://a.test', (relay: 'https://push.test', forumId: 'f_a', handle: _handle, deviceId: '1'));
+      await FlarumPush.store.write(
+          'https://b.test', (relay: 'https://push.test', forumId: 'f_b', handle: 'another-handle-0123456', deviceId: '4'));
 
       await FlarumPush.updateInstallations();
 

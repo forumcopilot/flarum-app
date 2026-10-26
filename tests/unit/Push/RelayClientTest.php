@@ -79,4 +79,29 @@ class RelayClientTest extends TestCase
 
         $client->forget('https://relay.test', 'f_abc', $this->privateKey);
     }
+
+    public function test_a_push_answers_with_the_handles_that_are_gone(): void
+    {
+        $client = $this->client([new Response(200, [], json_encode(['sent' => 1, 'gone' => ['aaaaaaaaaaaaaaaaaaaaaa', 42]]))]);
+
+        $gone = $client->push('https://relay.test', 'f_abc', $this->privateKey, [['handle' => 'aaaaaaaaaaaaaaaaaaaaaa', 'payload' => ['v' => 1]]]);
+
+        $this->assertSame(['aaaaaaaaaaaaaaaaaaaaaa'], $gone);
+    }
+
+    public function test_a_push_the_relay_has_already_seen_counts_as_sent(): void
+    {
+        $client = $this->client([new Response(409, [], json_encode(['error' => 'The relay has already seen this call.']))]);
+
+        $this->assertSame([], $client->push('https://relay.test', 'f_abc', $this->privateKey, [['handle' => 'aaaaaaaaaaaaaaaaaaaaaa', 'payload' => ['v' => 1]]]));
+    }
+
+    public function test_a_refused_push_throws(): void
+    {
+        $client = $this->client([new Response(422, [], json_encode(['error' => 'pushes[0]: payload.title must be a string']))]);
+
+        $this->expectException(RelayException::class);
+
+        $client->push('https://relay.test', 'f_abc', $this->privateKey, [['handle' => 'aaaaaaaaaaaaaaaaaaaaaa', 'payload' => ['v' => 1]]]);
+    }
 }

@@ -409,6 +409,7 @@
   "notifyPrefNewDiscussionTag": "누군가 토의의 태그를 내가 팔로우하는 태그로 바꿨을 때",
   "notifyByWeb": "웹",
   "notifyByEmail": "이메일",
+  "notifyByPush": "푸시 알림",
   "followAfterReply": "답장한 게시물을 자동으로 팔로우",
   "followAfterCreate": "내가 만든 토의를 자동으로 팔로우",
   "notifyForAllPosts": "토론에서 모든 새로운 게시물에 대해 알림을 받도록 설정"

@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "Кто-то переместил тему в тег из моих подписок",
   "notifyByWeb": "Web",
   "notifyByEmail": "Email",
+  "notifyByPush": "Push-уведомления",
   "followAfterReply": "Автоматически подписываться на темы, в которых я участвую",
   "followAfterCreate": "Автоматически подписываться на созданные мной темы",
   "notifyForAllPosts": "Уведомлять о каждом сообщении в теме, а не только о последнем",

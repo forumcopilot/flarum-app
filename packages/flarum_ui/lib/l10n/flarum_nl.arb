@@ -409,6 +409,7 @@
   "notifyPrefNewDiscussionTag": "Iemand tagt een discussie opnieuw naar een tag die ik volg",
   "notifyByWeb": "Web",
   "notifyByEmail": "E-mail",
+  "notifyByPush": "Pushmeldingen",
   "followAfterReply": "Automatisch discussies volgen als ik reageer",
   "followAfterCreate": "Volg automatisch discussies die ik start",
   "notifyForAllPosts": "Geef een melding over elke nieuwe post in plaats van alleen de laatste in een discussie"

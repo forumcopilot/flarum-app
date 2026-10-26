@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "Quelqu'un modifie l'étiquette d'une discussion publiée sous une étiquette que je suis",
   "notifyByWeb": "Web",
   "notifyByEmail": "Adresse de courriel",
+  "notifyByPush": "Notifications push",
   "followAfterReply": "Suivre automatiquement les discussions auxquelles je réponds",
   "followAfterCreate": "Suivre automatiquement les discussions que je crée",
   "notifyForAllPosts": "Notifier chaque nouveau message au lieu de ne notifier que le dernier message dans une discussion",

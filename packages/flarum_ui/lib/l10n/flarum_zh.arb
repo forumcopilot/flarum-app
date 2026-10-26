@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "有人将讨论移至我关注的标签",
   "notifyByWeb": "站内通知",
   "notifyByEmail": "邮箱",
+  "notifyByPush": "推送通知",
   "followAfterReply": "自动关注我参与的讨论",
   "followAfterCreate": "自动关注我发起的讨论",
   "notifyForAllPosts": "通知所有新帖。关闭后每个讨论未读期间仅通知一次",

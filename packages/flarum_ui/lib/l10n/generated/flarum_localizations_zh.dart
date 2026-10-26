@@ -309,6 +309,9 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get notifyByEmail => '邮箱';
 
   @override
+  String get notifyByPush => '推送通知';
+
+  @override
   String get followAfterReply => '自动关注我参与的讨论';
 
   @override

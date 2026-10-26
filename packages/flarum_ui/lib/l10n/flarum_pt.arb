@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "Alguém muda a tag de uma discussão para uma tag que estou seguindo",
   "notifyByWeb": "Web",
   "notifyByEmail": "E-mail",
+  "notifyByPush": "Notificações push",
   "followAfterReply": "Seguir automaticamente as discussões que eu responder",
   "followAfterCreate": "Seguir automaticamente as discussões que eu criar",
   "notifyForAllPosts": "Notificar sobre cada novo post em vez de apenas o último em uma discussão",

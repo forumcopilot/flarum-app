@@ -337,6 +337,9 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get notifyByEmail => 'Email';
 
   @override
+  String get notifyByPush => 'Push-уведомления';
+
+  @override
   String get followAfterReply =>
       'Автоматически подписываться на темы, в которых я участвую';
 

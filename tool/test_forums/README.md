@@ -99,6 +99,10 @@ deletes it again (the forum doesn't check handles with the relay), and records t
 FLARUM_TEST_PASSWORD=… dart run tool/record_flapp_fixtures.dart http://127.0.0.1:8081
 ```
 
+For the phones, `push_types.php` makes one notification of each type for bob (carol acting, the admin
+where only a moderator may), so his phones get one push of each; [docs/push-check.md](../../docs/push-check.md)
+says how to run it, what each push should show and how to clean up.
+
 ## CAPTCHA
 
 For sign-in tests, 1.8 runs blomstra/turnstile (on sign-in, sign-up and password reset) and

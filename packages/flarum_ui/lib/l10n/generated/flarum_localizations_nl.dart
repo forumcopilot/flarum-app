@@ -329,6 +329,9 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
   String get notifyByEmail => 'E-mail';
 
   @override
+  String get notifyByPush => 'Pushmeldingen';
+
+  @override
   String get followAfterReply => 'Automatisch discussies volgen als ik reageer';
 
   @override

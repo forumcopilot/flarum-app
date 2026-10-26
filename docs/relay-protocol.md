@@ -68,7 +68,8 @@ extension is disabled; if the relay can't be reached, the forum disconnects anyw
 {"forumId": "…", "pushes": [{"handle": "…", "payload": {"v": 1, "id": 42, "type": "postMentioned", "title": "…", "body": "…"}}]}
 ```
 
-At most 500 pushes a call. A payload is `{v, id, type, title, body, excerpt?, open?, unread?}` under 3 KB, `open` being
+At most 500 pushes a call. A payload is `{v, id?, type, title, body, excerpt?, open?, unread?}` under 3 KB, `id` being
+the notification's (Flarum 2.0's private messages have none), `open` being
 `{discussion, post}`, `{dialog}` or `{user}`. Answer: `200 {"sent": 1, "gone": ["<handle>", …]}`. `gone` lists handles the
 relay doesn't know for this forum, whose devices the forum deletes; a phone that is only out of reach keeps its
 handle. The extension sends these from milestone 3; flapp-push's README has the relay's side, including the limits.

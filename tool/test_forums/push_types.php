@@ -6,13 +6,13 @@
 //
 //   ssh … 'php -- http://127.0.0.1:8082' < tool/test_forums/push_types.php
 //
-// It waits a few seconds between pushes, so they arrive in order, and prints what each push should
-// say. Last it prints the ids to delete: the discussions with delete_discussions.php (byobu hides
+// It waits 11 seconds between pushes (Flarum lets a member post once every 10), so they arrive in
+// order, and prints what each push should say. Last it prints the ids to delete: the discussions with delete_discussions.php (byobu hides
 // carol's private one even from the admin), 2.0's conversation with delete_dialogs.php. bob is
 // unsuspended again even if a step fails. The credentials file stays on the server.
 
 $base = $argv[1] ?? 'http://127.0.0.1:8082';
-$pause = (int) ($argv[2] ?? 4);
+$pause = (int) ($argv[2] ?? 11);
 $creds = [];
 foreach (file('/var/www/flarumapp/.credentials', FILE_IGNORE_NEW_LINES) as $line) {
     if (preg_match('/^([A-Z0-9_]+)=(.*)$/', $line, $m)) {
@@ -98,7 +98,7 @@ try {
     post($carol, $id, "@\"$bobName\"#p$first It does: a reply to your post.");
     step('postMentioned: Push check / carol replied to your post');
 
-    post($carol, $id, "And a mention of @\"$bobName\"#$bobId on its own.");
+    $mention = post($carol, $id, "And a mention of @\"$bobName\"#$bobId on its own.");
     step('userMentioned: Push check / carol mentioned you');
 
     call('PATCH', "/api/posts/$first", ['data' => ['type' => 'posts', 'id' => $first, 'attributes' => ['isLiked' => true]]], $carol);
@@ -109,7 +109,11 @@ try {
         step('postReacted: Push check / carol reacted with ❤️ to your post');
     }
 
-    call('PATCH', "/api/discussions/$id", ['data' => ['type' => 'discussions', 'id' => $id, 'attributes' => ['subscription' => 'follow']]], $bob);
+    // flarum/subscriptions tells only followers who have read to the end.
+    call('PATCH', "/api/discussions/$id", ['data' => ['type' => 'discussions', 'id' => $id, 'attributes' => [
+        'subscription' => 'follow',
+        'lastReadPostNumber' => $mention['attributes']['number'],
+    ]]], $bob);
     post($carol, $id, 'A post in a discussion you follow.');
     step('newPost: Push check / carol posted');
 

@@ -1,0 +1,37 @@
+forumcopilot-flapp:
+  # The admin page.
+  admin:
+    page:
+      intro: "Flapp est une application pour les forums Flarum, sur Android et iPhone. Avec cette extension, vos membres qui l'utilisent reçoivent les notifications push de ce forum en quelques secondes, dans leur langue, pour les notifications qu'ils choisissent."
+      independent: "Flapp est une application indépendante. Elle n'est ni conçue par les créateurs de Flarum, ni affiliée à eux."
+      how_heading: "Ce que fait la connexion"
+      how_text: "La connexion inscrit ce forum auprès du relais Flapp, qui confie chaque notification push à Google et Apple pour la livrer. Le forum décide de ce qu'il envoie et le rédige ; le relais ne reçoit jamais les identifiants de qui que ce soit. Se déconnecter, ou désactiver cette extension, demande au relais d'oublier le forum."
+      members_heading: "Ce que voient vos membres"
+      members_text: "Un membre qui se connecte à ce forum dans Flapp obtient une colonne Flapp dans ses paramètres de notification, sur le forum et dans l'application, où il choisit les notifications qui arrivent sur son téléphone. Celles qui alertent sur le web par défaut sont activées au départ. Les membres qui n'utilisent pas Flapp ne voient aucun changement."
+      privacy_link: "Politique de confidentialité de Flapp"
+      status_heading: "État"
+      connected_text: "Connecté à {relay}."
+      not_connected_text: "Non connecté. Les membres qui utilisent Flapp ne reçoivent pas encore de notifications push de ce forum."
+      connect_button: "Connecter"
+      disconnect_button: "Déconnecter"
+      disconnect_confirmation: "Se déconnecter du relais Flapp ? Les téléphones des membres ne recevront plus de notifications push de ce forum."
+
+  # Errors from the extension's API calls.
+  api:
+    already_connected: "Ce forum est déjà connecté. Déconnectez-le d'abord."
+    invalid_app: "Le nom de l'application est manquant ou invalide."
+    invalid_handle: "L'identifiant est manquant ou invalide."
+    invalid_locale: "La langue n'est pas valide."
+    invalid_platform: "La plateforme doit être android ou ios."
+    not_connected: "Ce forum n'est pas connecté au relais Flapp."
+    relay_failed: "Le relais Flapp n'a pas pu connecter ce forum : {message}"
+    token_needed: "Un appareil doit être enregistré avec le jeton du lecteur dans l'en-tête Authorization."
+
+  # The reader's notification settings.
+  forum:
+    settings:
+      notify_by_flapp_heading: "Flapp"
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: "Nouvelle notification"

@@ -11,6 +11,11 @@ forumcopilot-flapp:
         Connecting enrols this forum with the Flapp relay, which hands each push to Google and Apple to deliver. The
         forum decides what to send and writes it; the relay never gets anyone's sign-in. Disconnecting, or disabling
         this extension, tells the relay to forget the forum.
+      members_heading: What your members see
+      members_text: >
+        A member who signs in to this forum in Flapp gets a Flapp column in their notification settings, on the forum
+        and in the app, and chooses there which notifications reach their phone. The ones that alert on the web by
+        default start on. Members who don't use Flapp see no change.
       privacy_link: Flapp's privacy policy
       status_heading: Status
       connected_text: "Connected to {relay}."

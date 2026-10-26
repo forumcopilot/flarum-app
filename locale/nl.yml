@@ -1,0 +1,37 @@
+forumcopilot-flapp:
+  # The admin page.
+  admin:
+    page:
+      intro: "Flapp is een app voor Flarum-forums, op Android en iPhone. Met deze extensie krijgen je leden die hem gebruiken pushmeldingen van dit forum binnen enkele seconden, in hun eigen taal, voor de meldingen die ze kiezen."
+      independent: "Flapp is een onafhankelijke app. Hij is niet gemaakt door, of verbonden aan, de makers van Flarum."
+      how_heading: "Wat verbinden doet"
+      how_text: "Bij het verbinden schrijft dit forum zich in bij de Flapp-relay, die elke pushmelding aan Google en Apple doorgeeft om te bezorgen. Het forum bepaalt wat er wordt verstuurd en schrijft het; de relay krijgt nooit iemands inloggegevens. De verbinding verbreken, of deze extensie uitschakelen, laat de relay het forum vergeten."
+      members_heading: "Wat je leden zien"
+      members_text: "Wie in Flapp inlogt op dit forum, krijgt een Flapp-kolom in de meldingsinstellingen, op het forum en in de app, en kiest daar welke meldingen de telefoon bereiken. Wat op het web standaard een melding geeft, staat in het begin aan. Leden die Flapp niet gebruiken, merken niets."
+      privacy_link: "Privacybeleid van Flapp"
+      status_heading: "Status"
+      connected_text: "Verbonden met {relay}."
+      not_connected_text: "Niet verbonden. Leden die Flapp gebruiken, krijgen nog geen pushmeldingen van dit forum."
+      connect_button: "Verbinden"
+      disconnect_button: "Verbinding verbreken"
+      disconnect_confirmation: "Verbinding met de Flapp-relay verbreken? De telefoons van leden krijgen dan geen pushmeldingen meer van dit forum."
+
+  # Errors from the extension's API calls.
+  api:
+    already_connected: "Dit forum is al verbonden. Verbreek eerst de verbinding."
+    invalid_app: "De naam van de app ontbreekt of is ongeldig."
+    invalid_handle: "De handle ontbreekt of is ongeldig."
+    invalid_locale: "De taal is ongeldig."
+    invalid_platform: "Het platform moet android of ios zijn."
+    not_connected: "Dit forum is niet verbonden met de Flapp-relay."
+    relay_failed: "De Flapp-relay kon dit forum niet verbinden: {message}"
+    token_needed: "Een apparaat moet worden geregistreerd met het token van de lezer in de Authorization-header."
+
+  # The reader's notification settings.
+  forum:
+    settings:
+      notify_by_flapp_heading: "Flapp"
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: "Nieuwe melding"

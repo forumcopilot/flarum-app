@@ -54,7 +54,9 @@ SiteContext _site(String baseUrl) => SiteContext(
     );
 
 void main() {
-  final samples = jsonDecode(File('test/fixtures/render_samples.json').readAsStringSync()) as Map<String, dynamic>;
+  // RENDER_SAMPLES names another file of the same shape, such as posts from a live forum.
+  final samplesFile = Platform.environment['RENDER_SAMPLES'] ?? 'test/fixtures/render_samples.json';
+  final samples = jsonDecode(File(samplesFile).readAsStringSync()) as Map<String, dynamic>;
   final out = Directory('build/render');
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -67,7 +69,11 @@ void main() {
         '$fonts/Roboto-$style.ttf',
     ]);
     await _loadFont('MaterialIcons', ['$fonts/MaterialIcons-Regular.otf']);
-    await _loadFont('monospace', ['/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf']);
+    // DejaVu on Linux; Andale Mono on a Mac.
+    await _loadFont('monospace', [
+      '/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf',
+      '/System/Library/Fonts/Supplemental/Andale Mono.ttf',
+    ]);
     // Real requests, so pictures from the test forums load.
     HttpOverrides.global = null;
     // The image cache keeps files; widget tests have no path_provider plugin.

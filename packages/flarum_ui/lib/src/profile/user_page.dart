@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../account/account_page.dart' show ProfileStats;
-import '../account/forum_web_page.dart';
+import '../account/edit_profile_page.dart';
 import 'package:forum_kit/theme/forum_colors.dart';
 import '../safety/suspend_user_page.dart';
 import '../home/discussion_list_model.dart';
@@ -223,8 +223,10 @@ class _UserPageState extends State<UserPage> {
                 user: user,
                 onMessage: own ? null : message,
                 onEditProfile: own
-                    ? () => ForumWebPage.open(context, widget.site,
-                        path: '/u/${user.slug ?? user.username}', title: l10n.editProfile)
+                    ? () async {
+                        await EditProfilePage.open(context, widget.site);
+                        if (mounted) _load();
+                      }
                     : null,
               ),
             ),

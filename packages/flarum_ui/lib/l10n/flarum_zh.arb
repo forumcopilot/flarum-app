@@ -453,5 +453,18 @@
   "composerPost": "发布",
   "composerSend": "发送",
   "composerSave": "保存",
-  "bulletedList": "无序列表"
+  "bulletedList": "无序列表",
+  "profilePicture": "头像",
+  "changeProfilePicture": "更换头像",
+  "chooseFromLibrary": "从相册选择",
+  "removeProfilePicture": "移除头像",
+  "profilePictureUpdated": "头像已更新。",
+  "profilePictureRemoved": "头像已移除。",
+  "displayName": "显示名称",
+  "displayNameHelper": "留空则显示你的用户名 {username}。",
+  "displayNameSaved": "显示名称已保存。",
+  "displayNameLocked": "此论坛不允许更改显示名称。",
+  "usernameField": "用户名",
+  "usernameAdminsOnly": "只有论坛管理员可以更改用户名。",
+  "undo": "撤销"
 }

@@ -453,5 +453,18 @@
   "composerPost": "Publier",
   "composerSend": "Envoyer",
   "composerSave": "Enregistrer",
-  "bulletedList": "Liste à puces"
+  "bulletedList": "Liste à puces",
+  "profilePicture": "Photo de profil",
+  "changeProfilePicture": "Changer la photo de profil",
+  "chooseFromLibrary": "Choisir dans la galerie",
+  "removeProfilePicture": "Supprimer la photo",
+  "profilePictureUpdated": "Photo de profil mise à jour.",
+  "profilePictureRemoved": "Photo de profil supprimée.",
+  "displayName": "Nom affiché",
+  "displayNameHelper": "Laissez vide pour afficher votre nom d'utilisateur, {username}.",
+  "displayNameSaved": "Nom affiché enregistré.",
+  "displayNameLocked": "Ce forum ne vous permet pas de changer votre nom affiché.",
+  "usernameField": "Nom d'utilisateur",
+  "usernameAdminsOnly": "Seuls les administrateurs du forum peuvent changer les noms d'utilisateur.",
+  "undo": "Annuler"
 }

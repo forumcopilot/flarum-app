@@ -453,5 +453,18 @@
   "composerPost": "Publicar",
   "composerSend": "Enviar",
   "composerSave": "Guardar",
-  "bulletedList": "Lista con viñetas"
+  "bulletedList": "Lista con viñetas",
+  "profilePicture": "Foto de perfil",
+  "changeProfilePicture": "Cambiar foto de perfil",
+  "chooseFromLibrary": "Elegir de la galería",
+  "removeProfilePicture": "Quitar foto",
+  "profilePictureUpdated": "Foto de perfil actualizada.",
+  "profilePictureRemoved": "Foto de perfil eliminada.",
+  "displayName": "Nombre visible",
+  "displayNameHelper": "Déjalo vacío para mostrar tu nombre de usuario, {username}.",
+  "displayNameSaved": "Nombre visible guardado.",
+  "displayNameLocked": "Este foro no te permite cambiar tu nombre visible.",
+  "usernameField": "Nombre de usuario",
+  "usernameAdminsOnly": "Solo los administradores del foro pueden cambiar los nombres de usuario.",
+  "undo": "Deshacer"
 }

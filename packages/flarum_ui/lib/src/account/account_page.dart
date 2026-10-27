@@ -9,6 +9,7 @@ import 'package:forum_kit/l10n/kit_l10n.dart';
 import '../../l10n/flarum_l10n.dart';
 import '../app/forum_drawer.dart';
 import 'account_privacy_page.dart';
+import 'edit_profile_page.dart';
 import 'forum_web_page.dart';
 import '../notifications/notification_settings_page.dart';
 import '../safety/flagged_posts_page.dart';
@@ -249,7 +250,6 @@ class _AccountPageState extends State<AccountPage> {
     final l10n = flarumL10n(context);
     final theme = Theme.of(context);
     final muted = theme.colorScheme.onSurfaceVariant;
-    final slug = reader.slug ?? reader.username;
     return [
       Padding(
         padding: const EdgeInsets.fromLTRB(
@@ -274,11 +274,12 @@ class _AccountPageState extends State<AccountPage> {
         child: Row(children: [
           Expanded(child: FilledButton.tonal(onPressed: () => _openProfile(reader), child: Text(l10n.viewProfile))),
           const SizedBox(width: DesignTokens.spacingS),
-          // The forum's own profile page, where its owner changes their picture (and bio, where
-          // the forum has one); the app has no form of its own for them yet.
           Expanded(
             child: OutlinedButton(
-              onPressed: () => ForumWebPage.open(context, widget.site, path: '/u/$slug', title: l10n.editProfile),
+              onPressed: () async {
+                await EditProfilePage.open(context, widget.site);
+                if (mounted) setState(() {});
+              },
               child: Text(l10n.editProfile),
             ),
           ),

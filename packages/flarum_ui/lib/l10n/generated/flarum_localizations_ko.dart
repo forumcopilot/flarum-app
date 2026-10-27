@@ -1773,4 +1773,45 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get bulletedList => '글머리 기호 목록';
+
+  @override
+  String get profilePicture => '프로필 사진';
+
+  @override
+  String get changeProfilePicture => '프로필 사진 변경';
+
+  @override
+  String get chooseFromLibrary => '보관함에서 선택';
+
+  @override
+  String get removeProfilePicture => '사진 삭제';
+
+  @override
+  String get profilePictureUpdated => '프로필 사진을 변경했습니다.';
+
+  @override
+  String get profilePictureRemoved => '프로필 사진을 삭제했습니다.';
+
+  @override
+  String get displayName => '표시 이름';
+
+  @override
+  String displayNameHelper(String username) {
+    return '비워 두면 사용자 이름($username)이 표시됩니다.';
+  }
+
+  @override
+  String get displayNameSaved => '표시 이름을 저장했습니다.';
+
+  @override
+  String get displayNameLocked => '이 포럼에서는 표시 이름을 변경할 수 없습니다.';
+
+  @override
+  String get usernameField => '사용자 이름';
+
+  @override
+  String get usernameAdminsOnly => '사용자 이름은 포럼 관리자만 변경할 수 있습니다.';
+
+  @override
+  String get undo => '실행 취소';
 }

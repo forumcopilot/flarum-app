@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart' show MultipartFile;
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -229,6 +232,29 @@ void main() {
           final page = await FixtureForum(version, states: {'seesReactions'}).api().postReactions(liked());
           expect([for (final r in page.items) (r.user?.username, r.reactionId)], [('bob', '1'), ('carol', '2')]);
           expect(page.hasMore, isFalse);
+        });
+      });
+
+      group("the reader's profile", () {
+        test('sets a nickname, is refused one too long, and puts the username back', () async {
+          final alice = (await api.forumInfo()).actor!;
+          expect(alice.canEditNickname, isTrue, reason: 'members may, on the test forums');
+          expect(alice.canEditCredentials, isFalse, reason: 'admins only');
+          expect(alice.email, isNotNull, reason: 'their own');
+          expect((await api.setNickname(alice, WriteSamples.nickname)).displayName, WriteSamples.nickname);
+          final error = await _failure(() => api.setNickname(alice, WriteSamples.nicknameTooLong));
+          expect(error.isValidationError, isTrue);
+          expect(error.errors.single.pointer, '/data/attributes/nickname');
+          expect((await api.setNickname(alice, null)).displayName, 'alice');
+          expect(forum.requests.last.data['data']['attributes'], {'nickname': 'alice'},
+              reason: 'the username, as the web clears a nickname');
+        });
+
+        test('uploads an avatar and removes it', () async {
+          final alice = (await api.forumInfo()).actor!;
+          final image = MultipartFile.fromBytes(base64Decode(WriteSamples.uploadImageBase64), filename: WriteSamples.avatarName);
+          expect((await api.uploadAvatar(alice.id, image)).avatarUrl, contains('/assets/avatars/'));
+          expect((await api.removeAvatar(alice.id)).avatarUrl, isNull);
         });
       });
 

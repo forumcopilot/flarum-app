@@ -453,5 +453,18 @@
   "composerPost": "게시",
   "composerSend": "보내기",
   "composerSave": "저장",
-  "bulletedList": "글머리 기호 목록"
+  "bulletedList": "글머리 기호 목록",
+  "profilePicture": "프로필 사진",
+  "changeProfilePicture": "프로필 사진 변경",
+  "chooseFromLibrary": "보관함에서 선택",
+  "removeProfilePicture": "사진 삭제",
+  "profilePictureUpdated": "프로필 사진을 변경했습니다.",
+  "profilePictureRemoved": "프로필 사진을 삭제했습니다.",
+  "displayName": "표시 이름",
+  "displayNameHelper": "비워 두면 사용자 이름({username})이 표시됩니다.",
+  "displayNameSaved": "표시 이름을 저장했습니다.",
+  "displayNameLocked": "이 포럼에서는 표시 이름을 변경할 수 없습니다.",
+  "usernameField": "사용자 이름",
+  "usernameAdminsOnly": "사용자 이름은 포럼 관리자만 변경할 수 있습니다.",
+  "undo": "실행 취소"
 }

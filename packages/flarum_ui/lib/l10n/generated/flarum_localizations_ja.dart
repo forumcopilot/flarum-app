@@ -1771,4 +1771,45 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get bulletedList => '箇条書き';
+
+  @override
+  String get profilePicture => 'プロフィール画像';
+
+  @override
+  String get changeProfilePicture => 'プロフィール画像を変更';
+
+  @override
+  String get chooseFromLibrary => 'ライブラリから選択';
+
+  @override
+  String get removeProfilePicture => '画像を削除';
+
+  @override
+  String get profilePictureUpdated => 'プロフィール画像を更新しました。';
+
+  @override
+  String get profilePictureRemoved => 'プロフィール画像を削除しました。';
+
+  @override
+  String get displayName => '表示名';
+
+  @override
+  String displayNameHelper(String username) {
+    return '空欄にするとユーザー名（$username）が表示されます。';
+  }
+
+  @override
+  String get displayNameSaved => '表示名を保存しました。';
+
+  @override
+  String get displayNameLocked => 'このフォーラムでは表示名を変更できません。';
+
+  @override
+  String get usernameField => 'ユーザー名';
+
+  @override
+  String get usernameAdminsOnly => 'ユーザー名を変更できるのはフォーラムの管理者だけです。';
+
+  @override
+  String get undo => '元に戻す';
 }

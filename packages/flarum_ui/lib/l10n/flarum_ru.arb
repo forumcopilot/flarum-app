@@ -453,5 +453,18 @@
   "composerPost": "Опубликовать",
   "composerSend": "Отправить",
   "composerSave": "Сохранить",
-  "bulletedList": "Маркированный список"
+  "bulletedList": "Маркированный список",
+  "profilePicture": "Фото профиля",
+  "changeProfilePicture": "Изменить фото профиля",
+  "chooseFromLibrary": "Выбрать из галереи",
+  "removeProfilePicture": "Удалить фото",
+  "profilePictureUpdated": "Фото профиля обновлено.",
+  "profilePictureRemoved": "Фото профиля удалено.",
+  "displayName": "Отображаемое имя",
+  "displayNameHelper": "Оставьте пустым, чтобы показывать имя пользователя {username}.",
+  "displayNameSaved": "Отображаемое имя сохранено.",
+  "displayNameLocked": "На этом форуме нельзя изменить отображаемое имя.",
+  "usernameField": "Имя пользователя",
+  "usernameAdminsOnly": "Менять имена пользователей могут только администраторы форума.",
+  "undo": "Отменить"
 }

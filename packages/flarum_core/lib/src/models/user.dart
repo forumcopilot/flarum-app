@@ -28,6 +28,9 @@ class FlarumUser {
     this.canSuspend = false,
     this.groups = const [],
     this.bestAnswerCount,
+    this.canEditNickname = false,
+    this.canEditCredentials = false,
+    this.email,
   });
 
   /// [document] brings the user's groups, where the request included them.
@@ -59,6 +62,9 @@ class FlarumUser {
           for (final group in document.findAll(resource.toMany('groups'))) FlarumGroup.fromResource(group),
       ],
       bestAnswerCount: a.integer('bestAnswerCount'),
+      canEditNickname: a.boolean('canEditNickname') ?? false,
+      canEditCredentials: a.boolean('canEditCredentials') ?? false,
+      email: a.nonEmptyString('email'),
     );
   }
 
@@ -85,6 +91,9 @@ class FlarumUser {
         canSuspend: canSuspend,
         groups: groups,
         bestAnswerCount: bestAnswerCount,
+        canEditNickname: canEditNickname,
+        canEditCredentials: canEditCredentials,
+        email: email,
       );
 
   final String id;
@@ -136,6 +145,17 @@ class FlarumUser {
 
   /// Their posts chosen as best answers (fof/best-answer), when the forum counts them.
   final int? bestAnswerCount;
+
+  /// Whether the reader may change the user's nickname (flarum/nicknames; members their own, by
+  /// default). False without the extension.
+  final bool canEditNickname;
+
+  /// Whether the reader may change the user's username, email and password: admins. The reader
+  /// changes their own email and password on the forum's settings page, with their password.
+  final bool canEditCredentials;
+
+  /// Their email address: the reader's own, and for admins.
+  final String? email;
 
   bool get isSuspended => suspendedUntil?.isAfter(DateTime.now()) ?? false;
 

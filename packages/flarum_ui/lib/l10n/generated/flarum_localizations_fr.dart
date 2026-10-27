@@ -1871,4 +1871,47 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get bulletedList => 'Liste à puces';
+
+  @override
+  String get profilePicture => 'Photo de profil';
+
+  @override
+  String get changeProfilePicture => 'Changer la photo de profil';
+
+  @override
+  String get chooseFromLibrary => 'Choisir dans la galerie';
+
+  @override
+  String get removeProfilePicture => 'Supprimer la photo';
+
+  @override
+  String get profilePictureUpdated => 'Photo de profil mise à jour.';
+
+  @override
+  String get profilePictureRemoved => 'Photo de profil supprimée.';
+
+  @override
+  String get displayName => 'Nom affiché';
+
+  @override
+  String displayNameHelper(String username) {
+    return 'Laissez vide pour afficher votre nom d\'utilisateur, $username.';
+  }
+
+  @override
+  String get displayNameSaved => 'Nom affiché enregistré.';
+
+  @override
+  String get displayNameLocked =>
+      'Ce forum ne vous permet pas de changer votre nom affiché.';
+
+  @override
+  String get usernameField => 'Nom d\'utilisateur';
+
+  @override
+  String get usernameAdminsOnly =>
+      'Seuls les administrateurs du forum peuvent changer les noms d\'utilisateur.';
+
+  @override
+  String get undo => 'Annuler';
 }

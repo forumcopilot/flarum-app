@@ -1,0 +1,46 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/users/5/avatar",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": {
+      "type": "users",
+      "id": "5",
+      "attributes": {
+        "username": "alice",
+        "displayName": "alice",
+        "avatarUrl": null,
+        "slug": "alice",
+        "joinTime": "2026-10-08T17:52:27+00:00",
+        "discussionCount": 2,
+        "commentCount": 38,
+        "canEdit": false,
+        "canEditCredentials": false,
+        "canEditGroups": false,
+        "canDelete": false,
+        "lastSeenAt": "2026-10-27T05:03:34+00:00",
+        "isEmailConfirmed": true,
+        "email": "alice@flarumapp.local",
+        "suspendMessage": null,
+        "suspendedUntil": null,
+        "canSuspend": false,
+        "canModerateExports": false,
+        "blocksPd": false,
+        "fof-upload-uploadCountCurrent": null,
+        "fof-upload-uploadCountAll": null,
+        "fofTermsPoliciesState": [],
+        "fofTermsPoliciesHasUpdate": false,
+        "fofTermsPoliciesMustAccept": false,
+        "ignored": false,
+        "canBeIgnored": false,
+        "bestAnswerCount": 0,
+        "canEditNickname": true
+      }
+    }
+  }
+}

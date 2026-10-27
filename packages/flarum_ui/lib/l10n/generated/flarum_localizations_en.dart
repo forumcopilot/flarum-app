@@ -1848,4 +1848,47 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get bulletedList => 'Bulleted List';
+
+  @override
+  String get profilePicture => 'Profile Picture';
+
+  @override
+  String get changeProfilePicture => 'Change Profile Picture';
+
+  @override
+  String get chooseFromLibrary => 'Choose from Library';
+
+  @override
+  String get removeProfilePicture => 'Remove Picture';
+
+  @override
+  String get profilePictureUpdated => 'Profile picture updated.';
+
+  @override
+  String get profilePictureRemoved => 'Profile picture removed.';
+
+  @override
+  String get displayName => 'Display Name';
+
+  @override
+  String displayNameHelper(String username) {
+    return 'Leave it empty to show your username, $username.';
+  }
+
+  @override
+  String get displayNameSaved => 'Display name saved.';
+
+  @override
+  String get displayNameLocked =>
+      'This forum doesn\'t let you change your display name.';
+
+  @override
+  String get usernameField => 'Username';
+
+  @override
+  String get usernameAdminsOnly =>
+      'Only the forum\'s admins can change usernames.';
+
+  @override
+  String get undo => 'Undo';
 }

@@ -565,6 +565,10 @@ class FlarumApi {
   static Future<MultipartFile> fileAt(String path, {required String name}) =>
       MultipartFile.fromFile(path, filename: name);
 
+  /// [bytes] to [upload] or [uploadAvatar] as [name], for a photo picked without a file.
+  static MultipartFile fileFromBytes(List<int> bytes, {required String name}) =>
+      MultipartFile.fromBytes(bytes, filename: name);
+
   /// Deletes upload [uuid] (fof/upload): one the writer took back out of their post.
   Future<void> deleteUpload(String uuid) => client.delete('/fof/upload/delete/$uuid');
 
@@ -645,6 +649,32 @@ class FlarumApi {
       offset: offset,
       hasMore: document.hasNext,
     );
+  }
+
+  /// Sets [user]'s nickname (flarum/nicknames), where [FlarumUser.canEditNickname]; null puts their
+  /// username back, as the web does (the forum then keeps no nickname). The forum's rules (length,
+  /// characters, uniqueness) fail as a validation error on `nickname`.
+  Future<FlarumUser> setNickname(FlarumUser user, String? nickname) async {
+    final document = await client.patch('/users/${user.id}', {
+      'data': {
+        'type': 'users',
+        'id': user.id,
+        'attributes': {'nickname': nickname ?? user.username},
+      },
+    });
+    return FlarumUser.fromResource(document.single, document: document);
+  }
+
+  /// Uploads [file] as user [userId]'s avatar, which the forum crops square.
+  Future<FlarumUser> uploadAvatar(String userId, MultipartFile file) async {
+    final document = await client.postFiles('/users/$userId/avatar', 'avatar', [file]);
+    return FlarumUser.fromResource(document.single, document: document);
+  }
+
+  /// Removes user [userId]'s avatar: the forum shows their initial again.
+  Future<FlarumUser> removeAvatar(String userId) async {
+    final document = await client.deleteReturning('/users/$userId/avatar');
+    return FlarumUser.fromResource(document.single, document: document);
   }
 
   /// Everyone who liked post [postId], as the web's "Liked by" dialog lists them (flarum/likes'

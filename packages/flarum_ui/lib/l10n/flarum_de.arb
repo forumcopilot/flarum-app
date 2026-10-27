@@ -453,5 +453,18 @@
   "composerPost": "Posten",
   "composerSend": "Senden",
   "composerSave": "Speichern",
-  "bulletedList": "Aufzählung"
+  "bulletedList": "Aufzählung",
+  "profilePicture": "Profilbild",
+  "changeProfilePicture": "Profilbild ändern",
+  "chooseFromLibrary": "Aus Galerie auswählen",
+  "removeProfilePicture": "Bild entfernen",
+  "profilePictureUpdated": "Profilbild aktualisiert.",
+  "profilePictureRemoved": "Profilbild entfernt.",
+  "displayName": "Anzeigename",
+  "displayNameHelper": "Leer lassen, um deinen Benutzernamen {username} zu zeigen.",
+  "displayNameSaved": "Anzeigename gespeichert.",
+  "displayNameLocked": "In diesem Forum kannst du deinen Anzeigenamen nicht ändern.",
+  "usernameField": "Benutzername",
+  "usernameAdminsOnly": "Nur die Admins des Forums können Benutzernamen ändern.",
+  "undo": "Rückgängig"
 }

@@ -53,6 +53,12 @@ abstract final class WriteSamples {
   static const draftPrivateTitle = 'A private word saved for later';
   static const draftPrivateContent = 'For bob, when it is ready.';
 
+  /// alice's nickname for the profile fixtures, and one past flarum/nicknames' default 150
+  /// characters, which the forum refuses.
+  static const nickname = 'Alice Liddell';
+  static final nicknameTooLong = 'A' * 151;
+  static const avatarName = 'avatar-test.png';
+
   static const uploadImageName = 'composer-test.png';
   static const uploadFileName = 'composer-test.txt';
   static const uploadFileText = 'Uploaded by the composer tests.\n';

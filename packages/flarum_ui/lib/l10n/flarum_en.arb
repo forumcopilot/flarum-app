@@ -2530,5 +2530,63 @@
   "bulletedList": "Bulleted List",
   "@bulletedList": {
     "description": "Formatting menu item that starts a bulleted list"
+  },
+  "profilePicture": "Profile Picture",
+  "@profilePicture": {
+    "description": "Edit Profile: the title of the sheet that changes the reader's picture"
+  },
+  "changeProfilePicture": "Change Profile Picture",
+  "@changeProfilePicture": {
+    "description": "Edit Profile: the tooltip of the camera button on the reader's picture"
+  },
+  "chooseFromLibrary": "Choose from Library",
+  "@chooseFromLibrary": {
+    "description": "Edit Profile: picks the new picture from the phone's photos"
+  },
+  "removeProfilePicture": "Remove Picture",
+  "@removeProfilePicture": {
+    "description": "Edit Profile: removes the reader's picture (the forum shows their initial again)"
+  },
+  "profilePictureUpdated": "Profile picture updated.",
+  "@profilePictureUpdated": {
+    "description": "Edit Profile: said once the new picture is saved"
+  },
+  "profilePictureRemoved": "Profile picture removed.",
+  "@profilePictureRemoved": {
+    "description": "Edit Profile: said once the picture is removed"
+  },
+  "displayName": "Display Name",
+  "@displayName": {
+    "description": "Edit Profile: the name the forum shows for the reader (flarum/nicknames' nickname)"
+  },
+  "displayNameHelper": "Leave it empty to show your username, {username}.",
+  "@displayNameHelper": {
+    "description": "Edit Profile: under the display name's field; {username} is @ and their username",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "@alice"
+      }
+    }
+  },
+  "displayNameSaved": "Display name saved.",
+  "@displayNameSaved": {
+    "description": "Edit Profile: said once the display name is saved (with Undo)"
+  },
+  "displayNameLocked": "This forum doesn't let you change your display name.",
+  "@displayNameLocked": {
+    "description": "Edit Profile: why the display name has a lock (the forum doesn't let members change it)"
+  },
+  "usernameField": "Username",
+  "@usernameField": {
+    "description": "Edit Profile: the row with the reader's username"
+  },
+  "usernameAdminsOnly": "Only the forum's admins can change usernames.",
+  "@usernameAdminsOnly": {
+    "description": "Edit Profile: why the username has a lock"
+  },
+  "undo": "Undo",
+  "@undo": {
+    "description": "Puts back a change just saved (a snackbar's action)"
   }
 }

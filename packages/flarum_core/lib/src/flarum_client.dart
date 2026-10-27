@@ -53,6 +53,10 @@ class FlarumClient {
 
   Future<void> delete(String path) => _send('DELETE', path);
 
+  /// DELETEs [path] and returns the response document, for deletes that answer with what's left
+  /// (a user without their avatar).
+  Future<JsonApiDocument> deleteReturning(String path) async => _document(await _send('DELETE', path));
+
   /// POSTs [files] as multipart form data under [field] (fof/upload's `files[]`).
   Future<JsonApiDocument> postFiles(String path, String field, List<MultipartFile> files) async {
     final form = FormData();

@@ -53,6 +53,12 @@ likers the post carries show at once; everyone loads for a reader who may search
 (`postReactions`; no group may by default, so most readers get the reactions' counts). Fixtures:
 `post_likers*` and `post_reactions*`, recorded on the community's welcome post.
 
+**Edit Profile** (`EditProfilePage`, 27 Oct), as ABDA's: the picture with a camera button (take a
+photo, choose one, remove it), then a row per thing the forum lets the reader change, saved as it's
+changed: the display name (flarum/nicknames, in a dialog whose field shows the forum's refusal, with
+Undo after), the username with a lock (admins' alone). Email, password and the rest stay on the
+forum's settings page, linked at the foot. Fixtures: `profile_*`, alice's, put back as they were.
+
 **Profile.** The Profile tab is ABDA's hub: avatar and name, View Profile / Edit Profile, the stats,
 Your Stuff (My Posts, Drafts, Bookmarks, Flagged Posts), Settings (Notification Settings, the colour
 scheme in a sheet, Account and Privacy, Log Out in red); a guest gets Join and Log In. A member's
@@ -66,8 +72,8 @@ title to "Start a Discu…"). The bar is ABDA's: attachments, then every format 
 
 ## Not done, and why
 
-- **Native account editing** (avatar upload, nickname, email, password): Edit Profile and Account and
-  Privacy open the forum's own pages for now. Same reason: new API calls need recorded fixtures.
+- **Email and password in the app**: Flarum asks for the reader's password to change either (and
+  mails a confirmation), so they stay on the forum's settings page, as ABDA keeps them in Account.
 - **Composer drafts saved while typing** (ABDA saves server drafts as you type): fof/drafts is
   optional on Flarum and saving silently creates drafts on the forum; left as save-on-close.
 - **Emoji picker** in the composer: ABDA's composer has none either; left out for consistency.

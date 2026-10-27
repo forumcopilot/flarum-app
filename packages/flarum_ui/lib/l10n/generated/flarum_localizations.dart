@@ -2842,6 +2842,84 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Bulleted List'**
   String get bulletedList;
+
+  /// Edit Profile: the title of the sheet that changes the reader's picture
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Picture'**
+  String get profilePicture;
+
+  /// Edit Profile: the tooltip of the camera button on the reader's picture
+  ///
+  /// In en, this message translates to:
+  /// **'Change Profile Picture'**
+  String get changeProfilePicture;
+
+  /// Edit Profile: picks the new picture from the phone's photos
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Library'**
+  String get chooseFromLibrary;
+
+  /// Edit Profile: removes the reader's picture (the forum shows their initial again)
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Picture'**
+  String get removeProfilePicture;
+
+  /// Edit Profile: said once the new picture is saved
+  ///
+  /// In en, this message translates to:
+  /// **'Profile picture updated.'**
+  String get profilePictureUpdated;
+
+  /// Edit Profile: said once the picture is removed
+  ///
+  /// In en, this message translates to:
+  /// **'Profile picture removed.'**
+  String get profilePictureRemoved;
+
+  /// Edit Profile: the name the forum shows for the reader (flarum/nicknames' nickname)
+  ///
+  /// In en, this message translates to:
+  /// **'Display Name'**
+  String get displayName;
+
+  /// Edit Profile: under the display name's field; {username} is @ and their username
+  ///
+  /// In en, this message translates to:
+  /// **'Leave it empty to show your username, {username}.'**
+  String displayNameHelper(String username);
+
+  /// Edit Profile: said once the display name is saved (with Undo)
+  ///
+  /// In en, this message translates to:
+  /// **'Display name saved.'**
+  String get displayNameSaved;
+
+  /// Edit Profile: why the display name has a lock (the forum doesn't let members change it)
+  ///
+  /// In en, this message translates to:
+  /// **'This forum doesn\'t let you change your display name.'**
+  String get displayNameLocked;
+
+  /// Edit Profile: the row with the reader's username
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get usernameField;
+
+  /// Edit Profile: why the username has a lock
+  ///
+  /// In en, this message translates to:
+  /// **'Only the forum\'s admins can change usernames.'**
+  String get usernameAdminsOnly;
+
+  /// Puts back a change just saved (a snackbar's action)
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
 }
 
 class _FlarumLocalizationsDelegate

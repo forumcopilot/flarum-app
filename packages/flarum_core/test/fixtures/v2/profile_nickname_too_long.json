@@ -1,0 +1,32 @@
+{
+  "request": {
+    "match": "data",
+    "method": "PATCH",
+    "path": "/users/2",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "users",
+        "id": "2",
+        "attributes": {
+          "nickname": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      }
+    }
+  },
+  "status": 422,
+  "body": {
+    "errors": [
+      {
+        "status": "422",
+        "code": "validation_error",
+        "source": {
+          "pointer": "/data/attributes/nickname"
+        },
+        "detail": "The nickname field must not be greater than 150 characters."
+      }
+    ]
+  }
+}

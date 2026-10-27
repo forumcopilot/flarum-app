@@ -146,6 +146,11 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   discussion's `canSeeReactions`, which no group has by default (members get 403). A taken-back
   reaction stays as a row with no reaction. `FlarumApi.likers` and `postReactions`. 1.x lists
   bookmarked discussions only by the `is:bookmarked` gambit.
+- The reader's profile: nickname (flarum/nicknames, `canEditNickname` on the user; members by
+  default) = PATCH the user's `nickname`; the username itself clears it (the web's way; 1.x and 2.0
+  then store none), and over 150 characters is a 422 on it. Avatar: `POST /api/users/{id}/avatar`
+  (multipart `avatar`) and `DELETE` the same, both answering with the user. Username, email and
+  password: `canEditCredentials` (admins); a reader's own email and password need their password.
 - Users are found by slug (`GET /api/users/{slug}?bySlug=true`, as `/u/{slug}` links name them):
   the username by default, the id on forums with the ID slug driver, where a username 404s. Their
   posts and discussions: `filter[author]` (and 1.x's `author:` gambit) takes the username on 1.x

@@ -1855,4 +1855,47 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get bulletedList => 'Opsomming';
+
+  @override
+  String get profilePicture => 'Profielfoto';
+
+  @override
+  String get changeProfilePicture => 'Profielfoto wijzigen';
+
+  @override
+  String get chooseFromLibrary => 'Kiezen uit bibliotheek';
+
+  @override
+  String get removeProfilePicture => 'Foto verwijderen';
+
+  @override
+  String get profilePictureUpdated => 'Profielfoto bijgewerkt.';
+
+  @override
+  String get profilePictureRemoved => 'Profielfoto verwijderd.';
+
+  @override
+  String get displayName => 'Weergavenaam';
+
+  @override
+  String displayNameHelper(String username) {
+    return 'Laat leeg om je gebruikersnaam te tonen, $username.';
+  }
+
+  @override
+  String get displayNameSaved => 'Weergavenaam opgeslagen.';
+
+  @override
+  String get displayNameLocked =>
+      'Op dit forum kun je je weergavenaam niet wijzigen.';
+
+  @override
+  String get usernameField => 'Gebruikersnaam';
+
+  @override
+  String get usernameAdminsOnly =>
+      'Alleen de beheerders van het forum kunnen gebruikersnamen wijzigen.';
+
+  @override
+  String get undo => 'Ongedaan maken';
 }

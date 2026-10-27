@@ -1767,4 +1767,45 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get bulletedList => '无序列表';
+
+  @override
+  String get profilePicture => '头像';
+
+  @override
+  String get changeProfilePicture => '更换头像';
+
+  @override
+  String get chooseFromLibrary => '从相册选择';
+
+  @override
+  String get removeProfilePicture => '移除头像';
+
+  @override
+  String get profilePictureUpdated => '头像已更新。';
+
+  @override
+  String get profilePictureRemoved => '头像已移除。';
+
+  @override
+  String get displayName => '显示名称';
+
+  @override
+  String displayNameHelper(String username) {
+    return '留空则显示你的用户名 $username。';
+  }
+
+  @override
+  String get displayNameSaved => '显示名称已保存。';
+
+  @override
+  String get displayNameLocked => '此论坛不允许更改显示名称。';
+
+  @override
+  String get usernameField => '用户名';
+
+  @override
+  String get usernameAdminsOnly => '只有论坛管理员可以更改用户名。';
+
+  @override
+  String get undo => '撤销';
 }

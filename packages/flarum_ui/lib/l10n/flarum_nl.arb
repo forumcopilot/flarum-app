@@ -453,5 +453,18 @@
   "composerPost": "Plaatsen",
   "composerSend": "Versturen",
   "composerSave": "Opslaan",
-  "bulletedList": "Opsomming"
+  "bulletedList": "Opsomming",
+  "profilePicture": "Profielfoto",
+  "changeProfilePicture": "Profielfoto wijzigen",
+  "chooseFromLibrary": "Kiezen uit bibliotheek",
+  "removeProfilePicture": "Foto verwijderen",
+  "profilePictureUpdated": "Profielfoto bijgewerkt.",
+  "profilePictureRemoved": "Profielfoto verwijderd.",
+  "displayName": "Weergavenaam",
+  "displayNameHelper": "Laat leeg om je gebruikersnaam te tonen, {username}.",
+  "displayNameSaved": "Weergavenaam opgeslagen.",
+  "displayNameLocked": "Op dit forum kun je je weergavenaam niet wijzigen.",
+  "usernameField": "Gebruikersnaam",
+  "usernameAdminsOnly": "Alleen de beheerders van het forum kunnen gebruikersnamen wijzigen.",
+  "undo": "Ongedaan maken"
 }

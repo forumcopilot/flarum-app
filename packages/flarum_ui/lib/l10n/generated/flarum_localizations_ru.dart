@@ -1902,4 +1902,47 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get bulletedList => 'Маркированный список';
+
+  @override
+  String get profilePicture => 'Фото профиля';
+
+  @override
+  String get changeProfilePicture => 'Изменить фото профиля';
+
+  @override
+  String get chooseFromLibrary => 'Выбрать из галереи';
+
+  @override
+  String get removeProfilePicture => 'Удалить фото';
+
+  @override
+  String get profilePictureUpdated => 'Фото профиля обновлено.';
+
+  @override
+  String get profilePictureRemoved => 'Фото профиля удалено.';
+
+  @override
+  String get displayName => 'Отображаемое имя';
+
+  @override
+  String displayNameHelper(String username) {
+    return 'Оставьте пустым, чтобы показывать имя пользователя $username.';
+  }
+
+  @override
+  String get displayNameSaved => 'Отображаемое имя сохранено.';
+
+  @override
+  String get displayNameLocked =>
+      'На этом форуме нельзя изменить отображаемое имя.';
+
+  @override
+  String get usernameField => 'Имя пользователя';
+
+  @override
+  String get usernameAdminsOnly =>
+      'Менять имена пользователей могут только администраторы форума.';
+
+  @override
+  String get undo => 'Отменить';
 }

@@ -22,6 +22,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flarum_core/api.dart';
+import 'package:flarum_core/src/testing/write_samples.dart';
 
 import 'fixture_recorder.dart';
 
@@ -180,6 +181,18 @@ Future<void> main(List<String> args) async {
       }
     }
   }
+
+  // alice edits her profile and puts it back: a nickname (and one too long), then an avatar.
+  final alice = (await api.forumInfo()).actor!;
+  recorder.matchData.addAll(['profile_nickname', 'profile_nickname_too_long', 'profile_nickname_cleared']);
+  await record('profile_nickname', () => api.setNickname(alice, WriteSamples.nickname));
+  await record('profile_nickname_too_long', () => api.setNickname(alice, WriteSamples.nicknameTooLong));
+  await record('profile_nickname_cleared', () => api.setNickname(alice, null));
+  await record(
+      'profile_avatar',
+      () => api.uploadAvatar(
+          alice.id, MultipartFile.fromBytes(base64Decode(WriteSamples.uploadImageBase64), filename: WriteSamples.avatarName)));
+  await record('profile_avatar_removed', () => api.removeAvatar(alice.id));
 
   // Sign-out lists the account's tokens with the remember cookie, then deletes the current one.
   // carol signs in afresh so the tokens the fixtures above used stay valid.

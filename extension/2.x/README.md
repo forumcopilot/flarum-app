@@ -10,6 +10,10 @@ Flapp is an independent app. It is not made by, or affiliated with, the makers o
 
 > **Status:** running on our test forums, not yet on Packagist.
 
+> **Source:** developed in [forumcopilot/flarum-app](https://github.com/forumcopilot/flarum-app/tree/main/extension/2.x),
+> alongside the app it pushes to. [forumcopilot/flarum-flapp](https://github.com/forumcopilot/flarum-flapp), which Composer
+> installs from, is a copy of that folder.
+
 ## How it works
 
 1. An admin opens the extension's page and clicks **Connect**. The forum makes a signing key and enrols with the Flapp

@@ -16,7 +16,7 @@ which is in this repository too. MIT licensed.
   &nbsp;
   <img src="docs/screenshots/tags.png" width="196" alt="The Flarum Community's tags as cards: Support, Meta and Extensions, each with its colour, discussion count, latest discussion and child tags">
   &nbsp;
-  <img src="docs/screenshots/discussion.png" width="196" alt="A discussion on the Flarum Community: its title and tags, then the first post with its formatting">
+  <img src="docs/screenshots/discussion.png" width="196" alt="A discussion on the Flarum Community, Introducing Deck: its title and tags, then the first post with its text and picture">
   &nbsp;
   <img src="docs/screenshots/drawer.png" width="196" alt="The drawer: the forum's name, Log In and Sign Up, then the community's lists and its tags">
 </p>

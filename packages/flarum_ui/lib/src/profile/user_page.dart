@@ -335,6 +335,11 @@ class _UserHeader extends StatelessWidget {
                   Flexible(child: Text(info.join(' · '), style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant))),
                 ]),
               ],
+              // What they say about themselves (fof/user-bio).
+              if (user.bio case final bio?) ...[
+                const SizedBox(height: DesignTokens.spacingS),
+                Text(bio, style: theme.textTheme.bodyMedium),
+              ],
               // Shown to them and to moderators (flarum/suspend).
               if (user.isSuspended) ...[
                 const SizedBox(height: DesignTokens.spacingS),

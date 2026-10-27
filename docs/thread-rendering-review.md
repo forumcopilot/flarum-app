@@ -36,6 +36,17 @@ how many of the 4,706 have it.
   - flutter_svg draws part of some SVG pictures (the Vietnamese pack's flag logo shows its star but not the flag).
   - discuss.flarum.org's own SVG emoji, plain `img`s, show at their own size, larger than the web's.
 
+- **27 Oct, fof/upload's text previews (#10):** the file's card, then its first lines as a code
+  block. #6, the copy button over long lines, is forum_kit's `CodeBlock`, shared with ABDA. It
+  waits for a decision on changing it in discourse-app.
+- **27 Oct, around the post (#15, #16, #17):**
+  - Posts ask for `user.groups` and `ipInfo` (fof/geoip; dropped where a forum refuses it).
+  - The author's name has the post's country flag and a small round badge per group: its colour, its icon, its name on a long press.
+  - The member card and profile show the bio (fof/user-bio: `bioHtml`, or the text in `bio`).
+  - Fixtures recorded with fewer includes still answer a request that names more (`FixtureForum`).
+
+  Checked on the Pixel 4a.
+
 ## In the post's text
 
 | # | What | Posts | App | Web | Fix |

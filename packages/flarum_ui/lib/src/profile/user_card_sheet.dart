@@ -126,6 +126,11 @@ class _UserCardState extends State<_UserCard> {
                 ),
               ]),
             ],
+            // What they say about themselves (fof/user-bio), a few lines of it.
+            if (user.bio case final bio?) ...[
+              const SizedBox(height: DesignTokens.spacingS),
+              Text(bio, maxLines: 4, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodyMedium),
+            ],
             ProfileStats(user: user),
             Row(children: [
               Expanded(child: OutlinedButton(onPressed: widget.onOpenProfile, child: Text(l10n.profile))),

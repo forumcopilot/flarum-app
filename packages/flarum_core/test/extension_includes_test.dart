@@ -20,29 +20,34 @@ void main() {
 
   const pollIncludes = 'polls,polls.options,polls.myVotes,polls.myVotes.option';
 
+  /// A post's includes from Flarum itself: its author with their groups (the web's badges).
+  const core = 'user,user.groups,discussion';
+
   test('posts without flarum/mentions: each extension tried once, and only mentionedBy stays off', () async {
-    // Refused; without any extension's; mentions alone, refused; likes alone; polls alone; both.
-    final adapter = ScriptedAdapter([refused, noPosts, refused, noPosts, noPosts, noPosts, noPosts]);
+    // Refused; without any extension's; mentions alone, refused; likes alone; polls alone; fof/geoip
+    // alone; the three.
+    final adapter = ScriptedAdapter([refused, noPosts, refused, noPosts, noPosts, noPosts, noPosts, noPosts]);
     final forum = api(adapter);
     await forum.posts('1');
     expect(include(adapter, 0), contains('mentionedBy'));
-    expect(include(adapter, 1), 'user,discussion');
-    expect(include(adapter, 2), 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion');
-    expect(include(adapter, 3), 'user,discussion,likes');
-    expect(include(adapter, 4), 'user,discussion,$pollIncludes');
-    expect(include(adapter, 5), 'user,discussion,likes,$pollIncludes');
+    expect(include(adapter, 1), '$core');
+    expect(include(adapter, 2), '$core,mentionedBy,mentionedBy.user,mentionedBy.discussion');
+    expect(include(adapter, 3), '$core,likes');
+    expect(include(adapter, 4), '$core,$pollIncludes');
+    expect(include(adapter, 5), '$core,ipInfo');
+    expect(include(adapter, 6), '$core,likes,$pollIncludes,ipInfo');
     await forum.postsNear('1', 5);
-    expect(include(adapter, 6), 'user,discussion,likes,$pollIncludes', reason: 'no second refusal');
-    expect(adapter.requests, hasLength(7));
+    expect(include(adapter, 7), '$core,likes,$pollIncludes,ipInfo', reason: 'no second refusal');
+    expect(adapter.requests, hasLength(8));
   });
 
-  test('posts without fof/polls or flarum/likes: one extension accepted is the answer already', () async {
-    final adapter = ScriptedAdapter([refused, noPosts, noPosts, refused, refused, noPosts]);
+  test('posts without fof/polls, flarum/likes or fof/geoip: one extension accepted is the answer already', () async {
+    final adapter = ScriptedAdapter([refused, noPosts, noPosts, refused, refused, refused, noPosts]);
     final forum = api(adapter);
     await forum.posts('1');
-    expect(adapter.requests, hasLength(5));
+    expect(adapter.requests, hasLength(6));
     await forum.posts('1');
-    expect(include(adapter, 5), 'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion');
+    expect(include(adapter, 6), '$core,mentionedBy,mentionedBy.user,mentionedBy.discussion');
   });
 
   test('a forum whose info has no canStartPolls is asked for no poll includes at all', () async {

@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import '../plain_text.dart';
 import 'group.dart';
 
 /// A Flarum user as the API shows it to the current reader. Counts and
@@ -31,6 +32,7 @@ class FlarumUser {
     this.canEditNickname = false,
     this.canEditCredentials = false,
     this.email,
+    this.bio,
   });
 
   /// [document] brings the user's groups, where the request included them.
@@ -65,6 +67,11 @@ class FlarumUser {
       canEditNickname: a.boolean('canEditNickname') ?? false,
       canEditCredentials: a.boolean('canEditCredentials') ?? false,
       email: a.nonEmptyString('email'),
+      // fof/user-bio sends the bio as HTML where the forum formats bios, else as text (`bio`).
+      bio: switch (a.nonEmptyString('bioHtml')) {
+        final html? when plainText(html).trim().isNotEmpty => plainText(html).trim(),
+        _ => a.nonEmptyString('bio')?.trim(),
+      },
     );
   }
 
@@ -94,6 +101,7 @@ class FlarumUser {
         canEditNickname: canEditNickname,
         canEditCredentials: canEditCredentials,
         email: email,
+        bio: bio,
       );
 
   final String id;
@@ -156,6 +164,10 @@ class FlarumUser {
 
   /// Their email address: the reader's own, and for admins.
   final String? email;
+
+  /// What they say about themselves (fof/user-bio), as text, its lines kept; null without the
+  /// extension or a bio.
+  final String? bio;
 
   bool get isSuspended => suspendedUntil?.isAfter(DateTime.now()) ?? false;
 

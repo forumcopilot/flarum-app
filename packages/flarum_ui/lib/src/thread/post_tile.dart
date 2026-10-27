@@ -11,6 +11,7 @@ import '../../l10n/flarum_l10n.dart';
 import '../polls/poll_card.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
+import '../widgets/author_marks.dart';
 import '../widgets/flarum_avatar.dart';
 import '../navigation/web_links.dart';
 import 'post_actions_row.dart';
@@ -173,10 +174,29 @@ class PostTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                    // The name, then the country the post came from (fof/geoip) and the author's
+                    // groups as the web's badges.
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                        ),
+                        if (countryFlag(post.authorCountryCode) case final flag?)
+                          Padding(
+                            padding: const EdgeInsets.only(left: DesignTokens.spacingXS),
+                            child: Text(flag, semanticsLabel: post.authorCountryCode, style: theme.textTheme.titleSmall),
+                          ),
+                        for (final group in author?.groups ?? const <FlarumGroup>[])
+                          if (!group.isHidden)
+                            Padding(
+                              padding: const EdgeInsets.only(left: DesignTokens.spacingXS),
+                              child: GroupIconBadge(group: group),
+                            ),
+                      ],
+                    ),
                     if (meta.isNotEmpty)
                       Text(meta, style: theme.textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
                   ],

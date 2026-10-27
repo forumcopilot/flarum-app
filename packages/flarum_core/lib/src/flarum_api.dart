@@ -81,17 +81,21 @@ class FlarumApi {
   /// A thread's posts with their authors, who replied to them and their polls with the reader's
   /// votes, as the web loads them. (fof/polls includes its own by default, but only when the
   /// request names none.)
-  static const _postIncludes =
-      'user,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,polls,polls.options,polls.myVotes,polls.myVotes.option';
+  ///
+  /// The authors' groups (`user.groups`) are the web's badges beside their names, and `ipInfo`
+  /// (fof/geoip) the country flag.
+  static const _postIncludes = 'user,user.groups,discussion,mentionedBy,mentionedBy.user,mentionedBy.discussion,likes,'
+      'polls,polls.options,polls.myVotes,polls.myVotes.option,ipInfo';
 
   /// The extension an include comes from, for those a forum may not run: flarum/tags' `tags`,
-  /// flarum/mentions' `mentionedBy…`, flarum/likes' `likes`, fof/byobu's `recipientUsers` and
-  /// fof/polls' `polls…`; null for core's. A forum without the extension refuses the whole request
+  /// flarum/mentions' `mentionedBy…`, flarum/likes' `likes`, fof/byobu's `recipientUsers`,
+  /// fof/polls' `polls…` and fof/geoip's `ipInfo`; null for core's. A forum without the extension refuses the whole request
   /// (400 invalid_parameter), as the census found on real forums.
   static String? _extensionOf(String include) => switch (include) {
         'tags' => 'tags',
         'likes' => 'likes',
         'recipientUsers' => 'byobu',
+        'ipInfo' => 'geoip',
         _ when include.startsWith('mentionedBy') => 'mentions',
         _ when include == 'polls' || include.startsWith('polls.') => 'polls',
         _ => null,

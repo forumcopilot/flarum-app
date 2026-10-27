@@ -35,6 +35,7 @@ class FlarumPost {
     this.reactionCounts = const {},
     this.userReactionId,
     this.polls = const [],
+    this.authorCountryCode,
   });
 
   /// [discussion] stands in for the post's own `discussion` relationship when a
@@ -55,7 +56,8 @@ class FlarumPost {
       isHidden: a.boolean('isHidden') ?? a.date('hiddenAt') != null,
       discussionId: resource.toOne('discussion')?.id ?? discussion?.id,
       discussionTitle: discussion?.attributes.string('title'),
-      author: author == null ? null : FlarumUser.fromResource(author),
+      // With its groups, where the request included them (`user.groups`): the web's badges.
+      author: author == null ? null : FlarumUser.fromResource(author, document: document),
       canEdit: a.boolean('canEdit') ?? false,
       canDelete: a.boolean('canDelete') ?? false,
       canHide: a.boolean('canHide') ?? false,
@@ -84,6 +86,7 @@ class FlarumPost {
       polls: [
         for (final poll in document.findAll(resource.toMany('polls'))) FlarumPoll.fromResource(poll, document),
       ],
+      authorCountryCode: document.find(resource.toOne('ipInfo'))?.attributes.nonEmptyString('countryCode'),
     );
   }
 
@@ -130,6 +133,7 @@ class FlarumPost {
         reactionCounts: reactionCounts ?? this.reactionCounts,
         userReactionId: userReactionId == null ? this.userReactionId : userReactionId(),
         polls: polls ?? this.polls,
+        authorCountryCode: authorCountryCode,
       );
 
   final String id;
@@ -196,6 +200,10 @@ class FlarumPost {
 
   /// Its polls (fof/polls), with the reader's votes: a new discussion's poll is on its first post.
   final List<FlarumPoll> polls;
+
+  /// The country the post was written from (fof/geoip's `ipInfo`, ISO 3166 `CH`), where the forum
+  /// shows it: the web's flag beside the author's name.
+  final String? authorCountryCode;
 
   /// Whether the reader ([readerId]) liked it.
   bool isLikedBy(String? readerId) => readerId != null && likedBy.any((user) => user.id == readerId);

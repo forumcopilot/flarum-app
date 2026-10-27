@@ -140,8 +140,22 @@ class _Fixture {
     return jsonEncode(sorted(value));
   }
 
+  /// The same query, except that a request may name more includes than the recording did: the
+  /// recorded response then answers it as a forum that ignored them would (nothing of theirs
+  /// included). The posts' includes grew (the authors' groups, fof/geoip), and the fixtures
+  /// recorded before still serve.
   static bool _sameQuery(Map<String, dynamic> sent, Map<String, String> recorded) =>
-      sent.length == recorded.length && sent.entries.every((e) => recorded[e.key] == '${e.value}');
+      sent.length == recorded.length &&
+      sent.entries.every((e) =>
+          recorded[e.key] == '${e.value}' ||
+          (e.key == 'include' && recorded[e.key] != null && _includesAll('${e.value}', recorded[e.key]!)));
+
+  /// Whether this was recorded with exactly [sent]'s query.
+  bool hasQuery(Map<String, dynamic> sent) =>
+      sent.length == query.length && sent.entries.every((e) => query[e.key] == '${e.value}');
+
+  static bool _includesAll(String sent, String recorded) =>
+      sent.split(',').toSet().containsAll(recorded.split(','));
 }
 
 class _FixtureAdapter implements HttpClientAdapter {
@@ -177,6 +191,11 @@ class _FixtureAdapter implements HttpClientAdapter {
       matching = matchingAs(asMember: true);
     }
     if (matching.any((f) => f.state != null)) matching = [for (final f in matching) if (f.state != null) f];
+    // A fixture recorded with this very query answers before one that only covers it (fewer
+    // includes): a discussion's with its post ids, rather than the one without.
+    if (matching.any((f) => f.hasQuery(options.queryParameters))) {
+      matching = [for (final f in matching) if (f.hasQuery(options.queryParameters)) f];
+    }
     final fixture = matching.where((f) => !forum._served.contains(f)).firstOrNull ?? matching.lastOrNull;
     if (fixture != null) {
       forum._served.add(fixture);

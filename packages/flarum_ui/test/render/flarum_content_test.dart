@@ -96,6 +96,76 @@ void main() {
     expect(taps.urls, ['https://forum.test/t/general']);
   });
 
+  // Markup recorded from discuss.flarum.org (Flarum 2.0), as docs/thread-rendering-review.md found it.
+  group('as the web draws them', () {
+    Future<_Taps> pump(WidgetTester tester, String content) async {
+      final taps = _Taps();
+      tester.view.physicalSize = const Size(412, 900);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        home: Scaffold(
+          body: FlarumContent(siteContext: _site('https://discuss.flarum.org'), callbacks: taps.callbacks, content: content),
+        ),
+      ));
+      await tester.pump();
+      return taps;
+    }
+
+    testWidgets('inline code is text in the sentence, so it wraps with it', (tester) async {
+      await pump(
+          tester,
+          '<p>Deck gives the message <code>Use filters only, such as tag:support is:unread. Plain words '
+          "aren't supported.</code> and won't add it.</p>");
+      // A chip (a WidgetSpan) was a Text of its own, which couldn't break; as text, the code is part
+      // of the paragraph's own text.
+      expect(find.textContaining(RegExp(r"message\W+Use filters only.*supported\.\W+and won't", dotAll: true), findRichText: true),
+          findsOneWidget);
+    });
+
+    testWidgets('a GitHub link is a pill: the mark, the repository, and its number after an icon', (tester) async {
+      final taps = await pump(
+          tester,
+          '<p>in <a class="Github-embed github-pr-link" target="_blank" rel="ugc noopener noreferrer" '
+          'href="https://github.com/FriendsOfFlarum/anti-spam/pull/4"><i class="fab fa-github" aria-hidden="true"></i>'
+          '<span class="github-repo-name">FriendsOfFlarum/anti-spam</span><i class="fas fa-code-branch" aria-hidden="true">'
+          '</i><span class="github-pr-link--number">4</span></a></p>');
+      expect(find.text('FriendsOfFlarum/anti-spam'), findsOneWidget, reason: 'not run into the number ("anti-spam4")');
+      expect(find.text('4'), findsOneWidget);
+      expect(find.byIcon(Icons.call_split), findsOneWidget, reason: 'the pull request icon (fa-code-branch)');
+      await tester.tap(find.text('FriendsOfFlarum/anti-spam'));
+      expect(taps.urls, ['https://github.com/FriendsOfFlarum/anti-spam/pull/4']);
+    });
+
+    testWidgets('a link to a post is a pill: the favicon small, the discussion, then the post', (tester) async {
+      final taps = await pump(
+          tester,
+          '<p>Found this, helpful: <a href="https://discuss.flarum.org/d/4011-x/13" rel="ugc" target="_self" '
+          'class="UrlLink UrlLink--internal UrlLink--discussion"><img src="https://discuss.flarum.org/assets/favicon.png" '
+          'class="UrlLink-favicon" alt="" aria-hidden="true"><span class="UrlLink-discussion">#4011</span>'
+          '<span class="UrlLink-post"><i class="icon fas fa-comment UrlLink-postIcon" aria-hidden="true"></i>13</span></a></p>');
+      expect(find.text('#4011'), findsOneWidget, reason: 'not run into the post number ("#401113")');
+      expect(find.text('13'), findsOneWidget);
+      expect(find.byIcon(Icons.chat_bubble_outline), findsOneWidget);
+      final favicon = tester.getSize(find.byType(Image));
+      expect(favicon.height, lessThan(20), reason: 'the favicon at text size, not a full-size picture');
+      await tester.tap(find.text('#4011'));
+      expect(taps.urls, ['https://discuss.flarum.org/d/4011-x/13']);
+    });
+
+    testWidgets('a mention of someone deleted is a muted pill that goes nowhere', (tester) async {
+      final taps = await pump(
+          tester, '<p>Message disappeared as <span class="UserMention UserMention--deleted">@[deleted]</span> said.</p>');
+      final pill = find.text('@[deleted]');
+      expect(pill, findsOneWidget, reason: 'a pill of its own');
+      expect(tester.widget<Text>(pill).style?.color, AppTheme.lightTheme.colorScheme.onSurfaceVariant);
+      await tester.tap(pill);
+      expect(taps.urls, isEmpty);
+      expect(taps.users, isEmpty);
+    });
+  });
+
   group('a post\'s direction', () {
     test('comes from most of its letters, markup aside', () {
       expect(FlarumContent.directionOf('<p>مرحبا بكم في <a href="https://forum.test/d/1-hello">Flarum</a></p>'),

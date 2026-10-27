@@ -19,12 +19,21 @@ centred text, YouTube, pictures and uploads, code blocks with highlighting, even
 replies and the best answer. What doesn't match is below, most visible first. "Posts" counts
 how many of the 4,706 have it.
 
+## Fixed
+
+- **27 Oct, the text group (#1, #2, #3, #8):**
+  - Inline code is text on a tint, which wraps with its sentence.
+  - Discussion and GitHub links are pills (`LinkPillExtension`, `render/link_pills.dart`). Each keeps its whole width, and moves to the next line when it doesn't fit.
+  - Mentions of deleted users and posts are muted pills that go nowhere.
+
+  Checked against the web with the compare tools and on the Pixel 4a.
+
 ## In the post's text
 
 | # | What | Posts | App | Web | Fix |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Inline code | 639 | Each `code` is a chip that can't break. One that doesn't fit jumps to its own line and leaves a gap; a long one becomes a block; a "." or ")" after it can start a line on its own. | Wraps with the sentence. | Draw inline code as styled text (monospace on a tinted background) inside the paragraph's own text, not as a widget. |
-| 2 | Discussion links with a favicon (`a.UrlLink--discussion`) | 118 | The favicon is drawn as a full-size picture, and the comment count runs into the number ("#4011" + "13" → "#401113"). | A small pill: favicon, "#4011", comment icon and count. | Draw `UrlLink--discussion` and `UrlLink-post` as a pill: the favicon at text size, the number, the count. |
+| 2 | Discussion links with a favicon (`a.UrlLink--discussion`) | 118 | The favicon is drawn as a full-size picture, and a linked post's number runs into the discussion's ("#4011" + "13" → "#401113"). | A small pill: favicon, "#4011", then a comment icon and the post's number. | Draw `UrlLink--discussion` and `UrlLink-post` as a pill: the favicon at text size, the discussion, the post. |
 | 3 | GitHub links (`a.Github-embed`: repo, path, PR, issue, release, commit, compare) | 180 | Plain link text, parts run together: "anti-spam4", "azerbaijanitree/2.x", "velvet-rope1.0.0 1.0.1". | A pill: GitHub icon, repo in bold, then the path, PR or issue number, tag or commit, or "1.0.0 → 1.0.1", with their icons. | Draw `Github-embed` as a pill, with a space or icon between its parts (the Font Awesome icons mapped to Material ones). |
 | 4 | SVG pictures (shields.io badges, SVG logos, the forum's own SVG emoji) | 184 | On the phone a badge is drawn garbled, or as a full-width "broken picture" box with its alt text. Badges stack, one per line. | Small badges side by side, in the line. | Ask shields.io for PNG (raster.shields.io). Lay out small pictures inline, at their own size. A badge that fails shows its alt text inline, not a full-width box. |
 | 5 | Uploaded videos (`video`) | 4 | A black box with a play button. | The first frame and the player's controls. | Show the first frame (a thumbnail from the video, or `poster`). |

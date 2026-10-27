@@ -13,6 +13,7 @@ import 'package:forum_kit/views/widgets/broken_image_widget.dart';
 import 'package:forum_kit/views/widgets/code_block.dart';
 import 'embed_cards.dart';
 import 'forum_image.dart';
+import 'link_pills.dart';
 import 'post_body_extensions.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart' show PostContentCallbacks;
 import 'post_table.dart';
@@ -221,6 +222,8 @@ class FlarumContent extends StatelessWidget {
         const PostBlockRhythmExtension(),
         const QuoteExtension(),
         PostTableExtension(colorScheme: colorScheme),
+        // Discussion and GitHub links, as the pills Flarum draws them.
+        LinkPillExtension(onTap: openEmbed),
         MentionExtension(onTap: (href, isPost) {
           if (!isPost && callbacks?.onMentionTap != null) {
             final username = _usernameFromHref(href);
@@ -408,26 +411,19 @@ class FlarumContent extends StatelessWidget {
             ),
           ),
         ),
-        // Inline code as a small rounded chip, in the one code size. Code in
-        // a link stays text (see the `code` style), so the link still taps.
+        // Inline code as text of the one code size on a tint, so it wraps with the sentence as on
+        // the web. It was a chip (a WidgetSpan), which can't break: one that didn't fit jumped to
+        // its own line, a long one became a block, and a "." after it could start a line alone.
+        // Thin spaces inside the tint stand in for the chip's padding. Code in a link keeps the
+        // link's own text (see the `code` style), so the link still taps.
         MatcherExtension.inline(
           matcher: (c) =>
               c.elementName == 'code' && !_hasAncestor(c.node, const {'pre', 'a'}),
           builder: (c) {
             final style = c.styledElement?.style.generateTextStyle() ?? codeStyle;
-            return WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingXS),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(DesignTokens.radiusXS),
-                ),
-                child: Text(
-                  c.element?.text ?? '',
-                  style: style.copyWith(height: 1.4, backgroundColor: Colors.transparent),
-                ),
-              ),
+            return TextSpan(
+              text: '\u2009${c.element?.text ?? ''}\u2009',
+              style: style.copyWith(backgroundColor: colorScheme.surfaceContainerHighest),
             );
           },
         ),

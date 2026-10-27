@@ -258,10 +258,13 @@ class MentionExtension extends HtmlExtension {
 
   @override
   bool matches(ExtensionContext context) =>
-      context.elementName == 'a' &&
-      (context.classes.contains('UserMention') ||
-          context.classes.contains('PostMention') ||
-          context.classes.contains('TagMention'));
+      (context.elementName == 'a' &&
+          (context.classes.contains('UserMention') ||
+              context.classes.contains('PostMention') ||
+              context.classes.contains('TagMention'))) ||
+      // A mention of someone or something deleted: a span, muted, going nowhere.
+      (context.elementName == 'span' &&
+          (context.classes.contains('UserMention--deleted') || context.classes.contains('PostMention--deleted')));
 
   @override
   InlineSpan build(ExtensionContext context) {
@@ -269,6 +272,7 @@ class MentionExtension extends HtmlExtension {
     if (text.isEmpty) return TextSpan(children: context.inlineSpanChildren);
     final href = context.attributes['href'] ?? '';
     final isPost = context.classes.contains('PostMention');
+    final deleted = context.elementName == 'span';
     final style = context.styledElement?.style.generateTextStyle();
     // flarum/tags (2.0): a tag mention, in the tag's colour (`style="--color:#…"`) with its icon.
     final isTag = context.classes.contains('TagMention');
@@ -280,7 +284,8 @@ class MentionExtension extends HtmlExtension {
         style: style,
         icon: isPost ? Icons.reply : (isTag ? flarumTagIcon(context.element?.querySelector('i')?.className) : null),
         background: tagColor == null ? null : parseDiscourseHex(tagColor),
-        onTap: href.isEmpty ? null : () => onTap(href, isPost),
+        muted: deleted,
+        onTap: href.isEmpty || deleted ? null : () => onTap(href, isPost),
       ),
     );
   }
@@ -289,7 +294,7 @@ class MentionExtension extends HtmlExtension {
 }
 
 class _MentionPill extends StatelessWidget {
-  const _MentionPill({required this.text, this.style, this.icon, this.background, this.onTap});
+  const _MentionPill({required this.text, this.style, this.icon, this.background, this.muted = false, this.onTap});
 
   final String text;
   final TextStyle? style;
@@ -297,6 +302,9 @@ class _MentionPill extends StatelessWidget {
 
   /// A tag's colour; the theme's quiet surface otherwise.
   final Color? background;
+
+  /// Someone or something deleted: quiet text.
+  final bool muted;
   final VoidCallback? onTap;
 
   @override
@@ -305,7 +313,7 @@ class _MentionPill extends StatelessWidget {
     final size = style?.fontSize ?? 16;
     final fill = background;
     final foreground = fill == null
-        ? colorScheme.onSurface
+        ? (muted ? colorScheme.onSurfaceVariant : colorScheme.onSurface)
         : (ThemeData.estimateBrightnessForColor(fill) == Brightness.dark ? Colors.white : Colors.black87);
     return Semantics(
       link: onTap != null,

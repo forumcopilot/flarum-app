@@ -77,10 +77,13 @@ title to "Start a Discu…"). The bar is ABDA's: attachments, then every format 
 - **Composer drafts saved while typing** (ABDA saves server drafts as you type): fof/drafts is
   optional on Flarum and saving silently creates drafts on the forum; left as save-on-close.
 - **Emoji picker** in the composer: ABDA's composer has none either; left out for consistency.
-- **Flapp.** Nothing in Flapp changed. When its pin moves to this work, `test/app_test.dart`'s
-  "Back returns to the list" taps a `BackButton` the hosted forum no longer has (use
-  `tester.binding.handlePopRoute()`), and its tests should seed `forum_drawer_introduced: true` so the
-  drawer doesn't introduce itself over them.
+- **Flapp.** Nothing in Flapp changed. Tung, 27 Oct: its pin waits until the push branches are
+  merged (flarum-app `push` into phase-4, which it was cut from; Flapp `push` into Flapp main), then
+  moves to the merged phase-4. A dry run on 27 Oct merged `push` (ea52bdc) with phase-4 (04bff15)
+  without conflicts; regenerate l10n and run the tests after. With the new pin, Flapp's
+  `test/app_test.dart` "Back returns to the list" taps a `BackButton` the hosted forum no longer has
+  (use `tester.binding.handlePopRoute()`), and its tests should seed `forum_drawer_introduced: true`
+  so the drawer doesn't introduce itself over them.
 
 ## For Tung to look at
 

@@ -1,6 +1,6 @@
 name: flarum_core
 description: Flarum REST (JSON:API) client for flarum-app and its forumcopilot_sdk proxies, supporting Flarum 1.8 and 2.0.
-version: 0.2.0
+version: 0.2.1
 publish_to: none
 
 environment:

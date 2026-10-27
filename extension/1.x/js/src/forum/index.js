@@ -1,0 +1,17 @@
+import app from 'flarum/forum/app';
+import { extend } from 'flarum/common/extend';
+import NotificationGrid from 'flarum/forum/components/NotificationGrid';
+
+app.initializers.add('forumcopilot-flapp', () => {
+  // The Flapp column, for readers with a Flapp device on this forum only, so
+  // the grid doesn't change for anyone else.
+  extend(NotificationGrid.prototype, 'notificationMethods', function (items) {
+    if (!(this.attrs.user.attribute('flappDeviceCount') > 0)) return;
+
+    items.add('flapp', {
+      name: 'flapp',
+      icon: 'fas fa-mobile-alt',
+      label: app.translator.trans('forumcopilot-flapp.forum.settings.notify_by_flapp_heading'),
+    });
+  });
+});

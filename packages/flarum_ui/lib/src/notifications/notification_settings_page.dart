@@ -8,8 +8,9 @@ import '../../l10n/flarum_l10n.dart';
 
 /// The notification part of the forum's settings page: for each kind of notification the forum
 /// sends (as its extensions name them), whether it comes on the web (the forum's list, and the
-/// app's Notifications) and by email; then flarum/subscriptions' follow settings. Each change is
-/// saved at once.
+/// app's Notifications), by email and, in an app with push on a forum running the Flapp extension
+/// (forumcopilot/flarum-flapp), as a push (its `flapp` method, the web's Flapp column); then
+/// flarum/subscriptions' follow settings. Each change is saved at once.
 class NotificationSettingsPage extends StatefulWidget {
   const NotificationSettingsPage({super.key, required this.site});
 
@@ -26,6 +27,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   Map<String, Object?> _prefs = const {};
   bool _loading = true;
+  bool _push = false;
 
   /// The kinds the web's settings grid lists, in its words, in the order a reader thinks of them.
   static List<(String, String Function(FlarumLocalizations))> get _kinds => [
@@ -54,7 +56,11 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   void initState() {
     super.initState();
     _forum.refresh().then((info) {
-      if (mounted) setState(() => _prefs = Map.of(info.preferences));
+      if (!mounted) return;
+      setState(() {
+        _prefs = Map.of(info.preferences);
+        _push = FlarumPush.device != null && info.flappPush != null;
+      });
     }, onError: (Object e) {
       if (mounted) SnackbarHelper.showError(context, describeError(context, e));
     }).whenComplete(() {
@@ -90,7 +96,8 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
     final theme = Theme.of(context);
     final kinds = [
       for (final (kind, label) in _kinds)
-        if (_prefs.containsKey('notify_${kind}_alert') || _prefs.containsKey('notify_${kind}_email')) (kind, label(l10n)),
+        if (['alert', 'email', if (_push) 'flapp'].any((method) => _prefs.containsKey('notify_${kind}_$method')))
+          (kind, label(l10n)),
     ];
     Widget column(IconData icon, String label) => SizedBox(
           width: 56,
@@ -126,6 +133,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                       const Spacer(),
                       column(Icons.notifications_outlined, l10n.notifyByWeb),
                       column(Icons.mail_outline, l10n.notifyByEmail),
+                      if (_push) column(Icons.smartphone, l10n.notifyByPush),
                     ],
                   ),
                 ),
@@ -138,6 +146,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                           Expanded(child: Text(label, style: theme.textTheme.bodyMedium)),
                           box('notify_${kind}_alert'),
                           box('notify_${kind}_email'),
+                          if (_push) box('notify_${kind}_flapp'),
                         ],
                       ),
                     ),

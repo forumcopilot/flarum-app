@@ -311,6 +311,9 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get notifyByEmail => '이메일';
 
   @override
+  String get notifyByPush => '푸시 알림';
+
+  @override
   String get followAfterReply => '답장한 게시물을 자동으로 팔로우';
 
   @override

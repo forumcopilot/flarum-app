@@ -375,6 +375,10 @@
   "@notifyByEmail": {
     "description": "Notification settings: the column for notifications by email."
   },
+  "notifyByPush": "Push notifications",
+  "@notifyByPush": {
+    "description": "Notification settings: the column for push notifications to the app, on a forum running the Flapp extension."
+  },
   "followAfterReply": "Automatically follow discussions that I reply to",
   "@followAfterReply": {
     "description": "Notification settings (flarum/subscriptions)."

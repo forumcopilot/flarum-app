@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -7,6 +9,7 @@ import '../flarum_client.dart';
 import '../models/forum_info.dart';
 import '../models/tag.dart';
 import 'flarum_extensions.dart';
+import 'flarum_push.dart';
 import 'flarum_token_store.dart';
 
 /// One Flarum forum as the app knows it: its API client (with the reader's
@@ -97,6 +100,8 @@ class FlarumForum {
       final info = await refresh();
       if (info.actor == null) throw StateError('The forum did not accept this sign-in');
       await FlarumTokenStore.instance.write(baseUrl, (token: token, cookiePrefix: cookiePrefix));
+      // Pushes, where the forum runs the Flapp extension; the sign-in doesn't wait for it.
+      unawaited(FlarumPush.registerQuietly(this));
       return info;
     } catch (_) {
       api.client.token = null;
@@ -109,6 +114,8 @@ class FlarumForum {
   /// local sign-out happens either way.
   Future<bool> signOut() async {
     var revoked = false;
+    // While the token still works: the forum deletes the phone's device and the relay its handle.
+    await FlarumPush.unregister(this).timeout(const Duration(seconds: 5), onTimeout: () {});
     try {
       revoked = await api.logOut();
     } catch (_) {

@@ -29,6 +29,22 @@ sealed class ForumLink {
     }
     return null;
   }
+
+  /// What a push from the Flapp extension opens, from its data (strings, as Firebase delivers
+  /// them): a discussion at a post, a conversation (Flarum 2.0's messages) or a user. Null for a
+  /// push that names none.
+  static ForumLink? fromPush(Map<String, Object?> data) {
+    String? id(String key) => switch (data[key]) {
+          final String value when RegExp(r'^[1-9][0-9]*$').hasMatch(value) => value,
+          _ => null,
+        };
+    if (id('discussion_id') case final discussion?) {
+      return DiscussionLink(discussion, int.tryParse(id('post_number') ?? ''));
+    }
+    if (id('dialog_id') case final dialog?) return DialogLink(dialog);
+    if (id('user_id') case final user?) return UserIdLink(user);
+    return null;
+  }
 }
 
 /// A discussion, at post [number] when the link names one.
@@ -59,6 +75,32 @@ class UserLink extends ForumLink {
 
   @override
   int get hashCode => slug.hashCode;
+}
+
+/// A user by id, as a push names them (the profile a suspension opens).
+class UserIdLink extends ForumLink {
+  const UserIdLink(this.id);
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) => other is UserIdLink && other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
+}
+
+/// A conversation of flarum/messages (Flarum 2.0), as a push names it.
+class DialogLink extends ForumLink {
+  const DialogLink(this.id);
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) => other is DialogLink && other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 class TagLink extends ForumLink {

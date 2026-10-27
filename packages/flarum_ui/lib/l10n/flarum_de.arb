@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "Jemand markiert eine Diskussion erneut mit einem Tag, dem ich folge",
   "notifyByWeb": "Web",
   "notifyByEmail": "E-Mail",
+  "notifyByPush": "Push-Benachrichtigungen",
   "followAfterReply": "Diskussionen automatisch folgen, an denen ich teilgenommen habe",
   "followAfterCreate": "Diskussionen, die ich erstelle, automatisch folgen",
   "notifyForAllPosts": "Benachrichtige über jeden neuen Beitrag und nicht nur über den letzten in einer Diskussion",

@@ -5,6 +5,7 @@
 library;
 
 export 'src/attributes.dart';
+export 'src/flapp_relay.dart';
 export 'src/flarum_api.dart';
 export 'src/flarum_client.dart';
 export 'src/flarum_exception.dart';
@@ -12,6 +13,7 @@ export 'src/json_api.dart';
 export 'src/models/dialog.dart';
 export 'src/models/discussion.dart';
 export 'src/models/draft.dart';
+export 'src/models/flapp_push.dart';
 export 'src/models/flag.dart';
 export 'src/models/forum_info.dart';
 export 'src/models/notification.dart';

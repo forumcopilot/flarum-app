@@ -590,6 +590,12 @@ abstract class FlarumLocalizations {
   /// **'Email'**
   String get notifyByEmail;
 
+  /// Notification settings: the column for push notifications to the app, on a forum running the Flapp extension.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get notifyByPush;
+
   /// Notification settings (flarum/subscriptions).
   ///
   /// In en, this message translates to:

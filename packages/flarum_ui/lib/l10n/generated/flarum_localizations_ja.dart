@@ -310,6 +310,9 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get notifyByEmail => 'メールアドレス';
 
   @override
+  String get notifyByPush => 'プッシュ通知';
+
+  @override
   String get followAfterReply => '返信したスレッドを自動的にフォローする';
 
   @override

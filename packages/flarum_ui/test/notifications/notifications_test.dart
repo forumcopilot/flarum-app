@@ -5,6 +5,7 @@ import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
 import 'package:flarum_ui/src/messages/dialog_page.dart';
+import 'package:flarum_ui/src/notifications/notification_settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
@@ -171,6 +172,45 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      testWidgets('in an app with push, a forum running the Flapp extension adds a Push column', (tester) async {
+        final flapp = FixtureForum(version, root: _root, states: {'flapp'});
+        final forum = flapp.forum();
+        await tester.runAsync(forum.refresh);
+        final reader = forum.info!.actor!.id;
+        final pushed = forum.info!.preferences['notify_newPost_flapp'] == true;
+        flapp.replies['PATCH /users/$reader'] = {
+          'data': {'type': 'users', 'id': reader, 'attributes': <String, Object>{}},
+        };
+        FlarumPush.device = _PushDevice();
+        addTearDown(FlarumPush.resetForTesting);
+        tester.view.physicalSize = const Size(800, 2400);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationSettingsPage(site: _site())));
+        await _pumpUntil(tester, find.text('Someone posts in a discussion I\'m following'));
+
+        expect(find.byTooltip('Push notifications'), findsOneWidget);
+        final row = find.ancestor(of: find.text('Someone posts in a discussion I\'m following'), matching: find.byType(Row)).first;
+        final boxes = find.descendant(of: row, matching: find.byType(Checkbox));
+        expect(boxes, findsNWidgets(3), reason: 'web, email and push');
+        await tester.tap(boxes.last);
+        await tester.pump(const Duration(milliseconds: 300));
+        final sent = flapp.requests.singleWhere((r) => r.method == 'PATCH' && r.path == '/users/$reader');
+        expect((sent.data as Map)['data']['attributes'], {
+          'preferences': {'notify_newPost_flapp': !pushed},
+        });
+
+        // The same forum in an app without push (flarum-app's own builds): no column.
+        FlarumPush.device = null;
+        await tester.pumpWidget(const SizedBox());
+        await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationSettingsPage(site: _site())));
+        await _pumpUntil(tester, find.text('Someone posts in a discussion I\'m following'));
+        expect(find.byTooltip('Push notifications'), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+      });
+
       testWidgets('a guest is asked to sign in', (tester) async {
         fixtures.forum(signedIn: false);
         await tester.pumpWidget(MaterialApp(theme: AppTheme.lightTheme, home: NotificationsPage(site: _site())));
@@ -257,4 +297,28 @@ void main() {
     expect(adapter.requests.map((r) => '${r.method} ${r.path}'), ['PATCH /notifications/1', 'POST /notifications/read']);
     model.dispose();
   });
+}
+
+/// An app with push, as Flapp is, for the settings page: it only asks whether there is one.
+class _PushDevice implements FlarumPushDevice {
+  @override
+  String get platform => 'android';
+
+  @override
+  String get app => 'flapp';
+
+  @override
+  String? get appVersion => null;
+
+  @override
+  String? get locale => 'en';
+
+  @override
+  Future<String?> token() async => null;
+
+  @override
+  Future<bool> notificationsPermitted() async => true;
+
+  @override
+  Future<FlappInstallation> installation() async => const FlappInstallation(id: 'install', secret: 'secret');
 }

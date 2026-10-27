@@ -409,6 +409,7 @@
   "notifyPrefNewDiscussionTag": "Qualcuno modifica la categoria di una discussione in una che categoria sto seguendo",
   "notifyByWeb": "Web",
   "notifyByEmail": "E-mail",
+  "notifyByPush": "Notifiche push",
   "followAfterReply": "Segui automaticamente le discussioni a cui rispondo",
   "followAfterCreate": "Segui automaticamente le discussioni che creo",
   "notifyForAllPosts": "Notifica di ogni nuovo post anziché solo l'ultimo in una discussione",

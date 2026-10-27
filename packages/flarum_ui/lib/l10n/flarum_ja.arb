@@ -409,6 +409,7 @@
   "notifyPrefNewDiscussionTag": "フォローしているタグに既存のスレッドが移動された時",
   "notifyByWeb": "Web",
   "notifyByEmail": "メールアドレス",
+  "notifyByPush": "プッシュ通知",
   "followAfterReply": "返信したスレッドを自動的にフォローする",
   "followAfterCreate": "作成したスレッドを自動的にフォローする",
   "notifyForAllPosts": "スレッドの最後の投稿だけでなく全ての新しい投稿を通知する",

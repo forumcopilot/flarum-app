@@ -62,6 +62,7 @@
   "notifyPrefNewDiscussionTag": "Alguien vuelve a etiquetar una discusión con una etiqueta que estoy siguiendo",
   "notifyByWeb": "Web",
   "notifyByEmail": "Correo electrónico",
+  "notifyByPush": "Notificaciones push",
   "followAfterReply": "Seguir automáticamente las discusiones en las que tú participes",
   "followAfterCreate": "Seguir automáticamente discusiones creadas por mi",
   "notifyForAllPosts": "Notificar sobre cada nueva publicación en lugar de sólo la última en una discusión",

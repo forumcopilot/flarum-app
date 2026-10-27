@@ -47,6 +47,30 @@ for a global one.
 Not yet: links in a post to another Flarum forum still open in the browser (a host hook can
 open them in the app later), and push (Phase 5).
 
+### Push through the Flapp extension (25 Oct)
+
+A forum running forumcopilot/flarum-flapp announces `flappPush` on `GET /api` (its relay and its
+id there; `FlarumForumInfo.flappPush`). A host with push sets `FlarumPush.device` (a
+`FlarumPushDevice`: platform, app, version, locale, the push token, the notification permission
+and the phone's relay installation) before the first sign-in; the single-forum app sets none, and
+nothing runs.
+
+- **Registering:** signing in, and `FlarumForumPage.connect` once a run, call
+  `FlarumPush.registerQuietly`: `PUT /v1/installation` and `POST /v1/handles` on the relay, then
+  `POST /api/flapp-push/devices` with the handle on the forum. The registration (relay, forum id,
+  handle, device id) is kept in secure storage per forum (`FlappRegistrationStore`). Failures leave
+  the forum unregistered until the next launch. A forum without the extension is left alone.
+- **Signing out:** `FlarumForum.signOut` first deletes the device on the forum and the handle on the
+  relay (5 s at most), then revokes the token, which would take the device with it anyway.
+- **A push:** its data names the forum by `forum_id`; `FlarumPush.forumUrlFor` gives the forum's
+  address while the phone is registered there, null after sign-out (drop the push).
+  `ForumLink.fromPush(data)` is what it opens (`DiscussionLink`, `DialogLink`, `UserIdLink`), for
+  `FlarumForumPage(link:, notificationId:)`, which also marks the notification read.
+- **Token changes:** `FlarumPush.updateInstallations()` tells each relay once.
+- **Tests:** flarum_core's `flapp_push_test.dart` (fixtures from both forums, recorded as bob by
+  `tool/record_flapp_fixtures.dart`, and a scripted relay); flarum_ui's `forum_links_test.dart`
+  and `hosting_test.dart` (a forum opened from a push).
+
 ## The UI review (20 Oct)
 
 Three reviews (the app beside Flarum's website on a phone, beside discourse-app and ABDA, and

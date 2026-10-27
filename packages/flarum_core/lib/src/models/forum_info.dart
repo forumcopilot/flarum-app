@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import '../attributes.dart';
 import '../json_api.dart';
+import 'flapp_push.dart';
 import 'policy.dart';
 import 'reaction.dart';
 import 'user.dart';
@@ -61,6 +62,7 @@ class FlarumForumInfo {
     this.actorAttributes = const {},
     this.ignoredUsers,
     this.policies = const [],
+    this.flappPush,
   });
 
   factory FlarumForumInfo.fromDocument(JsonApiDocument document) {
@@ -104,6 +106,7 @@ class FlarumForumInfo {
           ? null
           : [for (final user in document.findAll(actor.toMany('ignoredUsers'))) FlarumUser.fromResource(user)],
       policies: [for (final policy in document.findAll(forum.toMany('fofTermsPolicies'))) FlarumPolicy.fromResource(policy)],
+      flappPush: FlappPushInfo.fromAttributes(a),
       attributes: a,
     );
   }
@@ -141,6 +144,9 @@ class FlarumForumInfo {
   /// The signed-in reader; null for guests.
   /// The forum's policies (fof/terms), for every reader.
   final List<FlarumPolicy> policies;
+
+  /// Where the forum's pushes come from, when it runs the Flapp extension and is connected.
+  final FlappPushInfo? flappPush;
 
   /// Where the signed-in reader stands with each policy, by its id.
   Map<String, FlarumPolicyState> get policyStates => {

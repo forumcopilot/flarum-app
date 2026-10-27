@@ -275,6 +275,61 @@ class _EmbedRow extends StatelessWidget {
 /// Discourse cooks with a thumbnail), in a post or a chat message: its
 /// poster frame with a play button; tapping plays it in the app's video
 /// viewer.
+/// A video's first frame, from the video itself, for one without a poster: the player loads it and
+/// stays paused there. Black while it loads, and where it can't (no player, or a refusal).
+class _FirstFrame extends StatefulWidget {
+  const _FirstFrame({required this.src, this.auth});
+
+  final String src;
+  final ForumMediaAuth? auth;
+
+  @override
+  State<_FirstFrame> createState() => _FirstFrameState();
+}
+
+class _FirstFrameState extends State<_FirstFrame> {
+  VideoPlayerController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_load());
+  }
+
+  Future<void> _load() async {
+    try {
+      final media = await ForumMedia.resolvePlayable(widget.auth, widget.src);
+      if (!mounted) return;
+      final controller = VideoPlayerController.networkUrl(media.url, httpHeaders: media.headers);
+      _controller = controller;
+      await controller.initialize();
+      if (mounted) setState(() {});
+    } catch (_) {
+      // The play button still opens it.
+    }
+  }
+
+  @override
+  void dispose() {
+    unawaited(_controller?.dispose());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = _controller;
+    if (controller == null || !controller.value.isInitialized) return const ColoredBox(color: Colors.black);
+    final size = controller.value.size;
+    return ColoredBox(
+      color: Colors.black,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: SizedBox(width: size.width, height: size.height, child: VideoPlayer(controller)),
+      ),
+    );
+  }
+}
+
 class PostVideoCard extends StatelessWidget {
   const PostVideoCard({
     super.key,
@@ -343,7 +398,8 @@ class PostVideoCard extends StatelessWidget {
                           errorBuilder: (context, _, __) => blank(),
                         )
                       else
-                        blank(),
+                        // fof/upload's videos have no poster: the first frame, as the web shows it.
+                        _FirstFrame(src: src, auth: auth),
                       Center(
                         child: Container(
                           width: 60,

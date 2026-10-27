@@ -106,7 +106,12 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         theme: AppTheme.lightTheme,
         home: Scaffold(
-          body: FlarumContent(siteContext: _site('https://discuss.flarum.org'), callbacks: taps.callbacks, content: content),
+          // Prepared as the thread prepares every post.
+          body: FlarumContent(
+            siteContext: _site('https://discuss.flarum.org'),
+            callbacks: taps.callbacks,
+            content: FlarumHtml.parse(content, forumBaseUrl: 'https://discuss.flarum.org').html,
+          ),
         ),
       ));
       await tester.pump();
@@ -152,6 +157,50 @@ void main() {
       expect(favicon.height, lessThan(20), reason: 'the favicon at text size, not a full-size picture');
       await tester.tap(find.text('#4011'));
       expect(taps.urls, ['https://discuss.flarum.org/d/4011-x/13']);
+    });
+
+    test('badges come from shields.io as PNG, sit in the line and stay out of the picture viewer', () {
+      expect(FlarumHtml.rasterBadge('https://img.shields.io/badge/license-MIT-blue.svg'),
+          'https://raster.shields.io/badge/license-MIT-blue.png');
+      expect(FlarumHtml.rasterBadge('https://img.shields.io/packagist/v/fof/photoswipe'),
+          'https://raster.shields.io/packagist/v/fof/photoswipe.png', reason: 'no extension: SVG, by default');
+      expect(FlarumHtml.rasterBadge('http://poser.pugx.org/fof/upload/downloads'),
+          'https://raster.shields.io/packagist/dt/fof/upload.png', reason: "poser's badge, as shields.io draws it");
+      expect(FlarumHtml.rasterBadge('https://poser.pugx.org/fof/upload/something-else'), isNull);
+      expect(FlarumHtml.rasterBadge('https://example.com/logo.svg'), isNull);
+
+      final prepared = FlarumHtml.parse(
+          '<p><a href="https://packagist.org/packages/fof/photoswipe"><img src="https://img.shields.io/packagist/v/fof/photoswipe" '
+          'alt="Latest Stable Version"></a> <img src="https://weblate.rob006.net/widgets/flarum/-/svg-badge.svg" alt="Translation"> '
+          '<img src="https://example.com/screenshot.png" alt="Screenshot"></p>',
+          forumBaseUrl: 'https://discuss.flarum.org');
+      expect(RegExp(r'class="badge"').allMatches(prepared.html), hasLength(2), reason: 'shields.io and Weblate');
+      expect(prepared.imageUrls, ['https://example.com/screenshot.png']);
+    });
+
+    testWidgets('a badge in a link opens the link', (tester) async {
+      final taps = await pump(
+          tester,
+          '<p><a href="https://packagist.org/packages/fof/photoswipe"><img src="https://img.shields.io/packagist/v/fof/photoswipe" '
+          'alt="Latest Stable Version"></a></p>');
+      // It doesn't load in a test: what shows is its alt text, in the line.
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+      await tester.tap(find.text('Latest Stable Version'));
+      expect(taps.urls, ['https://packagist.org/packages/fof/photoswipe']);
+      expect(taps.images, isEmpty);
+    });
+
+    testWidgets("a picture that doesn't load says what it was, in a small box", (tester) async {
+      await pump(tester, '<p><img src="https://example.com/missing.png" title="" alt="Bespoke"></p>');
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+      expect(find.text('Bespoke'), findsOneWidget);
+      expect(find.byIcon(Icons.broken_image_outlined), findsOneWidget);
+      expect(tester.getSize(find.ancestor(of: find.text('Bespoke'), matching: find.byType(Container)).first).width,
+          lessThan(200), reason: 'not the whole width');
     });
 
     testWidgets('a mention of someone deleted is a muted pill that goes nowhere', (tester) async {

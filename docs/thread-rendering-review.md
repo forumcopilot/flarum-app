@@ -27,6 +27,14 @@ how many of the 4,706 have it.
   - Mentions of deleted users and posts are muted pills that go nowhere.
 
   Checked against the web with the compare tools and on the Pixel 4a.
+- **27 Oct, the pictures group (#4, #5, #12):**
+  - shields.io and Packagist (poser) badges come as shields.io's PNG, from raster.shields.io. They sit side by side in the line at 20 px and open their link. Weblate's SVG badge is drawn by flutter_svg.
+  - A picture without a size that fails shows a small box with its alt text, in the line.
+  - A video without a poster shows its first frame (`_FirstFrame`, through video_player).
+
+  Checked on the Pixel 4a. Two small things remain:
+  - flutter_svg draws part of some SVG pictures (the Vietnamese pack's flag logo shows its star but not the flag).
+  - discuss.flarum.org's own SVG emoji, plain `img`s, show at their own size, larger than the web's.
 
 ## In the post's text
 

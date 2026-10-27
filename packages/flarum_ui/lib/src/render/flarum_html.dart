@@ -27,6 +27,9 @@ import 'package:html/parser.dart' as html_parser;
 ///  * fof/upload's 2.0 image preview (`a.FoFUpload--Upl-Image-Preview-Link`,
 ///    the full size, around the thumbnail) becomes an `a.lightbox`, so the
 ///    viewer opens the full size;
+///  * shields.io and poser badges ask shields.io for PNG (flutter_svg drew
+///    them blank or garbled), and badges are marked `img.badge`, which sit
+///    in the line and open their link;
 ///  * a post mention's Font Awesome icon (2.0: `i.fa-reply`) goes; the
 ///    renderer draws its own reply glyph on both versions;
 ///  * author colours are normalised to `#rrggbb`, and inline `display: none`
@@ -170,6 +173,18 @@ class FlarumHtml {
       icon.remove();
     }
 
+    // ---- 6a. Badges ---------------------------------------------------
+    // shields.io's SVG badges (and Packagist's poser, which draws the same)
+    // come out blank or garbled in flutter_svg: shields.io serves each as PNG
+    // too. Badges (`img.badge`) sit in the line at their own size and open
+    // their link, not the picture viewer.
+    for (final img in body.querySelectorAll('img[src]')) {
+      final src = img.attributes['src']!;
+      final raster = rasterBadge(src);
+      if (raster != null) img.attributes['src'] = raster;
+      if (raster != null || _weblateBadge.hasMatch(src)) img.classes.add('badge');
+    }
+
     // ---- 6. Images ----------------------------------------------------
     // A preview's link is the original; prefer it over the <img src>.
     final images = <String>{};
@@ -179,7 +194,7 @@ class FlarumHtml {
         if (href.isNotEmpty) images.add(_absolute(href, origin));
         continue;
       }
-      if (_classes(el).contains('emoji')) continue;
+      if (_classes(el).contains('emoji') || _classes(el).contains('badge')) continue;
       if (_hasAncestorMatching(el, (e) => _classes(e).contains('lightbox'))) continue;
       final src = el.attributes['src'] ?? '';
       if (src.isNotEmpty) images.add(_absolute(src, origin));
@@ -205,6 +220,42 @@ class FlarumHtml {
 
     return FlarumHtml(html: body.innerHtml, linkUrls: links.toList(), imageUrls: images.toList());
   }
+
+  /// A shields.io or poser badge at [src] as shields.io's PNG of it (from
+  /// raster.shields.io, where img.shields.io redirects a `.png`); null for
+  /// any other picture, and for a poser badge shields.io has no match for.
+  static String? rasterBadge(String src) {
+    final uri = Uri.tryParse(src);
+    if (uri == null) return null;
+    if (uri.host == 'img.shields.io' || uri.host == 'raster.shields.io') {
+      final path = uri.path;
+      final last = path.split('/').last;
+      final png = path.endsWith('.svg')
+          ? '${path.substring(0, path.length - 4)}.png'
+          : last.contains('.')
+              ? path
+              : '$path.png';
+      return uri.replace(scheme: 'https', host: 'raster.shields.io', path: png).toString();
+    }
+    if (uri.host == 'poser.pugx.org') {
+      final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+      if (segments.length < 3) return null;
+      final kind = switch (segments.skip(2).join('/')) {
+        'v' || 'version' || 'v/stable' => 'v',
+        'downloads' || 'd/total' => 'dt',
+        'd/monthly' => 'dm',
+        'd/daily' => 'dd',
+        'license' => 'l',
+        _ => null,
+      };
+      if (kind == null) return null;
+      return 'https://raster.shields.io/packagist/$kind/${segments[0]}/${segments[1]}.png';
+    }
+    return null;
+  }
+
+  /// Weblate's translation badge, an SVG that flutter_svg draws well enough.
+  static final _weblateBadge = RegExp(r'/widgets/.+/svg-badge\.svg$');
 
   /// [element]'s children and attributes under another tag.
   static dom.Element _retag(dom.Element element, String tag) {

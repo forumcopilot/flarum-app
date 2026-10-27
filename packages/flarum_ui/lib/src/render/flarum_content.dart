@@ -318,11 +318,35 @@ class FlarumContent extends StatelessWidget {
             // with flutter_svg from the disk cache, falling back the same way
             // when the file is missing or not SVG.
             final isSvg = BrandImage.isSvg(resolved);
-            // An emoji that fails reads as its `:name:`; a picture gets the
-            // same broken-image box as everywhere else.
+            // A badge (shields.io, Weblate: `img.badge`, see FlarumHtml) sits
+            // in the line at the web's 20px, and opens its link.
+            if (classes.split(RegExp(r'\s+')).contains('badge')) {
+              Widget failed(BuildContext _) => _ImageFallback(alt: alt);
+              final badge = isSvg
+                  ? BrandImage(resolved, height: _badgeHeight, fit: BoxFit.contain, fallback: failed)
+                  : Image(
+                      image: forumImage(resolved, media),
+                      height: _badgeHeight,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, _, __) => failed(context),
+                    );
+              final link = _anchorHref(extensionContext.node);
+              return _NoBaseline(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: DesignTokens.spacingXS),
+                  child: link == null ? badge : GestureDetector(onTap: () => openEmbed(link), child: badge),
+                ),
+              );
+            }
+            // An emoji that fails reads as its `:name:`. A picture of known
+            // size fills its box with the broken-image box; one without a
+            // size gets a small one with its alt text, in the line (the box
+            // took the whole width, and badges stacked one a line).
             Widget fallback(BuildContext _) => isEmoji
                 ? Text(alt, style: TextStyle(color: mutedColor))
-                : BrokenImagePlaceholder(alt: alt);
+                : (w != null && h != null)
+                    ? BrokenImagePlaceholder(alt: alt)
+                    : _ImageFallback(alt: alt);
             Widget picture({double? width, double? height}) => isSvg
                     ? BrandImage(
                         resolved,
@@ -510,6 +534,58 @@ bool _hasAncestor(dom.Node node, Set<String> tags) {
 
 /// The href of the `a.lightbox` around [node] — a lightboxed upload's
 /// original — or null.
+/// The link around a picture ([node]), if any.
+String? _anchorHref(dom.Node node) {
+  for (var p = node.parent; p != null; p = p.parent) {
+    if (p.localName == 'a') {
+      final href = p.attributes['href']?.trim();
+      return href == null || href.isEmpty ? null : href;
+    }
+  }
+  return null;
+}
+
+/// The web's badges are 20px tall.
+const double _badgeHeight = 20;
+
+/// A picture that didn't load, where it has no size of its own: a small
+/// broken-picture mark and its alt text, in the line.
+class _ImageFallback extends StatelessWidget {
+  const _ImageFallback({required this.alt});
+
+  final String alt;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final label = alt.trim();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingS, vertical: 2),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(DesignTokens.radiusXS),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.broken_image_outlined, size: 16, color: colorScheme.onSurfaceVariant),
+          if (label.isNotEmpty) ...[
+            const SizedBox(width: DesignTokens.spacingXS),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
 String? _lightboxHref(dom.Node node) {
   for (var p = node.parent; p != null; p = p.parent) {
     if (p.localName == 'a' && p.classes.contains('lightbox')) {

@@ -12,6 +12,7 @@ export 'src/render/post_body_extensions.dart' show SpoilerBox;
 export 'src/media/image_viewer_page.dart';
 export 'src/navigation/forum_links.dart';
 export 'src/thread/post_actions_row.dart';
+export 'src/thread/who_reacted_sheet.dart';
 export 'src/thread/post_tile.dart';
 export 'src/thread/thread_model.dart';
 export 'src/thread/thread_page.dart';

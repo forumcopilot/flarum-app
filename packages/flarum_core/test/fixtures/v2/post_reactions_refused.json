@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/post_reactions",
+    "query": {
+      "filter[post]": "153",
+      "include": "user,reaction",
+      "page[offset]": "0",
+      "page[limit]": "50"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "permission_denied"
+      }
+    ]
+  }
+}

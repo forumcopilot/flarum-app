@@ -68,6 +68,12 @@ FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:808
 With `ONLY` set to a pattern (`ONLY='^posts_'`), the recorder records only the fixtures whose names
 match it and keeps the rest, which depend on alice's state as the seed left it.
 
+Who reacted to a post is recorded on the community's welcome post: bob and carol react, alice is
+refused (no group may see who reacted by default), the admin lists them (with `FLARUM_ADMIN_USER`
+and `FLARUM_ADMIN_PASSWORD`), and they take their reactions back. fof/reactions keeps a taken-back
+reaction as a row with no reaction, which every list skips; to leave the forum as it was, delete
+them: `delete from post_reactions where reaction_id is null`.
+
 Since 14 October 2026 members may also start polls, vote and change their vote (fof/polls) and save
 drafts (fof/drafts) on both forums, as Tung approved for Phase 3; the write recorder's polls and
 drafts are deleted at its end (the polls go with their discussions).

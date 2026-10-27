@@ -1,0 +1,207 @@
+{
+  "request": {
+    "state": "seesReactions",
+    "method": "GET",
+    "path": "/post_reactions",
+    "query": {
+      "filter[post]": "153",
+      "include": "user,reaction",
+      "page[offset]": "0",
+      "page[limit]": "50"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "post_reactions",
+        "id": "23",
+        "links": {
+          "self": "/post_reactions/23"
+        },
+        "attributes": {
+          "userId": 3,
+          "postId": 153,
+          "reactionId": 1
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "153"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "3"
+            }
+          },
+          "reaction": {
+            "data": {
+              "type": "reactions",
+              "id": "1"
+            }
+          }
+        }
+      },
+      {
+        "type": "post_reactions",
+        "id": "24",
+        "links": {
+          "self": "/post_reactions/24"
+        },
+        "attributes": {
+          "userId": 4,
+          "postId": 153,
+          "reactionId": 2
+        },
+        "relationships": {
+          "post": {
+            "data": {
+              "type": "posts",
+              "id": "153"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "4"
+            }
+          },
+          "reaction": {
+            "data": {
+              "type": "reactions",
+              "id": "2"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "users",
+        "id": "4",
+        "links": {
+          "self": "/users/4"
+        },
+        "attributes": {
+          "username": "carol",
+          "email": "carol@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "carol",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "carol",
+          "joinTime": "2026-10-08T17:53:47+00:00",
+          "discussionCount": 0,
+          "commentCount": 23,
+          "lastSeenAt": "2026-10-27T04:49:19+00:00",
+          "canEdit": true,
+          "canEditCredentials": true,
+          "canEditGroups": true,
+          "canDelete": true,
+          "canSuspend": true,
+          "suspendReason": null,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "anonymized": false,
+          "canModerateExports": true,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 0,
+          "fof-upload-uploadCountAll": 0,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "2",
+        "links": {
+          "self": "/reactions/2"
+        },
+        "attributes": {
+          "identifier": "thumbsdown",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "users",
+        "id": "3",
+        "links": {
+          "self": "/users/3"
+        },
+        "attributes": {
+          "username": "bob",
+          "email": "bob@flarumapp.local",
+          "isEmailConfirmed": true,
+          "displayName": "bob",
+          "avatarUrl": null,
+          "avatarSrcset": null,
+          "hasUploadedAvatar": false,
+          "slug": "bob",
+          "joinTime": "2026-10-08T17:53:46+00:00",
+          "discussionCount": 4,
+          "commentCount": 26,
+          "lastSeenAt": "2026-10-27T04:49:19+00:00",
+          "canEdit": true,
+          "canEditCredentials": true,
+          "canEditGroups": true,
+          "canDelete": true,
+          "canSuspend": true,
+          "suspendReason": null,
+          "suspendMessage": null,
+          "suspendedUntil": null,
+          "anonymized": false,
+          "canModerateExports": true,
+          "blocksPd": false,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": true,
+          "canSendAnyMessage": true,
+          "fof-upload-uploadCountCurrent": 3,
+          "fof-upload-uploadCountAll": 3,
+          "fofTermsPoliciesState": [],
+          "fofTermsPoliciesHasUpdate": false,
+          "fofTermsPoliciesMustAccept": false
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "1",
+        "links": {
+          "self": "/reactions/1"
+        },
+        "attributes": {
+          "identifier": "thumbsup",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      }
+    ],
+    "meta": {
+      "page": {
+        "total": 2,
+        "offset": 0,
+        "limit": 50
+      }
+    },
+    "links": [],
+    "jsonapi": {
+      "version": "1.1"
+    }
+  }
+}

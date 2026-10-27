@@ -12,6 +12,7 @@ import 'models/forum_info.dart';
 import 'models/notification.dart';
 import 'models/poll.dart';
 import 'models/post.dart';
+import 'models/reaction.dart';
 import 'models/tag.dart';
 import 'models/upload.dart';
 import 'models/user.dart';
@@ -643,6 +644,37 @@ class FlarumApi {
       [for (final resource in document.data) FlarumUser.fromResource(resource)],
       offset: offset,
       hasMore: document.hasNext,
+    );
+  }
+
+  /// Everyone who liked post [postId], as the web's "Liked by" dialog lists them (flarum/likes'
+  /// `liked` filter on users); a post carries only four ([FlarumPost.likedBy]). Needs "search
+  /// users", as [searchUsers] does: guests get 403 by default.
+  Future<FlarumPage<FlarumUser>> likers(String postId, {int offset = 0, int limit = 50}) async {
+    final document = await client.get('/users', query: {'filter[liked]': postId, ..._page(offset, limit)});
+    return FlarumPage(
+      [for (final resource in document.data) FlarumUser.fromResource(resource)],
+      offset: offset,
+      hasMore: document.hasNext,
+    );
+  }
+
+  /// Who reacted to post [postId], and with what (fof/reactions), for a reader who may see it
+  /// ([FlarumDiscussion.canSeeReactions]; others get 403). 1.x lists them all at once
+  /// (`/posts/{id}/reactions`); 2.0 pages them (`/post_reactions`).
+  Future<FlarumPage<FlarumPostReaction>> postReactions(String postId, {int offset = 0, int limit = 50}) async {
+    final v2 = await version() == FlarumVersion.v2;
+    final document = v2
+        ? await client.get('/post_reactions', query: {
+            'filter[post]': postId,
+            'include': 'user,reaction',
+            ..._page(offset, limit),
+          })
+        : await client.get('/posts/$postId/reactions');
+    return FlarumPage(
+      [for (final resource in document.data) FlarumPostReaction.fromResource(resource, document)],
+      offset: offset,
+      hasMore: v2 && document.hasNext,
     );
   }
 

@@ -1,0 +1,105 @@
+{
+  "request": {
+    "state": "seesReactions",
+    "method": "GET",
+    "path": "/posts/100/reactions",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "type": "post_reactions",
+        "id": "22",
+        "attributes": {
+          "userId": 6,
+          "postId": 100,
+          "reactionId": 1
+        },
+        "relationships": {
+          "reaction": {
+            "data": {
+              "type": "reactions",
+              "id": "1"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "6"
+            }
+          }
+        }
+      },
+      {
+        "type": "post_reactions",
+        "id": "23",
+        "attributes": {
+          "userId": 7,
+          "postId": 100,
+          "reactionId": 2
+        },
+        "relationships": {
+          "reaction": {
+            "data": {
+              "type": "reactions",
+              "id": "2"
+            }
+          },
+          "user": {
+            "data": {
+              "type": "users",
+              "id": "7"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "reactions",
+        "id": "1",
+        "attributes": {
+          "identifier": "thumbsup",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "reactions",
+        "id": "2",
+        "attributes": {
+          "identifier": "thumbsdown",
+          "display": null,
+          "type": "emoji",
+          "enabled": true
+        }
+      },
+      {
+        "type": "users",
+        "id": "6",
+        "attributes": {
+          "username": "bob",
+          "displayName": "bob",
+          "avatarUrl": null,
+          "slug": "bob",
+          "anonymized": false
+        }
+      },
+      {
+        "type": "users",
+        "id": "7",
+        "attributes": {
+          "username": "carol",
+          "displayName": "carol",
+          "avatarUrl": null,
+          "slug": "carol",
+          "anonymized": false
+        }
+      }
+    ]
+  }
+}

@@ -783,6 +783,13 @@ class _ThreadPageState extends State<ThreadPage> {
         onApprove: post.canApprove && !post.isApproved ? () => _approvePost(post) : null,
         onPollChanged: _signedIn ? (poll) => _pollChanged(post.id, poll) : null,
         link: WebLinks.discussion(widget.site, widget.discussionId, slug: _model.discussion?.slug, near: post.number),
+        // The whole lists need "search users" (the likers) and fof/reactions' canSeeReactions.
+        loadLikers: _signedIn && (_forum.info?.can('canSearchUsers') ?? false)
+            ? (offset) => _forum.api.likers(post.id, offset: offset)
+            : null,
+        loadReactions: _model.discussion?.canSeeReactions ?? false
+            ? (offset) => _forum.api.postReactions(post.id, offset: offset)
+            : null,
       );
       final shown = post.number == _flashNumber ? _Flash(key: ValueKey(_flashes), child: tile) : tile;
       final gap = index > 0 ? timeLapsed(_model.posts[index - 1].createdAt, post.createdAt, l10n) : null;

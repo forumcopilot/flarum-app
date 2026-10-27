@@ -7,7 +7,7 @@ import 'package:forum_kit/views/widgets/post_action_button.dart';
 import 'package:forum_kit/views/widgets/sheet_title.dart';
 
 import '../../l10n/flarum_l10n.dart';
-import '../widgets/flarum_avatar.dart';
+import 'who_reacted_sheet.dart';
 
 /// A reaction's glyph: its emoji, from the shortcode it's named by; else its name.
 String reactionGlyph(FlarumReaction reaction) =>
@@ -36,6 +36,8 @@ class PostActionsRow extends StatelessWidget {
     this.repliesLabel,
     this.likesLabel,
     this.onOpenUser,
+    this.loadLikers,
+    this.loadReactions,
   });
 
   final FlarumPost post;
@@ -63,6 +65,13 @@ class PostActionsRow extends StatelessWidget {
   /// Opens a liker's profile, from the sheet of who liked the post.
   final void Function(FlarumUser user)? onOpenUser;
 
+  /// Everyone who liked the post, for the sheet (the post carries four); null where the reader may
+  /// not list them.
+  final LikersLoader? loadLikers;
+
+  /// Who reacted to the post, for the sheet; null where the reader may not see it.
+  final ReactionsLoader? loadReactions;
+
   /// The post's reactions with any count, the most used first.
   List<(FlarumReaction, int)> get _used => [
         for (final r in reactions)
@@ -88,7 +97,17 @@ class PostActionsRow extends StatelessWidget {
           // Without the Like button beside it (a guest), the count says what it counts.
           likes: onLike == null && post.likesCount > 0,
           total: total,
-          onTap: () => _showWhoReacted(context),
+          onTap: () => WhoReactedSheet.show(
+            context,
+            post: post,
+            reactions: reactions,
+            readerId: readerId,
+            loadLikers: loadLikers,
+            loadReactions: loadReactions,
+            likesLabel: likesLabel,
+            onOpenUser: onOpenUser,
+            onReact: react ? () => _pickReaction(context) : null,
+          ),
         ),
       if (onLike != null)
         PostActionButton(
@@ -212,81 +231,6 @@ class PostActionsRow extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  /// Who liked the post (the forum names up to four, the reader first; the rest are counted) and
-  /// how many used each reaction.
-  void _showWhoReacted(BuildContext context) {
-    final l10n = flarumL10n(context);
-    final used = _used;
-    final mine = _mine;
-    final others = post.likesCount - post.likedBy.length;
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      builder: (sheet) {
-        final theme = Theme.of(sheet);
-        final muted = theme.colorScheme.onSurfaceVariant;
-        return SafeArea(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.7),
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(bottom: DesignTokens.spacingM),
-              children: [
-                SheetTitle(l10n.likesAndReactions),
-                if (post.likesCount > 0) ...[
-                  ListTile(
-                    dense: true,
-                    leading: Icon(Icons.thumb_up, color: theme.colorScheme.primary),
-                    title: Text(l10n.likesTab, style: theme.textTheme.titleSmall),
-                    subtitle: likesLabel == null ? null : Text(likesLabel!),
-                    trailing: Text('${post.likesCount}', style: theme.textTheme.labelLarge?.copyWith(color: muted)),
-                  ),
-                  for (final user in post.likedBy)
-                    ListTile(
-                      leading: FlarumAvatar(user: user, radius: 18),
-                      title: Text(user.id == readerId ? l10n.you : user.displayName),
-                      onTap: onOpenUser == null
-                          ? null
-                          : () {
-                              Navigator.of(sheet).pop();
-                              onOpenUser!(user);
-                            },
-                    ),
-                  if (others > 0)
-                    ListTile(
-                      leading: const SizedBox(width: 36),
-                      title: Text(l10n.andOthers(others), style: theme.textTheme.bodyMedium?.copyWith(color: muted)),
-                    ),
-                ],
-                if (used.isNotEmpty) ...[
-                  if (post.likesCount > 0) const Divider(indent: DesignTokens.spacingL, endIndent: DesignTokens.spacingL),
-                  ListTile(dense: true, title: Text(l10n.reactions, style: theme.textTheme.titleSmall)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL),
-                    child: Wrap(
-                      spacing: DesignTokens.spacingS,
-                      runSpacing: DesignTokens.spacingS,
-                      children: [
-                        for (final (reaction, count) in used)
-                          Chip(
-                            avatar: Text(reactionGlyph(reaction), style: const TextStyle(fontSize: 18)),
-                            label: Text('$count'),
-                            side: reaction.id == mine?.id ? BorderSide(color: theme.colorScheme.primary, width: 1.5) : null,
-                            backgroundColor: reaction.id == mine?.id ? theme.colorScheme.primaryContainer : null,
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

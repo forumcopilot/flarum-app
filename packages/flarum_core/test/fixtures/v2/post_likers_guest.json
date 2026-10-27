@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/users",
+    "query": {
+      "filter[liked]": "153",
+      "page[offset]": "0",
+      "page[limit]": "50"
+    },
+    "signedIn": false,
+    "rememberCookie": false
+  },
+  "status": 403,
+  "body": {
+    "errors": [
+      {
+        "status": "403",
+        "code": "permission_denied"
+      }
+    ]
+  }
+}

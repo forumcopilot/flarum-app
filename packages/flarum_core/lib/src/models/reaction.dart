@@ -1,5 +1,6 @@
 import '../attributes.dart';
 import '../json_api.dart';
+import 'user.dart';
 
 /// A reaction a forum offers (fof/reactions): an emoji by its shortcode name, or a Font Awesome
 /// icon. The forum sends its set with `GET /api`.
@@ -28,4 +29,21 @@ class FlarumReaction {
   /// The forum's own label for it, if it set one.
   final String? display;
   final bool enabled;
+}
+
+/// One reader's reaction to a post, as who reacted lists it (fof/reactions): the reaction's id, and
+/// who. [user] is null for an anonymous reaction, where the forum allows them.
+class FlarumPostReaction {
+  const FlarumPostReaction({required this.reactionId, this.user});
+
+  factory FlarumPostReaction.fromResource(JsonApiResource resource, JsonApiDocument document) => FlarumPostReaction(
+        reactionId: resource.toOne('reaction')?.id ?? resource.attributes['reactionId']?.toString() ?? '',
+        user: switch (document.find(resource.toOne('user'))) {
+          final user? => FlarumUser.fromResource(user),
+          null => null,
+        },
+      );
+
+  final String reactionId;
+  final FlarumUser? user;
 }

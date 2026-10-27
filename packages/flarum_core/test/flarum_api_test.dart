@@ -205,6 +205,33 @@ void main() {
         expect(reply.postNumber, 3, reason: 'from content.postNumber');
       });
 
+      group('who liked and reacted', () {
+        String liked() => (forum.seed['posts'] as Map)['liked'] as String;
+
+        test('lists everyone who liked a post, past the four it carries', () async {
+          final page = await api.likers(liked());
+          expect(page.items.map((u) => u.username), ['maya', 'theo', 'priya', 'sofia', 'nils', 'grace']);
+          expect(page.hasMore, isFalse);
+        });
+
+        test('a guest may not list who liked a post', () async {
+          final error = await _failure(() => forum.api(signedIn: false).likers(liked()));
+          expect(error.statusCode, 403);
+        });
+
+        test('a member may not see who reacted, by default', () async {
+          expect((await api.discussion(forum.discussionId('welcome'))).canSeeReactions, isFalse);
+          final error = await _failure(() => api.postReactions(liked()));
+          expect(error.statusCode, 403);
+        });
+
+        test('lists who reacted, and with what, for a reader who may see it', () async {
+          final page = await FixtureForum(version, states: {'seesReactions'}).api().postReactions(liked());
+          expect([for (final r in page.items) (r.user?.username, r.reactionId)], [('bob', '1'), ('carol', '2')]);
+          expect(page.hasMore, isFalse);
+        });
+      });
+
       group('errors', () {
         test('a missing discussion is not_found', () async {
           final error = await _failure(() => api.discussion('999999'));

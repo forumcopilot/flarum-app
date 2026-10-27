@@ -46,6 +46,13 @@ opens who (the likers the post carries, "and N others", each reaction's count), 
 offers the reactions), the reader's reaction, Bookmark (out of ⋮) and Reply, as 48dp icons. An
 avatar opens the member's card (`showUserCard`) before the profile.
 
+**Who liked and reacted** (`WhoReactedSheet`, 27 Oct), as ABDA's sheet: chips for All, the likes
+and each reaction, a row per person with what they gave, the reader first, React at the foot. The
+likers the post carries show at once; everyone loads for a reader who may search users
+(`FlarumApi.likers`), and who reacted where the discussion's `canSeeReactions` allows
+(`postReactions`; no group may by default, so most readers get the reactions' counts). Fixtures:
+`post_likers*` and `post_reactions*`, recorded on the community's welcome post.
+
 **Profile.** The Profile tab is ABDA's hub: avatar and name, View Profile / Edit Profile, the stats,
 Your Stuff (My Posts, Drafts, Bookmarks, Flagged Posts), Settings (Notification Settings, the colour
 scheme in a sheet, Account and Privacy, Log Out in red); a guest gets Join and Log In. A member's
@@ -59,9 +66,6 @@ title to "Start a Discu…"). The bar is ABDA's: attachments, then every format 
 
 ## Not done, and why
 
-- **Who liked and who reacted, in full.** The sheet names the up to four likers the post carries.
-  The API has the whole lists (CLAUDE.md, Actions), but flarum_core has no calls for them and the
-  fixtures need recording with the test accounts' passwords, which is Tung's to run or approve.
 - **Native account editing** (avatar upload, nickname, email, password): Edit Profile and Account and
   Privacy open the forum's own pages for now. Same reason: new API calls need recorded fixtures.
 - **Composer drafts saved while typing** (ABDA saves server drafts as you type): fof/drafts is

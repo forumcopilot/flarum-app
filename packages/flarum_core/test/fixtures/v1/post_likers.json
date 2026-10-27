@@ -1,0 +1,213 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/users",
+    "query": {
+      "filter[liked]": "100",
+      "page[offset]": "0",
+      "page[limit]": "50"
+    },
+    "signedIn": true,
+    "rememberCookie": false
+  },
+  "status": 200,
+  "body": {
+    "links": {
+      "first": "https://flarum18.betterdiscourse.app/api/users?filter%5Bliked%5D=100&page%5Blimit%5D=50"
+    },
+    "data": [
+      {
+        "type": "users",
+        "id": "8",
+        "attributes": {
+          "username": "maya",
+          "displayName": "Maya Okafor",
+          "avatarUrl": null,
+          "slug": "maya",
+          "joinTime": "2026-08-18T13:30:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 11,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-05T03:15:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "9",
+        "attributes": {
+          "username": "theo",
+          "displayName": "Theo Lindqvist",
+          "avatarUrl": null,
+          "slug": "theo",
+          "joinTime": "2026-08-19T16:30:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 9,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-06T21:20:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "10",
+        "attributes": {
+          "username": "priya",
+          "displayName": "Priya Nair",
+          "avatarUrl": null,
+          "slug": "priya",
+          "joinTime": "2026-08-19T20:30:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 8,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-09-28T00:00:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "12",
+        "attributes": {
+          "username": "sofia",
+          "displayName": "Sofía Ramírez",
+          "avatarUrl": null,
+          "slug": "sofia",
+          "joinTime": "2026-08-22T07:30:00+00:00",
+          "discussionCount": 1,
+          "commentCount": 5,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-09-04T10:20:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "16",
+        "attributes": {
+          "username": "nils",
+          "displayName": "Nils Hagen",
+          "avatarUrl": null,
+          "slug": "nils",
+          "joinTime": "2026-08-23T00:30:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 9,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-03T17:00:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 1,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      },
+      {
+        "type": "users",
+        "id": "21",
+        "attributes": {
+          "username": "grace",
+          "displayName": "Grace O'Neill",
+          "avatarUrl": null,
+          "slug": "grace",
+          "joinTime": "2026-08-22T12:30:00+00:00",
+          "discussionCount": 2,
+          "commentCount": 12,
+          "canEdit": false,
+          "canEditCredentials": false,
+          "canEditGroups": false,
+          "canDelete": false,
+          "lastSeenAt": "2026-10-05T02:15:00+00:00",
+          "canSuspend": false,
+          "canModerateExports": false,
+          "blocksPd": false,
+          "fof-upload-uploadCountCurrent": null,
+          "fof-upload-uploadCountAll": null,
+          "ignored": false,
+          "canBeIgnored": true,
+          "bestAnswerCount": 0,
+          "canEditNickname": false
+        },
+        "relationships": {
+          "groups": {
+            "data": []
+          }
+        }
+      }
+    ]
+  }
+}

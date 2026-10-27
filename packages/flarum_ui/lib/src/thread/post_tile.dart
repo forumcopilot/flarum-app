@@ -14,6 +14,7 @@ import '../render/flarum_html.dart';
 import '../widgets/flarum_avatar.dart';
 import '../navigation/web_links.dart';
 import 'post_actions_row.dart';
+import 'who_reacted_sheet.dart';
 
 /// One post in a thread: a comment with its author, time and body, or an
 /// event (a rename, lock, sticky, retag…) as a one-line notice.
@@ -45,6 +46,8 @@ class PostTile extends StatelessWidget {
       this.onDeleteForever,
       this.onApprove,
       this.onPollChanged,
+      this.loadLikers,
+      this.loadReactions,
       this.link});
 
   final SiteContext site;
@@ -108,6 +111,11 @@ class PostTile extends StatelessWidget {
 
   /// The post's web address, for Share and Copy Link in its menu.
   final String? link;
+
+  /// Everyone who liked it and who reacted, for the sheet its count opens; null where the reader
+  /// may not list them (see [WhoReactedSheet]).
+  final LikersLoader? loadLikers;
+  final ReactionsLoader? loadReactions;
 
   bool get _hasMenu =>
       link != null ||
@@ -219,6 +227,8 @@ class PostTile extends StatelessWidget {
             repliesLabel: post.mentionedByCount > 0 ? repliedBy(post, l10n) : null,
             likesLabel: likedBy(post, readerId, l10n),
             onOpenUser: onAuthorTap,
+            loadLikers: loadLikers,
+            loadReactions: loadReactions,
           ),
         ],
       ),

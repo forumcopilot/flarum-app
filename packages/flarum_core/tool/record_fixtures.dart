@@ -6,6 +6,9 @@
 //
 //   FLARUM_TEST_PASSWORD=… dart run tool/record_fixtures.dart http://127.0.0.1:8081 seed-v1.json
 //
+// With FLARUM_ADMIN_USER and FLARUM_ADMIN_PASSWORD it also records who reacted to a post as the
+// admin sees it (members may not by default).
+//
 // With ONLY set to a pattern (ONLY='^posts_'), only the fixtures whose names match it are
 // recorded again, and the others kept: they depend on alice's state as the seed left it, which
 // phone runs change (see tool/test_forums/README.md).
@@ -125,6 +128,58 @@ Future<void> main(List<String> args) async {
           'attributes': {'title': '', 'content': ''},
         },
       }));
+
+  // Everyone who liked a post, past the four a post carries: the first sticky discussion's first
+  // post with more than four likes (community_seed.php's welcome), saved in seed.json as
+  // posts.liked.
+  String? likedId;
+  for (final sticky in (await api.discussions(sticky: true)).items) {
+    if (await api.firstPost(sticky.id) case final first? when first.likesCount > 4) {
+      likedId = first.id;
+      break;
+    }
+  }
+  if (likedId == null) throw StateError('No sticky discussion opens with a post liked more than four times');
+  final liked = likedId;
+  (seed['posts'] as Map)['liked'] = liked;
+  await record('post_likers', () => api.likers(liked));
+  await record('post_likers_guest', () => guest.likers(liked));
+
+  // Who reacted to the same post (fof/reactions): bob and carol react with the forum's first two
+  // reactions, alice asks who (refused: no group may see it by default) and so does the admin
+  // (with FLARUM_ADMIN_USER and FLARUM_ADMIN_PASSWORD; served to tests in the `seesReactions`
+  // state), and they take their reactions back.
+  final adminUser = Platform.environment['FLARUM_ADMIN_USER'];
+  final adminPassword = Platform.environment['FLARUM_ADMIN_PASSWORD'];
+  final reactions = (await api.forumInfo()).reactions;
+  if (reactions.length >= 2 && (only == null || only.hasMatch('post_reactions_refused'))) {
+    final reactors = [
+      for (var i = 0; i < 2; i++) FlarumApi(FlarumClient(args[0], dio: Dio())),
+    ];
+    await reactors[0].logIn('bob', password);
+    await reactors[1].logIn('carol', password);
+    try {
+      await reactors[0].reactToPost(liked, reactions[0].id);
+      await reactors[1].reactToPost(liked, reactions[1].id);
+      await record('post_reactions_refused', () => api.postReactions(liked));
+      if (adminUser != null && adminPassword != null) {
+        final admin = FlarumApi(FlarumClient(args[0], dio: Dio()..interceptors.add(recorder)));
+        await admin.logIn(adminUser, adminPassword);
+        await admin.version(); // not part of the fixture
+        recorder.states['post_reactions'] = 'seesReactions';
+        await record('post_reactions', () => admin.postReactions(liked));
+        await admin.logOut();
+      } else {
+        stdout.writeln('post_reactions not recorded: FLARUM_ADMIN_USER and FLARUM_ADMIN_PASSWORD are not set');
+      }
+    } finally {
+      await reactors[0].unreactToPost(liked, reactions[0].id);
+      await reactors[1].unreactToPost(liked, reactions[1].id);
+      for (final reactor in reactors) {
+        await reactor.logOut();
+      }
+    }
+  }
 
   // Sign-out lists the account's tokens with the remember cookie, then deletes the current one.
   // carol signs in afresh so the tokens the fixtures above used stay valid.

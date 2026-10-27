@@ -37,6 +37,7 @@ class FlarumDiscussion {
     this.hasBestAnswer = false,
     this.bestAnswerPostId,
     this.bookmarked = false,
+    this.canSeeReactions = false,
     this.author,
     this.lastPostedUser,
     this.tags = const [],
@@ -83,6 +84,7 @@ class FlarumDiscussion {
       // The same attribute holds the answer's post id, on 1.x and 2.0 alike (false when there's none).
       bestAnswerPostId: a.integer('hasBestAnswer')?.toString(),
       bookmarked: a.boolean('bookmarked') ?? false,
+      canSeeReactions: a.boolean('canSeeReactions') ?? false,
       author: author == null ? null : FlarumUser.fromResource(author),
       lastPostedUser: lastPostedUser == null ? null : FlarumUser.fromResource(lastPostedUser),
       tags: [for (final tag in document.findAll(resource.toMany('tags'))) FlarumTag.fromResource(tag)],
@@ -133,6 +135,7 @@ class FlarumDiscussion {
         hasBestAnswer: bestAnswerPostId == null ? hasBestAnswer : bestAnswerPostId() != null,
         bestAnswerPostId: bestAnswerPostId == null ? this.bestAnswerPostId : bestAnswerPostId(),
         bookmarked: bookmarked ?? this.bookmarked,
+        canSeeReactions: canSeeReactions,
         author: author,
         lastPostedUser: lastPostedUser,
         tags: tags,
@@ -201,6 +204,10 @@ class FlarumDiscussion {
 
   /// fof/bookmarks: the reader bookmarked it.
   final bool bookmarked;
+
+  /// fof/reactions: whether the reader may see who reacted to its posts
+  /// ([FlarumApi.postReactions]). No group may by default; the counts show either way.
+  final bool canSeeReactions;
   final FlarumUser? author;
   final FlarumUser? lastPostedUser;
   final List<FlarumTag> tags;

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:forum_kit/l10n/kit_l10n.dart';
 import 'package:forum_kit/theme/design_tokens.dart';
 import 'package:forum_kit/utils/snackbar_helper.dart';
+import 'package:forum_kit/views/widgets/adaptive_app_bar_title.dart';
 import 'package:forum_kit/views/widgets/empty_state_view.dart';
 import 'package:forum_kit/views/widgets/post_content_callbacks.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
@@ -641,9 +642,10 @@ class _ThreadPageState extends State<ThreadPage> {
     final discussion = _model.discussion;
     return Scaffold(
       appBar: AppBar(
-        title: _header && _heroOnScreen
-            ? null
-            : Text(discussion?.title ?? widget.title ?? '', maxLines: 2, overflow: TextOverflow.ellipsis),
+        // Once the heading has scrolled away: one line of the bar's own size while the title fits,
+        // else two smaller lines, as the Discourse app's topic bar (it was two lines at full size,
+        // taller than the bar).
+        title: _header && _heroOnScreen ? null : AdaptiveAppBarTitle(discussion?.title ?? widget.title ?? ''),
         actions: [
           if (discussion != null)
             Builder(

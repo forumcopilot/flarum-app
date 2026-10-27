@@ -189,7 +189,21 @@ void main() {
         for (var i = 0; i < 5; i++) {
           await tester.pump(const Duration(milliseconds: 100));
         }
-        expect(find.descendant(of: find.byType(AppBar), matching: find.text('Long thread for paging tests')), findsOneWidget);
+        final barTitle = find.descendant(of: find.byType(AppBar), matching: find.text('Long thread for paging tests'));
+        expect(barTitle, findsOneWidget);
+        // As the Discourse app's topic bar: one line of the bar's own size while it fits, else two
+        // smaller lines (titleMedium), never two at full size, which overflowed the bar.
+        // (The test font's letters are square: a wide window holds the title on one line.)
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        tester.view.physicalSize = const Size(1600, 800);
+        await tester.pump();
+        expect(tester.widget<Text>(barTitle).maxLines, 1);
+        expect(tester.widget<Text>(barTitle).style, isNull, reason: "the bar's titleLarge");
+        tester.view.physicalSize = const Size(400, 800);
+        await tester.pump();
+        expect(tester.widget<Text>(barTitle).maxLines, lessThanOrEqualTo(2));
+        expect(tester.widget<Text>(barTitle).style?.fontSize, Theme.of(tester.element(barTitle)).textTheme.titleMedium?.fontSize);
         await _close(tester);
       });
 

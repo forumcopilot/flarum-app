@@ -178,6 +178,22 @@ void main() {
       expect(prepared.imageUrls, ['https://example.com/screenshot.png']);
     });
 
+    test("fof/upload's text-file preview is the file's card and its first lines", () {
+      final prepared = FlarumHtml.parse(
+          '<figure class="FofUpload-TextPreview" data-hassnippet="true"><figcaption class="FofUpload-TextPreviewTitle">'
+          '<i class="icon far fa-file"></i> <span class="FofUpload-TextPreviewLabel">flarum.log</span></figcaption>'
+          '<div class="FofUpload-TextPreviewSnippet"><pre><code>[2026-07-31] flarum.ERROR: one</code></pre></div>'
+          '<div class="FofUpload-TextPreviewFull"></div><button type="button" class="Button FofUpload-TextPreviewToggle">'
+          '<span class="Button-label">Expand preview</span></button><a href="https://cdn.example.com/flarum.log" '
+          'class="Button hasIcon FofUpload-TextPreviewDownload"><span class="Button-label">Download file</span></a>'
+          '<div class="FofUpload-TextPreviewError"><p>Error previewing file.</p></div></figure>',
+          forumBaseUrl: 'https://discuss.flarum.org');
+      expect(prepared.html, contains('<a class="attachment" href="https://cdn.example.com/flarum.log">flarum.log</a>'));
+      expect(prepared.html, contains('<pre><code>[2026-07-31] flarum.ERROR: one</code></pre>'));
+      expect(prepared.html, isNot(contains('Error previewing')), reason: "the web's scripts hide it");
+      expect(prepared.html, isNot(contains('Expand preview')));
+    });
+
     testWidgets('a badge in a link opens the link', (tester) async {
       final taps = await pump(
           tester,

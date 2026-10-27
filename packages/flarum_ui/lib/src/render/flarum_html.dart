@@ -24,6 +24,8 @@ import 'package:html/parser.dart' as html_parser;
 ///  * fof/upload's file buttons (`div.ButtonGroup[data-fof-upload-download-uuid]`)
 ///    become an `a.attachment` on `/api/fof/download/{uuid}`, with the
 ///    name, and the size in `data-size`;
+///  * fof/upload's text-file preview (`figure.FofUpload-TextPreview`) becomes
+///    the file's card and its first lines as a code block;
 ///  * fof/upload's 2.0 image preview (`a.FoFUpload--Upl-Image-Preview-Link`,
 ///    the full size, around the thumbnail) becomes an `a.lightbox`, so the
 ///    viewer opens the full size;
@@ -163,6 +165,25 @@ class FlarumHtml {
         ..text = name;
       if (size.isNotEmpty) link.attributes['data-size'] = size;
       group.replaceWith(link);
+    }
+    // A text file's preview (`figure.FofUpload-TextPreview`): the web's
+    // scripts expand it and hide its error message. Here it is the file's
+    // card, then its first lines as a code block.
+    for (final figure in body.querySelectorAll('figure.FofUpload-TextPreview').toList()) {
+      final name = figure.querySelector('.FofUpload-TextPreviewLabel')?.text.trim() ?? '';
+      final href = figure.querySelector('a.FofUpload-TextPreviewDownload')?.attributes['href']?.trim() ?? '';
+      final snippet = figure.querySelector('.FofUpload-TextPreviewSnippet code')?.text.trimRight() ?? '';
+      final replacement = dom.DocumentFragment();
+      if (href.isNotEmpty) {
+        replacement.append(dom.Element.tag('a')
+          ..className = 'attachment'
+          ..attributes['href'] = href
+          ..text = name.isEmpty ? href.split('/').last : name);
+      }
+      if (snippet.isNotEmpty) {
+        replacement.append(dom.Element.tag('pre')..append(dom.Element.tag('code')..text = snippet));
+      }
+      figure.replaceWith(replacement);
     }
     for (final preview in body.querySelectorAll('a.FoFUpload--Upl-Image-Preview-Link')) {
       preview.classes.add('lightbox');

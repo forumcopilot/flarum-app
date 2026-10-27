@@ -1,0 +1,48 @@
+name: Flapp extension
+
+# The Flapp extension (extension/), for Flarum 2.0 (2.x) and 1.8 (1.x): Flarum's own backend tests
+# for each, and a check that the committed JavaScript build matches its source.
+on:
+  push:
+    paths: ['extension/**', '.github/workflows/extension.yml']
+  pull_request:
+    paths: ['extension/**', '.github/workflows/extension.yml']
+  workflow_dispatch:
+
+jobs:
+  php-2:
+    name: PHP (Flarum 2.0)
+    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x
+    with:
+      enable_backend_testing: true
+      backend_directory: ./extension/2.x
+
+  php-1:
+    name: PHP (Flarum 1.8)
+    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@1.x
+    with:
+      enable_backend_testing: true
+      backend_directory: ./extension/1.x
+
+  js:
+    name: JS (${{ matrix.version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['2.x', '1.x']
+    defaults:
+      run:
+        working-directory: extension/${{ matrix.version }}/js
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extension/${{ matrix.version }}/js/package-lock.json
+      - run: npm ci
+      - run: npm run format-check
+      - run: npm run build
+      # The built files are committed, as Flarum extensions ship them.
+      - name: The committed build matches the source
+        run: git diff --exit-code -- dist

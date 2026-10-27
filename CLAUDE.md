@@ -28,6 +28,10 @@ marked places so 1.x can be dropped later. The app needs no plugin on the forum.
 - Pushing to this repo needs no approval (decided 8 Oct 2026). Push when work is tested; CI must stay green.
 - `git add` with explicit paths only. Never commit credentials or a config pointing at a local forum.
 - SDK interface and model changes go into the canonical forumcopilot_sdk first, not a local copy.
+- The Flapp extension is developed in `extension/2.x` and `extension/1.x` (moved in with its history on 27 Oct
+  2026). forumcopilot/flarum-flapp is the copy Composer installs from: update it with `git subtree split`
+  and a fast-forward push (`extension/README.md`), as forumcopilot (yellowwinterday can't push there).
+  Never commit to flarum-flapp directly, or the two stop matching.
 
 ## Commands
 

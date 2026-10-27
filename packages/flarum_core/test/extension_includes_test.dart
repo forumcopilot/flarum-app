@@ -30,7 +30,7 @@ void main() {
     final forum = api(adapter);
     await forum.posts('1');
     expect(include(adapter, 0), contains('mentionedBy'));
-    expect(include(adapter, 1), '$core');
+    expect(include(adapter, 1), core);
     expect(include(adapter, 2), '$core,mentionedBy,mentionedBy.user,mentionedBy.discussion');
     expect(include(adapter, 3), '$core,likes');
     expect(include(adapter, 4), '$core,$pollIncludes');

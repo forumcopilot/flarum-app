@@ -1,0 +1,37 @@
+forumcopilot-flapp:
+  # The admin page.
+  admin:
+    page:
+      intro: "Flapp es una app para foros Flarum, en Android y iPhone. Con esta extensión, los miembros que la usan reciben notificaciones push de este foro en segundos, en su propio idioma, para las notificaciones que elijan."
+      independent: "Flapp es una app independiente. No está hecha por los creadores de Flarum ni está afiliada a ellos."
+      how_heading: "Qué hace la conexión"
+      how_text: "Al conectar, este foro se inscribe en el relé de Flapp, que entrega cada notificación push a Google y Apple para que la hagan llegar. El foro decide qué enviar y lo redacta; el relé nunca recibe el inicio de sesión de nadie. Desconectar, o desactivar esta extensión, le indica al relé que olvide el foro."
+      members_heading: "Qué ven tus miembros"
+      members_text: "Quien inicia sesión en este foro con Flapp tiene una columna Flapp en su configuración de notificaciones, en el foro y en la app, donde elige qué notificaciones llegan a su teléfono. Las que avisan en la web por defecto empiezan activadas. Los miembros que no usan Flapp no notan ningún cambio."
+      privacy_link: "Política de privacidad de Flapp"
+      status_heading: "Estado"
+      connected_text: "Conectado a {relay}."
+      not_connected_text: "Sin conectar. Los miembros que usan Flapp todavía no reciben notificaciones push de este foro."
+      connect_button: "Conectar"
+      disconnect_button: "Desconectar"
+      disconnect_confirmation: "¿Desconectar del relé de Flapp? Los teléfonos de los miembros dejarán de recibir notificaciones push de este foro."
+
+  # Errors from the extension's API calls.
+  api:
+    already_connected: "Este foro ya está conectado. Desconéctalo primero."
+    invalid_app: "Falta el nombre de la app o no es válido."
+    invalid_handle: "Falta el identificador o no es válido."
+    invalid_locale: "El idioma no es válido."
+    invalid_platform: "La plataforma debe ser android o ios."
+    not_connected: "Este foro no está conectado al relé de Flapp."
+    relay_failed: "El relé de Flapp no pudo conectar este foro: {message}"
+    token_needed: "Un dispositivo debe registrarse con el token del lector en la cabecera Authorization."
+
+  # The reader's notification settings.
+  forum:
+    settings:
+      notify_by_flapp_heading: "Flapp"
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: "Nueva notificación"

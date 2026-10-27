@@ -1,0 +1,37 @@
+forumcopilot-flapp:
+  # The admin page.
+  admin:
+    page:
+      intro: "Flapp 是一款适用于 Flarum 论坛的应用，支持 Android 和 iPhone。安装此扩展后，使用 Flapp 的成员会在几秒内以自己的语言收到此论坛的推送通知，推送哪些由他们自己选择。"
+      independent: "Flapp 是一款独立应用，并非由 Flarum 的开发者制作，也与他们没有关联。"
+      how_heading: "连接后会发生什么"
+      how_text: "连接后，此论坛会在 Flapp 中继注册，中继把每条推送交给 Google 和 Apple 送达。发送什么由论坛决定并撰写；中继从不获取任何人的登录信息。断开连接或停用此扩展，会让中继忘记此论坛。"
+      members_heading: "成员会看到什么"
+      members_text: "在 Flapp 中登录此论坛的成员，会在论坛和应用的通知设置中看到 Flapp 一栏，并在那里选择哪些通知推送到手机。网页上默认提醒的通知类型一开始即为开启。不使用 Flapp 的成员不会看到任何变化。"
+      privacy_link: "Flapp 隐私政策"
+      status_heading: "状态"
+      connected_text: "已连接到 {relay}。"
+      not_connected_text: "未连接。使用 Flapp 的成员暂时收不到此论坛的推送。"
+      connect_button: "连接"
+      disconnect_button: "断开连接"
+      disconnect_confirmation: "要断开与 Flapp 中继的连接吗？成员的手机将不再收到此论坛的推送。"
+
+  # Errors from the extension's API calls.
+  api:
+    already_connected: "此论坛已连接，请先断开连接。"
+    invalid_app: "应用名称缺失或无效。"
+    invalid_handle: "句柄缺失或无效。"
+    invalid_locale: "语言无效。"
+    invalid_platform: "平台必须是 android 或 ios。"
+    not_connected: "此论坛未连接到 Flapp 中继。"
+    relay_failed: "Flapp 中继无法连接此论坛：{message}"
+    token_needed: "设备必须在 Authorization 头中使用读者的令牌注册。"
+
+  # The reader's notification settings.
+  forum:
+    settings:
+      notify_by_flapp_heading: "Flapp"
+
+  # Pushes, for a notification type that has no line of its own.
+  push:
+    new_notification: "新通知"

@@ -19,7 +19,7 @@ class GroupIconBadge extends StatelessWidget {
     final color = group.color == null ? null : parseDiscourseHex(group.color!.trim());
     final background = color ?? colorScheme.secondaryContainer;
     final foreground = color == null ? colorScheme.onSecondaryContainer : textOn(color);
-    final icon = flarumTagIcon(group.icon) ?? _olderIcons[group.icon?.split(' ').lastOrNull];
+    final icon = flarumTagIcon(group.icon);
     final initial = group.nameSingular.isEmpty ? '' : group.nameSingular.characters.first.toUpperCase();
     return Tooltip(
       message: group.nameSingular,
@@ -40,13 +40,6 @@ class GroupIconBadge extends StatelessWidget {
     );
   }
 }
-
-/// Font Awesome 5 names groups still use, which forum_kit's map (Font Awesome 6's) lacks.
-const _olderIcons = <String, IconData>{
-  'fa-comment-alt': Icons.chat_bubble_outline,
-  'fa-user-shield': Icons.shield_outlined,
-  'fa-user-tie': Icons.badge_outlined,
-};
 
 /// [code] (ISO 3166, `CH`) as its flag emoji; null for none or one that isn't two letters.
 String? countryFlag(String? code) {

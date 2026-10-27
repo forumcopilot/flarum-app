@@ -985,6 +985,12 @@ class _SelectorStyles extends HtmlExtension {
     for (final (selector, style) in _rules) {
       if (selector.matches(element)) styled.style = styled.style.merge(style);
     }
+    // A numbered list that carries on from an earlier one (`<ol start="2">`, after a paragraph
+    // between its items) counts from there; flutter_html reads no `start`, and began again at 1.
+    if (element.localName == 'ol') {
+      final start = int.tryParse(element.attributes['start']?.trim() ?? '');
+      if (start != null) styled.style.counterReset = {'list-item': start - 1};
+    }
   }
 }
 

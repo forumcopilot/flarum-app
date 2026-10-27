@@ -5,13 +5,38 @@ import 'package:forum_kit/utils/discourse_color.dart';
 import 'package:forum_kit/utils/discourse_icons.dart';
 import 'package:forum_kit/utils/html_colors.dart';
 
-/// The Material icon for a Flarum tag's Font Awesome icon (`fas fa-comments`),
+/// The Material icon for a Flarum tag's or group's Font Awesome icon (`fas fa-comments`),
 /// or null when there's no good match.
 IconData? flarumTagIcon(String? icon) {
   if (icon == null) return null;
   final name = icon.split(RegExp(r'\s+')).where((c) => c.startsWith('fa-')).lastOrNull;
-  return materialIconForDiscourseIcon(name);
+  return materialIconForDiscourseIcon(name) ?? _fontAwesome5[name];
 }
+
+/// Font Awesome names Flarum forums still use (5's, and its numbered squares) that forum_kit's
+/// map, made from Font Awesome 6 for Discourse, lacks: discuss.flarum.org's tags and groups.
+const _fontAwesome5 = <String, IconData>{
+  'fa-square-1': Icons.looks_one_outlined,
+  'fa-square-2': Icons.looks_two_outlined,
+  'fa-square-3': Icons.looks_3_outlined,
+  'fa-square-4': Icons.looks_4_outlined,
+  'fa-square-5': Icons.looks_5_outlined,
+  'fa-square-6': Icons.looks_6_outlined,
+  'fa-exclamation-circle': Icons.error_outline,
+  'fa-hand-holding-usd': Icons.paid_outlined,
+  'fa-box-usd': Icons.attach_money,
+  'fa-hand-holding-heart': Icons.volunteer_activism_outlined,
+  'fa-ban': Icons.block,
+  'fa-project-diagram': Icons.account_tree_outlined,
+  'fa-quote-right': Icons.format_quote_outlined,
+  'fa-vote-yea': Icons.how_to_vote_outlined,
+  'fa-toolbox': Icons.home_repair_service_outlined,
+  'fa-images': Icons.photo_library_outlined,
+  'fa-vial': Icons.science_outlined,
+  'fa-comment-alt': Icons.chat_bubble_outline,
+  'fa-user-shield': Icons.shield_outlined,
+  'fa-user-tie': Icons.badge_outlined,
+};
 
 /// [tags] as the web lists them on a discussion: the primary ones, a child
 /// after its parent, then the secondary ones.

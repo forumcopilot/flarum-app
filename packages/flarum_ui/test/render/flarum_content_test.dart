@@ -194,6 +194,36 @@ void main() {
       expect(prepared.html, isNot(contains('Expand preview')));
     });
 
+    testWidgets('a numbered list that carries on (`ol start`) counts from where it left off', (tester) async {
+      await pump(tester, '<ol><li>The recaptcha option must be enabled.</li></ol><p>…</p><ol start="2"><li>Add it to the list.</li></ol>');
+      expect(find.textContaining('2.', findRichText: true), findsWidgets);
+      expect(find.textContaining(RegExp(r'^1\.'), findRichText: true), findsOneWidget, reason: 'not 1 again');
+    });
+
+    test('Giphy and single Imgur embeds are their pictures; other s9e frames point at the site', () {
+      final prepared = FlarumHtml.parse(
+          '<p><iframe src="//giphy.com/embed/MZocLC5dJprPTcrm65"></iframe></p>'
+          '<p><span data-s9e-mediaembed="imgur"><span><iframe src="https://s9e.github.io/iframe/2/imgur.min.html#axVTtrX"></iframe></span></span></p>'
+          '<p><iframe src="https://s9e.github.io/iframe/2/imgur.min.html#a/oIroHDc"></iframe></p>'
+          '<p><iframe src="https://s9e.github.io/iframe/2/gist.min.html#melihcaliskan/66377541"></iframe></p>'
+          '<p><iframe src="//streamable.com/e/imfxq"></iframe></p>',
+          forumBaseUrl: 'https://discuss.flarum.org');
+      expect(prepared.imageUrls, [
+        'https://media.giphy.com/media/MZocLC5dJprPTcrm65/giphy.gif',
+        'https://i.imgur.com/axVTtrX.gif',
+      ]);
+      expect(prepared.html, contains('src="https://imgur.com/a/oIroHDc"'), reason: 'an album: its card, on Imgur');
+      expect(prepared.html, contains('src="https://gist.github.com/melihcaliskan/66377541"'));
+      expect(prepared.html, contains('src="https://streamable.com/e/imfxq"'), reason: 'on https, not the forum');
+    });
+
+    test("discuss.flarum.org's older Font Awesome icons have Material ones", () {
+      expect(flarumTagIcon('fa-light fa-square-2'), Icons.looks_two_outlined);
+      expect(flarumTagIcon('fa-light fa-hand-holding-usd'), Icons.paid_outlined);
+      expect(flarumTagIcon('fa-duotone fa-comment-alt'), Icons.chat_bubble_outline);
+      expect(flarumTagIcon('fas fa-comments'), Icons.forum_outlined, reason: "forum_kit's map first");
+    });
+
     testWidgets('a badge in a link opens the link', (tester) async {
       final taps = await pump(
           tester,

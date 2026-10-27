@@ -47,6 +47,17 @@ how many of the 4,706 have it.
 
   Checked on the Pixel 4a.
 
+- **27 Oct, the rest (#7, #11, #13, #14; #9 needs nothing):**
+  - A numbered list with `start` counts from there.
+  - A Giphy GIF and a single Imgur picture embedded (34 Imgur frames) are drawn as the picture.
+  - s9e's frames for an Imgur album, X, a Gist or a Medium story point their card at the site.
+  - Protocol-relative frames (`//giphy.com/…`) are on https.
+  - discuss.flarum.org's older Font Awesome icons for tags and groups (5's, the numbered squares) map to Material ones.
+  - #13 already worked in the app: it reads `fof-upload.canDownload`, false for guests there, and shows "Permission required". The render test, with no forum info, offered Download.
+  - #9: discuss.flarum.org's spoilers have no `summary`, and "Details" is the browser's default; the app's "Spoiler" stays.
+
+  Checked on the Pixel 4a. #6 waits on the forum_kit decision. Streamable, Spotify and Pastebin stay cards.
+
 ## In the post's text
 
 | # | What | Posts | App | Web | Fix |

@@ -29,6 +29,9 @@ import 'package:html/parser.dart' as html_parser;
 ///  * fof/upload's 2.0 image preview (`a.FoFUpload--Upl-Image-Preview-Link`,
 ///    the full size, around the thumbnail) becomes an `a.lightbox`, so the
 ///    viewer opens the full size;
+///  * a Giphy GIF or a single Imgur picture embedded is the picture itself,
+///    and s9e's frames for other sites (an Imgur album, X, a Gist) point
+///    at the site, for its card;
 ///  * shields.io and poser badges ask shields.io for PNG (flutter_svg drew
 ///    them blank or garbled), and badges are marked `img.badge`, which sit
 ///    in the line and open their link;
@@ -150,6 +153,24 @@ class FlarumHtml {
       if (frame == null) continue;
       frame.attributes.remove('style');
       embed.replaceWith(frame..remove());
+    }
+
+    // ---- 3c. Embeds the app draws itself ------------------------------
+    // A protocol-relative frame (`//giphy.com/…`) is on https, not the
+    // forum. A Giphy GIF and a single Imgur picture are pictures (in the
+    // viewer on a tap); s9e's frames for other sites point at the site
+    // itself, so their card names it and opens it.
+    for (final frame in body.querySelectorAll('iframe[src]').toList()) {
+      var src = frame.attributes['src']!.trim();
+      if (src.startsWith('//')) src = 'https:$src';
+      final picture = _embedPicture(src);
+      if (picture != null) {
+        frame.replaceWith(dom.Element.tag('img')
+          ..attributes['src'] = picture.$1
+          ..attributes['alt'] = picture.$2);
+      } else {
+        frame.attributes['src'] = _s9eSite(src) ?? src;
+      }
     }
 
     // ---- 4. fof/upload ------------------------------------------------
@@ -274,6 +295,33 @@ class FlarumHtml {
     }
     return null;
   }
+
+  /// The picture an embed at [src] shows, with its alt text: a Giphy GIF, or a single Imgur picture
+  /// (s9e's frame); null for anything else.
+  static (String, String)? _embedPicture(String src) {
+    if (_giphy.firstMatch(src) case final m?) return ('https://media.giphy.com/media/${m[1]}/giphy.gif', 'GIF');
+    if (_s9eImgur.firstMatch(src) case final m?) return ('https://i.imgur.com/${m[1]}.gif', 'Imgur');
+    return null;
+  }
+
+  /// The page an s9e frame shows (an Imgur album, a post on X, a Gist, a Medium story); null for
+  /// any other frame.
+  static String? _s9eSite(String src) {
+    final m = _s9eFrame.firstMatch(src);
+    if (m == null) return null;
+    final id = Uri.decodeComponent(m[2]!);
+    return switch (m[1]) {
+      'imgur' => 'https://imgur.com/$id',
+      'twitter' => 'https://x.com/i/status/$id',
+      'gist' => 'https://gist.github.com/$id',
+      'medium' => 'https://medium.com/p/$id',
+      _ => null,
+    };
+  }
+
+  static final _giphy = RegExp(r'^https://giphy\.com/embed/([A-Za-z0-9]+)');
+  static final _s9eImgur = RegExp(r'^https://s9e\.github\.io/iframe/\d+/imgur\.min\.html#([A-Za-z0-9]+)$');
+  static final _s9eFrame = RegExp(r'^https://s9e\.github\.io/iframe/\d+/([a-z]+)\.min\.html#(.+)$');
 
   /// Weblate's translation badge, an SVG that flutter_svg draws well enough.
   static final _weblateBadge = RegExp(r'/widgets/.+/svg-badge\.svg$');

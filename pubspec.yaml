@@ -1,7 +1,7 @@
 name: flarum_app
 description: "A Flutter app for one Flarum forum (1.8 or 2.0): the template's thin runner over flarum_ui."
 publish_to: 'none'
-version: 0.1.1+2
+version: 0.1.2+3
 
 environment:
   sdk: ^3.6.0

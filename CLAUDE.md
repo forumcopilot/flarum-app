@@ -6,10 +6,13 @@ Guidance for Claude Code sessions working in this repository.
 
 flarum-app is a Flutter client for Flarum forums, the Flarum counterpart of discourse-app. The plan
 (phases, decisions, scope) is the "Flarum App Plan": https://claude.ai/artifact/W61kE9VGWeUbHWxMycWedL.
-Current phase: **4** (Flapp, the multi-forum app, which hosts flarum_ui as ABDA hosts discourse_ui),
-on branch `phase-4`; Phase 3 (the write path; plan: the "flarum-app Phase 3 Plan" doc,
-https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce) is on `phase-3`, its exit run
-still to do, and Phase 2 on `phase-2`. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md,
+Current phase: **6** (the store release). Phases 4 and 5 are built: Flapp, the multi-forum app,
+hosts flarum_ui as ABDA hosts discourse_ui, with push from flapp-push and the Flapp extension;
+on 28 Oct 2026 it was on Google Play and in App Store review. Work lands on `phase-4` first; `main`
+holds the released versions (tags v0.1.0 to v0.1.2, which Flapp pins) and is fast-forwarded to
+`phase-4` for a release. Phase 3 (the write path; plan: the "flarum-app Phase 3 Plan" doc,
+https://claude.ai/code/artifact/8995648c-50ff-42a2-ab6d-41388a98cbce) still owes its exit run, and
+Phase 2 its iPhone part. Notes: docs/phase-0-notes.md, docs/phase-2-notes.md,
 docs/phase-3-notes.md, docs/phase-4-notes.md. What still needs a real iPhone, to run together at the
 end: docs/iphone-tests.md.
 

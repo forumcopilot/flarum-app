@@ -158,8 +158,16 @@ approved, and are built (its table names each one's commit). Done since:
   unsuspended notices on his own account make one row each), and the badge goes by the list once
   it has loaded. Flapp's tile, which never loads the list, says 13.
 
-On a phone, still to check: Log In in dark mode (no white flash) and Back from a Google
-log-in page; the 15 changes as a whole, above all the thread's bottom bar and scrubber, Share,
-and the hero colours in dark mode; a message notification (2.0) now opens its conversation (it opened nothing): one
-on a phone, with the alert turned on in the reader's settings (flarum/messages only emails by
-default).
+- **The last checks** (Pixel 4a, 28 Oct, Flapp's debug build at flarum-app 6425164, the code of
+  v0.1.2; the phone in dark mode): all passed. Log In on a forum where the reader is a guest
+  (kagifeedback.org) showed the app's dark cover, then the forum's own dark page, then its log-in
+  box with Remember Me ticked: no frame of a screen recording was white. Its Google button opened
+  Google's sign-in page inside Log In; Back went back to the forum's log-in box, and Back again
+  closed Log In. As bob on the 2.0 forum: the thread's bar followed the reading ("12 of 60
+  posts"), and the scrubber went to post 46 from the slider, to the last post with Now and to the
+  first with Original Post; Share offered `/d/6-long-thread-for-paging-tests` and a post's Share
+  the same with `/3`; a tag's page is tinted with its colour in dark mode as in light. The
+  discussion's head has no tag colour, by design since the UI review's phase 1 (d8e0890). A
+  message can't reach the notification list (flarum/messages registers no alert for it,
+  CLAUDE.md), so it was checked through push: carol's message to bob came as "carol sent you a
+  message" under the forum's name, and the tap opened the conversation.

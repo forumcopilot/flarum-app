@@ -171,3 +171,11 @@ approved, and are built (its table names each one's commit). Done since:
   message can't reach the notification list (flarum/messages registers no alert for it,
   CLAUDE.md), so it was checked through push: carol's message to bob came as "carol sent you a
   message" under the forum's name, and the tap opened the conversation.
+
+- **Dark mode as ABDA's** (29 Oct): in dark mode every Flarum forum was on #222222, a grey beside
+  ABDA's near-black. flarum_ui gave each forum Discourse's stock "Dark" scheme as if the forum had
+  chosen it, and forum_kit keeps a forum's own neutral page. A Flarum palette now has no dark
+  scheme (Flarum has none to give), so dark mode is forum_kit's for a forum without one, as ABDA's
+  is: Material's dark neutral with a hint of the accent (#121315 for Flarum's blue), and the
+  selected chip in the accent's hue rather than Discourse's teal. Palettes remembered by earlier
+  versions drop the stock scheme as they load. Checked on the 4a beside ABDA in dark mode.

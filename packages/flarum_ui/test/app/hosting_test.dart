@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flarum_core/testing.dart';
 import 'package:flarum_ui/flarum_ui.dart';
@@ -9,10 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const _fixtures = '../flarum_core/test/fixtures';
 
-ForumPalette _palette(String hex) => ForumPalette(
-      light: DiscourseScheme.fromHex({'tertiary': hex}),
-      dark: DiscourseScheme.fromHex({'tertiary': hex}, fallback: DiscourseScheme.dark),
-    );
+ForumPalette _palette(String hex) => ForumPalette(light: DiscourseScheme.fromHex({'tertiary': hex}));
 
 /// An app that holds several forums, as Flapp does: its own list, each forum pushed over it.
 class _Host extends StatelessWidget {
@@ -100,6 +99,18 @@ void main() {
       FlarumForumTheme.reset();
       await FlarumForumTheme.loadRemembered();
       expect(FlarumForumTheme.paletteFor('https://one.test'), isNull);
+    });
+
+    test('remembered by an earlier version, they lose the stock dark scheme it kept with them', () async {
+      final old = ForumPalette(
+        light: DiscourseScheme.fromHex({'tertiary': '#D22929'}),
+        dark: DiscourseScheme.fromHex({'tertiary': '#D22929'}, fallback: DiscourseScheme.dark),
+      );
+      SharedPreferences.setMockInitialValues({
+        'flarum_forum_palettes': jsonEncode({'https://one.test': old.toJson()}),
+      });
+      await FlarumForumTheme.loadRemembered();
+      expect(FlarumForumTheme.paletteFor('https://one.test'), _palette('#D22929'));
     });
 
     test('a directory\'s hex without "#" makes the same palette as the forum\'s own', () {

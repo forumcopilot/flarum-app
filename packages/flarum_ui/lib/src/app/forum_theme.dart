@@ -46,8 +46,11 @@ abstract final class FlarumForumTheme {
       final json = jsonDecode(raw);
       if (json is! Map) return;
       for (final e in json.entries) {
-        // A palette learned this run is newer than the stored one.
-        if (ForumPalette.fromJson(e.value) case final palette?) _palettes.putIfAbsent('${e.key}', () => palette);
+        // A palette learned this run is newer than the stored one. Earlier versions stored
+        // Discourse's stock dark scheme with each palette; it's dropped ([flarumPalette] has none).
+        if (ForumPalette.fromJson(e.value)?.light case final light?) {
+          _palettes.putIfAbsent('${e.key}', () => ForumPalette(light: light));
+        }
       }
       await _apply();
     } catch (e) {

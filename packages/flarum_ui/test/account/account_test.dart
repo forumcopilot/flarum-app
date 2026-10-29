@@ -5,6 +5,7 @@ import 'package:flarum_ui/src/account/forum_web_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forum_kit/theme/app_theme.dart';
+import 'package:forum_kit/theme/forum_palette.dart';
 import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 void main() {
@@ -34,8 +35,12 @@ void main() {
     final palette = flarumPalette(info(primary: '#4D698E', secondary: '#B72A2A'));
     expect(palette!.light!.tertiary, const Color(0xFF4D698E));
     expect(palette.light!.quaternary, const Color(0xFFB72A2A));
-    expect(palette.dark!.tertiary, const Color(0xFF4D698E));
-    expect(palette.dark!.isDark, isTrue);
+    // Dark mode is the kit's own, as ABDA's for a Discourse forum without a dark scheme: darker
+    // than Discourse's stock "Dark" page, which every Flarum forum used to get.
+    expect(palette.dark, isNull);
+    final dark = AppTheme.themeFor(Brightness.dark, palette).colorScheme;
+    expect(dark.surface.computeLuminance(), lessThan(DiscourseScheme.dark.secondary.computeLuminance()));
+    expect(dark.secondaryContainer, isNot(DiscourseScheme.dark.selected), reason: 'not Discourse\'s teal');
     expect(flarumPalette(info()), isNull);
   });
 

@@ -5,19 +5,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// The forum's colours as the app's palette: Flarum's primary colour is the
 /// accent (links, buttons, the selected tab), its secondary the navigation
-/// accent; everything else is the kit's stock light and dark schemes, and
-/// the kit keeps the accent legible in both. Null when the forum sets none.
+/// accent, on the kit's stock light scheme; the kit keeps the accent legible.
+/// Null when the forum sets none.
+///
+/// No dark scheme: Flarum has none to give, so dark mode is the kit's, as
+/// ABDA's for a Discourse forum without one (Material's dark neutral, with
+/// a hint of the accent). Discourse's stock "Dark" stood in for it before,
+/// and kept every Flarum forum on its #222 grey.
 ForumPalette? flarumPalette(FlarumForumInfo info) => flarumPaletteOf(info.primaryColor, info.secondaryColor);
 
 /// [flarumPalette] from the two colours alone, as a host's directory keeps
 /// them (hex, with or without the `#`), for a forum not yet opened.
 ForumPalette? flarumPaletteOf(String? primary, String? secondary) {
   if (primary == null || primary.trim().isEmpty) return null;
-  final colours = {'tertiary': primary, 'quaternary': secondary ?? primary};
-  return ForumPalette(
-    light: DiscourseScheme.fromHex(colours),
-    dark: DiscourseScheme.fromHex(colours, fallback: DiscourseScheme.dark),
-  );
+  return ForumPalette(light: DiscourseScheme.fromHex({'tertiary': primary, 'quaternary': secondary ?? primary}));
 }
 
 /// Light, dark, or as the phone is: the reader's choice, kept on the phone.

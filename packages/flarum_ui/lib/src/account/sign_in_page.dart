@@ -47,16 +47,19 @@ class SignInPage extends StatefulWidget {
   /// Signs the reader in; true once they are. [signUp] starts with the forum's
   /// sign-up, where the page in the app is used.
   static Future<bool> open(BuildContext context, SiteContext site, {bool signUp = false}) async {
+    // The sign-in outlives [context]: the drawer's Log In closes the drawer first. Everything after
+    // this hangs on the navigator instead, which stays.
+    final navigator = Navigator.of(context);
     final host = FlarumHost.browserSignIn;
     if (host != null) {
       final info = await _forumInfo(site);
-      if (info?.flappSignIn case final signIn? when context.mounted) {
-        final signedIn = await _signInInBrowser(context, site, signIn, host);
+      if (info?.flappSignIn case final signIn? when navigator.mounted) {
+        final signedIn = await _signInInBrowser(navigator.context, site, signIn, host);
         if (signedIn != null) return signedIn;
       }
     }
-    if (!context.mounted) return false;
-    return await Navigator.of(context).push<bool>(MaterialPageRoute(
+    if (!navigator.mounted) return false;
+    return await navigator.push<bool>(MaterialPageRoute(
           fullscreenDialog: true,
           builder: (_) => SignInPage(site: site, signUp: signUp),
         )) ??

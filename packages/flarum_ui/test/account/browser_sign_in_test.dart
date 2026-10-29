@@ -66,6 +66,34 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
+  testWidgets('signs in when the screen that asked is gone, as the drawer is once its Log In is tapped',
+      (tester) async {
+    late BuildContext drawer;
+    final open = ValueNotifier(true);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: ValueListenableBuilder<bool>(
+          valueListenable: open,
+          builder: (_, isOpen, __) => isOpen
+              ? Builder(builder: (c) {
+                  drawer = c;
+                  return const SizedBox();
+                })
+              : const SizedBox(),
+        ),
+      ),
+    ));
+    SignInPage.debugAuthenticate = (url, scheme) async {
+      open.value = false;
+      await tester.pump();
+      return flappSignInCallback(Uri.parse(url), token: 'browser-token').toString();
+    };
+
+    expect(await tester.runAsync(() => SignInPage.open(drawer, site)), isTrue);
+    await tester.pumpAndSettle();
+    expect(forum.isSignedIn, isTrue);
+  });
+
   testWidgets("Cancel on the forum's page, or backing out of the sheet, signs no one in", (tester) async {
     SignInPage.debugAuthenticate = (url, scheme) async => 'flapp://auth?error=cancelled';
     expect(await signIn(tester), isFalse);

@@ -467,5 +467,12 @@
   "displayNameLocked": "Este foro no te permite cambiar tu nombre visible.",
   "usernameField": "Nombre de usuario",
   "usernameAdminsOnly": "Solo los administradores del foro pueden cambiar los nombres de usuario.",
-  "undo": "Deshacer"
+  "undo": "Deshacer",
+  "googleSignInRefused": "Google no permite iniciar sesión dentro de una app. Accede con tu nombre de usuario o correo y tu contraseña.",
+  "googleSignInNeedsExtension": "Google no permite iniciar sesión dentro de una app. Accede con tu contraseña, o pide a los administradores de este foro que instalen la extensión de Flapp, que permite entrar con Google.",
+  "confirmEmailTitle": "Confirma tu correo",
+  "confirmEmailText": "El foro envió un enlace a {email}. Ábrelo para terminar el registro: hasta entonces puedes leer, pero no participar.",
+  "confirmEmailTextNoAddress": "El foro te envió un enlace por correo. Ábrelo para terminar el registro: hasta entonces puedes leer, pero no participar.",
+  "resendConfirmationEmail": "Reenviar correo",
+  "confirmationEmailSent": "Enviado. Revisa tu bandeja de entrada."
 }

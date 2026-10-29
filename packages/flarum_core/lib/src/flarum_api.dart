@@ -1120,6 +1120,10 @@ class FlarumApi {
   /// Mark all as read does.
   Future<void> markAllDialogsRead() => client.postEmpty('/dialogs/read');
 
+  /// Sends the reader [userId] the email confirmation link again, as the website's "Resend
+  /// confirmation email" does.
+  Future<void> sendEmailConfirmation(String userId) => client.postEmpty('/users/$userId/send-confirmation');
+
   /// Marks every discussion read for the reader [userId]: Flarum records the
   /// time, and treats anything older as read. There's no per-tag version.
   Future<void> markAllAsRead(String userId) async {

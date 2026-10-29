@@ -88,6 +88,14 @@ Checked against 1.8.20 and 2.0.0-rc.8:
   "Remember me" ticked, the HttpOnly `<prefix>_remember` cookie read from the native store).
   `POST /api/token` works on 1.x even with blomstra/turnstile or fof/recaptcha (they guard only
   the website's `/login`), but the 2.0 Turnstile fork blocks it with a 422 on `turnstileToken`.
+- Sign-up: the forum's `POST /register` signs the new account in at once, with a remember token
+  and the `<prefix>_remember` cookie, before its email is confirmed. Until it is, the account has
+  only the Guests group's permissions (`User::permissions()` adds Members and its groups only
+  with `is_email_confirmed`). `POST /api/users/{id}/send-confirmation` sends the link again.
+- With the Flapp extension, `GET /api` carries `flappSignIn` (`authorizeUrl`): the app opens the
+  forum's `/flapp/authorize` in the browser sign-in sheet, and the member's Authorize
+  (`POST /api/flapp-auth/approve`, session and CSRF only) returns to `flapp://auth?payload=…`, a
+  remember token RSA-OAEP-encrypted to the app's one-time key (`FlappSignInRequest`).
 - 2.0 rejects unknown query parameters with HTTP 400; 1.x ignores them. Send only known ones.
   Unknown `filter[...]` keys are silently ignored on both.
 - Search: 1.x takes conditions as gambits inside `filter[q]` (`tag:`, `is:following`, `is:unread`,

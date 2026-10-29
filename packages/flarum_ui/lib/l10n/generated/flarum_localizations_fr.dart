@@ -1917,4 +1917,31 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
 
   @override
   String get undo => 'Annuler';
+
+  @override
+  String get googleSignInRefused =>
+      'Google n’autorise pas la connexion à l’intérieur d’une application. Connectez-vous plutôt avec votre nom d’utilisateur ou e-mail et votre mot de passe.';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'Google n’autorise pas la connexion à l’intérieur d’une application. Connectez-vous plutôt avec votre mot de passe, ou demandez aux administrateurs de ce forum d’installer l’extension Flapp, qui permet de se connecter avec Google.';
+
+  @override
+  String get confirmEmailTitle => 'Confirmez votre e-mail';
+
+  @override
+  String confirmEmailText(String email) {
+    return 'Le forum a envoyé un lien à $email. Ouvrez-le pour terminer votre inscription : d’ici là, vous pouvez lire, mais pas participer.';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      'Le forum vous a envoyé un lien par e-mail. Ouvrez-le pour terminer votre inscription : d’ici là, vous pouvez lire, mais pas participer.';
+
+  @override
+  String get resendConfirmationEmail => 'Renvoyer l’e-mail';
+
+  @override
+  String get confirmationEmailSent =>
+      'Envoyé. Vérifiez votre boîte de réception.';
 }

@@ -20,12 +20,13 @@ abstract final class ForumSession {
 }
 
 /// Asks a guest to Log In on the forum's own page before something only a member may do, as the
-/// web opens its Log In modal there. True once the reader is logged in, with the forum's info
-/// (what they may do now) read again.
-Future<bool> logInFirst(BuildContext context, SiteContext site) async {
+/// web opens its Log In modal there; [signUp] starts with its Sign Up instead (Create account),
+/// and a new account comes back logged in. True once the reader is logged in, with the forum's
+/// info (what they may do now) read again.
+Future<bool> logInFirst(BuildContext context, SiteContext site, {bool signUp = false}) async {
   final forum = FlarumForum.of(site);
   if (forum.isSignedIn) return true;
-  if (!await SignInPage.open(context, site)) return false;
+  if (!await SignInPage.open(context, site, signUp: signUp)) return false;
   ForumSession.changed(site);
   try {
     await forum.refresh();

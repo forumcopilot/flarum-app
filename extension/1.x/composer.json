@@ -1,6 +1,6 @@
 {
     "name": "forumcopilot/flarum-flapp",
-    "description": "Push notifications for Flapp, the app for Flarum forums.",
+    "description": "Push notifications and sign-in for Flapp, the app for Flarum forums.",
     "keywords": [
         "flarum",
         "push",

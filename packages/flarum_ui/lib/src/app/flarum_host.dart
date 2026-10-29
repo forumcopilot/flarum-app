@@ -60,4 +60,10 @@ abstract final class FlarumHost {
   /// opens it in the browser. Links the reader asked to see on the web (View on Web) don't come
   /// here.
   static Future<bool> Function(BuildContext context, String url)? openOtherForumLink;
+
+  /// How this app signs in through a forum's Flapp page in the phone's browser, on forums running
+  /// the Flapp extension (`flappSignIn`): the app's name as the extension lists it, and the link
+  /// scheme the page returns to (Flapp: `flapp`, returning to `flapp://auth`). Null, as in
+  /// flarum-app's own builds, signs in on the forum's page inside the app everywhere.
+  static ({String app, String callbackScheme})? browserSignIn;
 }

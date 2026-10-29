@@ -14,6 +14,9 @@ dependencies:
   dio: ^5.4.0
   # Keychain / Keystore for each forum's sign-in token, as discourse_core keeps its key.
   flutter_secure_storage: ^9.2.4
+  # The one-time key for signing in through a forum's Flapp page, as discourse_core makes its own.
+  pointycastle: ^3.9.1
+  asn1lib: ^1.5.3
   # The SDK lives in discourse-app, pinned by commit as ABDA pins discourse-app.
   # For local development, copy pubspec_overrides.yaml.example to pubspec_overrides.yaml.
   forumcopilot_sdk:

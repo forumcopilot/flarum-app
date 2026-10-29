@@ -1948,4 +1948,30 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get undo => 'Отменить';
+
+  @override
+  String get googleSignInRefused =>
+      'Google не разрешает входить внутри приложения. Войдите с именем пользователя или почтой и паролем.';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'Google не разрешает входить внутри приложения. Войдите с паролем или попросите администраторов форума установить расширение Flapp — с ним вход через Google работает.';
+
+  @override
+  String get confirmEmailTitle => 'Подтвердите почту';
+
+  @override
+  String confirmEmailText(String email) {
+    return 'Форум отправил ссылку на $email. Откройте её, чтобы завершить регистрацию: до тех пор можно читать, но не участвовать.';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      'Форум отправил вам ссылку по почте. Откройте её, чтобы завершить регистрацию: до тех пор можно читать, но не участвовать.';
+
+  @override
+  String get resendConfirmationEmail => 'Отправить ещё раз';
+
+  @override
+  String get confirmationEmailSent => 'Отправлено. Проверьте входящие.';
 }

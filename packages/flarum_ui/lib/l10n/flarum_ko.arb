@@ -467,5 +467,12 @@
   "displayNameLocked": "이 포럼에서는 표시 이름을 변경할 수 없습니다.",
   "usernameField": "사용자 이름",
   "usernameAdminsOnly": "사용자 이름은 포럼 관리자만 변경할 수 있습니다.",
-  "undo": "실행 취소"
+  "undo": "실행 취소",
+  "googleSignInRefused": "Google은 앱 안에서의 로그인을 허용하지 않습니다. 사용자 이름이나 이메일과 비밀번호로 로그인하세요.",
+  "googleSignInNeedsExtension": "Google은 앱 안에서의 로그인을 허용하지 않습니다. 비밀번호로 로그인하거나, 이 포럼 관리자에게 Flapp 확장 기능 설치를 요청하세요. 설치되면 Google로 로그인할 수 있습니다.",
+  "confirmEmailTitle": "이메일을 확인하세요",
+  "confirmEmailText": "포럼이 {email}(으)로 링크를 보냈습니다. 링크를 열어 가입을 마치세요. 그때까지는 읽기만 할 수 있습니다.",
+  "confirmEmailTextNoAddress": "포럼이 이메일로 링크를 보냈습니다. 링크를 열어 가입을 마치세요. 그때까지는 읽기만 할 수 있습니다.",
+  "resendConfirmationEmail": "다시 보내기",
+  "confirmationEmailSent": "보냈습니다. 받은편지함을 확인하세요."
 }

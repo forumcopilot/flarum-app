@@ -13,7 +13,6 @@ import 'edit_profile_page.dart';
 import 'forum_web_page.dart';
 import '../notifications/notification_settings_page.dart';
 import '../safety/flagged_posts_page.dart';
-import '../render/links.dart';
 import '../../config/app_forum_config.dart';
 import '../app/appearance.dart';
 import '../app/debug_forums.dart';
@@ -55,10 +54,23 @@ class _AccountPageState extends State<AccountPage> {
   late bool _readingReader = _forum.isSignedIn && _forum.info?.actor == null;
   Object? _readerError;
 
+  /// Back in the app with the email still to confirm: the reader may just have followed the
+  /// link, so the forum is asked again.
+  late final AppLifecycleListener _lifecycle = AppLifecycleListener(onResume: () {
+    if (_forum.isSignedIn && !(_forum.info?.actorEmailConfirmed ?? true) && !_readingReader) _readReader();
+  });
+
   @override
   void initState() {
     super.initState();
+    _lifecycle;
     if (_readingReader) _readReader(first: true);
+  }
+
+  @override
+  void dispose() {
+    _lifecycle.dispose();
+    super.dispose();
   }
 
   Future<void> _readReader({bool first = false}) async {
@@ -76,8 +88,8 @@ class _AccountPageState extends State<AccountPage> {
     if (mounted) setState(() => _readingReader = false);
   }
 
-  Future<void> _signIn() async {
-    if (await logInFirst(context, widget.site)) {
+  Future<void> _signIn({bool signUp = false}) async {
+    if (await logInFirst(context, widget.site, signUp: signUp)) {
       if (mounted) setState(() {});
       widget.onSignInChanged?.call();
     }
@@ -231,7 +243,7 @@ class _AccountPageState extends State<AccountPage> {
                 const SizedBox(width: DesignTokens.spacingS),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => openExternally(widget.site.site.url),
+                    onPressed: () => _signIn(signUp: true),
                     child: Text(l10n.createAccount),
                   ),
                 ),
@@ -269,6 +281,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ]),
       ),
+      if (!(_forum.info?.actorEmailConfirmed ?? true)) _ConfirmEmail(forum: _forum, reader: reader),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignTokens.spacingL),
         child: Row(children: [
@@ -466,6 +479,72 @@ class _Row extends StatelessWidget {
               ? Text('$count', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant))
               : null),
       onTap: onTap,
+    );
+  }
+}
+
+/// Flarum signs a new account in before its email is confirmed, with only a guest's permissions
+/// until then: where the link went, and Resend, as the website's banner offers.
+class _ConfirmEmail extends StatefulWidget {
+  const _ConfirmEmail({required this.forum, required this.reader});
+
+  final FlarumForum forum;
+  final FlarumUser reader;
+
+  @override
+  State<_ConfirmEmail> createState() => _ConfirmEmailState();
+}
+
+class _ConfirmEmailState extends State<_ConfirmEmail> {
+  bool _sending = false;
+
+  Future<void> _resend() async {
+    final l10n = flarumL10n(context);
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _sending = true);
+    try {
+      await widget.forum.api.sendEmailConfirmation(widget.reader.id);
+      messenger.showSnackBar(SnackBar(content: Text(l10n.confirmationEmailSent)));
+    } catch (e) {
+      if (mounted) messenger.showSnackBar(SnackBar(content: Text(describeError(context, e))));
+    }
+    if (mounted) setState(() => _sending = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = flarumL10n(context);
+    final theme = Theme.of(context);
+    final email = widget.forum.info?.actorEmail;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(DesignTokens.spacingL, 0, DesignTokens.spacingL, DesignTokens.spacingM),
+      child: Card.filled(
+        margin: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+              DesignTokens.spacingL, DesignTokens.spacingM, DesignTokens.spacingS, DesignTokens.spacingXS),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                Icon(Icons.mark_email_unread_outlined, color: theme.colorScheme.primary),
+                const SizedBox(width: DesignTokens.spacingS),
+                Expanded(child: Text(l10n.confirmEmailTitle, style: theme.textTheme.titleMedium)),
+              ]),
+              const SizedBox(height: DesignTokens.spacingXS),
+              Padding(
+                padding: const EdgeInsets.only(right: DesignTokens.spacingS),
+                child: Text(email == null ? l10n.confirmEmailTextNoAddress : l10n.confirmEmailText(email),
+                    style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+              ),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: TextButton(onPressed: _sending ? null : _resend, child: Text(l10n.resendConfirmationEmail)),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

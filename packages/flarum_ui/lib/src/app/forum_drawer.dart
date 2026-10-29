@@ -9,7 +9,6 @@ import '../account/log_in_first.dart';
 import '../bookmarks/bookmarks_page.dart';
 import '../home/following_page.dart';
 import '../profile/user_page.dart';
-import '../render/links.dart';
 import '../tags/tag_label.dart';
 import '../tags/tags_page.dart';
 import '../widgets/flarum_avatar.dart';
@@ -361,7 +360,10 @@ class _Header extends StatelessWidget {
                             const SizedBox(width: 8),
                             Expanded(
                               child: OutlinedButton(
-                                onPressed: () => openExternally(site.site.url),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  logInFirst(context, site, signUp: true);
+                                },
                                 child: Text(l10n.createAccount, maxLines: 1),
                               ),
                             ),

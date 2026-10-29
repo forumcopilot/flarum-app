@@ -1815,4 +1815,30 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get undo => '元に戻す';
+
+  @override
+  String get googleSignInRefused =>
+      'Google はアプリ内でのログインを許可していません。ユーザー名またはメールアドレスとパスワードでログインしてください。';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'Google はアプリ内でのログインを許可していません。パスワードでログインするか、このフォーラムの管理者に Flapp 拡張機能のインストールを依頼してください。拡張機能があれば Google でログインできます。';
+
+  @override
+  String get confirmEmailTitle => 'メールアドレスを確認してください';
+
+  @override
+  String confirmEmailText(String email) {
+    return 'フォーラムが $email にリンクを送りました。リンクを開いて登録を完了してください。それまでは閲覧だけができます。';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      'フォーラムがメールでリンクを送りました。リンクを開いて登録を完了してください。それまでは閲覧だけができます。';
+
+  @override
+  String get resendConfirmationEmail => 'メールを再送';
+
+  @override
+  String get confirmationEmailSent => '送信しました。受信トレイを確認してください。';
 }

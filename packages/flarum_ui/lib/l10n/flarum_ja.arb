@@ -467,5 +467,12 @@
   "displayNameLocked": "このフォーラムでは表示名を変更できません。",
   "usernameField": "ユーザー名",
   "usernameAdminsOnly": "ユーザー名を変更できるのはフォーラムの管理者だけです。",
-  "undo": "元に戻す"
+  "undo": "元に戻す",
+  "googleSignInRefused": "Google はアプリ内でのログインを許可していません。ユーザー名またはメールアドレスとパスワードでログインしてください。",
+  "googleSignInNeedsExtension": "Google はアプリ内でのログインを許可していません。パスワードでログインするか、このフォーラムの管理者に Flapp 拡張機能のインストールを依頼してください。拡張機能があれば Google でログインできます。",
+  "confirmEmailTitle": "メールアドレスを確認してください",
+  "confirmEmailText": "フォーラムが {email} にリンクを送りました。リンクを開いて登録を完了してください。それまでは閲覧だけができます。",
+  "confirmEmailTextNoAddress": "フォーラムがメールでリンクを送りました。リンクを開いて登録を完了してください。それまでは閲覧だけができます。",
+  "resendConfirmationEmail": "メールを再送",
+  "confirmationEmailSent": "送信しました。受信トレイを確認してください。"
 }

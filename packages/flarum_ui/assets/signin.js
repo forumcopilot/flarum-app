@@ -6,6 +6,9 @@
 // password, types them in. The reader still presses "Log In" themselves, so a
 // CAPTCHA in the modal (Turnstile, reCAPTCHA) is completed as on the website.
 //
+// flarumAppSignIn.start(null, true) opens the forum's sign-up modal instead, by its
+// own "Sign Up" button. Flarum signs a new account in with a remember cookie at once.
+//
 // Progress goes to report(): the Flutter handler "signinStatus" in the app, the
 // console elsewhere.
 (function () {
@@ -24,6 +27,20 @@
     input.value = value;
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  function signUpStep() {
+    if (document.querySelector('.SignUpModal')) {
+      report('sign-up modal open');
+      return true;
+    }
+    if (document.querySelector('.item-session, .SessionDropdown')) {
+      report('already signed in');
+      return true;
+    }
+    var button = document.querySelector('.item-signUp button, .item-signUp .Button');
+    if (button) button.click();
+    return false;
   }
 
   function step(fill) {
@@ -53,18 +70,18 @@
   }
 
   window.flarumAppSignIn = {
-    start: function (fill) {
+    start: function (fill, signUp) {
       var tries = 0;
       var timer = setInterval(function () {
         var done = false;
         try {
-          done = step(fill);
+          done = signUp ? signUpStep() : step(fill);
         } catch (e) {
           report('error: ' + e);
         }
         if (done || ++tries > 60) {
           clearInterval(timer);
-          if (!done) report('log-in modal not found');
+          if (!done) report((signUp ? 'sign-up' : 'log-in') + ' modal not found');
         }
       }, 250);
     },

@@ -1901,4 +1901,30 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get undo => 'Ongedaan maken';
+
+  @override
+  String get googleSignInRefused =>
+      'Google staat inloggen binnen een app niet toe. Log in plaats daarvan in met je gebruikersnaam of e-mailadres en wachtwoord.';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'Google staat inloggen binnen een app niet toe. Log in met je wachtwoord, of vraag de beheerders van dit forum de Flapp-extensie te installeren, waarmee inloggen met Google werkt.';
+
+  @override
+  String get confirmEmailTitle => 'Bevestig je e-mailadres';
+
+  @override
+  String confirmEmailText(String email) {
+    return 'Het forum heeft een link gestuurd naar $email. Open die om je registratie af te ronden: tot die tijd kun je lezen, maar niet meedoen.';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      'Het forum heeft je een link gemaild. Open die om je registratie af te ronden: tot die tijd kun je lezen, maar niet meedoen.';
+
+  @override
+  String get resendConfirmationEmail => 'Opnieuw sturen';
+
+  @override
+  String get confirmationEmailSent => 'Verstuurd. Kijk in je inbox.';
 }

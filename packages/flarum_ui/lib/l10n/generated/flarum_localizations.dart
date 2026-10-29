@@ -2926,6 +2926,48 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Undo'**
   String get undo;
+
+  /// The sign-in page in the app: the forum's page headed for Google's sign-in, which refuses apps
+  ///
+  /// In en, this message translates to:
+  /// **'Google doesn\'t allow logging in inside an app. Log in with your username or email and password instead.'**
+  String get googleSignInRefused;
+
+  /// The same, in an app that signs in through the Flapp extension where a forum has it
+  ///
+  /// In en, this message translates to:
+  /// **'Google doesn\'t allow logging in inside an app. Log in with your password instead, or ask this forum\'s admins to install the Flapp extension, which lets you log in with Google.'**
+  String get googleSignInNeedsExtension;
+
+  /// Account tab: a new account whose email address isn't confirmed yet
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your email'**
+  String get confirmEmailTitle;
+
+  /// Under confirmEmailTitle; email is the reader's address
+  ///
+  /// In en, this message translates to:
+  /// **'The forum sent a link to {email}. Follow it to finish signing up: until then you can read, but not take part.'**
+  String confirmEmailText(String email);
+
+  /// Under confirmEmailTitle, when the forum didn't give the address
+  ///
+  /// In en, this message translates to:
+  /// **'The forum sent you a link by email. Follow it to finish signing up: until then you can read, but not take part.'**
+  String get confirmEmailTextNoAddress;
+
+  /// Button under confirmEmailText: the forum sends the link again
+  ///
+  /// In en, this message translates to:
+  /// **'Resend email'**
+  String get resendConfirmationEmail;
+
+  /// Snackbar after resendConfirmationEmail
+  ///
+  /// In en, this message translates to:
+  /// **'Sent. Check your inbox.'**
+  String get confirmationEmailSent;
 }
 
 class _FlarumLocalizationsDelegate

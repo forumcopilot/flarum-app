@@ -1811,4 +1811,29 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get undo => '撤销';
+
+  @override
+  String get googleSignInRefused => 'Google 不允许在应用内登录。请改用用户名或邮箱和密码登录。';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'Google 不允许在应用内登录。请改用密码登录，或请此论坛的管理员安装 Flapp 扩展，安装后即可用 Google 登录。';
+
+  @override
+  String get confirmEmailTitle => '请确认你的邮箱';
+
+  @override
+  String confirmEmailText(String email) {
+    return '论坛已向 $email 发送了一个链接。打开它即可完成注册；在此之前你只能阅读，不能参与。';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      '论坛已通过邮件给你发送了一个链接。打开它即可完成注册；在此之前你只能阅读，不能参与。';
+
+  @override
+  String get resendConfirmationEmail => '重新发送';
+
+  @override
+  String get confirmationEmailSent => '已发送，请查看收件箱。';
 }

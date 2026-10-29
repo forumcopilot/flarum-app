@@ -1,10 +1,12 @@
 # Flapp
 
-Push notifications for [Flapp](https://flapp.forumcopilot.com), the app for Flarum forums on Android and iPhone.
+Push notifications and sign-in for [Flapp](https://flapp.forumcopilot.com), the app for Flarum forums on Android and
+iPhone.
 
 With this extension, members who use Flapp get your forum's notifications on their phones within seconds, in their
 own language, for the notification types they choose in a new Flapp column of their notification settings. Every type
-can be pushed, including private discussions and Flarum 2.0's messages.
+can be pushed, including private discussions and Flarum 2.0's messages. They also sign in to Flapp on your forum's own
+page in their phone's browser, so Google's sign-in and your other log-in buttons work there as on the website.
 
 Flapp is an independent app. It is not made by, or affiliated with, the makers of Flarum.
 
@@ -46,6 +48,20 @@ Any other type gets its email subject, or "New notification".
 
 The extension's own words (this page, the column, "New notification") are in English, German, Spanish, French,
 Italian, Japanese, Korean, Dutch, Portuguese, Russian and Simplified Chinese.
+
+## Signing in
+
+Without the extension, Flapp signs in on the forum's page inside the app, where Google refuses to sign anyone in. With
+it, Flapp opens the forum's **/flapp/authorize** page in the phone's browser instead:
+
+1. A member who isn't logged in there logs in or signs up, with the forum's own Log In and Sign Up buttons, CAPTCHAs
+   and sign-in providers. A new account comes back to the app at once; it gets a member's permissions when its email
+   address is confirmed, as on the website.
+2. The member taps **Authorize**. The forum gives Flapp a sign-in of the same kind "Remember me" makes, encrypted to a
+   one-time key the app made for this request, so only that app can read it.
+
+The member can sign Flapp out at any time, in the app or under Active Sessions on their Security page. Sign-in needs
+no setting, and works whether or not the forum is connected to the relay. Our servers take no part in it.
 
 ## For extension developers
 

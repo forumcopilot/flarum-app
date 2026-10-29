@@ -34,6 +34,7 @@ dependencies:
   flutter_svg: ^2.0.10 # the GitHub mark in GitHub link pills; the version forum_kit uses
   html: '>=0.15.6 <0.15.7' # 0.15.7 drops Element.matches, which flutter_html 3.0.0 still calls
   flutter_inappwebview: ^6.1.5 # sign-in: the forum's page, and its HttpOnly remember cookie
+  flutter_web_auth_2: ^5.1.0 # sign-in through a forum's Flapp page, in the browser's sign-in sheet
   image_picker: ^1.2.1 # the composer's uploads: XFile, as forum_kit's pickers give them
   intl: ^0.20.2
   permission_handler: ^12.0.0+1 # the picture viewer: storage, to save on Android before 10

@@ -2592,5 +2592,38 @@
   "undo": "Undo",
   "@undo": {
     "description": "Puts back a change just saved (a snackbar's action)"
+  },
+  "googleSignInRefused": "Google doesn't allow logging in inside an app. Log in with your username or email and password instead.",
+  "@googleSignInRefused": {
+    "description": "The sign-in page in the app: the forum's page headed for Google's sign-in, which refuses apps"
+  },
+  "googleSignInNeedsExtension": "Google doesn't allow logging in inside an app. Log in with your password instead, or ask this forum's admins to install the Flapp extension, which lets you log in with Google.",
+  "@googleSignInNeedsExtension": {
+    "description": "The same, in an app that signs in through the Flapp extension where a forum has it"
+  },
+  "confirmEmailTitle": "Confirm your email",
+  "@confirmEmailTitle": {
+    "description": "Account tab: a new account whose email address isn't confirmed yet"
+  },
+  "confirmEmailText": "The forum sent a link to {email}. Follow it to finish signing up: until then you can read, but not take part.",
+  "@confirmEmailText": {
+    "description": "Under confirmEmailTitle; email is the reader's address",
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmEmailTextNoAddress": "The forum sent you a link by email. Follow it to finish signing up: until then you can read, but not take part.",
+  "@confirmEmailTextNoAddress": {
+    "description": "Under confirmEmailTitle, when the forum didn't give the address"
+  },
+  "resendConfirmationEmail": "Resend email",
+  "@resendConfirmationEmail": {
+    "description": "Button under confirmEmailText: the forum sends the link again"
+  },
+  "confirmationEmailSent": "Sent. Check your inbox.",
+  "@confirmationEmailSent": {
+    "description": "Snackbar after resendConfirmationEmail"
   }
 }

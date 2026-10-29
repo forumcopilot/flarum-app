@@ -467,5 +467,12 @@
   "displayNameLocked": "Questo forum non ti permette di cambiare il nome visualizzato.",
   "usernameField": "Nome utente",
   "usernameAdminsOnly": "Solo gli amministratori del forum possono cambiare i nomi utente.",
-  "undo": "Annulla"
+  "undo": "Annulla",
+  "googleSignInRefused": "Google non consente l’accesso dentro un’app. Accedi invece con nome utente o email e password.",
+  "googleSignInNeedsExtension": "Google non consente l’accesso dentro un’app. Accedi invece con la password, o chiedi agli amministratori di questo forum di installare l’estensione Flapp, che permette di accedere con Google.",
+  "confirmEmailTitle": "Conferma la tua email",
+  "confirmEmailText": "Il forum ha inviato un link a {email}. Aprilo per completare la registrazione: fino ad allora puoi leggere, ma non partecipare.",
+  "confirmEmailTextNoAddress": "Il forum ti ha inviato un link via email. Aprilo per completare la registrazione: fino ad allora puoi leggere, ma non partecipare.",
+  "resendConfirmationEmail": "Invia di nuovo",
+  "confirmationEmailSent": "Inviata. Controlla la posta in arrivo."
 }

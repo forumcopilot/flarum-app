@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import '../attributes.dart';
 import '../json_api.dart';
 import 'flapp_push.dart';
+import 'flapp_sign_in.dart';
 import 'policy.dart';
 import 'reaction.dart';
 import 'user.dart';
@@ -63,6 +64,7 @@ class FlarumForumInfo {
     this.ignoredUsers,
     this.policies = const [],
     this.flappPush,
+    this.flappSignIn,
   });
 
   factory FlarumForumInfo.fromDocument(JsonApiDocument document) {
@@ -107,6 +109,7 @@ class FlarumForumInfo {
           : [for (final user in document.findAll(actor.toMany('ignoredUsers'))) FlarumUser.fromResource(user)],
       policies: [for (final policy in document.findAll(forum.toMany('fofTermsPolicies'))) FlarumPolicy.fromResource(policy)],
       flappPush: FlappPushInfo.fromAttributes(a),
+      flappSignIn: FlappSignInInfo.fromAttributes(a),
       attributes: a,
     );
   }
@@ -147,6 +150,18 @@ class FlarumForumInfo {
 
   /// Where the forum's pushes come from, when it runs the Flapp extension and is connected.
   final FlappPushInfo? flappPush;
+
+  /// Where the app signs in through the forum in the phone's browser, when it runs the Flapp
+  /// extension.
+  final FlappSignInInfo? flappSignIn;
+
+  /// Whether the signed-in reader has confirmed their email address. Flarum signs a new account in
+  /// before it is confirmed and gives it only a guest's permissions until then. True for a guest,
+  /// and when the forum doesn't say.
+  bool get actorEmailConfirmed => actorAttributes.boolean('isEmailConfirmed') ?? true;
+
+  /// The signed-in reader's email address, which Flarum sends only to them.
+  String? get actorEmail => actorAttributes.nonEmptyString('email');
 
   /// Where the signed-in reader stands with each policy, by its id.
   Map<String, FlarumPolicyState> get policyStates => {

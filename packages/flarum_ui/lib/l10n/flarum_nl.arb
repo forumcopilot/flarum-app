@@ -467,5 +467,12 @@
   "displayNameLocked": "Op dit forum kun je je weergavenaam niet wijzigen.",
   "usernameField": "Gebruikersnaam",
   "usernameAdminsOnly": "Alleen de beheerders van het forum kunnen gebruikersnamen wijzigen.",
-  "undo": "Ongedaan maken"
+  "undo": "Ongedaan maken",
+  "googleSignInRefused": "Google staat inloggen binnen een app niet toe. Log in plaats daarvan in met je gebruikersnaam of e-mailadres en wachtwoord.",
+  "googleSignInNeedsExtension": "Google staat inloggen binnen een app niet toe. Log in met je wachtwoord, of vraag de beheerders van dit forum de Flapp-extensie te installeren, waarmee inloggen met Google werkt.",
+  "confirmEmailTitle": "Bevestig je e-mailadres",
+  "confirmEmailText": "Het forum heeft een link gestuurd naar {email}. Open die om je registratie af te ronden: tot die tijd kun je lezen, maar niet meedoen.",
+  "confirmEmailTextNoAddress": "Het forum heeft je een link gemaild. Open die om je registratie af te ronden: tot die tijd kun je lezen, maar niet meedoen.",
+  "resendConfirmationEmail": "Opnieuw sturen",
+  "confirmationEmailSent": "Verstuurd. Kijk in je inbox."
 }

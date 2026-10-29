@@ -1,16 +1,19 @@
 # The Flapp extension
 
 A Flarum extension that sends a forum's notifications to its members' phones as push
-notifications, within seconds and in each member's language. The extension's own README covers
-what members see and how it works: [2.x/README.md](2.x/README.md).
+notifications, within seconds and in each member's language, and lets members sign in to the app
+on the forum's own page in their phone's browser. The extension's own README covers what members
+see and how it works: [2.x/README.md](2.x/README.md).
 
 | Folder | For | PHP |
 | --- | --- | --- |
 | `2.x/` | Flarum 2.0 | 8.3 or later |
 | `1.x/` | Flarum 1.8 | 7.3 or later |
 
-Only push needs the extension. The app reads, posts and signs in without anything installed on
-the forum: sign-in and sign-up use the forum's own pages.
+The app reads, posts and signs in without anything installed on the forum: sign-in and sign-up
+use the forum's own pages, inside the app. Push needs the extension, and so does signing in with
+Google, which refuses sign-in inside an app: with the extension, the app signs in in the phone's
+browser instead.
 
 ## Installing it on a forum
 

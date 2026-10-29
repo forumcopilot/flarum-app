@@ -1902,4 +1902,30 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get undo => 'Desfazer';
+
+  @override
+  String get googleSignInRefused =>
+      'O Google não permite entrar dentro de um app. Entre com seu nome de usuário ou e-mail e senha.';
+
+  @override
+  String get googleSignInNeedsExtension =>
+      'O Google não permite entrar dentro de um app. Entre com sua senha, ou peça aos administradores deste fórum que instalem a extensão do Flapp, que permite entrar com o Google.';
+
+  @override
+  String get confirmEmailTitle => 'Confirme seu e-mail';
+
+  @override
+  String confirmEmailText(String email) {
+    return 'O fórum enviou um link para $email. Abra-o para concluir o cadastro: até lá você pode ler, mas não participar.';
+  }
+
+  @override
+  String get confirmEmailTextNoAddress =>
+      'O fórum enviou um link para o seu e-mail. Abra-o para concluir o cadastro: até lá você pode ler, mas não participar.';
+
+  @override
+  String get resendConfirmationEmail => 'Reenviar e-mail';
+
+  @override
+  String get confirmationEmailSent => 'Enviado. Confira sua caixa de entrada.';
 }

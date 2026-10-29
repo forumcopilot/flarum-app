@@ -1,8 +1,12 @@
 import app from 'flarum/forum/app';
 import { extend } from 'flarum/common/extend';
 import NotificationGrid from 'flarum/forum/components/NotificationGrid';
+import AuthorizePage from './components/AuthorizePage';
 
 app.initializers.add('forumcopilot-flapp', () => {
+  // Where an app signs in through this forum (extend.php names the route).
+  app.routes['flapp.authorize'] = { path: '/flapp/authorize', component: AuthorizePage };
+
   // The Flapp column, for readers with a Flapp device on this forum only, so
   // the grid doesn't change for anyone else.
   extend(NotificationGrid.prototype, 'notificationMethods', function (items) {

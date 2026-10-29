@@ -41,6 +41,9 @@ export default class FlappPage extends ExtensionPage {
             <h3>{trans('members_heading')}</h3>
             <p>{trans('members_text')}</p>
 
+            <h3>{trans('signin_heading')}</h3>
+            <p>{trans('signin_text')}</p>
+
             <h3>{trans('status_heading')}</h3>
             <p>{connected ? trans('connected_text', { relay: app.data.settings[CONNECTED_RELAY_URL] }) : trans('not_connected_text')}</p>
 

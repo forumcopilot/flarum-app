@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "连接后，此论坛会在 Flapp 中继注册，中继把每条推送交给 Google 和 Apple 送达。发送什么由论坛决定并撰写；中继从不获取任何人的登录信息。断开连接或停用此扩展，会让中继忘记此论坛。"
       members_heading: "成员会看到什么"
       members_text: "在 Flapp 中登录此论坛的成员，会在论坛和应用的通知设置中看到 Flapp 一栏，并在那里选择哪些通知推送到手机。网页上默认提醒的通知类型一开始即为开启。不使用 Flapp 的成员不会看到任何变化。"
+      signin_heading: "登录 Flapp"
+      signin_text: "成员在手机浏览器中打开此论坛自己的页面登录 Flapp，使用与网站上相同的登录和注册按钮，包括 Google 等提供方的按钮。新注册的账号回到应用时已经登录。无论论坛是否已连接都可使用，无需任何设置。"
       privacy_link: "Flapp 隐私政策"
       status_heading: "状态"
       connected_text: "已连接到 {relay}。"
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "句柄缺失或无效。"
     invalid_locale: "语言无效。"
     invalid_platform: "平台必须是 android 或 ios。"
+    invalid_sign_in_request: "此登录请求无效。请从应用重新开始。"
     not_connected: "此论坛未连接到 Flapp 中继。"
     relay_failed: "Flapp 中继无法连接此论坛：{message}"
     token_needed: "设备必须在 Authorization 头中使用读者的令牌注册。"
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "登录 {app}"
+      guest_heading: "登录以继续使用 {app}"
+      guest_text: "登录或注册 {forum}，{app} 就会用你的账号登录。"
+      member_heading: "{app} 想以 {username} 的身份登录 {forum}"
+      member_text: "{app} 将可以做你在此论坛能做的一切。你可以随时让它退出登录：在应用中，或在这里安全页面的活动会话中。"
+      authorize_button: "授权"
+      cancel_button: "取消"
+      not_you_link: "不是 {username}？退出登录"
+      done_text: "已登录。你可以返回 {app} 了。"
+      invalid_text: "此登录链接无效。请返回应用重试。"
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

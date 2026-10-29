@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "La connexion inscrit ce forum auprès du relais Flapp, qui confie chaque notification push à Google et Apple pour la livrer. Le forum décide de ce qu'il envoie et le rédige ; le relais ne reçoit jamais les identifiants de qui que ce soit. Se déconnecter, ou désactiver cette extension, demande au relais d'oublier le forum."
       members_heading: "Ce que voient vos membres"
       members_text: "Un membre qui se connecte à ce forum dans Flapp obtient une colonne Flapp dans ses paramètres de notification, sur le forum et dans l'application, où il choisit les notifications qui arrivent sur son téléphone. Celles qui alertent sur le web par défaut sont activées au départ. Les membres qui n'utilisent pas Flapp ne voient aucun changement."
+      signin_heading: "Connexion à Flapp"
+      signin_text: "Les membres se connectent à Flapp sur la page même de ce forum, dans le navigateur de leur téléphone, avec les boutons de connexion et d'inscription qu'ils utilisent sur le site, y compris ceux de Google et des autres fournisseurs. Un nouveau compte revient dans l'application déjà connecté. Cela fonctionne que le forum soit connecté ou non, sans aucun réglage."
       privacy_link: "Politique de confidentialité de Flapp"
       status_heading: "État"
       connected_text: "Connecté à {relay}."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "L'identifiant est manquant ou invalide."
     invalid_locale: "La langue n'est pas valide."
     invalid_platform: "La plateforme doit être android ou ios."
+    invalid_sign_in_request: "Cette demande de connexion n'est pas valide. Recommencez depuis l'application."
     not_connected: "Ce forum n'est pas connecté au relais Flapp."
     relay_failed: "Le relais Flapp n'a pas pu connecter ce forum : {message}"
     token_needed: "Un appareil doit être enregistré avec le jeton du lecteur dans l'en-tête Authorization."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Se connecter à {app}"
+      guest_heading: "Connectez-vous pour continuer vers {app}"
+      guest_text: "Connectez-vous à {forum}, ou inscrivez-vous, et {app} sera connecté avec votre compte."
+      member_heading: "{app} souhaite se connecter à {forum} en tant que {username}"
+      member_text: "{app} pourra faire tout ce que vous pouvez faire sur ce forum. Vous pouvez le déconnecter à tout moment, dans l'application ou ici, dans les sessions actives de votre page Sécurité."
+      authorize_button: "Autoriser"
+      cancel_button: "Annuler"
+      not_you_link: "Vous n'êtes pas {username} ? Se déconnecter"
+      done_text: "Vous êtes connecté. Vous pouvez revenir à {app}."
+      invalid_text: "Ce lien de connexion n'est pas valide. Revenez à l'application et réessayez."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

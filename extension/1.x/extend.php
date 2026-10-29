@@ -22,7 +22,8 @@ use Flarum\User\User;
 
 return [
     (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js'),
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->route('/flapp/authorize', 'flapp.authorize', SignIn\AuthorizeContent::class),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js'),
@@ -33,7 +34,8 @@ return [
         ->post('/flapp-push/devices', 'flapp.devices.create', Api\Controller\CreateDeviceController::class)
         ->delete('/flapp-push/devices/{id}', 'flapp.devices.delete', Api\Controller\DeleteDeviceController::class)
         ->post('/flapp-push/connection', 'flapp.connection.create', Api\Controller\ConnectController::class)
-        ->delete('/flapp-push/connection', 'flapp.connection.delete', Api\Controller\DisconnectController::class),
+        ->delete('/flapp-push/connection', 'flapp.connection.delete', Api\Controller\DisconnectController::class)
+        ->post('/flapp-auth/approve', 'flapp.auth.approve', Api\Controller\ApproveSignInController::class),
 
     // Every type gets a Flapp box, not only alertable ones. The defaults are
     // worked out per type in the driver.

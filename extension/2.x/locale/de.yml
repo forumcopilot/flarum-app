@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "Beim Verbinden meldet sich dieses Forum beim Flapp-Relay an, das jede Push-Benachrichtigung zur Zustellung an Google und Apple weitergibt. Das Forum entscheidet, was gesendet wird, und verfasst es; das Relay erhält nie die Anmeldung von irgendjemandem. Trennen oder das Deaktivieren dieser Erweiterung weist das Relay an, das Forum zu vergessen."
       members_heading: "Was deine Mitglieder sehen"
       members_text: "Wer sich in Flapp bei diesem Forum anmeldet, bekommt in den Benachrichtigungseinstellungen eine Spalte „Flapp“, im Forum und in der App, und wählt dort aus, welche Benachrichtigungen das Telefon erreichen. Was im Web standardmäßig benachrichtigt, ist zu Beginn eingeschaltet. Mitglieder, die Flapp nicht nutzen, merken keine Änderung."
+      signin_heading: "Anmeldung in Flapp"
+      signin_text: "Mitglieder melden sich in Flapp auf der eigenen Seite dieses Forums an, im Browser ihres Telefons, mit den Knöpfen zum Anmelden und Registrieren, die sie von der Website kennen, auch denen von Google und anderen Anbietern. Ein neues Konto ist in der App gleich angemeldet. Das funktioniert, ob das Forum verbunden ist oder nicht, und braucht keine Einstellung."
       privacy_link: "Datenschutzerklärung von Flapp"
       status_heading: "Status"
       connected_text: "Verbunden mit {relay}."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "Das Handle fehlt oder ist ungültig."
     invalid_locale: "Die Sprache ist ungültig."
     invalid_platform: "Die Plattform muss android oder ios sein."
+    invalid_sign_in_request: "Diese Anmeldeanfrage ist ungültig. Beginne in der App noch einmal."
     not_connected: "Dieses Forum ist nicht mit dem Flapp-Relay verbunden."
     relay_failed: "Das Flapp-Relay konnte dieses Forum nicht verbinden: {message}"
     token_needed: "Ein Gerät muss mit dem Token des Lesers im Authorization-Header registriert werden."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Bei {app} anmelden"
+      guest_heading: "Melde dich an, um mit {app} fortzufahren"
+      guest_text: "Melde dich bei {forum} an oder registriere dich, dann wird {app} mit deinem Konto angemeldet."
+      member_heading: "{app} möchte sich bei {forum} als {username} anmelden"
+      member_text: "{app} kann dann alles tun, was du in diesem Forum tun kannst. Du kannst die App jederzeit abmelden, in der App oder hier bei den aktiven Sitzungen auf deiner Sicherheitsseite."
+      authorize_button: "Zulassen"
+      cancel_button: "Abbrechen"
+      not_you_link: "Nicht {username}? Abmelden"
+      done_text: "Du bist angemeldet. Du kannst zu {app} zurückkehren."
+      invalid_text: "Dieser Anmeldelink ist ungültig. Geh zurück in die App und versuche es noch einmal."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

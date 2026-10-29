@@ -16,6 +16,11 @@ forumcopilot-flapp:
         A member who signs in to this forum in Flapp gets a Flapp column in their notification settings, on the forum
         and in the app, and chooses there which notifications reach their phone. The ones that alert on the web by
         default start on. Members who don't use Flapp see no change.
+      signin_heading: Signing in to Flapp
+      signin_text: >
+        Members sign in to Flapp on this forum's own page, in their phone's browser, with the log-in and sign-up
+        buttons they use on the website, Google's and other providers' included. A new account comes back to the app
+        signed in. This works whether or not the forum is connected, and needs no setting.
       privacy_link: Flapp's privacy policy
       status_heading: Status
       connected_text: "Connected to {relay}."
@@ -31,12 +36,28 @@ forumcopilot-flapp:
     invalid_handle: The handle is missing or not valid.
     invalid_locale: The language is not valid.
     invalid_platform: The platform must be android or ios.
+    invalid_sign_in_request: This sign-in request is not valid. Start again from the app.
     not_connected: This forum is not connected to the Flapp relay.
     relay_failed: "The Flapp relay could not connect this forum: {message}"
     token_needed: A device must be registered with the reader's token in the Authorization header.
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Sign in to {app}"
+      guest_heading: "Log in to continue to {app}"
+      guest_text: "Log in to {forum}, or sign up, and {app} will be signed in with your account."
+      member_heading: "{app} wants to sign in to {forum} as {username}"
+      member_text: >
+        {app} will be able to do what you can do on this forum. You can sign it out at any time, in the app or
+        under Active Sessions on your Security page here.
+      authorize_button: Authorize
+      cancel_button: Cancel
+      not_you_link: "Not {username}? Log out"
+      done_text: "You're signed in. You can go back to {app}."
+      invalid_text: This sign-in link is not valid. Go back to the app and try again.
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: Flapp
 

@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "연결하면 이 포럼이 Flapp 릴레이에 등록되고, 릴레이는 각 푸시 알림을 Google과 Apple에 넘겨 전달합니다. 무엇을 보낼지는 포럼이 정하고 작성하며, 릴레이는 누구의 로그인 정보도 받지 않습니다. 연결을 해제하거나 이 확장 기능을 비활성화하면 릴레이가 이 포럼을 잊습니다."
       members_heading: "회원에게 보이는 것"
       members_text: "Flapp에서 이 포럼에 로그인한 회원은 포럼과 앱의 알림 설정에 Flapp 열이 생기고, 그곳에서 어떤 알림을 휴대폰으로 받을지 고릅니다. 처음에는 웹에서 기본으로 알리는 항목이 켜져 있습니다. Flapp을 쓰지 않는 회원에게는 달라지는 것이 없습니다."
+      signin_heading: "Flapp 로그인"
+      signin_text: "회원은 휴대폰 브라우저에서 이 포럼의 페이지를 열고, 웹사이트에서 쓰는 로그인과 가입 버튼(Google 등 다른 제공자 포함)으로 Flapp에 로그인합니다. 새로 만든 계정도 로그인된 채로 앱에 돌아옵니다. 포럼이 연결되어 있든 아니든 작동하며, 설정이 필요 없습니다."
       privacy_link: "Flapp 개인정보 처리방침"
       status_heading: "상태"
       connected_text: "{relay}에 연결되었습니다."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "핸들이 없거나 올바르지 않습니다."
     invalid_locale: "언어가 올바르지 않습니다."
     invalid_platform: "플랫폼은 android 또는 ios여야 합니다."
+    invalid_sign_in_request: "이 로그인 요청은 유효하지 않습니다. 앱에서 다시 시작하세요."
     not_connected: "이 포럼은 Flapp 릴레이에 연결되어 있지 않습니다."
     relay_failed: "Flapp 릴레이가 이 포럼을 연결하지 못했습니다: {message}"
     token_needed: "기기는 Authorization 헤더에 읽는 사람의 토큰을 넣어 등록해야 합니다."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "{app}에 로그인"
+      guest_heading: "로그인하고 {app}(으)로 계속하기"
+      guest_text: "{forum}에 로그인하거나 가입하면 {app}이(가) 회원님의 계정으로 로그인됩니다."
+      member_heading: "{app}이(가) {username}(으)로 {forum}에 로그인하려고 합니다"
+      member_text: "{app}은(는) 이 포럼에서 회원님이 할 수 있는 모든 일을 할 수 있게 됩니다. 언제든지 앱에서, 또는 여기 보안 페이지의 활성 세션에서 로그아웃할 수 있습니다."
+      authorize_button: "허용"
+      cancel_button: "취소"
+      not_you_link: "{username}님이 아닌가요? 로그아웃"
+      done_text: "로그인되었습니다. {app}(으)로 돌아가세요."
+      invalid_text: "이 로그인 링크는 유효하지 않습니다. 앱으로 돌아가 다시 시도하세요."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

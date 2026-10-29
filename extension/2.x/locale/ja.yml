@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "接続すると、このフォーラムが Flapp リレーに登録されます。リレーは各プッシュ通知を Google と Apple に渡して配信します。何を送るかはフォーラムが決めて作成し、リレーが誰かのログイン情報を受け取ることはありません。接続を解除するか、この拡張機能を無効にすると、リレーはこのフォーラムの情報を消去します。"
       members_heading: "メンバーに見えるもの"
       members_text: "Flapp でこのフォーラムにログインしたメンバーには、フォーラムとアプリの通知設定に Flapp 列が表示され、どの通知をスマートフォンに届けるかを選べます。最初は、ウェブでデフォルトで通知される種類がオンになっています。Flapp を使わないメンバーには何も変わりません。"
+      signin_heading: "Flapp へのログイン"
+      signin_text: "メンバーは、スマートフォンのブラウザでこのフォーラム自身のページを開き、ウェブサイトと同じログインと登録のボタン（Google などのプロバイダーを含む）を使って Flapp にログインします。新しく作ったアカウントも、ログインした状態でアプリに戻ります。フォーラムが接続されていてもいなくても使え、設定は要りません。"
       privacy_link: "Flapp のプライバシーポリシー"
       status_heading: "状態"
       connected_text: "{relay} に接続済みです。"
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "ハンドルがないか、無効です。"
     invalid_locale: "言語が無効です。"
     invalid_platform: "プラットフォームは android か ios にしてください。"
+    invalid_sign_in_request: "このログインリクエストは無効です。アプリからやり直してください。"
     not_connected: "このフォーラムは Flapp リレーに接続されていません。"
     relay_failed: "Flapp リレーがこのフォーラムを接続できませんでした: {message}"
     token_needed: "デバイスは、Authorization ヘッダーに読者のトークンを付けて登録する必要があります。"
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "{app} にログイン"
+      guest_heading: "ログインして {app} に進む"
+      guest_text: "{forum} にログインするか登録すると、{app} があなたのアカウントでログインします。"
+      member_heading: "{app} が {username} として {forum} にログインしようとしています"
+      member_text: "{app} は、このフォーラムであなたができることをすべて行えるようになります。ログアウトはいつでも、アプリで、またはここのセキュリティページのアクティブなセッションからできます。"
+      authorize_button: "許可"
+      cancel_button: "キャンセル"
+      not_you_link: "{username} ではありませんか？ログアウト"
+      done_text: "ログインしました。{app} に戻れます。"
+      invalid_text: "このログインリンクは無効です。アプリに戻ってもう一度お試しください。"
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

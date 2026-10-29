@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "Ao conectar, este fórum se inscreve no relay do Flapp, que entrega cada notificação push ao Google e à Apple para que a façam chegar. O fórum decide o que enviar e escreve o texto; o relay nunca recebe o login de ninguém. Desconectar, ou desativar esta extensão, faz o relay esquecer o fórum."
       members_heading: "O que seus membros veem"
       members_text: "Quem entra neste fórum pelo Flapp ganha uma coluna Flapp nas configurações de notificação, no fórum e no app, onde escolhe quais notificações chegam ao celular. As que avisam na web por padrão começam ativadas. Quem não usa o Flapp não vê nenhuma mudança."
+      signin_heading: "Entrar no Flapp"
+      signin_text: "Os membros entram no Flapp pela própria página deste fórum, no navegador do celular, com os botões de entrar e de cadastro que usam no site, inclusive os do Google e de outros provedores. Uma conta nova volta ao app já conectada. Funciona com o fórum conectado ou não, e não precisa de nenhuma configuração."
       privacy_link: "Política de privacidade do Flapp"
       status_heading: "Status"
       connected_text: "Conectado a {relay}."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "O identificador está faltando ou não é válido."
     invalid_locale: "O idioma não é válido."
     invalid_platform: "A plataforma deve ser android ou ios."
+    invalid_sign_in_request: "Este pedido de login não é válido. Comece de novo pelo app."
     not_connected: "Este fórum não está conectado ao relay do Flapp."
     relay_failed: "O relay do Flapp não conseguiu conectar este fórum: {message}"
     token_needed: "Um dispositivo deve ser registrado com o token do leitor no cabeçalho Authorization."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Entrar no {app}"
+      guest_heading: "Entre para continuar no {app}"
+      guest_text: "Entre no {forum}, ou cadastre-se, e o {app} será conectado com a sua conta."
+      member_heading: "O {app} quer entrar no {forum} como {username}"
+      member_text: "O {app} poderá fazer tudo o que você pode fazer neste fórum. Você pode desconectá-lo quando quiser, no app ou aqui, nas sessões ativas da sua página de Segurança."
+      authorize_button: "Autorizar"
+      cancel_button: "Cancelar"
+      not_you_link: "Não é {username}? Sair"
+      done_text: "Você entrou. Já pode voltar ao {app}."
+      invalid_text: "Este link de login não é válido. Volte ao app e tente de novo."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

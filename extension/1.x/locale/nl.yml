@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "Bij het verbinden schrijft dit forum zich in bij de Flapp-relay, die elke pushmelding aan Google en Apple doorgeeft om te bezorgen. Het forum bepaalt wat er wordt verstuurd en schrijft het; de relay krijgt nooit iemands inloggegevens. De verbinding verbreken, of deze extensie uitschakelen, laat de relay het forum vergeten."
       members_heading: "Wat je leden zien"
       members_text: "Wie in Flapp inlogt op dit forum, krijgt een Flapp-kolom in de meldingsinstellingen, op het forum en in de app, en kiest daar welke meldingen de telefoon bereiken. Wat op het web standaard een melding geeft, staat in het begin aan. Leden die Flapp niet gebruiken, merken niets."
+      signin_heading: "Inloggen in Flapp"
+      signin_text: "Leden loggen in Flapp in op de eigen pagina van dit forum, in de browser van hun telefoon, met de knoppen om in te loggen en te registreren die ze op de website gebruiken, ook die van Google en andere aanbieders. Een nieuw account komt al ingelogd terug in de app. Dit werkt of het forum nu verbonden is of niet, en vraagt geen instelling."
       privacy_link: "Privacybeleid van Flapp"
       status_heading: "Status"
       connected_text: "Verbonden met {relay}."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "De handle ontbreekt of is ongeldig."
     invalid_locale: "De taal is ongeldig."
     invalid_platform: "Het platform moet android of ios zijn."
+    invalid_sign_in_request: "Dit inlogverzoek is niet geldig. Begin opnieuw in de app."
     not_connected: "Dit forum is niet verbonden met de Flapp-relay."
     relay_failed: "De Flapp-relay kon dit forum niet verbinden: {message}"
     token_needed: "Een apparaat moet worden geregistreerd met het token van de lezer in de Authorization-header."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Inloggen bij {app}"
+      guest_heading: "Log in om verder te gaan naar {app}"
+      guest_text: "Log in op {forum}, of registreer je, en {app} wordt met je account ingelogd."
+      member_heading: "{app} wil inloggen op {forum} als {username}"
+      member_text: "{app} kan dan alles doen wat jij op dit forum kunt. Je kunt de app op elk moment uitloggen, in de app of hier bij de actieve sessies op je beveiligingspagina."
+      authorize_button: "Toestaan"
+      cancel_button: "Annuleren"
+      not_you_link: "Niet {username}? Uitloggen"
+      done_text: "Je bent ingelogd. Je kunt teruggaan naar {app}."
+      invalid_text: "Deze inloglink is niet geldig. Ga terug naar de app en probeer het opnieuw."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

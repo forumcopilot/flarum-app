@@ -8,6 +8,8 @@ forumcopilot-flapp:
       how_text: "Al conectar, este foro se inscribe en el relé de Flapp, que entrega cada notificación push a Google y Apple para que la hagan llegar. El foro decide qué enviar y lo redacta; el relé nunca recibe el inicio de sesión de nadie. Desconectar, o desactivar esta extensión, le indica al relé que olvide el foro."
       members_heading: "Qué ven tus miembros"
       members_text: "Quien inicia sesión en este foro con Flapp tiene una columna Flapp en su configuración de notificaciones, en el foro y en la app, donde elige qué notificaciones llegan a su teléfono. Las que avisan en la web por defecto empiezan activadas. Los miembros que no usan Flapp no notan ningún cambio."
+      signin_heading: "Iniciar sesión en Flapp"
+      signin_text: "Los miembros inician sesión en Flapp en la propia página de este foro, en el navegador de su teléfono, con los botones de inicio de sesión y registro que usan en la web, incluidos los de Google y otros proveedores. Una cuenta nueva vuelve a la app con la sesión ya iniciada. Funciona tanto si el foro está conectado como si no, y no necesita ninguna configuración."
       privacy_link: "Política de privacidad de Flapp"
       status_heading: "Estado"
       connected_text: "Conectado a {relay}."
@@ -23,12 +25,26 @@ forumcopilot-flapp:
     invalid_handle: "Falta el identificador o no es válido."
     invalid_locale: "El idioma no es válido."
     invalid_platform: "La plataforma debe ser android o ios."
+    invalid_sign_in_request: "Esta solicitud de inicio de sesión no es válida. Empieza de nuevo desde la app."
     not_connected: "Este foro no está conectado al relé de Flapp."
     relay_failed: "El relé de Flapp no pudo conectar este foro: {message}"
     token_needed: "Un dispositivo debe registrarse con el token del lector en la cabecera Authorization."
 
-  # The reader's notification settings.
   forum:
+    # /flapp/authorize, where an app signs in through the forum.
+    authorize:
+      title: "Iniciar sesión en {app}"
+      guest_heading: "Inicia sesión para continuar en {app}"
+      guest_text: "Inicia sesión en {forum}, o regístrate, y {app} quedará conectada con tu cuenta."
+      member_heading: "{app} quiere iniciar sesión en {forum} como {username}"
+      member_text: "{app} podrá hacer lo mismo que tú en este foro. Puedes cerrar su sesión cuando quieras, en la app o aquí, en las sesiones activas de tu página de seguridad."
+      authorize_button: "Autorizar"
+      cancel_button: "Cancelar"
+      not_you_link: "¿No eres {username}? Cerrar sesión"
+      done_text: "Has iniciado sesión. Ya puedes volver a {app}."
+      invalid_text: "Este enlace de inicio de sesión no es válido. Vuelve a la app e inténtalo de nuevo."
+
+    # The reader's notification settings.
     settings:
       notify_by_flapp_heading: "Flapp"
 

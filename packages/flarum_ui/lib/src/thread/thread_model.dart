@@ -209,8 +209,11 @@ class ThreadModel extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _readTimer?.cancel();
-    // Leaving the thread sends what was read without waiting.
-    unawaited(_sendRead());
+    // Leaving the thread sends what was read without waiting; then the forum's lists show the
+    // discussion again, whichever tab it was opened from.
+    unawaited(_sendRead().then((_) {
+      if (forum.isSignedIn) forum.discussionChanged(discussionId);
+    }));
     super.dispose();
   }
 }

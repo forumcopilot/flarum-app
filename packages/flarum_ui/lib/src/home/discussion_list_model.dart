@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flarum_core/flarum_core.dart';
 import 'package:flutter/foundation.dart';
 
@@ -17,7 +19,9 @@ class DiscussionListModel extends ChangeNotifier {
       bool private = false,
       this.pageSize = 20})
       : bookmarked = bookmarked || view == DiscussionView.bookmarks,
-        private = private || view == DiscussionView.private;
+        private = private || view == DiscussionView.private {
+    _changes = forum.discussionChanges.listen(reload);
+  }
 
   final FlarumForum forum;
   final DiscussionView view;
@@ -97,8 +101,11 @@ class DiscussionListModel extends ChangeNotifier {
   Future<void> reload(String id) async {
     final index = items.indexWhere((d) => d.id == id);
     if (index < 0) return;
+    // The row shows the latest read of it: an earlier one can answer after a later one.
+    final ticket = _reloads[id] = (_reloads[id] ?? 0) + 1;
     try {
       final fresh = await forum.api.discussion(id);
+      if (_reloads[id] != ticket) return;
       final at = items.indexWhere((d) => d.id == id);
       if (at >= 0) {
         final gone = fresh.subscription == 'ignore' ||
@@ -115,6 +122,8 @@ class DiscussionListModel extends ChangeNotifier {
       // The row keeps what it showed.
     }
   }
+
+  final Map<String, int> _reloads = {};
 
   /// Posts the reader hasn't read in [d], as the web counts them.
   int unreadIn(FlarumDiscussion d) => unreadCount(d, markedAllAsReadAt, signedIn: signedIn);
@@ -166,6 +175,9 @@ class DiscussionListModel extends ChangeNotifier {
     return const [];
   }
 
+  /// A discussion the reader changed, from this list or any other ([FlarumForum.discussionChanges]).
+  late final StreamSubscription<String> _changes;
+
   bool _disposed = false;
 
   void _notify() {
@@ -175,6 +187,7 @@ class DiscussionListModel extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
+    _changes.cancel();
     super.dispose();
   }
 }

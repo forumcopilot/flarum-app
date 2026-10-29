@@ -97,11 +97,32 @@ void main() {
       });
 
       test('a guest\'s reading is not reported', () async {
-        final model = ThreadModel(fixtures.forum(signedIn: false), fixtures.discussionId('welcome'), readDelay: Duration.zero);
+        final forum = fixtures.forum(signedIn: false);
+        var told = false;
+        final changes = forum.discussionChanges.listen((_) => told = true);
+        final model = ThreadModel(forum, fixtures.discussionId('welcome'), readDelay: Duration.zero);
         model.reportRead(3);
         await Future<void>.delayed(const Duration(milliseconds: 20));
         expect(fixtures.requests.where((r) => r.method == 'PATCH'), isEmpty);
         model.dispose();
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        expect(told, isFalse, reason: "nothing changed for a guest's lists");
+        await changes.cancel();
+      });
+
+      test("leaving, the thread sends what was read, then the forum's lists hear of it", () async {
+        final forum = fixtures.forum();
+        final long = fixtures.discussionId('long');
+        final model = ThreadModel(forum, long, readDelay: const Duration(seconds: 5));
+        await model.open();
+        final changed = forum.discussionChanges.first;
+        model
+          ..reportRead(26)
+          ..dispose();
+        expect(await changed, long);
+        final marks = fixtures.requests.where((r) => r.method == 'PATCH').toList();
+        expect(marks, hasLength(1), reason: 'sent on leaving, before the lists read the row again');
+        expect(((marks.single.data as Map)['data'] as Map)['attributes'], {'lastReadPostNumber': 26});
       });
 
       testWidgets("opened at its first post, a discussion shows its header; at its end, the bar counts the last post",

@@ -186,6 +186,29 @@ void main() {
         await tester.pump(const Duration(seconds: 5));
       });
 
+      test('a discussion the reader changed elsewhere is read again in every list that shows it', () async {
+        final forum = fixtures.forum();
+        final latest = DiscussionListModel(forum);
+        final newest = DiscussionListModel(forum, sort: DiscussionSort.newest);
+        await latest.refresh();
+        await newest.refresh();
+        final long = fixtures.discussionId('long');
+        expect([latest, newest].every((list) => list.items.any((d) => d.id == long)), isTrue);
+        fixtures.requests.clear();
+
+        forum.discussionChanged(long);
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        expect(fixtures.requests.where((r) => r.method == 'GET' && r.path == '/discussions/$long'), hasLength(2),
+            reason: 'once for each list');
+
+        latest.dispose();
+        newest.dispose();
+        fixtures.requests.clear();
+        forum.discussionChanged(long);
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        expect(fixtures.requests, isEmpty, reason: 'a closed list no longer listens');
+      });
+
       testWidgets('swiped, an unread discussion is marked read; a long press offers its controls', (tester) async {
         final long = fixtures.discussionId('long');
         final welcome = fixtures.discussionId('welcome');

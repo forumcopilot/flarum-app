@@ -45,7 +45,8 @@ for a global one.
   to the host.
 
 Not yet: links in a post to another Flarum forum still open in the browser (a host hook can
-open them in the app later), and push (Phase 5).
+open them in the app later), and push (Phase 5). Both came later: the hook on 21 Oct (item 27
+below), push on 26 Oct.
 
 ### Push through the Flapp extension (25 Oct)
 
@@ -139,6 +140,12 @@ approved, and are built (its table names each one's commit). Done since:
   end. A message notification can't be checked: flarum/messages only emails it (CLAUDE.md).
   Left: Home keeps a discussion's row as it was when it's read from another tab, until a refresh
   (as before for unread counts); a 1.8 visit once left a discussion unread, not reproduced.
+  Fixed on 28 Oct: leaving a thread sends what was read, then `FlarumForum.discussionChanges`
+  names the discussion, and every `DiscussionListModel` of that forum (Home's lists, a tag's,
+  Following, Bookmarks, a profile's) reads the row again. Before, only the list the thread was
+  opened from read it, as the page closed, which could be before the last read reached the forum
+  (that may be the 1.8 visit). A row's swipe and long-press controls go the same way, so Home's
+  other sort chips follow too.
 
 - **The re-check** (Pixel 4a, 22 Oct, flarum-app 6b8634d, Flapp a2a4031 pinning 7abb713): the
   fixes passed on both forums (checks 1, 3, 6, 8, 14, 16, 24, 27, 28). Found: after Log In from a

@@ -9,8 +9,8 @@ import '../navigation/web_links.dart';
 import '../render/links.dart';
 import 'discussion_list_model.dart';
 
-/// Marks [d] read to its last post, as the web does from a row's unread count, and puts the row
-/// right. Says why when it can't.
+/// Marks [d] read to its last post, as the web does from a row's unread count, and puts its row
+/// right in every list of the forum. Says why when it can't.
 Future<void> markDiscussionRead(BuildContext context, DiscussionListModel list, FlarumDiscussion d) async {
   final last = d.lastPostNumber;
   if (last == null) return;
@@ -20,7 +20,7 @@ Future<void> markDiscussionRead(BuildContext context, DiscussionListModel list, 
     if (context.mounted) SnackbarHelper.showError(context, describeError(context, e));
     return;
   }
-  await list.reload(d.id);
+  list.forum.discussionChanged(d.id);
 }
 
 /// A discussion's controls, from a long press on its row, as the web's row menu offers them to a
@@ -52,7 +52,7 @@ Future<void> showDiscussionActions(
               if (context.mounted) SnackbarHelper.showError(context, describeError(context, e));
               return;
             }
-            await list.reload(d.id);
+            forum.discussionChanged(d.id);
           });
 
       Widget level(String? value, IconData icon, String label) => ListTile(

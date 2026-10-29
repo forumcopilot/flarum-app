@@ -53,6 +53,16 @@ class FlarumForum {
   /// badges counting what's unread follow it.
   Listenable get infoChanges => _infoChanges;
 
+  final _discussionChanges = StreamController<String>.broadcast();
+
+  /// The id of each discussion the reader has just changed (read in, replied to, followed,
+  /// bookmarked), once the forum has it: every list of this forum's discussions shows that row
+  /// again, wherever the discussion was opened from.
+  Stream<String> get discussionChanges => _discussionChanges.stream;
+
+  /// Says discussion [id] has changed for the reader ([discussionChanges]).
+  void discussionChanged(String id) => _discussionChanges.add(id);
+
   FlarumVersion? get version => info?.version;
 
   /// What [info] reveals; empty until it's loaded. Use [currentExtensions]

@@ -3,5 +3,6 @@
 library;
 
 export 'src/testing/fixture_forum.dart';
+export 'src/testing/flapp_sign_in_callback.dart';
 export 'src/testing/scripted_adapter.dart';
 export 'src/testing/write_samples.dart';

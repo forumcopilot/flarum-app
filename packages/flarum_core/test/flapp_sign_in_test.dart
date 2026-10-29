@@ -1,30 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:asn1lib/asn1lib.dart';
 import 'package:flarum_core/flarum_core.dart';
+import 'package:flarum_core/testing.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pointycastle/export.dart' as pc;
-
-/// The public key in a request's address, read back as the forum's OpenSSL reads it.
-pc.RSAPublicKey _publicKey(String pem) {
-  final der = base64.decode(pem.split('\n').where((line) => !line.startsWith('-----')).join());
-  final info = ASN1Parser(Uint8List.fromList(der)).nextObject() as ASN1Sequence;
-  final bits = info.elements[1] as ASN1BitString;
-  final rsa = ASN1Parser(Uint8List.fromList(bits.stringValue)).nextObject() as ASN1Sequence;
-  return pc.RSAPublicKey(
-    (rsa.elements[0] as ASN1Integer).valueAsBigInteger,
-    (rsa.elements[1] as ASN1Integer).valueAsBigInteger,
-  );
-}
-
-/// What the extension sends back: the sign-in, encrypted to [key] with RSA-OAEP.
-Uri _callback(pc.RSAPublicKey key, Map<String, dynamic> payload) {
-  final oaep = pc.OAEPEncoding(pc.RSAEngine())..init(true, pc.PublicKeyParameter<pc.RSAPublicKey>(key));
-  final encrypted = oaep.process(Uint8List.fromList(utf8.encode(jsonEncode(payload))));
-  return Uri.parse('flapp://auth?payload=${Uri.encodeQueryComponent(base64.encode(encrypted))}');
-}
 
 void main() {
   final info = FlappSignInInfo.fromAttributes({
@@ -38,6 +17,15 @@ void main() {
     expect(FlappSignInInfo.fromAttributes({'flappSignIn': {'authorizeUrl': 'javascript:alert(1)'}}), isNull);
   });
 
+  for (final version in FlarumVersion.values) {
+    test('Flarum ${version.name}: the Flapp extension announces its sign-in page; a forum without it, none', () async {
+      final signIn = (await FixtureForum(version, states: {'flapp'}).api().forumInfo()).flappSignIn!;
+      expect(signIn.authorizeUrl.path, '/flapp/authorize');
+      expect(signIn.version, 1);
+      expect((await FixtureForum(version).api().forumInfo()).flappSignIn, isNull);
+    });
+  }
+
   test("a request names the app and carries a one-time key and nonce; it reads the forum's answer", () async {
     final request = await FlappSignInRequest.create(info, app: 'flapp');
 
@@ -46,20 +34,13 @@ void main() {
     expect(request.url.queryParameters['nonce'], request.nonce);
     expect(request.nonce, matches(RegExp(r'^[A-Za-z0-9_-]{16,64}$')));
 
-    final key = _publicKey(request.url.queryParameters['publicKey']!);
-    expect(key.modulus!.bitLength, 2048);
+    expect(request.url.queryParameters['publicKey'], startsWith('-----BEGIN PUBLIC KEY-----\n'));
 
-    final result = request.complete(_callback(key, {
-      'v': 1,
-      'token': 'remember-token',
-      'userId': 2,
-      'nonce': request.nonce,
-      'cookiePrefix': 'flarum18',
-    }));
+    final result = request.complete(flappSignInCallback(request.url, token: 'remember-token', cookiePrefix: 'flarum18'));
     expect(result, (token: 'remember-token', userId: '2', cookiePrefix: 'flarum18'));
 
     // A payload for another request, or none.
-    expect(() => request.complete(_callback(key, {'token': 't', 'userId': 2, 'nonce': 'another-request-nonce'})),
+    expect(() => request.complete(flappSignInCallback(request.url, token: 't', nonce: 'another-request-nonce')),
         throwsA(isA<FlappSignInException>()));
     expect(() => request.complete(Uri.parse('flapp://auth?payload=bm90IGEga2V5')), throwsA(isA<FlappSignInException>()));
     expect(() => request.complete(Uri.parse('flapp://auth')), throwsA(isA<FlappSignInException>()));

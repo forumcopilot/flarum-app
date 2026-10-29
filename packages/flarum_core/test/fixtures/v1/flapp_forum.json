@@ -59,6 +59,10 @@
         "fofFollowTagsPromptShouldPrompt": false,
         "fofFollowTagsPromptButton": false,
         "fofFollowTagsAllDiscussionsForGuests": false,
+        "flappSignIn": {
+          "version": 1,
+          "authorizeUrl": "https://flarum18.betterdiscourse.app/flapp/authorize"
+        },
         "flappPush": {
           "relay": "https://staging-push.flarumapp.com",
           "forumId": "f_2d1756eec7001a63",
@@ -299,11 +303,11 @@
           "canEditCredentials": false,
           "canEditGroups": false,
           "canDelete": false,
-          "lastSeenAt": "2026-10-26T06:36:23+00:00",
+          "lastSeenAt": "2026-10-29T07:56:59+00:00",
           "isEmailConfirmed": true,
           "email": "bob@flarumapp.local",
           "markedAllAsReadAt": null,
-          "unreadNotificationCount": 10,
+          "unreadNotificationCount": 0,
           "newNotificationCount": 0,
           "preferences": {
             "followAfterReply": false,
@@ -400,7 +404,7 @@
           "canEditNickname": true,
           "newFlagCount": 0,
           "canMentionGroups": false,
-          "flappDeviceCount": 0,
+          "flappDeviceCount": 1,
           "draftCount": 0
         },
         "relationships": {
@@ -423,12 +427,12 @@
           "backgroundUrl": null,
           "backgroundMode": null,
           "icon": null,
-          "discussionCount": 11,
+          "discussionCount": 14,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
           "isHidden": false,
-          "lastPostedAt": "2026-10-08T20:06:39+00:00",
+          "lastPostedAt": "2026-10-29T01:35:34+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,

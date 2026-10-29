@@ -6,6 +6,9 @@ import 'package:flarum_core/testing.dart';
 /// The handle tool/record_flapp_fixtures.dart registered.
 const _handle = 'fixture-handle-0123456789abcdef';
 
+/// The id both forums gave the recorded device; it changes each time the fixtures are recorded.
+const _deviceId = '5';
+
 const _installation = FlappInstallation(id: 'install-0123456789abcdef', secret: 'secret-0123456789abcdef0123456789abcdef');
 
 void main() {
@@ -30,7 +33,7 @@ void main() {
         final api = forum.api();
 
         final id = await api.registerFlappDevice(handle: _handle, platform: 'android', app: 'flapp', locale: 'de');
-        expect(id, '2');
+        expect(id, _deviceId);
         await api.deleteFlappDevice(id);
         // Already gone: the forum's 404 counts as deleted.
         await api.deleteFlappDevice(id);
@@ -40,8 +43,8 @@ void main() {
         expect(register.path, '/flapp-push/devices');
         expect(register.headers['Authorization'], 'Token fixture-token');
         expect(register.data, {'handle': _handle, 'platform': 'android', 'app': 'flapp', 'locale': 'de'});
-        expect([delete.method, delete.path], ['DELETE', '/flapp-push/devices/2']);
-        expect([deleteAgain.method, deleteAgain.path], ['DELETE', '/flapp-push/devices/2']);
+        expect([delete.method, delete.path], ['DELETE', '/flapp-push/devices/$_deviceId']);
+        expect([deleteAgain.method, deleteAgain.path], ['DELETE', '/flapp-push/devices/$_deviceId']);
       });
 
       test('register tells the relay of the phone, asks it for a handle, and registers that with the forum', () async {
@@ -52,7 +55,7 @@ void main() {
         final registration = await FlarumPush.register(forum);
 
         final push = (await forum.current()).flappPush!;
-        expect(registration, (relay: push.relay, forumId: push.forumId, handle: _handle, deviceId: '2'));
+        expect(registration, (relay: push.relay, forumId: push.forumId, handle: _handle, deviceId: _deviceId));
         expect(await FlarumPush.forumUrlFor(push.forumId), forum.baseUrl);
         expect(await FlarumPush.store.read(forum.baseUrl), registration);
         final [installation, handle] = relay.requests;
@@ -83,7 +86,7 @@ void main() {
         await FlarumPush.unregister(forum);
 
         expect(fixtures.requests.last.method, 'DELETE');
-        expect(fixtures.requests.last.path, '/flapp-push/devices/2');
+        expect(fixtures.requests.last.path, '/flapp-push/devices/$_deviceId');
         expect([relay.requests.last.method, relay.requests.last.path], ['DELETE', '/v1/handles/$_handle']);
         expect(await FlarumPush.store.read(forum.baseUrl), isNull);
         expect(await FlarumPush.forumUrlFor((await forum.current()).flappPush!.forumId), isNull);
@@ -96,12 +99,12 @@ void main() {
 
         await forum.signIn('fixture-token');
         await pumpEventQueue();
-        expect((await FlarumPush.store.read(forum.baseUrl))?.deviceId, '2');
+        expect((await FlarumPush.store.read(forum.baseUrl))?.deviceId, _deviceId);
 
         await forum.signOut();
 
         final paths = [for (final r in fixtures.requests) '${r.method} ${r.path}'];
-        expect(paths.indexOf('DELETE /flapp-push/devices/2'), lessThan(paths.indexOf('GET /access-tokens')));
+        expect(paths.indexOf('DELETE /flapp-push/devices/$_deviceId'), lessThan(paths.indexOf('GET /access-tokens')));
         expect(await FlarumPush.store.read(forum.baseUrl), isNull);
       });
 

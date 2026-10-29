@@ -16,12 +16,12 @@
   "body": {
     "data": {
       "type": "flappDevices",
-      "id": "2",
+      "id": "5",
       "attributes": {
         "platform": "android",
         "app": "flapp",
         "locale": "de",
-        "createdAt": "2026-10-26T06:36:24+00:00"
+        "createdAt": "2026-10-29T07:57:00+00:00"
       }
     }
   }

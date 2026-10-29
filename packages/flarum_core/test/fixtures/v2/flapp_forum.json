@@ -73,6 +73,10 @@
           "forumId": "f_f1c410d76602de92",
           "version": 1
         },
+        "flappSignIn": {
+          "version": 1,
+          "authorizeUrl": "https://flarum20.betterdiscourse.app/flapp/authorize"
+        },
         "fof-upload.canUpload": true,
         "fof-upload.canDownload": true,
         "fof-upload.composerButtonVisiblity": "both",
@@ -325,10 +329,10 @@
           "joinTime": "2026-10-08T17:53:46+00:00",
           "discussionCount": 4,
           "commentCount": 26,
-          "lastSeenAt": "2026-10-26T06:36:31+00:00",
+          "lastSeenAt": "2026-10-29T07:57:07+00:00",
           "markedAllAsReadAt": null,
-          "unreadNotificationCount": 13,
-          "newNotificationCount": 0,
+          "unreadNotificationCount": 17,
+          "newNotificationCount": 5,
           "preferences": {
             "followAfterReply": false,
             "followAfterCreate": false,
@@ -423,7 +427,7 @@
           "canModerateExports": true,
           "canMentionGroups": false,
           "blocksPd": false,
-          "flappDeviceCount": 0,
+          "flappDeviceCount": 2,
           "ignored": false,
           "canBeIgnored": false,
           "bestAnswerCount": 0,
@@ -461,11 +465,11 @@
           "icon": null,
           "isHidden": false,
           "isPrimary": true,
-          "discussionCount": 14,
+          "discussionCount": 19,
           "position": 0,
           "defaultSort": null,
           "isChild": false,
-          "lastPostedAt": "2026-10-24T06:28:30+00:00",
+          "lastPostedAt": "2026-10-29T01:35:29+00:00",
           "canStartDiscussion": true,
           "canAddToDiscussion": true,
           "subscription": null,
@@ -474,10 +478,7 @@
         },
         "relationships": {
           "lastPostedDiscussion": {
-            "data": {
-              "type": "discussions",
-              "id": "107"
-            }
+            "data": null
           },
           "parent": {
             "data": null

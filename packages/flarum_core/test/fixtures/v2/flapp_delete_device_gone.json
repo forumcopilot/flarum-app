@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "path": "/flapp-push/devices/2",
+    "path": "/flapp-push/devices/5",
     "query": {},
     "signedIn": true,
     "rememberCookie": false

@@ -2,6 +2,9 @@ import app from 'flarum/forum/app';
 import Page from 'flarum/common/components/Page';
 import Button from 'flarum/common/components/Button';
 
+// Flarum's Button--block doesn't stretch a button everywhere; on a phone the page's buttons do.
+const FULL_WIDTH = { display: 'block', width: '100%' };
+
 function trans(key, params) {
   return app.translator.trans(`forumcopilot-flapp.forum.authorize.${key}`, params);
 }
@@ -49,18 +52,26 @@ export default class AuthorizePage extends Page {
         <h2>{trans('guest_heading', { app: request.appName })}</h2>,
         <p>{trans('guest_text', { app: request.appName, forum })}</p>,
         <div className="Form-group">
-          <Button className="Button Button--primary Button--block" onclick={() => app.modal.show(() => import('flarum/forum/components/LogInModal'))}>
+          <Button
+            className="Button Button--primary Button--block"
+            style={FULL_WIDTH}
+            onclick={() => app.modal.show(() => import('flarum/forum/components/LogInModal'))}
+          >
             {app.translator.trans('core.forum.header.log_in_link')}
           </Button>
         </div>,
         app.forum.attribute('allowSignUp') ? (
           <div className="Form-group">
-            <Button className="Button Button--block" onclick={() => app.modal.show(() => import('flarum/forum/components/SignUpModal'))}>
+            <Button
+              className="Button Button--block"
+              style={FULL_WIDTH}
+              onclick={() => app.modal.show(() => import('flarum/forum/components/SignUpModal'))}
+            >
               {app.translator.trans('core.forum.header.sign_up_link')}
             </Button>
           </div>
         ) : null,
-        <p>
+        <p style={{ marginTop: '20px', textAlign: 'center' }}>
           <a href={request.cancelUrl}>{trans('cancel_button')}</a>
         </p>,
       ];
@@ -70,16 +81,22 @@ export default class AuthorizePage extends Page {
       <h2>{trans('member_heading', { app: request.appName, forum, username: user.username() })}</h2>,
       <p>{trans('member_text', { app: request.appName })}</p>,
       <div className="Form-group">
-        <Button className="Button Button--primary Button--block" loading={this.working} disabled={this.working} onclick={this.authorize.bind(this)}>
+        <Button
+          className="Button Button--primary Button--block"
+          style={FULL_WIDTH}
+          loading={this.working}
+          disabled={this.working}
+          onclick={this.authorize.bind(this)}
+        >
           {trans('authorize_button')}
         </Button>
       </div>,
       <div className="Form-group">
-        <a className="Button Button--block" href={request.cancelUrl}>
+        <a className="Button Button--block" style={{ ...FULL_WIDTH, textAlign: 'center' }} href={request.cancelUrl}>
           {trans('cancel_button')}
         </a>
       </div>,
-      <p>
+      <p style={{ marginTop: '20px', textAlign: 'center' }}>
         <a href="#" onclick={this.logOut.bind(this)}>
           {trans('not_you_link', { username: user.username() })}
         </a>

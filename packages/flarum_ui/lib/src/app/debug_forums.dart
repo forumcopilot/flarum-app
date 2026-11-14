@@ -8,8 +8,8 @@ import '../../l10n/flarum_l10n.dart';
 /// on a phone): the two test forums (docs/device-testing.md) and the 21 forums the census check
 /// reads (test/census/census_test.dart).
 const debugForums = <AppForumConfig>[
-  AppForumConfig(name: 'Test forum 2.0', baseUrl: 'https://flarum20.betterdiscourse.app'),
-  AppForumConfig(name: 'Test forum 1.8', baseUrl: 'https://flarum18.betterdiscourse.app'),
+  AppForumConfig(name: 'Test forum 2.0', baseUrl: 'https://flarumapp.com/flarum'),
+  AppForumConfig(name: 'Test forum 1.8', baseUrl: 'https://flarumapp.com/flarum18'),
   AppForumConfig(name: 'Flarum Community', baseUrl: 'https://discuss.flarum.org'),
   AppForumConfig(name: 'mondedie.fr', baseUrl: 'https://mondedie.fr'),
   AppForumConfig(name: 'osTicket Forum', baseUrl: 'https://forum.osticket.com'),

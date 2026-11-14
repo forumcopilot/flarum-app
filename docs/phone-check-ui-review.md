@@ -8,8 +8,8 @@ https://claude.ai/artifact/7tRPwsajPnnFewKn5dPJ6S.
 Setup: in flarum-app, `git fetch && git checkout phase-4 && git pull` (expect 5fcb495 or later),
 against the pinned discourse-app (no pubspec_overrides). Build once per forum, 2.0 first:
 
-    flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
-    flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarum18.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 1.8 test"
+    flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarumapp.com/flarum --dart-define=FLARUM_NAME="Flarum 2 test"
+    flutter run -d <pixel> --dart-define=FLARUM_URL=https://flarumapp.com/flarum18 --dart-define=FLARUM_NAME="Flarum 1.8 test"
 
 Log In as **bob**, never alice; members' password 12344321. Everything below on both forums
 unless it names one.

@@ -4,17 +4,19 @@ The two test forums are public, over HTTPS, so a phone reaches them directly:
 
 | | Address |
 |---|---|
-| Flarum 1.8 | https://flarum18.betterdiscourse.app |
-| Flarum 2.0 | https://flarum20.betterdiscourse.app |
+| Flarum 1.8 | https://flarumapp.com/flarum18 |
+| Flarum 2.0 | https://flarumapp.com/flarum |
 
-They run on the dev server behind Cloudflare (proxied, with a Cloudflare Origin CA certificate on
-the server), carry sample content, are closed to sign-ups and send `X-Robots-Tag: noindex`. The
-zone challenges cloud networks, the dev server included: a phone on a mobile or home network gets
-through, but tools on the server use the forums' local ports (127.0.0.1:8081 and 8082) instead.
+They run on the dev server behind Cloudflare: flarumapp.com itself is the Flapp website (Cloudflare
+Pages), and the Worker `flarumapp-forums` on the route `flarumapp.com/flarum*` forwards the two paths
+to the server (`origin.flarumapp.com`, a Let's Encrypt certificate; nginx site `flarumapp-com`). They
+carry sample content and send `X-Robots-Tag: noindex`; the 2.0 forum takes sign-ups. Until 14 Nov
+2026 they were flarum20/flarum18.betterdiscourse.app, which now redirect to the same path. Tools on
+the server use the forums' local ports (127.0.0.1:8081 and 8082).
 
 ```bash
 # In flarum-app (with pubspec_overrides.yaml copied from the .example files):
-flutter run --dart-define=FLARUM_URL=https://flarum20.betterdiscourse.app --dart-define=FLARUM_NAME="Flarum 2 test"
+flutter run --dart-define=FLARUM_URL=https://flarumapp.com/flarum --dart-define=FLARUM_NAME="Flarum 2 test"
 ```
 
 The forum is chosen at build time (`AppForumConfig`). For a forum on your own machine, debug builds

@@ -66,9 +66,12 @@ a `FixtureForum(states: {...})`, in place of the same request's plain fixture. `
 tests replay the same fixtures (`root: '../flarum_core/test/fixtures'`). Live tests and re-recording: `test/live_test.dart`,
 `tool/test_forums/README.md`.
 
-The test forums are public at https://flarum18.betterdiscourse.app and https://flarum20.betterdiscourse.app
-(phones use these), behind Cloudflare, which challenges the dev server's own network: tools on the
-server use 127.0.0.1:8081 and 8082.
+The test forums are public at https://flarumapp.com/flarum (2.0) and https://flarumapp.com/flarum18 (1.8),
+phones use these, since 14 Nov 2026 (flarum20/flarum18.betterdiscourse.app before, which redirect). The
+site at flarumapp.com is Cloudflare Pages; the Worker `flarumapp-forums` on the route
+`flarumapp.com/flarum*` forwards those two paths to the dev server (`origin.flarumapp.com`, nginx site
+`flarumapp-com`). Each forum's `url` has its subfolder; the 1.8 forum's cookies are `flarum18_*`.
+Tools on the server use 127.0.0.1:8081 and 8082.
 
 flarum_ui's post renderer is `FlarumContent` (copied from discourse_ui's RichTextContent) on HTML
 prepared by `FlarumHtml`, which rewrites Flarum's own markup (code-block scripts, task lists,

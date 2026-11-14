@@ -6,6 +6,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../flarum_api.dart';
 import '../flarum_client.dart';
+import '../flarum_exception.dart';
 import '../models/forum_info.dart';
 import '../models/tag.dart';
 import 'flarum_extensions.dart';
@@ -35,6 +36,42 @@ class FlarumForum {
   }
 
   static void resetForTesting() => _forums.clear();
+
+  /// Whether [a] and [b] are one forum's address, whatever the spelling: the host's case, a
+  /// default port, a trailing slash. The scheme counts: http and https are two addresses.
+  static bool sameAddress(String a, String b) {
+    final (x, y) = (Uri.tryParse(a.trim()), Uri.tryParse(b.trim()));
+    if (x == null || y == null) return a.trim() == b.trim();
+    String path(Uri u) => u.path.replaceAll(RegExp(r'/+$'), '');
+    return x.scheme.toLowerCase() == y.scheme.toLowerCase() &&
+        x.host.toLowerCase() == y.host.toLowerCase() &&
+        x.port == y.port &&
+        path(x) == path(y);
+  }
+
+  /// Keeps what is kept for the forum at [from] under [to], for a forum that has moved to a new
+  /// address: the reader's sign-in ([FlarumTokenStore]) and the phone's push registration
+  /// ([FlarumPush.move]). It is the same install, so its token still signs the reader in there; the
+  /// host checks that once the forum answers at [to], and signs out if it doesn't. Whatever [to]
+  /// already has is kept and [from]'s copy dropped, so the forum is never kept under both. The
+  /// forum at [from] is forgotten for this run: [forUrl] gives a fresh one, signed out.
+  static Future<void> move(String from, String to) async {
+    final source = _normalise(from);
+    final target = _normalise(to);
+    if (source == target) return;
+    final tokens = FlarumTokenStore.instance;
+    if (await tokens.read(source) case final saved?) {
+      if (await tokens.read(target) == null) await tokens.write(target, saved);
+      await tokens.delete(source);
+    }
+    try {
+      await FlarumPush.move(source, target);
+    } on Object catch (e) {
+      // The phone registers again at the new address, at the next sign-in or launch.
+      debugPrint('FlarumForum: push registration not moved from $source: $e');
+    }
+    _forums.remove(source);
+  }
 
   final String baseUrl;
   final FlarumApi api;
@@ -94,6 +131,23 @@ class FlarumForum {
     api.client
       ..token = saved.token
       ..cookiePrefix = saved.cookiePrefix;
+  }
+
+  /// Reads the forum with the sign-in kept for it and signs out ([signOut]) if the forum doesn't
+  /// know the token: for a sign-in [move]d to the forum's new address, so the reader is either
+  /// signed in there or plainly signed out, never shown as signed in to a forum that reads them as
+  /// a guest. A forum that doesn't answer changes nothing; the next launch asks again.
+  Future<void> recheckSession() async {
+    await restoreSession();
+    if (!isSignedIn) return;
+    final FlarumForumInfo info;
+    try {
+      info = await refresh();
+    } on FlarumApiException catch (e) {
+      debugPrint('FlarumForum: sign-in at $baseUrl not checked: $e');
+      return;
+    }
+    if (info.actor == null) await signOut();
   }
 
   /// Signs in with a token captured from the forum (the web view's

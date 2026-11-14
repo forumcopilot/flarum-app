@@ -55,8 +55,8 @@ Without the extension, Flapp signs in on the forum's page inside the app, where 
 it, Flapp opens the forum's **/flapp/authorize** page in the phone's browser instead:
 
 1. A member who isn't logged in there logs in or signs up, with the forum's own Log In and Sign Up buttons, CAPTCHAs
-   and sign-in providers. A new account comes back to the app at once; it gets a member's permissions when its email
-   address is confirmed, as on the website.
+   and sign-in providers (the app's Sign Up opens the forum's Sign Up straight away). A new account comes back to the
+   app at once; it gets a member's permissions when its email address is confirmed, as on the website.
 2. The member taps **Authorize**. The forum gives Flapp a sign-in of the same kind "Remember me" makes, encrypted to a
    one-time key the app made for this request, so only that app can read it.
 

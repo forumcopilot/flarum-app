@@ -12,8 +12,9 @@ function trans(key, params) {
 /**
  * /flapp/authorize: where a member lets an app sign in through this forum, in
  * the phone's browser. A guest logs in or signs up first, with the forum's own
- * modals; both reload the page, which then asks to Authorize. The forum has
- * already checked the request (AuthorizeContent) and named the app.
+ * modals; both reload the page, which then asks to Authorize. The app's Sign Up
+ * adds signUp=1, which opens the Sign Up modal at once. The forum has already
+ * checked the request (AuthorizeContent) and named the app.
  */
 export default class AuthorizePage extends Page {
   oninit(vnode) {
@@ -25,6 +26,24 @@ export default class AuthorizePage extends Page {
     this.done = false;
 
     app.setTitle(trans('title', { app: this.request.appName || 'Flapp' }));
+  }
+
+  oncreate(vnode) {
+    super.oncreate(vnode);
+
+    // Asked for once: the flag leaves the address, so a guest who closes the modal, or the reload
+    // after signing up, sees the page as it is.
+    if (this.params.get('signUp') !== '1') return;
+    this.params.delete('signUp');
+    const url = new URL(window.location.href);
+    url.searchParams.delete('signUp');
+    window.history.replaceState(window.history.state, '', url.toString());
+
+    if (!this.request.error && !app.session.user && app.forum.attribute('allowSignUp')) this.signUp();
+  }
+
+  signUp() {
+    app.modal.show(() => import('flarum/forum/components/SignUpModal'));
   }
 
   view() {
@@ -62,11 +81,7 @@ export default class AuthorizePage extends Page {
         </div>,
         app.forum.attribute('allowSignUp') ? (
           <div className="Form-group">
-            <Button
-              className="Button Button--block"
-              style={FULL_WIDTH}
-              onclick={() => app.modal.show(() => import('flarum/forum/components/SignUpModal'))}
-            >
+            <Button className="Button Button--block" style={FULL_WIDTH} onclick={() => this.signUp()}>
               {app.translator.trans('core.forum.header.sign_up_link')}
             </Button>
           </div>

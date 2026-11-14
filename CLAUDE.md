@@ -98,7 +98,9 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - With the Flapp extension, `GET /api` carries `flappSignIn` (`authorizeUrl`): the app opens the
   forum's `/flapp/authorize` in the browser sign-in sheet, and the member's Authorize
   (`POST /api/flapp-auth/approve`, session and CSRF only) returns to `flapp://auth?payload=…`, a
-  remember token RSA-OAEP-encrypted to the app's one-time key (`FlappSignInRequest`).
+  remember token RSA-OAEP-encrypted to the app's one-time key (`FlappSignInRequest`). The app's
+  Sign Up adds `signUp=1`, which opens the forum's Sign Up modal at once (the page then drops it
+  from the address); an older extension ignores it and shows Log In and Sign Up.
 - 2.0 rejects unknown query parameters with HTTP 400; 1.x ignores them. Send only known ones.
   Unknown `filter[...]` keys are silently ignored on both.
 - Search: 1.x takes conditions as gambits inside `filter[q]` (`tag:`, `is:following`, `is:unread`,

@@ -45,7 +45,7 @@ class SignInPage extends StatefulWidget {
   final bool signUp;
 
   /// Signs the reader in; true once they are. [signUp] starts with the forum's
-  /// sign-up, where the page in the app is used.
+  /// sign-up, in the browser's sheet or the page in the app.
   static Future<bool> open(BuildContext context, SiteContext site, {bool signUp = false}) async {
     // The sign-in outlives [context]: the drawer's Log In closes the drawer first. Everything after
     // this hangs on the navigator instead, which stays.
@@ -54,7 +54,7 @@ class SignInPage extends StatefulWidget {
     if (host != null) {
       final info = await _forumInfo(site);
       if (info?.flappSignIn case final signIn? when navigator.mounted) {
-        final signedIn = await _signInInBrowser(navigator.context, site, signIn, host);
+        final signedIn = await _signInInBrowser(navigator.context, site, signIn, host, signUp: signUp);
         if (signedIn != null) return signedIn;
       }
     }
@@ -95,7 +95,8 @@ class SignInPage extends StatefulWidget {
   /// in a snack bar); null when the sheet can't open here, for the page in the
   /// app instead.
   static Future<bool?> _signInInBrowser(
-      BuildContext context, SiteContext site, FlappSignInInfo info, ({String app, String callbackScheme}) host) async {
+      BuildContext context, SiteContext site, FlappSignInInfo info, ({String app, String callbackScheme}) host,
+      {bool signUp = false}) async {
     final authenticate = debugAuthenticate ??
         (_hasSystemSheet
             ? (String url, String scheme) => FlutterWebAuth2.authenticate(
@@ -108,7 +109,7 @@ class SignInPage extends StatefulWidget {
     final messenger = ScaffoldMessenger.maybeOf(context);
     final l10n = flarumL10n(context);
     try {
-      final request = await _whileWorking(context, FlappSignInRequest.create(info, app: host.app));
+      final request = await _whileWorking(context, FlappSignInRequest.create(info, app: host.app, signUp: signUp));
       final String callback;
       try {
         callback = await authenticate(request.url.toString(), host.callbackScheme);

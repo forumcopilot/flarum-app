@@ -36,13 +36,13 @@ void main() {
     SignInPage.debugAuthenticate = null;
   });
 
-  Future<bool?> signIn(WidgetTester tester) async {
+  Future<bool?> signIn(WidgetTester tester, {bool signUp = false}) async {
     late BuildContext context;
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (c) {
       context = c;
       return const SizedBox();
     }))));
-    final result = await tester.runAsync(() => SignInPage.open(context, site));
+    final result = await tester.runAsync(() => SignInPage.open(context, site, signUp: signUp));
     await tester.pumpAndSettle();
     return result;
   }
@@ -60,10 +60,27 @@ void main() {
     expect(scheme, 'flapp');
     expect(url.path, '/flapp/authorize');
     expect(url.queryParameters['app'], 'flapp');
+    expect(url.queryParameters.containsKey('signUp'), isFalse);
     expect(forum.isSignedIn, isTrue);
     expect(forum.api.client.token, 'browser-token');
     // No spinner left over the app.
     expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
+
+  testWidgets("Sign Up asks the forum's page to open its Sign Up, and the new account comes back signed in",
+      (tester) async {
+    final opened = <Uri>[];
+    SignInPage.debugAuthenticate = (url, scheme) async {
+      opened.add(Uri.parse(url));
+      return flappSignInCallback(Uri.parse(url), token: 'new-account-token').toString();
+    };
+
+    expect(await signIn(tester, signUp: true), isTrue);
+
+    final [url] = opened;
+    expect(url.path, '/flapp/authorize');
+    expect(url.queryParameters['signUp'], '1');
+    expect(forum.api.client.token, 'new-account-token');
   });
 
   testWidgets('signs in when the screen that asked is gone, as the drawer is once its Log In is tapped',

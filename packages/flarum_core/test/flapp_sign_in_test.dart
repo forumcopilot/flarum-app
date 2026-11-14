@@ -35,6 +35,8 @@ void main() {
     expect(request.nonce, matches(RegExp(r'^[A-Za-z0-9_-]{16,64}$')));
 
     expect(request.url.queryParameters['publicKey'], startsWith('-----BEGIN PUBLIC KEY-----\n'));
+    // A sign-in asks for no sign-up.
+    expect(request.url.queryParameters.containsKey('signUp'), isFalse);
 
     final result = request.complete(flappSignInCallback(request.url, token: 'remember-token', cookiePrefix: 'flarum18'));
     expect(result, (token: 'remember-token', userId: '2', cookiePrefix: 'flarum18'));
@@ -47,6 +49,14 @@ void main() {
 
     // Cancel on the forum's page.
     expect(request.complete(Uri.parse('flapp://auth?error=cancelled')), isNull);
+  });
+
+  test("a sign-up asks the page to open the forum's Sign Up", () async {
+    final request = await FlappSignInRequest.create(info, app: 'flapp', signUp: true);
+
+    expect(request.url.queryParameters['signUp'], '1');
+    expect(request.url.queryParameters['app'], 'flapp');
+    expect(request.url.queryParameters['nonce'], request.nonce);
   });
 
   test("reads a sign-in as the extension's PHP encrypts it", () {

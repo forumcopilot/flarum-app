@@ -34,7 +34,10 @@ class FlappSignInRequest {
 
   /// A new request for [app], as the extension lists it (`flapp`). Making the key takes a second
   /// or so, so it is made away from the UI.
-  static Future<FlappSignInRequest> create(FlappSignInInfo info, {required String app}) async {
+  ///
+  /// [signUp] asks the page to open the forum's Sign Up straight away for a guest (`signUp=1`); an
+  /// extension older than that ignores it and shows Log In and Sign Up, as for a sign-in.
+  static Future<FlappSignInRequest> create(FlappSignInInfo info, {required String app, bool signUp = false}) async {
     final pair = await Isolate.run(_generateKeyPair);
     final nonce = _randomToken(24);
     final url = info.authorizeUrl.replace(queryParameters: {
@@ -42,6 +45,7 @@ class FlappSignInRequest {
       'app': app,
       'publicKey': _publicKeyToPem(pair.publicKey),
       'nonce': nonce,
+      if (signUp) 'signUp': '1',
     });
     return FlappSignInRequest._(url, nonce, pair.privateKey);
   }

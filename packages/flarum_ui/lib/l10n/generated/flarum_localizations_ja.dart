@@ -1815,4 +1815,151 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
 
   @override
   String get undo => '元に戻す';
+
+  @override
+  String get deleteAccount => 'アカウントを削除';
+
+  @override
+  String get deleteAccountHint => 'フォーラムにアカウントの消去を依頼します';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return '$forumのアカウントを削除';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forumはメンバーの依頼によりアカウントを消去します。流れは次のとおりです。';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forumから$emailにリンクがメールで届きます。';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forumからリンクがメールで届きます。';
+  }
+
+  @override
+  String get deleteAccountStepConfirm => 'リンクを開いて確認します。確認するまでは何も起こりません。';
+
+  @override
+  String get deleteAccountStepStaff =>
+      '30日以内にフォーラムがアカウントを消去します。それまではここで取り消せます。';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      '消去するとアカウントは匿名化されます。名前、メールアドレス、画像、プロフィールが削除され、誰もログインできなくなります。投稿は匿名の名前で残ります。';
+
+  @override
+  String get deleteAccountDeletes => '消去するとアカウントとすべての投稿が削除されます。';
+
+  @override
+  String get deleteAccountEither =>
+      '消去では、スタッフの判断により、アカウントとすべての投稿が削除されるか、アカウントが匿名化されます。匿名化では名前、メールアドレス、画像、プロフィールが削除され、投稿は匿名の名前で残ります。';
+
+  @override
+  String get deleteAccountPassword => 'パスワード';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return '本人確認のための$forumのパスワードです。Google など別のサービスで登録した場合は空欄のままにしてください。';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'パスワードを表示';
+
+  @override
+  String get deleteAccountHidePassword => 'パスワードを隠す';
+
+  @override
+  String get deleteAccountReason => '理由（任意）';
+
+  @override
+  String get deleteAccountReasonHelp => '依頼とあわせてフォーラムのスタッフに表示されます。';
+
+  @override
+  String get deleteAccountRequest => 'アカウントの削除を依頼';
+
+  @override
+  String get deleteAccountWrongPassword => 'パスワードが正しくありません。';
+
+  @override
+  String get deleteAccountCheckEmail => 'メールを確認してください';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return '$dateに$forumから$emailへリンクを送りました。リンクを開いて、アカウントの消去を確認してください。';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return '$dateに$forumからリンクをメールで送りました。リンクを開いて、アカウントの消去を確認してください。';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      '確認するまでは何も起こりません。確認から30日以内にフォーラムがアカウントを消去します。それまでは取り消せます。';
+
+  @override
+  String deleteAccountYourReason(String reason) {
+    return '理由：$reason';
+  }
+
+  @override
+  String get deleteAccountCancelRequest => '依頼を取り消す';
+
+  @override
+  String get deleteAccountNoEmail =>
+      '数分たってもメールが届かない場合は、迷惑メールフォルダを確認するか、新しいリンクを送ってください。';
+
+  @override
+  String get deleteAccountSendAgain => '新しいリンクを送る';
+
+  @override
+  String get deleteAccountConfirmedTitle => '削除を確認しました';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return '$confirmedに確認しました。フォーラムは遅くとも$dueまでにアカウントを消去し、完了したらメールでお知らせします。';
+  }
+
+  @override
+  String get deleteAccountUntilThen => 'それまではアカウントをこれまでどおり使え、取り消すこともできます。';
+
+  @override
+  String get deleteAccountCancelQuestion => '依頼を取り消しますか？';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'アカウントはそのまま残ります。取り消したことはフォーラムからメールで届きます。';
+
+  @override
+  String get deleteAccountKeepRequest => '依頼を続ける';
+
+  @override
+  String get deleteAccountRequestCancelled => '依頼を取り消しました。アカウントは残ります。';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forumはアカウントを消去しました。';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'フォーラムのスタッフに依頼してください';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forumでは、メンバーがアプリから自分のアカウントを削除することはできず、スタッフだけが削除できます。フォーラムを開き、プライベートメッセージなどで管理者にアカウントの削除を依頼してください。';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'ログアウトしてもアプリからアカウントが外れるだけで、スタッフが削除するまで$forumには残ります。';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'フォーラムを開く';
 }

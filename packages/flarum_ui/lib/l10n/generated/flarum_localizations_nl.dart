@@ -1901,4 +1901,156 @@ class FlarumLocalizationsNl extends FlarumLocalizations {
 
   @override
   String get undo => 'Ongedaan maken';
+
+  @override
+  String get deleteAccount => 'Account verwijderen';
+
+  @override
+  String get deleteAccountHint => 'Laat het forum je account wissen';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Je account op $forum verwijderen';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum wist accounts als leden daarom vragen. Zo gaat het:';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum mailt een link naar $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum mailt je een link.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Open de link om te bevestigen. Tot dan gebeurt er niets.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'Binnen 30 dagen wist het forum je account. Tot dan kun je hier annuleren.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'Wissen maakt het account anoniem: je naam, e-mailadres, foto en profiel worden verwijderd en niemand kan er nog mee inloggen. Je berichten blijven staan, onder een anonieme naam.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'Wissen verwijdert het account en al je berichten.';
+
+  @override
+  String get deleteAccountEither =>
+      'Wissen verwijdert het account en al je berichten, of maakt het anoniem, zoals het team kiest: anoniem maken verwijdert je naam, e-mailadres, foto en profiel en laat je berichten staan onder een anonieme naam.';
+
+  @override
+  String get deleteAccountPassword => 'Wachtwoord';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Je wachtwoord op $forum, om te laten zien dat jij het bent. Laat het leeg als je je via een andere dienst, zoals Google, hebt aangemeld.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Wachtwoord tonen';
+
+  @override
+  String get deleteAccountHidePassword => 'Wachtwoord verbergen';
+
+  @override
+  String get deleteAccountReason => 'Reden (optioneel)';
+
+  @override
+  String get deleteAccountReasonHelp =>
+      'Het team van het forum ziet dit bij je verzoek.';
+
+  @override
+  String get deleteAccountRequest => 'Verwijdering aanvragen';
+
+  @override
+  String get deleteAccountWrongPassword => 'Onjuist wachtwoord.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Kijk in je e-mail';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return 'Op $date heeft $forum een link naar $email gestuurd. Open hem om te bevestigen dat je account gewist moet worden.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return 'Op $date heeft $forum je een link gemaild. Open hem om te bevestigen dat je account gewist moet worden.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'Tot dan gebeurt er niets. Binnen 30 dagen na de bevestiging wist het forum je account, en tot dan kun je annuleren.';
+
+  @override
+  String deleteAccountYourReason(String reason) {
+    return 'Je reden: $reason';
+  }
+
+  @override
+  String get deleteAccountCancelRequest => 'Verzoek annuleren';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'Na een paar minuten nog geen e-mail? Kijk in je spammap of stuur een nieuwe link.';
+
+  @override
+  String get deleteAccountSendAgain => 'Nieuwe link sturen';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Verwijdering bevestigd';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'Je hebt op $confirmed bevestigd. Het forum wist je account uiterlijk op $due en mailt je als het klaar is.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'Tot dan werkt je account zoals altijd, en kun je nog annuleren.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Je verzoek annuleren?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Je account blijft zoals het is. Het forum mailt je dat het verzoek is geannuleerd.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Verzoek houden';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Verzoek geannuleerd. Je account blijft.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum heeft je account gewist.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Vraag het het team van het forum';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum laat leden hun account niet zelf vanuit een app verwijderen: alleen het team kan dat. Open het forum en vraag een beheerder, bijvoorbeeld in een privébericht, je account te verwijderen.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'Uitloggen haalt het account alleen uit deze app: op $forum blijft het bestaan tot het team het verwijdert.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Forum openen';
 }

@@ -197,6 +197,16 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the
   reader's lists). fof/follow-tags puts `lurk`, `follow`, `ignore` or `hide` on each tag; 1.x sets it
   with `POST /api/tags/{id}/subscription {"data":{"subscription":…}}`, 2.0 by PATCHing the attribute.
+- Deleting an account: Flarum has no self-deletion. flarum/gdpr (fof/gdpr before; `erasureAnonymizationAllowed`,
+  `erasureDeletionAllowed`) takes requests: `POST /api/user-erasure-requests` with `data.attributes.reason` and
+  `meta.password` (422 on `password`; not checked for fof/oauth sign-ups) answers 201 `awaiting_user_confirmation` and
+  emails a link (`/gdpr/erasure/confirm/{token}`, email only) that makes it `user_confirmed`. Then a `processErasure`
+  holder (admins alone by default) anonymizes or deletes, or the daily `gdpr:process-erase-requests` does it 30 days after
+  the confirmation, if the forum runs Flarum's scheduler. Asking again reuses the one row (firstOrNew, both versions).
+  Cancel: 1.x `DELETE /api/user-erasure-requests/{id}`, 2.0 `POST …/{id}/cancel` (204). `GET /api` never carries
+  `actor.erasureRequest`, whatever the extender says: read `GET /api/users/{id}?include=erasureRequest` (1.x leaves the
+  relationship out when there's none). The app's Delete Account (`DeleteAccountPage`) uses it; on other forums it
+  sends the reader to the staff. The erasure fixtures other than `erasure_none` are written from the source (their `note`).
 - Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
   never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing
   with the token sent as the `<prefix>_remember` cookie marks it current; then

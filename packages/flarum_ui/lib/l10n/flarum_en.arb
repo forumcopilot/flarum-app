@@ -2592,5 +2592,236 @@
   "undo": "Undo",
   "@undo": {
     "description": "Puts back a change just saved (a snackbar's action)"
+  },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "Account and Privacy's row, and the title of its page: have the forum erase the reader's account"
+  },
+  "deleteAccountHint": "Have the forum erase your account",
+  "@deleteAccountHint": {
+    "description": "Under Delete Account on Account and Privacy"
+  },
+  "deleteAccountTitle": "Delete your account on {forum}",
+  "@deleteAccountTitle": {
+    "description": "Heading of Delete Account's request form",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountIntro": "{forum} erases accounts when their members ask. This is what happens:",
+  "@deleteAccountIntro": {
+    "description": "Above the numbered steps of an erasure request (flarum/gdpr)",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountStepEmail": "{forum} emails a link to {email}.",
+  "@deleteAccountStepEmail": {
+    "description": "Step 1 of an erasure request: the forum emails a confirmation link to the reader's address",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      },
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountStepEmailNoAddress": "{forum} emails you a link.",
+  "@deleteAccountStepEmailNoAddress": {
+    "description": "Step 1 when the reader's email address isn't known",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountStepConfirm": "Open the link to confirm. Nothing happens until you do.",
+  "@deleteAccountStepConfirm": {
+    "description": "Step 2 of an erasure request"
+  },
+  "deleteAccountStepStaff": "Within 30 days, the forum erases your account. Until then you can cancel here.",
+  "@deleteAccountStepStaff": {
+    "description": "Step 3 of an erasure request: flarum/gdpr's 30 days, carried out by the forum's staff or its scheduled task"
+  },
+  "deleteAccountAnonymizes": "Erasing anonymizes the account: your name, email address, picture and profile are removed, and no one can log in to it again. Your posts stay, under an anonymous name.",
+  "@deleteAccountAnonymizes": {
+    "description": "What erasing does where the forum anonymizes (flarum/gdpr's default): the user's details go, the posts stay"
+  },
+  "deleteAccountDeletes": "Erasing deletes the account and all your posts.",
+  "@deleteAccountDeletes": {
+    "description": "What erasing does where the forum deletes accounts (flarum/gdpr with deletion only)"
+  },
+  "deleteAccountEither": "Erasing deletes the account and all your posts, or anonymizes it, as the staff choose: anonymizing removes your name, email address, picture and profile, and keeps your posts under an anonymous name.",
+  "@deleteAccountEither": {
+    "description": "What erasing does where the forum may delete or anonymize, as its staff choose"
+  },
+  "deleteAccountPassword": "Password",
+  "@deleteAccountPassword": {
+    "description": "The request form's password field"
+  },
+  "deleteAccountPasswordHelp": "Your password on {forum}, to show it's you. Leave it empty if you signed up through another service, such as Google.",
+  "@deleteAccountPasswordHelp": {
+    "description": "Under the password field: flarum/gdpr checks it, except for members who signed up through fof/oauth",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountShowPassword": "Show password",
+  "@deleteAccountShowPassword": {
+    "description": "Tooltip of the password field's eye button"
+  },
+  "deleteAccountHidePassword": "Hide password",
+  "@deleteAccountHidePassword": {
+    "description": "Tooltip of the password field's eye button while the password shows"
+  },
+  "deleteAccountReason": "Reason (optional)",
+  "@deleteAccountReason": {
+    "description": "The request form's optional reason"
+  },
+  "deleteAccountReasonHelp": "The forum's staff see it with your request.",
+  "@deleteAccountReasonHelp": {
+    "description": "Under the reason field"
+  },
+  "deleteAccountRequest": "Request Account Deletion",
+  "@deleteAccountRequest": {
+    "description": "The request form's button: asks the forum to erase the account (flarum/gdpr)"
+  },
+  "deleteAccountWrongPassword": "Incorrect password.",
+  "@deleteAccountWrongPassword": {
+    "description": "Under the password field when the forum refuses it"
+  },
+  "deleteAccountCheckEmail": "Check your email",
+  "@deleteAccountCheckEmail": {
+    "description": "Heading once the request is made: the forum has emailed its confirmation link"
+  },
+  "deleteAccountEmailSent": "On {date}, {forum} sent a link to {email}. Open it to confirm that you want your account erased.",
+  "@deleteAccountEmailSent": {
+    "description": "Under Check your email: when and where the link went",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      },
+      "email": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountEmailSentNoAddress": "On {date}, {forum} emailed you a link. Open it to confirm that you want your account erased.",
+  "@deleteAccountEmailSentNoAddress": {
+    "description": "Under Check your email when the reader's address isn't known",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountAfterConfirming": "Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.",
+  "@deleteAccountAfterConfirming": {
+    "description": "Under Check your email: what happens next"
+  },
+  "deleteAccountYourReason": "Your reason: {reason}",
+  "@deleteAccountYourReason": {
+    "description": "The reason the reader gave with their request",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountCancelRequest": "Cancel Request",
+  "@deleteAccountCancelRequest": {
+    "description": "Button: take back the erasure request (also in its confirmation dialog)"
+  },
+  "deleteAccountNoEmail": "No email after a few minutes? Check your spam folder, or send a new link.",
+  "@deleteAccountNoEmail": {
+    "description": "Under Check your email, above Send a New Link"
+  },
+  "deleteAccountSendAgain": "Send a New Link",
+  "@deleteAccountSendAgain": {
+    "description": "Button: make the request again, which emails a new link (the password is asked again)"
+  },
+  "deleteAccountConfirmedTitle": "Deletion confirmed",
+  "@deleteAccountConfirmedTitle": {
+    "description": "Heading once the reader has confirmed the request from its email"
+  },
+  "deleteAccountConfirmedBody": "You confirmed on {confirmed}. The forum erases your account by {due} at the latest, and emails you when it's done.",
+  "@deleteAccountConfirmedBody": {
+    "description": "Under Deletion confirmed: when the reader confirmed, and the date 30 days later by which the forum erases the account",
+    "placeholders": {
+      "confirmed": {
+        "type": "String"
+      },
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountUntilThen": "Until then your account works as before, and you can still cancel.",
+  "@deleteAccountUntilThen": {
+    "description": "Under Deletion confirmed, above Cancel Request"
+  },
+  "deleteAccountCancelQuestion": "Cancel your request?",
+  "@deleteAccountCancelQuestion": {
+    "description": "Title of the dialog before cancelling the erasure request"
+  },
+  "deleteAccountCancelQuestionBody": "Your account stays as it is. The forum emails you that the request is cancelled.",
+  "@deleteAccountCancelQuestionBody": {
+    "description": "Body of the dialog before cancelling the erasure request"
+  },
+  "deleteAccountKeepRequest": "Keep Request",
+  "@deleteAccountKeepRequest": {
+    "description": "The cancel dialog's button that keeps the request"
+  },
+  "deleteAccountRequestCancelled": "Request cancelled. Your account stays.",
+  "@deleteAccountRequestCancelled": {
+    "description": "Snackbar once the erasure request is cancelled"
+  },
+  "deleteAccountDone": "{forum} has erased your account.",
+  "@deleteAccountDone": {
+    "description": "Heading when the request has been carried out",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountByStaffTitle": "Ask the forum's staff",
+  "@deleteAccountByStaffTitle": {
+    "description": "Heading of Delete Account on a forum where only the staff can delete accounts (no flarum/gdpr)"
+  },
+  "deleteAccountByStaff": "{forum} doesn't let members delete their own accounts from an app: only its staff can. Open the forum and ask an administrator, for example in a private message, to delete your account.",
+  "@deleteAccountByStaff": {
+    "description": "Under Ask the forum's staff: Flarum has no self-deletion, and this forum runs nothing that adds it",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountLogOutNote": "Logging out removes the account from this app only: it stays on {forum} until its staff delete it.",
+  "@deleteAccountLogOutNote": {
+    "description": "Under the staff explanation: Log Out isn't deletion",
+    "placeholders": {
+      "forum": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountContactStaff": "Open the Forum",
+  "@deleteAccountContactStaff": {
+    "description": "Button on a forum where only the staff can delete accounts: opens the forum, logged in"
   }
 }

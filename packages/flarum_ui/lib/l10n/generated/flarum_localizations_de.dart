@@ -1916,4 +1916,156 @@ class FlarumLocalizationsDe extends FlarumLocalizations {
 
   @override
   String get undo => 'Rückgängig';
+
+  @override
+  String get deleteAccount => 'Konto löschen';
+
+  @override
+  String get deleteAccountHint => 'Lass dein Konto vom Forum löschen';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Dein Konto bei $forum löschen';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum löscht Konten auf Wunsch seiner Mitglieder. So läuft es ab:';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum schickt einen Link an $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum schickt dir einen Link per E-Mail.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Öffne den Link, um zu bestätigen. Bis dahin passiert nichts.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'Innerhalb von 30 Tagen löscht das Forum dein Konto. Bis dahin kannst du hier abbrechen.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'Beim Löschen wird das Konto anonymisiert: Name, E-Mail-Adresse, Bild und Profil werden entfernt, und niemand kann sich mehr damit anmelden. Deine Beiträge bleiben, unter einem anonymen Namen.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'Beim Löschen werden das Konto und alle deine Beiträge gelöscht.';
+
+  @override
+  String get deleteAccountEither =>
+      'Beim Löschen werden das Konto und alle deine Beiträge gelöscht oder das Konto anonymisiert, wie das Team entscheidet: Anonymisieren entfernt Name, E-Mail-Adresse, Bild und Profil und behält deine Beiträge unter einem anonymen Namen.';
+
+  @override
+  String get deleteAccountPassword => 'Passwort';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Dein Passwort bei $forum, um zu zeigen, dass du es bist. Lass es leer, wenn du dich über einen anderen Dienst wie Google registriert hast.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Passwort anzeigen';
+
+  @override
+  String get deleteAccountHidePassword => 'Passwort verbergen';
+
+  @override
+  String get deleteAccountReason => 'Grund (optional)';
+
+  @override
+  String get deleteAccountReasonHelp =>
+      'Das Team des Forums sieht ihn mit deiner Anfrage.';
+
+  @override
+  String get deleteAccountRequest => 'Kontolöschung anfordern';
+
+  @override
+  String get deleteAccountWrongPassword => 'Falsches Passwort.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Sieh in deine E-Mails';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return 'Am $date hat $forum einen Link an $email geschickt. Öffne ihn, um zu bestätigen, dass dein Konto gelöscht werden soll.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return 'Am $date hat dir $forum einen Link per E-Mail geschickt. Öffne ihn, um zu bestätigen, dass dein Konto gelöscht werden soll.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'Bis dahin passiert nichts. Innerhalb von 30 Tagen nach der Bestätigung löscht das Forum dein Konto, und bis dahin kannst du abbrechen.';
+
+  @override
+  String deleteAccountYourReason(String reason) {
+    return 'Dein Grund: $reason';
+  }
+
+  @override
+  String get deleteAccountCancelRequest => 'Anfrage zurückziehen';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'Nach ein paar Minuten noch keine E-Mail? Sieh im Spam-Ordner nach oder lass einen neuen Link schicken.';
+
+  @override
+  String get deleteAccountSendAgain => 'Neuen Link schicken';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Löschung bestätigt';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'Du hast am $confirmed bestätigt. Das Forum löscht dein Konto spätestens am $due und schickt dir eine E-Mail, wenn es erledigt ist.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'Bis dahin funktioniert dein Konto wie bisher, und du kannst noch abbrechen.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Anfrage zurückziehen?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Dein Konto bleibt, wie es ist. Das Forum bestätigt dir per E-Mail, dass die Anfrage zurückgezogen ist.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Anfrage behalten';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Anfrage zurückgezogen. Dein Konto bleibt.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum hat dein Konto gelöscht.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Frag das Team des Forums';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum erlaubt Mitgliedern nicht, ihr Konto selbst aus einer App zu löschen: Das kann nur das Team. Öffne das Forum und bitte einen Administrator, zum Beispiel per privater Nachricht, dein Konto zu löschen.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'Abmelden entfernt das Konto nur aus dieser App: Bei $forum bleibt es, bis das Team es löscht.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Forum öffnen';
 }

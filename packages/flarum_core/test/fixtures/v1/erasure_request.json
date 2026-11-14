@@ -1,0 +1,35 @@
+{
+  "note": "Written from flarum/gdpr's source (1.8.2: Api/Serializer/RequestErasureSerializer, the erasure controllers), not recorded: the real requests need a member's password and email. The reader's own user with no request (erasure_none) is the forum's real answer, read as alice on 2026-11-14.",
+  "request": {
+    "method": "POST",
+    "path": "/user-erasure-requests",
+    "query": {},
+    "signedIn": true,
+    "rememberCookie": false,
+    "body": {
+      "data": {
+        "type": "user-erasure-requests",
+        "attributes": {
+          "reason": "Leaving the forum."
+        }
+      }
+    }
+  },
+  "status": 201,
+  "body": {
+    "data": {
+      "type": "user-erasure-requests",
+      "id": "4",
+      "attributes": {
+        "id": 4,
+        "status": "awaiting_user_confirmation",
+        "reason": "Leaving the forum.",
+        "createdAt": "2026-11-14T03:40:00+00:00",
+        "userConfirmedAt": null,
+        "processedAt": null,
+        "processedMode": null,
+        "processorComment": null
+      }
+    }
+  }
+}

@@ -212,6 +212,18 @@ class FlarumForumInfo {
   /// `canStartPrivateDiscussion`…), for detecting what a forum supports.
   final Map<String, dynamic> attributes;
 
+  /// Whether flarum/gdpr may anonymize an account it erases (`erasureAnonymizationAllowed`, on by
+  /// default): the name, email address, picture and profile go, the posts stay under an anonymous
+  /// name. False without the extension.
+  bool get erasureAnonymizes => attributes.boolean('erasureAnonymizationAllowed') ?? false;
+
+  /// Whether flarum/gdpr may delete an account it erases, and its posts with it
+  /// (`erasureDeletionAllowed`, off by default). False without the extension.
+  bool get erasureDeletes => attributes.boolean('erasureDeletionAllowed') ?? false;
+
+  /// Members sign up without a password, so the erasure request asks for none (the web's check).
+  bool get passwordlessSignUp => attributes.boolean('passwordlessSignUp') ?? false;
+
   /// The reader's `can*` permission flags, e.g. `canStartDiscussion`.
   bool can(String permission) => attributes.boolean(permission) ?? false;
 }

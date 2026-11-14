@@ -1843,4 +1843,142 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
 
   @override
   String get confirmationEmailSent => '보냈습니다. 받은편지함을 확인하세요.';
+
+  @override
+  String get deleteAccount => '계정 삭제';
+
+  @override
+  String get deleteAccountHint => '포럼에 계정 삭제를 요청합니다';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return '$forum 계정 삭제';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum은(는) 회원이 요청하면 계정을 삭제합니다. 진행 순서는 다음과 같습니다.';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum이(가) $email(으)로 링크를 보냅니다.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum이(가) 이메일로 링크를 보냅니다.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      '링크를 열어 확인합니다. 확인하기 전에는 아무 일도 일어나지 않습니다.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      '30일 이내에 포럼이 계정을 삭제합니다. 그 전까지는 여기에서 취소할 수 있습니다.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      '삭제하면 계정이 익명 처리됩니다. 이름, 이메일 주소, 사진, 프로필이 삭제되고 누구도 다시 로그인할 수 없습니다. 게시물은 익명 이름으로 남습니다.';
+
+  @override
+  String get deleteAccountDeletes => '삭제하면 계정과 모든 게시물이 삭제됩니다.';
+
+  @override
+  String get deleteAccountEither =>
+      '삭제 시 운영진의 판단에 따라 계정과 모든 게시물이 삭제되거나 계정이 익명 처리됩니다. 익명 처리하면 이름, 이메일 주소, 사진, 프로필이 삭제되고 게시물은 익명 이름으로 남습니다.';
+
+  @override
+  String get deleteAccountPassword => '비밀번호';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return '본인 확인을 위한 $forum 비밀번호입니다. Google 등 다른 서비스로 가입했다면 비워 두세요.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => '비밀번호 표시';
+
+  @override
+  String get deleteAccountHidePassword => '비밀번호 숨기기';
+
+  @override
+  String get deleteAccountRequest => '계정 삭제 요청';
+
+  @override
+  String get deleteAccountWrongPassword => '비밀번호가 올바르지 않습니다.';
+
+  @override
+  String get deleteAccountCheckEmail => '이메일을 확인하세요';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return '$date에 $forum이(가) $email(으)로 링크를 보냈습니다. 링크를 열어 계정 삭제를 확인하세요.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return '$date에 $forum이(가) 이메일로 링크를 보냈습니다. 링크를 열어 계정 삭제를 확인하세요.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      '확인하기 전에는 아무 일도 일어나지 않습니다. 확인 후 30일 이내에 포럼이 계정을 삭제하며, 그 전까지는 취소할 수 있습니다.';
+
+  @override
+  String get deleteAccountCancelRequest => '요청 취소';
+
+  @override
+  String get deleteAccountNoEmail =>
+      '몇 분이 지나도 이메일이 오지 않나요? 스팸함을 확인하거나 새 링크를 보내세요.';
+
+  @override
+  String get deleteAccountSendAgain => '새 링크 보내기';
+
+  @override
+  String get deleteAccountConfirmedTitle => '삭제 확인됨';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return '$confirmed에 확인했습니다. 포럼은 늦어도 $due까지 계정을 삭제하고, 완료되면 이메일로 알려 드립니다.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      '그 전까지는 계정을 이전처럼 사용할 수 있으며, 아직 취소할 수 있습니다.';
+
+  @override
+  String get deleteAccountCancelQuestion => '요청을 취소할까요?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      '계정은 그대로 유지됩니다. 요청이 취소되었다는 이메일이 포럼에서 발송됩니다.';
+
+  @override
+  String get deleteAccountKeepRequest => '요청 유지';
+
+  @override
+  String get deleteAccountRequestCancelled => '요청을 취소했습니다. 계정이 유지됩니다.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum에서 계정을 삭제했습니다.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => '포럼 운영진에게 요청하세요';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum에서는 회원이 앱에서 직접 계정을 삭제할 수 없으며, 운영진만 삭제할 수 있습니다. 포럼을 열고 개인 메시지 등으로 관리자에게 계정 삭제를 요청하세요.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return '로그아웃하면 이 앱에서만 계정이 제거되며, 운영진이 삭제할 때까지 $forum에는 남아 있습니다.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => '포럼 열기';
 }

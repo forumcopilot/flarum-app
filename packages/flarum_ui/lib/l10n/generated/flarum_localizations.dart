@@ -2968,6 +2968,222 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Sent. Check your inbox.'**
   String get confirmationEmailSent;
+
+  /// Account and Privacy's row, and the title of its page: have the forum erase the reader's account
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// Under Delete Account on Account and Privacy
+  ///
+  /// In en, this message translates to:
+  /// **'Have the forum erase your account'**
+  String get deleteAccountHint;
+
+  /// Heading of Delete Account's request form
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account on {forum}'**
+  String deleteAccountTitle(String forum);
+
+  /// Above the numbered steps of an erasure request (flarum/gdpr)
+  ///
+  /// In en, this message translates to:
+  /// **'{forum} erases accounts when their members ask. This is what happens:'**
+  String deleteAccountIntro(String forum);
+
+  /// Step 1 of an erasure request: the forum emails a confirmation link to the reader's address
+  ///
+  /// In en, this message translates to:
+  /// **'{forum} emails a link to {email}.'**
+  String deleteAccountStepEmail(String forum, String email);
+
+  /// Step 1 when the reader's email address isn't known
+  ///
+  /// In en, this message translates to:
+  /// **'{forum} emails you a link.'**
+  String deleteAccountStepEmailNoAddress(String forum);
+
+  /// Step 2 of an erasure request
+  ///
+  /// In en, this message translates to:
+  /// **'Open the link to confirm. Nothing happens until you do.'**
+  String get deleteAccountStepConfirm;
+
+  /// Step 3 of an erasure request: flarum/gdpr's 30 days, carried out by the forum's staff or its scheduled task
+  ///
+  /// In en, this message translates to:
+  /// **'Within 30 days, the forum erases your account. Until then you can cancel here.'**
+  String get deleteAccountStepStaff;
+
+  /// What erasing does where the forum anonymizes (flarum/gdpr's default): the user's details go, the posts stay
+  ///
+  /// In en, this message translates to:
+  /// **'Erasing anonymizes the account: your name, email address, picture and profile are removed, and no one can log in to it again. Your posts stay, under an anonymous name.'**
+  String get deleteAccountAnonymizes;
+
+  /// What erasing does where the forum deletes accounts (flarum/gdpr with deletion only)
+  ///
+  /// In en, this message translates to:
+  /// **'Erasing deletes the account and all your posts.'**
+  String get deleteAccountDeletes;
+
+  /// What erasing does where the forum may delete or anonymize, as its staff choose
+  ///
+  /// In en, this message translates to:
+  /// **'Erasing deletes the account and all your posts, or anonymizes it, as the staff choose: anonymizing removes your name, email address, picture and profile, and keeps your posts under an anonymous name.'**
+  String get deleteAccountEither;
+
+  /// The request form's password field
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get deleteAccountPassword;
+
+  /// Under the password field: flarum/gdpr checks it, except for members who signed up through fof/oauth
+  ///
+  /// In en, this message translates to:
+  /// **'Your password on {forum}, to show it\'s you. Leave it empty if you signed up through another service, such as Google.'**
+  String deleteAccountPasswordHelp(String forum);
+
+  /// Tooltip of the password field's eye button
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get deleteAccountShowPassword;
+
+  /// Tooltip of the password field's eye button while the password shows
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get deleteAccountHidePassword;
+
+  /// The request form's button: asks the forum to erase the account (flarum/gdpr)
+  ///
+  /// In en, this message translates to:
+  /// **'Request Account Deletion'**
+  String get deleteAccountRequest;
+
+  /// Under the password field when the forum refuses it
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password.'**
+  String get deleteAccountWrongPassword;
+
+  /// Heading once the request is made: the forum has emailed its confirmation link
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email'**
+  String get deleteAccountCheckEmail;
+
+  /// Under Check your email: when and where the link went
+  ///
+  /// In en, this message translates to:
+  /// **'On {date}, {forum} sent a link to {email}. Open it to confirm that you want your account erased.'**
+  String deleteAccountEmailSent(String forum, String email, String date);
+
+  /// Under Check your email when the reader's address isn't known
+  ///
+  /// In en, this message translates to:
+  /// **'On {date}, {forum} emailed you a link. Open it to confirm that you want your account erased.'**
+  String deleteAccountEmailSentNoAddress(String forum, String date);
+
+  /// Under Check your email: what happens next
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.'**
+  String get deleteAccountAfterConfirming;
+
+  /// Button: take back the erasure request (also in its confirmation dialog)
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Request'**
+  String get deleteAccountCancelRequest;
+
+  /// Under Check your email, above Send a New Link
+  ///
+  /// In en, this message translates to:
+  /// **'No email after a few minutes? Check your spam folder, or send a new link.'**
+  String get deleteAccountNoEmail;
+
+  /// Button: make the request again, which emails a new link (the password is asked again)
+  ///
+  /// In en, this message translates to:
+  /// **'Send a New Link'**
+  String get deleteAccountSendAgain;
+
+  /// Heading once the reader has confirmed the request from its email
+  ///
+  /// In en, this message translates to:
+  /// **'Deletion confirmed'**
+  String get deleteAccountConfirmedTitle;
+
+  /// Under Deletion confirmed: when the reader confirmed, and the date 30 days later by which the forum erases the account
+  ///
+  /// In en, this message translates to:
+  /// **'You confirmed on {confirmed}. The forum erases your account by {due} at the latest, and emails you when it\'s done.'**
+  String deleteAccountConfirmedBody(String confirmed, String due);
+
+  /// Under Deletion confirmed, above Cancel Request
+  ///
+  /// In en, this message translates to:
+  /// **'Until then your account works as before, and you can still cancel.'**
+  String get deleteAccountUntilThen;
+
+  /// Title of the dialog before cancelling the erasure request
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel your request?'**
+  String get deleteAccountCancelQuestion;
+
+  /// Body of the dialog before cancelling the erasure request
+  ///
+  /// In en, this message translates to:
+  /// **'Your account stays as it is. The forum emails you that the request is cancelled.'**
+  String get deleteAccountCancelQuestionBody;
+
+  /// The cancel dialog's button that keeps the request
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Request'**
+  String get deleteAccountKeepRequest;
+
+  /// Snackbar once the erasure request is cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'Request cancelled. Your account stays.'**
+  String get deleteAccountRequestCancelled;
+
+  /// Heading when the request has been carried out
+  ///
+  /// In en, this message translates to:
+  /// **'{forum} has erased your account.'**
+  String deleteAccountDone(String forum);
+
+  /// Heading of Delete Account on a forum where only the staff can delete accounts (no flarum/gdpr)
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the forum\'s staff'**
+  String get deleteAccountByStaffTitle;
+
+  /// Under Ask the forum's staff: Flarum has no self-deletion, and this forum runs nothing that adds it
+  ///
+  /// In en, this message translates to:
+  /// **'{forum} doesn\'t let members delete their own accounts from an app: only its staff can. Open the forum and ask an administrator, for example in a private message, to delete your account.'**
+  String deleteAccountByStaff(String forum);
+
+  /// Under the staff explanation: Log Out isn't deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Logging out removes the account from this app only: it stays on {forum} until its staff delete it.'**
+  String deleteAccountLogOutNote(String forum);
+
+  /// Button on a forum where only the staff can delete accounts: opens the forum, logged in
+  ///
+  /// In en, this message translates to:
+  /// **'Open the Forum'**
+  String get deleteAccountContactStaff;
 }
 
 class _FlarumLocalizationsDelegate

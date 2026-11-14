@@ -17,9 +17,12 @@ import '../render/links.dart';
 
 /// Forgets the forum's login in the app's web view, after Log Out: a page opened in it later
 /// opens as a guest's.
-Future<void> forgetWebLogin(SiteContext site) async {
+Future<void> forgetWebLogin(SiteContext site) => forgetWebLoginAt(site.site.url);
+
+/// [forgetWebLogin] for the forum at [url]: after it has moved, its old address.
+Future<void> forgetWebLoginAt(String url) async {
   try {
-    await CookieManager.instance().deleteCookies(url: WebUri(site.site.url));
+    await CookieManager.instance().deleteCookies(url: WebUri(url));
   } catch (e) {
     debugPrint('forgetWebLogin: $e');
   }

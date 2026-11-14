@@ -12,6 +12,7 @@ import '../tags/tags_page.dart';
 import '../thread/thread_page.dart';
 import 'app_shell.dart';
 import 'appearance.dart';
+import 'flarum_host.dart';
 import 'forum_theme.dart';
 
 /// One forum, opened by an app that holds many (see [FlarumHost]): its tabs
@@ -46,17 +47,42 @@ class FlarumForumPage extends StatefulWidget {
   /// forum down, it returns all the same: the screens say so and retry. In an
   /// app with push ([FlarumPush]), it also registers the phone with a forum
   /// that runs the Flapp extension, once a run, without waiting for it.
+  ///
+  /// A forum that names another address as its own is the host's to follow
+  /// ([FlarumHost.forumMoved]): the returned context is then the forum at its
+  /// new address.
   static Future<SiteContext> connect(Site site) async {
-    final forum = FlarumForum.forUrl(site.pluginUrl);
+    var forum = FlarumForum.forUrl(site.pluginUrl);
     try {
       await forum.restoreSession();
       _restored.add(forum.baseUrl);
-      await FlarumForumTheme.update(site.pluginUrl, flarumPalette(await forum.current()));
+      var info = await forum.current();
+      if (await _moved(site, info) case final moved?) {
+        site = moved;
+        forum = FlarumForum.forUrl(site.pluginUrl);
+        await forum.restoreSession();
+        _restored.add(forum.baseUrl);
+        info = await forum.current();
+      }
+      await FlarumForumTheme.update(site.pluginUrl, flarumPalette(info));
       unawaited(FlarumPush.registerQuietly(forum));
     } catch (_) {
       // Offline or the forum is down.
     }
     return _contextFor(site);
+  }
+
+  /// The forum at its new address, when its `GET /api` names another and the host follows it.
+  static Future<Site?> _moved(Site site, FlarumForumInfo info) async {
+    final follow = FlarumHost.forumMoved;
+    if (follow == null || info.baseUrl.isEmpty || FlarumForum.sameAddress(info.baseUrl, site.pluginUrl)) return null;
+    try {
+      final moved = await follow(site, info);
+      return moved == null || FlarumForum.sameAddress(moved.pluginUrl, site.pluginUrl) ? null : moved;
+    } catch (e) {
+      debugPrint('FlarumForumPage: ${site.pluginUrl} names ${info.baseUrl}, not followed: $e');
+      return null;
+    }
   }
 
   /// Forums whose sign-in has been picked up this run.
@@ -83,7 +109,8 @@ class FlarumForumPage extends StatefulWidget {
 }
 
 class _FlarumForumPageState extends State<FlarumForumPage> {
-  late final String _url = widget.site.pluginUrl;
+  /// The forum's address: the site's, or its new one once [FlarumForumPage.connect] has followed it.
+  late String _url = widget.site.pluginUrl;
   SiteContext? _site;
 
   @override
@@ -106,6 +133,12 @@ class _FlarumForumPageState extends State<FlarumForumPage> {
   Future<void> _connect() async {
     final site = await FlarumForumPage.connect(widget.site);
     if (!mounted) return;
+    if (site.site.pluginUrl != _url) {
+      // Moved: the colours on the app are the forum's at its new address.
+      FlarumForumTheme.leave(_url);
+      _url = site.site.pluginUrl;
+      FlarumForumTheme.enter(_url);
+    }
     setState(() => _site = site);
     _opened(site);
   }

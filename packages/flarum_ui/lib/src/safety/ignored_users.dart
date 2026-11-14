@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../app/forum_prefs.dart';
+
 /// Whom the reader ignores on a forum: their posts are folded away. Where the forum runs
 /// fof/ignore-users it keeps the list, and each post's author says whether they're ignored;
 /// elsewhere the app keeps the list on the phone, so a reader can always put someone out of sight
@@ -28,7 +30,7 @@ class IgnoredUsers extends ChangeNotifier {
 
   FlarumForum get _forum => FlarumForum.forUrl(_url);
 
-  String get _key => 'flarum_ignored_users:$_url';
+  String get _key => ForumPrefs.ignoredUsers(_url);
 
   /// Changes made in the app, by user id: they outdate what the forum said with a post's author.
   final _changed = <String, bool>{};

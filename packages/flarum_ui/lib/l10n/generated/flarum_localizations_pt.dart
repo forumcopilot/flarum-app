@@ -1928,4 +1928,144 @@ class FlarumLocalizationsPt extends FlarumLocalizations {
 
   @override
   String get confirmationEmailSent => 'Enviado. Confira sua caixa de entrada.';
+
+  @override
+  String get deleteAccount => 'Excluir Conta';
+
+  @override
+  String get deleteAccountHint => 'Peça ao fórum para apagar sua conta';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Excluir sua conta em $forum';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum apaga contas quando seus membros pedem. Funciona assim:';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum envia um link para $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum envia um link para seu e-mail.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Abra o link para confirmar. Nada acontece até você fazer isso.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'Em até 30 dias, o fórum apaga sua conta. Até lá, você pode cancelar aqui.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'Apagar a conta a torna anônima: seu nome, e-mail, foto e perfil são removidos, e ninguém poderá entrar nela de novo. Suas publicações ficam, com um nome anônimo.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'Apagar a conta exclui a conta e todas as suas publicações.';
+
+  @override
+  String get deleteAccountEither =>
+      'Apagar a conta exclui a conta e todas as suas publicações, ou a torna anônima, como a equipe escolher: tornar anônima remove seu nome, e-mail, foto e perfil, e mantém suas publicações com um nome anônimo.';
+
+  @override
+  String get deleteAccountPassword => 'Senha';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Sua senha em $forum, para mostrar que é você. Deixe em branco se você se cadastrou por outro serviço, como o Google.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Mostrar senha';
+
+  @override
+  String get deleteAccountHidePassword => 'Ocultar senha';
+
+  @override
+  String get deleteAccountRequest => 'Solicitar Exclusão da Conta';
+
+  @override
+  String get deleteAccountWrongPassword => 'Senha incorreta.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Confira seu e-mail';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return 'Em $date, $forum enviou um link para $email. Abra-o para confirmar que você quer apagar sua conta.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return 'Em $date, $forum enviou um link para seu e-mail. Abra-o para confirmar que você quer apagar sua conta.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'Nada acontece até lá. Em até 30 dias após a confirmação, o fórum apaga sua conta, e você pode cancelar até então.';
+
+  @override
+  String get deleteAccountCancelRequest => 'Cancelar Pedido';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'Não recebeu o e-mail depois de alguns minutos? Confira a pasta de spam ou envie um novo link.';
+
+  @override
+  String get deleteAccountSendAgain => 'Enviar Novo Link';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Exclusão confirmada';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'Você confirmou em $confirmed. O fórum apaga sua conta até $due, no máximo, e avisa por e-mail quando terminar.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'Até lá, sua conta funciona como antes, e você ainda pode cancelar.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Cancelar seu pedido?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Sua conta continua como está. O fórum avisa por e-mail que o pedido foi cancelado.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Manter Pedido';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Pedido cancelado. Sua conta continua.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum apagou sua conta.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Peça à equipe do fórum';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum não permite que os membros excluam a própria conta por um app: só a equipe pode. Abra o fórum e peça a um administrador, por exemplo em uma mensagem privada, que exclua sua conta.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'Sair remove a conta apenas deste app: ela continua em $forum até a equipe excluí-la.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Abrir o Fórum';
 }

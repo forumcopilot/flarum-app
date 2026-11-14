@@ -93,6 +93,15 @@ abstract final class FlarumForumTheme {
     }
   }
 
+  /// Keeps the colours remembered for the forum at [from] under [to], its new address
+  /// ([FlarumHost.moveForum]); colours [to] already has are kept.
+  static Future<void> move(String from, String to) async {
+    final palette = _palettes[_key(from)];
+    if (palette == null || _key(from) == _key(to)) return;
+    if (paletteFor(to) == null) await update(to, palette);
+    await update(from, null);
+  }
+
   // enter/leave run from a page's initState/dispose, mid-build, where the
   // host's theme builder (an ancestor) must not be marked dirty. A microtask
   // runs after the build that queued it, so the app-wide change waits for one;

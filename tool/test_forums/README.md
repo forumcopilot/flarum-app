@@ -2,10 +2,10 @@
 
 flarum_core's fixtures and live tests come from two forums on the dev server, one per Flarum major
 version, seeded with the same content by `seed.php`. The tools reach them on the server's local
-ports, 127.0.0.1:8081 (1.8) and 8082 (2.0). Phones reach them at https://flarum18.betterdiscourse.app
-and https://flarum20.betterdiscourse.app (behind Cloudflare, which challenges cloud networks such as
-the server's own; see docs/device-testing.md). Each forum's `url` is its public address, so the
-links in API responses and fixtures use it.
+ports, 127.0.0.1:8081 (1.8) and 8082 (2.0). Phones reach them at https://flarumapp.com/flarum18
+and https://flarumapp.com/flarum (since 14 Nov 2026; see docs/device-testing.md). Each forum's `url`
+is its public address, so the links in API responses and fixtures use it: fixtures recorded before
+then carry the old flarum18/flarum20.betterdiscourse.app addresses, which now redirect.
 
 | | Flarum 1 | Flarum 2 |
 |---|---|---|

@@ -7,8 +7,10 @@ import 'package:forumcopilot_sdk/forumcopilot_sdk.dart';
 
 import '../../config/app_forum_config.dart';
 import '../../l10n/flarum_l10n.dart';
-import 'forum_theme.dart';
+import '../account/forum_web_page.dart';
 import '../render/flarum_content.dart';
+import 'forum_prefs.dart';
+import 'forum_theme.dart';
 
 /// What an app that holds many forums (Flapp) needs to host flarum_ui's
 /// screens, as ABDA hosts discourse_ui's. The single-forum [FlarumApp] uses
@@ -66,4 +68,25 @@ abstract final class FlarumHost {
   /// scheme the page returns to (Flapp: `flapp`, returning to `flapp://auth`). Null, as in
   /// flarum-app's own builds, signs in on the forum's page inside the app everywhere.
   static ({String app, String callbackScheme})? browserSignIn;
+
+  /// A forum whose `GET /api` names another address than the one it was opened at: its `baseUrl`
+  /// in [info], read as [FlarumForumPage] connects, before the forum is shown. A host that keeps
+  /// forums by address checks that the new address answers as the same forum, moves what it keeps
+  /// for it (and [moveForum] what flarum_ui keeps), and answers the forum's [site] at the new
+  /// address, which the page then opens: after a move, requests other than GET don't follow the
+  /// old address's redirect (a reply, signing in or out), so the forum works only at the new one.
+  /// Null, or no handler (flarum-app's single forum, chosen at build time), stays where it was.
+  static Future<Site?> Function(Site site, FlarumForumInfo info)? forumMoved;
+
+  /// Carries what flarum_ui and flarum_core keep for the forum at [from] to [to], its new address:
+  /// the reader's sign-in and the phone's push registration ([FlarumForum.move]), its colours
+  /// ([FlarumForumTheme.move]), the welcome message hidden, recent searches and the people ignored.
+  /// What [to] already has is kept. The web view's cookies for [from] are cleared: pages opened
+  /// in it set the reader's login for the address they open ([ForumWebPage]).
+  static Future<void> moveForum(String from, String to) async {
+    await FlarumForum.move(from, to);
+    await FlarumForumTheme.move(from, to);
+    await ForumPrefs.move(from, to);
+    await forgetWebLoginAt(from);
+  }
 }

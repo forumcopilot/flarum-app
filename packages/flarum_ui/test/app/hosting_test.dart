@@ -280,4 +280,96 @@ void main() {
     expect(find.textContaining('Tap ☰ to open this again'), findsNothing, reason: 'the introduction is said once');
     await _close(tester);
   });
+
+  group('a forum that moved', () {
+    const old = 'https://old.test';
+    const moved = 'https://new.test/forum';
+
+    // The push registrations (none here) are in the Keychain otherwise.
+    setUp(() => FlarumPush.store = FlappRegistrationStore.memory());
+    tearDown(() => FlarumHost.forumMoved = null);
+
+    testWidgets('opens at its new address when the host follows it, signed in and in its colours', (tester) async {
+      final fixtures = FixtureForum(FlarumVersion.v2, root: _fixtures)
+        ..forum(url: old, signedIn: false)
+        ..forum(url: moved, signedIn: false);
+      await FlarumTokenStore.instance.write(old, (token: 'fixture-token', cookiePrefix: 'flarum'));
+      await FlarumForumTheme.update(old, _palette('#48BF83'));
+      final named = <String>[];
+      FlarumHost.forumMoved = (site, info) async {
+        named.add(info.baseUrl);
+        await FlarumHost.moveForum(site.pluginUrl, moved);
+        return site.copyWith(url: moved, baseUrl: moved);
+      };
+      await tester.pumpWidget(_Host({
+        'Old': () => FlarumForumPage(site: FlarumHost.site(name: 'Forum', url: old)),
+      }));
+
+      await tester.tap(find.text('Old'));
+      await _arrive(tester, find.byType(DiscussionTile));
+
+      // The fixtures were recorded at the test forum's address, which isn't old.test.
+      expect(named, ['https://flarum20.betterdiscourse.app']);
+      final lists = fixtures.requests.where((r) => r.path == '/discussions');
+      expect(lists, isNotEmpty);
+      expect(lists.every((r) => r.baseUrl == '$moved/api'), isTrue, reason: 'the forum is read at its new address');
+      expect(lists.every((r) => r.headers['Authorization'] == 'Token fixture-token'), isTrue,
+          reason: 'the sign-in went along');
+      expect(await FlarumTokenStore.instance.read(old), isNull);
+      expect(FlarumForumTheme.current.value, flarumPaletteOf('#4D698E', '#4D698E'));
+      expect(FlarumForumTheme.paletteFor(old), isNull);
+
+      await tester.binding.handlePopRoute();
+      await _pumpUntil(tester, find.byType(AppShell), gone: true);
+      await tester.pump(const Duration(milliseconds: 600));
+      await tester.pump();
+      expect(FlarumForumTheme.current.value, isNull, reason: 'closed under its new address too');
+      await _close(tester);
+    });
+
+    testWidgets('stays where it was when the host doesn\'t follow', (tester) async {
+      final fixtures = FixtureForum(FlarumVersion.v2, root: _fixtures)..forum(url: old, signedIn: false);
+      await FlarumTokenStore.instance.write(old, (token: 'fixture-token', cookiePrefix: 'flarum'));
+      var asked = 0;
+      FlarumHost.forumMoved = (site, info) async {
+        asked++;
+        return null;
+      };
+      await tester.pumpWidget(_Host({
+        'Old': () => FlarumForumPage(site: FlarumHost.site(name: 'Forum', url: old)),
+      }));
+
+      await tester.tap(find.text('Old'));
+      await _arrive(tester, find.byType(DiscussionTile));
+
+      expect(asked, 1);
+      expect(fixtures.requests.where((r) => r.path == '/discussions').every((r) => r.baseUrl == '$old/api'), isTrue);
+      expect(await FlarumTokenStore.instance.read(old), isNotNull);
+      await _close(tester);
+    });
+
+    test('moveForum carries its colours and preferences, keeping what the new address has', () async {
+      SharedPreferences.setMockInitialValues({
+        'flarum_ui.welcome_hidden.$old': 'abc',
+        'flarum_ui.recent_searches.$old': ['tags', 'polls'],
+        'flarum_ui.recent_searches.$moved': ['mine'],
+        'flarum_ignored_users:$old': '{"7":{"id":"7"}}',
+        'flarum_ui.welcome_hidden.https://other.test': 'xyz',
+      });
+      await FlarumForumTheme.update(old, _palette('#48BF83'));
+      await FlarumTokenStore.instance.write(old, (token: 't', cookiePrefix: 'flarum'));
+
+      await FlarumHost.moveForum(old, moved);
+
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('flarum_ui.welcome_hidden.$moved'), 'abc');
+      expect(prefs.getStringList('flarum_ui.recent_searches.$moved'), ['mine']);
+      expect(prefs.getString('flarum_ignored_users:$moved'), '{"7":{"id":"7"}}');
+      expect(prefs.getKeys().where((k) => k.endsWith(old)), isEmpty);
+      expect(prefs.getString('flarum_ui.welcome_hidden.https://other.test'), 'xyz');
+      expect(FlarumForumTheme.paletteFor(moved), _palette('#48BF83'));
+      expect(FlarumForumTheme.paletteFor(old), isNull);
+      expect(await FlarumTokenStore.instance.read(moved), (token: 't', cookiePrefix: 'flarum'));
+    });
+  });
 }

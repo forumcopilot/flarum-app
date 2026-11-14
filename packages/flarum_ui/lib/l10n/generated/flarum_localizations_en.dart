@@ -1920,4 +1920,144 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
 
   @override
   String get confirmationEmailSent => 'Sent. Check your inbox.';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountHint => 'Have the forum erase your account';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Delete your account on $forum';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum erases accounts when their members ask. This is what happens:';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum emails a link to $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum emails you a link.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Open the link to confirm. Nothing happens until you do.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'Within 30 days, the forum erases your account. Until then you can cancel here.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'Erasing anonymizes the account: your name, email address, picture and profile are removed, and no one can log in to it again. Your posts stay, under an anonymous name.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'Erasing deletes the account and all your posts.';
+
+  @override
+  String get deleteAccountEither =>
+      'Erasing deletes the account and all your posts, or anonymizes it, as the staff choose: anonymizing removes your name, email address, picture and profile, and keeps your posts under an anonymous name.';
+
+  @override
+  String get deleteAccountPassword => 'Password';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Your password on $forum, to show it\'s you. Leave it empty if you signed up through another service, such as Google.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Show password';
+
+  @override
+  String get deleteAccountHidePassword => 'Hide password';
+
+  @override
+  String get deleteAccountRequest => 'Request Account Deletion';
+
+  @override
+  String get deleteAccountWrongPassword => 'Incorrect password.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Check your email';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return 'On $date, $forum sent a link to $email. Open it to confirm that you want your account erased.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return 'On $date, $forum emailed you a link. Open it to confirm that you want your account erased.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.';
+
+  @override
+  String get deleteAccountCancelRequest => 'Cancel Request';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'No email after a few minutes? Check your spam folder, or send a new link.';
+
+  @override
+  String get deleteAccountSendAgain => 'Send a New Link';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Deletion confirmed';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'You confirmed on $confirmed. The forum erases your account by $due at the latest, and emails you when it\'s done.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'Until then your account works as before, and you can still cancel.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Cancel your request?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Your account stays as it is. The forum emails you that the request is cancelled.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Keep Request';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Request cancelled. Your account stays.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum has erased your account.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Ask the forum\'s staff';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum doesn\'t let members delete their own accounts from an app: only its staff can. Open the forum and ask an administrator, for example in a private message, to delete your account.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'Logging out removes the account from this app only: it stays on $forum until its staff delete it.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Open the Forum';
 }

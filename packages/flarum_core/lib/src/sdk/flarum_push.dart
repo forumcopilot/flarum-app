@@ -138,6 +138,18 @@ abstract final class FlarumPush {
     return null;
   }
 
+  /// Keeps the phone's registration with the forum that was at [from] under [to], its new address
+  /// ([FlarumForum.move]). It is the same install, so its device and the relay's handle still hold;
+  /// a registration [to] already has is kept and [from]'s dropped. The next [register] for [to] asks
+  /// the forum again, once, at its new address.
+  static Future<void> move(String from, String to) async {
+    _registeredThisRun.remove(from);
+    final saved = await store.read(from);
+    if (saved == null) return;
+    if (await store.read(to) == null) await store.write(to, saved);
+    await store.delete(from);
+  }
+
   /// Tells every relay the phone has handles on that its push token or notification permission
   /// changed. One call per relay covers all of its forums.
   static Future<void> updateInstallations() async {

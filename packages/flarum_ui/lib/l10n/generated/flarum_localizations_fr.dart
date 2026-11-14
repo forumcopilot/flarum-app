@@ -1944,4 +1944,144 @@ class FlarumLocalizationsFr extends FlarumLocalizations {
   @override
   String get confirmationEmailSent =>
       'Envoyé. Vérifiez votre boîte de réception.';
+
+  @override
+  String get deleteAccount => 'Supprimer le compte';
+
+  @override
+  String get deleteAccountHint => 'Demander au forum d’effacer votre compte';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Supprimer votre compte sur $forum';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum efface les comptes à la demande de leurs membres. Voici comment cela se passe :';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum envoie un lien à $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum vous envoie un lien par e-mail.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Ouvrez le lien pour confirmer. Rien ne se passe avant.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'Dans les 30 jours, le forum efface votre compte. D’ici là, vous pouvez annuler ici.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'L’effacement anonymise le compte : votre nom, votre adresse e-mail, votre photo et votre profil sont supprimés, et personne ne peut plus s’y connecter. Vos messages restent, sous un nom anonyme.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'L’effacement supprime le compte et tous vos messages.';
+
+  @override
+  String get deleteAccountEither =>
+      'L’effacement supprime le compte et tous vos messages, ou l’anonymise, au choix de l’équipe : l’anonymisation supprime votre nom, votre adresse e-mail, votre photo et votre profil, et garde vos messages sous un nom anonyme.';
+
+  @override
+  String get deleteAccountPassword => 'Mot de passe';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Votre mot de passe sur $forum, pour prouver que c’est bien vous. Laissez-le vide si vous vous êtes inscrit avec un autre service, comme Google.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Afficher le mot de passe';
+
+  @override
+  String get deleteAccountHidePassword => 'Masquer le mot de passe';
+
+  @override
+  String get deleteAccountRequest => 'Demander la suppression';
+
+  @override
+  String get deleteAccountWrongPassword => 'Mot de passe incorrect.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Consultez vos e-mails';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return 'Le $date, $forum a envoyé un lien à $email. Ouvrez-le pour confirmer que vous voulez effacer votre compte.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return 'Le $date, $forum vous a envoyé un lien par e-mail. Ouvrez-le pour confirmer que vous voulez effacer votre compte.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'Rien ne se passe avant. Dans les 30 jours suivant la confirmation, le forum efface votre compte, et vous pouvez annuler d’ici là.';
+
+  @override
+  String get deleteAccountCancelRequest => 'Annuler la demande';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'Pas d’e-mail après quelques minutes ? Vérifiez vos courriers indésirables, ou envoyez un nouveau lien.';
+
+  @override
+  String get deleteAccountSendAgain => 'Envoyer un nouveau lien';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Suppression confirmée';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'Vous avez confirmé le $confirmed. Le forum efface votre compte au plus tard le $due, et vous prévient par e-mail une fois que c’est fait.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'D’ici là, votre compte fonctionne comme avant, et vous pouvez encore annuler.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Annuler votre demande ?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Votre compte reste tel quel. Le forum vous confirme l’annulation par e-mail.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Garder la demande';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Demande annulée. Votre compte est conservé.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum a effacé votre compte.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Demandez à l’équipe du forum';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum ne permet pas à ses membres de supprimer eux-mêmes leur compte depuis une app : seule son équipe le peut. Ouvrez le forum et demandez à un administrateur, par exemple en message privé, de supprimer votre compte.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'La déconnexion retire le compte de cette app seulement : il reste sur $forum jusqu’à ce que son équipe le supprime.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Ouvrir le forum';
 }

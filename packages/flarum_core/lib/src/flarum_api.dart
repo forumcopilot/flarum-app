@@ -7,6 +7,7 @@ import 'json_api.dart';
 import 'models/dialog.dart';
 import 'models/discussion.dart';
 import 'models/draft.dart';
+import 'models/erasure_request.dart';
 import 'models/flag.dart';
 import 'models/forum_info.dart';
 import 'models/notification.dart';
@@ -714,6 +715,48 @@ class FlarumApi {
   Future<FlarumUser> removeAvatar(String userId) async {
     final document = await client.deleteReturning('/users/$userId/avatar');
     return FlarumUser.fromResource(document.single, document: document);
+  }
+
+  // ---- Erasing the reader's account (flarum/gdpr, [FlarumExtensions.gdpr]). Flarum itself lets no
+  // member delete their account; this extension takes requests, which its staff carry out. ----
+
+  /// The reader [userId]'s erasure request, or null if they have none. `GET /api` doesn't carry it
+  /// (checked on 1.8 and 2.0), so it's read with the reader: 2.0 gives the relationship (null when
+  /// there's none) to the reader alone, and 1.x leaves it out when there's none. Forums without the
+  /// extension refuse the include (400).
+  Future<FlarumErasureRequest?> erasureRequest(String userId) async {
+    final document = await client.get('/users/$userId', query: {'include': 'erasureRequest'});
+    final request = document.find(document.single.toOne('erasureRequest'));
+    return request == null ? null : FlarumErasureRequest.fromResource(request);
+  }
+
+  /// Asks the forum to erase the reader's account, as its settings page's Erase Account does
+  /// (`POST /user-erasure-requests`, the same on both versions). The forum checks [password]
+  /// (a 422 on `password` when it's wrong) unless the reader signed up through another service
+  /// (fof/oauth), then emails them a link that confirms the request: nothing more happens until
+  /// they open it. Asking again replaces an earlier request (a cancelled one, or one waiting for
+  /// its confirmation), with a new link. [password] null sends none, for forums whose members
+  /// have none (`passwordlessSignUp`).
+  Future<FlarumErasureRequest> requestErasure({String? password, String? reason}) async {
+    final document = await client.post('/user-erasure-requests', {
+      'data': {
+        'type': 'user-erasure-requests',
+        'attributes': {if (reason != null && reason.isNotEmpty) 'reason': reason},
+      },
+      if (password != null) 'meta': {'password': password},
+    });
+    return FlarumErasureRequest.fromResource(document.single);
+  }
+
+  /// Takes back the reader's erasure request [id], waiting for its confirmation or confirmed, and
+  /// emails them that it's cancelled. 1.x deletes it (`DELETE /user-erasure-requests/{id}`), 2.0
+  /// has its own action (`POST …/{id}/cancel`); both answer 204 and keep the request, cancelled.
+  Future<void> cancelErasure(String id) async {
+    if (await version() == FlarumVersion.v2) {
+      await client.postEmpty('/user-erasure-requests/$id/cancel');
+    } else {
+      await client.delete('/user-erasure-requests/$id');
+    }
   }
 
   /// Everyone who liked post [postId], as the web's "Liked by" dialog lists them (flarum/likes'

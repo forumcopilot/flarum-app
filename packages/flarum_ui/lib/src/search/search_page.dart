@@ -8,6 +8,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_prefs.dart';
 import '../home/discussion_tile.dart';
 import '../profile/user_page.dart';
 import '../thread/thread_page.dart';
@@ -53,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
   /// 1.x has no post search: its Posts tab would repeat the discussions' best posts.
   bool get _postsTab => _forum.info?.version != FlarumVersion.v1;
 
-  String get _recentKey => 'flarum_ui.recent_searches.${widget.site.site.pluginUrl}';
+  String get _recentKey => ForumPrefs.recentSearches(widget.site.site.pluginUrl);
 
   @override
   void initState() {

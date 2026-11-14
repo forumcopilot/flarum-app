@@ -66,9 +66,12 @@ a `FixtureForum(states: {...})`, in place of the same request's plain fixture. `
 tests replay the same fixtures (`root: '../flarum_core/test/fixtures'`). Live tests and re-recording: `test/live_test.dart`,
 `tool/test_forums/README.md`.
 
-The test forums are public at https://flarum18.betterdiscourse.app and https://flarum20.betterdiscourse.app
-(phones use these), behind Cloudflare, which challenges the dev server's own network: tools on the
-server use 127.0.0.1:8081 and 8082.
+The test forums are public at https://flarumapp.com/flarum (2.0) and https://flarumapp.com/flarum18 (1.8),
+phones use these, since 14 Nov 2026 (flarum20/flarum18.betterdiscourse.app before, which redirect). The
+site at flarumapp.com is Cloudflare Pages; the Worker `flarumapp-forums` on the route
+`flarumapp.com/flarum*` forwards those two paths to the dev server (`origin.flarumapp.com`, nginx site
+`flarumapp-com`). Each forum's `url` has its subfolder; the 1.8 forum's cookies are `flarum18_*`.
+Tools on the server use 127.0.0.1:8081 and 8082.
 
 flarum_ui's post renderer is `FlarumContent` (copied from discourse_ui's RichTextContent) on HTML
 prepared by `FlarumHtml`, which rewrites Flarum's own markup (code-block scripts, task lists,
@@ -205,6 +208,16 @@ Checked against 1.8.20 and 2.0.0-rc.8:
 - Following: a discussion's `subscription` is `follow`, `ignore` or null (an ignored one leaves the
   reader's lists). fof/follow-tags puts `lurk`, `follow`, `ignore` or `hide` on each tag; 1.x sets it
   with `POST /api/tags/{id}/subscription {"data":{"subscription":…}}`, 2.0 by PATCHing the attribute.
+- Deleting an account: Flarum has no self-deletion. flarum/gdpr (fof/gdpr before; `erasureAnonymizationAllowed`,
+  `erasureDeletionAllowed`) takes requests: `POST /api/user-erasure-requests` with `data.attributes.reason` and
+  `meta.password` (422 on `password`; not checked for fof/oauth sign-ups) answers 201 `awaiting_user_confirmation` and
+  emails a link (`/gdpr/erasure/confirm/{token}`, email only) that makes it `user_confirmed`. Then a `processErasure`
+  holder (admins alone by default) anonymizes or deletes, or the daily `gdpr:process-erase-requests` does it 30 days after
+  the confirmation, if the forum runs Flarum's scheduler. Asking again reuses the one row (firstOrNew, both versions).
+  Cancel: 1.x `DELETE /api/user-erasure-requests/{id}`, 2.0 `POST …/{id}/cancel` (204). `GET /api` never carries
+  `actor.erasureRequest`, whatever the extender says: read `GET /api/users/{id}?include=erasureRequest` (1.x leaves the
+  relationship out when there's none). The app's Delete Account (`DeleteAccountPage`) uses it; on other forums it
+  sends the reader to the staff. The erasure fixtures other than `erasure_none` are written from the source (their `note`).
 - Sign-out (`FlarumApi.logOut`): Flarum has no "revoke this token" call, and `/api/access-tokens`
   never marks a header token `isCurrent` (2.0 rc.8 even fails with 500 listing for one). Listing
   with the token sent as the `<prefix>_remember` cookie marks it current; then

@@ -4,6 +4,7 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../l10n/flarum_l10n.dart';
+import '../app/forum_prefs.dart';
 import '../render/flarum_content.dart';
 import '../render/flarum_html.dart';
 
@@ -27,7 +28,7 @@ class _WelcomeHeroState extends State<WelcomeHero> {
   /// Null until the phone says whether this message was hidden.
   bool? _hidden;
 
-  String get _key => 'flarum_ui.welcome_hidden.${widget.site.site.pluginUrl}';
+  String get _key => ForumPrefs.welcomeHidden(widget.site.site.pluginUrl);
 
   /// What was hidden: a change of title or message shows the hero again, as the web's does.
   String get _fingerprint => '${widget.title ?? ''}\u0000${widget.message ?? ''}'.hashCode.toRadixString(16);

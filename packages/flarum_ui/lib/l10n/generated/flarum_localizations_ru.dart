@@ -1974,4 +1974,144 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
 
   @override
   String get confirmationEmailSent => 'Отправлено. Проверьте входящие.';
+
+  @override
+  String get deleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get deleteAccountHint => 'Попросите форум стереть ваш аккаунт';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return 'Удаление аккаунта на $forum';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum стирает аккаунты по просьбе участников. Вот как это происходит:';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum отправит ссылку на $email.';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum отправит вам ссылку по почте.';
+  }
+
+  @override
+  String get deleteAccountStepConfirm =>
+      'Откройте ссылку, чтобы подтвердить. До этого ничего не произойдёт.';
+
+  @override
+  String get deleteAccountStepStaff =>
+      'В течение 30 дней форум сотрёт ваш аккаунт. До этого запрос можно отменить здесь.';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      'При стирании аккаунт обезличивается: имя, адрес почты, фото и профиль удаляются, и войти в него больше будет нельзя. Ваши сообщения останутся под анонимным именем.';
+
+  @override
+  String get deleteAccountDeletes =>
+      'При стирании удаляются аккаунт и все ваши сообщения.';
+
+  @override
+  String get deleteAccountEither =>
+      'При стирании удаляются аккаунт и все ваши сообщения или аккаунт обезличивается — на усмотрение команды: при обезличивании удаляются имя, адрес почты, фото и профиль, а сообщения остаются под анонимным именем.';
+
+  @override
+  String get deleteAccountPassword => 'Пароль';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return 'Ваш пароль на $forum — чтобы подтвердить, что это вы. Оставьте поле пустым, если вы регистрировались через другой сервис, например Google.';
+  }
+
+  @override
+  String get deleteAccountShowPassword => 'Показать пароль';
+
+  @override
+  String get deleteAccountHidePassword => 'Скрыть пароль';
+
+  @override
+  String get deleteAccountRequest => 'Запросить удаление';
+
+  @override
+  String get deleteAccountWrongPassword => 'Неверный пароль.';
+
+  @override
+  String get deleteAccountCheckEmail => 'Проверьте почту';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return '$date $forum отправил ссылку на $email. Откройте её, чтобы подтвердить стирание аккаунта.';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return '$date $forum отправил вам ссылку по почте. Откройте её, чтобы подтвердить стирание аккаунта.';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      'До этого ничего не произойдёт. В течение 30 дней после подтверждения форум сотрёт аккаунт, а до тех пор запрос можно отменить.';
+
+  @override
+  String get deleteAccountCancelRequest => 'Отменить запрос';
+
+  @override
+  String get deleteAccountNoEmail =>
+      'Письма нет уже несколько минут? Проверьте папку «Спам» или отправьте новую ссылку.';
+
+  @override
+  String get deleteAccountSendAgain => 'Отправить новую ссылку';
+
+  @override
+  String get deleteAccountConfirmedTitle => 'Удаление подтверждено';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return 'Вы подтвердили $confirmed. Форум сотрёт аккаунт не позднее $due и сообщит по почте, когда всё будет готово.';
+  }
+
+  @override
+  String get deleteAccountUntilThen =>
+      'До этого аккаунт работает как обычно, и запрос ещё можно отменить.';
+
+  @override
+  String get deleteAccountCancelQuestion => 'Отменить запрос?';
+
+  @override
+  String get deleteAccountCancelQuestionBody =>
+      'Аккаунт останется как есть. Форум пришлёт письмо об отмене запроса.';
+
+  @override
+  String get deleteAccountKeepRequest => 'Оставить запрос';
+
+  @override
+  String get deleteAccountRequestCancelled =>
+      'Запрос отменён. Аккаунт остаётся.';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum стёр ваш аккаунт.';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => 'Обратитесь к команде форума';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum не позволяет участникам удалять аккаунт из приложения: это может только команда форума. Откройте форум и попросите администратора, например в личном сообщении, удалить ваш аккаунт.';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return 'Выход убирает аккаунт только из этого приложения: на $forum он останется, пока команда его не удалит.';
+  }
+
+  @override
+  String get deleteAccountContactStaff => 'Открыть форум';
 }

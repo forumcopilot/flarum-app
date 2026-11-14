@@ -4,11 +4,13 @@ import 'package:forumcopilot_sdk/context/site_context.dart';
 
 import '../../l10n/flarum_l10n.dart';
 import '../safety/ignored_users_page.dart';
+import 'delete_account_page.dart';
 import 'forum_web_page.dart';
 
 /// The reader's account and privacy, as the Discourse app groups them: who they ignore, here, and
 /// the rest of the forum's settings (email, password, nickname, the forum's own extensions') on
-/// its settings page, which the app opens logged in as the reader.
+/// its settings page, which the app opens logged in as the reader. Last, Delete Account, where the
+/// Discourse app has it too.
 class AccountPrivacyPage extends StatelessWidget {
   const AccountPrivacyPage({super.key, required this.site});
 
@@ -20,6 +22,7 @@ class AccountPrivacyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = flarumL10n(context);
+    final error = Theme.of(context).colorScheme.error;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.accountAndPrivacy)),
       body: ListView(
@@ -39,6 +42,13 @@ class AccountPrivacyPage extends StatelessWidget {
             subtitle: Text(l10n.forumSettingsPageHint),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => ForumWebPage.open(context, site, path: '/settings', title: l10n.settings),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_remove_outlined, color: error),
+            title: Text(l10n.deleteAccount, style: TextStyle(color: error)),
+            subtitle: Text(l10n.deleteAccountHint),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => DeleteAccountPage.open(context, site),
           ),
         ],
       ),

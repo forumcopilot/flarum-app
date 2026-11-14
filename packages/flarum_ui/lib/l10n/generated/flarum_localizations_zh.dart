@@ -1836,4 +1836,137 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
 
   @override
   String get confirmationEmailSent => '已发送，请查看收件箱。';
+
+  @override
+  String get deleteAccount => '删除账户';
+
+  @override
+  String get deleteAccountHint => '请论坛删除你的账户';
+
+  @override
+  String deleteAccountTitle(String forum) {
+    return '删除你在 $forum 的账户';
+  }
+
+  @override
+  String deleteAccountIntro(String forum) {
+    return '$forum 会应成员的请求删除账户。流程如下：';
+  }
+
+  @override
+  String deleteAccountStepEmail(String forum, String email) {
+    return '$forum 会向 $email 发送一封含链接的邮件。';
+  }
+
+  @override
+  String deleteAccountStepEmailNoAddress(String forum) {
+    return '$forum 会给你发送一封含链接的邮件。';
+  }
+
+  @override
+  String get deleteAccountStepConfirm => '打开链接进行确认。确认之前不会有任何变化。';
+
+  @override
+  String get deleteAccountStepStaff => '30 天内，论坛会删除你的账户。在此之前，你可以在这里取消。';
+
+  @override
+  String get deleteAccountAnonymizes =>
+      '删除会将账户匿名化：你的名称、邮箱地址、头像和个人资料会被移除，任何人都无法再登录该账户。你的帖子会以匿名名称保留。';
+
+  @override
+  String get deleteAccountDeletes => '删除会移除该账户及你的所有帖子。';
+
+  @override
+  String get deleteAccountEither =>
+      '删除时，由管理团队决定移除账户及你的所有帖子，或将账户匿名化：匿名化会移除你的名称、邮箱地址、头像和个人资料，帖子以匿名名称保留。';
+
+  @override
+  String get deleteAccountPassword => '密码';
+
+  @override
+  String deleteAccountPasswordHelp(String forum) {
+    return '你在 $forum 的密码，用于确认是你本人。如果你是通过 Google 等其他服务注册的，请留空。';
+  }
+
+  @override
+  String get deleteAccountShowPassword => '显示密码';
+
+  @override
+  String get deleteAccountHidePassword => '隐藏密码';
+
+  @override
+  String get deleteAccountRequest => '申请删除账户';
+
+  @override
+  String get deleteAccountWrongPassword => '密码不正确。';
+
+  @override
+  String get deleteAccountCheckEmail => '请查收邮件';
+
+  @override
+  String deleteAccountEmailSent(String forum, String email, String date) {
+    return '$forum 已于 $date 向 $email 发送了链接。打开链接，确认你要删除账户。';
+  }
+
+  @override
+  String deleteAccountEmailSentNoAddress(String forum, String date) {
+    return '$forum 已于 $date 给你发送了含链接的邮件。打开链接，确认你要删除账户。';
+  }
+
+  @override
+  String get deleteAccountAfterConfirming =>
+      '确认之前不会有任何变化。确认后 30 天内，论坛会删除你的账户，在此之前你都可以取消。';
+
+  @override
+  String get deleteAccountCancelRequest => '取消请求';
+
+  @override
+  String get deleteAccountNoEmail => '几分钟后仍未收到邮件？请查看垃圾邮件文件夹，或重新发送链接。';
+
+  @override
+  String get deleteAccountSendAgain => '重新发送链接';
+
+  @override
+  String get deleteAccountConfirmedTitle => '已确认删除';
+
+  @override
+  String deleteAccountConfirmedBody(String confirmed, String due) {
+    return '你已于 $confirmed 确认。论坛最迟会在 $due 前删除你的账户，完成后会发邮件通知你。';
+  }
+
+  @override
+  String get deleteAccountUntilThen => '在此之前，你的账户照常可用，你仍可取消。';
+
+  @override
+  String get deleteAccountCancelQuestion => '要取消请求吗？';
+
+  @override
+  String get deleteAccountCancelQuestionBody => '你的账户保持不变。论坛会发邮件告知请求已取消。';
+
+  @override
+  String get deleteAccountKeepRequest => '保留请求';
+
+  @override
+  String get deleteAccountRequestCancelled => '请求已取消，你的账户会保留。';
+
+  @override
+  String deleteAccountDone(String forum) {
+    return '$forum 已删除你的账户。';
+  }
+
+  @override
+  String get deleteAccountByStaffTitle => '请联系论坛管理团队';
+
+  @override
+  String deleteAccountByStaff(String forum) {
+    return '$forum 不允许成员通过应用自行删除账户，只有管理团队可以删除。请打开论坛，通过私信等方式请管理员删除你的账户。';
+  }
+
+  @override
+  String deleteAccountLogOutNote(String forum) {
+    return '退出登录只会把账户从本应用中移除；在管理团队删除之前，它仍保留在 $forum。';
+  }
+
+  @override
+  String get deleteAccountContactStaff => '打开论坛';
 }

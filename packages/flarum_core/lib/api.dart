@@ -14,6 +14,7 @@ export 'src/json_api.dart';
 export 'src/models/dialog.dart';
 export 'src/models/discussion.dart';
 export 'src/models/draft.dart';
+export 'src/models/erasure_request.dart';
 export 'src/models/flapp_push.dart';
 export 'src/models/flapp_sign_in.dart';
 export 'src/models/flag.dart';

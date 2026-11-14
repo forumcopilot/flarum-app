@@ -1870,12 +1870,6 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   String get deleteAccountHidePassword => '隐藏密码';
 
   @override
-  String get deleteAccountReason => '原因（选填）';
-
-  @override
-  String get deleteAccountReasonHelp => '论坛管理团队会随请求一起看到。';
-
-  @override
   String get deleteAccountRequest => '申请删除账户';
 
   @override
@@ -1897,11 +1891,6 @@ class FlarumLocalizationsZh extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       '确认之前不会有任何变化。确认后 30 天内，论坛会删除你的账户，在此之前你都可以取消。';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return '你的原因：$reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => '取消请求';

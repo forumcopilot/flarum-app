@@ -1875,12 +1875,6 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   String get deleteAccountHidePassword => 'パスワードを隠す';
 
   @override
-  String get deleteAccountReason => '理由（任意）';
-
-  @override
-  String get deleteAccountReasonHelp => '依頼とあわせてフォーラムのスタッフに表示されます。';
-
-  @override
   String get deleteAccountRequest => 'アカウントの削除を依頼';
 
   @override
@@ -1902,11 +1896,6 @@ class FlarumLocalizationsJa extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       '確認するまでは何も起こりません。確認から30日以内にフォーラムがアカウントを消去します。それまでは取り消せます。';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return '理由：$reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => '依頼を取り消す';

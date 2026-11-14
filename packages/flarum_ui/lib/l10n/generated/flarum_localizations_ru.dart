@@ -2010,13 +2010,6 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   String get deleteAccountHidePassword => 'Скрыть пароль';
 
   @override
-  String get deleteAccountReason => 'Причина (необязательно)';
-
-  @override
-  String get deleteAccountReasonHelp =>
-      'Команда форума увидит её вместе с запросом.';
-
-  @override
   String get deleteAccountRequest => 'Запросить удаление';
 
   @override
@@ -2038,11 +2031,6 @@ class FlarumLocalizationsRu extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       'До этого ничего не произойдёт. В течение 30 дней после подтверждения форум сотрёт аккаунт, а до тех пор запрос можно отменить.';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return 'Ваша причина: $reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => 'Отменить запрос';

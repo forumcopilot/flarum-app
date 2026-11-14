@@ -1878,12 +1878,6 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   String get deleteAccountHidePassword => '비밀번호 숨기기';
 
   @override
-  String get deleteAccountReason => '사유(선택)';
-
-  @override
-  String get deleteAccountReasonHelp => '포럼 운영진이 요청과 함께 확인합니다.';
-
-  @override
   String get deleteAccountRequest => '계정 삭제 요청';
 
   @override
@@ -1905,11 +1899,6 @@ class FlarumLocalizationsKo extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       '확인하기 전에는 아무 일도 일어나지 않습니다. 확인 후 30일 이내에 포럼이 계정을 삭제하며, 그 전까지는 취소할 수 있습니다.';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return '사유: $reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => '요청 취소';

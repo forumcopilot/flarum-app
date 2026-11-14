@@ -1968,13 +1968,6 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   String get deleteAccountHidePassword => 'Nascondi password';
 
   @override
-  String get deleteAccountReason => 'Motivo (facoltativo)';
-
-  @override
-  String get deleteAccountReasonHelp =>
-      'Lo staff del forum lo vede insieme alla richiesta.';
-
-  @override
   String get deleteAccountRequest => 'Richiedi l’eliminazione';
 
   @override
@@ -1996,11 +1989,6 @@ class FlarumLocalizationsIt extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       'Fino ad allora non succede nulla. Entro 30 giorni dalla conferma il forum cancella il tuo account, e fino ad allora puoi annullare.';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return 'Il tuo motivo: $reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => 'Annulla richiesta';

@@ -33,7 +33,6 @@ class DeleteAccountPage extends StatefulWidget {
 class _DeleteAccountPageState extends State<DeleteAccountPage> {
   late final FlarumForum _forum = FlarumForum.of(widget.site);
   final _password = TextEditingController();
-  final _reason = TextEditingController();
 
   FlarumErasureRequest? _request;
   /// Reading where the reader's request stands (and the forum's info, if the app has none yet).
@@ -64,7 +63,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
   @override
   void dispose() {
     _password.dispose();
-    _reason.dispose();
     super.dispose();
   }
 
@@ -96,10 +94,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
       _passwordError = null;
     });
     try {
-      final request = await _forum.api.requestErasure(
-        password: askPassword ? _password.text : null,
-        reason: _reason.text.trim(),
-      );
+      final request = await _forum.api.requestErasure(password: askPassword ? _password.text : null);
       if (!mounted) return;
       _password.clear();
       setState(() {
@@ -220,8 +215,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     );
   }
 
-  /// No request yet (or a cancelled one): what will happen, then the password, a reason, and the
-  /// request.
+  /// No request yet (or a cancelled one): what will happen, then the password and the request.
+  /// flarum/gdpr also takes a reason, which the website asks for as optional; the app leaves it
+  /// out, for the shortest form the forum accepts (Tung, 14 November 2026).
   List<Widget> _form(BuildContext context) {
     final l10n = flarumL10n(context);
     final theme = Theme.of(context);
@@ -243,7 +239,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
           autocorrect: false,
           enableSuggestions: false,
           autofillHints: const [AutofillHints.password],
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
           onChanged: (_) {
             if (_passwordError != null) setState(() => _passwordError = null);
           },
@@ -262,20 +258,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
         ),
         const SizedBox(height: DesignTokens.spacingL),
       ],
-      TextField(
-        controller: _reason,
-        enabled: !_sending,
-        minLines: 2,
-        maxLines: 5,
-        textCapitalization: TextCapitalization.sentences,
-        decoration: InputDecoration(
-          labelText: l10n.deleteAccountReason,
-          helperText: l10n.deleteAccountReasonHelp,
-          alignLabelWithHint: true,
-          border: const OutlineInputBorder(),
-        ),
-      ),
-      const SizedBox(height: DesignTokens.spacingL),
       FilledButton(
         onPressed: _sending ? null : _send,
         style: FilledButton.styleFrom(
@@ -310,7 +292,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
           : l10n.deleteAccountEmailSent(_forumName, email, sent)),
       _Paragraph(l10n.deleteAccountAfterConfirming),
       _Paragraph(_whatErasingDoes(l10n), muted: true),
-      if (request.reason case final reason?) _Paragraph(l10n.deleteAccountYourReason(reason), muted: true),
       const SizedBox(height: DesignTokens.spacingS),
       OutlinedButton(
         onPressed: _sending ? null : _cancel,
@@ -336,7 +317,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
       _Header(icon: Icons.hourglass_top_rounded, title: l10n.deleteAccountConfirmedTitle),
       _Paragraph(l10n.deleteAccountConfirmedBody(_date(request.confirmedAt), _date(request.dueBy))),
       _Paragraph(_whatErasingDoes(l10n), muted: true),
-      if (request.reason case final reason?) _Paragraph(l10n.deleteAccountYourReason(reason), muted: true),
       _Paragraph(l10n.deleteAccountUntilThen),
       const SizedBox(height: DesignTokens.spacingS),
       OutlinedButton(

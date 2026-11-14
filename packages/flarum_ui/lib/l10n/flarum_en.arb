@@ -2681,14 +2681,6 @@
   "@deleteAccountHidePassword": {
     "description": "Tooltip of the password field's eye button while the password shows"
   },
-  "deleteAccountReason": "Reason (optional)",
-  "@deleteAccountReason": {
-    "description": "The request form's optional reason"
-  },
-  "deleteAccountReasonHelp": "The forum's staff see it with your request.",
-  "@deleteAccountReasonHelp": {
-    "description": "Under the reason field"
-  },
   "deleteAccountRequest": "Request Account Deletion",
   "@deleteAccountRequest": {
     "description": "The request form's button: asks the forum to erase the account (flarum/gdpr)"
@@ -2731,15 +2723,6 @@
   "deleteAccountAfterConfirming": "Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.",
   "@deleteAccountAfterConfirming": {
     "description": "Under Check your email: what happens next"
-  },
-  "deleteAccountYourReason": "Your reason: {reason}",
-  "@deleteAccountYourReason": {
-    "description": "The reason the reader gave with their request",
-    "placeholders": {
-      "reason": {
-        "type": "String"
-      }
-    }
   },
   "deleteAccountCancelRequest": "Cancel Request",
   "@deleteAccountCancelRequest": {

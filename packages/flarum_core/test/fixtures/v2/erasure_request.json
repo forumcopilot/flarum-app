@@ -9,9 +9,7 @@
     "body": {
       "data": {
         "type": "user-erasure-requests",
-        "attributes": {
-          "reason": "Leaving the forum."
-        }
+        "attributes": {}
       }
     }
   },
@@ -22,7 +20,7 @@
       "id": "29",
       "attributes": {
         "status": "awaiting_user_confirmation",
-        "reason": "Leaving the forum.",
+        "reason": null,
         "createdAt": "2026-11-14T03:40:00+00:00",
         "userConfirmedAt": null,
         "processedAt": null,

@@ -1956,13 +1956,6 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   String get deleteAccountHidePassword => 'Hide password';
 
   @override
-  String get deleteAccountReason => 'Reason (optional)';
-
-  @override
-  String get deleteAccountReasonHelp =>
-      'The forum\'s staff see it with your request.';
-
-  @override
   String get deleteAccountRequest => 'Request Account Deletion';
 
   @override
@@ -1984,11 +1977,6 @@ class FlarumLocalizationsEn extends FlarumLocalizations {
   @override
   String get deleteAccountAfterConfirming =>
       'Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.';
-
-  @override
-  String deleteAccountYourReason(String reason) {
-    return 'Your reason: $reason';
-  }
 
   @override
   String get deleteAccountCancelRequest => 'Cancel Request';

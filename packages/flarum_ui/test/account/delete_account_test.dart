@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 
 /// alice deletes her account from Profile → Account and Privacy → Delete Account, replayed from
 /// flarum_core's erasure_* fixtures (flarum/gdpr, which both test forums run): the request with her
-/// password, the email it waits for, a cancellation, a confirmed request, and a forum without the
+/// password alone (flarum/gdpr leaves the reason optional, and the app asks none), the email it waits for, a cancellation, a confirmed request, and a forum without the
 /// extension, where only its staff can delete accounts.
 void main() {
   const root = '../flarum_core/test/fixtures';
@@ -66,22 +66,20 @@ void main() {
 
       await scrollTo(tester, find.widgetWithText(TextField, 'Password'));
       await tester.enterText(find.widgetWithText(TextField, 'Password'), 'secret');
-      await scrollTo(tester, find.widgetWithText(TextField, 'Reason (optional)'));
-      await tester.enterText(find.widgetWithText(TextField, 'Reason (optional)'), WriteSamples.erasureReason);
       await scrollTo(tester, find.text('Request Account Deletion'));
       await tester.tap(find.text('Request Account Deletion'));
       await tester.pumpAndSettle();
 
       final sent = fixtures.requests.lastWhere((r) => r.method == 'POST').data as Map;
       expect(sent['meta'], {'password': 'secret'});
-      expect(sent['data']['attributes'], {'reason': WriteSamples.erasureReason});
+      expect(sent['data']['attributes'], isEmpty, reason: 'no reason: the app asks only for the password');
+      expect(find.widgetWithText(TextField, 'Reason (optional)'), findsNothing);
 
       expect(find.text('Check your email'), findsOneWidget);
       expect(
           find.text('On ${day('2026-11-14T03:40:00+00:00')}, $forumName sent a link to alice@flarumapp.local. '
               'Open it to confirm that you want your account erased.'),
           findsOneWidget);
-      await scrollTo(tester, find.text('Your reason: ${WriteSamples.erasureReason}'));
 
       await scrollTo(tester, find.text('Cancel Request'));
       await tester.tap(find.text('Cancel Request'));
@@ -98,19 +96,16 @@ void main() {
       await tester.pump(const Duration(seconds: 5));
     });
 
-    testWidgets('Flarum ${version.name}: a wrong password is said under the field, and the form keeps the rest',
+    testWidgets('Flarum ${version.name}: a wrong password is said under the field',
         (tester) async {
       await openDeleteAccount(tester, version, states: {'wrongPassword'});
       await scrollTo(tester, find.widgetWithText(TextField, 'Password'));
       await tester.enterText(find.widgetWithText(TextField, 'Password'), 'wrong');
-      await scrollTo(tester, find.widgetWithText(TextField, 'Reason (optional)'));
-      await tester.enterText(find.widgetWithText(TextField, 'Reason (optional)'), WriteSamples.erasureReason);
       await scrollTo(tester, find.text('Request Account Deletion'));
       await tester.tap(find.text('Request Account Deletion'));
       await tester.pumpAndSettle();
       await scrollTo(tester, find.text('Incorrect password.'));
       expect(find.text('Check your email'), findsNothing);
-      await scrollTo(tester, find.text(WriteSamples.erasureReason));
     });
 
     testWidgets('Flarum ${version.name}: a request waiting for its email offers a new link and Cancel', (tester) async {

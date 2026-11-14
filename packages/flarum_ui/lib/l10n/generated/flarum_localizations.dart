@@ -3017,18 +3017,6 @@ abstract class FlarumLocalizations {
   /// **'Hide password'**
   String get deleteAccountHidePassword;
 
-  /// The request form's optional reason
-  ///
-  /// In en, this message translates to:
-  /// **'Reason (optional)'**
-  String get deleteAccountReason;
-
-  /// Under the reason field
-  ///
-  /// In en, this message translates to:
-  /// **'The forum\'s staff see it with your request.'**
-  String get deleteAccountReasonHelp;
-
   /// The request form's button: asks the forum to erase the account (flarum/gdpr)
   ///
   /// In en, this message translates to:
@@ -3064,12 +3052,6 @@ abstract class FlarumLocalizations {
   /// In en, this message translates to:
   /// **'Nothing happens until you do. Within 30 days of confirming, the forum erases your account, and you can cancel until then.'**
   String get deleteAccountAfterConfirming;
-
-  /// The reason the reader gave with their request
-  ///
-  /// In en, this message translates to:
-  /// **'Your reason: {reason}'**
-  String deleteAccountYourReason(String reason);
 
   /// Button: take back the erasure request (also in its confirmation dialog)
   ///

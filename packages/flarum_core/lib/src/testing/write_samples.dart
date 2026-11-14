@@ -53,9 +53,6 @@ abstract final class WriteSamples {
   static const draftPrivateTitle = 'A private word saved for later';
   static const draftPrivateContent = 'For bob, when it is ready.';
 
-  /// Why alice asks to have her account erased (flarum/gdpr; the erasure_* fixtures).
-  static const erasureReason = 'Leaving the forum.';
-
   /// alice's nickname for the profile fixtures, and one past flarum/nicknames' default 150
   /// characters, which the forum refuses.
   static const nickname = 'Alice Liddell';

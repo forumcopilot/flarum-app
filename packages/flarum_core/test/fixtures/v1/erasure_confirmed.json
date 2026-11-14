@@ -147,7 +147,7 @@
         "attributes": {
           "id": 4,
           "status": "user_confirmed",
-          "reason": "Leaving the forum.",
+          "reason": null,
           "createdAt": "2026-11-14T03:40:00+00:00",
           "userConfirmedAt": "2026-11-14T04:05:00+00:00",
           "processedAt": null,

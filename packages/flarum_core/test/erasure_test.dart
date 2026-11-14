@@ -26,23 +26,24 @@ void main() {
         expect(sent.queryParameters, {'include': 'erasureRequest'});
       });
 
-      test('asking sends the reason and the password, and the request waits for its email', () async {
+      test('asking sends the password, and the request waits for its email', () async {
         final fixtures = FixtureForum(version);
-        final request = await fixtures.api().requestErasure(password: 'secret', reason: WriteSamples.erasureReason);
+        final request = await fixtures.api().requestErasure(password: 'secret');
         expect(request.status, FlarumErasureStatus.awaitingConfirmation);
-        expect(request.reason, WriteSamples.erasureReason);
+        expect(request.reason, isNull);
         expect(request.createdAt, DateTime.utc(2026, 11, 14, 3, 40));
         expect(request.confirmedAt, isNull);
         expect(request.isOpen, isTrue);
         final body = fixtures.requests.single.data as Map;
         expect(body['meta'], {'password': 'secret'});
         expect(body['data']['type'], 'user-erasure-requests');
+        expect(body['data']['attributes'], isEmpty, reason: 'no reason given, none sent');
       });
 
       test('a wrong password is a validation error on password', () async {
         final fixtures = FixtureForum(version, states: {'wrongPassword'});
         try {
-          await fixtures.api().requestErasure(password: 'wrong', reason: WriteSamples.erasureReason);
+          await fixtures.api().requestErasure(password: 'wrong');
           fail('Expected the forum to refuse');
         } on FlarumApiException catch (e) {
           expect(e.isValidationError, isTrue);

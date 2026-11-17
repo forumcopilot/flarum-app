@@ -12,8 +12,10 @@
 namespace ForumCopilot\Flapp\Tests\unit\Push;
 
 use Carbon\Carbon;
+use Flarum\Settings\SettingsRepositoryInterface;
 use ForumCopilot\Flapp\Push\PayloadBuilder;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PayloadBuilderTest extends TestCase
 {
@@ -33,6 +35,16 @@ class PayloadBuilderTest extends TestCase
     {
         $this->assertEquals('Insightful', PayloadBuilder::reaction(['identifier' => 'fas fa-lightbulb', 'display' => 'Insightful']));
         $this->assertEquals('sparkles', PayloadBuilder::reaction('sparkles'));
+    }
+
+    public function test_the_forums_title_is_cut_to_what_the_relay_takes(): void
+    {
+        $settings = $this->createMock(SettingsRepositoryInterface::class);
+        $settings->method('get')->with('forum_title')->willReturnOnConsecutiveCalls('Flarum 2.0 Demo Community', str_repeat('é', 250));
+        $builder = new PayloadBuilder($this->createStub(TranslatorInterface::class), $settings);
+
+        $this->assertSame('Flarum 2.0 Demo Community', $builder->forumTitle());
+        $this->assertSame(str_repeat('é', 199).'…', $builder->forumTitle());
     }
 
     public function test_a_days_suspension_pushed_a_few_seconds_later_is_still_a_day(): void

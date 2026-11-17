@@ -18,6 +18,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
@@ -87,6 +88,27 @@ class RelayClientTest extends TestCase
         $gone = $client->push('https://relay.test', 'f_abc', $this->privateKey, [['handle' => 'aaaaaaaaaaaaaaaaaaaaaa', 'payload' => ['v' => 1]]]);
 
         $this->assertSame(['aaaaaaaaaaaaaaaaaaaaaa'], $gone);
+    }
+
+    public function test_a_push_names_the_forums_title_when_given(): void
+    {
+        $calls = [];
+        $stack = HandlerStack::create(new MockHandler([
+            new Response(200, [], json_encode(['sent' => 1, 'gone' => []])),
+            new Response(200, [], json_encode(['sent' => 1, 'gone' => []])),
+        ]));
+        $stack->push(Middleware::history($calls));
+        $client = new RelayClient(new Client(['handler' => $stack]));
+        $pushes = [['handle' => 'aaaaaaaaaaaaaaaaaaaaaa', 'payload' => ['v' => 1]]];
+
+        $client->push('https://relay.test', 'f_abc', $this->privateKey, $pushes, 'Flarum 2.0 Demo Community');
+        $client->push('https://relay.test', 'f_abc', $this->privateKey, $pushes);
+
+        $this->assertSame(
+            ['forumId' => 'f_abc', 'forumTitle' => 'Flarum 2.0 Demo Community', 'pushes' => $pushes],
+            json_decode((string) $calls[0]['request']->getBody(), true)
+        );
+        $this->assertSame(['forumId' => 'f_abc', 'pushes' => $pushes], json_decode((string) $calls[1]['request']->getBody(), true));
     }
 
     public function test_a_push_the_relay_has_already_seen_counts_as_sent(): void

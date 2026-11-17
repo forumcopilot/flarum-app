@@ -151,6 +151,16 @@ class PayloadBuilder
         }
     }
 
+    /**
+     * The forum's title as it is now, which each push call names: the relay
+     * shows it with the push (Android's subtext, the iPhone's subtitle), and
+     * would otherwise keep the one the forum connected with.
+     */
+    public function forumTitle(): string
+    {
+        return $this->cut((string) $this->settings->get('forum_title'), 200);
+    }
+
     protected function locale(User $user): ?string
     {
         $locale = $user->getPreference('locale') ?: $this->settings->get('default_locale');

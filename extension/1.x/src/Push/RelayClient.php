@@ -93,19 +93,27 @@ class RelayClient
     }
 
     /**
-     * Hand a batch of pushes to the relay.
+     * Hand a batch of pushes to the relay, naming the forum's title as it is
+     * now, which the relay keeps: a forum renamed after it connected shows
+     * its new name.
      *
      * @param array[] $pushes each ['handle' => …, 'payload' => […]], at most MAX_PUSHES
+     * @param string|null $forumTitle at most 200 characters
      * @return string[] the handles the relay no longer knows for this forum
      * @throws RelayException
      */
-    public function push(string $relay, string $forumId, string $privateKey, array $pushes): array
+    public function push(string $relay, string $forumId, string $privateKey, array $pushes, ?string $forumTitle = null): array
     {
+        $data = ['forumId' => $forumId];
+
+        if ($forumTitle !== null) {
+            $data['forumTitle'] = $forumTitle;
+        }
+
+        $data['pushes'] = array_values($pushes);
+
         try {
-            $answer = $this->call($relay, 'POST', '/v1/push', [
-                'forumId' => $forumId,
-                'pushes' => array_values($pushes),
-            ], $privateKey, $forumId);
+            $answer = $this->call($relay, 'POST', '/v1/push', $data, $privateKey, $forumId);
         } catch (RelayException $e) {
             // The relay has this call already: sent again after an answer
             // that never arrived.

@@ -114,9 +114,11 @@ class Pusher
             }
         }
 
+        $forumTitle = $this->payloads->forumTitle();
+
         foreach (array_chunk($pushes, RelayClient::MAX_PUSHES) as $batch) {
             try {
-                $gone = $this->relay->push($relayUrl, $forumId, $privateKey, $batch);
+                $gone = $this->relay->push($relayUrl, $forumId, $privateKey, $batch, $forumTitle);
             } catch (RelayException $e) {
                 // Most forums run the sync queue, so this runs in the poster's
                 // own request: a relay that is down must not fail it.

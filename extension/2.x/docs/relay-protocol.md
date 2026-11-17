@@ -65,10 +65,12 @@ extension is disabled; if the relay can't be reached, the forum disconnects anyw
 ### Push: `POST /v1/push`
 
 ```json
-{"forumId": "…", "pushes": [{"handle": "…", "payload": {"v": 1, "id": 42, "type": "postMentioned", "title": "…", "body": "…"}}]}
+{"forumId": "…", "forumTitle": "Example Forum", "pushes": [{"handle": "…", "payload": {"v": 1, "id": 42, "type": "postMentioned", "title": "…", "body": "…"}}]}
 ```
 
-At most 500 pushes a call. A payload is `{v, id?, type, title, body, excerpt?, open?, unread?}` under 3 KB, `id` being
+`forumTitle` is the forum's title now, at most 200 characters. The relay shows it with each push (the phone gets it as
+`forum_title`; the iPhone's alert has it as its subtitle) and keeps it, so a forum renamed after it enrolled shows its
+new name. Extensions from before it leave it out, and the relay keeps the title it has. At most 500 pushes a call. A payload is `{v, id?, type, title, body, excerpt?, open?, unread?}` under 3 KB, `id` being
 the notification's (Flarum 2.0's private messages have none), `open` being
 `{discussion, post}`, `{dialog}` or `{user}`. Answer: `200 {"sent": 1, "gone": ["<handle>", …]}`. `gone` lists handles the
 relay doesn't know for this forum, whose devices the forum deletes; a phone that is only out of reach keeps its

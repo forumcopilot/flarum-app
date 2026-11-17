@@ -16,6 +16,7 @@ use Flarum\Notification\Blueprint\DiscussionRenamedBlueprint;
 use Flarum\Notification\Notification;
 use Flarum\Notification\NotificationSyncer;
 use Flarum\Post\Post;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\User\User;
 use ForumCopilot\Flapp\Device;
@@ -115,6 +116,35 @@ class PushTest extends FlappTestCase
         ], $body['pushes'][0]['payload']);
 
         $this->assertNotNull(Device::query()->findOrFail(1)->last_sent_at);
+    }
+
+    public function test_each_push_names_the_forums_title_as_it_is_now(): void
+    {
+        $this->setting('forum_title', 'flarum-app test forum (2.0)');
+        $this->connected();
+        $this->prepareDatabase(['posts' => [
+            ['id' => 3, 'discussion_id' => 1, 'number' => 3, 'created_at' => Carbon::now()->toDateTimeString(), 'user_id' => 3, 'type' => 'discussionRenamed', 'content' => '["Welcome thread","Welcome, everyone"]'],
+        ]]);
+        $this->fakeRelay([
+            new Response(200, [], json_encode(['sent' => 1, 'gone' => []])),
+            new Response(200, [], json_encode(['sent' => 1, 'gone' => []])),
+        ]);
+
+        $this->rename();
+
+        // The admin renames the forum; the next push names the new title.
+        $this->app()->getContainer()->make(SettingsRepositoryInterface::class)->set('forum_title', 'Flarum 2.0 Demo Community');
+        $this->app()->getContainer()->make(NotificationSyncer::class)->sync(
+            new DiscussionRenamedBlueprint(Post::query()->findOrFail(3)),
+            [User::query()->findOrFail(2)]
+        );
+
+        $this->assertCount(2, $this->relayCalls);
+        $first = json_decode((string) $this->relayCalls[0]['request']->getBody(), true);
+        $second = json_decode((string) $this->relayCalls[1]['request']->getBody(), true);
+        $this->assertEquals('flarum-app test forum (2.0)', $first['forumTitle']);
+        $this->assertEquals('Flarum 2.0 Demo Community', $second['forumTitle']);
+        $this->assertEquals(['forumId', 'forumTitle', 'pushes'], array_keys($second));
     }
 
     public function test_another_extension_can_give_a_type_its_words(): void
